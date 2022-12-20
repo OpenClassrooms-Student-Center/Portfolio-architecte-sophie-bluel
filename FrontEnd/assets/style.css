@@ -125,6 +125,10 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
+#filters ul {
+	display: flex;
+	justify-content: center;
+}
 .gallery {
 	width: 100%;
 	display: grid;
