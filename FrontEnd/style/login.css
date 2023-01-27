@@ -1,0 +1,54 @@
+
+li a {
+	text-decoration: none;
+}
+li a:hover {
+	color: #B1663C;
+}
+
+#LogIn a {
+	text-decoration: underline;
+}
+
+#LogIn {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	margin-top: 200px;
+}
+
+#LogIn form {
+	display: flex;
+	flex-direction: column;
+	margin-top: 50px;
+}
+
+#LogIn label {
+	font-size: 12px;
+	font-family: 'Syne', sans-serif;
+	margin: 15px 0px 6px 0px;
+}
+
+#email2 , #mdp2 {
+	box-shadow: rgba(0, 0, 0, 0.178) 3px 3px 4px;
+	width: 20em;
+	height: 2em;
+	border: none;
+}
+
+#erreur {
+	color: red;
+	font-family: 'Syne',sans-serif;
+	margin-top: 30px;
+}
+
+input[type="submit"] {
+	padding: 7px 0px;
+	border: none;
+}
+
+footer {
+	position: absolute;
+	bottom: 0px;
+	right: 100px;
+}
