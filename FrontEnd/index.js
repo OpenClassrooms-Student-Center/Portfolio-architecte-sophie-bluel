@@ -51,4 +51,5 @@ async function filterCategories() {
         }
     });
 };           
-filterCategories();   
+filterCategories();
+
