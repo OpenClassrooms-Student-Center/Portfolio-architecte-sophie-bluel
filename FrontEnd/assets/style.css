@@ -187,7 +187,7 @@ form a {
 	color: #3D3D3D;
 }
 /* bouton lien modifier modale */
-.square-pen{
+.square-pen {
 	position: relative;
 	height: 18px;
 	width: 18px;
@@ -197,14 +197,22 @@ form a {
 	left: 5px;
 	bottom: 7px;
 }
-a {
-	text-decoration-line: none;
-	color: black;
-	font-size: 14px;
-	font-weight: 400;
-	font-family: 'Work Sans';
+button[type="button"] {
+	display: flex;
+	width: 85px;
+	justify-content: space-between;
+	border: none;
+	background-color: white;
 }
 
+.section-header {
+	display: flex;
+	justify-content: center;
+	align-items: baseline;
+}
+.section-header h2 {
+	margin-right: 20px;
+}
 /* modale*/
 .modal{
 	position: fixed;
@@ -226,12 +234,15 @@ a {
 	background-color: white;
 	width: 630px;
 	border-radius: 10px;
-	padding: 4%;
+	padding: 4% 4% 0 4%;
+	position: absolute;
 }
 #cross {
 	position: absolute;
-	top: 45%;
-	right:30%;
+	top: 20px;
+	right: 30px;
+	border: none;
+	background-color: white;
 }
 
 .modal-container h3 {
@@ -239,32 +250,124 @@ a {
 	line-height: 30px;
 }
 
-.modal-container-photo {
-	
-}
-.modal-container input[type="submit"] {
-	width: 230px;
-	padding: 1.5% 6% 1.5% 6%;
-	border: none;
+#btn-add-photo {
+	width: 237px;
+	padding: 10px 49px 10px 49px;
+	border-radius: 60px;
+	color: white;
+	background-color: #1D6154;
+	font-family: 'Syne';
+	text-align: center;
+	margin: 30px 0 30px 0;
 }
 .modal-container input[type="button"] {
 	color:#D65353;
 	background-color: white;
 	line-height: 17px;
 	border: none;
+	margin-bottom: 40px;
+	font-family: 'Syne';
 }
 /* modale ajout photo */
 #arrow-back {
 	position: absolute;
-	top: 45%;
-	left: 30%;
+	top: 20px;
+	left: 30px;
+	border: none;
+	background-color: white;
+}
+.container-add-photo {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 169px;
+	background-color: #E8F1F7;
+	border-radius: 3px;
+	margin-top: 30px;
+}
+
+#rectangle{
+	position: relative;
+	z-index: 1;
+	top: 14px;
+	left: 24px;
+}
+
+#circle {
+	position: relative;
+	z-index: 3;
+	top: -10px;
+	right: 30px;
+}
+#mount{
+	position: relative;
+	z-index: 2;
+	top : 8px;
+	right: 50px;
+}
+.container-add-photo button {
+	color: #306685;
+	background-color: #CBD6DC;
+	border-radius: 50px;
+	padding: 10px 35px 10px 35px;
+	margin: 30px 0 7px 0;
+	border: none;
+	font-weight: 500;
+	line-height: 16px;
+	text-align: center;
+}
+.container-add-photo p{
+	font-size: 10px;
+	font-weight: 400;
+}
+
+.modal-container form {
+	margin: 20px 0 20px 0;
+	width: 100%;
+}
+
+.modal-container form label, select {
+	font-weight: 500;
+	color: #3D3D3D;
+	line-height: 16px;
+}
+.modal-container form input, select {
+	box-shadow: 0 4px 14px rgba(0,0,0,0.09);
+	width: 100%;
+}
+select{
+	background-color: white;
+	box-shadow: 0 4px 14px rgba(0,0,0,0.09);
+	border: none;
+	height: 51px;
+	margin-bottom: 40px;
+}
+#valider {
+	width: 237px;
+	height: 36px;
+	background-color: #A7A7A7;
+	border-radius: 60px;
+	
 }
 #introduction {
 	display: flex;
 	align-items: center;
 }
 #introduction figure {
-	flex: 1
+	flex: 1;
+}
+#introduction button {
+	width: 85px;
+	height: 20px;
+}
+.figure-edit {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: baseline;
+	border: 2px solid blue;
 }
 #introduction img {
 	display: block;

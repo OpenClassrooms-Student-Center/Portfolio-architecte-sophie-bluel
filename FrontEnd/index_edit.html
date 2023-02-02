@@ -34,21 +34,27 @@
 </header>
 <main>
 	<section id="introduction">
-		<figure>
+		<figure class="figure-edit">
 			<img src="./assets/images/sophie-bluel.png">
-            <figure class="square-pen">
-                <img class="square" src ="assets/icons/square.png" alt ="icone carré"/>
-                <img class="pen" src ="assets/icons/pen.png" alt ="icone crayon"/>
-            </figure>
-            <a href="#modal-projet" class=".modification-link">modifier</a>  
+            
+                <button type="button" href="#" aria-haspopup="dialog" aria-contrils="dialog" class ="modification-link">
+                    <figure class="square-pen">
+                        <img class="square" src ="assets/icons/square.png" alt ="icone carré"/>
+                        <img class="pen" src ="assets/icons/pen.png" alt ="icone crayon"/>
+                    </figure>
+                    modifier
+                </button> 
+            
 		</figure>
         
 		<article>
-            <figure class="square-pen">
-                <img class="square" src ="assets/icons/square.png" alt ="icone carré"/>
-                <img class="pen" src ="assets/icons/pen.png" alt ="icone crayon"/>
-                <a href="#modal-article"class = ".modification-link">modifier</a>
-            </figure>
+            <button type="button" href="#" aria-haspopup="dialog" aria-contrils="dialog" class ="modification-link">
+                <figure class="square-pen">
+                    <img class="square" src ="assets/icons/square.png" alt ="icone carré"/>
+                    <img class="pen" src ="assets/icons/pen.png" alt ="icone crayon"/>
+                </figure>
+                modifier
+            </button>
             
             <h2>Designer d'espace</h2>
 			<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
@@ -57,50 +63,57 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
-            <figure class="square-pen">
-                <img class="square" src ="assets/icons/square.png" alt ="icone carré"/>
-                <img class="pen" src ="assets/icons/pen.png" alt ="icone crayon"/>
-                <a href="#modal-article"class = ".modification-link">modifier</a>
-            </figure>
-        <aside id="modal-projet" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titlemodal" style="display:none">
+        <div class="section-header">
+		    <h2>Mes Projets</h2>
+            <button type="button" href="#modal-projet" aria-haspopup="dialog" aria-contrils="dialog" class ="modification-link">
+                <figure class="square-pen">
+                    <img class="square" src ="assets/icons/square.png" alt ="icone carré"/>
+                    <img class="pen" src ="assets/icons/pen.png" alt ="icone crayon"/>
+                </figure>
+                modifier
+            </button>
+        </div>
+        <aside id="modal-projet" class="modal" class="js-modal-close" aria-hidden="true" role="dialog" aria-labelledby="titlemodal" style="display:none">
             <div class="modal-container">
-                <img id="cross" src="./assets/icons/cross.png" alt="croix pour fermeture de la fenêtre">
+                <button class="js-modal-close"  id="cross"><img src="./assets/icons/cross.png" alt="croix pour fermeture de la fenêtre" ></button>
                 <h3 id="titlemodal">Galerie photo</h3>
                 <div class="modal-container-photo">
                 </div>
                 <hr width="100%" size="1px" color="#B3B3B3">
-                <input type="submit" value="Ajouter une photo">
+                <a href="#modal-projet-photo" class="modification-link" id="btn-add-photo">Ajouter une photo</a>
                 <input type="button" value="Supprimer la galerie">
             </div>
         </aside>
-        <aside id="modal-projet-photo" class="modal" aria-hidden="true" role="dialog">
+        <aside id="modal-projet-photo" class="modal" aria-hidden="true" role="dialog" style="display: none">
             <div class="modal-container">
-                <figure>
-                    <img id="arrow-back" src="./assets/icons/arrow_Back.png" alt="flèche retour">
-                    <img id="cross" src="./assets/icons/cross.png" alt="croix pour fermeture de la fenêtre">
-                </figure>
+                <div class="modal-icon">
+                    <button id="arrow-back" class="js-modal-close"><img  src="./assets/icons/arrow_Back.png" alt="flèche retour"></button>
+                    <button id="cross" class="js-modal-close-return"><img src="./assets/icons/cross.png" alt="croix pour fermeture de la fenêtre"></button>
+                </div>
                 <h3>Ajout photo</h3>
                 <div class="container-add-photo">
                     <figure id="icon-photo">
-                        <img src="" alt="">
-                        <img src="" alt="">
-                        <img src="" alt="">
+                        <img id="rectangle" src="./assets/icons/rectangle.png" alt="rectangle">
+                        <img id="circle" src="./assets/icons/circle.png" alt="cercle">
+                        <img id="mount" src="./assets/icons/mount.png" alt="montagne">
                     </figure>
-                    <button>+ Ajouter photo</button>
+                    <button type="submit">+ Ajouter photo</button>
                     <p>jpg.png : 4mo max</p>
-                    <form action="" method="post">
-                        <label for="title">Titre</label>
-                        <input type="text" name="title" id="title">
-                        <label for="categorie">Catégorie</label>
-                        <select name="" id="">
-                            <option value=""></option>
-                        </select>
-                        <input type="text" name="categorie" id="categorie">
-                    </form>
-                    <hr width="100%" size="1px" color="#B3B3B3">
-                <input type="submit" value="Valider">
                 </div>
+                <form action="" method="post">
+                    <label for="title">Titre</label>
+                    <input type="text" name="title" id="title" required>
+                    <label for="categorie">Catégorie</label>
+                    <select name="categorie" id="select-categorie" autocomplete="off" required>
+                        <option value="">Choisissez une catégorie</option>
+                        <option value="objets">Objets</option>
+                        <option value="appartements">Appartements</option>
+                        <option value="hotels-restaurants">Hôtels & restaurants</option>
+                       
+                    </select>
+                    <hr width="100%" size="1px" color="#B3B3B3">
+                    <input id="valider" type="submit" value="Valider">
+                </form>
             </div>
         </aside>
 		<div class="filtres">
@@ -131,6 +144,6 @@
 		</ul>
 	</nav>
 </footer>
-
+<script type="module" src="index_edit.js"></script>
 </body>
 </html>
