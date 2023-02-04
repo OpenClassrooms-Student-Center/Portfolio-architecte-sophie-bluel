@@ -40,3 +40,41 @@ window.addEventListener('keydown', function (e){
         closeModal(e);
     };
 });
+
+let works = window.localStorage.getItem("works");
+
+if (works === null){
+// Récupération des pièces depuis l'API
+	const reponse = await fetch("http://localhost:5678/api/works");
+	works = await reponse.json();
+	// Transformation des pièces en JSON
+	const valueWorks = JSON.stringify(works);
+	// Stockage des informations dans le localStorage
+	window.localStorage.setItem("works", valueWorks);
+}else{
+	works = JSON.parse(works);
+}
+
+// Recupérer et afficher tous les travaux //
+async function getWorks() {
+    for(let work of works) {
+        document.querySelector(".gallery-edit").innerHTML += `<figure>
+                                                        <img class="gallery-edit-img" src=${work.imageUrl} alt="" crossorigin="anonymous">
+                                                        <button class="photo-remove" data-id=${work.id}><img src="./assets/icons/remove.png" alt="remove"></button>
+                                                        <figcaption>éditer</figcaption>
+                                                        </figure>`
+    };
+};
+getWorks();
+
+//effacer image de la galerie suite à click sur icone//
+async function removeGallery() {
+    const photoRemove = document.querySelector(".photo-remove");
+    photoRemove.addEventListener("click", async function (event) {
+    const photoId = event.target.dataset.id;
+    console.log(photoId);
+    document.querySelector(".gallery-edit").innerHTML ="";
+    window.localStorage.removeItem( );
+    getWorks();
+    });
+};

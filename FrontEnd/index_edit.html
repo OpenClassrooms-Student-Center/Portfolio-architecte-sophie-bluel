@@ -34,20 +34,17 @@
 </header>
 <main>
 	<section id="introduction">
-		<figure class="figure-edit">
+		<figure id="photo-presentation">
 			<img src="./assets/images/sophie-bluel.png">
-            
-                <button type="button" href="#" aria-haspopup="dialog" aria-contrils="dialog" class ="modification-link">
-                    <figure class="square-pen">
-                        <img class="square" src ="assets/icons/square.png" alt ="icone carré"/>
-                        <img class="pen" src ="assets/icons/pen.png" alt ="icone crayon"/>
-                    </figure>
-                    modifier
-                </button> 
-            
-		</figure>
-        
-		<article>
+            <button type="button" href="#" aria-haspopup="dialog" aria-contrils="dialog" class ="modification-link">
+                <figure class="square-pen">
+                    <img class="square" src ="assets/icons/square.png" alt ="icone carré"/>
+                    <img class="pen" src ="assets/icons/pen.png" alt ="icone crayon"/>
+                </figure>
+                modifier
+            </button> 
+        </figure>   
+        <article>
             <button type="button" href="#" aria-haspopup="dialog" aria-contrils="dialog" class ="modification-link">
                 <figure class="square-pen">
                     <img class="square" src ="assets/icons/square.png" alt ="icone carré"/>
@@ -55,7 +52,6 @@
                 </figure>
                 modifier
             </button>
-            
             <h2>Designer d'espace</h2>
 			<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
 			<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
@@ -77,9 +73,12 @@
             <div class="modal-container">
                 <button class="js-modal-close"  id="cross"><img src="./assets/icons/cross.png" alt="croix pour fermeture de la fenêtre" ></button>
                 <h3 id="titlemodal">Galerie photo</h3>
+                <div class="gallery-edit">
+
+                </div>
                 <div class="modal-container-photo">
                 </div>
-                <hr width="100%" size="1px" color="#B3B3B3">
+                <hr width="80%" size="1px" color="#B3B3B3">
                 <a href="#modal-projet-photo" class="modification-link" id="btn-add-photo">Ajouter une photo</a>
                 <input type="button" value="Supprimer la galerie">
             </div>
