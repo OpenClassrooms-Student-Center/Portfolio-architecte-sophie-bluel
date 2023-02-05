@@ -8,8 +8,8 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
-	<link rel="stylesheet" href="./assets/style.css">
-	<script type="module" src="login.js"></script>
+	<link rel="stylesheet" href="./assets/CSS/style.css">
+	<script type="module" src="./assets/JS/loginbis.js"></script>
 </head>
 <body>
     <header>
@@ -26,10 +26,12 @@
 </body>
     <form action="" method="post">
         <h2>Log In</h2>
+		<p class="error-message-absence">Veuillez compléter votre e-mail et votre mot de passe</p>
+		<p class="error-message-error">Erreur dans l'e-mail ou le mot de passe</p>
         <label for="email">E-mail</label>
-        <input type="email" name="email" required>
+        <input type="email" name="email">
         <label for="password">Mot de passe</label>
-        <input type="password" name="password" required>
+        <input type="password" name="password">
         <input type="submit" value="Se connecter">
         <a href="#">Mot de passe oublié</a>
     </form>

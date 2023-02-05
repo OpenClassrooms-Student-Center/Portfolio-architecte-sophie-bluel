@@ -55,6 +55,14 @@ body {
 
 }
 .edition-mode {
+	display: none;
+}
+
+.edition-mode.active {
+	display: contents;
+}
+
+#edition-header {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -89,7 +97,7 @@ body {
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0;
+	margin: 40px 0;
 }
 section {
 	margin: 50px 0;
@@ -184,62 +192,76 @@ form input {
 form a {
 	color: #3D3D3D;
 }
+.error-message-absence {
+	color: white;
+}
+.error-message-absence.active{
+	color: black;
+	padding: 2%;
+	border: 2px dashed #D65353;
+}
+.error-message-error {
+	color: white;
+}
+.error-message-error.active {
+	color: black;
+	padding: 2%;
+	border: 2px dashed #D65353;
+}
 
 /* bouton lien modifier modale */
 .square-pen {
 	position: relative;
 	height: 18px;
 	width: 18px;
+	margin-right: 8px;;
 }
 .pen {
 	position: absolute;
 	left: 5px;
 	bottom: 6px;
 }
-button[type="button"] {
+
+.edition-mode button[type="button"]{
 	display: flex;
-	width: 85px;
 	justify-content: space-between;
-	border: none;
-	background-color: white;
+	align-items: center;
+	box-sizing: border-box;
+	font-family: 'Work Sans';
 }
-/*integrer bouton modifier au titre projet*/
-.section-header {
-	display: flex;
-	justify-content: center;
-	align-items: baseline;
+#edition-article.edition-mode {
+	margin: 0;
+	padding: 0;
+	border: 2px solid blue;
 }
-.section-header h2 {
-	margin-right: 20px;
-}
+
+
 /* modale*/
 .modal{
 	position: fixed;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	display: none;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
+	z-index: 1; /* Sit on top */
+	overflow: auto; 
 	background: rgba(0, 0,0, 0.4);
 }
 
 .modal-container {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
-	margin: 0 auto;
+	padding: 4%;
 	background-color: white;
 	width: 630px;
 	border-radius: 10px;
-	padding: 4% 4% 0 4%;
-	position: absolute;
+	margin: 15% auto;
+
+	
 }
-#cross {
-	position: absolute;
-	top: 20px;
-	right: 30px;
+.modal-close {
+	align-self: flex-end;
 	border: none;
 	background-color: white;
 }
@@ -247,22 +269,24 @@ button[type="button"] {
 .modal-container h3 {
 	font-size: 26px;
 	line-height: 30px;
+	text-align: center;
 }
-.gallery-edit {
-	width: 80%;
+.gallery-modal {
+	width: 90%;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 	grid-column-gap: 10px;
 	grid-row-gap: 10px;
-	margin: 40px;
+	margin: auto;
+	padding: 40px 0 20px 0;
 }
 
-.gallery-edit-img {
+.gallery-modal figure img {
 	width: 100%;
 }
-.gallery-edit figcaption {
+.gallery-modal figcaption {
 	display: inline;
-	margin-left: -20px;
+	margin-left: -16px;
 }
 
 .photo-remove {
@@ -282,26 +306,28 @@ button[type="button"] {
 	background-color: #1D6154;
 	font-family: 'Syne';
 	text-align: center;
-	margin: 30px 0 30px 0;
+	align-self: center;
 	text-decoration-line: none;
+	margin: 16px 0 16px 0;
 }
 .modal-container input[type="button"] {
 	color:#D65353;
 	background-color: white;
 	line-height: 17px;
 	border: none;
-	margin-bottom: 40px;
 	font-family: 'Syne';
 	font-weight: 400;
 }
 /* modale ajout photo */
+.modal-icon {
+	display: flex;
+	justify-content: space-between;
+}
 #arrow-back {
-	position: absolute;
-	top: 20px;
-	left: 30px;
 	border: none;
 	background-color: white;
 }
+
 .container-add-photo {
 	display: flex;
 	flex-direction: column;
@@ -388,12 +414,6 @@ select{
 	flex: 1;
 }
 
-#photo-presentation button {
-	width: 85px;
-	height: 16px;
-	margin: 10px 0 8px 50px;
-}
-
 #introduction img {
 	display: block;
 	margin: auto;
@@ -406,11 +426,6 @@ select{
 	line-height: 16px;
 	text-align: left;
 }
-#introduction article button {
-	width: 85px;
-	height: 16px;
-	margin-bottom: 16px;
-}
 
 #introduction h2 {
 	margin-bottom: 1em;
@@ -420,6 +435,8 @@ select{
 	margin-bottom: 0.5em;
 }
 #portfolio h2 {
+	display: flex;
+	justify-content: center;
 	text-align: center;
 	margin-bottom: 1em;
 }
@@ -429,26 +446,36 @@ select{
 	display: flex;
 	justify-content: center;
 	margin-bottom: 2rem;
+	margin-left: 3rem;
 }
-.filtres button {
+.filter-btn {
 	border-radius: 60px;
 	text-align: center;
 	border: 1px solid #1D6154;
-	color: white;
-	background: #1D6154;
+	color: #1D6154;
+	background: white;
 	padding: 9px  30px 9px 28px; 
 	font-size: 16px;
 	font-weight: 700;
 	font-family: 'Syne';
 	line-height: 19px;
-
+	margin-right: 8px;
 }
 
-.filtres .categories-btn {
-	color: #1D6154;
-	background: white;
-	margin-left: 8px;
+.filter-btn.active {
+	color: white;
+	background: #1D6154;
+	border-radius: 60px;
+	text-align: center;
+	border: 1px solid #1D6154;
+	padding: 9px  30px 9px 28px; 
+	font-size: 16px;
+	font-weight: 700;
+	font-family: 'Syne';
+	line-height: 19px;
+	margin-right: 8px;
 }
+
 .gallery {
 	width: 90%;
 	display: grid;

@@ -32,18 +32,32 @@ async function displayCategories() {
     for (let categorie of categories) {
         const buttonsFilter = document.querySelector(".filtres")
         const buttonFilter = document.createElement("button");
-        buttonFilter.class = "categories-btn";
+        buttonFilter.className = "filter-btn";
         buttonFilter.innerText = categorie.name;
         buttonsFilter.appendChild(buttonFilter);
     }
 }
 displayCategories();
 
-// Filtrer les travaux et affichage par catégorie //
 async function filterCategories() {
+    const defaultButton = document.querySelector("#all");
+    // Par défaut, la catégorie Tous est cliquée
+    defaultButton.classList.add("active")
+    //const buttonsFilter = document.querySelectorAll(".filter-btn");  
     const filterButton = document.querySelector(".filtres");
     filterButton.addEventListener("click", async function (event) {
         const categorieName = event.target.innerText;
+        const buttonsFilter = document.querySelectorAll(".filter-btn");  
+        console.log(buttonsFilter)
+        for (let button of buttonsFilter) {
+            button.addEventListener("click", () => {
+                    for (let removeActive of buttonsFilter) {
+                    // Retire la classe active
+                    removeActive.classList.remove("active");
+                    // Ajoute la classe active au bouton
+                    button.classList.add("active");
+                };
+        });
         document.querySelector(".gallery").innerHTML = "";
         const reponse = await fetch("http://localhost:5678/api/works");
         const works = await reponse.json();
@@ -68,7 +82,28 @@ async function filterCategories() {
                     }
                 } else {
                     displayWorks();
-                }
-        })
-    };
+            }
+        }
+    });
+}
 filterCategories();
+
+// affichage mode edition
+const token = localStorage.getItem("Token")
+
+if (token){
+    const modeEdition = document.querySelectorAll(".edition-mode");
+    for (let data of modeEdition) {
+        data.classList.add("active"); 
+    }
+    const modeEditionFilter = document.querySelector(".filtres");
+    modeEditionFilter.style.display = "none";
+    const logout = document.getElementById("login-logout")
+    logout.setAttribute("href", "./index.html");
+    logout.innerText = "logout";
+    logout.style.fontWeight ="700";
+    logout.addEventListener("click", function (event) {
+        localStorage.removeItem("Token");
+    }
+    )
+    };
