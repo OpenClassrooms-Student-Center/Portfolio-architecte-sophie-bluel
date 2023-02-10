@@ -4,6 +4,7 @@
 const apiLink = "http://localhost:5678/api/";
 const response = await fetch(apiLink + "works");
 const projectList = await response.json();
+const filterContainer = document.querySelector(".project-filters");
 
 // Genère dynamiquement les projets
 function genererProjets(projectsToGenerate) {
@@ -25,9 +26,6 @@ function genererProjets(projectsToGenerate) {
 genererProjets(projectList);
 
 // --------------------- Je gère les filtres ---------------------
-
-const filterContainer = document.querySelector(".project-filters");
-
 filterContainer.innerHTML = `<button class="filter-button">Tous</button>
 <button id=category-1-button class="filter-button">Objets</button>
 <button id=category-2-button class="filter-button">Appartements</button>
@@ -38,7 +36,6 @@ const buttonCategory2 = document.getElementById("category-2-button");
 const buttonCategory3 = document.getElementById("category-3-button");
 const filterButtons = document.querySelectorAll(".filter-button");
 
-//    /*
 //Réponds au click sur un boutton des filtres
 for (let i in filterButtons) {
   filterButtons[i].addEventListener("click", () => {
@@ -51,7 +48,6 @@ for (let i in filterButtons) {
     } else if (filterButtons[i] == buttonCategory3) {
       category = 3;
     }
-
     //copie la liste des projets pour ne pas modifier la liste initiale
     let filteredProjects = Array.from(projectList);
 
@@ -63,10 +59,8 @@ for (let i in filterButtons) {
         }
       }
     }
-
     // actualise l'affichage
     document.querySelector(".gallery").innerHTML = "";
     genererProjets(filteredProjects);
   });
 }
-//  */
