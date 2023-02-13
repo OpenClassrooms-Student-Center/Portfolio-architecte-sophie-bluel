@@ -94,6 +94,9 @@ nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
 }
+li>a{
+	text-decoration: none;
+}
 
 li:hover {
 	color: #B1663C;
@@ -124,6 +127,29 @@ li:hover {
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
+}
+.categories{
+	display: flex;
+	justify-content: center;
+}
+.categories>button{
+	background: #fff;
+	border: 1px green solid;
+	border-radius: 20px;
+	padding: 10px;
+	font-size: 20px;
+	margin-left: 2rem;
+	margin-bottom: 3rem;
+	font-family: 'Work Sans';
+	font-weight: 600;
+	padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.categories>button:hover{
+	background-color: #1D6154;
+	color: #fff;
 }
 .gallery {
 	width: 100%;
@@ -186,3 +212,59 @@ footer nav ul {
 	margin: 2em
 }
 
+
+/*CSS Login Page*/
+
+#login_form {
+	width: 35%;
+	margin: auto;
+	margin-top: 5rem;
+}
+#login_form > * {
+	text-align: center;
+
+}
+#login_form h2{
+	margin-bottom: 20px;
+}
+#login_form form {
+	text-align: left;
+	margin-top:30px;
+	display: flex;
+	flex-direction: column;
+}
+
+#login_form input {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+#login_form label {
+	margin: 2em 0 1em 0;
+	font-weight: 700;
+}
+#login_form textarea {
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+#pswd_forgot>a{
+	text-align: center;
+	display: block;
+	color: black;
+	margin-bottom: 10rem;
+	font-size: 14px;
+    font-weight: 600;
+	font-family: 'Work Sans';
+}
+
+#sumbit{
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin: 2em auto;
+	width: 210px;
+	text-align: center;
+	border-radius: 60px;
+}
