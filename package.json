@@ -1,0 +1,19 @@
+{
+  "name": "portfolio-architecte-sophie-bluel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OpenClassrooms-Student-Center/Portfolio-architecte-sophie-bluel.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OpenClassrooms-Student-Center/Portfolio-architecte-sophie-bluel/issues"
+  },
+  "homepage": "https://github.com/OpenClassrooms-Student-Center/Portfolio-architecte-sophie-bluel#readme"
+}
