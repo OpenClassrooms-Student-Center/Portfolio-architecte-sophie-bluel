@@ -186,3 +186,30 @@ footer nav ul {
 	margin: 2em
 }
 
+/* JS Content */
+.filters{
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 19px;
+	text-align: center;
+	color: #1D6154;
+	background-color: white;
+	border: 1px solid #1D6154;
+	border-radius: 60px;
+	height: 37px;
+	padding-inline: 1.5rem;
+	
+}
+.filters:hover{
+	cursor:pointer;
+}
+.filtersdiv{
+	display: flex;
+	justify-content: center;
+	padding-bottom: 3rem;
+	padding-top: 1.5rem;
+	gap: 0.8rem;
+	
+}
+
