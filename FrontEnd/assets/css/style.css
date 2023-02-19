@@ -192,29 +192,24 @@ form input {
 form a {
 	color: #3D3D3D;
 }
-.error-message-absence {
-	color: white;
+
+.message-error-login {
+	background-color: white;
+	color: #D65353;
+	padding: 4%;
+	border: 2px dashed  #D65353;
+	font-weight: 700;
+	text-align: center;
+	width: 110%;
 }
-.error-message-absence.active{
-	color: black;
-	padding: 2%;
-	border: 2px dashed #D65353;
-}
-.error-message-error {
-	color: white;
-}
-.error-message-error.active {
-	color: black;
-	padding: 2%;
-	border: 2px dashed #D65353;
-}
+
 
 /* bouton lien modifier modale */
 .square-pen {
 	position: relative;
 	height: 18px;
 	width: 18px;
-	margin-right: 8px;;
+	margin-right: 8px;
 }
 .pen {
 	position: absolute;
@@ -228,11 +223,7 @@ form a {
 	align-items: center;
 	box-sizing: border-box;
 	font-family: 'Work Sans';
-}
-#edition-article.edition-mode {
-	margin: 0;
 	padding: 0;
-	border: 2px solid blue;
 }
 
 
@@ -406,16 +397,18 @@ select{
 #introduction {
 	display: flex;
 	align-items: center;
-	width: 90%;
-	margin-left: 30px;
+	width: 100%;
+	margin-left: 80px;
 }
 
 #photo-presentation {
 	flex: 1;
 }
+#introduction button {
+	display: flex;
+}
 
 #introduction img {
-	display: block;
 	margin: auto;
 	width: 80%;
 }
@@ -424,7 +417,6 @@ select{
 	flex: 1;
 	color: #3D3D3D;
 	line-height: 16px;
-	text-align: left;
 }
 
 #introduction h2 {
@@ -433,12 +425,17 @@ select{
 
 #introduction p {
 	margin-bottom: 0.5em;
+	width: 80%;
+	text-align: justify;
+	
 }
-#portfolio h2 {
+#edition-portfolio {
 	display: flex;
 	justify-content: center;
-	text-align: center;
 	margin-bottom: 1em;
+}
+#portfolio h2{
+	padding-right: 16px;
 }
 
 /* ajout bouton filtre catégorie*/
