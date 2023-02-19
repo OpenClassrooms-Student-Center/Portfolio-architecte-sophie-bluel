@@ -206,15 +206,8 @@ form a {
 
 /* bouton lien modifier modale */
 .square-pen {
-	position: relative;
 	height: 18px;
 	width: 18px;
-	margin-right: 8px;
-}
-.pen {
-	position: absolute;
-	left: 5px;
-	bottom: 6px;
 }
 
 .edition-mode button[type="button"]{
@@ -243,25 +236,25 @@ form a {
 .modal-container {
 	display: flex;
 	flex-direction: column;
-	padding: 4%;
+	padding: 4% 6% 4% 6%;
 	background-color: white;
 	width: 630px;
 	border-radius: 10px;
 	margin: 15% auto;
-
-	
 }
+
 .modal-close {
 	align-self: flex-end;
-	border: none;
-	background-color: white;
+	width: 16px;
+	height: 16px;
 }
 
 .modal-container h3 {
 	font-size: 26px;
 	line-height: 30px;
-	text-align: center;
+	margin: auto;
 }
+
 .gallery-modal {
 	width: 90%;
 	display: grid;
@@ -272,21 +265,30 @@ form a {
 	padding: 40px 0 20px 0;
 }
 
+.photo-remove{
+	width: 21px;
+	height: 21px;
+}
+.photo-remove img {
+	position: relative;
+	top: -135px;
+	left: 70px;
+	background-color: black;
+	padding: 5px;
+}
+
 .gallery-modal figure img {
 	width: 100%;
 }
 .gallery-modal figcaption {
 	display: inline;
-	margin-left: -16px;
+	margin-left: -22px;
 }
 
-.photo-remove {
-	position: relative;
-	background-color: black;
-	top: -80%;
-	left: 77%;
-	padding: 4px;
-	border: none;
+.modal-container hr {
+	width: 90%;
+	size: 1px;
+	color: #B3B3B3;
 }
 
 #btn-add-photo {
@@ -301,7 +303,7 @@ form a {
 	text-decoration-line: none;
 	margin: 16px 0 16px 0;
 }
-.modal-container input[type="button"] {
+.modal-container button {
 	color:#D65353;
 	background-color: white;
 	line-height: 17px;
@@ -310,46 +312,34 @@ form a {
 	font-weight: 400;
 }
 /* modale ajout photo */
-.modal-icon {
-	display: flex;
-	justify-content: space-between;
-}
+
 #arrow-back {
-	border: none;
-	background-color: white;
+	width: 21px;
+	height: 15px;
+	position: relative;
+	top: 15px;
 }
+
 
 .container-add-photo {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	width: 100%;
+	width: 90%;
 	height: 169px;
 	background-color: #E8F1F7;
 	border-radius: 3px;
-	margin-top: 30px;
+	margin: 30px auto;
 }
 
-#rectangle{
-	position: relative;
-	z-index: 1;
-	top: 14px;
-	left: 24px;
+.container-add-photo img{
+	width: 58px;
+	height: 58px;
+	color: #B9C5CC;
 }
 
-#circle {
-	position: relative;
-	z-index: 3;
-	top: -10px;
-	right: 30px;
-}
-#mount{
-	position: relative;
-	z-index: 2;
-	top : 8px;
-	right: 50px;
-}
+
 .container-add-photo button {
 	color: #306685;
 	background-color: #CBD6DC;
@@ -368,7 +358,8 @@ form a {
 
 .modal-container form {
 	margin: 20px 0 20px 0;
-	width: 100%;
+	width: 90%;
+	margin: auto;
 }
 
 .modal-container form label, select {
