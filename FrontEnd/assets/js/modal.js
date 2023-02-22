@@ -1,4 +1,6 @@
 import { works } from "./fetch.js";
+import { categories } from "./fetch.js"
+
 
 // création première modale galerie photo
 const modalProjet = document.querySelector("#modal-projet");
@@ -69,19 +71,34 @@ imgSecondModalClose.src = "./assets/icons/cross.png";
 imgSecondModalClose.alt = "croix pour fermeture de la fenêtre";
 const h3SecondModalContainer = document.createElement("h3");
 h3SecondModalContainer.innerText ="Ajout photo";
+const formAddPhoto = document.createElement("form");
+formAddPhoto.id = "formAddPhoto";
+formAddPhoto.name = "formAddPhoto"
+//formAddPhoto.action = "";
+formAddPhoto.method ="post";
+formAddPhoto.enctype ="multipart/form-data";
 const containerAddPhoto = document.createElement("div");
 containerAddPhoto.className = "container-add-photo";
+const displayImage = document.createElement("div");
+displayImage.id = "display-image";
+displayImage.style.display = "none";
 const imgContainerAddPhoto = document.createElement("img");
 imgContainerAddPhoto.src = "./assets/icons/picture-svgrepo.png"; 
 imgContainerAddPhoto.alt = "icone image";
-const btnContainerAddPhoto = document.createElement("button");
-btnContainerAddPhoto.type = "submit";
-btnContainerAddPhoto.innerText ="+ Ajouter photo";
+const labelBtnContainerAddPhoto = document.createElement("label");
+labelBtnContainerAddPhoto.className = ("myfile");
+labelBtnContainerAddPhoto.for = "image";
+labelBtnContainerAddPhoto.innerText = "+ Ajouter photo";
+const btnContainerAddPhoto = document.createElement("input");
+btnContainerAddPhoto.type = "file";
+btnContainerAddPhoto.id = "myfile";
+btnContainerAddPhoto.name = "image";
+btnContainerAddPhoto.accept = "image/png, image/jpg";
+btnContainerAddPhoto.style.display = "none";
+btnContainerAddPhoto.attributes.required = "required";
 const pContainerAddPhoto = document.createElement("p");
 pContainerAddPhoto.innerText = "jpg. png : 4mo max";
-const formAddPhoto = document.createElement("form");
-formAddPhoto.action = "";
-formAddPhoto.method ="post";
+
 const labelFormAddPhoto = document.createElement("label");
 labelFormAddPhoto.for = "title";
 labelFormAddPhoto.innerText = "Titre";
@@ -89,30 +106,45 @@ const titleElement = document.createElement("input");
 titleElement.type ="text";
 titleElement.name = "title";
 titleElement.id = "title";
-titleElement.attribute ="required";
+titleElement.attributes.required ="required";
 const labelCategorieFormAddPhoto = document.createElement("label");
-labelCategorieFormAddPhoto.for = "categorie";
+labelCategorieFormAddPhoto.for = "category";
 labelCategorieFormAddPhoto.innerText = "Catégorie";
 const selectCategorieFormAddPhoto = document.createElement("select");
-selectCategorieFormAddPhoto.name = "categorie";
+selectCategorieFormAddPhoto.name = "category";
 selectCategorieFormAddPhoto.id = "select-categorie";
 selectCategorieFormAddPhoto.autocomplete = "off";
-selectCategorieFormAddPhoto.attribute = "required";
-const optionFirst = document.createElement("option");
+selectCategorieFormAddPhoto.attributes.required = "required";
+// Recupérer et afficher toutes les catégories //
+for (let categorie of categories) {
+    var  optionForm = document.createElement("option")
+    optionForm.className = "option"
+    optionForm.dataset.id = categorie.id;
+    optionForm.innerText = categorie.name;
+    selectCategorieFormAddPhoto.appendChild(optionForm);
+    console.log(optionForm)
+}
+
+
+
+/*const optionFirst = document.createElement("option");
 optionFirst.value = "";
 optionFirst.innerText = "Choisissez une catégorie";
 const optionSecond = document.createElement("option");
 optionSecond.value = "Objets";
+optionSecond.dataset.id = "1";
 optionSecond.innerText = "Objets";
 const optionThird = document.createElement("option");
 optionThird.value = "appartements";
-optionFirst.innerText = "Appartements";
+optionThird.innerText = "Appartements";
+optionThird.dataset.id = "2";
 const optionFour = document.createElement("option");
 optionFour.value = "hotels-restaurants";
 optionFour.innerText = "Hôtels & restaurants";
+optionFour.dataset.id = "3";*/
 const hrAddPhoto = document.createElement("hr");
 const btnFormAddPhoto = document.createElement("input");
-btnFormAddPhoto.type = "submit";
+//btnFormAddPhoto.type = "submit";
 btnFormAddPhoto.id = "valider";
 btnFormAddPhoto.value = "valider";
 
@@ -120,19 +152,23 @@ modalProjetPhoto.appendChild(secondModalContainer);
 secondModalContainer.appendChild(imgArrowBack);
 secondModalContainer.appendChild(imgSecondModalClose);
 secondModalContainer.appendChild(h3SecondModalContainer);
-secondModalContainer.appendChild(containerAddPhoto);
-containerAddPhoto.appendChild(imgContainerAddPhoto);
-containerAddPhoto.appendChild(btnContainerAddPhoto);
-containerAddPhoto.appendChild(pContainerAddPhoto);
 secondModalContainer.appendChild(formAddPhoto);
+formAddPhoto.appendChild(containerAddPhoto);
+containerAddPhoto.appendChild(displayImage);
+containerAddPhoto.appendChild(imgContainerAddPhoto);
+containerAddPhoto.appendChild(labelBtnContainerAddPhoto);
+labelBtnContainerAddPhoto.appendChild(btnContainerAddPhoto);
+containerAddPhoto.appendChild(pContainerAddPhoto);
+
 formAddPhoto.appendChild(labelFormAddPhoto);
 formAddPhoto.appendChild(titleElement);
 formAddPhoto.appendChild(labelCategorieFormAddPhoto);
 formAddPhoto.appendChild(selectCategorieFormAddPhoto);
-selectCategorieFormAddPhoto.appendChild(optionFirst);
+/*selectCategorieFormAddPhoto.appendChild(optionFirst);
 selectCategorieFormAddPhoto.appendChild(optionSecond);
 selectCategorieFormAddPhoto.appendChild(optionThird);
-selectCategorieFormAddPhoto.appendChild(optionFour);
+selectCategorieFormAddPhoto.appendChild(optionFour);*/
+
 formAddPhoto.appendChild(hrAddPhoto);
 formAddPhoto.appendChild(btnFormAddPhoto);
 
@@ -186,10 +222,28 @@ btnOpenSecondModal.addEventListener("click", function () {
 btnReturnModal.addEventListener("click", function() {
     secondModal.style.display = "none";
     firstModal.style.display = "block";
+    displayImage.style.display = "none";
+    imgContainerAddPhoto.style.display = "block";
+    labelBtnContainerAddPhoto.style.display = "flex";
+    pContainerAddPhoto.style.display = "block";
+    //reset formulaire
+    btnContainerAddPhoto.value ="";
+    titleElement.value = "";
+    selectCategorieFormAddPhoto.value = "";
+    btnFormAddPhoto.id = ("valider");
 });
 // fermeture de la modale
 btnCloseModal.addEventListener("click", function() {
     secondModal.style.display = "none";
+    displayImage.style.display = "none";
+    imgContainerAddPhoto.style.display = "block";
+    labelBtnContainerAddPhoto.style.display = "flex";
+    pContainerAddPhoto.style.display = "block";
+    //reset formulaire 
+    btnContainerAddPhoto.value ="";
+    titleElement.value = "";
+    selectCategorieFormAddPhoto.value = "";
+    btnFormAddPhoto.id = ("valider");
 });
 
 // fermeture de la modale si clic en dehors de la modale
@@ -197,8 +251,18 @@ window.addEventListener("click", function(event) {
     if (event.target == secondModal) {
     secondModal.style.display = "none";
     firstModal.style.display = "none";
-    }
-});
+    displayImage.style.display = "none";
+    imgContainerAddPhoto.style.display = "block";
+    labelBtnContainerAddPhoto.style.display = "flex";
+    pContainerAddPhoto.style.display = "block";
+    //reset formulaire
+    btnContainerAddPhoto.value ="";
+    titleElement.value = "";
+    selectCategorieFormAddPhoto.value = "";
+    btnFormAddPhoto.id = ("valider")
+    };
+});   
+
 
 //  afficher tous les travaux //
 function displayWorksModal(works) {
@@ -207,6 +271,7 @@ function displayWorksModal(works) {
         const galleryModalContainer = document.querySelector(".gallery-modal");
         // Création d’une balise dédiée à un work
         const workElement = document.createElement("figure");
+        workElement.dataset.id = work.id;
         // Création des balises 
         const imageElement = document.createElement("img");
         imageElement.src = work.imageUrl;
@@ -236,10 +301,95 @@ displayWorksModal(works);
 
     const buttonsPhotoRemove = document.querySelectorAll(".photo-remove");
     for(let button of buttonsPhotoRemove) {
-        button.addEventListener("click", function (event) {
+        button.addEventListener("click", async function (event) {
+        event.preventDefault();
         const photoId = event.target.dataset.id;
-        console.log(photoId);
-        //document.querySelector(".gallery-modal").innerHTML = "";
-        //displayWorksModal(works);
+        const token = localStorage.getItem("Token");
+        console.log(photoId)
+         // supprime information sur l'API works
+        const responseWorksDelete =  await fetch("http://localhost:5678/api/works/" + photoId, {
+            method: "DELETE",
+            headers:  { "Authorization" : `Bearer ${token}`},
+            body: JSON.stringify(),
+        });
+        
+        if (responseWorksDelete.ok) {
+            for (let work of works) {
+                if (work.id == photoId) {
+                    const workElement = document.querySelector("figure")
+                    workElement.remove()
+                    }
+                }
+            }
         });
     };
+    
+
+// affichage image avant upload
+const imageNewWork = document.querySelector("#myfile");
+var uploadedImage = "";
+
+imageNewWork.addEventListener("change", function () {
+    const reader = new FileReader();
+    reader.addEventListener("load", () => {
+        displayImage.style.display = "block";
+        imgContainerAddPhoto.style.display = "none";
+        labelBtnContainerAddPhoto.style.display = "none";
+        pContainerAddPhoto.style.display = "none";
+        uploadedImage = reader.result;
+        document.querySelector("#display-image").style.backgroundImage = `url(${uploadedImage})`;
+    });
+    reader.readAsDataURL(this.files[0]);
+});
+
+//verification formulaire complet et changement couleur btn submit
+let spanElement = document.createElement("span");
+spanElement.innerText ="";
+
+formAddPhoto.addEventListener("change", function () {
+    //creation objet newWork
+    const newWork = {
+        imageUrl: document.querySelector("[name = 'image']").value,
+        title: document.querySelector("[name ='title']").value,
+        categoryId: parseInt(document.querySelector("option").dataset.id)
+    };
+    /*const optionsForm = document.querySelectorAll(".option")
+    for (let option of optionsForm) {
+        option.addEventListener("click", (event) => {
+            newWork.categoryId = event.target.dataset.id;
+        })
+        console.log(newWork.categoryId)
+    }*/
+    console.log(newWork)
+    if (!newWork.imageUrl || !newWork.title || !newWork.categoryId) {
+        hrAddPhoto.insertAdjacentElement("afterend",spanElement);
+        spanElement.className = "message-error-login";
+        spanElement.innerText = "Veuillez compléter l'ensemble des champs à saisir";
+    }else{
+        spanElement.innerText ="";
+        spanElement.className = "";
+
+        // envoi possible du formulaire
+        btnFormAddPhoto.id = ("valider-submit");
+        btnFormAddPhoto.type = "submit";
+
+        //Récupération objet FormData et envoi
+        var formAddPhoto = document.getElementById("formAddPhoto");
+        var formData = new FormData(formAddPhoto);
+        formData.append("image", newWork.imageUrl);
+        formData.append("title", newWork.title);
+        formData.append("category", newWork.categoryId);
+        
+        var formElement = document.querySelector("form");
+        var request = new XMLHttpRequest();
+        const token = localStorage.getItem("Token")
+        console.log(token)
+        request.open("POST", "http://localhost:5678/api/works");
+        request.setRequestHeader("Authorization", `Bearer ${token}`);
+        request.setRequestHeader("Accept", "application/json")
+        console.log(formData)
+        request.send(formData);
+        
+    };
+});
+

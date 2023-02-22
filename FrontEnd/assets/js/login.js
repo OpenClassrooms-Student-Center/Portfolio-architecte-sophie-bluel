@@ -26,7 +26,6 @@ formLogin.addEventListener("submit", async function (event) {
         });
         const response = await responseLogin.json();
         //récupération token et statut de la réponse
-        console.log(response);
         const reponseToken = response.token;
         const reponseState = responseLogin.ok;
 

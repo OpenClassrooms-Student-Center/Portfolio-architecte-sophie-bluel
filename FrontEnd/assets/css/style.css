@@ -331,6 +331,7 @@ form a {
 	background-color: #E8F1F7;
 	border-radius: 3px;
 	margin: 30px auto;
+	padding : 0 40px 0 40px;
 }
 
 .container-add-photo img{
@@ -340,36 +341,28 @@ form a {
 }
 
 
-.container-add-photo button {
-	color: #306685;
-	background-color: #CBD6DC;
-	border-radius: 50px;
-	padding: 10px 35px 10px 35px;
-	margin: 30px 0 7px 0;
-	border: none;
-	font-weight: 500;
-	line-height: 16px;
-	text-align: center;
-}
+
 .container-add-photo p{
 	font-size: 10px;
 	font-weight: 400;
 }
 
 .modal-container form {
-	margin: 20px 0 20px 0;
+	margin: 20px;
 	width: 90%;
 	margin: auto;
 }
 
-.modal-container form label, select {
+.modal-container label, select {
 	font-weight: 500;
 	color: #3D3D3D;
 	line-height: 16px;
+	width: 90%;
 }
-.modal-container form input, select {
+
+.modal-container input, select {
 	box-shadow: 0 4px 14px rgba(0,0,0,0.09);
-	width: 100%;
+	width: 90%;
 }
 select{
 	background-color: white;
@@ -378,11 +371,27 @@ select{
 	height: 51px;
 	margin-bottom: 40px;
 }
+.myfile {
+	display: flex;
+	justify-content: center;
+	color: #306685;
+	background-color: #CBD6DC;
+	border-radius: 50px;
+	margin: auto;
+	height: 36px;
+	border: none;
+	font-weight: 500;
+	line-height: 16px;
+	align-items: center;
+}
 #valider {
 	width: 237px;
 	height: 36px;
 	background-color: #A7A7A7;
 	border-radius: 60px;
+}
+#valider-submit {
+	background-color: #1D6154;
 }
 
 #introduction {
@@ -528,3 +537,7 @@ footer nav ul {
 	font-weight: 300;
 }
 
+#display-image {
+	width : 129px;
+	height: 193px;
+}
