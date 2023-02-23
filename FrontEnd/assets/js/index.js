@@ -8,6 +8,7 @@ async function displayWorks(works) {
         const portfolioGallery = document.querySelector(".gallery");
         // Création d’une balise dédiée à un work
         const workElement = document.createElement("figure");
+        workElement.dataset.id = work.id;
         // Création des balises 
         const imageElement = document.createElement("img");
         imageElement.src = work.imageUrl;

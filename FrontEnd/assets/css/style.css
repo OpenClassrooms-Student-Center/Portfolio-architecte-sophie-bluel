@@ -362,7 +362,7 @@ form a {
 
 .modal-container input, select {
 	box-shadow: 0 4px 14px rgba(0,0,0,0.09);
-	width: 90%;
+	width: 100%;
 }
 select{
 	background-color: white;
@@ -387,8 +387,13 @@ select{
 #valider {
 	width: 237px;
 	height: 36px;
+	color: white;
 	background-color: #A7A7A7;
 	border-radius: 60px;
+	font-style: bold;
+	text-align: center;
+	line-height: 17px;
+	font-size: 16px;
 }
 #valider-submit {
 	background-color: #1D6154;

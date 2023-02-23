@@ -76,7 +76,7 @@ formAddPhoto.id = "formAddPhoto";
 formAddPhoto.name = "formAddPhoto"
 //formAddPhoto.action = "";
 formAddPhoto.method ="post";
-formAddPhoto.enctype ="multipart/form-data";
+//formAddPhoto.enctype ="multipart/form-data";
 const containerAddPhoto = document.createElement("div");
 containerAddPhoto.className = "container-add-photo";
 const displayImage = document.createElement("div");
@@ -297,13 +297,13 @@ function displayWorksModal(works) {
 displayWorksModal(works);
 
 
-//effacer image de la galerie suite à click sur icone//
+//effacer image de la galerie suite à click sur icone
 
     const buttonsPhotoRemove = document.querySelectorAll(".photo-remove");
     for(let button of buttonsPhotoRemove) {
         button.addEventListener("click", async function (event) {
         event.preventDefault();
-        const photoId = event.target.dataset.id;
+        const photoId = String(event.target.dataset.id);
         const token = localStorage.getItem("Token");
         console.log(photoId)
          // supprime information sur l'API works
@@ -312,18 +312,18 @@ displayWorksModal(works);
             headers:  { "Authorization" : `Bearer ${token}`},
             body: JSON.stringify(),
         });
-        
+        // supprime élément dans le DOM
         if (responseWorksDelete.ok) {
-            for (let work of works) {
-                if (work.id == photoId) {
-                    const workElement = document.querySelector("figure")
-                    workElement.remove()
-                    }
-                }
-            }
+            const worksElement = document.querySelectorAll("figure");
+            for (let workElement of worksElement){
+                if (workElement.dataset.id === photoId){
+                    workElement.remove();
+                    };
+                };
+            };
         });
     };
-    
+ 
 
 // affichage image avant upload
 const imageNewWork = document.querySelector("#myfile");
@@ -360,7 +360,7 @@ formAddPhoto.addEventListener("change", function () {
         })
         console.log(newWork.categoryId)
     }*/
-    console.log(newWork)
+    //console.log(newWork)
     if (!newWork.imageUrl || !newWork.title || !newWork.categoryId) {
         hrAddPhoto.insertAdjacentElement("afterend",spanElement);
         spanElement.className = "message-error-login";
@@ -373,23 +373,32 @@ formAddPhoto.addEventListener("change", function () {
         btnFormAddPhoto.id = ("valider-submit");
         btnFormAddPhoto.type = "submit";
 
-        //Récupération objet FormData et envoi
-        var formAddPhoto = document.getElementById("formAddPhoto");
-        var formData = new FormData(formAddPhoto);
-        formData.append("image", newWork.imageUrl);
-        formData.append("title", newWork.title);
-        formData.append("category", newWork.categoryId);
-        
-        var formElement = document.querySelector("form");
-        var request = new XMLHttpRequest();
-        const token = localStorage.getItem("Token")
-        console.log(token)
-        request.open("POST", "http://localhost:5678/api/works");
-        request.setRequestHeader("Authorization", `Bearer ${token}`);
-        request.setRequestHeader("Accept", "application/json")
-        console.log(formData)
-        request.send(formData);
-        
+        btnFormAddPhoto.addEventListener("click", function (e) {
+            e.preventDefault();
+            //Récupération objet FormData et envoi
+            var formAddPhoto = document.getElementById("formAddPhoto");
+            var formData = new FormData(formAddPhoto);
+            formData.append("image", newWork.imageUrl);
+            formData.append("title", newWork.title);
+            formData.append("category", newWork.categoryId);
+            console.log(formData)
+            //var request = new XMLHttpRequest();
+            const token = localStorage.getItem("Token")
+            console.log(token)
+           /* request.open("POST", "http://localhost:5678/api/works");
+            request.setRequestHeader("Authorization", `Bearer ${token}`);
+            request.setRequestHeader("Accept", "application/json")
+            request.setRequestBody("formData")
+            console.log(formData)
+            request.send(formData);*/
+            const responseFormData = fetch("http://localhost:5678/api/works", {
+                method: "POST",
+                headers: { "Authorization" : `Bearer ${token}`,
+                        "Accept": "application/json",
+                        /*"Content-Type" : "multipart/formData"*/},
+                body: "formData"
+            });
+        });
     };
 });
 
