@@ -12,7 +12,7 @@ function genererProjets(){
     
    
         // Récupération de l'élément du DOM qui accueillera les fiches
-        const sectionPortfolio = document.querySelector(".gallery");
+        const divGallery = document.querySelector(".gallery");
 
         // Création d’une balise dédiée au projet
         const figure = document.createElement("figure");
@@ -20,15 +20,14 @@ function genererProjets(){
         // Création des balises 
         const image = document.createElement("img");
         image.src = projet.imageUrl;
-            figure.appendChild(image)
+        figure.appendChild(image)
 
         const figcaption = document.createElement("figcaption");
         figcaption.innerText = projet.title;
 
         figure.appendChild(figcaption);
 
-        sectionPortfolio.appendChild(figure)
+        divGallery.appendChild(figure)
     
     }
-
-    }
+}
