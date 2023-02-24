@@ -59,8 +59,7 @@ header {
 	margin: 50px 0
 }
 section {
-	
-	margin: 50px 0
+	margin: 50px;
 }
 
 h1{
@@ -109,11 +108,12 @@ li:hover {
 #introduction img {
 	display: block;
 	margin: auto;
-	width: 80%;
+	width: 100%;
 }
 
 #introduction article {
-	flex: 1
+	flex: 1;
+	margin-left: 71px;
 }
 #introduction h2 {
 	margin-bottom: 1em;
@@ -148,6 +148,11 @@ button {
 	border: 1px solid #1D6154;
 	}
 
+button:hover {
+	color: white;
+	background-color: #1D6154;
+}
+
 .appartements {
 	padding-right: 15px;
 	padding-left: 15px;
@@ -169,7 +174,6 @@ button {
 	width: 100%;
 
 }
-
 
 #contact {
 	width: 50%;
