@@ -1,29 +1,7 @@
 // Récupération des travaux et catégories depuis l'API
-import { works , categories } from "./fetch.js";
+import { works , categories, displayWorks } from "./fetch.js";
 
-//  afficher tous les travaux //
-async function displayWorks(works) {
-    for (let work of works) {
-        // Récupération de l'élément du DOM qui accueillera les travaux
-        const portfolioGallery = document.querySelector(".gallery");
-        // Création d’une balise dédiée à un work
-        const workElement = document.createElement("figure");
-        workElement.dataset.id = work.id;
-        // Création des balises 
-        const imageElement = document.createElement("img");
-        imageElement.src = work.imageUrl;
-        imageElement.alt = work.title;
-        imageElement.crossOrigin = "anonymous";
-        const titleElement = document.createElement("figcaption");
-        titleElement.innerText = work.title;
-        
-        // On rattache la balise figure à la section gallery
-        portfolioGallery.appendChild(workElement);
-        // On rattache l’image et figcaption à workElement (la balise figure)
-        workElement.appendChild(imageElement);
-        workElement.appendChild(titleElement);
-        };
-};
+//affichage de tous les travaux
 displayWorks(works);
 
 // Recupérer et afficher toutes les catégories //

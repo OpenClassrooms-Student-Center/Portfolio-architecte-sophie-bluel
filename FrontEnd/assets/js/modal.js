@@ -1,5 +1,4 @@
-import { works } from "./fetch.js";
-import { categories } from "./fetch.js"
+import { works, categories, displayWorks } from "./fetch.js";
 
 
 // création première modale galerie photo
@@ -22,73 +21,50 @@ btnAddPhoto.id = "btn-add-photo";
 btnAddPhoto.innerText = "Ajouter une photo";
 const btnRemoveGallery = document.createElement("button");
 btnRemoveGallery.innerText = "Supprimer la galerie";
-modalProjet.appendChild(modalContainer);
-modalContainer.appendChild(imgModalContainer);
-modalContainer.appendChild(h3ModalContainer);
-modalContainer.appendChild(galleryModalContainer);
-modalContainer.appendChild(hrModalContainer);
-modalContainer.appendChild(btnAddPhoto);
-modalContainer.appendChild(btnRemoveGallery);
+modalProjet.append(modalContainer);
+modalContainer.append(imgModalContainer, h3ModalContainer, galleryModalContainer, hrModalContainer, btnAddPhoto, btnRemoveGallery);
 
-// création deuxième modale ajout photo
-/*document.querySelector(".second-modal").innerHTML += `
-    <aside id="modal-projet-photo" class="modal">
-        <div class="modal-container">
-            <img id="arrow-back" class="js-modal-close-return" src="./assets/icons/arrow_Back.png" alt="flèche retour">
-            <img id="second-modal-close" class="modal-close" src="./assets/icons/cross.png" alt="croix pour fermeture de la fenêtre">
-            <h3>Ajout photo</h3>
-            <div class="container-add-photo">
-                <img src="./assets/icons/picture-svgrepo.png" alt="icone image">
-                <button type="submit">+ Ajouter photo</button>
-                <p>jpg.png : 4mo max</p>
-            </div>
-            <form action="" method="post">
-                <label for="title">Titre</label>
-                <input type="text" name="title" id="title" required>
-                <label for="categorie">Catégorie</label>
-                <select name="categorie" id="select-categorie" autocomplete="off" required>
-                    <option value="">Choisissez une catégorie</option>
-                    <option value="objets">Objets</option>
-                    <option value="appartements">Appartements</option>
-                    <option value="hotels-restaurants">Hôtels & restaurants</option>
-                </select>
-                <hr width="100%" size="1px" color="#B3B3B3">
-                <input id="valider" type="submit" value="Valider">
-            </form>
-        </div>
-    </aside>`;*/
-const modalProjetPhoto = document.querySelector("#modal-projet-photo")
+//creation seconde modale ajout photo
+const modalProjetPhoto = document.querySelector("#modal-projet-photo");
 const secondModalContainer = document.createElement("div");
-secondModalContainer.className ="modal-container";
+secondModalContainer.className = "modal-container";
+//fleche retour 1ere modale
 const imgArrowBack = document.createElement("img");
 imgArrowBack.id = "arrow-back";
-imgArrowBack.src="./assets/icons/arrow_Back.png";
-imgArrowBack.alt ="flèche retour";
+imgArrowBack.src = "./assets/icons/arrow_Back.png";
+imgArrowBack.alt = "flèche retour";
+//croix fermeture modale
 const imgSecondModalClose = document.createElement("img");
 imgSecondModalClose.id = "second-modal-close";
 imgSecondModalClose.className = "modal-close";
 imgSecondModalClose.src = "./assets/icons/cross.png";
 imgSecondModalClose.alt = "croix pour fermeture de la fenêtre";
+
 const h3SecondModalContainer = document.createElement("h3");
-h3SecondModalContainer.innerText ="Ajout photo";
+h3SecondModalContainer.innerText = "Ajout photo";
+//formulaire
 const formAddPhoto = document.createElement("form");
 formAddPhoto.id = "formAddPhoto";
-formAddPhoto.name = "formAddPhoto"
-//formAddPhoto.action = "";
-formAddPhoto.method ="post";
-//formAddPhoto.enctype ="multipart/form-data";
+formAddPhoto.name = "formAddPhoto";
+formAddPhoto.method = "post";
+formAddPhoto.enctype ="multipart/form-data";
+//container image avant upload
 const containerAddPhoto = document.createElement("div");
 containerAddPhoto.className = "container-add-photo";
+const imgContainerAddPhoto = document.createElement("img");
+imgContainerAddPhoto.src = "./assets/icons/picture-svgrepo.png";
+imgContainerAddPhoto.alt = "icone image";
+const labelBtnContainerAddPhoto = document.createElement("label");
+labelBtnContainerAddPhoto.className = "myfile";
+labelBtnContainerAddPhoto.for = "image";
+labelBtnContainerAddPhoto.innerText = "+ Ajouter photo";
+const pContainerAddPhoto = document.createElement("p");
+pContainerAddPhoto.innerText = "jpg. png : 4mo max";
+
+//container pour affichage image upload
 const displayImage = document.createElement("div");
 displayImage.id = "display-image";
 displayImage.style.display = "none";
-const imgContainerAddPhoto = document.createElement("img");
-imgContainerAddPhoto.src = "./assets/icons/picture-svgrepo.png"; 
-imgContainerAddPhoto.alt = "icone image";
-const labelBtnContainerAddPhoto = document.createElement("label");
-labelBtnContainerAddPhoto.className = ("myfile");
-labelBtnContainerAddPhoto.for = "image";
-labelBtnContainerAddPhoto.innerText = "+ Ajouter photo";
 const btnContainerAddPhoto = document.createElement("input");
 btnContainerAddPhoto.type = "file";
 btnContainerAddPhoto.id = "myfile";
@@ -96,17 +72,16 @@ btnContainerAddPhoto.name = "image";
 btnContainerAddPhoto.accept = "image/png, image/jpg";
 btnContainerAddPhoto.style.display = "none";
 btnContainerAddPhoto.attributes.required = "required";
-const pContainerAddPhoto = document.createElement("p");
-pContainerAddPhoto.innerText = "jpg. png : 4mo max";
 
+// input du formulaire : titre et categorie
 const labelFormAddPhoto = document.createElement("label");
 labelFormAddPhoto.for = "title";
 labelFormAddPhoto.innerText = "Titre";
-const titleElement = document.createElement("input");
-titleElement.type ="text";
-titleElement.name = "title";
-titleElement.id = "title";
-titleElement.attributes.required ="required";
+const titlePhoto = document.createElement("input");
+titlePhoto.type = "text";
+titlePhoto.name = "title";
+titlePhoto.id = "title";
+titlePhoto.attributes.required = "required";
 const labelCategorieFormAddPhoto = document.createElement("label");
 labelCategorieFormAddPhoto.for = "category";
 labelCategorieFormAddPhoto.innerText = "Catégorie";
@@ -115,64 +90,30 @@ selectCategorieFormAddPhoto.name = "category";
 selectCategorieFormAddPhoto.id = "select-categorie";
 selectCategorieFormAddPhoto.autocomplete = "off";
 selectCategorieFormAddPhoto.attributes.required = "required";
-// Recupérer et afficher toutes les catégories //
+
+// Recupérer et afficher toutes les catégories dans le select
 for (let categorie of categories) {
-    var  optionForm = document.createElement("option")
-    optionForm.className = "option"
-    optionForm.dataset.id = categorie.id;
-    optionForm.innerText = categorie.name;
-    selectCategorieFormAddPhoto.appendChild(optionForm);
-    console.log(optionForm)
-}
+  var optionForm = document.createElement("option");
+  optionForm.className = "option";
+  optionForm.value = categorie.id;
+  optionForm.innerText = categorie.name;
+  selectCategorieFormAddPhoto.appendChild(optionForm);
+  };
 
-
-
-/*const optionFirst = document.createElement("option");
-optionFirst.value = "";
-optionFirst.innerText = "Choisissez une catégorie";
-const optionSecond = document.createElement("option");
-optionSecond.value = "Objets";
-optionSecond.dataset.id = "1";
-optionSecond.innerText = "Objets";
-const optionThird = document.createElement("option");
-optionThird.value = "appartements";
-optionThird.innerText = "Appartements";
-optionThird.dataset.id = "2";
-const optionFour = document.createElement("option");
-optionFour.value = "hotels-restaurants";
-optionFour.innerText = "Hôtels & restaurants";
-optionFour.dataset.id = "3";*/
+//footer du formulaire
 const hrAddPhoto = document.createElement("hr");
 const btnFormAddPhoto = document.createElement("input");
-//btnFormAddPhoto.type = "submit";
 btnFormAddPhoto.id = "valider";
 btnFormAddPhoto.value = "valider";
 
-modalProjetPhoto.appendChild(secondModalContainer);
-secondModalContainer.appendChild(imgArrowBack);
-secondModalContainer.appendChild(imgSecondModalClose);
-secondModalContainer.appendChild(h3SecondModalContainer);
-secondModalContainer.appendChild(formAddPhoto);
-formAddPhoto.appendChild(containerAddPhoto);
-containerAddPhoto.appendChild(displayImage);
-containerAddPhoto.appendChild(imgContainerAddPhoto);
-containerAddPhoto.appendChild(labelBtnContainerAddPhoto);
-labelBtnContainerAddPhoto.appendChild(btnContainerAddPhoto);
-containerAddPhoto.appendChild(pContainerAddPhoto);
-
-formAddPhoto.appendChild(labelFormAddPhoto);
-formAddPhoto.appendChild(titleElement);
-formAddPhoto.appendChild(labelCategorieFormAddPhoto);
-formAddPhoto.appendChild(selectCategorieFormAddPhoto);
-/*selectCategorieFormAddPhoto.appendChild(optionFirst);
-selectCategorieFormAddPhoto.appendChild(optionSecond);
-selectCategorieFormAddPhoto.appendChild(optionThird);
-selectCategorieFormAddPhoto.appendChild(optionFour);*/
-
-formAddPhoto.appendChild(hrAddPhoto);
-formAddPhoto.appendChild(btnFormAddPhoto);
+modalProjetPhoto.append(secondModalContainer);
+secondModalContainer.append(imgArrowBack, imgSecondModalClose, h3SecondModalContainer, formAddPhoto);
+formAddPhoto.append(containerAddPhoto, labelFormAddPhoto, titlePhoto, labelCategorieFormAddPhoto, selectCategorieFormAddPhoto, hrAddPhoto, btnFormAddPhoto);
+containerAddPhoto.append(imgContainerAddPhoto, labelBtnContainerAddPhoto, pContainerAddPhoto, displayImage);
+labelBtnContainerAddPhoto.append(btnContainerAddPhoto);
 
 
+//fonctionnement modale
 // récupère la 1ere modale
 var firstModal = document.getElementById("modal-projet");
 
@@ -183,21 +124,21 @@ var btnOpenModal = document.getElementById("modal-projet-btn");
 var btnCloseModal = document.getElementById("first-modal-close");
 
 // ouverture de la modale au click
-btnOpenModal.addEventListener("click", function() {
+btnOpenModal.addEventListener("click", function () {
     firstModal.style.display = "block";
 });
 
 // fermeture de la modale
-btnCloseModal.addEventListener("click", function() {
+btnCloseModal.addEventListener("click", function () {
     firstModal.style.display = "none";
 });
 
 // fermeture de la modale si clic en dehors de la modale
-window.addEventListener("click", function(event) {
+window.addEventListener("click", function (event) {
     if (event.target == firstModal) {
-    firstModal.style.display = "none";
-    secondModal.style.display = "none";
-    }
+        firstModal.style.display = "none";
+        secondModal.style.display = "none";
+    };
 });
 
 // récupère la 2eme modale
@@ -210,61 +151,45 @@ var btnOpenSecondModal = document.getElementById("btn-add-photo");
 var btnCloseModal = document.getElementById("second-modal-close");
 
 // récupère le bouton qui retourne à la 1ere modale
-var btnReturnModal = document.getElementById("arrow-back")
+var btnReturnModal = document.getElementById("arrow-back");
 
 // ouverture de la 2eme modale au click
 btnOpenSecondModal.addEventListener("click", function () {
-        firstModal.style.display = "none";
-        secondModal.style.display = "block";
-    });
+    firstModal.style.display = "none";
+    secondModal.style.display = "block";
+    //reset formulaire
+    displayImage.style.display = "none";
+    imgContainerAddPhoto.style.display = "block";
+    labelBtnContainerAddPhoto.style.display = "flex";
+    pContainerAddPhoto.style.display = "block";
+    btnContainerAddPhoto.value = "";
+    titlePhoto.value = "";
+    selectCategorieFormAddPhoto.value = "";
+    btnFormAddPhoto.id = "valider";
+    spanElement.innerText = "";
+    spanElement.className = "";
+});
 
 // retour sur la 1ere modale
-btnReturnModal.addEventListener("click", function() {
+btnReturnModal.addEventListener("click", function () {
     secondModal.style.display = "none";
     firstModal.style.display = "block";
-    displayImage.style.display = "none";
-    imgContainerAddPhoto.style.display = "block";
-    labelBtnContainerAddPhoto.style.display = "flex";
-    pContainerAddPhoto.style.display = "block";
-    //reset formulaire
-    btnContainerAddPhoto.value ="";
-    titleElement.value = "";
-    selectCategorieFormAddPhoto.value = "";
-    btnFormAddPhoto.id = ("valider");
 });
+
 // fermeture de la modale
-btnCloseModal.addEventListener("click", function() {
+btnCloseModal.addEventListener("click", function () {
     secondModal.style.display = "none";
-    displayImage.style.display = "none";
-    imgContainerAddPhoto.style.display = "block";
-    labelBtnContainerAddPhoto.style.display = "flex";
-    pContainerAddPhoto.style.display = "block";
-    //reset formulaire 
-    btnContainerAddPhoto.value ="";
-    titleElement.value = "";
-    selectCategorieFormAddPhoto.value = "";
-    btnFormAddPhoto.id = ("valider");
 });
 
 // fermeture de la modale si clic en dehors de la modale
-window.addEventListener("click", function(event) {
+window.addEventListener("click", function (event) {
     if (event.target == secondModal) {
     secondModal.style.display = "none";
     firstModal.style.display = "none";
-    displayImage.style.display = "none";
-    imgContainerAddPhoto.style.display = "block";
-    labelBtnContainerAddPhoto.style.display = "flex";
-    pContainerAddPhoto.style.display = "block";
-    //reset formulaire
-    btnContainerAddPhoto.value ="";
-    titleElement.value = "";
-    selectCategorieFormAddPhoto.value = "";
-    btnFormAddPhoto.id = ("valider")
     };
-});   
+});
 
-
-//  afficher tous les travaux //
+//  afficher tous les travaux dans la modale 
 function displayWorksModal(works) {
     for (let work of works) {
         // Récupération de l'élément du DOM qui accueillera les travaux
@@ -272,21 +197,21 @@ function displayWorksModal(works) {
         // Création d’une balise dédiée à un work
         const workElement = document.createElement("figure");
         workElement.dataset.id = work.id;
-        // Création des balises 
+        // Création des balises
         const imageElement = document.createElement("img");
         imageElement.src = work.imageUrl;
         imageElement.alt = work.title;
         imageElement.crossOrigin = "anonymous";
         const buttonElement = document.createElement("button");
-        buttonElement.className ="photo-remove";
+        buttonElement.className = "photo-remove";
         const imageButtonElement = document.createElement("img");
         //imageButtonElement.className ="photo-remove";
-        imageButtonElement.src ="./assets/icons/remove.png";
-        imageButtonElement.alt ="remove";
+        imageButtonElement.src = "./assets/icons/remove.png";
+        imageButtonElement.alt = "remove";
         imageButtonElement.dataset.id = work.id;
         const figcaptionElement = document.createElement("figcaption");
         figcaptionElement.innerText = "éditer";
-               
+
         galleryModalContainer.appendChild(workElement);
         workElement.appendChild(imageElement);
         workElement.appendChild(buttonElement);
@@ -296,34 +221,31 @@ function displayWorksModal(works) {
 };
 displayWorksModal(works);
 
+// effacer image de la galerie suite à click sur icone
 
-//effacer image de la galerie suite à click sur icone
-
-    const buttonsPhotoRemove = document.querySelectorAll(".photo-remove");
-    for(let button of buttonsPhotoRemove) {
-        button.addEventListener("click", async function (event) {
+const buttonsPhotoRemove = document.querySelectorAll(".photo-remove");
+for (let button of buttonsPhotoRemove) {
+    button.addEventListener("click", async function (event) {
         event.preventDefault();
         const photoId = String(event.target.dataset.id);
         const token = localStorage.getItem("Token");
-        console.log(photoId)
-         // supprime information sur l'API works
-        const responseWorksDelete =  await fetch("http://localhost:5678/api/works/" + photoId, {
+        // supprime information sur l'API works
+        const responseWorksDelete = await fetch("http://localhost:5678/api/works/" + photoId, {
             method: "DELETE",
-            headers:  { "Authorization" : `Bearer ${token}`},
+            headers: { Authorization: `Bearer ${token}` },
             body: JSON.stringify(),
-        });
+            });
         // supprime élément dans le DOM
         if (responseWorksDelete.ok) {
             const worksElement = document.querySelectorAll("figure");
-            for (let workElement of worksElement){
-                if (workElement.dataset.id === photoId){
-                    workElement.remove();
-                    };
+            for (let workElement of worksElement) {
+                if (workElement.dataset.id === photoId) {
+                workElement.remove();
                 };
             };
-        });
-    };
- 
+        };
+    });
+};
 
 // affichage image avant upload
 const imageNewWork = document.querySelector("#myfile");
@@ -343,62 +265,69 @@ imageNewWork.addEventListener("change", function () {
 });
 
 //verification formulaire complet et changement couleur btn submit
+//pour affichage message erreur
 let spanElement = document.createElement("span");
-spanElement.innerText ="";
+spanElement.innerText = "";
+spanElement.className = "";
 
-formAddPhoto.addEventListener("change", function () {
-    //creation objet newWork
+formAddPhoto.addEventListener("click", function () {
+    //creation objet newWork pour validation formulaire
     const newWork = {
-        imageUrl: document.querySelector("[name = 'image']").value,
+        imageUrl: document.querySelector("input[type=file]").value,
         title: document.querySelector("[name ='title']").value,
-        categoryId: parseInt(document.querySelector("option").dataset.id)
+        categoryId: document.querySelector("select[name='category']").value,
     };
-    /*const optionsForm = document.querySelectorAll(".option")
-    for (let option of optionsForm) {
-        option.addEventListener("click", (event) => {
-            newWork.categoryId = event.target.dataset.id;
-        })
-        console.log(newWork.categoryId)
-    }*/
-    //console.log(newWork)
-    if (!newWork.imageUrl || !newWork.title || !newWork.categoryId) {
-        hrAddPhoto.insertAdjacentElement("afterend",spanElement);
+    
+    if (newWork.imageUrl && newWork.title && newWork.categoryId) {
+        spanElement.innerText = "";
+        spanElement.className = "";
+        // envoi possible du formulaire
+        btnFormAddPhoto.id = "valider-submit";
+        btnFormAddPhoto.type = "submit";
+    }else {
+        btnFormAddPhoto.addEventListener("click", function() {
+        hrAddPhoto.insertAdjacentElement("afterend", spanElement);
         spanElement.className = "message-error-login";
         spanElement.innerText = "Veuillez compléter l'ensemble des champs à saisir";
-    }else{
-        spanElement.innerText ="";
-        spanElement.className = "";
-
-        // envoi possible du formulaire
-        btnFormAddPhoto.id = ("valider-submit");
-        btnFormAddPhoto.type = "submit";
-
-        btnFormAddPhoto.addEventListener("click", function (e) {
-            e.preventDefault();
-            //Récupération objet FormData et envoi
-            var formAddPhoto = document.getElementById("formAddPhoto");
-            var formData = new FormData(formAddPhoto);
-            formData.append("image", newWork.imageUrl);
-            formData.append("title", newWork.title);
-            formData.append("category", newWork.categoryId);
-            console.log(formData)
-            //var request = new XMLHttpRequest();
-            const token = localStorage.getItem("Token")
-            console.log(token)
-           /* request.open("POST", "http://localhost:5678/api/works");
-            request.setRequestHeader("Authorization", `Bearer ${token}`);
-            request.setRequestHeader("Accept", "application/json")
-            request.setRequestBody("formData")
-            console.log(formData)
-            request.send(formData);*/
-            const responseFormData = fetch("http://localhost:5678/api/works", {
-                method: "POST",
-                headers: { "Authorization" : `Bearer ${token}`,
-                        "Accept": "application/json",
-                        /*"Content-Type" : "multipart/formData"*/},
-                body: "formData"
-            });
-        });
+        btnFormAddPhoto.id = "valider";
+        btnFormAddPhoto.type = ""
+        });  
     };
 });
+
+// envoi formData sur api    
+btnFormAddPhoto.addEventListener("click", async function (e) {
+    e.preventDefault();
+    // creation formData
+    const formData = new FormData();
+    formData.append("image", document.querySelector("input[type=file]").files[0]);
+    formData.append("title", document.querySelector("[name ='title']").value);
+    formData.append("category", document.querySelector("select[name='category']").value);
+        
+    const token = localStorage.getItem("Token");
+    
+    const responseFormData = await fetch("http://localhost:5678/api/works", {
+        method: "POST",
+        headers: {"Authorization" : `Bearer ${token}`},
+        body: formData
+    });
+   
+    // affiche élément dans le DOM 
+    if (responseFormData.ok) {
+        works.push(await responseFormData.json());
+        const galleryModalContainer = document.querySelector(".gallery-modal");
+        galleryModalContainer.innerHTML=  "";
+        displayWorksModal(works);
+        const portfolioGallery = document.querySelector(".gallery");
+        portfolioGallery.innerHTML= "";
+        displayWorks(works); 
+        //fermeture modale     
+        secondModal.style.display = "none";
+        firstModal.style.display = "block";
+        displayImage.style.display = "none";
+        imgContainerAddPhoto.style.display = "block";
+        labelBtnContainerAddPhoto.style.display = "flex";
+        pContainerAddPhoto.style.display = "block";
+    };
+});   
 

@@ -162,8 +162,7 @@ form {
 	justify-content: space-between;
 	margin-bottom: 379px;
 	width : 380px;
-	font-weight: 500;
-	color: #3D3D3D;
+	
 }
 
 form h2 {
@@ -201,6 +200,7 @@ form a {
 	font-weight: 700;
 	text-align: center;
 	width: 110%;
+	margin : 10px 0 20px 0;
 }
 
 
@@ -340,8 +340,6 @@ form a {
 	color: #B9C5CC;
 }
 
-
-
 .container-add-photo p{
 	font-size: 10px;
 	font-weight: 400;
@@ -390,11 +388,13 @@ select{
 	color: white;
 	background-color: #A7A7A7;
 	border-radius: 60px;
-	font-style: bold;
+	
 	text-align: center;
 	line-height: 17px;
 	font-size: 16px;
+	
 }
+
 #valider-submit {
 	background-color: #1D6154;
 }
@@ -533,6 +533,7 @@ input[type="submit"]{
 	width: 180px;
 	text-align: center;
 	border-radius: 60px ;
+	
 }
 
 footer nav ul {

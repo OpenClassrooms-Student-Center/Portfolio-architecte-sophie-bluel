@@ -2,9 +2,9 @@ const formLogin = document.querySelector("form");
 let spanElement = document.createElement("span");
 let inputPassword = document.querySelector("[name='password']");
 
-
 formLogin.addEventListener("submit", async function (event) {
-    event.preventDefault(); /*bloque rechargement de la page*/
+    //bloque rechargement de la page
+    event.preventDefault(); 
     
     // creation objet login
     const login = {
