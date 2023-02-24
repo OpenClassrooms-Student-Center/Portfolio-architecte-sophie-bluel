@@ -59,6 +59,7 @@ header {
 	margin: 50px 0
 }
 section {
+	
 	margin: 50px 0
 }
 
@@ -121,10 +122,42 @@ li:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
+
+/* Concerne le partfolio */
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
+	margin-bottom: 51px;
 }
+
+.filtres {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 51px;
+	gap: 10px;
+}
+
+button {
+	font-family: 'Syne';
+	font-size: 1em;
+	color: #1D6154;
+	font-weight: 700;
+	min-width: 100px;
+	height: 37px;
+	border-radius: 120px;
+	background-color: transparent;
+	border: 1px solid #1D6154;
+	}
+
+.appartements {
+	padding-right: 15px;
+	padding-left: 15px;
+}
+
+.hotelsrestaurants {
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -132,11 +165,12 @@ li:hover {
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
 }
-
 .gallery img {
 	width: 100%;
 
 }
+
+
 #contact {
 	width: 50%;
 margin: auto;
