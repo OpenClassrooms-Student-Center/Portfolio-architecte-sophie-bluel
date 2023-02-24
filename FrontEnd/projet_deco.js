@@ -34,24 +34,46 @@ function genererProjets(projets){
 genererProjets(projets);
 
 
-
+const boutonTous = document.querySelector(".tous");
+boutonTous.addEventListener("click", function () {
+    const filtreTous = projets.filter(function (projet) {
+        return projet.categoryId !== 0;
+    });  
+    console.log(filtreTous);
+    document.querySelector(".gallery").innerHTML = "";
+    genererProjets(filtreTous);
+});
 
 const boutonObjets = document.querySelector(".objets");
 boutonObjets.addEventListener("click", function () {
-   
     const filtreObjets = projets.filter(function (projet) {
-        return projet.categoryId === 3;
+        return projet.categoryId === 1;
     });  
     console.log(filtreObjets);
     document.querySelector(".gallery").innerHTML = "";
     genererProjets(filtreObjets);
 });
 
+const boutonAppartements = document.querySelector(".appartements");
+boutonAppartements.addEventListener("click", function () { 
+    const filtreAppartements = projets.filter(function (projet) {
+        return projet.categoryId === 2;
+    });  
+    console.log(filtreAppartements);
+    document.querySelector(".gallery").innerHTML = "";
+    genererProjets(filtreAppartements);
+});
 
-
-
-
-
+const boutonHotels = document.querySelector(".hotelsrestaurants");
+boutonHotels.addEventListener("click", function () {
+   
+    const filtreHotels = projets.filter(function (projet) {
+        return projet.categoryId === 3;
+    });  
+    console.log(filtreHotels);
+    document.querySelector(".gallery").innerHTML = "";
+    genererProjets(filtreHotels);
+});
 
 
 
