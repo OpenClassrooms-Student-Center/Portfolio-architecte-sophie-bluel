@@ -4,13 +4,13 @@ console.log(reponse);
 const projets = await reponse.json();
 console.log(projets);
 
-genererProjets()
 
-function genererProjets(){
+
+function genererProjets(projets){
     for (let i =0 ; i < projets.length; i++) {
+        
         const projet = projets[i];
-    
-   
+     
         // Récupération de l'élément du DOM qui accueillera les fiches
         const divGallery = document.querySelector(".gallery");
 
@@ -30,17 +30,32 @@ function genererProjets(){
         divGallery.appendChild(figure)
     }
 }
+// premier affichage de la page
+genererProjets(projets);
+
+
 
 
 const boutonObjets = document.querySelector(".objets");
 boutonObjets.addEventListener("click", function () {
+   
     const filtreObjets = projets.filter(function (projet) {
-        return projets.name === "Objets";
-    });
-console.log(filtreObjets);
+        return projet.categoryId === 3;
+    });  
+    console.log(filtreObjets);
+    document.querySelector(".gallery").innerHTML = "";
+    genererProjets(filtreObjets);
 });
 
 
+
+
+
+
+
+
+
+/*
 
 // catégorie des projets
 const categorieDeProjet = await fetch("http://localhost:5678/api/categories");
@@ -57,3 +72,4 @@ for(let i = nomDesCategories.lenght - 1; i >=0 ; i-- ) {
       
     }
 }
+*/
