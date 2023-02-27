@@ -201,7 +201,9 @@ footer nav ul {
 }
 
 /* JS Content */
-.filters{
+
+/* filters */
+button{
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 16px;
@@ -213,17 +215,31 @@ footer nav ul {
 	border-radius: 60px;
 	height: 37px;
 	padding-inline: 1.5rem;
-	
-}
-.filters:hover{
 	cursor:pointer;
 }
+.activefilter{
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 19px;
+	text-align: center;
+	color: white;
+	background-color: #1D6154;
+	border-radius: 60px;
+	height: 37px;
+	padding-inline: 1.5rem;
+	cursor:pointer;
+}
+
 .filtersdiv{
 	display: flex;
 	justify-content: center;
 	padding-bottom: 3rem;
 	padding-top: 1.5rem;
 	gap: 0.8rem;
+}
+.no-show{
+    display: none;	
 }
 
 /* Login */
@@ -235,4 +251,40 @@ footer nav ul {
 	text-decoration: underline;
 	display: flex;
 	justify-content: center;
+}
+
+.form{
+	display: flex;
+	align-items: center;
+}
+
+form input{
+	width: 379px;
+}
+
+
+
+form button{
+		font-family: 'Syne';
+		font-weight: 700;
+		font-size: 16px;
+		line-height: 19px;
+		text-align: center;
+		color: white;
+		background-color: #1D6154;
+		border-radius: 60px;
+		height: 37px;
+		padding-inline: 1.5rem;
+		cursor:pointer;
+		margin-top: 2.5rem;
+		margin-bottom: 2rem;
+		width: 179px;
+	}
+
+.labelemail{
+	padding-right: 21rem;
+}
+
+.labelmdp{
+	padding-right: 18rem;
 }

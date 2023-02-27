@@ -6,7 +6,6 @@ async function getWorks(){
 
 async function createGallery(){
     const works = await getWorks();
-    console.log(works);
     const gallery = document.querySelector(".gallery");
     
     let categories = [];
@@ -25,18 +24,42 @@ async function createGallery(){
         categories.push(work.category.name);
     });
 
-    console.log(categories);
+    categories.unshift('Tous');
     const cleanCategories = new Set(categories);
-    console.log(cleanCategories);
-
+    
     cleanCategories.forEach(category=> {
-        console.log(category);
-        buttonFilters.addEventListener("click", function () {
 
-        })
-        
+        const buttonElement = document.createElement("button");
+        buttonElement.innerText = category;
+        buttonElement.dataset.category = category;
+        if(category === 'Tous'){
+            buttonElement.classList.add("activefilter");
+        }
+        document.querySelector(".filtersdiv").appendChild(buttonElement);
 
+        buttonElement.addEventListener("click", function(e) {
+            e.preventDefault();
+            console.log(buttonElement.dataset.category);
+            const filters = document.querySelector(".filtersdiv");
+            const filtersArray = Array.from(filters.children);
+            filtersArray.forEach(buttonElement=> {
+                buttonElement.classList.remove("activefilter");
+            }); 
+            buttonElement.classList.add("activefilter");
 
+            let figure = document.querySelectorAll('.gallery figure');
+            figure.forEach(figurework=> {
+                if(buttonElement.dataset.category === 'Tous') {
+                    figurework.classList.remove("no-show"); 
+                }
+                else if(figurework.dataset.category === buttonElement.dataset.category) {
+                    figurework.classList.remove("no-show"); 
+                }
+                else {
+                    figurework.classList.add("no-show");
+                }
+            });
+        });
     });
 
     
