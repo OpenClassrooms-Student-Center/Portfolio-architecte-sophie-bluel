@@ -47,6 +47,7 @@ table {
 	border-spacing: 0;
 }
 /** end reset css**/
+
 body {
 	max-width: 1140px;
 	margin:auto;
@@ -58,6 +59,7 @@ header {
 	justify-content: space-between;
 	margin: 50px 0
 }
+
 section {
 	margin: 50px;
 }
@@ -177,7 +179,7 @@ button:hover {
 
 #contact {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
 #contact > * {
 	text-align: center;
@@ -207,7 +209,7 @@ margin: auto;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-input[type="submit"]{
+input[type="submit"] {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
@@ -222,5 +224,53 @@ footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em
+}
+
+#login h2 {
+	text-align: center;
+}
+
+#login {
+	width: 33%;
+	margin: 112px auto 372px auto;
+}
+
+#login > * {
+	text-align: center;
+}
+
+#login h2{
+	margin-bottom: 37px;
+}
+
+#login form {
+	text-align: left;
+	margin-top: 30px;
+	display: flex;
+	flex-direction: column;
+}
+
+#login input {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+#login label {
+	margin: 2em 0 1em 0;
+}
+
+#login textarea {
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+#login input[type="submit"] {
+	margin : 2.2em auto 1.7em auto;
+}
+
+#login a {
+	color: #3D3D3D;
+	text-align: center;
 }
 
