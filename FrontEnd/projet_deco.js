@@ -1,16 +1,17 @@
-const connection = await fetch("http://localhost:5678/api/users/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json"},
-        body: {}
+import { addNewUser } from "./connection.js";
+
+// Tentative pour formulaire
+const formulaire = document.querySelectorAll('form');
+
+
+formulaire[0].addEventListener('submit', function() {
+    console.log("ok");
 });
 
-console.log(connection);
-
-let text = await connection.text();
+/*
 
 
-
-/*const reponse = await fetch("http://localhost:5678/api/works");
+const reponse = await fetch("http://localhost:5678/api/works");
 console.log(reponse);
 
 const projets = await reponse.json();
@@ -37,7 +38,10 @@ function genererProjets(projets){
         figure.appendChild(figcaption);
 
         divGallery.appendChild(figure)
-    }
+        }
+    
+        // Pas du tout sûr
+    addNewUser();
 }
 // premier affichage de la page
 genererProjets(projets);
