@@ -44,7 +44,7 @@ const h3SecondModalContainer = document.createElement("h3");
 h3SecondModalContainer.innerText = "Ajout photo";
 //formulaire
 const formAddPhoto = document.createElement("form");
-formAddPhoto.id = "formAddPhoto";
+formAddPhoto.id = "form-add-photo";
 formAddPhoto.name = "formAddPhoto";
 formAddPhoto.method = "post";
 formAddPhoto.enctype ="multipart/form-data";
@@ -55,7 +55,7 @@ const imgContainerAddPhoto = document.createElement("img");
 imgContainerAddPhoto.src = "./assets/icons/picture-svgrepo.png";
 imgContainerAddPhoto.alt = "icone image";
 const labelBtnContainerAddPhoto = document.createElement("label");
-labelBtnContainerAddPhoto.className = "myfile";
+labelBtnContainerAddPhoto.id = "label-file";
 labelBtnContainerAddPhoto.for = "image";
 labelBtnContainerAddPhoto.innerText = "+ Ajouter photo";
 const pContainerAddPhoto = document.createElement("p");
@@ -222,30 +222,39 @@ function displayWorksModal(works) {
 displayWorksModal(works);
 
 // effacer image de la galerie suite à click sur icone
-
-const buttonsPhotoRemove = document.querySelectorAll(".photo-remove");
-for (let button of buttonsPhotoRemove) {
-    button.addEventListener("click", async function (event) {
-        event.preventDefault();
-        const photoId = String(event.target.dataset.id);
-        const token = localStorage.getItem("Token");
-        // supprime information sur l'API works
-        const responseWorksDelete = await fetch("http://localhost:5678/api/works/" + photoId, {
-            method: "DELETE",
-            headers: { Authorization: `Bearer ${token}` },
-            body: JSON.stringify(),
-            });
-        // supprime élément dans le DOM
-        if (responseWorksDelete.ok) {
-            const worksElement = document.querySelectorAll("figure");
-            for (let workElement of worksElement) {
-                if (workElement.dataset.id === photoId) {
-                workElement.remove();
+function deleteWorks() {
+    const buttonsPhotoRemove = document.querySelectorAll(".photo-remove");
+    for (let button of buttonsPhotoRemove) {
+        button.addEventListener("click", async function (event) {
+            event.preventDefault();
+            const photoId = String(event.target.dataset.id);
+            const token = localStorage.getItem("Token");
+            // supprime information sur l'API works
+            const responseWorksDelete = await fetch("http://localhost:5678/api/works/" + photoId, {
+                method: "DELETE",
+                headers: { Authorization: `Bearer ${token}` },
+                body: JSON.stringify(),
+                });
+            
+            if (responseWorksDelete.ok) {
+                // supprime élément dans le DOM
+                const worksElement = document.querySelectorAll("figure");
+                for (let workElement of worksElement) {
+                    if (workElement.dataset.id === photoId) {
+                        workElement.remove();
+                    };
                 };
-            };
-        };
-    });
+                // supprime element dans works
+                const worksIndex = works.findIndex(index);
+                    function index (work){
+                        return work === photoId
+                    };
+                works.splice(worksIndex,1);    
+            };            
+        });
+    };
 };
+deleteWorks(works);
 
 // affichage image avant upload
 const imageNewWork = document.querySelector("#myfile");
@@ -290,7 +299,7 @@ formAddPhoto.addEventListener("click", function () {
         spanElement.className = "message-error-login";
         spanElement.innerText = "Veuillez compléter l'ensemble des champs à saisir";
         btnFormAddPhoto.id = "valider";
-        btnFormAddPhoto.type = ""
+        btnFormAddPhoto.type = "";
         });  
     };
 });
@@ -298,12 +307,13 @@ formAddPhoto.addEventListener("click", function () {
 // envoi formData sur api    
 btnFormAddPhoto.addEventListener("click", async function (e) {
     e.preventDefault();
-    // creation formData
+
+     // creation formData
     const formData = new FormData();
     formData.append("image", document.querySelector("input[type=file]").files[0]);
     formData.append("title", document.querySelector("[name ='title']").value);
     formData.append("category", document.querySelector("select[name='category']").value);
-        
+
     const token = localStorage.getItem("Token");
     
     const responseFormData = await fetch("http://localhost:5678/api/works", {
@@ -311,7 +321,7 @@ btnFormAddPhoto.addEventListener("click", async function (e) {
         headers: {"Authorization" : `Bearer ${token}`},
         body: formData
     });
-   
+
     // affiche élément dans le DOM 
     if (responseFormData.ok) {
         works.push(await responseFormData.json());
@@ -321,13 +331,10 @@ btnFormAddPhoto.addEventListener("click", async function (e) {
         const portfolioGallery = document.querySelector(".gallery");
         portfolioGallery.innerHTML= "";
         displayWorks(works); 
-        //fermeture modale     
+        //fermeture 2 modales     
         secondModal.style.display = "none";
-        firstModal.style.display = "block";
-        displayImage.style.display = "none";
-        imgContainerAddPhoto.style.display = "block";
-        labelBtnContainerAddPhoto.style.display = "flex";
-        pContainerAddPhoto.style.display = "block";
+        firstModal.style.display = "none";
+        deleteWorks(works);
     };
 });   
 

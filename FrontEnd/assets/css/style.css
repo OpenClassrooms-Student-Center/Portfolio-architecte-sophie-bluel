@@ -54,46 +54,8 @@ body {
 	font-size: 14px;
 
 }
-.edition-mode {
-	display: none;
-}
 
-.edition-mode.active {
-	display: contents;
-}
-
-#edition-header {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin:0;
-	height : 59px;
-	background-color: black;
-	color: white;
-	box-sizing: border-box;
-}
-
-.edition-mode img {
-	color: white;
-}
-
-.edition-mode span{
-	font-weight: 400;
-	font-size: 16px;
-	line-height: 19px;
-	margin: 0 21px 0 13px;
-}
-
-.edition-mode button {
-	padding : 0 2.5% 0 2.5%;
-	font-weight: 500;
-	line-height: 16px;
-	background: white;
-	border-radius: 30px;
-	height: 38px;
-	border: none;
-}
-
+/** header **/
 header {
 	display: flex;
 	justify-content: space-between;
@@ -153,7 +115,151 @@ nav li a span {
 	font-weight: 600;
 }
 
-/* Formulaire Log In */
+#introduction {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	margin-left: 80px;
+}
+
+#photo-presentation {
+	flex: 1;
+}
+#introduction button {
+	display: flex;
+}
+
+#introduction img {
+	margin: auto;
+	width: 80%;
+}
+
+#introduction article {
+	flex: 1;
+	color: #3D3D3D;
+	line-height: 16px;
+	margin-right: 80px;
+}
+
+#introduction h2 {
+	margin-bottom: 1em;
+}
+
+#introduction p {
+	margin-bottom: 0.5em;
+	width: 80%;
+	text-align: justify;
+}
+
+#edition-portfolio {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 1em;
+}
+
+#portfolio {
+	margin : 20px 80px 30px 0;
+}
+
+#portfolio h2{
+	padding-right: 16px;
+	margin-bottom: 20px;
+}
+
+/* ajout bouton filtre catégorie*/
+.filters {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 2rem;
+	margin-left: 3rem;
+}
+.filter-btn {
+	border-radius: 60px;
+	text-align: center;
+	border: 1px solid #1D6154;
+	color: #1D6154;
+	background: white;
+	padding: 9px  30px 9px 28px; 
+	font-size: 16px;
+	font-weight: 700;
+	font-family: 'Syne';
+	line-height: 19px;
+	margin-right: 8px;
+}
+
+.filter-btn.active {
+	color: white;
+	background: #1D6154;
+}
+
+.gallery {
+	width: 90%;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-column-gap: 20px;
+	grid-row-gap: 20px;
+	margin-left: 80px;
+	margin-right: 80px;
+}
+
+.gallery img {
+	width: 100%;
+}
+
+#contact {
+	width: 50%;
+	margin: auto;
+}
+#contact > * {
+	text-align: center;
+}
+
+#contact h2{
+	margin-bottom: 20px;
+}
+
+#contact form {
+	text-align: left;
+	margin-top:30px;
+	display: flex;
+	flex-direction: column;
+}
+
+#contact input {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+#contact label {
+	margin: 2em 0 1em 0;
+}
+
+#contact textarea {
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+input[type="submit"]{
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin : 2em auto ;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px ;
+}
+
+footer nav ul {
+	display: flex;
+	justify-content: flex-end;
+	margin: 2em;
+	font-weight: 300;
+}
+
+/** Formulaire Log In **/
 form {
 	margin: auto;
 	display: flex;
@@ -191,7 +297,7 @@ form input {
 form a {
 	color: #3D3D3D;
 }
-
+/* message erreur */
 .message-error-login {
 	background-color: white;
 	color: #D65353;
@@ -199,10 +305,54 @@ form a {
 	border: 2px dashed  #D65353;
 	font-weight: 700;
 	text-align: center;
-	width: 110%;
-	margin : 10px 0 20px 0;
+	width: 100%;
+	margin : 10px 0 10px 0;
 }
 
+/** mode edition **/
+.edition-mode {
+	display: none;
+}
+
+.edition-mode.active {
+	display: contents;
+}
+
+#edition-header {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin:0;
+	height : 59px;
+	background-color: black;
+	color: white;
+	box-sizing: border-box;
+}
+
+.edition-mode span{
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 19px;
+	margin: 0 21px 0 13px;
+}
+
+.edition-mode button {
+	padding : 0 2.5% 0 2.5%;
+	font-weight: 500;
+	line-height: 16px;
+	background: white;
+	border-radius: 30px;
+	height: 38px;
+	border: none;
+}
+.edition-mode a {
+	text-decoration: none;
+	color : black;
+}
+
+#modal-projet-btn {
+	padding-top: 6px;
+}
 
 /* bouton lien modifier modale */
 .square-pen {
@@ -210,7 +360,7 @@ form a {
 	width: 18px;
 }
 
-.edition-mode button[type="button"]{
+.edition-mode button[type="button"] {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -221,14 +371,13 @@ form a {
 
 
 /* modale*/
-.modal{
+.modal {
 	position: fixed;
 	display: none;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
-	z-index: 1; /* Sit on top */
 	overflow: auto; 
 	background: rgba(0, 0,0, 0.4);
 }
@@ -238,7 +387,7 @@ form a {
 	flex-direction: column;
 	padding: 4% 6% 4% 6%;
 	background-color: white;
-	width: 630px;
+	max-width: 630px;
 	border-radius: 10px;
 	margin: 15% auto;
 }
@@ -269,6 +418,7 @@ form a {
 	width: 21px;
 	height: 21px;
 }
+
 .photo-remove img {
 	position: relative;
 	top: -135px;
@@ -280,6 +430,7 @@ form a {
 .gallery-modal figure img {
 	width: 100%;
 }
+
 .gallery-modal figcaption {
 	display: inline;
 	margin-left: -22px;
@@ -287,7 +438,6 @@ form a {
 
 .modal-container hr {
 	width: 90%;
-	size: 1px;
 	color: #B3B3B3;
 }
 
@@ -320,6 +470,13 @@ form a {
 	top: 15px;
 }
 
+#form-add-photo {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 100%;
+	margin: auto;
+}
 
 .container-add-photo {
 	display: flex;
@@ -330,11 +487,10 @@ form a {
 	height: 169px;
 	background-color: #E8F1F7;
 	border-radius: 3px;
-	margin: 30px auto;
-	padding : 0 40px 0 40px;
+	margin-top: 30px;
 }
 
-.container-add-photo img{
+.container-add-photo img {
 	width: 58px;
 	height: 58px;
 	color: #B9C5CC;
@@ -345,204 +501,63 @@ form a {
 	font-weight: 400;
 }
 
-.modal-container form {
-	margin: 20px;
-	width: 90%;
-	margin: auto;
-}
-
-.modal-container label, select {
+.modal-container label  {
+	display: flex;
 	font-weight: 500;
 	color: #3D3D3D;
 	line-height: 16px;
-	width: 90%;
+	width: 25%;
+	margin-top: 10px;
+	margin-left: 35px;
+}
+
+#label-file {
+	padding : 2%;
+	justify-content: center;
+	margin: 20px auto;
+	background-color: #CBD6DC;
+	border-radius: 50px;
+	border: none;
 }
 
 .modal-container input, select {
 	box-shadow: 0 4px 14px rgba(0,0,0,0.09);
-	width: 100%;
+	width: 90%;
 }
-select{
-	background-color: white;
-	box-shadow: 0 4px 14px rgba(0,0,0,0.09);
+
+#form-add-photo hr{
+	width: 90%;
+}
+
+.modal-container select{
 	border: none;
 	height: 51px;
 	margin-bottom: 40px;
 }
-.myfile {
-	display: flex;
-	justify-content: center;
-	color: #306685;
-	background-color: #CBD6DC;
-	border-radius: 50px;
-	margin: auto;
-	height: 36px;
-	border: none;
-	font-weight: 500;
-	line-height: 16px;
-	align-items: center;
-}
+
 #valider {
 	width: 237px;
 	height: 36px;
 	color: white;
 	background-color: #A7A7A7;
 	border-radius: 60px;
-	
 	text-align: center;
 	line-height: 17px;
 	font-size: 16px;
-	
+	outline : none;
 }
 
 #valider-submit {
 	background-color: #1D6154;
-}
-
-#introduction {
-	display: flex;
-	align-items: center;
-	width: 100%;
-	margin-left: 80px;
-}
-
-#photo-presentation {
-	flex: 1;
-}
-#introduction button {
-	display: flex;
-}
-
-#introduction img {
-	margin: auto;
-	width: 80%;
-}
-
-#introduction article {
-	flex: 1;
-	color: #3D3D3D;
-	line-height: 16px;
-}
-
-#introduction h2 {
-	margin-bottom: 1em;
-}
-
-#introduction p {
-	margin-bottom: 0.5em;
-	width: 80%;
-	text-align: justify;
-	
-}
-#edition-portfolio {
-	display: flex;
-	justify-content: center;
-	margin-bottom: 1em;
-}
-#portfolio h2{
-	padding-right: 16px;
-}
-
-/* ajout bouton filtre catégorie*/
-.filtres {
-	display: flex;
-	justify-content: center;
-	margin-bottom: 2rem;
-	margin-left: 3rem;
-}
-.filter-btn {
+	width: 237px;
+	height: 36px;
 	border-radius: 60px;
 	text-align: center;
-	border: 1px solid #1D6154;
-	color: #1D6154;
-	background: white;
-	padding: 9px  30px 9px 28px; 
+	line-height: 17px;
 	font-size: 16px;
-	font-weight: 700;
-	font-family: 'Syne';
-	line-height: 19px;
-	margin-right: 8px;
 }
 
-.filter-btn.active {
-	color: white;
-	background: #1D6154;
-	border-radius: 60px;
-	text-align: center;
-	border: 1px solid #1D6154;
-	padding: 9px  30px 9px 28px; 
-	font-size: 16px;
-	font-weight: 700;
-	font-family: 'Syne';
-	line-height: 19px;
-	margin-right: 8px;
-}
-
-.gallery {
-	width: 90%;
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	grid-column-gap: 20px;
-	grid-row-gap: 20px;
-	margin-left: 80px;
-	margin-right: 80px;
-}
-
-.gallery img {
-	width: 100%;
-}
-
-#contact {
-	width: 50%;
-	margin: auto;
-}
-#contact > * {
-	text-align: center;
-
-}
-#contact h2{
-	margin-bottom: 20px;
-}
-#contact form {
-	text-align: left;
-	margin-top:30px;
-	display: flex;
-	flex-direction: column;
-}
-
-#contact input {
-	height: 50px;
-	font-size: 1.2em;
-	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-}
-#contact label {
-	margin: 2em 0 1em 0;
-}
-#contact textarea {
-	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-}
-
-input[type="submit"]{
-	font-family: 'Syne';
-	font-weight: 700;
-	color: white;
-	background-color: #1D6154;
-	margin : 2em auto ;
-	width: 180px;
-	text-align: center;
-	border-radius: 60px ;
-	
-}
-
-footer nav ul {
-	display: flex;
-	justify-content: flex-end;
-	margin: 2em;
-	font-weight: 300;
-}
-
+/* affichage image upload */
 #display-image {
 	width : 129px;
 	height: 193px;

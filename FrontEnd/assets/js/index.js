@@ -7,7 +7,7 @@ displayWorks(works);
 // Recupérer et afficher toutes les catégories //
 async function displayCategories(categories) {
     for (let categorie of categories) {
-        const buttonsFilter = document.querySelector(".filtres")
+        const buttonsFilter = document.querySelector(".filters")
         const buttonFilter = document.createElement("button");
         buttonFilter.className = "filter-btn";
         buttonFilter.dataset.id = categorie.id;
@@ -68,7 +68,7 @@ if (token){
     for (let data of modeEdition) {
         data.classList.add("active"); 
     };
-    const modeEditionFilter = document.querySelector(".filtres");
+    const modeEditionFilter = document.querySelector(".filters");
     modeEditionFilter.style.display = "none";
     const logout = document.getElementById("login-logout");
     logout.setAttribute("href", "./index.html");
