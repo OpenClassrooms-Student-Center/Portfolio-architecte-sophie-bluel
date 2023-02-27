@@ -95,6 +95,17 @@ nav ul {
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
+	
+}
+
+nav li a {
+	text-decoration: none;
+	color: #000000;
+}
+
+nav li b {
+	font-weight: 700;
+	text-decoration: none;
 }
 
 li:hover {

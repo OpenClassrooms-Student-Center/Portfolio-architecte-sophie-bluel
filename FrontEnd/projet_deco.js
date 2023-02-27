@@ -1,14 +1,23 @@
-const reponse = await fetch("http://localhost:5678/api/works");
+const connection = await fetch("http://localhost:5678/api/users/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json"},
+        body: {}
+});
+
+console.log(connection);
+
+let text = await connection.text();
+
+
+
+/*const reponse = await fetch("http://localhost:5678/api/works");
 console.log(reponse);
 
 const projets = await reponse.json();
 console.log(projets);
 
-
-
 function genererProjets(projets){
     for (let i =0 ; i < projets.length; i++) {
-        
         const projet = projets[i];
      
         // Récupération de l'élément du DOM qui accueillera les fiches
@@ -33,6 +42,8 @@ function genererProjets(projets){
 // premier affichage de la page
 genererProjets(projets);
 
+
+// gestion des boutons de filtre
 
 const boutonTous = document.querySelector(".tous");
 boutonTous.addEventListener("click", function () {
@@ -75,9 +86,6 @@ boutonHotels.addEventListener("click", function () {
     genererProjets(filtreHotels);
 });
 
-
-
-/*
 
 // catégorie des projets
 const categorieDeProjet = await fetch("http://localhost:5678/api/categories");
