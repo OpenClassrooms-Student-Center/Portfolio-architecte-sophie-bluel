@@ -165,7 +165,7 @@ paths:
            format: int64
            example: 1
      responses:
-       '200':
+       '204':
          description: Item Deleted
        '401':
          description: Unauthorized
