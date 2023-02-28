@@ -276,12 +276,16 @@ footer nav ul {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-#login input[type="submit"] {
+#login button {
 	margin : 2.2em auto 1.7em auto;
+	background-color: #1D6154;
+	color: #FFFFFF;
 }
 
 #login a {
 	color: #3D3D3D;
 	text-align: center;
+	text-decoration: underline;
+	
 }
 

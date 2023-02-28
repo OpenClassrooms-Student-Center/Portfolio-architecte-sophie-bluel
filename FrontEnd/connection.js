@@ -1,14 +1,28 @@
-export function addNewUser () {
+ // Récupération de l'élément du DOM qui accueillera les fiches
+ const divLogin = document.querySelector("#login");
 
-    const loginBinoms = document.querySelector("section form input")
+ // Création d’une balise dédiée au projet
+ const formulaire_de_connection = document.createElement("form");
+ divLogin.appendChild(formulaire_de_connection);
 
-    for (let i = 0; i < loginBinoms.length; i++) {
-        loginBinoms[i].addEventListener("click", async function (event) {
+ const emailLabel = document.createElement("label");
+ emailLabel.innerText = "Email";
+ formulaire_de_connection.appendChild(emailLabel);
 
-const id = event.target.dataset.id;
-await fetch("http://localhost:5678/api/users/login");
+ const email = document.createElement("input");
+ formulaire_de_connection.appendChild(email)
 
-        })
-    }
+ const passwordLabel = document.createElement("label");
+ passwordLabel.innerText = "Mot de passe";
+ formulaire_de_connection.appendChild(passwordLabel);
 
-}
+ const password = document.createElement("input");
+ formulaire_de_connection.appendChild(password);
+ 
+ const soumettre = document.createElement("button");
+ soumettre.innerText = "Se connecter";
+ formulaire_de_connection.appendChild(soumettre);
+
+ const oubli = document.createElement("a");
+ oubli.innerText = "Mot de passe oublié";
+ formulaire_de_connection.appendChild(oubli);
