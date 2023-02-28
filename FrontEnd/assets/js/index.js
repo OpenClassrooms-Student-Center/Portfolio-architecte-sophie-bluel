@@ -1,5 +1,5 @@
 // Récupération des travaux et catégories depuis l'API
-import { works , categories, displayWorks } from "./fetch.js";
+import { works , categories, displayWorks } from "./data.js";
 
 //affichage de tous les travaux
 displayWorks(works);

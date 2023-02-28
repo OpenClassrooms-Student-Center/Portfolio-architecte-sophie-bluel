@@ -1,5 +1,9 @@
-import { works, categories, displayWorks } from "./fetch.js";
+import { works, categories, displayWorks } from "./data.js";
 
+//pour affichage message erreur
+let spanElement = document.createElement("span");
+spanElement.innerText = "";
+spanElement.className = "";
 
 // création première modale galerie photo
 const modalProjet = document.querySelector("#modal-projet");
@@ -93,12 +97,12 @@ selectCategorieFormAddPhoto.attributes.required = "required";
 
 // Recupérer et afficher toutes les catégories dans le select
 for (let categorie of categories) {
-  var optionForm = document.createElement("option");
-  optionForm.className = "option";
-  optionForm.value = categorie.id;
-  optionForm.innerText = categorie.name;
-  selectCategorieFormAddPhoto.appendChild(optionForm);
-  };
+    var optionForm = document.createElement("option");
+    optionForm.className = "option";
+    optionForm.value = categorie.id;
+    optionForm.innerText = categorie.name;
+    selectCategorieFormAddPhoto.appendChild(optionForm);
+};
 
 //footer du formulaire
 const hrAddPhoto = document.createElement("hr");
@@ -256,29 +260,44 @@ function deleteWorks() {
 };
 deleteWorks(works);
 
-// affichage image avant upload
+// affichage image avant upload avec verification taille et type image
 const imageNewWork = document.querySelector("#myfile");
 var uploadedImage = "";
 
 imageNewWork.addEventListener("change", function () {
+    spanElement.className = "";
+    spanElement.innerText = "";
     const reader = new FileReader();
-    reader.addEventListener("load", () => {
-        displayImage.style.display = "block";
-        imgContainerAddPhoto.style.display = "none";
-        labelBtnContainerAddPhoto.style.display = "none";
-        pContainerAddPhoto.style.display = "none";
-        uploadedImage = reader.result;
-        document.querySelector("#display-image").style.backgroundImage = `url(${uploadedImage})`;
-    });
-    reader.readAsDataURL(this.files[0]);
+    const size = document.getElementById("myfile").files[0].size;
+    const type = document.getElementById("myfile").files[0].type;
+    console.log(size)
+    console.log(type)
+    if (type !=="image/png" && type !=="image/jpeg" && type !=="image/jpg") {
+        spanElement.className = "";
+        spanElement.innerText = "";
+        hrAddPhoto.insertAdjacentElement("afterend", spanElement);
+        spanElement.className = "message-error-login";
+        spanElement.innerText = "Veuillez sélectionner un fichier au format jpg ou png";
+    } else if( size > "4000000") {  
+        spanElement.className = "";
+        spanElement.innerText = "";
+        hrAddPhoto.insertAdjacentElement("afterend", spanElement);
+        spanElement.className = "message-error-login";
+        spanElement.innerText = "Veuillez sélectionner un fichier dont la taille est de 4mo au maximun";
+    } else { 
+        reader.addEventListener("load", () => {
+            displayImage.style.display = "block";
+            imgContainerAddPhoto.style.display = "none";
+            labelBtnContainerAddPhoto.style.display = "none";
+            pContainerAddPhoto.style.display = "none";
+            uploadedImage = reader.result;
+            document.querySelector("#display-image").style.backgroundImage = `url(${uploadedImage})`;
+        });
+        reader.readAsDataURL(this.files[0]);
+    };
 });
 
 //verification formulaire complet et changement couleur btn submit
-//pour affichage message erreur
-let spanElement = document.createElement("span");
-spanElement.innerText = "";
-spanElement.className = "";
-
 formAddPhoto.addEventListener("click", function () {
     //creation objet newWork pour validation formulaire
     const newWork = {

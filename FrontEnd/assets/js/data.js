@@ -22,7 +22,7 @@ export  function displayWorks(works) {
         const titleElement = document.createElement("figcaption");
         titleElement.innerText = work.title;
         
-        // On rattache la balise figure à la section gallery
+        // On rattache la balise figure à gallery
         portfolioGallery.appendChild(workElement);
         // On rattache l’image et figcaption à workElement (la balise figure)
         workElement.appendChild(imageElement);
