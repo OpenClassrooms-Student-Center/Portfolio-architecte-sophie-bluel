@@ -1,14 +1,3 @@
-import { addNewUser } from "./connection.js";
-
-// Tentative pour formulaire
-const formulaire = document.querySelectorAll('form');
-
-
-formulaire[0].addEventListener('submit', function() {
-    console.log("ok");
-});
-
-/*
 
 
 const reponse = await fetch("http://localhost:5678/api/works");
@@ -105,5 +94,3 @@ for(let i = nomDesCategories.lenght - 1; i >=0 ; i-- ) {
         console.log(x);
       
     }
-}
-*/
