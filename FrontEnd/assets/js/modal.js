@@ -102,7 +102,7 @@ for (let categorie of categories) {
     optionForm.value = categorie.id;
     optionForm.innerText = categorie.name;
     selectCategorieFormAddPhoto.appendChild(optionForm);
-};
+}
 
 //footer du formulaire
 const hrAddPhoto = document.createElement("hr");
@@ -142,7 +142,7 @@ window.addEventListener("click", function (event) {
     if (event.target == firstModal) {
         firstModal.style.display = "none";
         secondModal.style.display = "none";
-    };
+    }
 });
 
 // récupère la 2eme modale
@@ -152,7 +152,7 @@ var secondModal = document.getElementById("modal-projet-photo");
 var btnOpenSecondModal = document.getElementById("btn-add-photo");
 
 // récupère le bouton qui ferme la modale
-var btnCloseModal = document.getElementById("second-modal-close");
+var btnCloseSecondModal = document.getElementById("second-modal-close");
 
 // récupère le bouton qui retourne à la 1ere modale
 var btnReturnModal = document.getElementById("arrow-back");
@@ -181,7 +181,7 @@ btnReturnModal.addEventListener("click", function () {
 });
 
 // fermeture de la modale
-btnCloseModal.addEventListener("click", function () {
+btnCloseSecondModal.addEventListener("click", function () {
     secondModal.style.display = "none";
 });
 
@@ -190,7 +190,7 @@ window.addEventListener("click", function (event) {
     if (event.target == secondModal) {
     secondModal.style.display = "none";
     firstModal.style.display = "none";
-    };
+    }
 });
 
 //  afficher tous les travaux dans la modale 
@@ -221,7 +221,7 @@ function displayWorksModal(works) {
         workElement.appendChild(buttonElement);
         buttonElement.appendChild(imageButtonElement);
         workElement.appendChild(figcaptionElement);
-    };
+    }
 };
 displayWorksModal(works);
 
@@ -246,17 +246,18 @@ function deleteWorks() {
                 for (let workElement of worksElement) {
                     if (workElement.dataset.id === photoId) {
                         workElement.remove();
-                    };
+                    }
                 };
                 // supprime element dans works
                 const worksIndex = works.findIndex(index);
-                    function index (work){
-                        return work === photoId
+                // eslint-disable-next-line no-inner-declarations
+                function index (work){
+                    return work === photoId
                     };
                 works.splice(worksIndex,1);    
-            };            
+            }            
         });
-    };
+    }
 };
 deleteWorks(works);
 
@@ -270,8 +271,6 @@ imageNewWork.addEventListener("change", function () {
     const reader = new FileReader();
     const size = document.getElementById("myfile").files[0].size;
     const type = document.getElementById("myfile").files[0].type;
-    console.log(size)
-    console.log(type)
     if (type !=="image/png" && type !=="image/jpeg" && type !=="image/jpg") {
         spanElement.className = "";
         spanElement.innerText = "";
@@ -294,7 +293,7 @@ imageNewWork.addEventListener("change", function () {
             document.querySelector("#display-image").style.backgroundImage = `url(${uploadedImage})`;
         });
         reader.readAsDataURL(this.files[0]);
-    };
+    }
 });
 
 //verification formulaire complet et changement couleur btn submit
@@ -320,7 +319,7 @@ formAddPhoto.addEventListener("click", function () {
         btnFormAddPhoto.id = "valider";
         btnFormAddPhoto.type = "";
         });  
-    };
+    }
 });
 
 // envoi formData sur api    
@@ -354,6 +353,6 @@ btnFormAddPhoto.addEventListener("click", async function (e) {
         secondModal.style.display = "none";
         firstModal.style.display = "none";
         deleteWorks(works);
-    };
+    }
 });   
 

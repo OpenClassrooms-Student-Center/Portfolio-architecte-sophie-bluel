@@ -74,7 +74,7 @@ if (token){
     logout.setAttribute("href", "./index.html");
     logout.innerText = "logout";
     logout.style.fontWeight ="700";
-    logout.addEventListener("click", function (event) {
+    logout.addEventListener("click", function () {
         localStorage.removeItem("Token");
     });
 };
