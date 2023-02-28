@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
-    <header>
+    <header id="login__header">
         <h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
         <nav>
             <ul>
@@ -23,16 +23,20 @@
         </nav>
     </header>
     <main>
-        <section id="login">
-            <h1>Login</h1>
-            <form>
-                <label for="email">Email</label><br>
-                <input type="email" id="email" name="email"><br>
-                <label for="password">Mot de passe</label><br>
-                <input type="password" id="password" name="password">
-                <button> Se connecter </button>
-                <a href="#">Mot de passe oublié</a>
+        <section class="login__section">
+            <h1>Log in</h1>
+            <div class="login-form__container">
+                <form class="login__form">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" name="password">
+                    <div class="login-form__container">
+                        <button> Se connecter </button>
+                        <a href="#">Mot de passe oublié</a>
+                    </div>
               </form>
+            </div>
         </section>
     </main>
     <footer>
