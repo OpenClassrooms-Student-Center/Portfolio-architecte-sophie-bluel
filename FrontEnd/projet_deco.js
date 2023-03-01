@@ -31,11 +31,11 @@ function genererProjets(projets){
 
 // premier affichage de la page
 genererProjets(projets);
-
-/*je tente une nouvelle version du filtre
+/*
+//je tente une nouvelle version du filtre
 // gestion des boutons de filtre
 
-const boutonTous = document.querySelector(".tous");
+const boutonTous = document.createElement(".tous");
 boutonTous.addEventListener("click", function () {
     const filtreTous = projets.filter(function (projet) {
         return projet.categoryId !== 0;
@@ -82,15 +82,28 @@ const categories = await fetch("http://localhost:5678/api/categories")
 const cat= await categories.json();
 console.log(cat);
 
-const boutonTous = document.querySelector(".tous");
-boutonTous.addEventListener("click", function () {
-    const filtreTous = projets.filter(function (projet) {
-        return projet.categoryId !== 0;
-    });  
-    console.log(filtreTous);
-    document.querySelector(".gallery").innerHTML = "";
-    genererProjets(filtreTous);
-});
+for (let i = 0 ; i < cat.length + 1; i++) {
+    
+    const bouton = document.createElement("button");
+    if (i === 0) {
+        bouton.innerText = "Tous";
+    } else {
+        bouton.innerText = cat[i-1].name
+    }    
+
+    bouton.addEventListener("click", function () {
+        const filtre = projets.filter(function (projet) {
+            return projet.categoryId == i-1;
+        });  
+        genererProjets(filtre);
+    });
+
+    document.querySelector(".filtres").appendChild(bouton);
+}
+
+
+
+/*
 
 const boutonObjets = document.querySelector(".objets");
 boutonObjets.addEventListener("click", function () {
@@ -125,3 +138,4 @@ boutonHotels.addEventListener("click", function () {
 
 
 
+*/

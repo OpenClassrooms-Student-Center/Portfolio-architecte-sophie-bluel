@@ -30,16 +30,50 @@
  formulaire_de_connection.appendChild(oubli);
 */
 
+document.querySelector("#formulaire_de_connection").addEventListener("submit", function (event) {
+    
+    event.preventDefault();
+    
+    const dataLogin = {
+        email: document.querySelector("#email").value,
+        password: document.querySelector("#password").value
+    }
+
+    fetch("http://localhost:5678/api/users/login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(dataLogin)
+    })
+    .then(function (reponse) {
+        if (reponse.ok) {
+            reponse.json()
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        } else {
+            alert("identification ou mot de passe erroné");
+        }
+    })
+    .catch(error => {
+        console.log(error);
+    });
+});
 
 
-const test = await fetch("Les_inscriptions")
-const test2= await test.json();
+/*
+const RecupDesIdentifiants = await fetch("Les_inscriptions")
+const identifiants = await RecupDesIdentifiants.json();
 
-const emails = test2.map(test2 => test2.email)
-const MotsDePasse = test2.map(test2 => test2.email)
-console.log(MotsDePasse)
+const emails = identifiants.map(identifiants => identifiants.email)
+const motsDePasse = identifiants.map(identifiants => identifiants.password)
 
-function ajoutNouveauCompteClient (){
+
+function verifyIdentifiants (){
     const formulaireClient = document.querySelector(".formulaire_de_connection")
     formulaireClient.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -47,25 +81,59 @@ function ajoutNouveauCompteClient (){
         email: event.target.querySelector("[name=email]").value,
         motDePasse: event.target.querySelector("[name=password]").value
     };
-    console.log(formulaireClient);
+    const saisieEmail = inscription.email;
+    const saisieMotDePasse = inscription.motDePasse;
+   
+
+  
+  
+    for (let i = 0; i = identifiants.length; i++) {
+       
+    let verif = '';           
+    let autorisation = '';
+    if (saisieEmail === emails[i] && saisieMotDePasse === motsDePasse[i]) {
+        verif = true;
+    }
+
+    if (verif) {
+        autorisation = "entrez"
+    } else {
+        autorisation = "Vous n'êtes pas autorisé à entrer"
+    };
+
+    console.log(autorisation);
+    };
+    });
+
+}
+verifyIdentifiants()
+
+
+*/
+
+
+
+
 
     //création de la charge utile au format json
-    const chargeUtile = JSON.stringify(inscription);
+   /* const chargeUtile = JSON.stringify(inscription);*/
 
-    fetch("Les_inscriptions.json"/*, {
+
+
+
+
+   /* fetch("Les_inscriptions.json", {
         method : "POST",
         headers : {"Content-Type": "application/json"},
         body: chargeUtile
-    });
-    console.log(chargeUtile)
-    }*/)
-}
-ajoutNouveauCompteClient()
+    })*/;
+
+    /*console.log(chargeUtile)*/
 
 
-
-for(let i = test2.length ; i >= 0 ; i--) {
+/*
+for(let i = identifiant.length ; i >= 0 ; i--) {
     if (chargeUtile.email === test2.email[i]) {
         console.log(true)}
     }
-        
+*/
