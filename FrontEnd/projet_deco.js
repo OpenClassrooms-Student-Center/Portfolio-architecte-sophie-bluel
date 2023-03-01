@@ -1,8 +1,8 @@
 
 
-
 const reponse = await fetch("http://localhost:5678/api/works");
 const projets = await reponse.json();
+
 
 
 function genererProjets(projets){
@@ -122,5 +122,6 @@ boutonHotels.addEventListener("click", function () {
     document.querySelector(".gallery").innerHTML = "";
     genererProjets(filtreHotels);
 });
+
 
 

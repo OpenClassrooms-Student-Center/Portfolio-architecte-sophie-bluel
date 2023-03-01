@@ -1,3 +1,4 @@
+
  /*
  // Récupération de l'élément du DOM qui accueillera les fiches
  const divLogin = document.querySelector("#login");
@@ -30,26 +31,41 @@
 */
 
 
- function ajoutNouveauCompteClient (){
-    const formulaireClient = document.querySelector("#formulaire_de_connection")
-    formulaireClient.addEventListener("button", function (event) {
+
+const test = await fetch("Les_inscriptions")
+const test2= await test.json();
+
+const emails = test2.map(test2 => test2.email)
+const MotsDePasse = test2.map(test2 => test2.email)
+console.log(MotsDePasse)
+
+function ajoutNouveauCompteClient (){
+    const formulaireClient = document.querySelector(".formulaire_de_connection")
+    formulaireClient.addEventListener("submit", function (event) {
     event.preventDefault();
     const inscription = {
         email: event.target.querySelector("[name=email]").value,
         motDePasse: event.target.querySelector("[name=password]").value
     };
-    
+    console.log(formulaireClient);
 
     //création de la charge utile au format json
     const chargeUtile = JSON.stringify(inscription);
 
-    fetch("http://localhost:5678/api/users/login", {
+    fetch("Les_inscriptions.json"/*, {
         method : "POST",
         headers : {"Content-Type": "application/json"},
         body: chargeUtile
     });
-   
-    })
+    console.log(chargeUtile)
+    }*/)
 }
-
 ajoutNouveauCompteClient()
+
+
+
+for(let i = test2.length ; i >= 0 ; i--) {
+    if (chargeUtile.email === test2.email[i]) {
+        console.log(true)}
+    }
+        
