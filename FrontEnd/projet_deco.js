@@ -1,12 +1,13 @@
 
 
+
+
+
 const reponse = await fetch("http://localhost:5678/api/works");
 const projets = await reponse.json();
 
-
-
 function genererProjets(projets){
-    for (let i =0 ; i < projets.length; i++) {
+    for (let i = 0 ; i < projets.length; i++) {
         const projet = projets[i];
      
         // Récupération de l'élément du DOM qui accueillera les fiches
@@ -28,114 +29,33 @@ function genererProjets(projets){
         divGallery.appendChild(figure);
         }
 }
-
 // premier affichage de la page
 genererProjets(projets);
-/*
-//je tente une nouvelle version du filtre
-// gestion des boutons de filtre
 
-const boutonTous = document.createElement(".tous");
-boutonTous.addEventListener("click", function () {
-    const filtreTous = projets.filter(function (projet) {
-        return projet.categoryId !== 0;
-    });  
-    console.log(filtreTous);
-    document.querySelector(".gallery").innerHTML = "";
-    genererProjets(filtreTous);
-});
 
-const boutonObjets = document.querySelector(".objets");
-boutonObjets.addEventListener("click", function () {
-    const filtreObjets = projets.filter(function (projet) {
-        return projet.categoryId === 1;
-    });  
-    console.log(filtreObjets);
-    document.querySelector(".gallery").innerHTML = "";
-    genererProjets(filtreObjets);
-});
-
-const boutonAppartements = document.querySelector(".appartements");
-boutonAppartements.addEventListener("click", function () { 
-    const filtreAppartements = projets.filter(function (projet) {
-        return projet.categoryId === 2;
-    });  
-    console.log(filtreAppartements);
-    document.querySelector(".gallery").innerHTML = "";
-    genererProjets(filtreAppartements);
-});
-
-const boutonHotels = document.querySelector(".hotelsrestaurants");
-boutonHotels.addEventListener("click", function () {
-   
-    const filtreHotels = projets.filter(function (projet) {
-        return projet.categoryId === 3;
-    });  
-    console.log(filtreHotels);
-    document.querySelector(".gallery").innerHTML = "";
-    genererProjets(filtreHotels);
-});
-
-*/
-//récupération des categories depuis le fichier JSON
 const categories = await fetch("http://localhost:5678/api/categories")
 const cat= await categories.json();
-console.log(cat);
 
-for (let i = 0 ; i < cat.length + 1; i++) {
-    
+
+
+const boutonTous = document.createElement("button");
+boutonTous.innerText = "Tous";
+document.querySelector(".filtres").appendChild(boutonTous);
+boutonTous.addEventListener("click", function() {
+    document.querySelector(".gallery").innerHTML = "";
+    genererProjets(projets)
+});
+
+for (let i = 0 ; i < cat.length; i++) {
     const bouton = document.createElement("button");
-    if (i === 0) {
-        bouton.innerText = "Tous";
-    } else {
-        bouton.innerText = cat[i-1].name
-    }    
-
+    bouton.innerText = cat[i].name
     bouton.addEventListener("click", function () {
         const filtre = projets.filter(function (projet) {
-            return projet.categoryId == i-1;
-        });  
-        genererProjets(filtre);
-    });
+            return projet.categoryId == i+1;
+            });  
+            document.querySelector(".gallery").innerHTML = "";
+            genererProjets(filtre);
+        });
 
-    document.querySelector(".filtres").appendChild(bouton);
+        document.querySelector(".filtres").appendChild(bouton);
 }
-
-
-
-/*
-
-const boutonObjets = document.querySelector(".objets");
-boutonObjets.addEventListener("click", function () {
-    const filtreObjets = projets.filter(function (projet) {
-        return projet.categoryId === 1;
-    });
-    console.log(filtreObjets);
-    document.querySelector(".gallery").innerHTML = "";
-    genererProjets(filtreObjets);
-});
-
-const boutonAppartements = document.querySelector(".appartements");
-boutonAppartements.addEventListener("click", function () { 
-    const filtreAppartements = projets.filter(function (projet) {
-        return projet.categoryId === 2;
-    });  
-    console.log(filtreAppartements);
-    document.querySelector(".gallery").innerHTML = "";
-    genererProjets(filtreAppartements);
-});
-
-const boutonHotels = document.querySelector(".hotelsrestaurants");
-boutonHotels.addEventListener("click", function () {
-   
-    const filtreHotels = projets.filter(function (projet) {
-        return projet.categoryId === 3;
-    });  
-    console.log(filtreHotels);
-    document.querySelector(".gallery").innerHTML = "";
-    genererProjets(filtreHotels);
-});
-
-
-
-*/
