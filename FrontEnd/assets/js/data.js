@@ -1,3 +1,4 @@
+/* eslint-disable no-extra-semi */
     const reponseWorks = await fetch("http://localhost:5678/api/works");
     const  works = await reponseWorks.json();
     export {works};

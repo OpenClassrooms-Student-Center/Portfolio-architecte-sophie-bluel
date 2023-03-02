@@ -1,3 +1,4 @@
+/* eslint-disable no-extra-semi */
 const formLogin = document.querySelector("form");
 let spanElement = document.createElement("span");
 let inputPassword = document.querySelector("[name='password']");
@@ -31,7 +32,7 @@ formLogin.addEventListener("submit", async function (event) {
 
         // Retour en fonction du statut de la réponse
         if (reponseState) {
-            localStorage.setItem("Token", reponseToken);
+            sessionStorage.setItem("Token", reponseToken);
             window.location.replace("index.html");
         } else {
             inputPassword.insertAdjacentElement("afterend",spanElement);

@@ -1,3 +1,4 @@
+/* eslint-disable no-extra-semi */
 // Récupération des travaux et catégories depuis l'API
 import { works , categories, displayWorks } from "./data.js";
 
@@ -61,7 +62,7 @@ async function filterCategories() {
 filterCategories();
 
 // affichage mode edition
-const token = localStorage.getItem("Token");
+const token = sessionStorage.getItem("Token");
 
 if (token){
     const modeEdition = document.querySelectorAll(".edition-mode");
@@ -75,7 +76,7 @@ if (token){
     logout.innerText = "logout";
     logout.style.fontWeight ="700";
     logout.addEventListener("click", function () {
-        localStorage.removeItem("Token");
+        sessionStorage.removeItem("Token");
     });
 };
 

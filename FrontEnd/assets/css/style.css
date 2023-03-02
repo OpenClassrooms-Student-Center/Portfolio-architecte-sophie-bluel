@@ -453,6 +453,7 @@ form a {
 	text-decoration-line: none;
 	margin: 16px 0 16px 0;
 }
+
 .modal-container button {
 	color:#D65353;
 	background-color: white;
@@ -559,6 +560,8 @@ form a {
 
 /* affichage image upload */
 #display-image {
-	width : 129px;
+	width : 35%;
 	height: 193px;
+	background-position: center;
+	background-size: cover;
 }
