@@ -1,34 +1,40 @@
+const affichageLogin = document.createElement("h2");
+affichageLogin.innerText = "Log In";
+document.querySelector("#login").appendChild(affichageLogin);
 
- /*
- // Récupération de l'élément du DOM qui accueillera les fiches
- const divLogin = document.querySelector("#login");
+const formulaire_de_connection = document.createElement("form");
+formulaire_de_connection.id = "formulaire_de_connection";
+document.querySelector("#login").appendChild(formulaire_de_connection);
 
- // Création d’une balise dédiée au projet
- const formulaire_de_connection = document.createElement("form");
- divLogin.appendChild(formulaire_de_connection);
+const emailLabel = document.createElement("label");
+emailLabel.innerText = "E-mail";
+document.querySelector("#formulaire_de_connection").appendChild(emailLabel);
 
- const emailLabel = document.createElement("label");
- emailLabel.innerText = "Email";
- formulaire_de_connection.appendChild(emailLabel);
+const emailSaisie = document.createElement("input");
+emailSaisie.innerText = "";
+emailSaisie.id = "email";
+emailSaisie.type = "email";
+document.querySelector("#formulaire_de_connection").appendChild(emailSaisie);
 
- const email = document.createElement("input");
- formulaire_de_connection.appendChild(email)
+const passwordLabel = document.createElement("label");
+passwordLabel.innerText = "Mot de passe";
+document.querySelector("#formulaire_de_connection").appendChild(passwordLabel);
 
- const passwordLabel = document.createElement("label");
- passwordLabel.innerText = "Mot de passe";
- formulaire_de_connection.appendChild(passwordLabel);
+const passwordSaisie = document.createElement("input");
+passwordSaisie.innerText = "";
+passwordSaisie.id = "password";
+passwordSaisie.type = "password";
 
- const password = document.createElement("input");
- formulaire_de_connection.appendChild(password);
- 
- const soumettre = document.createElement("button");
- soumettre.innerText = "Se connecter";
- formulaire_de_connection.appendChild(soumettre);
+document.querySelector("#formulaire_de_connection").appendChild(passwordSaisie);
 
- const oubli = document.createElement("a");
- oubli.innerText = "Mot de passe oublié";
- formulaire_de_connection.appendChild(oubli);
-*/
+const envoi = document.createElement("button");
+envoi.innerText = "Se connecter";
+document.querySelector("#formulaire_de_connection").appendChild(envoi);
+
+const oubli = document.createElement("a");
+oubli.innerText = "Mot de passe oublié";
+document.querySelector("#formulaire_de_connection").appendChild(oubli);
+
 
 document.querySelector("#formulaire_de_connection").addEventListener("submit", function (event) {
     
@@ -64,76 +70,3 @@ document.querySelector("#formulaire_de_connection").addEventListener("submit", f
     });
 });
 
-
-/*
-const RecupDesIdentifiants = await fetch("Les_inscriptions")
-const identifiants = await RecupDesIdentifiants.json();
-
-const emails = identifiants.map(identifiants => identifiants.email)
-const motsDePasse = identifiants.map(identifiants => identifiants.password)
-
-
-function verifyIdentifiants (){
-    const formulaireClient = document.querySelector(".formulaire_de_connection")
-    formulaireClient.addEventListener("submit", function (event) {
-    event.preventDefault();
-    const inscription = {
-        email: event.target.querySelector("[name=email]").value,
-        motDePasse: event.target.querySelector("[name=password]").value
-    };
-    const saisieEmail = inscription.email;
-    const saisieMotDePasse = inscription.motDePasse;
-   
-
-  
-  
-    for (let i = 0; i = identifiants.length; i++) {
-       
-    let verif = '';           
-    let autorisation = '';
-    if (saisieEmail === emails[i] && saisieMotDePasse === motsDePasse[i]) {
-        verif = true;
-    }
-
-    if (verif) {
-        autorisation = "entrez"
-    } else {
-        autorisation = "Vous n'êtes pas autorisé à entrer"
-    };
-
-    console.log(autorisation);
-    };
-    });
-
-}
-verifyIdentifiants()
-
-
-*/
-
-
-
-
-
-    //création de la charge utile au format json
-   /* const chargeUtile = JSON.stringify(inscription);*/
-
-
-
-
-
-   /* fetch("Les_inscriptions.json", {
-        method : "POST",
-        headers : {"Content-Type": "application/json"},
-        body: chargeUtile
-    })*/;
-
-    /*console.log(chargeUtile)*/
-
-
-/*
-for(let i = identifiant.length ; i >= 0 ; i--) {
-    if (chargeUtile.email === test2.email[i]) {
-        console.log(true)}
-    }
-*/
