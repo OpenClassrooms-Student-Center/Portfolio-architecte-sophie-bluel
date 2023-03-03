@@ -157,16 +157,24 @@ li:hover {
 	flex-direction: column;
 	margin-top:2em;
 }
+
+.filterDiv{
+	display: flex;
+	justify-content: center;
+	gap:1%;
+	margin-bottom: 2rem;
+}
+
 button{
-	color: white;
-	background-color: #1D6154;
+	color: #1D6154;
+	background-color: white;
 	border-radius: 60px;
 	padding: 5px 15px;
 	font-family: 'Syne';
 	font-size: 14px;
 	font-weight: 700;
 }
-.filters button:hover{
+button:hover{
 	color: white;
 	background-color: #1D6154;
 }
