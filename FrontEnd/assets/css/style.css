@@ -409,7 +409,7 @@ form a {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 	grid-column-gap: 10px;
-	grid-row-gap: 10px;
+	grid-row-gap: 20px;
 	margin: auto;
 	padding: 40px 0 20px 0;
 }
@@ -427,8 +427,9 @@ form a {
 	padding: 5px;
 }
 
-.gallery-modal figure img {
+.gallery-modal figure>img {
 	width: 100%;
+	height: 140px;
 }
 
 .gallery-modal figcaption {
