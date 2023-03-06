@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tuto modale</title>
     <link rel="stylesheet" href="./assets/style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
 </head>
 <body>
     
@@ -14,8 +16,17 @@
 
     <aside id="modale1" class="modale" aria-hidden="true" role="dialog" aria-labelledby="titlemodale" style="display:none">
         <div class="modal-wrapper">
-            <button class="js-close-modale">fermer la boite modale</button>
+            <button class="js-close-modale"><i class="fa-solid fa-xmark"></i></button>
             <h2 id="titlemodale">Galerie photo</h2>
+
+            <div class="gallery">
+                <!--<figure>
+                    <img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
+                    <figcaption>Abajour Tahina</figcaption>
+                </figure>-->
+            </div>
+           
+           
             <div id="galerie"></div>
             <div id="figures"></div>
             <img>
@@ -67,6 +78,7 @@
 
         </div>
     </aside>
+    <script src = "projet_deco.js" type = 'module'></script>
     <script src="./app.js"></script>
 </body>
 
