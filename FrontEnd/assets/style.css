@@ -49,19 +49,21 @@ table {
 /** end reset css**/
 
 body {
-	max-width: 1140px;
+	max-width: 1440px;
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 }
-header {
+
+#bandeau_de_navigation
+{
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 38px 150px 92px 150px;
 }
 
 section {
-	margin: 50px;
+	margin: 0px 245px 0 245px;
 }
 
 h1{
@@ -77,6 +79,7 @@ h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
+	margin-top: 4px
 ;
 }
 
@@ -86,15 +89,20 @@ h2{
 	font-size: 30px;
 	color: #1D6154
 }
+
+p {
+	color: #3D3D3D;
+}
 nav ul {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
+	font-size: 1.2em;
 
 }
 nav li {
 	padding: 0 10px;
-	font-size: 1.2em;
+	
 	
 }
 
@@ -114,9 +122,13 @@ li:hover {
 #introduction {
 	display: flex;
 	align-items: center;
+	padding-bottom: 139px;
+	position: relative;
 }
 #introduction figure {
-	flex: 1
+	flex: 1;
+	color: #000000;
+
 }
 #introduction img {
 	display: block;
@@ -134,17 +146,48 @@ li:hover {
 
 #introduction p {
 	margin-bottom: 0.5em;
+	
+}
+
+figure .modif {
+	display: flex;
+	position: absolute;
+	bottom: 108px;
+	font-size: 1em;
+}
+
+h3 {
+	margin-left: 11px;
 }
 
 /* Concerne le partfolio */
-#portfolio h2 {
-	text-align: center;
-	margin-bottom: 51px;
+
+#portfolio .projet_modif {
+	display: flex;
+	justify-content: center;
+	position: relative;
+	margin-left: 115px;
+}
+
+
+
+
+#portfolio .modif {
+	display: flex;
+	font-size: 1em;
+	left: 380px;
+	align-items: center;
+	margin-top: 5px;
+	margin-left: 31px;
+
+	
+
 }
 
 .filtres {
 	display: flex;
 	justify-content: center;
+	margin-top: 51px;
 	margin-bottom: 51px;
 	gap: 10px;
 }
@@ -204,10 +247,12 @@ button:hover {
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 }
 
 #contact input {
 	height: 50px;
+	width: 379px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
@@ -217,6 +262,7 @@ button:hover {
 }
 #contact textarea {
 	border: none;
+	width: 379px;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
@@ -239,6 +285,7 @@ footer nav ul {
 
 #login h2 {
 	text-align: center;
+	margin-bottom: 37px;
 }
 
 #login {
@@ -248,10 +295,6 @@ footer nav ul {
 
 #login > * {
 	text-align: center;
-}
-
-#login h2{
-	margin-bottom: 37px;
 }
 
 #login form {
@@ -311,3 +354,57 @@ footer nav ul {
 	overflow: auto;
 
 }
+
+
+/*ce qui suit concerne le mode edition*/
+
+
+#bandeau_mode_edition {
+	width: 100%;
+	display: flex;
+	grid-template-columns: auto auto 216px;
+	grid-template-rows: auto auto 38px;
+	height: 58px;
+	background-color: #000000;
+	justify-content: center;
+	align-items: center;
+}
+
+#bandeau_mode_edition i {
+	color: #FFFFFF;
+}
+
+#bandeau_mode_edition h2 {
+	font-family: 'Work Sans';
+	font-size: 1.2em;
+	color: #FFFFFF;
+	font-weight: 400;
+	margin-left: 12px;
+	margin-right: 21px;
+}
+
+#bandeau_mode_edition button {
+	font-family: 'Work Sans';
+	font-size: 1em;
+	background-color: #FFFFFF;
+	font-weight: 500;
+	min-width: 100px;
+	height: 37px;
+	border-radius: 120px;
+	border: 1px solid #1D6154;
+	margin: 0;
+	padding: 0 23px;
+	}
+
+	#bandeau_mode_edition button:hover {
+		color: white;
+		background-color: #1D6154;
+	}
+	#contact {
+		margin-top: 57px;
+	}
+
+	#marge_du_haut {
+		height: 12px;
+		width: 100%;
+	}

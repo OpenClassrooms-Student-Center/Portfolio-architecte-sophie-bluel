@@ -56,7 +56,7 @@ document.querySelector("#formulaire_de_connection").addEventListener("submit", f
         if (reponse.ok) {
             reponse.json()
             .then(data => {
-                console.log(data);
+                console.log("data");
             })
             .catch(error => {
                 console.log(error);
