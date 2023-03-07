@@ -47,19 +47,19 @@
 			<h2>Mes Projets</h2>
 			<nav>
 				<ul class="listeFiltres">
-					<li><input type="button" class="filtre" value="Tous"></li>
+					<li><input type="button" class="filtre" id="Tous" value="Tous"></li>
 					<li><input type="button" class="filtre" value="Objets"></li>
 					<li><input type="button" class="filtre" value="Appartements"></li>
-					<li><input type="button" class="filtre" value="Hôtels & Restaurants"></li>
+					<li><input type="button" class="filtre" value="Hotels & restaurants"></li>
 				</ul>
 			</nav>
 
-
 			<div class="gallery" id="gallery">
-				<script>recupererContenuBase('http://localhost:5678/api/works');</script>
+				<script>
+					recupererContenuBase('http://localhost:5678/api/works', 'Tous') // Permet d'afficher tous les projets par défaut
+					identifierCritereDeTri(); // Permet d'afficher les projets sélectionnés via les boutons de filtre
+				</script>
 			</div>
-
-
 
 		</section>
 		<section id="contact">
