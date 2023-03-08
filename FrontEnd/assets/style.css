@@ -192,7 +192,7 @@ h3 {
 	gap: 10px;
 }
 
-button {
+.filtres button {
 	font-family: 'Syne';
 	font-size: 1em;
 	color: #1D6154;
@@ -350,48 +350,57 @@ footer nav ul {
 }
 
 .modal-wrapper {
+	position: relative;
 	display: flex;
 	flex-direction: column;
-	justify-content: right;
 	width: 630px;
-	background-color: #FFF;
+	background-color: #FFFFFF;
 	padding-bottom: 48px;
-	max-height: calc(100vh -20px);
-	overflow: scroll;
+	height: 730px;
+	border-radius: 10px;
 
-	
-	/*provisoire*/
-	height: 531px;
-	
-}
+	}
 
-.js-close-modal {
+.js-modal-close {
+	display: flex;
+	position: absolute;
+	top: 26px;
+	right: 30px;
 	display: flex;
 	border: none;
 	margin: none;
 	padding: none;
-	width: 100%;
-	height: 24px;
-	border-radius: 0;
-	justify-content: right;	
+	height: 2em;
+	width: 2em;
+	justify-content: center;	
 	align-items: center;
-	margin-right: 30px;
-	margin-top: 26px;
-	margin-bottom: 10px;
 }
 
-.modal button {
-	background-color: blue;
-	width: 50px;
-	height: 50px;
-	color: red;
+.modal-wrapper h2 {
+	display: flex;
+	justify-content: center;
+	font-family: 'Work Sans';
+	font-weight: 400;
+	margin-bottom: 46px;
+	margin-top: 60px
 }
 
-#modal1 figure {
+.modal-wrapper .gallery_modal {
+	width: 420px;
+	
+	display: flex;	
+	flex-wrap: wrap;
+	justify-content: right;
+	padding-bottom: 46px;
+	border-bottom: solid 1px #B3B3B3;
+
+}
+
+.modal figure {
 	width: 78px;
 }
 
-#modal1 img {
+.modal img {
 	width: 100%;
 }
 

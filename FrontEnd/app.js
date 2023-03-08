@@ -6,8 +6,7 @@
 
 
 
-
-
+//ouverture et fermeture de la modale
 
 let modal = null 
  
@@ -47,9 +46,11 @@ document.querySelectorAll(".js-modal").forEach(a=> {
 });
 
 
-// button close modale
- // Récupération de l'élément du DOM qui accueillera le bouton
+// Récupération de l'élément du DOM qui accueillera le bouton
 const modalWrappper = document.querySelector(".modal-wrapper");
+
+
+//création du boutton fermer
 const boutonFermer = document.createElement("button");
 boutonFermer.className="js-modal-close";
 modalWrappper.appendChild(boutonFermer);
@@ -65,15 +66,17 @@ const titleModal = document.createElement("h2")
 titleModal.innerText="Galerie photo"
 modalWrappper.appendChild(titleModal)
 
+//création de la gallery_modal
+const galleryModal = document.createElement("div")
+galleryModal.className="gallery_modal"
+modalWrappper.appendChild(galleryModal)
+
 
 
 
 //Alimentation de la modale
-
 const reponse = await fetch("http://localhost:5678/api/works");
 const projets = await reponse.json();
-
-
 
 
 
@@ -81,11 +84,12 @@ function genererProjets(projets){
     for (let i = 0 ; i < projets.length; i++) {
         const projet = projets[i];
      
-        // Récupération de l'élément du DOM qui accueillera les fiches
-        const divGallery = document.querySelector(".gallery_modal1");
+        // Récupération de l'élément du DOM qui accueillera figures
+        /*galleryModal = document.querySelector(".gallery_modal");*/
 
         // Création d’une balise dédiée au projet
         const figure = document.createElement("figure");
+        galleryModal.appendChild(figure);
                 
         // Création des balises 
         const image = document.createElement("img");
@@ -93,11 +97,9 @@ function genererProjets(projets){
         figure.appendChild(image)
 
         const figcaption = document.createElement("figcaption");
-        figcaption.innerText = projet.title;
-
+        figcaption.innerText = "editer";
         figure.appendChild(figcaption);
 
-        divGallery.appendChild(figure);
         }
 }
 // premier affichage de la page
