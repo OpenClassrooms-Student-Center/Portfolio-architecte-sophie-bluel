@@ -1,4 +1,4 @@
-const affichageLogin = document.createElement("h2");
+/*const affichageLogin = document.createElement("h2");
 affichageLogin.innerText = "Log In";
 document.querySelector("#login").appendChild(affichageLogin);
 
@@ -35,7 +35,7 @@ const oubli = document.createElement("a");
 oubli.innerText = "Mot de passe oublié";
 document.querySelector("#formulaire_de_connection").appendChild(oubli);
 
-
+*/
 document.querySelector("#formulaire_de_connection").addEventListener("submit", function (event) {
     
     event.preventDefault();
@@ -56,7 +56,9 @@ document.querySelector("#formulaire_de_connection").addEventListener("submit", f
         if (reponse.ok) {
             reponse.json()
             .then(data => {
-                console.log("data");
+                console.log(data);
+                localStorage.setItem('adminToken', data.token)
+                window.location.href="index.html"
             })
             .catch(error => {
                 console.log(error);

@@ -1,4 +1,22 @@
+/* version de Philippe
+e.preventDefault()
 
+    const target = document.querySelector("#modal1");
+    target.style.display = null
+
+   
+    target.setAttribute('aria-hidden', false)
+    target.setAttribute('aria-modal', true)
+   
+
+    target.addEventListener('click', closeModal)
+    target.querySelector('.js-modal-close').addEventListener('click', closeModal)
+    target.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
+
+    modal = target
+
+
+*/
 
 
 
@@ -12,7 +30,7 @@ let modal = null
  
  const openModal =  function(e)  {
     e.preventDefault()
-    const target = document.querySelector(e.target.getAttribute('href'))
+    const target = document.querySelector("#modal1")
     target.style.display = null
     target.setAttribute('aria-hidden', false)
     target.setAttribute('aria-modal', true)
