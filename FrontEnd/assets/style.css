@@ -387,7 +387,6 @@ footer nav ul {
 
 .modal-wrapper .gallery_modal {
 	width: 420px;
-	
 	display: flex;	
 	flex-wrap: wrap;
 	justify-content: right;
@@ -397,7 +396,11 @@ footer nav ul {
 }
 
 .modal figure {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 	width: 78px;
+;
 }
 
 .modal img {
