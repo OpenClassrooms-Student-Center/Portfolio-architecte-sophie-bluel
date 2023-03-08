@@ -332,11 +332,16 @@ footer nav ul {
 	text-decoration: underline;
 }
 
-.modale {
-	position: fixed;
+
+
+
+/* ce qui suit concerne la modale*/
+
+.modal {
 	display: flex;
-	justify-content: center;
 	position: fixed;
+	justify-content: center;
+	align-items: center;
 	top: 0;
 	left: 0;
 	width: 100%;
@@ -348,15 +353,19 @@ footer nav ul {
 	display: flex;
 	flex-direction: column;
 	justify-content: right;
-	height: 731px;
 	width: 630px;
 	background-color: #FFF;
-	padding: 0;
-	align-items: center;
+	padding-bottom: 48px;
+	max-height: calc(100vh -20px);
+	overflow: scroll;
+
+	
+	/*provisoire*/
+	height: 531px;
 	
 }
 
-.js-close-modale {
+.js-close-modal {
 	display: flex;
 	border: none;
 	margin: none;
@@ -370,6 +379,24 @@ footer nav ul {
 	margin-top: 26px;
 	margin-bottom: 10px;
 }
+
+.modal button {
+	background-color: blue;
+	width: 50px;
+	height: 50px;
+	color: red;
+}
+
+#modal1 figure {
+	width: 78px;
+}
+
+#modal1 img {
+	width: 100%;
+}
+
+
+
 
 
 

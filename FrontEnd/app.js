@@ -1,27 +1,104 @@
- let modal = null
+
+
+
+
+
+
+
+
+
+
+
+let modal = null 
  
- const openModale =  function(e)  {
+ const openModal =  function(e)  {
     e.preventDefault()
-    const target = document.querySelector("#modale1")
-    target.style = "display:null";
-    target.removeAttribute("aria-hidden");
-    modal = target;
-    modal.addEventListener("click", closeModale)
-    modal.querySelector(".js-close-modale").addEventListener("click", closeModale)
- }
+    const target = document.querySelector(e.target.getAttribute('href'))
+    target.style.display = null
+    target.setAttribute('aria-hidden', false)
+    target.setAttribute('aria-modal', true)
+    modal = target
+    modal.addEventListener('click', closeModal)
+    modal.querySelector('.js-modal-close').addEventListener('click', closeModal)
+    modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
 
+}
+    
 
-document.querySelectorAll(".js-modale").forEach(a=> {
-    a.addEventListener('click', openModale)
+const closeModal = function (e) {
+    if (modal === null) return
+    e.preventDefault()
+    modal.style.display = 'none'
+    modal.setAttribute('aria-hidden', 'true')
+    modal.removeAttribute('aria-modal')
+    modal.removeEventListener('click', closeModal)
+    modal.querySelector('.js-modal-close').removeEventListener('click', closeModal)
+    modal.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation)
+    modal = null
+}
+
+const stopPropagation = function (e) {
+    e.stopPropagation()
+}
+
+document.querySelectorAll(".js-modal").forEach(a=> {
+    a.addEventListener('click', openModal)
+
 });
 
 
-const closeModale =  function(e)  {
-    if (modal === null) return
-    e.preventDefault()
-    modal.style = "display:none";
-    modal.setAttribute("aria-hidden", "true");
-    modal.removeEventListener("click", closeModale);
-    modal.querySelector(".js-close-modale").removeEventListener("click", closeModale)
-    modal = null
+// button close modale
+ // Récupération de l'élément du DOM qui accueillera le bouton
+const modalWrappper = document.querySelector(".modal-wrapper");
+const boutonFermer = document.createElement("button");
+boutonFermer.className="js-modal-close";
+modalWrappper.appendChild(boutonFermer);
+boutonFermer.addEventListener("click", closeModal);
+
+const i = document.createElement("i");
+i.className="fa-solid fa-xmark";
+boutonFermer.appendChild(i)
+
+
+//Création du titre
+const titleModal = document.createElement("h2")
+titleModal.innerText="Galerie photo"
+modalWrappper.appendChild(titleModal)
+
+
+
+
+//Alimentation de la modale
+
+const reponse = await fetch("http://localhost:5678/api/works");
+const projets = await reponse.json();
+
+
+
+
+
+function genererProjets(projets){
+    for (let i = 0 ; i < projets.length; i++) {
+        const projet = projets[i];
+     
+        // Récupération de l'élément du DOM qui accueillera les fiches
+        const divGallery = document.querySelector(".gallery_modal1");
+
+        // Création d’une balise dédiée au projet
+        const figure = document.createElement("figure");
+                
+        // Création des balises 
+        const image = document.createElement("img");
+        image.src = projet.imageUrl;
+        figure.appendChild(image)
+
+        const figcaption = document.createElement("figcaption");
+        figcaption.innerText = projet.title;
+
+        figure.appendChild(figcaption);
+
+        divGallery.appendChild(figure);
+        }
 }
+// premier affichage de la page
+genererProjets(projets);
