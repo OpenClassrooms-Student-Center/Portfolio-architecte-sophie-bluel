@@ -61,30 +61,15 @@ async function createGallery(){
             });
         });
     });
-
-    
-    
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 createGallery();
 
+if(localStorage.getItem("token") != null){
+    document.querySelector('body').classList.add("user-logged");
+}
+
+document.querySelector("#logout-button").addEventListener("click",function(){
+    localStorage.removeItem("token")
+    document.location.href='index.html';
+})

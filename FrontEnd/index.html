@@ -4,21 +4,31 @@
 	<meta charset="UTF-8">
 	<title>Sophie Bluel - Architecte d'intérieur</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://kit.fontawesome.com/6e68ff01c2.js" crossorigin="anonymous"></script>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 	<script src="/script.js" defer></script>
+	<script src="/modale.js" defer></script>
 </head>
 <body>
-<header>
+<div class="header-admin">
+	<span class="modeedition">
+		    <i class="fa-regular fa-pen-to-square"></i>
+			<span class="texteedition">Mode édition</span>
+	</span>
+	<button class="publishchange">publier les changements</button>
+
+</div>	
+<header class="header">
 	<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
 	<nav>
 		<ul>
 			<li>projets</li>
 			<li>contact</li>
-			<li><a href="Login.html">login</a></li>
+			<li><a id="login-button" href="Login.html">login</a><button id="logout-button">logout</button></li>
 			<li><img class="iconeinstagram" src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -36,7 +46,23 @@
 		</article>
 	</section>
 	<section id="portfolio">
+	 <div class="gallerytitle">
 		<h2>Mes Projets</h2>
+		<i class="fa-regular fa-pen-to-square"></i>
+		<a href="#modal1" class="modifier">modifier</a>
+	 </div>
+	 <aside id="modal1" class="modal" style="display:none;">
+		<div class="modal-wrapper js-modal-stop">
+		   <button class="js-modal-close">X</button>
+           <h3>Galerie photo</h3>
+		   <div class="modal-gallery">
+		   </div>
+		   <div class="modal-button">
+		     <button class="add-photo">Ajouter une photo</button>
+		     <a href="#" class="remove-gallery">Supprimer la galerie</a>
+		   </div>
+		</div>
+	 </aside>
 		<div class="filtersdiv">
 		</div>
 		<div class="gallery">

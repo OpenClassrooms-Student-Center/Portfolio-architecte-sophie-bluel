@@ -13,9 +13,18 @@ formElement.addEventListener('submit', (e) => {
             'Content-Type': 'application/Json'
         },
         body: JSON.stringify(data)
-    }).then(res => res.json())
-      .then(data => console.log(data))
-      .catch(error => console.log(error));
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log(data);
+        if(data.error){
+            alert("mauvais identifiant")
+            return
+        }
+        localStorage.setItem("token",data.token)
+        document.location.href='index.html' ;
+    })
+    .catch(error => console.log(error));
 
 });
 

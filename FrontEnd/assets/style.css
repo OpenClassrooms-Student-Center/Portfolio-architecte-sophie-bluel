@@ -32,6 +32,9 @@ body {
 	line-height: 1;
 	background-color: #fffef8;
 }
+main {
+	margin: 0 4rem;
+}
 ol, ul {
 	list-style: none;
 }
@@ -57,8 +60,10 @@ body {
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	flex-wrap: wrap;
+	margin: 0 2rem 50px 2rem ;
 }
+
 section {
 	margin: 50px 0
 }
@@ -119,7 +124,7 @@ li:hover {
 }
 #introduction img {
 	display: block;
-	margin: auto;
+	margin:0;
 	width: 80%;
 }
 
@@ -197,7 +202,9 @@ footer{
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
-	margin: 2em
+	margin: 0;
+	padding: 1rem;
+	
 }
 
 /* JS Content */
@@ -247,6 +254,7 @@ button{
 	padding-top: 5rem;
 	padding-bottom: 30rem;
 }
+
 .mdpoublie{
 	text-decoration: underline;
 	display: flex;
@@ -287,4 +295,196 @@ form button{
 
 .labelmdp{
 	padding-right: 18rem;
+}
+
+/* Admin */
+.header-admin{
+	background-color: black;
+	width: 100%;
+	margin-bottom: 2rem;
+	justify-content: center;
+	align-items: center;
+	padding: 0.5rem 0;
+	display: none;
+}
+
+.texteedition{
+	color:white;
+}
+
+.fa-regular{
+	color:white;
+}
+
+.user-logged .header-admin{
+	display:flex ;
+}
+
+#logout-button{
+    display: none;
+}
+
+.user-logged #logout-button{
+	display: flex;
+	align-items: center;
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight: 500;
+	color: black;
+	border: none;
+	padding: 0;
+} 
+
+.user-logged #login-button{
+	display: none;
+}
+
+.user-logged .filtersdiv{
+	display: none;
+}
+
+.publishchange {
+	margin-left: 1rem;
+	border: 1px solid white;
+	color: black;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: 500;
+	align-items: center;
+	display: none;
+}
+
+main .fa-pen-to-square{
+	color:black;
+	display: none;
+}
+
+.modifier{
+	align-items: center;
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight: 500;
+	color: black;
+	border: none;
+	padding: 0;
+	display: none;
+}
+
+.user-logged main .fa-pen-to-square{
+	display: flex;
+	padding: 0 0.3rem 0 1rem;
+}
+
+.user-logged .modifier{
+	display: flex;
+}
+
+.user-logged .publishchange{
+	display: flex;
+}
+
+.gallerytitle{
+	display: flex;
+	justify-content: center;
+	align-items: baseline;
+	margin-top: 5rem;
+}
+
+/* modal */
+
+.modal {
+	position: fixed;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.8);
+}
+
+.modal-wrapper{
+	overflow: auto;
+	width: 630px;
+	padding: 20px ;
+	background-color: #fff;
+	border-radius: 10px;
+}
+
+.js-modal-close{
+	color: black;
+	border: none;
+	padding: 0;
+	margin-left: 36rem;
+
+}
+
+.modal-wrapper h3{
+	display: flex;
+	justify-content: center;
+	font-weight: 400;
+	font-size: 26px;
+}
+
+.modal-gallery{
+	display: flex;
+	flex-wrap: wrap;
+	column-gap: 6px;
+	row-gap: 25px;
+	border-bottom: 1px solid #B3B3B3;
+	padding: 2rem 6rem;
+	position: relative;
+}
+
+.modal-button{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.add-photo{
+	margin-top: 2rem;
+	margin-bottom: 1.5rem;
+	background-color: #1D6154;
+	color: #fff;
+	font-size: 14px;
+	font-family: 'syne';
+}
+
+.remove-gallery{
+	color: #d65353;
+	font-family: 'syne';
+}
+
+.modal-gallery img{
+	width: 78px;
+	height: 104px;
+}
+
+.modal-gallery figure{
+	width: 78px;
+	height: 104px;
+}
+
+.modal-gallery figcaption{
+	font-size: 12px;
+	padding-top: 0.2rem;
+}
+
+.delete-work{
+  position:relative;
+  background-color: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 2px;
+  top: -110%;
+  left: 65%;
+  height: 20px;
+  width: 20px;
+  padding-inline: 2px;
+
+}
+
+.fa-trash-can{
+	color: #fff;
+	height: 9px;
 }
