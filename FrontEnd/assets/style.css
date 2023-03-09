@@ -347,6 +347,7 @@ footer nav ul {
 	width: 100%;
 	height: 100%;
 	background-color: rgba(0,0,0,0.8);
+	overflow: scroll;
 }
 
 
@@ -513,29 +514,29 @@ aside .ajout {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
+	padding-bottom: 27px;
+	border-bottom: solid 1px #B3B3B3;
+}
+
+#modal2 label {
+	margin-bottom: 10px;
 }
 
 #modal2 input {
 	height: 50px;
 	width: 100%;
+	margin-bottom: 21px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#modal2 label {
-	margin: 2em 0 1em 0;
-}
 
-#modal2 textarea {
-	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-}
-
-/*#modal2 button {
-	margin : 2.2em auto 1.7em auto;
-	background-color: #1D6154;
+#modal2 .ajout {
+	margin-top: 32px;
+	background-color: #A7A7A7;
 	color: #FFFFFF;
 	width: 179px;
+	border: none;
 }
 
 #modal2 a {
