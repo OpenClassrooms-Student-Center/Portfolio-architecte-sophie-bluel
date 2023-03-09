@@ -33,9 +33,16 @@ document.querySelector("#formulaire_de_connection").appendChild(envoi);
 
 const oubli = document.createElement("a");
 oubli.innerText = "Mot de passe oublié";
-document.querySelector("#formulaire_de_connection").appendChild(oubli);
+document.querySelector("#formulaire_de_connection").appendChild(oubli)*/
 
-*/
+let element = null
+
+
+element = querySelectorAll(".if_logged");
+console.log(matches)
+
+
+
 document.querySelector("#formulaire_de_connection").addEventListener("submit", function (event) {
     
     event.preventDefault();
@@ -58,7 +65,7 @@ document.querySelector("#formulaire_de_connection").addEventListener("submit", f
             .then(data => {
                 console.log(data);
                 localStorage.setItem('adminToken', data.token)
-                window.location.href="index.html"
+                window.location.href="index.html" 
             })
             .catch(error => {
                 console.log(error);
@@ -71,4 +78,6 @@ document.querySelector("#formulaire_de_connection").addEventListener("submit", f
         console.log(error);
     });
 });
+
+
 

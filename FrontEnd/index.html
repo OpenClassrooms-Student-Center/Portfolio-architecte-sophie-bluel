@@ -14,10 +14,9 @@
 <body>
 <header>
 	<!-- ce qui suit correspond au bandeau que je dois rendre dynamique-->
-	<div id="bandeau_mode_edition">
+	<div id= "bandeau_mode_edition" class="if_logged" style="display:none">
 		<i class="fa-sharp fa-regular fa-pen-to-square"></i>
 		<h2> Mode édition</h2>
-
 		<button type="submit">publier les changements</button>
 	</div>
 
@@ -38,7 +37,7 @@
 	<section id="introduction">
 		<figure>
 			<img src="./assets/images/sophie-bluel.png" alt="">
-			<a href="#"class=" ">
+			<a href="#"class="if_logged" style="display:none">
 				<div class ="modif">
 				<i class="fa-sharp fa-regular fa-pen-to-square"></i>
 				<h3> Modifier</h3></figure>
@@ -46,7 +45,7 @@
 			</a>
 		</figure>
 		<article>
-			<a href="#"class=" ">
+			<a href="#"class="if_logged" style="display:none">
 				<div class ="modif">
 					<i class="fa-sharp fa-regular fa-pen-to-square"></i>
 					<h3>Modifier</h3>
@@ -64,8 +63,7 @@
 	<section id="portfolio">	
 		<div class= projet_modif>
 			<h2>Mes Projets</h2>
-			<a href="#modal1"class="js-modal">
-				
+			<a href="#modal1" class="if_logged" style="display:none"">
 				<div class ="modif">
 					<i class="fa-sharp fa-regular fa-pen-to-square"></i>
 					<h3>Modifier</h3>
@@ -146,10 +144,11 @@
 </aside>
 
 
-
-
+<script src = "connection.js" type = 'module'></script>
 <script src = "projet_deco.js" type = 'module'></script>
 <script src = "app.js" type = 'module'></script>
+
+
 
 </body>
 </html>
