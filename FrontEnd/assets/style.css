@@ -360,6 +360,8 @@ footer nav ul {
 	background-color: #FFFFFF;
 	padding-bottom: 48px;
 	border-radius: 10px;
+	padding-left: 105px;
+	padding-right: 105px;
 	}
 
 .js-modal-close {
@@ -372,10 +374,12 @@ footer nav ul {
 	width: 2em;
 	justify-content: center;	
 	align-items: center;
+	background-color: transparent;
 }
 
 .js-modal-return {
 	position: absolute;
+	background-color: transparent;
 	top: 26px;
 	left: 30px;
 	display: flex;
@@ -422,7 +426,6 @@ footer nav ul {
 }
 
 aside .ajout {
-	
 	font-family: 'Syne';
 	font-size: 1em;
 	width: 237px;
@@ -441,6 +444,7 @@ aside .ajout {
 }
 
 /* ce qui suit concerne la modale 2*/
+/*
 .modal-wrapper {
 	position: relative;
 	display: flex;
@@ -450,80 +454,95 @@ aside .ajout {
 	background-color: #FFFFFF;
 	padding-bottom: 48px;
 	border-radius: 10px;
+	padding-left: 105px;
+	padding-right: 105px;
 	}
+*/
 
-.js-modal-close {
-	
-	position: absolute;
-	top: 26px;
-	right: 30px;
-	display: flex;
-	border: none;
-	height: 2em;
-	width: 2em;
-	justify-content: center;	
-	align-items: center;
-}
-
-.modal-wrapper h2 {
-	display: flex;
-	justify-content: center;
-	font-family: 'Work Sans';
-	font-weight: 400;
-	margin-bottom: 46px;
-	margin-top: 60px
-}
-.gallery_modal {
-	display: flex;
-	margin: 0 auto;
-}
-
-.modal-wrapper .gallery_modal {
+#modal2 .modal-wrapper {
 	width: 420px;
-	display: flex;	
-	flex-wrap: wrap;
-	justify-content: space-between;
-	padding-bottom: 46px;
-	border-bottom: solid 1px #B3B3B3;
-
 }
 
-.modal figure {
+.modal-wrapper .boite_grise {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
-	width: 78px;
-;
+	align-items: center;
+	width: 100%;
+	height: auto;
+	background-color:  #E8F1F7;
+	border-radius: 3px;
+	padding-bottom: 19px;
+	}
+
+.modal-wrapper .fa-regular {
+	margin-top: 28px;
+	font-size: 3.5em;
+	color: grey;
 }
 
-.modal img {
+.ajout_image {
+	font-family: 'Syne';
+	font-size: 0.9em;
+	font-weight: 500;
+	width: 173px;
+	height: 36px;
+	padding: 0;
+	border: none;
+	margin-top: 21px;
+	border-radius: 60px;
+	background-color: #CBD6DC;
+	color: #306685;
+	font-weight: 700;
+	}
+
+.boite_grise h3 {
+	margin-top: 7px;
+	font-size: 0.7em;
+	color: #444444;
+}
+
+#modal2 .ajout {
+	background-color: #A7A7A7;
+}
+
+
+
+#modal2 form {
+	text-align: left;
+	margin-top: 30px;
+	display: flex;
+	flex-direction: column;
 	width: 100%;
 }
 
-aside .ajout {
-	
-	font-family: 'Syne';
-	font-size: 1em;
-	width: 237px;
-	height: 36px;
-	border-radius: 120px;
+#modal2 input {
+	height: 50px;
+	width: 100%;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+#modal2 label {
+	margin: 2em 0 1em 0;
+}
+
+#modal2 textarea {
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+/*#modal2 button {
+	margin : 2.2em auto 1.7em auto;
 	background-color: #1D6154;
-	color: #fff;
-	font-weight: 700;
-	margin-top: 38px;
+	color: #FFFFFF;
+	width: 179px;
 }
 
-.modal-wrapper h3 {
-	color: #D65353;
-	margin-top: 32px;
-
+#modal2 a {
+	color: #3D3D3D;
+	text-align: center;
+	text-decoration: underline;
 }
-
-
-
-
-
-
 
 
 

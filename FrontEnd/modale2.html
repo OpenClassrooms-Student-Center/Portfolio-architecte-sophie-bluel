@@ -13,20 +13,29 @@
 </head>
 <body>
 
-      <aside id="modal2" class="modal" aria-hidden="true" aria-modal="false" role:"dialog" aria-labelledby="titlemodal" style="display:flex">
-	<div class="modal-wrapper js-modal-stop">
-		<button class = 'js-modal-return'><i class="fa-sharp fa-solid fa-arrow-left"></i></button>
-		<button class = 'js-modal-close'><i class="fa-solid fa-xmark"></i></button>
-		<h2 id="titlemodal">Ajout photo</h2>
-		<div class="boite_grise">
-			<!--<figure>
-				<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
-				<figcaption>Abajour Tahina</figcaption>
-			</figure>-->
-	</div>
-	<button class="ajout">Valider</button>
+    <aside id="modal2" class="modal" aria-hidden="true" aria-modal="false" role:"dialog" aria-labelledby="titlemodal" style="display:flex">
+		<div class="modal-wrapper js-modal-stop">
+			<button class = 'js-modal-return'><i class="fa-sharp fa-solid fa-arrow-left"></i></button>
+			<button class = 'js-modal-close'><i class="fa-solid fa-xmark"></i></button>
+			<h2 id="titlemodal">Ajout photo</h2>
+			<div class="boite_grise">
+				<div><i class="fa-regular fa-image"></i></div>
+				<button class = "ajout_image">+ Ajouter photo</button>
+				<h3>jpg, png : 4mo max</h3>
+			</div>
+			<form id="formulaire_de_connection">
+				<label for="email" id="emailLabel">Titre</label>
+					<input type="email" name="email" id="email">
+					<label for="password" id="passwordLabel">Catégorie</label>
+					<input type="password" name="password" id="password">
+					<button type="submit">Se connecter</button>
+					<a href = "#">Mot de passe oublié</a>
+			</form>
+			<button class="ajout">Valider</button>
+		</div>
+	</aside>
 	
-</aside>
+
 </body>
 </html>
 
