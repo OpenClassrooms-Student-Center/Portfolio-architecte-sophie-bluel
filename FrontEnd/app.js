@@ -40,7 +40,6 @@ let modal = null
     modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
 
 }
-    
 
 const closeModal = function (e) {
     if (modal === null) return
@@ -67,7 +66,7 @@ document.querySelectorAll(".js-modal").forEach(a=> {
 // Récupération de l'élément du DOM qui accueillera le bouton
 const modalWrappper = document.querySelector(".modal-wrapper");
 
-
+/*
 //création du boutton fermer
 const boutonFermer = document.createElement("button");
 boutonFermer.className="js-modal-close";
@@ -76,20 +75,17 @@ boutonFermer.addEventListener("click", closeModal);
 
 const i = document.createElement("i");
 i.className="fa-solid fa-xmark";
-boutonFermer.appendChild(i)
+boutonFermer.appendChild(i)*/
 
 
-//Création du titre
-const titleModal = document.createElement("h2")
-titleModal.innerText="Galerie photo"
-modalWrappper.appendChild(titleModal)
+/*
 
 //création de la gallery_modal
 const galleryModal = document.createElement("div")
 galleryModal.className="gallery_modal"
 modalWrappper.appendChild(galleryModal)
 
-
+*/
 
 
 //Alimentation de la modale
@@ -103,7 +99,7 @@ function genererProjets(projets){
         const projet = projets[i];
      
         // Récupération de l'élément du DOM qui accueillera figures
-        /*galleryModal = document.querySelector(".gallery_modal");*/
+       const galleryModal = document.querySelector(".gallery_modal");
 
         // Création d’une balise dédiée au projet
         const figure = document.createElement("figure");

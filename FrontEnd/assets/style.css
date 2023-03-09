@@ -335,7 +335,7 @@ footer nav ul {
 
 
 
-/* ce qui suit concerne la modale*/
+/* ce qui suit concerne les modales */
 
 .modal {
 	display: flex;
@@ -349,27 +349,37 @@ footer nav ul {
 	background-color: rgba(0,0,0,0.8);
 }
 
+
+/* ce qui suit concerne la modale 1*/
 .modal-wrapper {
 	position: relative;
 	display: flex;
+	align-items: center;
 	flex-direction: column;
 	width: 630px;
 	background-color: #FFFFFF;
 	padding-bottom: 48px;
-	height: 730px;
 	border-radius: 10px;
-
 	}
 
 .js-modal-close {
-	display: flex;
 	position: absolute;
 	top: 26px;
 	right: 30px;
 	display: flex;
 	border: none;
-	margin: none;
-	padding: none;
+	height: 2em;
+	width: 2em;
+	justify-content: center;	
+	align-items: center;
+}
+
+.js-modal-return {
+	position: absolute;
+	top: 26px;
+	left: 30px;
+	display: flex;
+	border: none;
 	height: 2em;
 	width: 2em;
 	justify-content: center;	
@@ -385,6 +395,7 @@ footer nav ul {
 	margin-top: 60px
 }
 .gallery_modal {
+	display: flex;
 	margin: 0 auto;
 }
 
@@ -410,10 +421,103 @@ footer nav ul {
 	width: 100%;
 }
 
+aside .ajout {
+	
+	font-family: 'Syne';
+	font-size: 1em;
+	width: 237px;
+	height: 36px;
+	border-radius: 120px;
+	background-color: #1D6154;
+	color: #fff;
+	font-weight: 700;
+	margin-top: 38px;
+}
 
+.modal-wrapper h3 {
+	color: #D65353;
+	margin-top: 32px;
 
+}
 
+/* ce qui suit concerne la modale 2*/
+.modal-wrapper {
+	position: relative;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	width: 630px;
+	background-color: #FFFFFF;
+	padding-bottom: 48px;
+	border-radius: 10px;
+	}
 
+.js-modal-close {
+	
+	position: absolute;
+	top: 26px;
+	right: 30px;
+	display: flex;
+	border: none;
+	height: 2em;
+	width: 2em;
+	justify-content: center;	
+	align-items: center;
+}
+
+.modal-wrapper h2 {
+	display: flex;
+	justify-content: center;
+	font-family: 'Work Sans';
+	font-weight: 400;
+	margin-bottom: 46px;
+	margin-top: 60px
+}
+.gallery_modal {
+	display: flex;
+	margin: 0 auto;
+}
+
+.modal-wrapper .gallery_modal {
+	width: 420px;
+	display: flex;	
+	flex-wrap: wrap;
+	justify-content: space-between;
+	padding-bottom: 46px;
+	border-bottom: solid 1px #B3B3B3;
+
+}
+
+.modal figure {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 78px;
+;
+}
+
+.modal img {
+	width: 100%;
+}
+
+aside .ajout {
+	
+	font-family: 'Syne';
+	font-size: 1em;
+	width: 237px;
+	height: 36px;
+	border-radius: 120px;
+	background-color: #1D6154;
+	color: #fff;
+	font-weight: 700;
+	margin-top: 38px;
+}
+
+.modal-wrapper h3 {
+	color: #D65353;
+	margin-top: 32px;
+
+}
 
 
 
@@ -474,3 +578,4 @@ footer nav ul {
 		height: 12px;
 		width: 100%;
 	}
+

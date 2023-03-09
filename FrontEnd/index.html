@@ -13,7 +13,6 @@
 </head>
 <body>
 <header>
-	<div id="marge_du_haut" style="display:none"></div>
 	<!-- ce qui suit correspond au bandeau que je dois rendre dynamique-->
 	<div id="bandeau_mode_edition">
 		<i class="fa-sharp fa-regular fa-pen-to-square"></i>
@@ -39,10 +38,12 @@
 	<section id="introduction">
 		<figure>
 			<img src="./assets/images/sophie-bluel.png" alt="">
-			<div class ="modif">
+			<a href="#modal1"class="js-modal">
+				<div class ="modif">
 				<i class="fa-sharp fa-regular fa-pen-to-square"></i>
 				<h3> Modifier</h3></figure>
-			</div>
+				</div>
+			</a>
 		</figure>
 		<article>
 			<h2>Designer d'espace</h2>
@@ -52,29 +53,18 @@
 		</article>
 	</section>
 
-
-
-<!--section modale-->
-
-<a href="#modal1" class="js-modal">Ouvrir la boite modale</a>
-
-
-
-
-
-
-
-
-
 <!--section portfolio-->
 	<section id="portfolio">	
 		<div class= projet_modif>
 			<h2>Mes Projets</h2>
-			<div class ="modif">
-				<i class="fa-sharp fa-regular fa-pen-to-square"></i>
-				<h3>Modifier</h3>
-			</div>
-			</div>
+			<a href="#modal1"class="js-modal">
+				
+				<div class ="modif">
+					<i class="fa-sharp fa-regular fa-pen-to-square"></i>
+					<h3>Modifier</h3>
+				</div>
+			</a>
+		</div>
 		<div class="filtres">
 		<!--	
 			<button class="tous">Tous</button>
@@ -116,18 +106,20 @@
 
 <aside id="modal1" class="modal" aria-hidden="true" aria-modal="false" role:"dialog" aria-labelledby="titlemodal" style="display:none">
 	<div class="modal-wrapper js-modal-stop">
-		<!--<button class = 'js-modal-close'>fermer la boite modale</button>-->
-		<!--<h2 id="titlemodal">Galerie photo</h2>-->
-		<!--<div class="gallery_modal">
-			<figure>
+		<button class = 'js-modal-close'><i class="fa-solid fa-xmark"></i></button>
+		<h2 id="titlemodal">Galerie photo</h2>
+		<div class="gallery_modal">
+			<!--<figure>
 				<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
 				<figcaption>Abajour Tahina</figcaption>
 			</figure>-->
 	</div>
-
-
-	        
+	<button class="ajout">ajouter une photo</button>
+	<h3>Supprimer la galerie</h3>     
 </aside>
+
+
+
 
 
 <script src = "projet_deco.js" type = 'module'></script>
