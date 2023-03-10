@@ -1,9 +1,9 @@
 let modal = null
-const focusableSelector= 'button, a, input, textarea'
+const focusableSelector = 'button, a, input, textarea'
 let focusables = []
 let previouslyFocusedElement = null
 
-const openModal = function (e){
+const openModal = function (e) {
     e.preventDefault()
     modal = document.querySelector(e.target.getAttribute('href'))
     focusables = Array.from(modal.querySelectorAll(focusableSelector))
@@ -19,7 +19,7 @@ const openModal = function (e){
 
 const closeModal = function (e) {
     if (modal === null) return
-    if(previouslyFocusedElement !== null) previouslyFocusedElement.focus()
+    if (previouslyFocusedElement !== null) previouslyFocusedElement.focus()
     e.preventDefault()
     modal.style.display = "none"
     modal.setAttribute('aria-hidden', 'true')
@@ -37,7 +37,7 @@ const stopPropagation = function (e) {
 const focusInModal = function (e) {
     e.preventDefault()
     let index = focusables.findIndex(f => f === modal.querySelector(':focus'))
-    if(e.shiftKey === true) {
+    if (e.shiftKey === true) {
         index--
     } else {
         index++
@@ -51,11 +51,11 @@ const focusInModal = function (e) {
     focusables[index].focus()
 }
 
-document.querySelectorAll('.modifier').forEach(a =>{
-    a.addEventListener('click', openModal) 
+document.querySelectorAll('.modifier').forEach(a => {
+    a.addEventListener('click', openModal)
 })
 
-window.addEventListener('keydown', function (e){
+window.addEventListener('keydown', function (e) {
     if (e.key === "Escape" || e.key === "Esc") {
         closeModal(e)
     }
@@ -65,37 +65,62 @@ window.addEventListener('keydown', function (e){
 });
 
 
-async function getWorks(){
+async function getWorks() {
     const res = await fetch("http://localhost:5678/api/works");
     const data = await res.json();
     return data;
 }
-   
-async function createModaleGallery(){
-       const works = await getWorks();
-       const gallery = document.querySelector(".modal-gallery");
-       
-       let categories = [];
-   
-       works.forEach(work=> {
-           const element = document.createElement("figure");
-           const imgElement = document.createElement("img");
-           const captionElement = document.createElement("figcaption");
-           const buttonElement = document.createElement("button");
-           const iconElement = document.createElement("i");
-           buttonElement.classList.add("delete-work");
-           iconElement.classList.add("fa-regular", "fa-trash-can");
-           captionElement.innerText = 'éditer';
-           imgElement.src = work.imageUrl;
-           element.dataset.category = work.category.name;
-           element.appendChild(imgElement);
-           element.appendChild(captionElement);
-           element.appendChild(buttonElement);
-           buttonElement.appendChild(iconElement);      
-           gallery.appendChild(element);
-   
-           categories.push(work.category.name);
-       });
+
+async function createModaleGallery() {
+    const works = await getWorks();
+    const gallery = document.querySelector(".modal-gallery");
+
+    let categories = [];
+
+    works.forEach(work => {
+        const element = document.createElement("figure");
+        const imgElement = document.createElement("img");
+        const captionElement = document.createElement("figcaption");
+        const buttonElement = document.createElement("button");
+        const iconElement = document.createElement("i");
+        buttonElement.classList.add("delete-work");
+        iconElement.classList.add("fa-regular", "fa-trash-can");
+        captionElement.innerText = 'éditer';
+        imgElement.src = work.imageUrl;
+        element.dataset.category = work.category.name;
+        element.dataset.id = work.id;
+        element.appendChild(imgElement);
+        element.appendChild(captionElement);
+        element.appendChild(buttonElement);
+        buttonElement.appendChild(iconElement);
+        gallery.appendChild(element);
+
+        categories.push(work.category.name);
+        buttonElement.addEventListener('click', function (e) {
+            e.preventDefault();
+            const workId = e.target.closest('figure').dataset.id;
+            deleteWork(workId);
+        })
+    });
 };
 
 createModaleGallery();
+
+async function deleteWork(id) {
+    try {
+        const token = localStorage.getItem("token");
+        const res = await fetch(`http://localhost:5678/api/works/${id}`, {
+            method: "DELETE",
+            headers: {Authorization: `Bearer ${token}`}
+        });
+        if(res.status === 200){
+            document.querySelector(`figure[data-id="${id}"]`).style.display='none';
+        }
+
+    } catch (error) {
+      console.log(error)
+    }
+}
+
+
+
