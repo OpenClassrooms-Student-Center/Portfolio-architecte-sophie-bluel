@@ -1,67 +1,11 @@
-/*const affichageLogin = document.createElement("h2");
-affichageLogin.innerText = "Log In";
-document.querySelector("#login").appendChild(affichageLogin);
-
-const formulaire_de_connection = document.createElement("form");
-formulaire_de_connection.id = "formulaire_de_connection";
-document.querySelector("#login").appendChild(formulaire_de_connection);
-
-const emailLabel = document.createElement("label");
-emailLabel.innerText = "E-mail";
-document.querySelector("#formulaire_de_connection").appendChild(emailLabel);
-
-const emailSaisie = document.createElement("input");
-emailSaisie.innerText = "";
-emailSaisie.id = "email";
-emailSaisie.type = "email";
-document.querySelector("#formulaire_de_connection").appendChild(emailSaisie);
-
-const passwordLabel = document.createElement("label");
-passwordLabel.innerText = "Mot de passe";
-document.querySelector("#formulaire_de_connection").appendChild(passwordLabel);
-
-const passwordSaisie = document.createElement("input");
-passwordSaisie.innerText = "";
-passwordSaisie.id = "password";
-passwordSaisie.type = "password";
-
-document.querySelector("#formulaire_de_connection").appendChild(passwordSaisie);
-
-const envoi = document.createElement("button");
-envoi.innerText = "Se connecter";
-document.querySelector("#formulaire_de_connection").appendChild(envoi);
-
-const oubli = document.createElement("a");
-oubli.innerText = "Mot de passe oublié";
-document.querySelector("#formulaire_de_connection").appendChild(oubli)*/
-
-
-
-const affichage = document.querySelectorAll(".iflogged")
-let style = null
-
-function changeStyle () {
-    style =  affichage.forEach(element => {element.getAttribute('style')
-        
-    });
-}
-
-changeStyle(affichage)
-console.log(style)
-
-
-
-
 
 document.querySelector("#formulaire_de_connection").addEventListener("submit", function (event) {
-    
-    event.preventDefault();
-    
     const dataLogin = {
         email: document.querySelector("#email").value,
         password: document.querySelector("#password").value
     }
 
+    event.preventDefault();
     fetch("http://localhost:5678/api/users/login", {
         method: "POST",
         headers: {
@@ -69,14 +13,17 @@ document.querySelector("#formulaire_de_connection").addEventListener("submit", f
         },
         body: JSON.stringify(dataLogin)
     })
+    
     .then(function (reponse) {
         if (reponse.ok) {
             reponse.json()
             .then(data => {
                 console.log(data);
-                localStorage.setItem('adminToken', data.token)
+                sessionStorage.setItem('adminToken', data.token)
                 window.location.href="index.html" 
+                        
             })
+           
             .catch(error => {
                 console.log(error);
             });
@@ -88,6 +35,14 @@ document.querySelector("#formulaire_de_connection").addEventListener("submit", f
         console.log(error);
     });
 });
+
+
+if(sessionStorage.getItem('adminToken')) {
+    console.log("true")
+    console.log(sessionStorage.getItem('adminToken'))
+   const affichage = document.querySelectorAll(".iflogged")
+    affichage.forEach(a => {a.setAttribute("style", null)})
+} else {console.log("false")}
 
 
 
