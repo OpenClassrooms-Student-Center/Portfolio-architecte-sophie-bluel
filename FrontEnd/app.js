@@ -1,45 +1,50 @@
-/* version de Philippe
-e.preventDefault()
-
-    const target = document.querySelector("#modal1");
+//version de Philippe
+/*
+const openModal = function(e) {
+    e.preventDefault()
+    const target = document.querySelector(e.target.getAttribute('href'))
     target.style.display = null
-
-   
     target.setAttribute('aria-hidden', false)
     target.setAttribute('aria-modal', true)
-   
+}
+
+document.querySelectorAll(".js-modal").forEach(a=> {
+    a.addEventListener('click', openModal)
+})
+console.log(openModal)
+
+
+
+    /*
+const openModal =  function(e){
+    
+    
+    console.log(target)
+
+    target.style.display = null
 
     target.addEventListener('click', closeModal)
     target.querySelector('.js-modal-close').addEventListener('click', closeModal)
     target.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
 
-    modal = target
-
-
+}
 */
-
-
-
-
-
-
-
 //ouverture et fermeture de la modale
 
-let modal = null 
- 
- const openModal =  function(e)  {
+let modal = null
+
+ const openModal = function(e) {
     e.preventDefault()
-    const target = document.querySelector("#modal1")
+    const target = document.querySelector('#modal1')
     target.style.display = null
     target.setAttribute('aria-hidden', false)
     target.setAttribute('aria-modal', true)
     modal = target
     modal.addEventListener('click', closeModal)
     modal.querySelector('.js-modal-close').addEventListener('click', closeModal)
-    modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
-
+   modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
 }
+
 
 const closeModal = function (e) {
     if (modal === null) return
@@ -54,38 +59,16 @@ const closeModal = function (e) {
 }
 
 const stopPropagation = function (e) {
-    e.stopPropagation()
+e.stopPropagation()
 }
 
-document.querySelectorAll(".js-modal").forEach(a=> {
+document.querySelectorAll(".js-modal").forEach(a => {
     a.addEventListener('click', openModal)
-
 });
 
-
 // Récupération de l'élément du DOM qui accueillera le bouton
-const modalWrappper = document.querySelector(".modal-wrapper");
+//const modalWrappper = document.querySelector(".modal-wrapper");
 
-/*
-//création du boutton fermer
-const boutonFermer = document.createElement("button");
-boutonFermer.className="js-modal-close";
-modalWrappper.appendChild(boutonFermer);
-boutonFermer.addEventListener("click", closeModal);
-
-const i = document.createElement("i");
-i.className="fa-solid fa-xmark";
-boutonFermer.appendChild(i)*/
-
-
-/*
-
-//création de la gallery_modal
-const galleryModal = document.createElement("div")
-galleryModal.className="gallery_modal"
-modalWrappper.appendChild(galleryModal)
-
-*/
 
 
 //Alimentation de la modale
@@ -118,3 +101,33 @@ function genererProjets(projets){
 }
 // premier affichage de la page
 genererProjets(projets);
+
+
+
+
+
+/*
+//création du boutton fermer
+const boutonFermer = document.createElement("button");
+boutonFermer.className="js-modal-close";
+modalWrappper.appendChild(boutonFermer);
+boutonFermer.addEventListener("click", closeModal);
+
+const i = document.createElement("i");
+i.className="fa-solid fa-xmark";
+boutonFermer.appendChild(i)
+*/
+
+
+/*
+
+//création de la gallery_modal
+const galleryModal = document.createElement("div")
+galleryModal.className="gallery_modal"
+modalWrappper.appendChild(galleryModal)
+
+*/
+
+/*
+
+*/
