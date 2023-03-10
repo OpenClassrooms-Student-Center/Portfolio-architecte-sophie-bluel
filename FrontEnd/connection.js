@@ -35,11 +35,21 @@ const oubli = document.createElement("a");
 oubli.innerText = "Mot de passe oublié";
 document.querySelector("#formulaire_de_connection").appendChild(oubli)*/
 
-let element = null
 
 
-element = querySelectorAll(".if_logged");
-console.log(matches)
+const affichage = document.querySelectorAll(".iflogged")
+let style = null
+
+function changeStyle () {
+    style =  affichage.forEach(element => {element.getAttribute('style')
+        
+    });
+}
+
+changeStyle(affichage)
+console.log(style)
+
+
 
 
 
