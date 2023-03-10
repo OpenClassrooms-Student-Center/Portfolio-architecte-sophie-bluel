@@ -33,6 +33,7 @@ body {
 }
 ol, ul {
 	list-style: none;
+	text-decoration: none;
 }
 blockquote, q {
 	quotes: none;
@@ -94,7 +95,11 @@ nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
 }
+li a {
+	text-decoration: none;
+	color: black                                                ;
 
+}
 li:hover {
 	color: #B1663C;
 }
@@ -167,12 +172,14 @@ li:hover {
 
 button{
 	color: #1D6154;
+	border: 1px solid #1D6154;
 	background-color: white;
 	border-radius: 60px;
 	padding: 5px 15px;
 	font-family: 'Syne';
 	font-size: 14px;
 	font-weight: 700;
+	border: solid 1px 
 }
 button:hover{
 	color: white;
