@@ -37,12 +37,13 @@ let modal = null
     e.preventDefault()
     const target = document.querySelector('#modal1')
     target.style.display = null
+    
     target.setAttribute('aria-hidden', false)
     target.setAttribute('aria-modal', true)
     modal = target
-    modal.addEventListener('click', closeModal)
+   modal.addEventListener('click', closeModal)
     modal.querySelector('.js-modal-close').addEventListener('click', closeModal)
-   modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
+    modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
 }
 
 
@@ -86,6 +87,7 @@ function genererProjets(projets){
 
         // Création d’une balise dédiée au projet
         const figure = document.createElement("figure");
+        figure.id = i + 1
         figure.className = "figures"
         galleryModal.appendChild(figure);
                 
@@ -108,23 +110,86 @@ function genererProjets(projets){
         iconSuppression.src = "assets/icons/trash-can-solid.svg"
         suppression.appendChild(iconSuppression)
         
-       const deplacement = document.createElement("button");
+
+        const deplacement = document.createElement("button");
+        deplacement.id = i + 1
         deplacement.className = "boutonDeplacement"
         deplacement.setAttribute("style", "display:none")
         figure.appendChild(deplacement);
-
+        
+        
         const iconDeplacement = document.createElement("img");
         iconDeplacement.className = "fa-solid fa-arrows-up-down-left-right"
         iconDeplacement.src = "assets/icons/arrows-up-down-left-right-solid.svg"
         deplacement.appendChild(iconDeplacement)
-        }
+        
+        
+        
+
+
+
+
+
+
+
+
+        const apparitionDeplacement = function(e) {
+            e.preventDefault()
+            const cible = document.querySelector('.boutonDeplacement')
+            cible.style = "flex"
+            //cible.setAttribute("display", "flex")
+            console.log(cible)
+         }
+
+
+
+       document.querySelectorAll(".figures").forEach(figure => {
+        figure.addEventListener('click', apparitionDeplacement)
+        
+        })
+
+
+    }
+        
 }
 // premier affichage de la page
 genererProjets(projets);
 
     
+
+
+
+
+  
+ 
+
+
+
+
+
+
+/*
+
+    modal = target
+    modal.addEventListener('click', closeModal)
+    modal.querySelector('.js-modal-close').addEventListener('click', closeModal)
+   modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
+
+
+
+
+
+
+
+
 const selection = document.querySelectorAll(".figures")
 selection.addEventListener("click", genererProjets(projets))
+
+
+
+
+
+
 
 console.log(selection)
 
