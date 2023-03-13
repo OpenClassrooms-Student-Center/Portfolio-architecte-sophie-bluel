@@ -86,6 +86,7 @@ function genererProjets(projets){
 
         // Création d’une balise dédiée au projet
         const figure = document.createElement("figure");
+        figure.className = "figures"
         galleryModal.appendChild(figure);
                 
         // Création des balises 
@@ -108,46 +109,31 @@ function genererProjets(projets){
         suppression.appendChild(iconSuppression)
         
        const deplacement = document.createElement("button");
-        deplacement.className = "boutonDeplacement" 
+        deplacement.className = "boutonDeplacement"
+        deplacement.setAttribute("style", "display:none")
         figure.appendChild(deplacement);
 
         const iconDeplacement = document.createElement("img");
         iconDeplacement.className = "fa-solid fa-arrows-up-down-left-right"
         iconDeplacement.src = "assets/icons/arrows-up-down-left-right-solid.svg"
         deplacement.appendChild(iconDeplacement)
-
-
         }
 }
 // premier affichage de la page
 genererProjets(projets);
 
+    
+const selection = document.querySelectorAll(".figures")
+selection.addEventListener("click", genererProjets(projets))
 
+console.log(selection)
 
 
 
 /*
-//création du boutton fermer
-const boutonFermer = document.createElement("button");
-boutonFermer.className="js-modal-close";
-modalWrappper.appendChild(boutonFermer);
-boutonFermer.addEventListener("click", closeModal);
+.forEach(figure => {figure.addEventListener("click", apparitionDeplacement)
+})
 
-const i = document.createElement("i");
-i.className="fa-solid fa-xmark";
-boutonFermer.appendChild(i)
-*/
-
-
-/*
-
-//création de la gallery_modal
-const galleryModal = document.createElement("div")
-galleryModal.className="gallery_modal"
-modalWrappper.appendChild(galleryModal)
-
-*/
-
-/*
-
-*/
+document.querySelectorAll(".js-modal").forEach(a => {
+    a.addEventListener('click', openModal)
+})*/
