@@ -96,6 +96,26 @@ function genererProjets(projets){
         const figcaption = document.createElement("figcaption");
         figcaption.innerText = "editer";
         figure.appendChild(figcaption);
+        
+
+        const suppression = document.createElement("button");
+        suppression.className = "boutonSuppression"
+        figure.appendChild(suppression);
+
+        const iconSuppression = document.createElement("img");
+        iconSuppression.className = "fa-solid fa-trash-can";
+        iconSuppression.src = "assets/icons/trash-can-solid.svg"
+        suppression.appendChild(iconSuppression)
+        
+       const deplacement = document.createElement("button");
+        deplacement.className = "boutonDeplacement" 
+        figure.appendChild(deplacement);
+
+        const iconDeplacement = document.createElement("img");
+        iconDeplacement.className = "fa-solid fa-arrows-up-down-left-right"
+        iconDeplacement.src = "assets/icons/arrows-up-down-left-right-solid.svg"
+        deplacement.appendChild(iconDeplacement)
+
 
         }
 }

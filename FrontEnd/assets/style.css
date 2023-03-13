@@ -416,6 +416,7 @@ footer nav ul {
 }
 
 .modal figure {
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -600,3 +601,40 @@ aside .ajout {
 		width: 100%;
 	}
 
+	.boutonSuppression {
+		height: 17px;
+		width: 17px;
+		padding: 0;
+		border: none;
+		background-color: white;
+		position: absolute;
+		top: 6px;
+		right: 7px;
+		border-radius: 2px;
+	}
+
+	.modal .fa-trash-can {
+		height: 80%;
+		width: 80%;
+		margin: 0;
+	}
+
+	.boutonDeplacement {
+		height: 17px;
+		width: 17px;
+		padding: 0;
+		border: none;
+		background-color: white;
+		position: absolute;
+		top: 6px;
+		right: 28px;
+		border-radius: 2px;
+		display: none;
+	}
+
+	.modal .fa-arrows-up-down-left-right {
+		height: 80%;
+		width: 80%;
+		margin: 0;
+		color: white;
+	}
