@@ -111,94 +111,62 @@ function genererProjets(projets){
         suppression.appendChild(iconSuppression)
         
 
-        const deplacement = document.createElement("button");
-        deplacement.id = i + 1
-        deplacement.className = "boutonDeplacement"
-        deplacement.setAttribute("style", "display:none")
-        figure.appendChild(deplacement);
+        function genererBoutonDeplacement() {
+        const boutonDeplacement = document.createElement("button");
+        boutonDeplacement.className = "boutonDeplacement"
+        boutonDeplacement.id = i +1
+        boutonDeplacement.style = "display:none"
+        figure.appendChild(boutonDeplacement);
+        figure.addEventListener("mouseover", function() {
+            if( boutonDeplacement.id === figure.id) {
+            boutonDeplacement.style = null
+            }
+        })
         
-        
+       
+       
         const iconDeplacement = document.createElement("img");
         iconDeplacement.className = "fa-solid fa-arrows-up-down-left-right"
         iconDeplacement.src = "assets/icons/arrows-up-down-left-right-solid.svg"
-        deplacement.appendChild(iconDeplacement)
-        
-        
-        
+        boutonDeplacement.appendChild(iconDeplacement)
+        }
+
+        genererBoutonDeplacement() 
 
 
 
 
 
 
-
-
-        const apparitionDeplacement = function(e) {
-            e.preventDefault()
-            const cible = document.querySelector('.boutonDeplacement')
-            cible.style = "flex"
-            //cible.setAttribute("display", "flex")
-            console.log(cible)
-         }
-
-
-
-       document.querySelectorAll(".figures").forEach(figure => {
-        figure.addEventListener('click', apparitionDeplacement)
-        
+        function effacerBoutonDeplacement() {
+           
+            figure.addEventListener("onmouseout", function() {
+           
+            boutonDeplacement.style = "display:none"
+            console.log(boutonDeplacement)
         })
+        }/**/
+
 
 
     }
-        
 }
+
+
+
+
+
+
+/*
+
+       
+            const modalWrappper = document.querySelector(".modal-wrapper")
+            modalWrappper.addEventListener("mouseover", function(i) {
+            const boutonDeplacement = document.querySelectorAll(".boutonDeplacement")
+            boutonDeplacement.style="display:none"
+            console.log(boutonDeplacement.style)
+*/
+
+
 // premier affichage de la page
-genererProjets(projets);
-
-    
-
-
-
-
-  
- 
-
-
-
-
-
-
-/*
-
-    modal = target
-    modal.addEventListener('click', closeModal)
-    modal.querySelector('.js-modal-close').addEventListener('click', closeModal)
-   modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
-
-
-
-
-
-
-
-
-const selection = document.querySelectorAll(".figures")
-selection.addEventListener("click", genererProjets(projets))
-
-
-
-
-
-
-
-console.log(selection)
-
-
-
-/*
-.forEach(figure => {figure.addEventListener("click", apparitionDeplacement)
-})
-
-document.querySelectorAll(".js-modal").forEach(a => {
-    a.addEventListener('click', openModal)
-})*/
+genererProjets(projets)
