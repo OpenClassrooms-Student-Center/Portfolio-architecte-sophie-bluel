@@ -117,40 +117,46 @@ function genererProjets(projets){
         boutonDeplacement.id = i +1
         boutonDeplacement.style = "display:none"
         figure.appendChild(boutonDeplacement);
-        figure.addEventListener("mouseover", function() {
+       figure.addEventListener("mouseover", function() {
             if( boutonDeplacement.id === figure.id) {
-            boutonDeplacement.style = null
-            }
+            boutonDeplacement.style = "display:flex"
+              }
+            console.log(boutonDeplacement.style)
         })
-        
-       
-       
+          
         const iconDeplacement = document.createElement("img");
         iconDeplacement.className = "fa-solid fa-arrows-up-down-left-right"
         iconDeplacement.src = "assets/icons/arrows-up-down-left-right-solid.svg"
         boutonDeplacement.appendChild(iconDeplacement)
         }
 
-        genererBoutonDeplacement() 
-
-
-
-
-
-
+         genererBoutonDeplacement() 
         function effacerBoutonDeplacement() {
+           const boutonDeplacement = document.querySelectorAll(".boutonDeplacement")
            
-            figure.addEventListener("onmouseout", function() {
-           
-            boutonDeplacement.style = "display:none"
-            console.log(boutonDeplacement)
+           boutonDeplacement.id = i + 1
+            figure.addEventListener("mouseout", function() {
+    //        boutonDeplacement.setAttribute()    
+            boutonDeplacement.style = "style", "display:none"
+            console.log(boutonDeplacement.style)
         })
-        }/**/
-
-
+        }
+   
+        effacerBoutonDeplacement()
 
     }
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
