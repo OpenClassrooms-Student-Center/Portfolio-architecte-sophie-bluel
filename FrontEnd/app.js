@@ -105,91 +105,91 @@ function genererProjets(projets){
         suppression.className = "boutonSuppression"
         figure.appendChild(suppression);
 
-        const iconSuppression = document.createElement("img");
-        iconSuppression.className = "fa-solid fa-trash-can";
-        iconSuppression.src = "assets/icons/trash-can-solid.svg"
+        const iconSuppression = document.createElement("i");
+        iconSuppression.className = "fa-solid fa-trash-can"
+        //iconSuppression.src = "assets/icons/trash-can-solid.svg"
         suppression.appendChild(iconSuppression)
         
 
 
-        //problème à voir avec le bouton deplacement
-        function genererBoutonDeplacement() {
-        const boutonDeplacement = document.createElement("button");
+           //problème à voir avec le bouton deplacement
+           function genererBoutonDeplacement() {
+            const boutonDeplacement = document.createElement("button");
         boutonDeplacement.className = "boutonDeplacement"
-        boutonDeplacement.id = i +1
-        boutonDeplacement.style = "display:none"
+        // boutonDeplacement.id = i +1
+         //   boutonDeplacement.style = "display:none"
+            
+            figure.appendChild(boutonDeplacement);
+         /*   figure.addEventListener("mouseover", function() {
+                if(boutonDeplacement.id === figure.id) {
+                boutonDeplacement.style = "display:block"
+                }
+    
+    
+                
+            })
+               */
+            const iconDeplacement = document.createElement("i");
+            iconDeplacement.className = "fa-solid fa-arrows-up-down-left-right"
+            boutonDeplacement.appendChild(iconDeplacement)
+            }
+    
+             genererBoutonDeplacement()
+    
+    
+    
+            function effacerBoutonDeplacement() {
+                const boutonDeplacement = document.querySelectorAll(".boutonDeplacement")
+                const modalWrapper = document.querySelector(".modal-wrapper"); 
+                //boutonDeplacement.id = i + 1
+               
+                modalWrapper.addEventListener("mouseover", function() {
+    
+              // boutonDeplacement.style = "display:none";
+                console.log(boutonDeplacement.style)
+            })
+            }
+       
+            //effacerBoutonDeplacement()
+    
+        }
         
-        figure.appendChild(boutonDeplacement);
-        figure.addEventListener("mouseover", function() {
-            if(boutonDeplacement.id === figure.id) {
-            boutonDeplacement.style = "display:block"
-              }
-
-
-              
-        })
-          
-        const iconDeplacement = document.createElement("img");
-        iconDeplacement.className = "fa-solid fa-arrows-up-down-left-right"
-        iconDeplacement.src = "assets/icons/arrows-up-down-left-right-solid.svg"
-        boutonDeplacement.appendChild(iconDeplacement)
-        }
-
-         genererBoutonDeplacement() 
-
-
-
-        function effacerBoutonDeplacement() {
-            const boutonDeplacement = document.querySelectorAll(".boutonDeplacement")
-            const modalWrapper = document.querySelector(".modal-wrapper"); 
-            boutonDeplacement.id = i + 1
-           
-            modalWrapper.addEventListener("mouseover", function() {
-
-            boutonDeplacement.style = "display:none";
-            console.log(boutonDeplacement.style)
-        })
-        }
-   
-        effacerBoutonDeplacement()
-
     }
     
-}
-
-
-
-// premier affichage de la page
-genererProjets(projets)
-
-
-   
-//Suppression des projets
-function suppressionProjets () {
-   
-    for (let i = 0; i < projets.length; i++) {
-        const boutonSuppression = document.querySelectorAll(".boutonSuppression")  
-        boutonSuppression[i].type = "submit"
-        boutonSuppression[i].id =  i + 1
-        boutonSuppression[i].addEventListener("click", function() {
-        
-        
-
-//comment faire la requête
-        const element= document.querySelector("figure")
-        fetch("http://localhost:5678/api/users/works/id", {method: 'DELETE', headers: {
-        "Content-Type": "application/json"}, body: JSON.stringify(boutonSuppression[i].id)})
-        .then(() => element.innerHTML = " ")
-
-        })
-    }
     
-
-
-}
-suppressionProjets()
-  
-
-
-
-
+    
+    // premier affichage de la page
+    genererProjets(projets)
+    
+    
+       
+    //Suppression des projets
+    function suppressionProjets () {
+       
+        for (let i = 0; i < projets.length; i++) {
+            const boutonSuppression = document.querySelectorAll(".boutonSuppression")  
+            boutonSuppression[i].type = "submit"
+            boutonSuppression[i].id =  i + 1
+            boutonSuppression[i].addEventListener("click", function() {
+            
+            
+    
+    //comment faire la requête
+            const element= document.querySelector("figure")
+            fetch("http://localhost:5678/api/users/works/id", {method: 'DELETE', headers: {
+            "Content-Type": "application/json"}, body: JSON.stringify(boutonSuppression[i].id)})
+            .then(() => element.innerHTML = " ")
+    
+            })
+        }
+        
+    
+    
+    }
+    suppressionProjets()
+      
+    
+    
+    
+    
+    

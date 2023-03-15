@@ -602,38 +602,45 @@ aside .ajout {
 	}
 
 	.boutonSuppression {
+		display: flex;
+		justify-content: center;
+		align-items: center;
 		height: 17px;
 		width: 17px;
 		padding: 0;
 		border: none;
-		background-color: white;
+		background-color: black;
 		position: absolute;
 		top: 6px;
 		right: 7px;
 		border-radius: 2px;
 	}
 
-	.modal .fa-trash-can {
-		height: 80%;
-		width: 80%;
-		margin: 0;
-	}
-
 	.boutonDeplacement {
+		display: flex;
+		justify-content: center;
+		align-items: center;
 		height: 17px;
 		width: 17px;
 		padding: 0;
 		border: none;
-		background-color: white;
+		background-color: black;
 		position: absolute;
 		top: 6px;
 		right: 28px;
 		border-radius: 2px;
-			}
+	}
 
-	.modal .fa-arrows-up-down-left-right {
-		height: 80%;
-		width: 80%;
-		margin: 0;
+	.modal .fa-arrows-up-down-left-right, .modal .fa-trash-can {
+		height: 11px;
+		width: 11px;
 		color: white;
+		font-size: 10px;
+	}
+
+	.figures .boutonDeplacement {
+		display: none;
+	}
+	.figures:hover .boutonDeplacement {
+		display: block;
 	}
