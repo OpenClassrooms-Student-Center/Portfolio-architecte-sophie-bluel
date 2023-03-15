@@ -117,6 +117,7 @@ function genererProjets(projets){
         const boutonDeplacement = document.createElement("button");
         boutonDeplacement.className = "boutonDeplacement"
         boutonDeplacement.id = i +1
+        boutonDeplacement.style = "display:none"
         
         figure.appendChild(boutonDeplacement);
         figure.addEventListener("mouseover", function() {
@@ -124,6 +125,8 @@ function genererProjets(projets){
             boutonDeplacement.style = "display:block"
               }
 
+
+              
         })
           
         const iconDeplacement = document.createElement("img");
@@ -137,11 +140,12 @@ function genererProjets(projets){
 
 
         function effacerBoutonDeplacement() {
-           const boutonDeplacement = document.querySelectorAll(".boutonDeplacement")
+            const boutonDeplacement = document.querySelectorAll(".boutonDeplacement")
+            const modalWrapper = document.querySelector(".modal-wrapper"); 
+            boutonDeplacement.id = i + 1
            
-           boutonDeplacement.id = i + 1
-            figure.addEventListener("mouseout", function() {
-    //       boutonDeplacement.setAttribute("style", "display:none")    
+            modalWrapper.addEventListener("mouseover", function() {
+
             boutonDeplacement.style = "display:none";
             console.log(boutonDeplacement.style)
         })
@@ -159,24 +163,33 @@ function genererProjets(projets){
 genererProjets(projets)
 
 
-function suppressionProjets () {
-
-    const boutonSuppression = document.querySelector(".boutonSuppression")
-    for (let i = 0; i < boutonSuppression.length; i++) {
-        boutonSuppression.id = i + 1
-        boutonSuppression[i].addEventListener("click", function() {
-        console.log(boutonSuppression.id)
-            })
-
-
-        }
-      
-    
-    
-
    
-        }
+//Suppression des projets
+function suppressionProjets () {
+   
+    for (let i = 0; i < projets.length; i++) {
+        const boutonSuppression = document.querySelectorAll(".boutonSuppression")  
+        boutonSuppression[i].type = "submit"
+        boutonSuppression[i].id =  i + 1
+        boutonSuppression[i].addEventListener("click", function() {
+        
+        
+
+//comment faire la requête
+        const element= document.querySelector("figure")
+        fetch("http://localhost:5678/api/users/works/id", {method: 'DELETE', headers: {
+        "Content-Type": "application/json"}, body: JSON.stringify(boutonSuppression[i].id)})
+        .then(() => element.innerHTML = " ")
+
+        })
+    }
     
-        suppressionProjets()
+
+
+}
+suppressionProjets()
   
+
+
+
 
