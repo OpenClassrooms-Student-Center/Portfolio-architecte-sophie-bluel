@@ -111,17 +111,19 @@ function genererProjets(projets){
         suppression.appendChild(iconSuppression)
         
 
+
+        //problème à voir avec le bouton deplacement
         function genererBoutonDeplacement() {
         const boutonDeplacement = document.createElement("button");
         boutonDeplacement.className = "boutonDeplacement"
         boutonDeplacement.id = i +1
-        boutonDeplacement.style = "display:none"
+        
         figure.appendChild(boutonDeplacement);
-       figure.addEventListener("mouseover", function() {
-            if( boutonDeplacement.id === figure.id) {
-            boutonDeplacement.style = "display:flex"
+        figure.addEventListener("mouseover", function() {
+            if(boutonDeplacement.id === figure.id) {
+            boutonDeplacement.style = "display:block"
               }
-            console.log(boutonDeplacement.style)
+
         })
           
         const iconDeplacement = document.createElement("img");
@@ -131,13 +133,16 @@ function genererProjets(projets){
         }
 
          genererBoutonDeplacement() 
+
+
+
         function effacerBoutonDeplacement() {
            const boutonDeplacement = document.querySelectorAll(".boutonDeplacement")
            
            boutonDeplacement.id = i + 1
             figure.addEventListener("mouseout", function() {
-    //        boutonDeplacement.setAttribute()    
-            boutonDeplacement.style = "style", "display:none"
+    //       boutonDeplacement.setAttribute("style", "display:none")    
+            boutonDeplacement.style = "display:none";
             console.log(boutonDeplacement.style)
         })
         }
@@ -145,34 +150,33 @@ function genererProjets(projets){
         effacerBoutonDeplacement()
 
     }
+    
 }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-
-       
-            const modalWrappper = document.querySelector(".modal-wrapper")
-            modalWrappper.addEventListener("mouseover", function(i) {
-            const boutonDeplacement = document.querySelectorAll(".boutonDeplacement")
-            boutonDeplacement.style="display:none"
-            console.log(boutonDeplacement.style)
-*/
-
-
 // premier affichage de la page
 genererProjets(projets)
+
+
+function suppressionProjets () {
+
+    const boutonSuppression = document.querySelector(".boutonSuppression")
+    for (let i = 0; i < boutonSuppression.length; i++) {
+        boutonSuppression.id = i + 1
+        boutonSuppression[i].addEventListener("click", function() {
+        console.log(boutonSuppression.id)
+            })
+
+
+        }
+      
+    
+    
+
+   
+        }
+    
+        suppressionProjets()
+  
+

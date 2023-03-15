@@ -620,6 +620,7 @@ aside .ajout {
 	}
 
 	.boutonDeplacement {
+		display: none;
 		height: 17px;
 		width: 17px;
 		padding: 0;
