@@ -11,22 +11,23 @@
 		rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+		integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+		crossorigin="anonymous" referrerpolicy="no-referrer">
 	<script src="./fonctions.js"></script>
+	<!-- La partie dynamique du site est gérée dans le fichier "fonctions" dédié au code JS -->
 </head>
 
 <body>
+	<div id="barreEdition"></div>
+	<header id="enTete">test</header>
 
-	<header>
-		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
-		<nav>
-			<ul>
-				<li>projets</li>
-				<li>contact</li>
-				<li>login</li>
-				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
-			</ul>
-		</nav>
-	</header>
+	<script>
+		createBarreEdition(); //permet de créer la barre noire d'édition pour un utilisateur logué
+		creationHeader(); //permet de créer un header identique pour toutes les pages du site
+		logout(); //permet de quitter le mode édition lorsque le bouton "logout" est disponible
+	</script>
+
 	<main>
 		<section id="introduction">
 			<figure>
@@ -44,14 +45,25 @@
 			</article>
 		</section>
 		<section id="portfolio">
-			<h2>Mes Projets</h2>
-
+			<h2 id="titreAccueil">Mes Projets</h2>
+			<div id="presentation">
+			</div>
+			<nav>
+				<ul class="listeFiltres">
+					<li><input type="button" class="filtre" id="Tous" value="Tous"></li>
+					<li><input type="button" class="filtre" value="Objets"></li>
+					<li><input type="button" class="filtre" value="Appartements"></li>
+					<li><input type="button" class="filtre" value="Hotels & restaurants"></li>
+				</ul>
+			</nav>
 
 			<div class="gallery" id="gallery">
-				<script>recupererContenuBase('http://localhost:5678/api/works');</script>
+				<script>
+					createBoutonEdition();//permet d'afficher le bouton modifier pour un utilisateur logué
+					recupererContenuBase('http://localhost:5678/api/works', 'Tous') // Permet d'afficher tous les projets par défaut
+					identifierCritereDeTri(); // Permet d'afficher les projets sélectionnés via les boutons de filtre
+				</script>
 			</div>
-
-
 
 		</section>
 		<section id="contact">
