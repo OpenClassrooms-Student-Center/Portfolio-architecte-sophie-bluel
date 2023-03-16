@@ -165,31 +165,56 @@ function genererProjets(projets){
        
     //Suppression des projets
     function suppressionProjets () {
+
+
+
+
+        
+        for(let i = 0 ; i < projets.length ; i++) {
+        const boutonSuppression = document.querySelectorAll(".boutonSuppression")  
+        boutonSuppression.type = "submit"
+        boutonSuppression[i].id = i + 1
+        let id = boutonSuppression[i].id
+        boutonSuppression[i].addEventListener("click", function() {
+     //   console.log(sessionStorage.adminToken)
+
+        fetch(`http://localhost:5678/api/works/${id}`, {
+            method: "DELETE",
+            headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${sessionStorage.adminToken}`,
+            }})
        
-        for (let i = 0; i < projets.length; i++) {
-            const boutonSuppression = document.querySelectorAll(".boutonSuppression")  
-            boutonSuppression[i].type = "submit"
-            boutonSuppression[i].id =  i + 1
-            boutonSuppression[i].addEventListener("click", function() {
-            
-            
-    
-    //comment faire la requête
-            const element= document.querySelector("figure")
-            fetch("http://localhost:5678/api/users/works/id", {method: 'DELETE', headers: {
-            "Content-Type": "application/json"}, body: JSON.stringify(boutonSuppression[i].id)})
-            .then(() => element.innerHTML = " ")
+        .then(console.log("pouet"))
     
             })
         }
         
-    
-    
     }
+  
+    
     suppressionProjets()
       
     
-    
-    
-    
-    
+   
+
+
+
+        
+        
+        
+        
+        /*function (recupToken) {
+        if (recupToken.ok) {
+            recupToken.json()
+            .then(data => {
+                
+                sessionStorage.setItem('adminToken', data.token)
+                console.log(data.token)
+                        
+            })
+           
+          
+        }
+    })
+    */

@@ -18,7 +18,7 @@ document.querySelector("#formulaire_de_connection").addEventListener("submit", f
         if (reponse.ok) {
             reponse.json()
             .then(data => {
-                console.log(data);
+                console.log("data");
                 sessionStorage.setItem('adminToken', data.token)
                 window.location.href="index.html" 
                         
@@ -38,7 +38,7 @@ document.querySelector("#formulaire_de_connection").addEventListener("submit", f
 
 
 if(sessionStorage.getItem('adminToken')) {
-    console.log("true")
+    console.log("ok")
     console.log(sessionStorage.getItem('adminToken'))
    const affichage = document.querySelectorAll(".iflogged")
     affichage.forEach(a => {a.setAttribute("style", null)})
