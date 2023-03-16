@@ -197,24 +197,3 @@ function genererProjets(projets){
       
     
    
-
-
-
-        
-        
-        
-        
-        /*function (recupToken) {
-        if (recupToken.ok) {
-            recupToken.json()
-            .then(data => {
-                
-                sessionStorage.setItem('adminToken', data.token)
-                console.log(data.token)
-                        
-            })
-           
-          
-        }
-    })
-    */
