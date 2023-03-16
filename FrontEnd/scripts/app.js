@@ -1,12 +1,8 @@
-const galleryContainer = document.querySelector('.gallery')
 let works = []
 
-createGallery()
+init()
 
-async function createGallery() {
+async function init() {
     works = [...(await getWorks())]
-    console.log(works)
-    works.forEach((work) => {
-        galleryContainer.appendChild(createPictureCard(work.title, work.imageUrl))
-    })
+    createGallery(works)
 }

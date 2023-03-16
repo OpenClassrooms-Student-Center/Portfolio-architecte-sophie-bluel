@@ -9,3 +9,10 @@ const createPictureCard = (title, imageUrl) => {
     pictureContainer.appendChild(figcaption)
     return pictureContainer
 }
+
+const createGallery = (works) => {
+    const galleryContainer = document.querySelector('.gallery')
+    works.forEach((work) => {
+        galleryContainer.appendChild(createPictureCard(work.title, work.imageUrl))
+    })
+}
