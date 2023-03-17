@@ -10,20 +10,26 @@ async function init() {
     createCategoriesButtons(categories, works)
 }
 
-const createCategories = () => {
+function createCategories() {
     works.forEach((work) => {
         categories.add(work.category.name)
     })
 }
 
-const filterByCategory = (category) => {
+function filterByCategory(category) {
     const filteredWorks = works.filter((work) => work.category.name === category)
     createGallery(filteredWorks)
 }
 
-const removeGreenBackground = () => {
+function removeGreenBackground() {
     const categoriesButtons = document.querySelectorAll('.category-button')
     categoriesButtons.forEach((button) => {
         button.classList.remove('bg-green')
     })
+}
+
+function checkAuth() {
+    const token = sessionStorage.getItem('authToken')
+    if (token) {
+    }
 }
