@@ -40,8 +40,65 @@ const createCategoriesButtons = (categories, works) => {
         allCategoryButton.classList.add('bg-green')
         createGallery(works)
     })
+    categoriesContainer.innerHTML = ''
     categoriesContainer.appendChild(allCategoryButton)
     categories.forEach((category) => {
         categoriesContainer.appendChild(createCategoryButton(category))
     })
+}
+
+const createAdminButton = (className) => {
+    const adminButton = document.createElement('button')
+    adminButton.classList.add(className)
+    adminButton.innerHTML = '<i class="fa-regular fa-pen-to-square"></i><span>modifier</span>'
+    return adminButton
+}
+
+const createModalArticle = (imageUrl, imageName, imageId) => {
+    const article = document.createElement('article')
+    const articleImage = document.createElement('img')
+    const editBtn = document.createElement('button')
+    const buttonsWrapper = document.createElement('div')
+    const dragBtn = document.createElement('button')
+    const deleteBtn = document.createElement('button')
+    article.classList.add('modal__article')
+    articleImage.classList.add('modal__article__image')
+    editBtn.classList.add('modal__article__edit-btn')
+    buttonsWrapper.classList.add('modal__article__buttons-wrapper')
+    dragBtn.classList.add('modal__article__button')
+    deleteBtn.classList.add('modal__article__button')
+
+    articleImage.setAttribute('src', imageUrl)
+    articleImage.setAttribute('alt', imageName)
+    editBtn.textContent = 'éditer'
+    dragBtn.innerHTML = '<i class="fa-solid fa-up-down-left-right"></i>'
+    deleteBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i>'
+    article.appendChild(articleImage)
+    article.appendChild(editBtn)
+    buttonsWrapper.appendChild(dragBtn)
+    buttonsWrapper.appendChild(deleteBtn)
+    article.appendChild(buttonsWrapper)
+
+    deleteBtn.addEventListener('click', () => {
+        fetch(`http://localhost:5678/api/works/${imageId}`, {
+            method: 'DELETE',
+            headers: {
+                Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+            },
+        }).then((response) => {
+            if (response.status === 204) {
+                works = [...works.filter((work) => work.id !== imageId)]
+                createGallery(works)
+                createGalleryPage()
+                createCategories()
+                createCategoriesButtons(categories, works)
+                alert('Travail supprimé avec success!! ✅')
+            } else if (response.status === 401) {
+                alert(`Vous n'êtes pas autorisé à supprimer! ❌`)
+            } else {
+                alert(`Erreur lors de la suppression ❌`)
+            }
+        })
+    })
+    return article
 }

@@ -8,7 +8,7 @@ const getWorks = async () => {
     }
 }
 
-async function login() {
+const login = async () => {
     try {
         const email = document.getElementById('email').value
         const password = document.getElementById('password').value

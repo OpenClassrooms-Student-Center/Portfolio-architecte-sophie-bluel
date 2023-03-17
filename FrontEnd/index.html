@@ -9,6 +9,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
 		rel="stylesheet">
+	<script src="https://kit.fontawesome.com/f345641d85.js" crossorigin="anonymous"></script>
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
@@ -42,10 +43,13 @@
 			</article>
 		</section>
 		<section id="portfolio">
-			<h2>Mes Projets</h2>
+			<div class="portfolio__header">
+				<h2>Mes Projets</h2>
+			</div>
 			<div class="categories"></div>
 			<div class="gallery">
 			</div>
+
 		</section>
 		<section id="contact">
 			<h2>Contact</h2>
@@ -60,6 +64,18 @@
 				<input type="submit" value="Envoyer">
 			</form>
 		</section>
+		<div class="modal">
+			<div class="modal__container">
+				<header class="modal__header">
+					<button class="modal__button--backward"><i class="fa-solid fa-arrow-left"></i></button>
+					<span></span>
+					<button class="modal__button--close"><i class="fa-solid fa-x modal__close"></i></button>
+				</header>
+				<h2 class="modal__title"></h2>
+				<div class="modal__content"></div>
+				<footer class="modal__footer"></footer>
+			</div>
+		</div>
 	</main>
 
 	<footer>

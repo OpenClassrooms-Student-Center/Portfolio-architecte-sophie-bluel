@@ -266,3 +266,55 @@ footer nav ul {
 .bg-green {
     background-color: green;
 }
+
+.portfolio__header {
+    display: flex;
+    justify-content: center;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(19, 19, 19, 0.2);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal__container {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 600px;
+    height: 600px;
+}
+.modal__header {
+    width: 90%;
+}
+.modal__content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    height: 500px;
+}
+.modal__article {
+    position: relative;
+    width: 100px;
+    height: 150px;
+}
+
+.modal__article__image {
+    position: relative;
+    width: 100%;
+    height: 90%;
+}
+
+.modal__article__buttons-wrapper {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
