@@ -171,6 +171,7 @@ li:hover {
 }
 
 button{
+	border: #1D6154 1px solid;
 	color: #1D6154;
 	border: 1px solid #1D6154;
 	background-color: white;
@@ -181,7 +182,7 @@ button{
 	font-weight: 700;
 	border: solid 1px 
 }
-button:hover{
+button:focus-within{
 	color: white;
 	background-color: #1D6154;
 }
