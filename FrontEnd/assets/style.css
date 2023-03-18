@@ -318,3 +318,16 @@ footer nav ul {
     top: 10px;
     right: 10px;
 }
+
+.upload-form__file-input {
+    display: none;
+}
+
+.upload-form__image {
+    display: none;
+    height: 100%;
+}
+
+.upload-form__wrapper {
+    height: 200px;
+}

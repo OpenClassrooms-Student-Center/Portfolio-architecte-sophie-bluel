@@ -45,3 +45,56 @@ const login = async () => {
         console.error(error)
     }
 }
+
+const deleteWork = async (imageId) => {
+    const response = await fetch(`http://localhost:5678/api/works/${imageId}`, {
+        method: 'DELETE',
+        headers: {
+            Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+        },
+    })
+    if (response.status === 204) {
+        works = [...works.filter((work) => work.id !== imageId)]
+        createGallery(works)
+        createGalleryPage()
+        createCategories()
+        createCategoriesButtons(categories, works)
+        alert('Travail supprimé avec success!! ✅')
+    } else if (response.status === 401) {
+        alert(`Vous n'êtes pas autorisé à supprimer! ❌`)
+    } else {
+        alert(`Erreur lors de la suppression ❌`)
+    }
+}
+
+const uploadWork = async (formData) => {
+    const response = await fetch('http://localhost:5678/api/works', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            Accept: 'application/json',
+            Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
+        },
+    })
+    if (response.status === 201) {
+        const work = await response.json()
+        let category = { id: parseInt(work.categoryId) }
+        if (work.categoryId === '1') category.name = 'Objets'
+        if (work.categoryId === '2') category.name = 'Appartements'
+        if (work.categoryId === '3') category.name = 'Hôtels & restaurants'
+        work.category = category
+        works.push(work)
+        createGallery(works)
+        createGalleryPage()
+        createCategories()
+        createCategoriesButtons(categories, works)
+        createUploadPage()
+        alert('Travail ajouté avec success!! ✅')
+    } else if (response.status === 400) {
+        alert(`Erreur lors de l'ajout ❌`)
+    } else if (response.status === 401) {
+        alert(`Vous n'avez pas les droits pour ajouter une photo ❌`)
+    } else {
+        alert(`Erreur lors de l'ajout❌`)
+    }
+}

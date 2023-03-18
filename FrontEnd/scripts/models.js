@@ -80,25 +80,7 @@ const createModalArticle = (imageUrl, imageName, imageId) => {
     article.appendChild(buttonsWrapper)
 
     deleteBtn.addEventListener('click', () => {
-        fetch(`http://localhost:5678/api/works/${imageId}`, {
-            method: 'DELETE',
-            headers: {
-                Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
-            },
-        }).then((response) => {
-            if (response.status === 204) {
-                works = [...works.filter((work) => work.id !== imageId)]
-                createGallery(works)
-                createGalleryPage()
-                createCategories()
-                createCategoriesButtons(categories, works)
-                alert('Travail supprimé avec success!! ✅')
-            } else if (response.status === 401) {
-                alert(`Vous n'êtes pas autorisé à supprimer! ❌`)
-            } else {
-                alert(`Erreur lors de la suppression ❌`)
-            }
-        })
+        deleteWork(imageId)
     })
     return article
 }
