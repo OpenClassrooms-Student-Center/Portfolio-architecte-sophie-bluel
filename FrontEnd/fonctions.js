@@ -6,31 +6,18 @@ est-il possible plutôt de mettre cette base en mémoire pour la requêter sans 
 // !!! Tester la création d'une classe
 function creationHeader() {
     const template = document.getElementById('enTete');
-    template.innerHTML = "test";
-    if (testIndentifiedUser() == 'true') {
-        template.innerHTML = `
+    template.innerHTML = `
         <h1 class="teteDePage">Sophie Bluel <span>Architecte d'intérieur</span></h1>
         <nav>
             <ul>
                 <li class="lien">projets</li>
-                <li class="lien">contact</li>
-                <li class="lien" id="logout">logout</li>
+                <li class="lien">contact</li>`
+        +
+        (testIndentifiedUser() == 'true' ? '<li class="lien" id="logout">logout</li>' : '<li class="lien"><a href="login.html">login</a></li>')
+        + `
                 <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
-            </ul>
-        </nav>`;
-    } else {
-        template.innerHTML = `
-        <h1 class="teteDePage">Sophie Bluel <span>Architecte d'intérieur</span></h1>
-        <nav>
-            <ul>
-                <li class="lien">projets</li>
-                <li class="lien">contact</li>
-                <li class="lien"><a href="login.html">login</a></li>
-                <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
-            </ul>
-        </nav>`;
-    }
-    //document.body.appendChild(template);
+            </ul >
+        </nav > `;
 }
 
 function logout() {
@@ -47,14 +34,12 @@ function logout() {
 
 function testIndentifiedUser() {
     let test = sessionStorage.getItem('sessionStatus');
-    console.log(test);
-    if (test == "connected") {
-        console.log('true');
+    return test == "connected" ? 'true' : 'false';
+    /*if (test == "connected") {
         return 'true';
     } else {
-        console.log('false');
         return 'false';
-    }
+    }*/
 }
 
 /*!!! Autre possibilité : créer la barre et le bouton par défaut, avec un display/none, qui sont affichés lorsque l'utilisateur
@@ -63,23 +48,20 @@ est connecté. Ca serait sans doute + simple. Point à voir : y a-t-il un enjeu 
 // Création de la barre noire en haut du site pour indiquer qu'on est en mode édition
 function createBarreEdition() {
     const edit = document.getElementById('barreEdition');
-    if (testIndentifiedUser() == 'true') {
-        edit.innerHTML = `
-        <nav id="barreMenu">
+    edit.innerHTML =
+        testIndentifiedUser() == 'true' ? `<nav id = "barreMenu">
             <label id="edition" for="publier"><i class="fa-regular fa-pen-to-square"></i>Mode edition</label>
             <button id="publier">Publier les changements</button>
-        </nav>`;
-    } else {
-        edit.innerHTML = "";
-    }
+        </nav> ` : "";
 }
+
 
 // Création du bouton "modifier" à droite du titre pour permettre d'ajouter ou supprimer des projets
 function createBoutonEdition() {
     const edit2 = document.getElementById('presentation');
     if (testIndentifiedUser() == 'true') {
         edit2.innerHTML = `
-        <label id="edition2"><i class="fa-regular fa-pen-to-square"></i>modifier</label>`;
+        <button id="edition2" onclick='openModal2()'><i class="fa-regular fa-pen-to-square"></i>modifier</button>`
     } else {
         edit2.innerHTML = "";
     }
@@ -91,14 +73,14 @@ function identifierCritereDeTri() {
     for (let i = 0; i < filtreClick.length; i++) {
         filtreClick[i].addEventListener('click', function () {
             critereDeTri = filtreClick[i].value;
-            recupererContenuBase('http://localhost:5678/api/works', critereDeTri);
+            recupererContenuBase('http://localhost:5678/api/works', critereDeTri, 'gallery', 'maxi');
             /*!!! la variable critereDeTri n'est plus reconnue en dehors de la boucle for ; je ne comprends pas pourquoi*/
         });
     };
 }
 
 //Fonction permettant d'interroger la base en tenant compte du filtre d'affichage choisi
-function recupererContenuBase(url, critereDeTri) {
+/*function recupererContenuBase(url, critereDeTri) {
     fetch(url)
         .then(function (res) {
             if (res.ok) {
@@ -122,12 +104,40 @@ function recupererContenuBase(url, critereDeTri) {
             });
         })
         .catch(function (err) {
-            // Une erreur est survenue ; !!! Faut-il qualifier ?
+            console.log("problème : " + err);
+        });
+}*/
+
+function recupererContenuBase(url, critereDeTri, zoneAffichage, miniMaxi) {
+    fetch(url)
+        .then(function (res) {
+            if (res.ok) {
+                return res.json();
+            }
+        })
+        .then(function (value) {
+            const parentAffichage = document.getElementById(zoneAffichage);
+            parentAffichage.innerHTML = ''; //on efface l'écran pour afficher la nouvelle sélection
+            //filtrage de la base selon le critère choisi
+            if (critereDeTri == 'Tous') {
+                var baseFiltree = value;
+            } else {
+                var baseFiltree = value.filter(function (e) {
+                    return e.category.name == critereDeTri;
+                });
+            }
+            //pour chaque item de la sélection, on fait appel à la fonction permettant de créer une fiche projet
+            baseFiltree.forEach(element => {
+                creerAffichage(element, parentAffichage, miniMaxi)
+            });
+        })
+        .catch(function (err) {
+            console.log("problème : " + err);
         });
 }
 
 //Fonction permettant de générer une fiche projet
-function creerAffichage(baseAffichage, parentAffichage) {
+/*function creerAffichage(baseAffichage, parentAffichage) {
     const figure = document.createElement('figure');
     parentAffichage.appendChild(figure);
     const imageVignette = document.createElement('img');
@@ -136,16 +146,33 @@ function creerAffichage(baseAffichage, parentAffichage) {
     const descriptionVignette = document.createElement('figcaption');
     descriptionVignette.innerText = baseAffichage.title;
     figure.appendChild(descriptionVignette);
-}
+}*/
 
-// Fonction de test du login / mot de passe
+function creerAffichage(baseAffichage, parentAffichage, miniMaxi) {
+    const figure = document.createElement('figure');
+    parentAffichage.appendChild(figure);
+    const imageVignette = document.createElement('img');
+    imageVignette.src = baseAffichage.imageUrl;
+    figure.appendChild(imageVignette);
 
-function testLogin(login, password) {
-    if (testChampVide(login, champReponse) == 1 && testChampVide(password, champReponse) == 1) {
-        test
-
+    if (miniMaxi == 'mini') {
+        const iconeVignette = document.createElement('a');
+        iconeVignette.innerHTML = `<a class="icone"><i class="fa-solid fa-trash-can"></i></a>`
+        figure.appendChild(iconeVignette);
     }
+
+    const descriptionVignette = document.createElement('figcaption');
+    miniMaxi == 'maxi' ? descriptionVignette.innerText = baseAffichage.title : descriptionVignette.innerText = 'éditer';
+    figure.appendChild(descriptionVignette);
 }
+
+/*<link href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" rel="stylesheet" />
+
+<div class="container">
+    <img src="https://placekitten.com/300/300">
+    <a href="dog.png" download="new-filename"><i class="fas fa-download"></i></a>
+</div>*/
+
 
 // Test champ vide dans la fenêtre de login
 function testChampVide(champTest, champReponse) {
@@ -155,11 +182,11 @@ function testChampVide(champTest, champReponse) {
         verification.style.borderWidth = '1px';
         verification.style.borderColor = 'red';
         document.getElementById(champReponse).innerText = 'Champ obligatoire';
-        return 1
+        return 1;
     } else {
         verification.style.borderStyle = 'none';
         document.getElementById(champReponse).innerText = '';
-        return 0
+        return 0;
     }
 }
 
@@ -189,47 +216,68 @@ function verificationUser(login, password) {
         },
         body: JSON.stringify({ "email": login, "password": password })
     })
-        .then(response => response.json())
-        .then(result => sessionStorage.setItem("sessionID", result.token)) /* !!! Cette ligne ne couvre que les cas où 
-        l'utilisateur est identifié. Il faut couvrir les cas où il ne l'est pas et envoyer un msg d'erreur */
-        .then(sessionStorage.setItem("sessionStatus", 'connected'))
-        .then(window.location.href = "http://127.0.0.1:5500/FrontEnd/index.html")
+
+        .then(function (response) {
+            if (response.status == 200) {
+                return response.json();
+            }
+        })
+
+        .then(function (result) {
+            const result2 = result.token;
+            console.log(result2);
+            //result => sessionStorage.setItem("sessionID", result2);
+            sessionStorage.setItem("sessionID", result2);
+            sessionStorage.setItem("sessionStatus", 'connected');
+            window.location.href = "http://127.0.0.1:5500/FrontEnd/index.html";
+        })
+
         .catch((error) => {
-            console.error("Error:", error);
+            document.getElementById('erreurPassword').innerText = 'Utilisateur non reconnu';
         });
 }
 
+// Gestion de la modale
 
-// Note : refaire la même fonction avec await et en version + longue pour voir si la gestion du rejet marche mieux
 
-/*function verificationUser(login, password) {
-    const donneesTestees = JSON.stringify({ "email": login, "password": password });
-    const erreur = document.getElementById('erreurPassword');
-    let response = fetch('http://localhost:5678/api/users/login', {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json;charset=utf-8'
-        },
-        body: JSON.stringify({ "email": login, "password": password })
-    })
-    if (response.ok) {
-        let json = response.json();
-    } else {
-        console.log("HTTP-Error: " + response.status);
-    }
-    /*.then(response => response.json())
-    //.then(result => console.log(result.token))
-    .then(result => sessionStorage.setItem("sessionID", result.token))
-    // !!! Voir comment supprimer ce sessionID sinon il reste sans limite de temps
-    .catch((error) => {
-        console.error("Error:", error);
-        //erreur.innerText = 'Utilisateur non reconnu';
-        //afficherUtilisateurInconnu();
-        // !!! ce message d'erreur ne s'affiche pas, je ne comprends pas pourquoi. La fonction .catch ne semble pas fonctionner ici
-    });
+let modal = null;
+
+/*const openModal = function (e) {
+    e.preventDefault();
+    const target = document.querySelector(e.target.getAttribute('href'));
+    target.style.display = null;
+    modal = target;
+    modal.addEventListener('click', closeModal);
+    modal.querySelector('.js-modal-close').addEventListener('click', closeModal);
+    modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation);
+}*/
+
+const openModal2 = function (e) {
+    const target = document.getElementById('modal1');
+    target.style.display = null;
+    modal = target;
+    modal.addEventListener('click', closeModal);
+    modal.querySelector('.js-modal-close').addEventListener('click', closeModal);
+    modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation);
 }
 
-function afficherUtilisateurInconnu() {
-    const erreur = document.getElementById('erreurPassword');
-    erreur.innerText = 'Utilisateur non reconnu';
+
+/*function ouvrirModale() {
+    document.querySelectorAll('.js-modal').forEach(a => {
+        a.addEventListener('click', openModal);
+    })
 }*/
+
+const closeModal = function (e) {
+    if (modal === null) return;
+    e.preventDefault();
+    modal.style.display = "none";
+    modal.removeEventListener('click', closeModal);
+    modal.querySelector('.js-modal-close').removeEventListener('click', closeModal);
+    modal.querySelector('.js-modal-stop').removeEventtListener('click', stopPropagation);
+    modal = null;
+}
+
+const stopPropagation = function (e) {
+    e.stopPropagation();
+}
