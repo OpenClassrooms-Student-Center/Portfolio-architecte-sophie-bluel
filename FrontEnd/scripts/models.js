@@ -66,7 +66,9 @@ const createModalArticle = (imageUrl, imageName, imageId) => {
     editBtn.classList.add('modal__article__edit-btn')
     buttonsWrapper.classList.add('modal__article__buttons-wrapper')
     dragBtn.classList.add('modal__article__button')
+    dragBtn.classList.add('modal__article__button--drag')
     deleteBtn.classList.add('modal__article__button')
+    deleteBtn.classList.add('modal__article__button--delete')
 
     articleImage.setAttribute('src', imageUrl)
     articleImage.setAttribute('alt', imageName)

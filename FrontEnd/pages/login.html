@@ -14,45 +14,48 @@
 </head>
 
 <body>
-    <header>
-        <h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
-        <nav>
-            <ul>
-                <li>projets</li>
-                <li>contact</li>
-                <li>login</li>
-                <li><img src="../assets/icons/instagram.png" alt="Instagram"></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <section class="login">
-            <h2 class="login__title">Log In</h2>
-            <form action="#" id="login-form" class="login-form__form">
-                <div class="login-form__group">
-                    <label for="email" class="login-form__label login-form__label--email">Email</label>
-                    <input type="text" name="email" id="email" class="login-form__input login-form__input--email">
-                    <div class="login-form__error login-form__error--email"></div>
-                </div>
-                <div class="login-form__group">
-                    <label for="password" class="login-form__label login-form__label--password">Password</label>
-                    <input type="password" name="password" id="password"
-                        class="login-form__input login-form__input--password">
-                    <div class="login-form__error login-form__error--password"></div>
-                </div>
-                <button type="submit" class="login-form__submit">Se connecter</button>
-                <a href="#" class="login-form__link">Mot de passe oublié</a>
-            </form>
-        </section>
-    </main>
+    <div class="site-wrapper">
+        <header>
+            <h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
+            <nav>
+                <ul>
+                    <li>projets</li>
+                    <li>contact</li>
+                    <li><a class="login-link link-selected" href="pages/login.html">login</a></li>
+                    <li><img src="../assets/icons/instagram.png" alt="Instagram"></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <section class="login">
+                <h2 class="login__title">Log In</h2>
+                <form action="#" id="login-form" class="login-form__form">
+                    <div class="login-form__group">
+                        <label for="email" class="login-form__label login-form__label--email">Email</label>
+                        <input type="text" name="email" id="email" class="login-form__input login-form__input--email">
+                        <div class="login-form__error login-form__error--email"></div>
+                    </div>
+                    <div class="login-form__group">
+                        <label for="password" class="login-form__label login-form__label--password">Password</label>
+                        <input type="password" name="password" id="password"
+                            class="login-form__input login-form__input--password">
+                        <div class="login-form__error login-form__error--password"></div>
+                    </div>
+                    <button type="submit" class="login-form__submit">Se connecter</button>
+                    <a href="#" class="login-form__link">Mot de passe oublié</a>
+                </form>
+            </section>
+        </main>
 
-    <footer>
-        <nav>
-            <ul>
-                <li>Mentions Légales</li>
-            </ul>
-        </nav>
-    </footer>
+        <footer>
+            <nav>
+                <ul>
+                    <li>Mentions Légales</li>
+                </ul>
+            </nav>
+        </footer>
+    </div>
+
     <script src="../scripts/services.js"></script>
     <script src="../scripts/login.js"></script>
 </body>

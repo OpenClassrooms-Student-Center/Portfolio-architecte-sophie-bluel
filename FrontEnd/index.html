@@ -7,7 +7,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
+	<link
+		href="https://fonts.googleapis.com/css2?family=Syne:wght@300;400;700;800&family=Work+Sans:wght@400;500;600;700&display=swap"
 		rel="stylesheet">
 	<script src="https://kit.fontawesome.com/f345641d85.js" crossorigin="anonymous"></script>
 	<meta name="description" content="">
@@ -15,85 +16,98 @@
 </head>
 
 <body>
-	<header>
-		<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
-		<nav>
-			<ul>
-				<li>projets</li>
-				<li>contact</li>
-				<li><a class="login-link" href="pages/login.html">login</a></li>
-				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
-			</ul>
-		</nav>
-	</header>
-	<main>
-		<section id="introduction">
-			<figure>
-				<img src="./assets/images/sophie-bluel.png" alt="">
-			</figure>
-			<article>
-				<h2>Designer d'espace</h2>
-				<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison
-					finale du chantier.</p>
-				<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les
-					couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du
-					chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
-				<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG,
-					décorateur(trice)</p>
-			</article>
-		</section>
-		<section id="portfolio">
-			<div class="portfolio__header">
-				<h2>Mes Projets</h2>
-			</div>
-			<div class="categories"></div>
-			<div class="gallery">
-			</div>
+	<div class="black-bar">
+		<span class="black-bar__edit-mode"><i class="fa-regular fa-pen-to-square"></i> Mode édition</span>
+		<button class="black-bar__publish-btn">publier les changements</button>
+	</div>
+	<div class="site-wrapper">
+		<header>
+			<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
+			<nav>
+				<ul>
+					<li>projets</li>
+					<li>contact</li>
+					<li><a class="login-link" href="pages/login.html">login</a></li>
+					<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+				</ul>
+			</nav>
+		</header>
 
-		</section>
-		<section id="contact">
-			<h2>Contact</h2>
-			<p>Vous avez un projet ? Discutons-en !</p>
-			<form action="#" method="post">
-				<label for="name">Nom</label>
-				<input type="text" name="name" id="name">
-				<label for="email">Email</label>
-				<input type="email" name="email" id="email">
-				<label for="message">Message</label>
-				<textarea name="message" id="message" cols="30" rows="10"></textarea>
-				<input type="submit" value="Envoyer">
-			</form>
-		</section>
-		<div class="modal">
-			<div class="modal__container">
-				<header class="modal__header">
-					<button class="modal__button modal__button--backward"><i
-							class="fa-solid fa-arrow-left"></i></button>
-					<span></span>
-					<button class="modal__button modal__button--close"><i
-							class="fa-solid fa-x modal__close"></i></button>
-				</header>
-				<h2 class="modal__title"></h2>
-				<div class="modal__content"></div>
-				<footer class="modal__footer">
-					<div class="modal__footer__gallery">
-						<button class="modal__footer__button modal__footer__button--add">Ajouter une photo</button>
-					</div>
-					<div class="modal__footer__upload">
-						<button class="modal__footer__button modal__footer__button--upload">Valider</button>
-					</div>
-				</footer>
-			</div>
-		</div>
-	</main>
+		<main>
+			<section id="introduction">
+				<div class="introduction__left">
+					<figure>
+						<img src="./assets/images/sophie-bluel.png" alt="">
+					</figure>
+				</div>
 
-	<footer>
-		<nav>
-			<ul>
-				<li>Mentions Légales</li>
-			</ul>
-		</nav>
-	</footer>
+				<article>
+					<h2>Designer d'espace</h2>
+					<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la
+						livraison
+						finale du chantier.</p>
+					<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les
+						couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du
+						chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
+					<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG,
+						décorateur(trice)</p>
+				</article>
+			</section>
+			<section id="portfolio">
+				<div class="portfolio__header">
+					<h2>Mes Projets</h2>
+				</div>
+				<div class="categories"></div>
+				<div class="gallery">
+				</div>
+
+			</section>
+			<section id="contact">
+				<h2>Contact</h2>
+				<p>Vous avez un projet ? Discutons-en !</p>
+				<form action="#" method="post">
+					<label for="name">Nom</label>
+					<input type="text" name="name" id="name">
+					<label for="email">Email</label>
+					<input type="email" name="email" id="email">
+					<label for="message">Message</label>
+					<textarea name="message" id="message" cols="30" rows="10"></textarea>
+					<input type="submit" value="Envoyer">
+				</form>
+			</section>
+			<div class="modal">
+				<div class="modal__container">
+					<header class="modal__header">
+						<button class="modal__button modal__button--backward"><i
+								class="fa-solid fa-arrow-left"></i></button>
+						<span></span>
+						<button class="modal__button modal__button--close"><i
+								class="fa-solid fa-x modal__close"></i></button>
+					</header>
+					<h2 class="modal__title"></h2>
+					<div class="modal__content"></div>
+					<footer class="modal__footer">
+						<div class="modal__footer__gallery">
+							<button class="modal__footer__button modal__footer__button--add">Ajouter une photo</button>
+							<button class="modal__footer__button-delete">Supprimer la galerie</button>
+						</div>
+						<div class="modal__footer__upload">
+							<button class="modal__footer__button modal__footer__button--upload">Valider</button>
+						</div>
+					</footer>
+				</div>
+			</div>
+		</main>
+
+		<footer>
+			<nav>
+				<ul>
+					<li>Mentions Légales</li>
+				</ul>
+			</nav>
+		</footer>
+	</div>
+
 	<script src="scripts/services.js"></script>
 	<script src="scripts/models.js"></script>
 	<script src="scripts/modal.js"></script>

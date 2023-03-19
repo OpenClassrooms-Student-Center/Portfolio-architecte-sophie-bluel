@@ -6,7 +6,6 @@ const modalContent = document.querySelector('.modal__content')
 const modalFooterGallery = document.querySelector('.modal__footer__gallery')
 const modalFooterUpload = document.querySelector('.modal__footer__upload')
 const modalAddBtn = document.querySelector('.modal__footer__button--add')
-const modalUploadBtn = document.querySelector('.modal__footer__button--upload')
 
 modal.addEventListener('click', (event) => {
     const modalContainer = document.querySelector('.modal__container')
@@ -32,7 +31,7 @@ function createGalleryPage() {
     modalContent.innerHTML = ''
     modalBackwardBtn.style.display = 'none'
     modalFooterUpload.style.display = 'none'
-    modalFooterGallery.style.display = 'block'
+    modalFooterGallery.style.display = 'flex'
     works.forEach((work) =>
         modalContent.appendChild(createModalArticle(work.imageUrl, work.title, work.id))
     )
@@ -40,18 +39,20 @@ function createGalleryPage() {
 }
 
 function createUploadPage() {
+    const modalUploadBtn = document.querySelector('.modal__footer__button--upload')
     modalAddBtn.removeEventListener('click', createUploadPage)
+    modalUploadBtn.classList.remove('bg-green')
+    modalUploadBtn.removeEventListener('click', handleFileUpload)
     modalTitle.textContent = 'Ajout photo'
     modalContent.innerHTML = ''
     modalBackwardBtn.style.display = 'block'
     modalFooterGallery.style.display = 'none'
     modalFooterUpload.style.display = 'block'
     modalContent.appendChild(createModalForm())
-
+    const titleInput = document.querySelector('#upload-title')
     const photoInput = document.querySelector('.upload-form__file-input')
-
+    titleInput.addEventListener('input', isUploadFormValid)
     photoInput.addEventListener('change', handleFileInput)
-    modalUploadBtn.addEventListener('click', handleFileUpload)
 }
 
 function handleFileUpload() {
@@ -84,6 +85,7 @@ function handleFileInput(event) {
     }
 
     reader.readAsDataURL(file)
+    isUploadFormValid()
 }
 
 function handleImageClick() {
@@ -96,7 +98,7 @@ function createModalForm() {
     form.innerHTML = `
     <div class="upload-form__wrapper">
         <img class="upload-form__image" src="" alt="">
-        <i class="fa-regular fa-image upload-form__icon"></i>
+        <img src="./assets/icons/upload-icon.svg" class="upload-form__icon">
         <label for="file-input" class="upload-form__overlay-button">+Ajouter photo</label>
         <input type="file" id="file-input" class="upload-form__file-input" accept="image/png, image/jpeg">
         <p class="upload-form__text">jpg, png: 4mo max</p>
@@ -115,4 +117,22 @@ function createModalForm() {
     </div>
     `
     return form
+}
+
+function isUploadFormValid() {
+    const modalUploadBtn = document.querySelector('.modal__footer__button--upload')
+    const file = document.querySelector('.upload-form__file-input').files[0]
+    const title = document.querySelector('.upload-form__input').value
+    let fileCheck = false
+    let titleCheck = false
+    modalUploadBtn.classList.remove('bg-green')
+    if (file && file.size < 4194304) fileCheck = true
+    if (title.length > 0) titleCheck = true
+    if (titleCheck && fileCheck) {
+        modalUploadBtn.classList.add('bg-green')
+        modalUploadBtn.addEventListener('click', handleFileUpload)
+    } else {
+        modalUploadBtn.removeEventListener('click', handleFileUpload)
+        modalUploadBtn.classList.remove('bg-green')
+    }
 }
