@@ -20,7 +20,7 @@
 
 <body>
 	<div id="barreEdition"></div>
-	<header id="enTete">test</header>
+	<header id="enTete"></header>
 
 	<script>
 		createBarreEdition(); //permet de créer la barre noire d'édition pour un utilisateur logué
@@ -46,8 +46,27 @@
 		</section>
 		<section id="portfolio">
 			<h2 id="titreAccueil">Mes Projets</h2>
-			<div id="presentation">
-			</div>
+			<div id="presentation"></div>
+			<!-- <a href="#modal1" class="js-modal" id="js-modal">Ouvrir la boîte modale</a> -->
+			<script>
+				ouvrirModale();
+			</script>
+
+			<aside id="modal1" class="modal" style="display: none">
+				<div class="modalWrapper js-modal-stop">
+					<button class="js-modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+					<br>
+					<h3>Galerie photo</h3>
+					<section id="galleryMini">
+						<script>recupererContenuBase('http://localhost:5678/api/works', 'Tous', 'galleryMini', 'mini')</script>
+					</section>
+					<section id="gestionGalleryMini">
+						<button class="boutonGestionGalleryMini">Ajouter une photo</button>
+						<button class="boutonGestionGalleryMini">Supprimer la galerie</button>
+					</section>
+				</div>
+			</aside>
+
 			<nav>
 				<ul class="listeFiltres">
 					<li><input type="button" class="filtre" id="Tous" value="Tous"></li>
@@ -59,9 +78,11 @@
 
 			<div class="gallery" id="gallery">
 				<script>
-					createBoutonEdition();//permet d'afficher le bouton modifier pour un utilisateur logué
-					recupererContenuBase('http://localhost:5678/api/works', 'Tous') // Permet d'afficher tous les projets par défaut
+					//recupererContenuBase('http://localhost:5678/api/works', 'Tous') // Permet d'afficher tous les projets par défaut
+					recupererContenuBase('http://localhost:5678/api/works', 'Tous', 'gallery', 'maxi') // Permet d'afficher tous les projets par défaut
 					identifierCritereDeTri(); // Permet d'afficher les projets sélectionnés via les boutons de filtre
+					createBoutonEdition();//permet d'afficher le bouton modifier pour un utilisateur logué
+					/*ouvrirModale();*/
 				</script>
 			</div>
 
