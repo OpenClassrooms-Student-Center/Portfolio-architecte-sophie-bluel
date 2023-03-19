@@ -134,6 +134,10 @@ a:hover {
 	color: #B1663C
 }
 
+.lien:hover {
+	cursor: pointer;
+}
+
 .listeFiltres {
 	justify-content: center;
 }
@@ -170,8 +174,142 @@ article {
 
 #edition2 {
 	position: relative;
-	left: 800px;
+	left: 700px;
 	bottom: 50px;
+	background-color: white;
+	border: none;
+	font-size: 14px;
+	cursor: pointer;
+}
+
+#edition2:hover {
+	color: #B1663C;
+}
+
+#edition2 i {
+	margin-right: 5px;
+}
+
+/* -------------------------------------------- CSS pour la modale ----------------------------------------------------------*/
+
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.8);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.modalWrapper {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	overflow: auto;
+	width: 630px;
+	max-width: calc(100vw - 20px);
+	max-height: calc(100vh - 20px);
+	padding: 20px;
+	background-color: white;
+	border-radius: 10px;
+}
+
+h3 {
+	font-family: 'Work Sans';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 26px;
+	text-align: center;
+}
+
+.js-modal-close {
+	display: flex;
+	margin: auto;
+	justify-content: right;
+	align-self: flex-end;
+	margin: 0;
+	background-color: white;
+	border: none;
+	cursor: pointer;
+}
+
+#gestionGalleryMini {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 0;
+	padding: 30px 0;
+	width: 420px;
+	max-width: calc(90vw - 20px);
+	border-top: 1px solid #B3B3B3;
+}
+
+.boutonGestionGalleryMini {
+	font-family: 'Syne';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	width: 237px;
+	height: 36px;
+	background: white;
+	color: #D65353;
+	border: none;
+	margin: 10px 0;
+}
+
+.boutonGestionGalleryMini:hover {
+	font-weight: 700;
+	background: #1D6154;
+	border-radius: 60px;
+	color: white;
+	cursor: pointer;
+}
+
+#galleryMini {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	max-width: 86%;
+}
+
+#galleryMini figure {
+	width: 18%;
+	height: 140px;
+	margin: 30px 5px 0 5px;
+}
+
+#galleryMini img {
+	width: 100%;
+	height: 140px;
+}
+
+#galleryMini figcaption {
+	position: relative;
+	bottom: 15px;
+}
+
+figure img {
+	display: block;
+}
+
+
+figure button
+
+/*:.fa-trash-can*/
+	{
+	background-color: black;
+	color: white;
+	position: relative;
+	bottom: 95%;
+	left: 70%;
+	border: none;
+}
+
+.icone {
+	cursor: pointer;
 }
 
 /* -------------------------------------------- CSS pour la page de login ---------------------------------------------------*/
@@ -218,6 +356,10 @@ article {
 	color: white;
 	margin-bottom: 25px;
 	font-family: 'Syne';
+}
+
+#seConnecter:hover {
+	cursor: pointer;
 }
 
 #oubli {
