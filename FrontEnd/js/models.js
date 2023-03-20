@@ -22,29 +22,7 @@ const createCategoryButton = (name) => {
     const categoryButton = document.createElement('button')
     categoryButton.classList.add('category-button')
     categoryButton.innerHTML = name
-    categoryButton.addEventListener('click', (event) => {
-        removeGreenBackground()
-        categoryButton.classList.add('bg-green')
-        filterByCategory(name)
-    })
     return categoryButton
-}
-
-const createCategoriesButtons = (categories, works) => {
-    const categoriesContainer = document.querySelector('.categories')
-    const allCategoryButton = document.createElement('button')
-    allCategoryButton.classList.add('category-button')
-    allCategoryButton.innerHTML = 'Tous'
-    allCategoryButton.addEventListener('click', (event) => {
-        removeGreenBackground()
-        allCategoryButton.classList.add('bg-green')
-        createGallery(works)
-    })
-    categoriesContainer.innerHTML = ''
-    categoriesContainer.appendChild(allCategoryButton)
-    categories.forEach((category) => {
-        categoriesContainer.appendChild(createCategoryButton(category))
-    })
 }
 
 const createAdminButton = (className) => {
@@ -81,8 +59,19 @@ const createModalArticle = (imageUrl, imageName, imageId) => {
     buttonsWrapper.appendChild(deleteBtn)
     article.appendChild(buttonsWrapper)
 
-    deleteBtn.addEventListener('click', () => {
-        deleteWork(imageId)
+    deleteBtn.addEventListener('click', async () => {
+        const response = await deleteWork(imageId)
+        if (response.status === 204) {
+            works = [...works.filter((work) => work.id !== imageId)]
+            createGallery(works)
+            createModalGalleryPage()
+            createCategories()
+            alert('Travail supprimé avec success!! ✅')
+        } else if (response.status === 401) {
+            alert(`Vous n'êtes pas autorisé à supprimer! ❌`)
+        } else {
+            alert(`Erreur lors de la suppression ❌`)
+        }
     })
     return article
 }

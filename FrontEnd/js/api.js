@@ -7,26 +7,25 @@ async function getWorks() {
 }
 
 async function addWork(work) {
-    const response = await fetch(`${apiUrl}/works`, {
+    const response = await fetch('http://localhost:5678/api/works', {
         method: 'POST',
+        body: work,
         headers: {
-            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
         },
-        body: JSON.stringify(work),
     })
-    const data = await response.json()
-    return data
+    return response
 }
 
-async function deleteWork(id) {
-    const response = await fetch(`${apiUrl}/works/${id}`, {
+async function deleteWork(workId) {
+    const response = await fetch(`http://localhost:5678/api/works/${workId}`, {
         method: 'DELETE',
         headers: {
             Authorization: `Bearer ${sessionStorage.getItem('authToken')}`,
         },
     })
-    const data = await response.json()
-    return data
+    return response
 }
 
 async function login(email, password) {
@@ -42,43 +41,3 @@ async function login(email, password) {
     })
     return response
 }
-
-// const login = async () => {
-//     try {
-//         const email = document.getElementById('email').value
-//         const password = document.getElementById('password').value
-//         const emailErrorDiv = document.querySelector('.login-form__error--email')
-//         const passwordErrorDiv = document.querySelector('.login-form__error--password')
-//         emailErrorDiv.textContent = ''
-//         passwordErrorDiv.textContent = ''
-
-//         const response = await fetch('http://localhost:5678/api/users/login', {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json',
-//             },
-//             body: JSON.stringify({
-//                 email: email,
-//                 password: password,
-//             }),
-//         })
-//         const data = await response.json()
-
-//         if (response.ok) {
-//             sessionStorage.setItem('authToken', data.token)
-//             sessionStorage.setItem('authUser', data.userId)
-//             window.location.replace('../index.html')
-//             // sophie.bluel@test.tld
-//         } else if (response.status === 401) {
-//             passwordErrorDiv.textContent = 'Mot de passe incorrect.'
-//         } else if (response.status === 404) {
-//             emailErrorDiv.textContent = 'Adresse email est introuvable.'
-//         } else {
-//             throw new Error("Une erreur s'est produite lors de la connexion.")
-//         }
-//     } catch (error) {
-//         console.error(error)
-//     }
-// }
-
-export { getWorks, addWork, deleteWork, login }

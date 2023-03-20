@@ -15,18 +15,18 @@ modal.addEventListener('click', (event) => {
 })
 
 modalCloseBtn.addEventListener('click', closeModal)
-modalBackwardBtn.addEventListener('click', createGalleryPage)
+modalBackwardBtn.addEventListener('click', createModalGalleryPage)
 
 function openModal() {
     modal.style.display = 'flex'
-    createGalleryPage()
+    createModalGalleryPage()
 }
 
 function closeModal() {
     modal.style.display = 'none'
 }
 
-function createGalleryPage() {
+function createModalGalleryPage() {
     modalTitle.textContent = 'Galerie photo'
     modalContent.innerHTML = ''
     modalBackwardBtn.style.display = 'none'
@@ -35,12 +35,12 @@ function createGalleryPage() {
     works.forEach((work) =>
         modalContent.appendChild(createModalArticle(work.imageUrl, work.title, work.id))
     )
-    modalAddBtn.addEventListener('click', createUploadPage)
+    modalAddBtn.addEventListener('click', createModalUploadPage)
 }
 
-function createUploadPage() {
+function createModalUploadPage() {
     const modalUploadBtn = document.querySelector('.modal__footer__button--upload')
-    modalAddBtn.removeEventListener('click', createUploadPage)
+    modalAddBtn.removeEventListener('click', createModalUploadPage)
     modalUploadBtn.classList.remove('bg-green')
     modalUploadBtn.removeEventListener('click', handleFileUpload)
     modalTitle.textContent = 'Ajout photo'
@@ -55,7 +55,7 @@ function createUploadPage() {
     photoInput.addEventListener('change', handleFileInput)
 }
 
-function handleFileUpload() {
+async function handleFileUpload() {
     const photoFile = document.querySelector('.upload-form__file-input').files[0]
     const photoTitle = document.querySelector('.upload-form__input').value
     const photoCategory = document.querySelector('.upload-form__select').value
@@ -63,7 +63,27 @@ function handleFileUpload() {
     formData.append('image', photoFile)
     formData.append('title', photoTitle)
     formData.append('category', photoCategory)
-    uploadWork(formData)
+    const response = await addWork(formData)
+    if (response.status === 201) {
+        const work = await response.json()
+        let category = { id: parseInt(work.categoryId) }
+        if (work.categoryId === '1') category.name = 'Objets'
+        if (work.categoryId === '2') category.name = 'Appartements'
+        if (work.categoryId === '3') category.name = 'Hôtels & restaurants'
+        work.category = category
+        works.push(work)
+        createGallery(works)
+        createModalGalleryPage()
+        createCategories()
+        createModalUploadPage()
+        alert('Travail ajouté avec success!! ✅')
+    } else if (response.status === 400) {
+        alert(`Erreur lors de l'ajout ❌`)
+    } else if (response.status === 401) {
+        alert(`Vous n'avez pas les droits pour ajouter une photo ❌`)
+    } else {
+        alert(`Erreur lors de l'ajout❌`)
+    }
 }
 
 function handleFileInput(event) {
@@ -121,12 +141,15 @@ function createModalForm() {
 
 function isUploadFormValid() {
     const modalUploadBtn = document.querySelector('.modal__footer__button--upload')
+    const sizeMsg = document.querySelector('.upload-form__text')
     const file = document.querySelector('.upload-form__file-input').files[0]
     const title = document.querySelector('.upload-form__input').value
     let fileCheck = false
     let titleCheck = false
     modalUploadBtn.classList.remove('bg-green')
+    sizeMsg.classList.remove('txt-red')
     if (file && file.size < 4194304) fileCheck = true
+    if (file && file.size > 4194304) sizeMsg.classList.add('txt-red')
     if (title.length > 0) titleCheck = true
     if (titleCheck && fileCheck) {
         modalUploadBtn.classList.add('bg-green')

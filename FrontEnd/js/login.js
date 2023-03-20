@@ -1,4 +1,4 @@
-import { login } from './api.js'
+// sophie.bluel@test.tld
 
 const loginForm = document.getElementById('login-form')
 
@@ -14,7 +14,7 @@ loginForm.addEventListener('submit', async (event) => {
     passwordError.textContent = ''
     submitError.textContent = ''
 
-    if (!isValidEmail(emailInput.value)) {
+    if (!isValidEmail(emailInput.value.trim())) {
         emailError.textContent = 'Veuillez entrer une adresse email valide.'
         return
     }
