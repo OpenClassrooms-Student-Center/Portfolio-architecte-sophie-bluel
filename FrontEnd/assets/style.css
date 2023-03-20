@@ -608,6 +608,14 @@ footer nav ul {
     background: #ffffff;
     box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
+.login-form__error {
+    margin-top: 10px;
+    color: red;
+    font-weight: 600;
+}
+.login-form__error--submit {
+    text-align: center;
+}
 
 .login-form__submit {
     width: 179px;
@@ -661,4 +669,8 @@ footer nav ul {
 .bg-green {
     background-color: #1d6154;
     color: white;
+}
+
+.txt-red {
+    color: red;
 }
