@@ -53,14 +53,43 @@
 	 </div>
 	 <aside id="modal1" class="modal" style="display:none;">
 		<div class="modal-wrapper js-modal-stop">
+		   <button class="return-back no-show"><i class="fa-solid fa-arrow-left"></i></button>
 		   <button class="js-modal-close">X</button>
+		  <div class="modale1">
            <h3>Galerie photo</h3>
-		   <div class="modal-gallery">
-		   </div>
+		   <div class="modal-gallery"></div>
 		   <div class="modal-button">
-		     <button class="add-photo">Ajouter une photo</button>
+		     <button class="navbutton-add-photo">Ajouter une photo</button>
 		     <a href="#" class="remove-gallery">Supprimer la galerie</a>
 		   </div>
+		  </div>
+		
+		  <div class="modale2 no-show">
+		   <div class="flex-div">	 
+			<h3>Ajout photo</h3>
+			<div class="div-add-photo">
+				<div class="div-upload-photo">
+					<span><i class="fa-regular fa-image fa-4x"></i></span>
+					<button onclick  class="button-add-photo">+ Ajouter photo<input type="file" id="upload-button"></button>
+					<p class="mo-max">jpg, png : 4mo max</p>
+					<img id="chosen-image" class="no-show">
+				</div>
+				<form class="form-add-photo">
+					<label for="title">Titre</label>
+                    <input>
+                    <label for="title">Catégorie</label>
+                    <select>
+						<option></option>
+						<option value="objets">Objets</option>
+						<option value="appartements">Appartements</option>
+						<option value="hotels-restaurants">Hôtels & restaurants</option>
+					</select>
+				</form>				
+		     </div>
+			 <button class="valid-button">Valider</button>			
+		    </div>
+		   </div>
+
 		</div>
 	 </aside>
 		<div class="filtersdiv">

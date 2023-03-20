@@ -27,6 +27,9 @@ const closeModal = function (e) {
     modal.removeEventListener('click', closeModal)
     modal.querySelector('.js-modal-close').removeEventListener('click', closeModal)
     modal.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation)
+    document.querySelector('.modale1').classList.remove("no-show");
+    document.querySelector('.modale2').classList.add("no-show");
+    document.querySelector('.return-back').classList.add("no-show");
     modal = null
 }
 
@@ -122,5 +125,47 @@ async function deleteWork(id) {
     }
 }
 
+document.querySelector(".navbutton-add-photo").addEventListener("click",function(){
+    document.querySelector('.modale1').classList.add("no-show");
+    document.querySelector('.modale2').classList.remove("no-show");
+    document.querySelector('.return-back').classList.remove("no-show");
+})
+
+document.querySelector(".return-back").addEventListener("click",function(){
+    document.querySelector('.modale2').classList.add("no-show");
+    document.querySelector('.modale1').classList.remove("no-show");
+    document.querySelector('.return-back').classList.add("no-show");
+})
 
 
+const uploadButton = document.querySelector("#upload-button");
+const addphotoButton = document.querySelector(".button-add-photo");
+
+function uploadbuttonActive(){
+    uploadButton.click()
+}
+
+addphotoButton.addEventListener('click', function () {
+    uploadbuttonActive()
+});
+
+
+
+uploadButton.onchange = () => {
+    let reader = new FileReader();
+    reader.readAsDataURL(uploadButton.files[0]);
+    console.log(uploadButton.files[0]);
+    reader.onload = () => {
+        chosenImage.setAttribute("src",reader.result);
+    }
+}
+
+let chosenImage = document.getElementById("chosen-image");
+let srcChosenimage = chosenImage.getAttribute('src');
+
+if (srcChosenimage == null){
+    console.log('src empty');
+}
+else {
+    console.log('not empty');
+}

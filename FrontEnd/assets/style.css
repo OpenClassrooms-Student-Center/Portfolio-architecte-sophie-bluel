@@ -413,7 +413,7 @@ main .fa-pen-to-square{
 	color: black;
 	border: none;
 	padding: 0;
-	margin-left: 36rem;
+	margin-left: 34rem;
 
 }
 
@@ -432,6 +432,7 @@ main .fa-pen-to-square{
 	border-bottom: 1px solid #B3B3B3;
 	padding: 2rem 6rem;
 	position: relative;
+	
 }
 
 .modal-button{
@@ -440,7 +441,7 @@ main .fa-pen-to-square{
 	align-items: center;
 }
 
-.add-photo{
+.navbutton-add-photo{
 	margin-top: 2rem;
 	margin-bottom: 1.5rem;
 	background-color: #1D6154;
@@ -487,4 +488,108 @@ main .fa-pen-to-square{
 .fa-trash-can{
 	color: #fff;
 	height: 9px;
+	
 }
+
+.flex-div{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.div-upload-photo{
+	background-color: #E8F1F7;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding-top: 2rem;
+	margin-top: 2rem;
+	padding-bottom: 2rem;
+}
+
+.fa-image{
+	color: #b9c5cc;
+}
+
+.button-add-photo{
+	color: #306685;
+	background-color: #CBD6DC;
+	border: none;
+	margin-bottom: 0.5rem;
+	margin-top: 1.5rem;
+	position: relative;
+
+}
+
+.button-add-photo input[type="file"]{
+	position: absolute;
+	opacity: 1;
+    width: 1px;
+	height: 1px;
+	opacity: 0;
+}
+
+.div-upload-photo p{
+	font-size: 10px;
+	margin-bottom: 1rem;
+}
+
+.div-add-photo{
+	border-bottom: 1px solid #B3B3B3;
+	padding-bottom: 2.5rem;
+}
+
+.form-add-photo{
+	display: flex;
+	flex-direction: column;
+	margin-top: 1.5rem;
+}
+
+.form-add-photo input{
+	width: 420px;
+	margin-bottom: 0.5rem ;
+	height: 50px;
+    font-size: 1.2em;
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	margin-bottom: 1.5rem;
+	font-size: 14px;
+	color: #444444;
+} 
+
+.form-add-photo select{
+	width: 428px;
+	padding: 1px 2px;
+	height: 50px;
+    font-size: 1.2em;
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	font-size: 14px;
+	color: #444444;
+}
+
+.form-add-photo label{
+	margin-bottom: 0.5rem;
+}
+
+.return-back{
+	color: black;
+	border: none;
+	padding: 0;
+	margin-left:0.5rem ;
+	height: 20px;
+}
+
+.valid-button{
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+	border-color: #A7A7A7;
+	background-color: #A7A7A7;
+	color: white ;
+	font-size: 14px;
+	padding-inline: 6rem;
+}
+
+
+
