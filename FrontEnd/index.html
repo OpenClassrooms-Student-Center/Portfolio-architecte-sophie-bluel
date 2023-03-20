@@ -68,25 +68,25 @@
 		   <div class="flex-div">	 
 			<h3>Ajout photo</h3>
 			<div class="div-add-photo">
-				<div class="div-upload-photo">
-					<span><i class="fa-regular fa-image fa-4x"></i></span>
-					<button onclick  class="button-add-photo">+ Ajouter photo<input type="file" id="upload-button"></button>
-					<p class="mo-max">jpg, png : 4mo max</p>
-					<img id="chosen-image" class="no-show">
-				</div>
-				<form class="form-add-photo">
+				<form enctype="multipart/form-data" class="form-add-photo">
+					<div class="div-upload-photo">
+						<span><i class="fa-regular fa-image fa-4x"></i></span>
+						<button onclick  class="button-add-photo">+ Ajouter photo<input name='image' type="file" id="upload-button"></button>
+						<p class="mo-max">jpg, png : 4mo max</p>
+						<img id="chosen-image"/>
+					</div>
 					<label for="title">Titre</label>
-                    <input>
+                    <input name='title' class="input-title" type="text">
                     <label for="title">Catégorie</label>
-                    <select>
+                    <select name='category' class="select-category">
 						<option></option>
 						<option value="objets">Objets</option>
 						<option value="appartements">Appartements</option>
 						<option value="hotels-restaurants">Hôtels & restaurants</option>
 					</select>
+					<button type='submit' class="valid-button" disabled>Valider</button>
 				</form>				
-		     </div>
-			 <button class="valid-button">Valider</button>			
+		     </div>			
 		    </div>
 		   </div>
 

@@ -591,5 +591,12 @@ main .fa-pen-to-square{
 	padding-inline: 6rem;
 }
 
+#chosen-image{
+	height: 50px;
+	width: 50px;
 
+}
 
+.active-button{
+	background-color: #1D6154;
+}

@@ -157,6 +157,10 @@ uploadButton.onchange = () => {
     console.log(uploadButton.files[0]);
     reader.onload = () => {
         chosenImage.setAttribute("src",reader.result);
+        document.querySelector('.mo-max').classList.add("no-show");
+        document.querySelector('.mo-max').classList.add("no-show");
+        document.querySelector('.mo-max').classList.add("no-show");
+        checkForm();
     }
 }
 
@@ -164,8 +168,57 @@ let chosenImage = document.getElementById("chosen-image");
 let srcChosenimage = chosenImage.getAttribute('src');
 
 if (srcChosenimage == null){
-    console.log('src empty');
+ 
 }
 else {
-    console.log('not empty');
+
 }
+
+function checkForm(){
+     const imgElement = document.querySelector("#chosen-image").getAttribute('src');
+     const inputElement = document.querySelector(".input-title").value;
+     const selectElement = document.querySelector(".select-category").selectedIndex;
+     console.log(imgElement);
+     console.log(inputElement);
+     if(imgElement !== null && inputElement !== "" && selectElement !== 0){
+        document.querySelector('.valid-button').classList.add("active-button");
+        document.querySelector('.valid-button').removeAttribute('disabled');
+
+     }
+     else{
+        document.querySelector('.valid-button').classList.remove("active-button");
+        document.querySelector('.valid-button').setAttribute('disabled',true);
+     }
+    }
+
+document.querySelector(".input-title").addEventListener("input",checkForm);
+
+document.querySelector(".select-category").addEventListener("change",checkForm);
+const newWorkform = document.querySelector('.form-add-photo');
+newWorkform.addEventListener("submit",async function(e){
+    e.preventDefault();
+    const formData = new FormData(newWorkform);
+    formData.append("test","testvalue");
+    for(const value of formData.values()){
+        console.log(value)
+    };
+    try {
+        const token = localStorage.getItem("token");
+        const res = await fetch(`http://localhost:5678/api/works`, {
+            method: "POST",
+            headers: {Authorization: `Bearer ${token}`},
+            body: formData,
+
+        });
+        if(res.status === 200)
+        {
+            console.log('formsent')
+        }
+
+    } catch (error) {
+      console.log(error)
+    }
+});
+
+
+     
