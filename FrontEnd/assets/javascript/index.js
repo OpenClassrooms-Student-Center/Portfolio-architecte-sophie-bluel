@@ -33,7 +33,8 @@ function createFiches(result) {
     
     }
 }
-
+// Appel de la fonction pour récupérer tous les travaux
+getAllWorks();
 
 //creation boutton filtres
 const filtres = document.querySelector(".filtres");
@@ -51,8 +52,7 @@ createButton('objets', 'btn-filtres');
 createButton('Appartements', 'btn-appartements');
 createButton(`Hôtels & restaurants`);
 
-// Appel de la fonction pour récupérer tous les travaux
-getAllWorks();
+
 
 
 
