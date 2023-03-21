@@ -3,10 +3,17 @@ let works = []
 window.addEventListener('load', initializeGallery)
 
 async function initializeGallery() {
-    works = await getWorks()
-    createGallery(works)
-    createCategories()
     checkAuth()
+    try {
+        works = await getWorks()
+        createGallery(works)
+        createCategories()
+    } catch (error) {
+        showNotification(
+            `Problème de connexion à l'API veuillez verifier votre connexion`,
+            'negative'
+        )
+    }
 }
 
 function createCategories() {
@@ -63,4 +70,25 @@ function checkAuth() {
         portfolioHeader.appendChild(openModalBtn)
         document.querySelector('.introduction__left').appendChild(avatarBtn)
     }
+}
+
+function showNotification(message, type) {
+    const notificationContainer = document.querySelector('.notification')
+    const notificationIcon = document.querySelector('.notification__icon')
+    const notificationMessage = document.querySelector('.notification__message')
+    if (type === 'positive') {
+        notificationContainer.classList.add('positive')
+        notificationContainer.classList.remove('negative')
+        notificationIcon.innerHTML = '<i class="fa-regular fa-circle-check"></i>'
+    } else if (type === 'negative') {
+        notificationContainer.classList.add('negative')
+        notificationContainer.classList.remove('positive')
+        notificationIcon.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i>'
+    }
+    notificationMessage.textContent = message
+    notificationContainer.style.opacity = '1'
+
+    setTimeout(() => {
+        notificationContainer.style.opacity = '0'
+    }, 3000)
 }

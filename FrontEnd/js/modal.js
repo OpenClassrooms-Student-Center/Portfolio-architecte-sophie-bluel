@@ -63,26 +63,30 @@ async function handleFileUpload() {
     formData.append('image', photoFile)
     formData.append('title', photoTitle)
     formData.append('category', photoCategory)
-    const response = await addWork(formData)
-    if (response.status === 201) {
-        const work = await response.json()
-        let category = { id: parseInt(work.categoryId) }
-        if (work.categoryId === '1') category.name = 'Objets'
-        if (work.categoryId === '2') category.name = 'Appartements'
-        if (work.categoryId === '3') category.name = 'Hôtels & restaurants'
-        work.category = category
-        works.push(work)
-        createGallery(works)
-        createModalGalleryPage()
-        createCategories()
-        createModalUploadPage()
-        alert('Travail ajouté avec success!! ✅')
-    } else if (response.status === 400) {
-        alert(`Erreur lors de l'ajout ❌`)
-    } else if (response.status === 401) {
-        alert(`Vous n'avez pas les droits pour ajouter une photo ❌`)
-    } else {
-        alert(`Erreur lors de l'ajout❌`)
+    try {
+        const response = await addWork(formData)
+        if (response.status === 201) {
+            const work = await response.json()
+            let category = { id: parseInt(work.categoryId) }
+            if (work.categoryId === '1') category.name = 'Objets'
+            if (work.categoryId === '2') category.name = 'Appartements'
+            if (work.categoryId === '3') category.name = 'Hôtels & restaurants'
+            work.category = category
+            works.push(work)
+            createGallery(works)
+            createModalGalleryPage()
+            createCategories()
+            createModalUploadPage()
+            showNotification('Travail ajouté avec succès!!', 'positive')
+        } else if (response.status === 400) {
+            showNotification(`Erreur lors de l'ajout`, 'negative')
+        } else if (response.status === 401) {
+            showNotification(`Vous n'avez pas les droits pour ajouter une photo`, 'negative')
+        } else {
+            showNotification(`Erreur lors de l'ajout`, 'negative')
+        }
+    } catch (error) {
+        showNotification(error, 'negative')
     }
 }
 

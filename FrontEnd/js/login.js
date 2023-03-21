@@ -3,13 +3,14 @@
 const loginForm = document.getElementById('login-form')
 
 loginForm.addEventListener('submit', async (event) => {
+    event.preventDefault()
+
     const emailInput = document.getElementById('email')
     const passwordInput = document.getElementById('password')
     const emailError = document.querySelector('.login-form__error--email')
     const passwordError = document.querySelector('.login-form__error--password')
     const submitError = document.querySelector('.login-form__error--submit')
 
-    event.preventDefault()
     emailError.textContent = ''
     passwordError.textContent = ''
     submitError.textContent = ''
@@ -37,7 +38,7 @@ loginForm.addEventListener('submit', async (event) => {
             submitError.textContent = `Une erreur est survenue lors de la tentative de connexion.`
         }
     } catch (error) {
-        submitError.textContent = error
+        showNotification(error, 'negative')
     }
 })
 

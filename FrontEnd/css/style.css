@@ -674,3 +674,38 @@ footer nav ul {
 .txt-red {
     color: red;
 }
+
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 40px;
+    display: flex;
+    align-items: center;
+    z-index: 10;
+    border-radius: 5px;
+    height: 50px;
+    font-weight: 500;
+    padding: 0 10px;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.notification__message {
+    margin-left: 10px;
+    margin-right: 30px;
+}
+
+.fa-circle-check {
+    color: green;
+}
+.fa-triangle-exclamation {
+    color: #ea4f2c;
+}
+.positive {
+    background-color: #eaf7ee;
+    border: solid 1px #3bb159;
+}
+.negative {
+    background-color: #fcede8;
+    border: solid 1px #ea4f2c;
+}

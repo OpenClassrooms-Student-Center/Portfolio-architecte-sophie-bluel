@@ -60,17 +60,21 @@ const createModalArticle = (imageUrl, imageName, imageId) => {
     article.appendChild(buttonsWrapper)
 
     deleteBtn.addEventListener('click', async () => {
-        const response = await deleteWork(imageId)
-        if (response.status === 204) {
-            works = [...works.filter((work) => work.id !== imageId)]
-            createGallery(works)
-            createModalGalleryPage()
-            createCategories()
-            alert('Travail supprimé avec success!! ✅')
-        } else if (response.status === 401) {
-            alert(`Vous n'êtes pas autorisé à supprimer! ❌`)
-        } else {
-            alert(`Erreur lors de la suppression ❌`)
+        try {
+            const response = await deleteWork(imageId)
+            if (response.status === 204) {
+                works = [...works.filter((work) => work.id !== imageId)]
+                createGallery(works)
+                createModalGalleryPage()
+                createCategories()
+                showNotification('Travail supprimé avec succès!!', 'positive')
+            } else if (response.status === 401) {
+                showNotification(`Vous n'êtes pas autorisé à supprimer!`, 'negative')
+            } else {
+                showNotification(`Erreur lors de la suppression`, 'negative')
+            }
+        } catch (error) {
+            showNotification(error, 'negative')
         }
     })
     return article
