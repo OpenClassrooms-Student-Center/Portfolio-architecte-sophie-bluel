@@ -503,9 +503,7 @@ main .fa-pen-to-square{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	padding-top: 2rem;
 	margin-top: 2rem;
-	padding-bottom: 2rem;
 }
 
 .fa-image{
@@ -519,7 +517,7 @@ main .fa-pen-to-square{
 	margin-bottom: 0.5rem;
 	margin-top: 1.5rem;
 	position: relative;
-
+    font-size: 14px;
 }
 
 .button-add-photo input[type="file"]{
@@ -533,11 +531,6 @@ main .fa-pen-to-square{
 .div-upload-photo p{
 	font-size: 10px;
 	margin-bottom: 1rem;
-}
-
-.div-add-photo{
-	border-bottom: 1px solid #B3B3B3;
-	padding-bottom: 2.5rem;
 }
 
 .form-add-photo{
@@ -571,6 +564,7 @@ main .fa-pen-to-square{
 
 .form-add-photo label{
 	margin-bottom: 0.5rem;
+	margin-top: 1rem;
 }
 
 .return-back{
@@ -589,14 +583,23 @@ main .fa-pen-to-square{
 	color: white ;
 	font-size: 14px;
 	padding-inline: 6rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-left: 120px;
 }
 
 #chosen-image{
-	height: 50px;
-	width: 50px;
+	height: 193px;
+	width: 129px;
+	object-fit: cover;
 
 }
 
 .active-button{
 	background-color: #1D6154;
+}
+
+.span-icon{
+	padding-top: 1rem;
 }

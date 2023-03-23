@@ -158,8 +158,9 @@ uploadButton.onchange = () => {
     reader.onload = () => {
         chosenImage.setAttribute("src",reader.result);
         document.querySelector('.mo-max').classList.add("no-show");
-        document.querySelector('.mo-max').classList.add("no-show");
-        document.querySelector('.mo-max').classList.add("no-show");
+        document.querySelector('.span-icon').classList.add("no-show");
+        document.querySelector('.button-add-photo').classList.add("no-show");
+        document.querySelector('#chosen-image').classList.remove("no-show");
         checkForm();
     }
 }
