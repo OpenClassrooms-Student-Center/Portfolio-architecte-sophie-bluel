@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sophie Bluel - Architecte d'intérieur</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
+        rel="stylesheet">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="./assets/style.css">
+    <script src="./fonctions.js"></script>
+    <!-- La partie dynamique du site est gérée dans un fichier dédié au code JS -->
+</head>
+
+<body>
+
+    <header id="enTete"></header>
+
+    <script>creationHeader()</script>
+
+    <h2 id="titreLogIn">Log In</h2>
+
+    <article name="login" id="login">
+        <div>
+            <label for="email">E-mail</label>
+            <br>
+            <input type="email" id="email">
+            <br>
+            <label class="erreur" id="erreurEmail"></label>
+        </div>
+        <div>
+            <label for="password">Mot de passe</label>
+            <br>
+            <input type="password" id="password">
+            <br>
+            <label class="erreur" id="erreurPassword"></label>
+            <br>
+        </div>
+        <input type="button" id="seConnecter" value="Se connecter">
+        <br>
+        <p><a href="" id="oubli">Mot de passe oublié</a></p>
+    </article>
+
+    <script>
+
+        seConnecter();
+
+    </script>
+
+</body>

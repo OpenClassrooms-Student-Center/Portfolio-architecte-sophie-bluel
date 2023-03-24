@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Sophie Bluel - Architecte d'intérieur</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
+		rel="stylesheet">
+	<meta name="description" content="">
+	<link rel="stylesheet" href="./assets/style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+		integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+		crossorigin="anonymous" referrerpolicy="no-referrer">
+	<script src="./fonctions.js"></script>
+	<!-- La partie dynamique du site est gérée dans le fichier "fonctions" dédié au code JS -->
+</head>
+
+<body>
+	<div id="barreEdition"></div>
+	<header id="enTete"></header>
+
+	<script>
+		createBarreEdition(); //permet de créer la barre noire d'édition pour un utilisateur logué
+		creationHeader(); //permet de créer un header identique pour toutes les pages du site
+		logout(); //permet de quitter le mode édition lorsque le bouton "logout" est disponible
+	</script>
+
+	<main>
+		<section id="introduction">
+			<figure>
+				<img src="./assets/images/sophie-bluel.png" alt="">
+			</figure>
+			<article>
+				<h2>Designer d'espace</h2>
+				<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison
+					finale du chantier.</p>
+				<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les
+					couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du
+					chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
+				<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG,
+					décorateur(trice)</p>
+			</article>
+		</section>
+		<section id="portfolio">
+			<h2 id="titreAccueil">Mes Projets</h2>
+			<div id="presentation"></div>
+
+			<aside id="modal1" class="modal" style="display: none">
+				<div class="modalWrapper js-modal-stop">
+					<button class="js-modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+					<br>
+					<h3>Galerie photo</h3>
+					<section id="galleryMini"></section>
+					<section id="gestionGalleryMini">
+						<button class="boutonGestionGalleryMini" id="ajouter">Ajouter une photo</button>
+						<button class="boutonGestionGalleryMini" id="supprimer">Supprimer la galerie</button>
+					</section>
+					<script>
+						recupererContenuBase('http://localhost:5678/api/works', 'Tous', 'galleryMini', 'mini')
+						actionsModaleMiniGallery()
+					</script>
+				</div>
+			</aside>
+
+			<aside id="modal2" class="modal" style="display: none">
+
+				<script>
+
+				</script>
+
+				<div class="modalWrapper js-modal-stop">
+					<button class="js-modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+					<br>
+					<h3>Ajout photo</h3>
+					<section id="ajoutPhoto">
+						<img src="" id="imageSelectionnee" class='testAffichageBouton' height="169">
+						<div id="aideImage">
+							<i class="fa-regular fa-image"></i>
+							<input type="file" id="ajouterPhoto" onchange="previewFile()" accept=".jpg, .png">
+							<label for="ajouterPhoto" id="labelPhoto">+ Ajouter photo</label>
+							<p id="limitesPhoto">jpg, png : 4mo max</p>
+						</div>
+					</section>
+
+					<form id="formulaire">
+
+						<label for="titre" class="labelForm">Titre</label>
+						<input id="titre" class='testAffichageBouton' type="text">
+						<p>
+							<label for="categorie" class="labelForm">Catégorie</label><br>
+							<select name="categorie" id="categorie" class='testAffichageBouton' required>
+								<option value=""></option>
+								<option value="Objets">Objets</option>
+								<option value="Appartements">Appartements</option>
+								<option value="Hotels & restaurants">Hotels & restaurants</option>
+							</select>
+							<br>
+							<label for="categorie" class='labelErreur' id="erreurCategorie"></label>
+						</p>
+
+					</form>
+
+					<button id="valider" disabled>Valider</button>
+					<script>
+						testBouton();
+						rechercheImage();
+					</script>
+				</div>
+			</aside>
+
+			<nav>
+				<ul class="listeFiltres">
+					<li><input type="button" class="filtre" id="Tous" value="Tous"></li>
+					<li><input type="button" class="filtre" value="Objets"></li>
+					<li><input type="button" class="filtre" value="Appartements"></li>
+					<li><input type="button" class="filtre" value="Hotels & restaurants"></li>
+				</ul>
+			</nav>
+
+			<div class="gallery" id="gallery">
+				<script>
+					//recupererContenuBase('http://localhost:5678/api/works', 'Tous') // Permet d'afficher tous les projets par défaut
+					recupererContenuBase('http://localhost:5678/api/works', 'Tous', 'gallery', 'maxi') // Permet d'afficher tous les projets par défaut
+					identifierCritereDeTri(); // Permet d'afficher les projets sélectionnés via les boutons de filtre
+					createBoutonEdition();//permet d'afficher le bouton modifier pour un utilisateur logué
+					/*ouvrirModale();*/
+				</script>
+			</div>
+
+		</section>
+		<section id="contact">
+			<h2>Contact</h2>
+			<p>Vous avez un projet ? Discutons-en !</p>
+			<form action="#" method="post">
+				<label for="name">Nom</label>
+				<input type="text" name="name" id="name">
+				<label for="email">Email</label>
+				<input type="email" name="email" id="email">
+				<label for="message">Message</label>
+				<textarea name="message" id="message" cols="30" rows="10"></textarea>
+				<input type="submit" value="Envoyer">
+			</form>
+		</section>
+
+
+
+
+
+	</main>
+
+	<footer>
+		<nav>
+			<ul>
+				<li>Mentions Légales</li>
+			</ul>
+		</nav>
+	</footer>
+</body>
+
+</html>
