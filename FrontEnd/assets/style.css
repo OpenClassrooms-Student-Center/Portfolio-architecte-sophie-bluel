@@ -296,10 +296,7 @@ figure img {
 }
 
 
-figure button
-
-/*:.fa-trash-can*/
-	{
+figure button {
 	background-color: black;
 	color: white;
 	position: relative;
@@ -311,6 +308,131 @@ figure button
 .icone {
 	cursor: pointer;
 }
+
+#aideImage {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+}
+
+#ajoutPhoto {
+	flex-wrap: wrap;
+	width: 420px;
+	height: 169px;
+	background: #E8F1F6;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	margin-bottom: 30px;
+}
+
+.fa-image {
+	font-size: 30px;
+	color: #B9C5CC;
+}
+
+#labelPhoto {
+	display: inline-block;
+	font-family: 'Work Sans';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 173px;
+	height: 36px;
+	color: #306685;
+	background: #CBD6DC;
+	border-radius: 50px;
+	border: none;
+	margin: 10px 0 5px 0;
+}
+
+#labelPhoto:hover {
+	cursor: pointer;
+}
+
+#limitesPhoto {
+	font-size: 10px;
+}
+
+#formulaire {
+	display: flex;
+	flex-direction: column;
+	border-bottom: 1px solid #B3B3B3;
+	padding-bottom: 10px;
+}
+
+#modal2 section {
+	margin: 30px 0;
+}
+
+#modal2 label {
+	font-family: 'Work Sans';
+	font-weight: 500;
+	font-size: 14px;
+}
+
+.labelForm {
+	margin-bottom: 10px;
+}
+
+#titre,
+#categorie {
+	background-color: white;
+	width: 420px;
+	height: 51px;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	margin-bottom: 30px;
+}
+
+#valider:enabled {
+	height: 36px;
+	width: 237px;
+	border-radius: 60px;
+	background: #1D6154;
+	color: white;
+	border: none;
+	font-family: Syne;
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 17px;
+	letter-spacing: 0em;
+	text-align: center;
+	margin-top: 35px;
+}
+
+#valider:enabled:hover {
+	cursor: pointer;
+}
+
+
+
+#valider:disabled {
+	height: 36px;
+	width: 237px;
+	border-radius: 60px;
+	background: #A7A7A7;
+	color: white;
+	border: none;
+	font-family: Syne;
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 17px;
+	letter-spacing: 0em;
+	text-align: center;
+	margin-top: 35px;
+}
+
+/*#valider:hover {
+	cursor: pointer;
+}*/
+
 
 /* -------------------------------------------- CSS pour la page de login ---------------------------------------------------*/
 
