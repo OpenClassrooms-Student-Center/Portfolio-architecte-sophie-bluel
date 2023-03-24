@@ -56,4 +56,6 @@ export function renderWorks(category) {
     .catch((err) => {
       gallery.innerHTML = `<p>Une erreur est survenue (${err})</p>`;
     });
+
+
 }

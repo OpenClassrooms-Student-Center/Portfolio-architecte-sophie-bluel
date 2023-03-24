@@ -19,9 +19,8 @@ export function renderFilters() {
         //On ajoute du texte a l'interieur du btn qui prendra le nom de la categorie 
         //category.name permet d'acceder a l'attribut "name" dans category qui possède ici le nom de category
         newButton.innerText = category.name;
-        //On ajoute un attribut id au btn qui est identique à celui de la category
-        // 
-        newButton.id = category.id;
+        newButton.className = "btn"
+
         //On va également inserer ces btns dans la même div que celui de "tous" => filterDiv
         filterDiv.appendChild(newButton);
         //On ajoute un event listener aux btns pour "ecouter" a chaque fois que le user click sur un des btns
@@ -45,4 +44,7 @@ export function renderFilters() {
         renderWorks("Tous");
       });
     });
+
+
+
 }

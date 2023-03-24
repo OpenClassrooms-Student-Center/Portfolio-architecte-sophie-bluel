@@ -1,20 +1,3 @@
-//What to do with response from API 3 possible outcomes bc 3 different code combos
-      //API returns 200 value if the login was successful
-      if (value === '200'){
-        console.log("you're logged in!")
-      }
-     //API returns 401 value if the user is unauthorized
-      else if (value === '401') {
-        window.alert('User unauthorized')
-      }
-     //Else the user doesn't exist or wrong email or password
-      else {
-        window.alert('Wrong email or password')
-      }
-
-
-
-
 
 //Page modification when user logs in
 
@@ -37,9 +20,14 @@
       const modifyText = document.createElement("p");
       modifyText.innerText = "modifier";
 
+      //<a> pour regrouper l'icon et le text pour faciliter le lien
+      const modalLink = document.createElement("a");
+      modalLink.className(".js-modal")
+      modalLink.appendChild(modifyIcon);
+      modalLink.appendChild(modifyText);
+
       //Injecting elements next to h2 already present
-      modifyIcon.parentNode.insertBefore(modifyIcon, h2);
-      modifyText.parentNode.insertBefore(modifyText, h2);
+      modalLink.parentNode.insertBefore(modalLink, h2);
 
       //Creating the logged in nav
       const nav = document.createElement("nav");

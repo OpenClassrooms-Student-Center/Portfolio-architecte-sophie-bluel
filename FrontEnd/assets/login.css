@@ -1,3 +1,36 @@
 body{
     max-width: unset !important;
 }
+
+.container{
+	background-color: #fffef8;
+}
+
+#login__header{
+	padding : 50px 0px;
+}
+.login__section{
+	margin: 0 ;
+	padding : 50px 0 100px 0px;
+	display: flex;
+	flex-direction: column;
+}
+
+.login__section h1 {
+	align-items: center;
+	color: #1D6154;
+	font-family: Syne;
+	font-weight: 700;
+	font-size: 30px;
+}
+
+.login__section form{
+	display: flex;
+	flex-direction: column;
+	margin-top:2em;
+}
+
+header, main {
+    max-width: 1140px;
+    margin: auto;
+}

@@ -136,32 +136,7 @@ li:hover {
 	gap:10px;
 	margin-bottom: 3em;
 }
-#login__header{
-	background-color: #fffef8;
-	margin: 0;
-	padding : 50px 0px;
-}
-.login__section{
-	background-color: #fffef8;
-	margin: 0 ;
-	padding : 50px 0 100px 0px;
-	display: flex;
-	flex-direction: column;
-}
 
-.login__section h1 {
-	align-items: center;
-	color: #1D6154;
-	font-family: Syne;
-	font-weight: 700;
-	font-size: 30px;
-}
-
-.login__section form{
-	display: flex;
-	flex-direction: column;
-	margin-top:2em;
-}
 
 .filterDiv{
 	display: flex;
@@ -182,10 +157,10 @@ button{
 	font-weight: 700;
 	border: solid 1px 
 }
-button:focus-within{
+/* button:focus-within{
 	color: white;
 	background-color: #1D6154;
-}
+} */
 .login__form a{
 	color: #3D3D3D;
 	font-size: 14px;
@@ -291,3 +266,9 @@ footer nav ul {
 	margin: 2em
 }
 
+
+
+.activeFilter{
+	background-color: #1D6154;
+	color: white;
+}
