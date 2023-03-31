@@ -1,3 +1,6 @@
+export function modalFunction(){
+
+
 let modal = null;
 
 const openModal = function (e) {
@@ -28,3 +31,5 @@ window.addEventListener("click", (e) => {
         closeModal(e)
     }
 })
+
+}

@@ -10,32 +10,35 @@ export function renderFilters() {
       filterDiv.className = "filterDiv";
       const allElementsButton = document.createElement("button");
       allElementsButton.innerText = "Tous";
+
+      //necessaire pour le hover effect sur les boutons des filtres
+      allElementsButton.classList.add('btn')
+      allElementsButton.classList.add('active')
+
+      allElementsButton.addEventListener("click", function(){
+        document.querySelector(".btn").forEach((btn) => {
+          btn.classList.remove('active')
+        })
+        allElementsButton.classList.add('active')
+      })
       //On insere le btn dans la div filterDiv
       filterDiv.appendChild(allElementsButton);
       //On fait une boucle pour que chaque category dans categories ait un bouton créé 
       categories.forEach((category) => {
-        //On crée donc un button 
         const newButton = document.createElement("button");
-        //On ajoute du texte a l'interieur du btn qui prendra le nom de la categorie 
-        //category.name permet d'acceder a l'attribut "name" dans category qui possède ici le nom de category
+
         newButton.innerText = category.name;
         newButton.className = "btn"
 
-        //On va également inserer ces btns dans la même div que celui de "tous" => filterDiv
         filterDiv.appendChild(newButton);
-        //On ajoute un event listener aux btns pour "ecouter" a chaque fois que le user click sur un des btns
-        //lors d'un click on effectuera la fonction renderWorks(category.name)
+
         newButton.addEventListener("click", function () {
 
-          //On appelle la fonction renderWorks dans le fichier works.js
-          //cette fonction affiche les works 
-          //elle prend comme paramettre une category
+
           renderWorks(category.name);
-          //Ici on a pris category.name comme paramettre qui va nous permettre d'afficher uniquement les works qui correspondent
-          //a "l'innerText" du bouton
-          // Ex : si user click sur le btn "Objects" le eventListener ecoute, voit que c'est innerText "Objects" va le mettre en parametre
-          //de la fonction renderWorks
+
         });
+        addActiveClass(newButton);
       });
       const gallery = document.querySelector(".gallery");
       gallery.parentNode.insertBefore(filterDiv, gallery);
