@@ -179,6 +179,29 @@ input[type="submit"]{
 	text-align: center;
 	border-radius: 60px ;
 }
+.filters{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	column-gap: 8px;
+}
+button[type="filter"]{
+	font-family: 'Syne';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 16px;
+	border-radius: 60px;
+	border: solid 1px #1D6154;
+	background-color: white;
+	padding: 8px 16px;
+	color: #1D6154;
+}
+
+.filteractive{
+	background-color: #1D6154;
+	color: white;
+}
 
 footer nav ul {
 	display: flex;
