@@ -185,6 +185,7 @@ input[type="submit"]{
 	align-items: center;
 	justify-content: center;
 	column-gap: 8px;
+	padding: 24px 0 48px 0;
 }
 button[type="filter"]{
 	font-family: 'Syne';
@@ -198,7 +199,7 @@ button[type="filter"]{
 	color: #1D6154;
 }
 
-.filteractive{
+#filteractif{
 	background-color: #1D6154;
 	color: white;
 }
