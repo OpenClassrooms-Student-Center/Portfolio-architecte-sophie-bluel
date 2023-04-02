@@ -215,6 +215,17 @@ article {
 	padding: 20px;
 	background-color: white;
 	border-radius: 10px;
+	animation: slideFromTop .3s both;
+}
+
+@keyframes slideFromTop {
+	from {
+		transform: translateY(-50px);
+	}
+
+	to {
+		transform: translateY(0);
+	}
 }
 
 h3 {
@@ -225,10 +236,22 @@ h3 {
 	text-align: center;
 }
 
-.js-modal-close {
+#modal1Icons {
+	width: 100%;
 	display: flex;
-	margin: auto;
-	justify-content: right;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.js-modal-previous {
+	align-self: flex-start;
+	margin: 0;
+	background-color: white;
+	border: none;
+	cursor: pointer;
+}
+
+.js-modal-close {
 	align-self: flex-end;
 	margin: 0;
 	background-color: white;
@@ -272,7 +295,7 @@ h3 {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	max-width: 86%;
+	width: 86%;
 }
 
 #galleryMini figure {
@@ -411,8 +434,6 @@ figure button {
 	cursor: pointer;
 }
 
-
-
 #valider:disabled {
 	height: 36px;
 	width: 237px;
@@ -429,9 +450,6 @@ figure button {
 	margin-top: 35px;
 }
 
-/*#valider:hover {
-	cursor: pointer;
-}*/
 
 
 /* -------------------------------------------- CSS pour la page de login ---------------------------------------------------*/
@@ -441,6 +459,7 @@ figure button {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	margin-bottom: 20%;
 }
 
 #titreLogIn {
@@ -490,7 +509,6 @@ figure button {
 	font-family: 'Work Sans';
 	color: #3D3D3D;
 	text-decoration: underline;
-
 }
 
 /* HTML5 display-role reset for older browsers */
