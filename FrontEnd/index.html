@@ -14,6 +14,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
 		integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
 		crossorigin="anonymous" referrerpolicy="no-referrer">
+	<link rel="shortcut icon" href="#">
 	<script src="./fonctions.js"></script>
 	<!-- La partie dynamique du site est gérée dans le fichier "fonctions" dédié au code JS -->
 </head>
@@ -47,23 +48,72 @@
 		<section id="portfolio">
 			<h2 id="titreAccueil">Mes Projets</h2>
 			<div id="presentation"></div>
-			<!-- <a href="#modal1" class="js-modal" id="js-modal">Ouvrir la boîte modale</a> -->
-			<script>
-				ouvrirModale();
-			</script>
 
 			<aside id="modal1" class="modal" style="display: none">
 				<div class="modalWrapper js-modal-stop">
-					<button class="js-modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+					<button class="js-modal-close"><i class="fa-solid fa-xmark"></i></button>
 					<br>
 					<h3>Galerie photo</h3>
-					<section id="galleryMini">
-						<script>recupererContenuBase('http://localhost:5678/api/works', 'Tous', 'galleryMini', 'mini')</script>
-					</section>
+					<section id="galleryMini"></section>
 					<section id="gestionGalleryMini">
-						<button class="boutonGestionGalleryMini">Ajouter une photo</button>
-						<button class="boutonGestionGalleryMini">Supprimer la galerie</button>
+						<button class="boutonGestionGalleryMini" id="ajouter">Ajouter une photo</button>
+						<button class="boutonGestionGalleryMini" id="supprimer">Supprimer la galerie</button>
 					</section>
+					<script>
+						recupererContenuBase('http://localhost:5678/api/works', 'Tous', 'galleryMini', 'mini')
+						actionsModaleMiniGallery()
+						closeModal()
+					</script>
+				</div>
+			</aside>
+
+			<aside id="modal2" class="modal" style="display: none">
+
+				<script>
+
+				</script>
+
+				<div class="modalWrapper js-modal-stop">
+					<nav id="modal1Icons">
+						<button class="js-modal-previous"><i class="fa-solid fa-arrow-left"></i></button>
+						<button class="js-modal-close"><i class="fa-solid fa-xmark"></i></button>
+					</nav>
+					<br>
+					<h3>Ajout photo</h3>
+					<section id="ajoutPhoto">
+						<img src="" id="imageSelectionnee" class='testAffichageBouton' height="169">
+						<div id="aideImage">
+							<i class="fa-regular fa-image"></i>
+							<input type="file" id="ajouterPhoto" accept=".jpeg, .jpg, .png">
+							<label for="ajouterPhoto" id="labelPhoto">+ Ajouter photo</label>
+							<p id="limitesPhoto">jpeg, png : 4mo max</p>
+						</div>
+					</section>
+
+					<form id="formulaire">
+
+						<label for="titre" class="labelForm">Titre</label>
+						<input id="titre" class='testAffichageBouton' type="text">
+						<p>
+							<label for="categorie" class="labelForm">Catégorie</label><br>
+							<select name="categorie" id="categorie" class='testAffichageBouton' required>
+								<option value=""></option>
+								<option value="1">Objets</option>
+								<option value="2">Appartements</option>
+								<option value="3">Hotels & restaurants</option>
+							</select>
+							<br>
+							<label for="categorie" class='labelErreur' id="erreurCategorie"></label>
+						</p>
+
+					</form>
+
+					<button id="valider" disabled>Valider</button>
+					<script>
+						testBouton();
+						rechercheImage();
+
+					</script>
 				</div>
 			</aside>
 
@@ -78,11 +128,9 @@
 
 			<div class="gallery" id="gallery">
 				<script>
-					//recupererContenuBase('http://localhost:5678/api/works', 'Tous') // Permet d'afficher tous les projets par défaut
 					recupererContenuBase('http://localhost:5678/api/works', 'Tous', 'gallery', 'maxi') // Permet d'afficher tous les projets par défaut
 					identifierCritereDeTri(); // Permet d'afficher les projets sélectionnés via les boutons de filtre
 					createBoutonEdition();//permet d'afficher le bouton modifier pour un utilisateur logué
-					/*ouvrirModale();*/
 				</script>
 			</div>
 
@@ -100,6 +148,8 @@
 				<input type="submit" value="Envoyer">
 			</form>
 		</section>
+
+
 	</main>
 
 	<footer>
