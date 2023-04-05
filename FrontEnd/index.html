@@ -10,9 +10,12 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-	<script src="/script.js" defer></script>
-	<script src="/modale.js" defer></script>
+	<script src="js/utils.js" defer></script>
+	<script src="js/script.js" defer></script>
+	<script src="js/works.js" defer></script>
+	<script src="js/modale.js" defer></script>
 </head>
+
 <body>
 <div class="header-admin">
 	<span class="modeedition">
@@ -22,6 +25,7 @@
 	<button class="publishchange">publier les changements</button>
 
 </div>	
+
 <header class="header">
 	<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
 	<nav>
@@ -33,6 +37,7 @@
 		</ul>
 	</nav>
 </header>
+
 <main>
 	<section id="introduction">
 		<figure>
@@ -45,6 +50,7 @@
 			<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
 		</article>
 	</section>
+
 	<section id="portfolio">
 	 <div class="gallerytitle">
 		<h2>Mes Projets</h2>
@@ -71,25 +77,24 @@
 				<form enctype="multipart/form-data" class="form-add-photo">
 					<div class="div-upload-photo">
 						<span class="span-icon"><i class="fa-regular fa-image fa-4x"></i></span>
-						<button onclick  class="button-add-photo">+ Ajouter photo<input name='image' type="file" id="upload-button"></button>
+						<label class="button-add-photo" for="upload-button" >+ Ajouter photo<input name='image' type="file" id="upload-button"></label>
 						<p class="mo-max">jpg, png : 4mo max</p>
 						<img id="chosen-image" class="no-show"/>
 					</div>
 					<label for="title">Titre</label>
-                    <input name='title' class="input-title" type="text">
-                    <label for="title">Catégorie</label>
-                    <select name='category' class="select-category">
+                    <input name='title' id="title" class="input-title" type="text">
+                    <label for="category">Catégorie</label>
+                    <select name='category' id="category" class="select-category">
 						<option></option>
-						<option value="objets">Objets</option>
-						<option value="appartements">Appartements</option>
-						<option value="hotels-restaurants">Hôtels & restaurants</option>
+						<option value="1">Objets</option>
+						<option value="2">Appartements</option>
+						<option value="3">Hôtels & restaurants</option>
 					</select>
-					<button type='submit' class="valid-button" disabled>Valider</button>
+					<button type='submit' class="valid-button" disabled="disabled">Valider</button>
 				</form>				
 		     </div>			
 		    </div>
 		   </div>
-
 		</div>
 	 </aside>
 		<div class="filtersdiv">

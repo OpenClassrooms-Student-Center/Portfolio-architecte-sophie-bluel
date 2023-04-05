@@ -513,11 +513,13 @@ main .fa-pen-to-square{
 .button-add-photo{
 	color: #306685;
 	background-color: #CBD6DC;
-	border: none;
-	margin-bottom: 0.5rem;
-	margin-top: 1.5rem;
-	position: relative;
-    font-size: 14px;
+	line-height: 19px;
+	border-radius: 60px;
+	height: 20px;
+	padding-inline: 1.5rem;
+	cursor:pointer;
+	padding : 10px 40px;
+	font-weight: 700;
 }
 
 .button-add-photo input[type="file"]{

@@ -1,8 +1,8 @@
 const formElement = document.querySelector('.form');
 
-formElement.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const formData = new FormData(formElement);
+formElement.addEventListener('submit', (e) => {     // envoi du formulaire de connexion à l'api et nous renvoi le token d'identification //
+    e.preventDefault();                             // ou non après vérification de l'identifiant //
+    const formData = new FormData(formElement); 
     const data = Object.fromEntries(formData);
 
     console.log(data);
