@@ -9,6 +9,10 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
+	<!-- Mon JS avec defer pour charger en dernier (type="module" fait la même chose) -->
+	
+	<script src="/FrontEnd/js/categories.js" type="module" defer></script>
+	<script src="/FrontEnd/js/works.js" type="module" defer></script>
 </head>
 <body>
 <header>
@@ -43,6 +47,7 @@
 			<li class="filter__item">Hôtel & restaurants</li>
 		</ul>
 		<div class="gallery">
+
 		</div>
 	</section>
 	<section id="contact">
@@ -68,7 +73,6 @@
 	</nav>
 </footer>
 </body>
-<script src="/FrontEnd/js/categories.js"></script>
-<script src="/FrontEnd/js/works.js"></script>
+
 
 </html>
