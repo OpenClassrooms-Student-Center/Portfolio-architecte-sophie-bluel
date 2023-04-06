@@ -268,7 +268,68 @@ footer nav ul {
 
 
 
-.activeFilter{
+.active{
 	background-color: #1D6154;
 	color: white;
+}
+
+.d-inline{
+	display: inline;
+}
+
+
+.d-inline-flex{
+	display: inline-flex;
+}
+
+.move-modal-link{
+	left:64%;
+	position: relative;
+}
+
+.move-h2{
+	left:35%;
+	position: relative;
+}
+
+.admin-bar{
+	background-color: black;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+	gap: 15px;
+}
+
+.admin-bar i {
+	background-color: white;
+	font-size: 2rem;
+}
+
+.admin-bar p {
+	color: white;
+}
+
+.admin-bar button {
+	font-family: Work Sans;
+
+}
+
+.modal{
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.modal-wrapper{
+	width: 600px;
+	padding: 20px;
+	max-width: 100vh;
+	background-color: white;
 }

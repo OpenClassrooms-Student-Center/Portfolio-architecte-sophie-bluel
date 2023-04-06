@@ -12,7 +12,6 @@ export function renderWorks(category) {
       //pour chaque objet work dans works alors on va ...
       works.forEach((work) => {
        
-        console.log(work)
         
         //On va aller voir pour chaque category si elle correspond a dans l'objet work la valeur de l'objet cateogry et son atrribut name
         //vu qu'on est dans une boucle pour chaque work on va faire cette comparaison sur tous les objets work 
@@ -43,7 +42,7 @@ export function renderWorks(category) {
         newFigcaption.innerText = work.title;
 
         newFigure.appendChild(newFigcaption);
-        gallery.append6666669Child(newFigure);}
+        gallery.appendChild(newFigure);}
       });
     })
     //afficher un msg d'erreur à l'ecran si pb avec la fonction

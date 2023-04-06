@@ -16,38 +16,43 @@ export function renderFilters() {
       allElementsButton.classList.add('active')
 
       allElementsButton.addEventListener("click", function(){
-        document.querySelector(".btn").forEach((btn) => {
+        document.querySelectorAll(".btn").forEach((btn) => {
           btn.classList.remove('active')
         })
         allElementsButton.classList.add('active')
       })
       //On insere le btn dans la div filterDiv
       filterDiv.appendChild(allElementsButton);
+      
       //On fait une boucle pour que chaque category dans categories ait un bouton créé 
       categories.forEach((category) => {
         const newButton = document.createElement("button");
-
         newButton.innerText = category.name;
         newButton.className = "btn"
-
         filterDiv.appendChild(newButton);
-
+        
         newButton.addEventListener("click", function () {
-
-
           renderWorks(category.name);
-
+          addActiveClass(newButton);
         });
-        addActiveClass(newButton);
+        
       });
+      
       const gallery = document.querySelector(".gallery");
       gallery.parentNode.insertBefore(filterDiv, gallery);
 
       allElementsButton.addEventListener("click", function () {
         renderWorks("Tous");
       });
+      
     });
 
+}
 
+function addActiveClass(button){
+  document.querySelectorAll(".btn").forEach((btn) => {
+      btn.classList.remove("active")
+  })
+  button.classList.add("active")
 
 }

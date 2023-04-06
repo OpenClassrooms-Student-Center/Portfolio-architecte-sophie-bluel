@@ -1,6 +1,5 @@
 export function modalFunction(){
 
-
 let modal = null;
 
 const openModal = function (e) {
@@ -11,6 +10,7 @@ const openModal = function (e) {
     target.setAttribute('aria-modal', 'true');
     modal = target;
     modal.addEventListener("click", closeModal)
+    modal.querySelector("js-modal-close").addEventListener("click", closeModal)
 }
 
 
@@ -21,6 +21,7 @@ const closeModal = function (e) {
     modal.setAttribute('aria-hidden', 'true')
     modal.removeAttribute('aria-modal')
     modal.removeEventListener('click', closeModal)
+    modal.querySelector(".js-modal-close").removeEventListener("click", closeModal)
     modal = null
 }
 
@@ -32,4 +33,20 @@ window.addEventListener("click", (e) => {
     }
 })
 
+
+const createModal = function (e) {
+    e.preventDefault();
+    const asideTag = document.createElement("aside")
+    asideTag.setAttribute("id", "modal1")
+    asideTag.setAttribute("class", "modal")
+    asideTag.setAttribute("aria-hidden", "true")
+    asideTag.setAttribute("role", "dialogue")
+    asideTag.innerHTML = "<div> </div>"
+
+    body.appendChild(asideTag)
+    
 }
+
+
+}
+
