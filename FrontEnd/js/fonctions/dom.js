@@ -12,3 +12,24 @@ export function createElement(tagName, attributes = {}) {
     return element;
 
 }
+
+
+/**
+ * 
+ * @param {number} categoriesId 
+ */
+export function filterBy(categoriesId) {
+    // get My Button
+    const boutonFilter = document.querySelector("#filterBtn_" + categoriesId);
+    // onClick
+    boutonFilter.addEventListener("click", function () {
+        if (categoriesId === 0) {
+            return console.log(maListWorks);
+        } else {
+            const filterByObjets = maListWorks.filter(function (objet) {
+                return objet.category.id === categoriesId;
+            });
+            console.log(filterByObjets);
+        }
+    });
+}
