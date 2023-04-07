@@ -96,7 +96,6 @@ boutonsFilter.forEach(function (element) {
             return showWorkBy(maListWorks);
         } else {
             const filterByObjets = maListWorks.filter(function (objet) {
-                console.log(objet.category.id);
                 return objet.category.id == categoryId;
             });
             document.querySelector(".gallery").innerHTML = "";
