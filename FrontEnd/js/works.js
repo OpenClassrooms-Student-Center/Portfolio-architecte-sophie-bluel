@@ -1,57 +1,112 @@
 /*
- Faites l’appel à l’API avec fetch afin de récupérer dynamiquement lesprojets de l’architecte.
+Mes Projets
  */
+// Mes Imports (type="module")
+import { fetchJSON } from "./fonctions/api.js";
+import { createElement } from "./fonctions/dom.js";
 
-/**
- * Permet de se connecter API et GET all Works
- * @returns json works
+
+/*
+LES PROJETS - Récuperation de tous les Projets 
  */
-async function fetchWorks() {
-    const answer = await fetch("http://localhost:5678/api/works", {
-        method: 'GET',
-        headers: {
-            "Accept": "application/json",
-        }
-    })
-    if (answer.ok === true) {
-        return answer.json();
-    };
-    throw new Error("Impossible de contacter le serveur !!");
-};
+const maListWorks = await fetchJSON("http://localhost:5678/api/works", {
+    // si je souhaite rajouter des options.
+});
 
-// Je realise ma requete pour recevoir ma liste WORKS from API
-// fetchWorks().then(works => console.log(works));
-
-
-async function readWork() {
-
-    // Je realise ma requete pour recevoir ma liste WORKS from API et je la stock dans une variable
-    const list = await fetchWorks();
-
+/*
+1/ AFFICHER LES PROJETS
+ */
+// Créer ma function ICI ==> showWorksby(liste)
+export function showWorkBy(liste) {
     // Je crée tous les elements suivant le nombre de réponses trouvés
-    for (let item = 0; item < list.length; item++) {
-        // Je declare la balise parent Ref!
-        const contenerWork = document.querySelector(".gallery");
-        // Je crée les balises 
-        const figureElement = document.createElement("figure");
-        const imgElement = document.createElement("img");
-        const captionElement = document.createElement("figcaption");
+    for (let item = 0; item < liste.length; item++) {
+        // Je crée les balises suivant ma fonction c'est plus facile d'intégrer des para comme des class !
+        const figureElement = createElement("figure");
+        const imgElement = createElement("img", {
+            "src": liste[item].imageUrl
+        });
+        const captionElement = createElement("figcaption", {
+        });
         // J'assigne la valeur dans mon nouveau element crée
-        imgElement.src = list[item].imageUrl;
-        captionElement.innerText = list[item].title;
+        captionElement.innerText = liste[item].title;
+        // Je declare la balise parent Ref!
+        const contenerWorks = document.querySelector(".gallery");
         // Je les inbrique et affiche
-        contenerWork.appendChild(figureElement);
+        contenerWorks.appendChild(figureElement);
         figureElement.appendChild(imgElement);
         figureElement.appendChild(captionElement);
     };
-};
+}
+showWorkBy(maListWorks);
+
+/*
+LES CATEGORIES - Récuperation de toutes les categories
+ */
+const maListCategories = await fetchJSON("http://localhost:5678/api/categories", {
+    // si je souhaite rajouter des options.
+});
+
+/*
+CREATE ALL MY FILTER'S BUTTON TO index.html
+ */
+// 1) I make the first button <ALL>
+const myFirstFilter = createElement("li", {
+    "class": "filter__item",
+    "id": "filterBtn_0",
+    "data-id": 0
+})
+// Value to my button
+myFirstFilter.innerText = "Tout";
+// Parent's to my new elements
+const contenerFilter = document.querySelector(".filter");
+// i insert my new element to index.html
+contenerFilter.appendChild(myFirstFilter);
+
+// 2) i made all other filters from API
+for (let category = 0; category < maListCategories.length; category++) {
+    const itemFilter = createElement("li", {
+        "class": "filter__item",
+        "id": "filterBtn_" + maListCategories[category].id,
+        "data-id": maListCategories[category].id
+    });
+    // Value to my button
+    itemFilter.innerText = maListCategories[category].name;
+    // Parent's to my new elements
+    const contenerFilter = document.querySelector(".filter");
+    // i insert my new element to index.html
+    contenerFilter.appendChild(itemFilter);
+}
 
 
-readWork();
+
+/*
+FILTERS
+ */
+// get My Button
+const boutonsFilter = document.querySelectorAll(".filter__item");
+// onClick on each element
+boutonsFilter.forEach(function (element) {
+
+    element.addEventListener("click", function () {
+        const categoryId = element.dataset.id;
+
+        if (categoryId == 0) {
+            document.querySelector(".gallery").innerHTML = "";
+
+            return showWorkBy(maListWorks);
+        } else {
+            const filterByObjets = maListWorks.filter(function (objet) {
+                console.log(objet.category.id);
+                return objet.category.id == categoryId;
+            });
+            document.querySelector(".gallery").innerHTML = "";
+            showWorkBy(filterByObjets);
+        }
+    });
+
+});
 
 
-// EXEMPLE
-/* <figure>
-    <img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
-        <figcaption>Abajour Tahina</figcaption>
-</figure> */
+
+
+
