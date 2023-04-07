@@ -1,4 +1,6 @@
-async function createModaleGallery() {     // Même fonction que pour la création de la gallerie de travaux mais à l'intérieur de la modale //
+// Même fonction que pour la création de la gallerie de travaux mais à l'intérieur de la modale //
+
+async function createModaleGallery() {     
     const works = await getWorks();
     const gallery = document.querySelector(".modal-gallery");
     gallery.innerHTML = '';
@@ -23,8 +25,10 @@ async function createModaleGallery() {     // Même fonction que pour la créati
         buttonElement.appendChild(iconElement);
         gallery.appendChild(element);
 
+        // suppression d'un travaux en cliquant sur le bouton 'corbeille' //
+
         categories.push(work.category.name);            
-        buttonElement.addEventListener('click', function (e) {        // suppression d'un travaux en cliquant sur le bouton 'corbeille' //
+        buttonElement.addEventListener('click', function (e) {        
             e.preventDefault();
             const workId = e.target.closest('figure').dataset.id;
             deleteWork(workId);
@@ -34,7 +38,10 @@ async function createModaleGallery() {     // Même fonction que pour la créati
 
 createModaleGallery();
 
-async function deleteWork(id) {  // fonction permetteant de supprimer un travaux via api //
+
+// fonction permetteant de supprimer un travaux via api //
+
+async function deleteWork(id) {  
     try {
         const token = localStorage.getItem("token");
         const res = await fetch(`http://localhost:5678/api/works/${id}`, {
@@ -53,24 +60,31 @@ async function deleteWork(id) {  // fonction permetteant de supprimer un travaux
     }
 }
 
-document.querySelector(".navbutton-add-photo").addEventListener("click",function(){     // en cliquant sur 'ajouter une photo' on cache la modale 1 //
-    document.querySelector('.modale1').classList.add("no-show");                        // et on fait apparaître la modale 2 //
+
+// en cliquant sur 'ajouter une photo' on cache la modale 1 et on fait apparaître la modale 2 //
+
+document.querySelector(".navbutton-add-photo").addEventListener("click",function(){     
+    document.querySelector('.modale1').classList.add("no-show");                        
     document.querySelector('.modale2').classList.remove("no-show"); 
     document.querySelector('.return-back').classList.remove("no-show");
 })
 
-document.querySelector(".return-back").addEventListener("click",function(){    // en cliquant sur la flèche on retourne dans la modale 1 //
+// en cliquant sur la flèche on retourne dans la modale 1 //
+
+document.querySelector(".return-back").addEventListener("click",function(){    
     document.querySelector('.modale2').classList.add("no-show");
     document.querySelector('.modale1').classList.remove("no-show");
     document.querySelector('.return-back').classList.add("no-show");
 })
 
 
+// lorsqu'un fichier est sélectionner il est prévisualisable dans la modale 2 //
+
 const uploadButton = document.querySelector("#upload-button");    
 let chosenImage = document.getElementById("chosen-image");
 let srcChosenimage = chosenImage.getAttribute('src');
 
-uploadButton.onchange = () => {                             // lorsqu'un fichier est sélectionner il est prévisualisable dans la modale 2 //
+uploadButton.onchange = () => {                             
     let reader = new FileReader();
     reader.readAsDataURL(uploadButton.files[0]);
     console.log(uploadButton.files[0]);
@@ -84,7 +98,10 @@ uploadButton.onchange = () => {                             // lorsqu'un fichier
     }
 }
 
-function checkForm(){                  // on vérifie içi avec une fonction si tout le formulaire est rempli avant de pouvoir l'envoyer //
+
+// on vérifie içi avec une fonction si tout le formulaire est rempli avant de pouvoir l'envoyer //
+
+function checkForm(){                  
      const imgElement = document.querySelector("#chosen-image").getAttribute('src');
      const inputElement = document.querySelector(".input-title").value;
      const selectElement = document.querySelector(".select-category").selectedIndex;
@@ -102,8 +119,11 @@ function checkForm(){                  // on vérifie içi avec une fonction si 
 document.querySelector(".input-title").addEventListener("input",checkForm);
 document.querySelector(".select-category").addEventListener("change",checkForm);
 
+
+// envoi du formulaire via l'api //
+
 const newWorkform = document.querySelector('.form-add-photo');
-newWorkform.addEventListener("submit",async function(e){         // envoi du formulaire via l'api //
+newWorkform.addEventListener("submit",async function(e){         
     e.preventDefault();
     const formData = new FormData(newWorkform);
     try {

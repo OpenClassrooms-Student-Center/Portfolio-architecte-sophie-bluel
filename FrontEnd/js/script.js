@@ -1,11 +1,16 @@
-async function createGallery(){  // On crée une fonction asynchrone qui permettra d'afficher les images dans la galerie //
+// On crée une fonction asynchrone qui permettra d'afficher les images dans la galerie //
+
+async function createGallery(){
     const works = await getWorks();
     const gallery = document.querySelector(".gallery");
     gallery.innerHTML = '';
     
     let categories = [];
 
-    works.forEach(work=> {    // On crée un DOM HTML pour chaque travaux //
+
+    // On va ajouter dans le DOM HTML chaque travaux //
+
+    works.forEach(work=> {    
         const element = document.createElement("figure");  
         const imgElement = document.createElement("img");
         const captionElement = document.createElement("figcaption");
@@ -20,20 +25,30 @@ async function createGallery(){  // On crée une fonction asynchrone qui permett
         categories.push(work.category.name);
     });
 
+
     categories.unshift('Tous');
-    const cleanCategories = new Set(categories);  // On crée une constante permettant de supprimer les doublons de catégorie pour les filtres //
+
+
+ // On crée une constante permettant de supprimer les doublons de catégorie pour les filtres //
+
+    const cleanCategories = new Set(categories);  
     
-    cleanCategories.forEach(category=> {      // Pour chaque catégorie unique on crée un bouton //           
+
+// Pour chaque catégorie unique on crée un bouton // 
+
+    cleanCategories.forEach(category=> {               
 
         const buttonElement = document.createElement("button");
         buttonElement.innerText = category;
         buttonElement.dataset.category = category;
-        if(category === 'Tous'){                      // le bouton 'tous' est activé par défaut //
+        if(category === 'Tous'){                     
             buttonElement.classList.add("activefilter");
         }
         document.querySelector(".filtersdiv").appendChild(buttonElement);
 
-        buttonElement.addEventListener("click", function(e) {     // lorsque l'on clique sur un bouton de filtre on affiche seulement les travaux correspondant à sa catégorie //
+        // lorsque l'on clique sur un bouton de filtre on affiche seulement les travaux correspondant à sa catégorie //
+
+        buttonElement.addEventListener("click", function(e) {     
             e.preventDefault();
             console.log(buttonElement.dataset.category);
             const filters = document.querySelector(".filtersdiv");
@@ -59,13 +74,22 @@ async function createGallery(){  // On crée une fonction asynchrone qui permett
     });
 }
 
-createGallery(); // exécution de la fonction //
 
-if(localStorage.getItem("token") != null){       // si l'utilisateur est connecté (le token est donc actif), affiché le mode admin sur le site //
+// exécution de la fonction au chargement de la page //
+
+createGallery(); 
+
+
+// si l'utilisateur est connecté (le token est donc actif), affiché le mode admin sur le site //
+
+if(localStorage.getItem("token") != null){      
     document.querySelector('body').classList.add("user-logged");
 }
 
-document.querySelector("#logout-button").addEventListener("click",function(){        // en cliquant sur le bouton 'logout' le token de connexion est retiré //
-    localStorage.removeItem("token")                                                 // et l'utilisateur est déconnecté //
+
+// en cliquant sur le bouton 'logout' le token de connexion est retiré et l'utilisateur est déconnecté //
+
+document.querySelector("#logout-button").addEventListener("click",function(){        
+    localStorage.removeItem("token")                                                 
     document.location.href='index.html';
 })

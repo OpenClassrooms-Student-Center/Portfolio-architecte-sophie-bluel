@@ -3,7 +3,10 @@ const focusableSelector = 'button, a, input, textarea'
 let focusables = []
 let previouslyFocusedElement = null
 
-const openModal = function (e) {           // création d'une fonction à partir d'une constante permettant d'ouvrir la modale //
+
+// création d'une fonction permettant d'ouvrir la modale //
+
+const openModal = function (e) {           
     e.preventDefault()
     modal = document.querySelector(e.target.getAttribute('href'))
     focusables = Array.from(modal.querySelectorAll(focusableSelector))
@@ -17,7 +20,10 @@ const openModal = function (e) {           // création d'une fonction à partir
     modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
 }
 
-const closeModal = function (e) {        // création d'une fonction à partir d'une constante permettant de fermer la modale //
+
+// création d'une fonction permettant de fermer la modale //
+
+const closeModal = function (e) {        
     if (modal === null) return
     if (previouslyFocusedElement !== null) previouslyFocusedElement.focus()
     e.preventDefault()
@@ -33,11 +39,17 @@ const closeModal = function (e) {        // création d'une fonction à partir d
     modal = null
 }
 
-const stopPropagation = function (e) {        // création d'une fonction à partir d'une constante permettant //
-    e.stopPropagation()                       // de ne pas propager la fermeture de la modale par bouton à son parent du DOM //
+
+// création d'une fonction permettant de ne pas propager la fermeture de la modale par bouton à son parent du DOM //
+
+const stopPropagation = function (e) {        
+    e.stopPropagation()                       
 }
 
-const focusInModal = function (e) {          // fonction pour naviguer avec 'tab' et 'shift tab' dans la modale //
+
+// fonction pour naviguer avec 'tab' et 'shift tab' dans la modale //
+
+const focusInModal = function (e) {         
     e.preventDefault()
     let index = focusables.findIndex(f => f === modal.querySelector(':focus'))
     if (e.shiftKey === true) {
@@ -54,11 +66,17 @@ const focusInModal = function (e) {          // fonction pour naviguer avec 'tab
     focusables[index].focus()
 }
 
-document.querySelectorAll('.modifier').forEach(a => {   // ouverture modale via bouton admin //
+
+// ouverture modale via bouton admin //
+
+document.querySelectorAll('.modifier').forEach(a => {   
     a.addEventListener('click', openModal)
 })
 
-window.addEventListener('keydown', function (e) {     // activation des fonctions avec utilisation de touche clavier (échap et tab) //
+
+// activation des fonctions avec utilisation de touche clavier (échap et tab) //
+
+window.addEventListener('keydown', function (e) {     
     if (e.key === "Escape" || e.key === "Esc") {
         closeModal(e)
     }
