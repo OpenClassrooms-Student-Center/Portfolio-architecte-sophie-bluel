@@ -60,8 +60,8 @@
 						<button class="boutonGestionGalleryMini" id="supprimer">Supprimer la galerie</button>
 					</section>
 					<script>
-						recupererContenuBase('http://localhost:5678/api/works', 'Tous', 'galleryMini', 'mini')
-						actionsModaleMiniGallery()
+						//recupererContenuBase('http://localhost:5678/api/works', 'Tous', 'galleryMini', 'mini')
+						//actionsModaleMiniGallery()
 						closeModal()
 					</script>
 				</div>
@@ -96,14 +96,15 @@
 						<input id="titre" class='testAffichageBouton' type="text">
 						<p>
 							<label for="categorie" class="labelForm">Catégorie</label><br>
-							<select name="categorie" id="categorie" class='testAffichageBouton' required>
+							<!--<select name="categorie" id="categorie" class='testAffichageBouton' required>
 								<option value=""></option>
 								<option value="1">Objets</option>
 								<option value="2">Appartements</option>
 								<option value="3">Hotels & restaurants</option>
-							</select>
-							<br>
-							<label for="categorie" class='labelErreur' id="erreurCategorie"></label>
+							</select>-->
+						<div id="categorieMenu"></div>
+						<br>
+						<label for="categorie" class='labelErreur' id="erreurCategorie"></label>
 						</p>
 
 					</form>
@@ -112,7 +113,7 @@
 					<script>
 						testBouton();
 						rechercheImage();
-
+						recupererCategories();
 					</script>
 				</div>
 			</aside>

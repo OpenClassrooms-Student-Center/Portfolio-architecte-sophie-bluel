@@ -120,7 +120,6 @@ function creerAffichage(baseAffichage, parentAffichage, miniMaxi) {
         figure.appendChild(iconeVignette);
         iconeVignette.addEventListener("click", (e) => {
             e.preventDefault();
-            console.log(e);
             supprimerProjet(e)
         })
     }
@@ -142,10 +141,6 @@ function supprimerProjet(event) {
     const itemRecherche2 = itemRecherche.parentElement;
     const itemRecherche3 = itemRecherche2.parentElement;
     const itemRecherche4 = itemRecherche3.id;
-    console.log(itemRecherche);
-    console.log(itemRecherche2);
-    console.log(itemRecherche3);
-    console.log(itemRecherche4);
 
     fetch('http://localhost:5678/api/works/' + itemRecherche4, {
         method: "DELETE",
@@ -153,30 +148,20 @@ function supprimerProjet(event) {
             'Content-Type': 'application/json;charset=utf-8',
             'Authorization': 'Basic ' + sessionStorage.getItem('sessionID')
         },
-    }) // !!! La suppression d'une vignette entraîne la fermeture de la modale (et un message d'erreur dans la console). A voir
+    })
 
-
-        /* !!! ESt-ce que cette partie du code reste utile ?*/
         .then(function (response) {
             console.log(response)
-            if (response.status == 200) {
-                //ouvrirModale();
-                //openModal();
+            if (response.status == 200 || response.status == 204) { //Je ne comprends pas pq j'ai un retour 204 au lieu de 200
                 itemRecherche3.remove();
-                return response.json();
+                recupererContenuBase('http://localhost:5678/api/works', 'Tous', 'gallery', 'maxi');
+                return false;
             }
-        })
-
-        .then(function (result) {
-            //const result2 = result.code;
-            console.log(result);
         })
 
         .catch((error) => {
             alert('Impossible de supprimer ce projet, motif : ' + error);
         });
-
-    openModal();
 }
 
 //------------------------------------------------------Gestion de la fenêtre de login-----------------------------------------
@@ -234,7 +219,7 @@ function verificationUser(login, password) {
             const result2 = result.token;
             sessionStorage.setItem("sessionID", result2);
             sessionStorage.setItem("sessionStatus", 'connected');
-            window.location.href = "http://127.0.0.1:5500/FrontEnd/index.html";
+            window.location = "./index.html";
         })
 
         .catch((error) => {
@@ -254,6 +239,8 @@ const openModal = function () {
     modal.addEventListener('click', closeModal);
     modal.querySelector('.js-modal-close').addEventListener('click', closeModal);
     modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation);
+    recupererContenuBase('http://localhost:5678/api/works', 'Tous', 'galleryMini', 'mini')
+    actionsModaleMiniGallery()
 }
 
 const closeModal = function (e) {
@@ -285,7 +272,7 @@ function actionsModaleMiniGallery() {
 
 const openModal2 = function () {
     document.getElementById('titre').value = '';
-    document.getElementById('categorie').value = '';
+    //document.getElementById('categorie').value = '';
     document.getElementById('imageSelectionnee').src = '';
     document.getElementById('ajouterPhoto').value = '';
     document.getElementById('ajouterPhoto').style.opacity = 0;
@@ -302,6 +289,7 @@ const openModal2 = function () {
     modal2.addEventListener('click', closeModal2);
     modal2.querySelector('.js-modal-close').addEventListener('click', closeModal2);
     modal2.querySelector('.js-modal-stop').addEventListener('click', stopPropagation);
+    categorie.selectedIndex = "0"
     testBouton();
 }
 
@@ -314,7 +302,7 @@ const closeModal2 = function (e) {
     modal2.querySelector('.js-modal-stop').removeEventtListener('click', stopPropagation);
     modal2.getElementById('ajouterPhoto').removeEventListener('change', checkEnableButton);
     modal2.getElementById('titre').removeEventListener('change', checkEnableButton);
-    modal2.getElementById('categorie').removeEventListener('change', checkEnableButton);
+    //modal2.getElementById('categorie').removeEventListener('change', checkEnableButton);
     modal2.getElementById('valider').removeEventListener('click', chargerProjet);
     modal2.getElementById('valider').disabled = true;
     modal2 = null;
@@ -355,7 +343,46 @@ function previewFile() {
     }
 }
 
-function testBouton() {
+function recupererCategories() {
+    fetch('http://localhost:5678/api/categories')
+        .then(function (res) {
+            if (res.ok) {
+                return res.json();
+            }
+        })
+        .then(function (value) {
+            console.log(value)
+            dynamicDropdownList(value)
+            return false
+        })
+        .catch(function (err) {
+            console.log("problème : " + err);
+        });
+}
+
+function dynamicDropdownList(listeMenu) {
+
+    var dropdown = document.createElement("select");
+    dropdown.setAttribute('id', 'categorie');
+    dropdown.setAttribute('name', 'categorie');
+    dropdown.setAttribute('class', 'testAffichageBouton');
+    var opt = document.createElement("option");
+    opt.text = ""
+    dropdown.options.add(opt);
+    for (var i = 0; i < listeMenu.length; i++) {
+        var opt = document.createElement("option");
+        opt.value = listeMenu[i].id;
+        opt.text = listeMenu[i].name;
+        dropdown.options.add(opt);
+    }
+
+    //Load the dynamically created dropdown in container
+    var container = document.getElementById("categorieMenu");
+    container.appendChild(dropdown);
+}
+
+
+async function testBouton() {
 
     const submitBtn = document.getElementById('valider')
 
@@ -367,7 +394,7 @@ function testBouton() {
         submitBtn.disabled = !(
             photo.value &&
             titre.value &&
-            categorie.value !== ''
+            categorie.value !== ""
         )
         submitBtn.disabled ? console.log('stop') : submitBtn.addEventListener('click', chargerProjet);
     }
@@ -379,14 +406,13 @@ function testBouton() {
 
 async function chargerProjet(e) {
 
-    console.log('test')
     e.preventDefault(); // utile ?
     e.stopPropagation();
 
     const file = document.querySelector("input[type=file]").files[0];
     const titre = document.getElementById('titre')
     const categorie = document.getElementById('categorie')
-
+    console.log("categorie : " + categorie.value);
 
     const formData = new FormData();
 
@@ -411,20 +437,22 @@ async function chargerProjet(e) {
         .then(function (response) {
             console.log(response)
             if (response.status == 201) {
-                openModal();
-                return response.json();
+                modal2Previous();
+                recupererContenuBase('http://localhost:5678/api/works', 'Tous', 'gallery', 'maxi');
+                return false
+                //return response.json();
             }
         })
 
-        .then(function (result) {
+        /*.then(function (result) {
             console.log(result)
 
-        })
+        })*/
 
         .catch((error) => {
             console.log('Erreur de chargement : ' + error);
         });
-    openModal();
+
 }
 
 
