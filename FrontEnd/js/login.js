@@ -16,15 +16,18 @@ formElement.addEventListener('submit', (e) => {
         },
         body: JSON.stringify(data)
     })
-    .then(res => res.json())
-    .then(data => {
-        console.log(data);
-        if(data.error){
-            alert("mauvais identifiant")
-            return
+    .then(res => {
+        if(res.status === 401 || res.status === 404) {
+            alert("Indentifiants incorrects");
+            throw new Error("Indentifiants incorrects");
         }
+        else {
+            return res.json()
+        }
+    })
+    .then(data => {
         localStorage.setItem("token",data.token)
-        document.location.href='index.html' ;
+        document.location.href='index.html';
     })
     .catch(error => console.log(error));
 
