@@ -206,8 +206,21 @@ footer nav ul {
 	cursor: pointer;
 
 }
-
+.filter__item--select{
+	background-color:#1D6154 ;
+	color: white;
+}
 .filter__item:hover{
 	background-color:#1D6154 ;
 	color: white;
 }
+
+.warning {
+	display: flex;
+	align-items: center;
+	height: 50px;
+	grid: 3fr;
+	background-color: #ffffcc;
+	border-left: 6px solid #ffeb3b;
+  }
+
