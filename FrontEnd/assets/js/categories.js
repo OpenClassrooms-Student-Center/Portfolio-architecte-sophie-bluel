@@ -15,12 +15,9 @@ export function renderFilters() {
       allElementsButton.classList.add('btn')
       allElementsButton.classList.add('active')
 
-      allElementsButton.addEventListener("click", function(){
-        document.querySelectorAll(".btn").forEach((btn) => {
-          btn.classList.remove('active')
-        })
-        allElementsButton.classList.add('active')
-      })
+      addActiveClass(allElementsButton)
+      allElementsButton.classList.add('active')
+      
       //On insere le btn dans la div filterDiv
       filterDiv.appendChild(allElementsButton);
       
