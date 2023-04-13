@@ -6,9 +6,8 @@ import { renderFilters } from "./filters.js";
 /*
 SHOW ALL WORKS ==> RenderWorks()
  */
-
 try {
-    const maListWorks = await fetchJSON("http://localhost:5678/api/works");
+    var maListWorks = await fetchJSON("http://localhost:5678/api/works");
     renderWorks(maListWorks);
     console.log(maListWorks);
 } catch (error) {
@@ -22,7 +21,7 @@ try {
 SHOW ALL BUTTONS FILTER ==> RenderFilters()
  */
 try {
-    const maListCategories = await fetchJSON("http://localhost:5678/api/categories");
+    var maListCategories = await fetchJSON("http://localhost:5678/api/categories");
     console.log(maListCategories);
     renderFilters(maListCategories);
 } catch (error) {
@@ -36,7 +35,6 @@ try {
 BUTTONS FILTERS ONCLICK
  */
 const boutonsFilter = document.querySelectorAll(".filter__item");
-
 boutonsFilter.forEach(element => {
     element.addEventListener("click", function () {
         const categoryId = element.dataset.id;
@@ -44,7 +42,7 @@ boutonsFilter.forEach(element => {
         // take off class --select to all button
         for (let i = 0; i < nbCat; i++) {
             boutonsFilter[i].classList.remove("filter__item--select");
-        }
+        };
         // reinitialise page
         document.querySelector(".gallery").innerHTML = "";
         // Add class --select

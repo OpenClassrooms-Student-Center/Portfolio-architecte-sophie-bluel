@@ -1,24 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+	<meta charset="UTF-8">
+	<title>Sophie Bluel - Architecte d'intérieur</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+	<meta name="description" content="">
+	<link rel="stylesheet" href="./assets/style.css">
+	<!-- Mon JS avec defer pour charger en dernier (type="module" fait la même chose) -->
+
+	<!-- <script src="/FrontEnd/js/works.js" type="module" defer></script> -->
+	<script src="/FrontEnd/js/login.js" type="module" defer></script>
+	<!-- <script src="/FrontEnd/js/home.js" type="module" defer></script> -->
+
 </head>
 <body>
-    
+<header>
+	<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
+	<nav>
+		<ul>
+			<li><a href="./index.html">projets</a></li>
+			<li ><a href="#contact">contact</a></li>
+			<li><a href="./login.html">Login</a></li>
+			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+		</ul>
+	</nav>
+</header>
+<main>
+	<section id="login">
+        <form action="" >
+            <h2 class="login__title">Log in</h2>
+            <label for="mail" >E-mail</label>
+            <input type="text" name="mail" id="mail" >
+            <label for="pass" >E-mail</label>
+            <input type="password" name="pass" id="pass" >
+            <input type="submit" value="Se connecter" >
+            <p><a href="#">Mot de passe oublié</a></p>
+        </form>
 
+	</section>
+</main>
 
-    <form action="" class="login">
-        <h1 class="login__title">Log in</h1>
-        <label for="mail" class="login__label-mail">E-mail</label>
-        <input type="text" id="mail" class="login__input-mail">
-        <label for="pass" class="login__label-pass">E-mail</label>
-        <input type="password" id="pass" class="login__input-pass">
-        <button class="login__button" >Se connecter</button>
-        <a href="#">Mot de passe oublié</a>
-    </form>
-    
+<footer>
+	<nav>
+		<ul>
+			<li>Mentions Légales</li>
+		</ul>
+	</nav>
+</footer>
 </body>
+
+
 </html>
+
+
+
+
+
