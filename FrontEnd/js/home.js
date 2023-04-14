@@ -13,7 +13,7 @@ try {
 } catch (error) {
     console.error(error);
     const message = "Il y a une erreur sur le fetch des projets !";
-    errorMessage(error, message, "#portfolio");
+    errorMessage(message, "#portfolio");
 }
 
 
@@ -27,7 +27,7 @@ try {
 } catch (error) {
     console.error(error);
     const message = "Il y a une erreur sur le fetch des catégories !";
-    errorMessage(error, message, "#portfolio");
+    errorMessage(message, "#portfolio");
 }
 
 
@@ -47,7 +47,6 @@ boutonsFilter.forEach(element => {
         document.querySelector(".gallery").innerHTML = "";
         // Add class --select
         element.classList.add("filter__item--select");
-        console.log(maListWorks);
         if (categoryId == 0) {
             return renderWorks(maListWorks);
         }

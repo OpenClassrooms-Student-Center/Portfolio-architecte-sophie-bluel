@@ -9,7 +9,7 @@ export function renderFilters(liste) {
         "id": "filterBtn_0",
         "data-id": 0
     },
-        "Tout")
+        "Tout");
     // Parent's to my new elements
     const contenerFilter = document.querySelector(".filter");
     // i insert my new element to index.html
@@ -26,6 +26,7 @@ export function renderFilters(liste) {
         );
         const contenerFilter = document.querySelector(".filter");
         contenerFilter.appendChild(buttonsFilter);
-    })
+    });
 
-}
+};
+

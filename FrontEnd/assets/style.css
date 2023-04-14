@@ -66,6 +66,7 @@ header {
 	justify-content: space-between;
 	margin: 50px 0;
 }
+
 section {
 	margin: 50px 0;
 }
@@ -275,5 +276,8 @@ footer nav ul {
 	grid: 3fr;
 	background-color: #ffffcc;
 	border-left: 6px solid #ffeb3b;
-  }
+}
 
+.wrong {
+	border: 2px solid red !important;
+}
