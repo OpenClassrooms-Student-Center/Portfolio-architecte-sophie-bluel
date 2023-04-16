@@ -344,7 +344,7 @@ footer nav ul {
 
 .modal-content{
     background-color: white;
-    height: 600px;
+    height: 662px;
     width: 600px;
     top: 30%;
     left: 30%;
@@ -360,12 +360,14 @@ footer nav ul {
 	justify-content: center;
 	align-items: center;
 	padding : 56px;
+	padding-left: 90px;
+	padding-right: 90px;
 
 }
 
 .close {
 	color: black;
-	font-size: 28px;
+	font-size: 25px;
 	position: absolute;
 	right: 21px;
     top: 8px;
@@ -397,3 +399,38 @@ footer nav ul {
 .divider{
 	width: 100%;
 }
+
+.miniGallery{
+	display: flex;
+	position: relative;
+	height: 100%;
+	width: 100%;
+	flex-wrap: wrap;
+	gap:10px;
+	margin-top:3em;
+	justify-content: space-between;
+}
+
+.miniGallery figure{
+	display: flex;
+	flex-direction: column;
+	gap:3px;
+	margin-bottom:5px;
+}
+
+.miniGallery img{
+	height:100px;
+}
+
+.miniGallery i{
+	z-index: 10;
+    position: absolute;
+    color: white;
+    background-color: black;
+    padding: 5px;
+}
+
+.d-none{
+	display: none;
+}
+

@@ -4,15 +4,14 @@ export function modalFunction() {
     const createModal = function (e) {
         const divTag = document.createElement('div')
         divTag.setAttribute('id', 'modal1')
-        divTag.setAttribute('class', 'modal')
-        //divTag.classList.add('d-none')
+        divTag.classList.add("modal", "d-none")
+       //divTag.classList.add('d-none')
         divTag.setAttribute('aria-hidden', 'true')
         divTag.setAttribute('role', 'dialogue')
         const main = document.querySelector('main')
         main.appendChild(divTag)
         return divTag
     }
-    createModal()
 
     function createModalContent() {
         const newOuterDiv = document.createElement('div')
@@ -28,7 +27,6 @@ export function modalFunction() {
         modalTitle.innerText = 'Galerie Photo'
 
         const gallery = document.querySelector('.gallery')
-        //renderMiniWorks("Tous")
 
         const divider = document.createElement('hr')
         divider.className = 'divider'
@@ -37,6 +35,8 @@ export function modalFunction() {
         ajouterPhotoBtn.innerText = "Ajouter une photo"
         const deleteGalleryLink = document.createElement('a')
         deleteGalleryLink.innerText = "Supprimer la galerie"
+
+
 
         //all elements into a big div for easier styling
         newInnerDiv.appendChild(closeX)
@@ -50,25 +50,34 @@ export function modalFunction() {
         //finally adding them into the modal html done above
         const modalDiv = document.getElementById('modal1')
         modalDiv.appendChild(newOuterDiv)
+        renderMiniWorks()
+
     }
 
-    createModalContent()
+    function openModal(){
+        const modalHTML = document.querySelector(".modal-div-link")
+        modalHTML.addEventListener("click", function () {
+            createModal()
+            createModalContent()
+            const modalTag = document.getElementById("modal1")
+            modalTag.classList.remove("d-none")
+            const closeX = document.querySelector(".close")
+            console.log(closeX)
+            closeModal()
+        })
+        
 
-    const closeX = document.querySelector('.close')
-    const modal = document.querySelector('.modal')
-    const linkOpenModal = document.querySelector('.js-modal')
+    }
 
-    function closeModal() {
-        closeX.addEventListener('click', function (e) {
-            modal.style.display = 'none'
+    function closeModal(){
+        const closeX = document.querySelector(".close")
+        closeX.addEventListener("click", function(){
+            const modalTag = document.getElementById('modal1')
+            modalTag.remove()
         })
     }
-    closeModal()
 
-    function openModal() {
-        linkOpenModal.addEventListener('click', function (e) {
-            modal.style.display = 'block'
-        })
-    }
-    openModal()
+openModal()
+
 }
+
