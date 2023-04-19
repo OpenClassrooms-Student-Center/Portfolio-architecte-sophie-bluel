@@ -24,10 +24,24 @@ export function createElement(tagName, attributes = {}, value = "") {
  * @param {string} message 
  * @param {string} element tagName parent
  */
-export function errorMessage(e, message, element = "#portfolio") {
+export function errorMessage(message, element) {
     const divError = document.createElement("div");
     divError.classList.add("warning");
-    divError.innerHTML = `<p><strong>Warning !</strong> ${e} : ${message}</p>`
+    divError.innerHTML = `<p><strong>Warning !</strong> erreur : ${message}</p>`
     const parentElement = document.querySelector(element)
     parentElement.insertBefore(divError, parentElement.children[0]);
 }
+
+
+/**
+ * delete message to the page
+ * @param {*} element 
+ */
+export function errorMessageRemove(element) {
+    const selectElement = document.querySelectorAll(".warning");
+    selectElement.forEach(e => {
+        // console.log(e);
+        e.remove();
+    })
+}
+
