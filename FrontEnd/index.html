@@ -23,12 +23,6 @@
 	<div id="barreEdition"></div>
 	<header id="enTete"></header>
 
-	<script>
-		createBarreEdition(); //permet de créer la barre noire d'édition pour un utilisateur logué
-		creationHeader(); //permet de créer un header identique pour toutes les pages du site
-		logout(); //permet de quitter le mode édition lorsque le bouton "logout" est disponible
-	</script>
-
 	<main>
 		<section id="introduction">
 			<figure>
@@ -59,19 +53,10 @@
 						<button class="boutonGestionGalleryMini" id="ajouter">Ajouter une photo</button>
 						<button class="boutonGestionGalleryMini" id="supprimer">Supprimer la galerie</button>
 					</section>
-					<script>
-						//recupererContenuBase('http://localhost:5678/api/works', 'Tous', 'galleryMini', 'mini')
-						//actionsModaleMiniGallery()
-						closeModal()
-					</script>
 				</div>
 			</aside>
 
 			<aside id="modal2" class="modal" style="display: none">
-
-				<script>
-
-				</script>
 
 				<div class="modalWrapper js-modal-stop">
 					<nav id="modal1Icons">
@@ -96,12 +81,6 @@
 						<input id="titre" class='testAffichageBouton' type="text">
 						<p>
 							<label for="categorie" class="labelForm">Catégorie</label><br>
-							<!--<select name="categorie" id="categorie" class='testAffichageBouton' required>
-								<option value=""></option>
-								<option value="1">Objets</option>
-								<option value="2">Appartements</option>
-								<option value="3">Hotels & restaurants</option>
-							</select>-->
 						<div id="categorieMenu"></div>
 						<br>
 						<label for="categorie" class='labelErreur' id="erreurCategorie"></label>
@@ -110,30 +89,12 @@
 					</form>
 
 					<button id="valider" disabled>Valider</button>
-					<script>
-						testBouton();
-						rechercheImage();
-						recupererCategories();
-					</script>
+
 				</div>
 			</aside>
 
-			<nav>
-				<ul class="listeFiltres">
-					<li><input type="button" class="filtre" id="Tous" value="Tous"></li>
-					<li><input type="button" class="filtre" value="Objets"></li>
-					<li><input type="button" class="filtre" value="Appartements"></li>
-					<li><input type="button" class="filtre" value="Hotels & restaurants"></li>
-				</ul>
-			</nav>
-
-			<div class="gallery" id="gallery">
-				<script>
-					recupererContenuBase('http://localhost:5678/api/works', 'Tous', 'gallery', 'maxi') // Permet d'afficher tous les projets par défaut
-					identifierCritereDeTri(); // Permet d'afficher les projets sélectionnés via les boutons de filtre
-					createBoutonEdition();//permet d'afficher le bouton modifier pour un utilisateur logué
-				</script>
-			</div>
+			<nav id="navigation"></nav>
+			<div class="gallery" id="gallery"></div>
 
 		</section>
 		<section id="contact">
