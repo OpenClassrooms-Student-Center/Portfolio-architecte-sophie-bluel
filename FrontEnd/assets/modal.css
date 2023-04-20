@@ -1,0 +1,86 @@
+.modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6) ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-wrapper{
+    background-color: white;
+    width: 40%;
+    min-width: 400px;
+    max-width: 500px;
+    height: 500px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: space-between; */
+}
+
+.modal__nav{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal__nav a{
+text-decoration: none;
+color: black;
+}
+.modal__tittle{
+    margin-top: 20px;
+    font-size: 1.2rem;
+}
+
+.modal__gallery{
+    overflow-y: scroll;    
+    width: 80%;
+    margin-top: 20px;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: 8px;
+	grid-row-gap: 8px;
+}
+
+
+.modal__gallery img {
+	width: 100%;
+}
+
+
+.modal__buttons{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+    border-top: 1px solid #1D6154;
+}
+
+.modal__btn{
+    width: 50%;
+    min-width: 250px;
+    border: none;
+    border-radius: 18px;
+    cursor: pointer;
+}
+.modal__btn--add{
+    background-color: #1D6154 ;
+    height: 34px ;
+    color: white;
+    margin-top: 25px;
+}
+.modal__btn--delete{
+    background-color: white ;
+    height: 25px ;
+    font-size: 0.6rem;
+    font-family: 'Syne';
+	color: #B1663C;
+    margin-top: 20px;
+}

@@ -1,7 +1,7 @@
 import { renderWorks } from "./works.js";
 import { renderFilters } from "./filters.js";
-import { ifConnect, loginButton } from "./fonctions/connect.js";
-
+import { ifConnect, loginButton } from "./admin.js";
+import { modalWindow } from "./modal.js";
 
 /*
 ALL WORKS FUNCTION ==> RenderWorks()
@@ -19,7 +19,7 @@ LOGIN==> RenderLogin()
 loginButton();
 ifConnect();
 
-
+modalWindow();
 
 
 

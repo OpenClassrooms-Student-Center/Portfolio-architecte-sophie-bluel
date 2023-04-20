@@ -13,7 +13,7 @@ try {
 };
 
 
-export async function renderWorks(liste = maListe) {
+export async function renderWorks(liste = maListe, where = ".gallery") {
     try {
         // console.log(liste);
         // Je crée tous les elements suivant le nombre de réponses trouvés
@@ -30,7 +30,7 @@ export async function renderWorks(liste = maListe) {
                 element.title
             );
             // Je declare la balise parent Ref!
-            const contenerWorks = document.querySelector(".gallery");
+            const contenerWorks = document.querySelector(where);
             // Je les inbrique et affiche
             contenerWorks.appendChild(figureElement);
             figureElement.appendChild(imgElement);

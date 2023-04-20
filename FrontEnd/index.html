@@ -8,14 +8,18 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
-	<link rel="stylesheet" href="./assets/style.css">
-	<!-- Mon JS avec defer pour charger en dernier (type="module" fait la même chose) -->
 
-	<!-- <script src="/FrontEnd/js/works.js" type="module" defer></script> -->
-	<!-- <script src="/FrontEnd/js/login.js" type="module" defer></script> -->
-	<script src="/FrontEnd/js/home.js" type="module" defer></script>
+	<script src="https://kit.fontawesome.com/b87b562c17.js" crossorigin="anonymous" defer></script>
+	<link rel="stylesheet" href="./assets/style.css">
+	<link rel="stylesheet" href="./assets/modal.css">
+
+	<!-- Mon JS avec defer pour charger en dernier (type="module" fait la même chose) -->
+	<!-- type="module" defer -->
+	<script src="/FrontEnd/js/home.js" type="module" defer ></script>
+	
 
 </head>
+
 <body>
 <header>
 	<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
@@ -23,7 +27,7 @@
 		<ul>
 			<li><a href="./index.html">projets</a></li>
 			<li ><a href="#contact">contact</a></li>
-			<li><a  href="#" id="login">Login</a></li>
+			<li><a href="#" id="login">Login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -43,7 +47,7 @@
 	<section id="portfolio">
 		<h2>Mes Projets</h2>
 		
-		<ul class="filter">
+		<ul class="filter ">
 			<!-- Généré par JS -->
 		</ul>
 		<div class="gallery">
@@ -63,6 +67,31 @@
 			<input type="submit" value="Envoyer">
 		</form>
 	</section>
+
+
+<!-- The Modal -->
+<aside id="myModalGallery" class="modal" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="modal__tittle" style="display:none;">
+	<!-- Modal content -->
+	<div class="modal-wrapper js-myModalGallery-stop">
+		<ul class="modal__nav">
+			<li class="nav__item"><a href="#" ></a></li>
+			<li class="nav__item"><a href="#" class="js-myModalGallery-close" >X</a></li>
+		</ul>
+
+		<h3 class="modal__tittle">Galerie photo</h3>
+		<div class="modal__gallery">
+			<!-- Généré par JS -->
+			
+		</div>
+		
+		<div class="modal__buttons">
+			<button class="modal__btn modal__btn--add">Ajouter une photo</button>
+			<button class="modal__btn modal__btn--delete">Supprimer la galerie</button>
+		</div>
+	</div>
+</aside>
+
+
 </main>
 
 <footer>
