@@ -12,6 +12,7 @@ const tagLogin = document.querySelector("#login");
  */
 export function ifConnect() {
 
+    // iL Y A UN PROBLEME DE SECURITE QUAND MEME !!!!
     if (getToken === "SESSION") {
         // update link login menu
         tagLogin.innerText = "logout";
@@ -19,7 +20,7 @@ export function ifConnect() {
         // Take off Filter menu
         document.querySelector(".filter").classList.add("filter--off")
 
-        addMenuEdit("html");
+        addMenuEdit("body");
         addLinkModifier("#introduction figure",
             {
                 "href": "#myModalProfil",

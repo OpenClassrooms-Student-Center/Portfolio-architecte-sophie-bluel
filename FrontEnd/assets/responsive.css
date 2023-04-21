@@ -1,0 +1,64 @@
+@media screen and (max-width: 768px) {
+
+    .editNav{
+        display: flex;
+        flex-direction: column;
+    }
+
+	header {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+        margin-top: 70px;
+		margin-bottom: 10px;
+	}
+
+	#introduction {
+		flex-direction: column;
+	}
+
+	#introduction article {
+		text-align: justify;
+		padding: 10px;
+	}
+
+	.editLink-projets{
+		margin-left: 20px;
+	}
+
+	.gallery {
+		grid-template-columns: 1fr ;
+		justify-self: center;
+
+	}
+	.gallery figure {
+		/* grid-template-columns: 1fr ;
+		justify-self: center; */
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+	.gallery img {
+		/* display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center; */
+		width: 90%;
+		margin: auto;
+	}
+
+	#login  {
+		width: 80%;
+	}
+
+	.filter__item{
+		flex: 1;
+		min-width: 100px;
+
+	}
+	#contact  {
+		width: 80%;
+	}
+
+}
