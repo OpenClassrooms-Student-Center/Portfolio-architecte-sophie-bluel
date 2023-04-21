@@ -17,7 +17,8 @@ export function renderMiniWorks(category) {
             const newFigure = document.createElement("figure");
             const newImage = document.createElement("img");
             const trashCan = document.createElement("i")
-            trashCan.classList.add("fa-regular", "fa-trash-can")
+            trashCan.classList.add("fa-regular", "fa-trash-can", "deleteWork")
+            newFigure.setAttribute("id", work.id)
   
             newImage.src = work.imageUrl;
             newImage.alt = "Photo du projet";

@@ -24,6 +24,9 @@ export function renderWorks(category) {
           newFigure.appendChild(newImage);
           const newFigcaption = document.createElement("figcaption");
           newFigcaption.innerText = work.title;
+
+          newFigure.setAttribute("id", work.id)
+
           newFigure.appendChild(newFigcaption);
           gallery.appendChild(newFigure);
 

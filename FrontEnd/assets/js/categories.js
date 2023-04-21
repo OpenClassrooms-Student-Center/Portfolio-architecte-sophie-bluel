@@ -39,6 +39,7 @@ export function renderFilters() {
       gallery.parentNode.insertBefore(filterDiv, gallery);
 
       allElementsButton.addEventListener("click", function () {
+        addActiveClass(allElementsButton)
         renderWorks("Tous");
       });
       

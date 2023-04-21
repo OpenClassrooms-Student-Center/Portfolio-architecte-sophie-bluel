@@ -1,4 +1,6 @@
 import { renderMiniWorks } from './miniWorks.js'
+import { deleteWorks } from './deleteWorks.js'
+
 
 export function modalFunction() {
     const createModal = function (e) {
@@ -54,6 +56,20 @@ export function modalFunction() {
 
     }
 
+    function deleteWorks(){
+        
+        document.addEventListener("click", function (e){
+            const target = e.target.querySelector(".deleteWork")
+            const urlBase = "http://localhost:5678/api/works/"
+            const figureDeleteId = document.querySelector(".miniGallery figure").id
+            console.log(target.innerHTML)
+            if(target){
+                console.log("deleted")
+            }
+    
+        })
+    }
+
     function openModal(){
         const modalHTML = document.querySelector(".modal-div-link")
         modalHTML.addEventListener("click", function () {
@@ -61,8 +77,7 @@ export function modalFunction() {
             createModalContent()
             const modalTag = document.getElementById("modal1")
             modalTag.classList.remove("d-none")
-            const closeX = document.querySelector(".close")
-            console.log(closeX)
+            deleteWorks()
             closeModal()
         })
         
@@ -71,11 +86,15 @@ export function modalFunction() {
 
     function closeModal(){
         const closeX = document.querySelector(".close")
+        const modalTag = document.getElementById('modal1')
         closeX.addEventListener("click", function(){
             const modalTag = document.getElementById('modal1')
             modalTag.remove()
         })
+
     }
+
+
 
 openModal()
 
