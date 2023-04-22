@@ -47,8 +47,7 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
-		
+			<h2>Mes Projets</h2>
 		<ul class="filter ">
 			<!-- Généré par JS -->
 		</ul>
@@ -73,16 +72,15 @@
 <!-- Modal Profil -->
 <aside id="myModalProfil" class="modal" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="modal__tittle" style="display:none;">
 	<!-- Modal content -->
-	<div class="modal-wrapper js-myModalGallery-stop">
+	<div class="modal-wrapper js-myModal-stop">
 		<ul class="modal__nav">
 			<li class="nav__item"><a href="#" ></a></li>
-			<li class="nav__item"><a href="#" class="js-myModalGallery-close" >X</a></li>
+			<li class="nav__item"><a href="#" class="js-myModal-close" >X</a></li>
 		</ul>
 		<h3 class="modal__tittle">Mon profil</h3>
 		<form action="">
-			<label for="photo">Photo</label>
-			<input type="image" name="photo" id="photo">
-			<input type="file" name="photo" id="photo">
+			<label for="photo_profil">Photo</label>
+			<input type="file" name="photo_profil" id="photo_profil">
 
 			<label for="description">Email</label>
 			<input type="textarea" name="email" id="email">
@@ -98,51 +96,63 @@
 <!-- Modal Portfolio -->
 <aside id="myModalGallery" class="modal" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="modal__tittle" style="display:none;">
 	<!-- Modal content -->
-	<div class="modal-wrapper js-myModalGallery-stop">
-		<ul class="modal__nav">
-			<li class="nav__item"><a href="#" ></a></li>
-			<li class="nav__item"><a href="#" class="js-myModalGallery-close" >X</a></li>
-		</ul>
+	<div class="modal-wrapper js-myModal-stop">
 
-		<h3 class="modal__tittle">Galerie photo</h3>
-		<div class="modal__gallery">
-			<!-- Généré par JS -->
 
+		<div class="js-gallery">
+			<ul class="modal__nav">
+				<li class="nav__item"><a href="#" ></a></li>
+				<li class="nav__item"><a href="#" class="js-myModal-close" ><i class="fa-solid fa-xmark"></i></a></li>
+			</ul>
+			<h3 class="modal__tittle">Galerie photo</h3>
+
+			<div class="modal__gallery">
+				<!-- Généré par JS -->
+
+			</div>	
+			<div class="modal__buttons">
+				<button class="modal__btn modal__btn--add">Ajouter une photo</button>
+				<button class="modal__btn modal__btn--delete">Supprimer la galerie</button>
+			</div>	
 		</div>
+
 		
-		<div class="modal__buttons">
-			<button class="modal__btn modal__btn--add">Ajouter une photo</button>
-			<button class="modal__btn modal__btn--delete">Supprimer la galerie</button>
-		</div>
-	</div>
-</aside>
-
-
-<!-- Modal photo -->
-<aside id="myModalPhoto" class="modal" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="modal__tittle" style="display:none;">
-	<!-- Modal content -->
-	<div class="modal-wrapper js-myModalGallery-stop">
-		<ul class="modal__nav">
-			<li class="nav__item"><a href="#" >before</a></li>
-			<li class="nav__item"><a href="#" class="js-myModalGallery-close" >X</a></li>
-		</ul>
-		<form action="">
-					<h3 class="modal__tittle">Mon profil</h3>
-				<div class="modal__gallery">
-					<!-- Généré par JS -->
-
+		<div class="js-picture" style="display:none;">
+			<ul class="modal__nav">
+				<li class="nav__item"><a href="#" class="js-myModal-before"><i class="fa-solid fa-arrow-left"></i></a></li>
+				<li class="nav__item"><a href="#" class="js-myModal-close" ><i class="fa-solid fa-xmark"></i></a></li>
+			</ul>
+			<h3 class="modal__tittle">Ajout photo</h3>
+			<form action="" class="addPicture">
+				<div class="contener-photo">
+					<img src="" id="img" alt="">
+					
+					<img src="./assets/icons/image.png" alt="image vide" class="addPicture__logo">
+					<label for="photo" >
+						<span class="addPicture__btn">+ Ajouter photo</span>
+						<input id="photo" type="file" style="display: none;">
+					</label>
 				</div>
-				
+
+				<label for="titre">Titre</label>
+				<input type="text" name="titre" id="titre">
+
+				<label for="cat">Catégorie</label>
+				<select id="cat" name="cat">
+					<!-- En JS -->
+					<!-- <option value="audi">Audi</option> -->
+				  </select>	
+
 				<div class="modal__buttons">
-					<input type="submit" class="modal__btn modal__btn--add">Terminé</input>
-				</div>
-		</form>
+					  <input type="submit" class="modal__btn" value="Valider">
+				</div>	
+			</form>
+		</div>
+
+
 
 	</div>
 </aside>
-
-
-
 
 
 <!-- <i class="fa-solid fa-trash-can"></i> -->

@@ -29,11 +29,10 @@
 
 .editLink{
     display: block;
-	color: #B1663C;
+	color: #1D6154;
 	cursor: pointer;
 	font-size: 0.8rem;
 	padding: 0;
-	margin: 10px 0;
 	text-decoration: none;
 }
 
@@ -41,10 +40,11 @@
 	position: relative;
 	left: 10%;
     margin-top: 10px;
+	width: 80px;
 }
 .editLink-projets{
 	position:relative;
-    left: 170px;
-    top: -30px;
-	/* margin-left: 40px; */
+    left: 150px ;
+	top: -20px;
 }
+

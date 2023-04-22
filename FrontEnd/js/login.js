@@ -1,10 +1,14 @@
 import { errorMessage, errorMessageRemove } from "./fonctions/dom.js";
 
-
 /*
 GET LOGIN
  */
-getLogin();
+try {
+    getLogin();
+} catch (e) {
+    alert("Probleme avec mon code")
+};
+
 
 export function getLogin() {
 
@@ -53,34 +57,31 @@ export function getLogin() {
         }
 
 
-        try {
-            const cnx = await fetch('http://localhost:5678/api/users/login', {
-                method: 'POST',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(user)
-            });
+        const cnx = await fetch('http://localhost:5678/api/users/login', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        });
 
-            const r = cnx.status;
+        const r = cnx.status;
 
-            if (r === 401 || r === 404) {
-                const message = "Il y a une erreur sur les identifiants !";
-                errorMessage(message, "main");
-                return;
-            };
-
-            if (cnx.ok && r === 200) {
-                alert("Vous êtes connecté(e)");
-                const data = await cnx.json();
-                localStorage.setItem("SESSION", data.token);
-                window.location.href = './index.html';
-            };
-
-        } catch (e) {
-            alert("Probleme avec mon code")
+        if (r === 401 || r === 404) {
+            const message = "Il y a une erreur sur les identifiants !";
+            errorMessage(message, "main");
+            return;
         };
+
+        if (cnx.ok && r === 200) {
+            alert("Vous êtes connecté(e)");
+            const data = await cnx.json();
+            localStorage.setItem("SESSION", data.token);
+            window.location.href = './index.html';
+        };
+
+
 
 
     });
