@@ -157,11 +157,6 @@ a:hover {
 	margin-bottom: 3em;
 }
 
-.filtre:hover {
-	color: white;
-	background-color: #1D6154;
-}
-
 p {
 	font-family: 'Work Sans';
 	font-size: 14px;
@@ -182,13 +177,27 @@ article {
 	cursor: pointer;
 }
 
-#edition2:hover {
+#edition3 {
+	position: relative;
+	left: 10%;
+	background-color: white;
+	color: black;
+	border: none;
+	font-size: 14px;
+	cursor: pointer;
+}
+
+
+#edition2:hover,
+#edition3:hover {
 	color: #B1663C;
 }
 
-#edition2 i {
+#edition2 i,
+#edition3 i {
 	margin-right: 5px;
 }
+
 
 /* -------------------------------------------- CSS pour la modale ----------------------------------------------------------*/
 
@@ -319,17 +328,23 @@ figure img {
 }
 
 
-figure button {
+.icone {
 	background-color: black;
 	color: white;
 	position: relative;
 	bottom: 95%;
-	left: 70%;
+	left: 75%;
 	border: none;
+	cursor: pointer;
 }
 
-.icone {
-	cursor: pointer;
+.deplacer {
+	background-color: black;
+	color: white;
+	position: relative;
+	bottom: 95%;
+	left: 25%;
+	border: none;
 }
 
 #aideImage {
@@ -337,7 +352,6 @@ figure button {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-
 }
 
 #ajoutPhoto {
