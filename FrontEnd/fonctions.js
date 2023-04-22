@@ -25,8 +25,9 @@ document.addEventListener('DOMContentLoaded', function () {
         testLogout.addEventListener('click', function () {
             sessionStorage.clear();
             creationHeader();
+            recupererCategories()
             createBarreEdition();
-            createBoutonEdition()
+            createBoutonEdition();
         });
     }
 
@@ -49,14 +50,16 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-    // Création du bouton "modifier" à droite du titre pour permettre d'ajouter ou supprimer des projets
+    // Création des boutons "modifier" pour permettre d'ajouter ou supprimer des projets
+
     function createBoutonEdition() {
-        const edit2 = document.getElementById('presentation');
         if (testIndentifiedUser() == 'true') {
-            edit2.innerHTML = `<button id="edition2"><i class="fa-regular fa-pen-to-square"></i>modifier</button>`
+            document.getElementById('edition2').style.display = 'null'
+            document.getElementById('modifierImage').style.display = 'null'
             listenToModifier();
         } else {
-            edit2.innerHTML = "";
+            document.getElementById('edition2').style.display = 'none'
+            document.getElementById('modifierImage').style.display = 'none'
         }
     }
 
@@ -90,44 +93,59 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Création dynamique des boutons de filtre
     function dynamicFilters(value) {
-        const navigation = document.getElementById('navigation');
-        const listeUl = document.createElement('ul');
-        listeUl.setAttribute('class', 'listeFiltres');
-        navigation.appendChild(listeUl);
-        const listeLi = document.createElement('li');
-        listeUl.appendChild(listeLi);
-        const boutonTous = document.createElement('button');
-        boutonTous.setAttribute('class', 'filtre');
-        boutonTous.setAttribute('value', 'Tous');
-        boutonTous.innerText = 'Tous';
-        listeLi.appendChild(boutonTous);
-        for (let i = 0; i < value.length; i++) {
+
+        if (testIndentifiedUser() != 'true') {
+
+            const navigation = document.getElementById('navigation');
+            const listeUl = document.createElement('ul');
+            listeUl.setAttribute('class', 'listeFiltres');
+            navigation.appendChild(listeUl);
             const listeLi = document.createElement('li');
             listeUl.appendChild(listeLi);
-            const boutonChoix = document.createElement('button');
-            boutonChoix.setAttribute('class', 'filtre');
-            boutonChoix.setAttribute('value', value[i].name);
-            boutonChoix.setAttribute('id', value[i].name);
-            boutonChoix.innerText = value[i].name;
-            listeLi.appendChild(boutonChoix);
+            const boutonTous = document.createElement('button');
+            boutonTous.setAttribute('class', 'filtre');
+            boutonTous.setAttribute('value', 'Tous');
+            boutonTous.innerText = 'Tous';
+            listeLi.appendChild(boutonTous);
+            for (let i = 0; i < value.length; i++) {
+                const listeLi = document.createElement('li');
+                listeUl.appendChild(listeLi);
+                const boutonChoix = document.createElement('button');
+                boutonChoix.setAttribute('class', 'filtre');
+                boutonChoix.setAttribute('value', value[i].name);
+                boutonChoix.setAttribute('id', value[i].name);
+                boutonChoix.innerText = value[i].name;
+                listeLi.appendChild(boutonChoix);
+            }
+            const filtreClick = document.querySelectorAll('.filtre');
+            filtreClick[0].style.backgroundColor = "#1D6154";
+            filtreClick[0].style.color = "white";
+            identifierCritereDeTri();
         }
-        identifierCritereDeTri();
     }
     //Fonction permettant d'identifier quel bouton a été cliqué pour pouvoir ensuite filtrer l'affichage
 
     function identifierCritereDeTri() {
         const filtreClick = document.querySelectorAll('.filtre');
-        console.log(filtreClick);
         let critereDeTri;
         for (let i = 0; i < filtreClick.length; i++) {
             filtreClick[i].addEventListener('click', function () {
+                filtresBlanc();
+                filtreClick[i].style.backgroundColor = "#1D6154";
+                filtreClick[i].style.color = "white";
                 critereDeTri = filtreClick[i].value;
-                console.log('test ' + i);
                 recupererContenuBase('http://localhost:5678/api/works', critereDeTri, 'gallery', 'maxi');
             });
         };
     }
 
+    function filtresBlanc() {
+        const filtreClick = document.querySelectorAll('.filtre');
+        for (let i = 0; i < filtreClick.length; i++) {
+            filtreClick[i].style.backgroundColor = "white";
+            filtreClick[i].style.color = "#1D6154";
+        }
+    }
 
     //Fonction permettant d'interroger la base en tenant compte du filtre d'affichage choisi
 
@@ -150,9 +168,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     });
                 }
                 //pour chaque item de la sélection, on fait appel à la fonction permettant de créer une fiche projet
-                baseFiltree.forEach(element => {
+                /*baseFiltree.forEach(element => {
                     creerAffichage(element, parentAffichage, miniMaxi)
-                });
+                });*/
+
+                for (let i = 0; i < baseFiltree.length; i++) {
+                    creerAffichage(baseFiltree[i], parentAffichage, miniMaxi, i)
+                }
             })
             .catch(function (err) {
                 console.log("problème : " + err);
@@ -161,7 +183,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     //Fonction permettant de générer une fiche projet
 
-    function creerAffichage(baseAffichage, parentAffichage, miniMaxi) {
+    function creerAffichage(baseAffichage, parentAffichage, miniMaxi, i) {
         const figure = document.createElement('figure');
         figure.setAttribute('id', baseAffichage.id)
         parentAffichage.appendChild(figure);
@@ -171,7 +193,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (miniMaxi == 'mini') {
             const iconeVignette = document.createElement('a');
-            iconeVignette.innerHTML = `<button class="icone"><i class="fa-solid fa-trash-can"></i></button>`
+            if (i == 0) {
+                iconeVignette.innerHTML = `
+                <button class="icone"><i class="fa-solid fa-trash-can"></i></button>
+                <button class="deplacer"><i class="fa-solid fa-arrows-up-down-left-right"></i></button>`
+            } else {
+                iconeVignette.innerHTML = `<button class="icone"><i class="fa-solid fa-trash-can"></i></button>`
+            }
             figure.appendChild(iconeVignette);
             iconeVignette.addEventListener("click", (e) => {
                 e.preventDefault();
@@ -207,8 +235,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
             .then(function (response) {
                 console.log(response)
-                if (response.status == 200 || response.status == 204) { //Je ne comprends pas pq j'ai un retour 204 au lieu de 200
-                    itemRecherche3.remove();
+                if (response.status == 200 || response.status == 204) {
+                    openModal();
                     recupererContenuBase('http://localhost:5678/api/works', 'Tous', 'gallery', 'maxi');
                     return false;
                 }
@@ -448,8 +476,7 @@ document.addEventListener('DOMContentLoaded', function () {
     creationHeader(); //permet de créer un header identique pour toutes les pages du site
     recupererContenuBase('http://localhost:5678/api/works', 'Tous', 'gallery', 'maxi') // Permet d'afficher tous les projets par défaut
     recupererCategories();
-    //identifierCritereDeTri(); // Permet d'afficher les projets sélectionnés via les boutons de filtre
-    createBoutonEdition();//permet d'afficher le bouton modifier pour un utilisateur logué
+    createBoutonEdition('presentation', 'edition2');//permet d'afficher le bouton modifier pour un utilisateur logué
     createBarreEdition(); //permet de créer la barre noire d'édition pour un utilisateur logué
     logout(); //permet de quitter le mode édition lorsque le bouton "logout" est disponible
     recupererCategories2();
