@@ -1,17 +1,14 @@
-import { errorMessage, errorMessageRemove } from "./fonctions/dom.js";
-
-/*
-GET LOGIN
- */
-try {
-    getLogin();
-} catch (e) {
-    alert("Probleme avec mon code")
-};
+import {
+    addErrorMessage,
+    removeErrorMessage,
+    addErrorStyle,
+    removeErrorStyle
+} from "./fonctions/dom.js";
 
 
-export function getLogin() {
+export function setLogin() {
 
+    // Select the form
     const formLogin = document.querySelector("#formLogin");
 
     formLogin.addEventListener("submit", async function (event) {
@@ -19,44 +16,40 @@ export function getLogin() {
         // stop form method
         event.preventDefault();
 
-        // Delete error message
-        errorMessageRemove("main");
-        const elementEmail = document.querySelector("#mail");
-        const elementPass = document.querySelector("#pass");
-        elementEmail.classList.remove("wrong");
-        elementPass.classList.remove("wrong");
+        // Init messageError
+        removeErrorMessage("main");
+
+        // Delete error Style
+        removeErrorStyle("#mail");
+        removeErrorStyle("#pass");
 
         // control email
         const email = event.target.querySelector("#mail").value;
         const pattern = /^[a-z0-9.-]{2,}@+[a-z0-9.-]{2,}$/i;
         if (email === "") {
-            alert("Formulaire non completé !");
-            elementEmail.classList.add("wrong");
+            addErrorStyle("#mail");
             return;
         };
-        if (pattern.test(email)) {
-            console.log('La saisie est une adresse email valide !');
-        } else {
-            alert("Mauvaise adresse e-mail !");
-            elementEmail.classList.add("wrong");
+        if (!pattern.test(email)) {
+            alert("Ceci n'est pas une adresse e-mail");
+            addErrorStyle("#mail");
             return;
         };
 
         // control password
         const passWord = event.target.querySelector("#pass").value;
         if (passWord === "") {
-            alert("Formulaire non completé !");
-            elementPass.classList.add("wrong");
+            addErrorStyle("#pass");
             return;
         };
 
-        // Get object full valid
+        // Get object full valid after pass controls
         const user = {
             "email": email,
             "password": passWord,
         }
 
-
+        // Connect to API
         const cnx = await fetch('http://localhost:5678/api/users/login', {
             method: 'POST',
             headers: {
@@ -65,26 +58,24 @@ export function getLogin() {
             },
             body: JSON.stringify(user)
         });
-
         const r = cnx.status;
 
+        // Controls connection
         if (r === 401 || r === 404) {
-            const message = "Il y a une erreur sur les identifiants !";
-            errorMessage(message, "main");
+            addErrorMessage("Il y a une erreur sur les identifiants !", "main");
+            document.querySelector("#mail").value = "";
+            document.querySelector("#pass").value = "";
             return;
         };
 
+        // Connection OK => Next
         if (cnx.ok && r === 200) {
-            alert("Vous êtes connecté(e)");
             const data = await cnx.json();
             localStorage.setItem("SESSION", data.token);
             window.location.href = './index.html';
+            alert("Vous êtes connecté(e)");
         };
-
-
-
 
     });
 
 };
-

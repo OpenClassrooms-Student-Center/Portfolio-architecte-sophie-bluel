@@ -43,8 +43,9 @@
 	width: 80px;
 }
 .editLink-projets{
+	width: fit-content;
 	position:relative;
-    left: 150px ;
+    left: calc(50% + 120px) ;
 	top: -20px;
 }
 

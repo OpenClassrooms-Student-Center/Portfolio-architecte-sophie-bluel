@@ -1,10 +1,5 @@
-import { createElement } from "./fonctions/dom.js";
 import { renderWorks } from "./works.js";
 import { fetchJSON } from "./fonctions/api.js";
-import { errorMessage } from "./fonctions/dom.js";
-/**
- * MODALE
- */
 
 // Variables
 let modal = null;
@@ -13,6 +8,7 @@ let canFocus = [];
 let previouslyFocusedElement = null;
 const page1 = document.querySelector(".js-gallery");
 const page2 = document.querySelector(".js-picture");
+
 
 export async function modalWindow() {
 
@@ -31,6 +27,7 @@ export async function modalWindow() {
     //     const parentContener = document.querySelector(".modal__gallery");
     //     parentContener.appendChild(figureClone);
     // });
+
     const maListe = await fetchJSON("http://localhost:5678/api/works");
     renderWorks(maListe, ".modal__gallery")
 
@@ -130,6 +127,7 @@ const openPicture = function (e) {
     input.addEventListener("change", () => {
         let inputImage = modal.querySelector("input[type=file]").files[0];
         imageSrc.setAttribute("src", inputImage.name);
+        console.log(inputImage);
     });
 
 }

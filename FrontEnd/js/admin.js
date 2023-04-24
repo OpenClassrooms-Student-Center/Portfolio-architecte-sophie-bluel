@@ -1,70 +1,60 @@
+import { createElement } from "./fonctions/dom.js";
+import { modalWindow } from "./modal.js";
 /**
- * Mode EDIT
+ * ADMIN
  */
 
-import { createElement } from "./fonctions/dom.js";
-
-const getToken = localStorage.key("SESSION");
+// Variables
 const tagLogin = document.querySelector("#login");
 
-/**
- * tell us if the user is connect !
- */
-export function ifConnect() {
 
-    // iL Y A UN PROBLEME DE SECURITE QUAND MEME !!!!
-    if (getToken === "SESSION") {
-        // update link login menu
-        tagLogin.innerText = "logout";
+// Add mode EDIT after control token
+export function setAdmin() {
 
-        // Take off Filter menu
-        document.querySelector(".filter").classList.add("filter--off")
+    // update link login menu
+    tagLogin.innerText = "logout";
+    console.log("Je suis connecté(e)");
 
-        addMenuEdit("body");
-        addLinkModifier("#introduction figure",
-            {
-                "href": "#myModalProfil",
-                "class": "editLink editLink-profil"
-            });
-        addLinkModifier("#portfolio h2",
-            {
-                "href": "#myModalGallery",
-                "class": "editLink editLink-projets"
-            });
+    addMenuEdit("body");
+    addLinkModifier("#introduction figure",
+        {
+            "href": "#myModalProfil",
+            "class": "editLink editLink-profil"
+        });
+    addLinkModifier("#portfolio h2",
+        {
+            "href": "#myModalGallery",
+            "class": "editLink editLink-projets"
+        });
 
-
-    } else {
-        tagLogin.innerText = "Login";
-        document.querySelector(".filter").classList.remove("filter--off")
-        console.log("Je ne suis pas connecté");
-    };
+    modalWindow();
+    logoutButton();
 };
 
 
 /**
- * Event onClick for signOut before to go login.html
+ * Event onClick for signOut and go to login.html
  */
-export function loginButton() {
+const logoutButton = function () {
+    tagLogin.addEventListener("click", function (e) {
 
-    tagLogin.addEventListener("click", function () {
-        if (getToken === "SESSION") {
-            localStorage.removeItem("SESSION");
-            window.location.href = './index.html';
-
-        } else {
-            window.location.href = './login.html';
-            // Appeler la function renderLogin
-            console.log("Je ne suis pas connecté");
-        };
+        e.preventDefault();
+        localStorage.removeItem("SESSION");
+        window.location.href = './index.html';
     });
 };
 
 
+/**
+ * Build all link "Modifier" for the black edit mode
+ * @param {*} parent tagName of parent for new link
+ * @param {*} liste list of attributes for new link
+ */
 const addLinkModifier = function (parent, liste = {}) {
-    // AJOUT DES BTN MODIFIES dans PROFIL
+    // Add button "MODIFIES" in parent tagName
     const contenerTitleWorks = document.querySelector(parent);
 
-    // Lien 
+    // link
     const editWorksModifier = createElement("a", liste, " modifier");
     contenerTitleWorks.appendChild(editWorksModifier);
 
@@ -76,15 +66,19 @@ const addLinkModifier = function (parent, liste = {}) {
 }
 
 
+/**
+ * Creat black edit mode on the top screem
+ * @param {*} parent Tag Name of parent for new link
+ */
 const addMenuEdit = function (parent) {
-    // AJOUT DU MENU EDIT NOIR
+    // Add black edit mode
     const contenerParent = document.querySelector(parent);
     const editNav = createElement("div", {
         "class": "editNav"
     });
     contenerParent.prepend(editNav);
 
-    // Titre
+    // Tittle
     const editNavTitre = createElement("h3", {
         "class": "editNav__titre"
     },
