@@ -1,10 +1,11 @@
 // Mes Imports (type="module")
 import { fetchJSON } from "./fonctions/api.js";
 import { renderWorks } from "./works.js";
-import { createElement } from "./fonctions/dom.js";
-import { errorMessage } from "./fonctions/dom.js";
+import { createElement, addErrorMessage } from "./fonctions/dom.js";
+
 
 export async function renderFilters() {
+
     try {
         const liste = await fetchJSON("http://localhost:5678/api/categories");
 
@@ -60,8 +61,7 @@ export async function renderFilters() {
 
     } catch (error) {
         console.error(error);
-        const message = "Il y a une erreur sur le fetch des projets triés par catégorie !";
-        errorMessage(message, "#portfolio");
+        addErrorMessage("Il y a une erreur sur le fetch des projets triés par catégorie !", "#portfolio");
     };
 
 };

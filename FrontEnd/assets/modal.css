@@ -1,0 +1,184 @@
+.modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6) ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal a{
+    text-decoration: none;
+    font-size: 0.7rem;
+    font-weight: 200 !important;
+}
+
+.modal-wrapper{
+    overflow-y: auto;    
+    background-color: white;
+    border-radius: 5px;
+    width: 40%;
+    min-width: 400px;
+    max-width: 500px;
+    padding: 10px;
+}
+
+.js-gallery{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.js-picture{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal__nav{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal__nav a{
+    text-decoration: none;
+    color: black;
+}
+
+.modal__tittle{
+    margin-top: 20px;
+    font-size: 1.2rem;
+}
+
+.modal__gallery{
+    overflow-y: auto;
+    width: 80%;
+    margin-top: 20px;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: 6px;
+	grid-row-gap: 6px;
+    max-height: 400px;
+    overflow-y: auto;  
+}
+
+.modal__gallery img {
+	width: 100%;
+}
+
+.modal__buttons{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+    border-top: 1px solid #1D6154;
+}
+
+.modal__btn{
+    width: 50%;
+    min-width: 250px;
+    border: none;
+    border-radius: 18px;
+    cursor: pointer;
+}
+
+.modal__btn--add{
+    background-color: #1D6154 ;
+    height: 34px ;
+    color: white;
+    margin-top: 25px;
+}
+
+.modal__btn--delete{
+    background-color: white ;
+    height: 25px ;
+    font-size: 0.6rem;
+    font-family: 'Syne';
+	color: #B1663C;
+    margin-top: 20px;
+}
+
+/* FORMULAIRE */
+#myModalGallery  form {
+    width: 80%;
+	text-align: left;
+	margin-top:30px;
+	display: flex;
+	flex-direction: column;
+}
+#myModalGallery input , #myModalGallery select {
+    /* width: 80%; */
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+#myModalGallery  label {
+	margin: 2em 0 1em 0;
+}
+#myModalGallery textarea {
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+#myModalGallery p {
+	margin : auto ;
+}
+#myModalGallery a {
+	color: #000000;
+	font-weight: 600;
+}
+
+.contener-photo{
+    width: 100%;
+    background-color: #E8F1F6;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+}
+.addPicture__logo{
+    width: 50px;
+    color: gray;
+}
+
+.js-picture .modal__buttons{
+ width: 100%;
+}
+
+#myModalGallery .addPicture__btn{
+    display: flex;
+    align-items: center;
+    background-color: #CBD6DC;
+    border: none;
+    height: 34px;
+    padding: 0 30px;
+    border-radius: 16px;
+    cursor: pointer;
+}
+#myModalGallery input[type="submit"]{
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+    height: 34px;
+	background-color: #A7A7A7;
+	margin : 2em auto ;
+	/* width: 180px; */
+	text-align: center;
+	border-radius: 60px ;
+	cursor: pointer;
+}
+
+.trash--position{
+    position: relative;
+    left: 75%;
+    top: 18%;
+    font-size: 1rem;
+}

@@ -64,7 +64,7 @@ main{
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0;
+	margin: 55px 0;
 }
 
 section {
@@ -180,7 +180,7 @@ nav a:hover {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-input[type="submit"]{
+#contact input[type="submit"]{
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
@@ -232,6 +232,18 @@ input[type="submit"]{
 	font-weight: 600;
 }
 
+#login input[type="submit"]{
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin : 2em auto ;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px ;
+	cursor: pointer;
+}
+
 /* FOOTER */
 footer nav ul {
 	display: flex;
@@ -242,10 +254,12 @@ footer nav ul {
 /* FILTERS */
 .filter {
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: center;
 	row-gap: 10px;
 	margin: 10px 0 50px 0;
 }
+
 .filter__item{
 	border: 1px solid #1D6154;
 	color: #1D6154;
@@ -281,3 +295,4 @@ footer nav ul {
 .wrong {
 	border: 2px solid red !important;
 }
+

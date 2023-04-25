@@ -8,14 +8,20 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
-	<link rel="stylesheet" href="./assets/style.css">
-	<!-- Mon JS avec defer pour charger en dernier (type="module" fait la même chose) -->
 
-	<!-- <script src="/FrontEnd/js/works.js" type="module" defer></script> -->
-	<!-- <script src="/FrontEnd/js/login.js" type="module" defer></script> -->
-	<script src="/FrontEnd/js/home.js" type="module" defer></script>
+	<script src="https://kit.fontawesome.com/b87b562c17.js" crossorigin="anonymous" defer></script>
+	<link rel="stylesheet" href="./assets/style.css">
+	<link rel="stylesheet" href="./assets/modeEdit.css">
+	<link rel="stylesheet" href="./assets/modal.css">
+	<link rel="stylesheet" href="./assets/responsive.css">
+
+	<!-- Mon JS avec defer pour charger en dernier (type="module" fait la même chose) -->
+	<!-- type="module" defer -->
+	<script src="/FrontEnd/js/home.js" type="module" defer ></script>
+	
 
 </head>
+
 <body>
 <header>
 	<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
@@ -23,7 +29,7 @@
 		<ul>
 			<li><a href="./index.html">projets</a></li>
 			<li ><a href="#contact">contact</a></li>
-			<li><a  href="#" id="login">Login</a></li>
+			<li><a href="./login.html" id="login">Login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -41,9 +47,8 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
-		
-		<ul class="filter">
+			<h2>Mes Projets</h2>
+		<ul class="filter ">
 			<!-- Généré par JS -->
 		</ul>
 		<div class="gallery">
@@ -63,6 +68,99 @@
 			<input type="submit" value="Envoyer">
 		</form>
 	</section>
+
+<!-- Modal Profil -->
+<aside id="myModalProfil" class="modal" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="modal__tittle" style="display:none;">
+	<!-- Modal content -->
+	<div class="modal-wrapper js-myModal-stop">
+		<ul class="modal__nav">
+			<li class="nav__item"><a href="#" ></a></li>
+			<li class="nav__item"><a href="#" class="js-myModal-close" >X</a></li>
+		</ul>
+		<h3 class="modal__tittle">Mon profil</h3>
+		<form action="">
+			
+			<label for="photoProfil">Photo</label>
+			<input type="file" name="photoProfil" id="photoProfil">
+
+			<label for="descriptionProfil">Description :</label>
+			<textarea name="descriptionProfil" id="descriptionProfil" cols="30" rows="10"></textarea>
+
+			<div class="modal__buttons">
+				<input type="submit" class="modal__btn modal__btn--add" value="Terminé">
+			</div>
+		</form>
+
+	</div>
+</aside>
+
+
+<!-- Modal Portfolio -->
+<aside id="myModalGallery" class="modal" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="modal__tittle" style="display:none;">
+	<!-- Modal content -->
+	<div class="modal-wrapper js-myModal-stop">
+
+
+		<div class="js-gallery">
+			<ul class="modal__nav">
+				<li class="nav__item"><a href="#" ></a></li>
+				<li class="nav__item"><a href="#" class="js-myModal-close" ><i class="fa-solid fa-xmark"></i></a></li>
+			</ul>
+			<h3 class="modal__tittle">Galerie photo</h3>
+
+			<div class="modal__gallery">
+				<!-- Généré par JS -->
+
+			</div>	
+			<div class="modal__buttons">
+				<button class="modal__btn modal__btn--add">Ajouter une photo</button>
+				<button class="modal__btn modal__btn--delete">Supprimer la galerie</button>
+			</div>	
+		</div>
+
+		
+		<div class="js-picture" style="display:none;">
+			<ul class="modal__nav">
+				<li class="nav__item"><a href="#" class="js-myModal-before"><i class="fa-solid fa-arrow-left"></i></a></li>
+				<li class="nav__item"><a href="#" class="js-myModal-close" ><i class="fa-solid fa-xmark"></i></a></li>
+			</ul>
+			<h3 class="modal__tittle">Ajout photo</h3>
+			<form action="" class="addPicture">
+				<div class="contener-photo">
+					<img src="" id="img" alt="">
+					
+					<img src="./assets/icons/image.png" alt="image vide" class="addPicture__logo">
+					<label for="photo" >
+						<span class="addPicture__btn">+ Ajouter photo</span>
+						<input id="photo" type="file" style="display: none;">
+					</label>
+				</div>
+
+				<label for="titre">Titre</label>
+				<input type="text" name="titre" id="titre">
+
+				<label for="cat">Catégorie</label>
+				<select id="cat" name="cat">
+					<!-- En JS -->
+					<!-- <option value="audi">Audi</option> -->
+				  </select>	
+
+				<div class="modal__buttons">
+					  <input type="submit" class="modal__btn" value="Valider">
+				</div>	
+			</form>
+		</div>
+
+
+
+	</div>
+</aside>
+
+
+<!-- <i class="fa-solid fa-trash-can"></i> -->
+<!-- elle doit juste apparaître au moment où tu te  déplace sur l'image -->
+<!-- <i class="fa-solid fa-arrows-up-down-left-right"></i> -->
+
 </main>
 
 <footer>

@@ -1,26 +1,43 @@
 import { renderWorks } from "./works.js";
 import { renderFilters } from "./filters.js";
-import { ifConnect, loginButton } from "./fonctions/connect.js";
+import { setAdmin } from "./admin.js";
+import { setLogin } from "./login.js";
 
+// Variables
+const pageLogin = document.querySelector("#formLogin");
+const pageIndex = document.querySelector("#portfolio");
+let SESSION = localStorage.key("SESSION");
 
-/*
-ALL WORKS FUNCTION ==> RenderWorks()
+/**
+ * PAGE INDEX
  */
-renderWorks();
+if (pageIndex) {
+    try {
+        renderWorks();
 
-/*
-ALL FILTER FUNCTION ==> RenderFilters()
+        if (SESSION === "SESSION") {
+            setAdmin();
+        } else {
+            renderFilters();
+        };
+
+    } catch (e) {
+        alert("Veuillez contacter le développeur s'il vous plaît, merci")
+        console.log(e);
+    };
+};
+
+/**
+ * PAGE LOGIN
  */
-renderFilters();
-
-/*
-LOGIN==> RenderLogin()
- */
-loginButton();
-ifConnect();
-
-
-
+if (pageLogin) {
+    try {
+        setLogin();
+    } catch (e) {
+        alert("Veuillez contacter le développeur s'il vous plaît, merci")
+        console.log(e);
+    };
+};
 
 
 
