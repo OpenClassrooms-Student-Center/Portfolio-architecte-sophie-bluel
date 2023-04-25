@@ -12,15 +12,18 @@ const page1 = document.querySelector(".js-gallery");
 const page2 = document.querySelector(".js-picture");
 
 
-export async function modalWindow() {
+export function modalWindow() {
+
+    // Get all the works
+    getAllWorks();
+
+    // Get all the categories
+    getAllCat();
 
     // Open modal
     document.querySelectorAll(".editLink").forEach(a => {
         a.addEventListener("click", openModal);
     });
-
-    // Get all the works
-    getAllWorks();
 
     // Key touch
     window.addEventListener("keydown", function (e) {
@@ -35,6 +38,61 @@ export async function modalWindow() {
     });
 
 };
+
+async function getAllWorks() {
+    const worksListe = await fetchJSON("http://localhost:5678/api/works");
+    // Je crée tous les elements suivant le nombre de réponses trouvés
+    worksListe.forEach(element => {
+        // Je crée les balises suivant ma fonction c'est plus facile d'intégrer des para comme des class !
+        const figureElement = createElement("figure", {
+            "id": element.id
+        });
+        const linkTrash = createElement("a", {
+            "href": "#",
+            "class": "js_trashClick"
+        });
+        const iconTrash = createElement("i", {
+            "class": "fa-solid fa-trash-can trash--position",
+            "data-id": element.id
+        })
+        // const iconArrows = createElement("i", {
+        //     "class": "fa-solid fa-arrows-up-down-left-right arrows--active"
+        // })
+        const imgElement = createElement("img", {
+            "src": element.imageUrl,
+            "alt": "image sur : " + element.category.name
+        });
+        const linkElement = createElement("a", {
+            "href": "#"
+        },
+            "Editer"
+        );
+        // Je declare la balise parent Ref!
+        const contenerWorks = document.querySelector(".modal__gallery");
+        // Je les inbrique et affiche
+        contenerWorks.appendChild(figureElement);
+        figureElement.appendChild(linkTrash);
+        linkTrash.appendChild(iconTrash);
+        // linkTrash.appendChild(iconArrows);
+        figureElement.appendChild(imgElement);
+        figureElement.appendChild(linkElement);
+    });
+};
+
+
+async function getAllCat() {
+    const liste = await fetchJSON("http://localhost:5678/api/categories");
+    const selectContener = document.querySelector("#cat");
+    liste.forEach(item => {
+        const optionCat = createElement("option", {
+            "value": item.id
+        },
+            item.name
+        );
+        selectContener.appendChild(optionCat);
+    });
+};
+
 
 const openModal = function (e) {
     e.preventDefault();
@@ -58,6 +116,19 @@ const openModal = function (e) {
     // Go modal picture
     modal.querySelector("#myModalGallery .modal__btn--add").addEventListener("click", openPicture);
 
+
+
+    // Add listener on link trash
+    modal.querySelectorAll(".js_trashClick").forEach(trash => {
+        console.log(trash);
+        trash.addEventListener("click", removePicture);
+    });
+
+
+    // Add listener on link trash
+    modal.querySelector("#addPicture").addEventListener("click", addPicture);
+
+
 };
 
 const closeModal = function (e) {
@@ -76,6 +147,16 @@ const closeModal = function (e) {
     modal.querySelector(".js-myModal-stop").removeEventListener("click", stopPropagation);
     // Go modal picture
     modal.querySelector("#myModalGallery .modal__btn--add").removeEventListener("click", openPicture);
+
+
+    // Add listener on link trash
+    modal.querySelectorAll(".js_trashClick").forEach(trash => {
+        console.log(trash);
+        trash.removeEventListener("click", removePicture);
+    });
+    // Add listener on link trash
+    modal.querySelector("#addPicture").removeEventListener("click", addPicture);
+
     modal = null;
     page1.style.display = null;
     page2.style.display = "none";
@@ -104,19 +185,37 @@ const focusInModal = function (e) {
 
 const openPicture = function (e) {
     e.preventDefault();
+
     page1.style.display = "none";
     page2.style.display = null;
+
     // Back modal gallery
     modal.querySelector(".js-myModal-before").addEventListener("click", backGallery);
 
     // const addBtnImage = document.querySelector(".addPicture__btn");
-    let input = modal.querySelector("#photo");
-    let imageSrc = modal.querySelector("#img");
+    let input = modal.querySelector("#choosePicture");
+    let imageSrc = modal.querySelector("#pictureView");
+    let buttonLabel = modal.querySelector(".addPicture__btn");
 
     input.addEventListener("change", () => {
-        let inputImage = modal.querySelector("input[type=file]").files[0];
-        imageSrc.setAttribute("src", inputImage.name);
-        console.log(inputImage);
+        const imgSizeMax = 4000000 * 1;
+
+        let imgSelect = input.files[0];
+        let imgSize = imgSelect.size;
+
+        if (imgSize > imgSizeMax) {
+            alert("La photo est trop volumineuse");
+            return;
+        } else {
+            alert("Je continu pour ajouter la photo");
+            imageSrc.src = URL.createObjectURL(input.files[0]);
+            buttonLabel.style = "display:none;";
+            imageSrc.classList.add("addPicture__logo--full");
+        }
+
+        console.log(input.files[0].size / 1000000 + " MO");
+
+
     });
 
 }
@@ -129,44 +228,74 @@ const backGallery = function (e) {
 }
 
 
-const getAllWorks = async function () {
+const removePicture = async function (e) {
+    e.preventDefault();
 
-    const worksListe = await fetchJSON("http://localhost:5678/api/works");
+    console.log(e.target.parentElement.parentElement);
+    console.log(e.target);
+    console.log(e.target.getAttribute("data-id"));
 
-    // Je crée tous les elements suivant le nombre de réponses trouvés
-    worksListe.forEach(element => {
-        // Je crée les balises suivant ma fonction c'est plus facile d'intégrer des para comme des class !
-        const figureElement = createElement("figure");
-        const linkTrash = createElement("a", {
-            "href": "#"
-        });
-        const iconTrash = createElement("i", {
-            "class": "fa-solid fa-trash-can trash--position"
-        })
-        // const iconArrows = createElement("i", {
-        //     "class": "fa-solid fa-arrows-up-down-left-right arrows--active"
-        // })
-        const imgElement = createElement("img", {
-            "src": element.imageUrl,
-            "alt": "image sur : " + element.category.name
-        });
-        const linkElement = createElement("a", {
-            "id": element.id,
-            "href": "#"
-        },
-            "Editer"
-        );
-        // Je declare la balise parent Ref!
-        const contenerWorks = document.querySelector(".modal__gallery");
-        // Je les inbrique et affiche
-        contenerWorks.appendChild(figureElement);
-        figureElement.appendChild(linkTrash);
-        linkTrash.appendChild(iconTrash);
-        // linkTrash.appendChild(iconArrows);
-        figureElement.appendChild(imgElement);
-        figureElement.appendChild(linkElement);
+    const pictureToDelete = e.target.parentElement.parentElement;
+
+    // control if id isnumber
+    const idDelete = e.target.getAttribute("data-id") * 1;
+    if (!Number.isInteger(idDelete)) {
+        alert("Ce n'est pas un nombre !");
+        return;
+    };
+
+    const url = 'http://localhost:5678/api/works/' + idDelete;
+    console.log(url);
+
+    const token = localStorage.getItem("SESSION");
+    console.log(token);
+
+    // return;
+    // Connect to API
+    const cnx = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Basic ${token}`
+        }
     });
+
+    const r = cnx.status;
+    const data = await cnx.json();
+    console.log(cnx);
+    console.log(data);
+
+    // Controls connection
+    if (r === 401) {
+        alert("Vous n'êtes pas autorisé(e)");
+        return;
+    };
+
+    if (r === 500) {
+        alert("la photo n'existe pas !");
+        return;
+    };
+
+    // Connection OK => Next
+    if (cnx.ok && r === 200) {
+        alert("Photo supprimée !");
+    };
+
+    pictureToDelete.remove();
 
 };
 
 
+
+const addPicture = async function (e) {
+    e.preventDefault();
+
+
+
+
+};
+
+
+
+const control = function () {
+
+};

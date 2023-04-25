@@ -125,15 +125,18 @@
 				<li class="nav__item"><a href="#" class="js-myModal-close" ><i class="fa-solid fa-xmark"></i></a></li>
 			</ul>
 			<h3 class="modal__tittle">Ajout photo</h3>
+
 			<form action="" class="addPicture">
+
 				<div class="contener-photo">
-					<img src="" id="img" alt="">
-					
-					<img src="./assets/icons/image.png" alt="image vide" class="addPicture__logo">
-					<label for="photo" >
+
+					<label for="choosePicture" class="contener__label" >
+						<img src="./assets/icons/image.png" alt="image choisie" class="addPicture__logo" id="pictureView" >
 						<span class="addPicture__btn">+ Ajouter photo</span>
-						<input id="photo" type="file" style="display: none;">
+						<input id="choosePicture" name="choosePicture" type="file" style="display: none;">
+						<p>jpg, png: 4 Mo Max</p>
 					</label>
+
 				</div>
 
 				<label for="titre">Titre</label>
@@ -142,24 +145,17 @@
 				<label for="cat">Catégorie</label>
 				<select id="cat" name="cat">
 					<!-- En JS -->
-					<!-- <option value="audi">Audi</option> -->
+					<option value="0">Merci de choisir</option>
 				  </select>	
 
 				<div class="modal__buttons">
-					  <input type="submit" class="modal__btn" value="Valider">
+					  <input type="submit" class="modal__btn" value="Valider" id="addPicture">
 				</div>	
 			</form>
 		</div>
 
-
-
 	</div>
 </aside>
-
-
-<!-- <i class="fa-solid fa-trash-can"></i> -->
-<!-- elle doit juste apparaître au moment où tu te  déplace sur l'image -->
-<!-- <i class="fa-solid fa-arrows-up-down-left-right"></i> -->
 
 </main>
 

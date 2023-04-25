@@ -137,15 +137,30 @@
 .contener-photo{
     width: 100%;
     background-color: #E8F1F6;
-    height: 120px;
+    height: 170px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-top: 10px;
+    overflow: hidden;
 }
+
+.contener__label{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    margin: 0 !important;
+}
+.contener__label p{
+    font-size: 0.7rem;
+    font-weight: 300;
+    padding-top: 5px;
+}
+
 .addPicture__logo{
-    width: 50px;
+    width: 90px;
     color: gray;
 }
 
@@ -162,6 +177,8 @@
     padding: 0 30px;
     border-radius: 16px;
     cursor: pointer;
+    color: #306685;
+    font-weight: 500;
 }
 #myModalGallery input[type="submit"]{
 	font-family: 'Syne';
@@ -176,9 +193,18 @@
 	cursor: pointer;
 }
 
-.trash--position{
+ .js_trashClick{
+    display: block;
     position: relative;
     left: 75%;
     top: 18%;
+    width: fit-content;
+    margin: 0;
+}
+.trash--position{
     font-size: 1rem;
+}
+
+.addPicture__logo--full{
+    width: 140px;
 }
