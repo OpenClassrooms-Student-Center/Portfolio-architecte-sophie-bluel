@@ -10,6 +10,12 @@
     align-items: center;
 }
 
+.modal a{
+    text-decoration: none;
+    font-size: 0.7rem;
+    font-weight: 200 !important;
+}
+
 .modal-wrapper{
     overflow-y: auto;    
     background-color: white;
@@ -50,12 +56,13 @@
 }
 
 .modal__gallery{
+    overflow-y: auto;
     width: 80%;
     margin-top: 20px;
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr ;
-	grid-column-gap: 8px;
-	grid-row-gap: 8px;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: 6px;
+	grid-row-gap: 6px;
     max-height: 400px;
     overflow-y: auto;  
 }
@@ -167,4 +174,11 @@
 	text-align: center;
 	border-radius: 60px ;
 	cursor: pointer;
+}
+
+.trash--position{
+    position: relative;
+    left: 75%;
+    top: 18%;
+    font-size: 1rem;
 }

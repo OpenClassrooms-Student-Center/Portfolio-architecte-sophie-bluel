@@ -34,6 +34,7 @@ export async function renderWorks(liste = maListe, where = ".gallery") {
             figureElement.appendChild(captionElement);
         });
 
+
     } catch (error) {
         console.error(error);
         addErrorMessage("Il y a une erreur sur le fetch des projets !", "#portfolio");

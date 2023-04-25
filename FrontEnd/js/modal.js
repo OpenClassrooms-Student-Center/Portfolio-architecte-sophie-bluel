@@ -1,5 +1,7 @@
-import { renderWorks } from "./works.js";
+// import { renderWorks } from "./works.js";
 import { fetchJSON } from "./fonctions/api.js";
+import { createElement, addErrorMessage } from "./fonctions/dom.js";
+
 
 // Variables
 let modal = null;
@@ -14,23 +16,11 @@ export async function modalWindow() {
 
     // Open modal
     document.querySelectorAll(".editLink").forEach(a => {
-        console.log(a);
         a.addEventListener("click", openModal);
     });
 
-    // Get img => Faire un fletch !!!!
-    // const recup = document.querySelectorAll("#portfolio img");
-    // recup.forEach(figure => {
-    //     const trash = createElement("i", { "class": "fa-solid fa-trash-can" })
-    //     const figureClone = figure.cloneNode(true);
-    //     figureClone.appendChild(trash);
-    //     const parentContener = document.querySelector(".modal__gallery");
-    //     parentContener.appendChild(figureClone);
-    // });
-
-    const maListe = await fetchJSON("http://localhost:5678/api/works");
-    renderWorks(maListe, ".modal__gallery")
-
+    // Get all the works
+    getAllWorks();
 
     // Key touch
     window.addEventListener("keydown", function (e) {
@@ -52,7 +42,6 @@ const openModal = function (e) {
     modal = document.querySelector(e.target.getAttribute("href"));
     // List all selectors can be focus
     canFocus = Array.from(modal.querySelectorAll(listSelectorFocus)); // renvoi normalement un node, Array.from permet de le transformer en tableau !
-    console.log(canFocus);
     previouslyFocusedElement = document.querySelector(":focus");
     // show modal selected
     modal.style.display = null;
@@ -140,6 +129,44 @@ const backGallery = function (e) {
 }
 
 
+const getAllWorks = async function () {
 
+    const worksListe = await fetchJSON("http://localhost:5678/api/works");
+
+    // Je crée tous les elements suivant le nombre de réponses trouvés
+    worksListe.forEach(element => {
+        // Je crée les balises suivant ma fonction c'est plus facile d'intégrer des para comme des class !
+        const figureElement = createElement("figure");
+        const linkTrash = createElement("a", {
+            "href": "#"
+        });
+        const iconTrash = createElement("i", {
+            "class": "fa-solid fa-trash-can trash--position"
+        })
+        // const iconArrows = createElement("i", {
+        //     "class": "fa-solid fa-arrows-up-down-left-right arrows--active"
+        // })
+        const imgElement = createElement("img", {
+            "src": element.imageUrl,
+            "alt": "image sur : " + element.category.name
+        });
+        const linkElement = createElement("a", {
+            "id": element.id,
+            "href": "#"
+        },
+            "Editer"
+        );
+        // Je declare la balise parent Ref!
+        const contenerWorks = document.querySelector(".modal__gallery");
+        // Je les inbrique et affiche
+        contenerWorks.appendChild(figureElement);
+        figureElement.appendChild(linkTrash);
+        linkTrash.appendChild(iconTrash);
+        // linkTrash.appendChild(iconArrows);
+        figureElement.appendChild(imgElement);
+        figureElement.appendChild(linkElement);
+    });
+
+};
 
 

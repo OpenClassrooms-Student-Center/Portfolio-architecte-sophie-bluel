@@ -5,6 +5,7 @@ import { createElement, addErrorMessage } from "./fonctions/dom.js";
 
 
 export async function renderFilters() {
+
     try {
         const liste = await fetchJSON("http://localhost:5678/api/categories");
 

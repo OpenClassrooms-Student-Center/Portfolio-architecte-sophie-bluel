@@ -30,8 +30,6 @@ export function addErrorMessage(message, element) {
     const parentElement = document.querySelector(element);
     parentElement.insertBefore(divError, parentElement.children[0]);
 };
-
-
 /**
  * delete all messages to the page
  */
@@ -51,7 +49,6 @@ export function removeErrorStyle(tagName) {
     const element = document.querySelector(tagName);
     element.classList.remove("wrong");
 }
-
 /**
  * Add Error Style
  * @param {String} tagName name of Tag ex: p, a, section, ....

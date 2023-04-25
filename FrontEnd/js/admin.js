@@ -1,15 +1,12 @@
 import { createElement } from "./fonctions/dom.js";
 import { modalWindow } from "./modal.js";
-/**
- * ADMIN
- */
 
 // Variables
 const tagLogin = document.querySelector("#login");
 
 
 // Add mode EDIT after control token
-export function setAdmin() {
+export async function setAdmin() {
 
     // update link login menu
     tagLogin.innerText = "logout";
@@ -27,8 +24,8 @@ export function setAdmin() {
             "class": "editLink editLink-projets"
         });
 
-    modalWindow();
     logoutButton();
+    modalWindow();
 };
 
 
