@@ -30,6 +30,25 @@ export function renderMiniWorks(category) {
             newFigure.appendChild(newFigcaption);
             modalWrapper.appendChild(newFigure);
             divider.insertAdjacentElement("beforeBegin", modalWrapper)
+
+            // Since we created the trashcan delete elements here we deal with them here 
+            trashCan.addEventListener("click", function (){
+              const id = work.id
+              console.log(id)
+              deleteWorks(id)
+
+            })
+
+            //async funtion to delete the works
+            const deleteWorks = async function (id){
+              const response = await fetch("http://localhost:5678/api/works/" + id, {
+                method: 'DELETE',
+                headers: {
+                  'content-type': 'application/json',
+                  'Authorization': 'Bearer ' + window.localStorage.getItem("token")
+                }
+              })
+            }
                   
         })
       

@@ -56,20 +56,6 @@ export function modalFunction() {
 
     }
 
-    function deleteWorks(){
-        
-        document.addEventListener("click", function (e){
-            const target = e.target.querySelector(".deleteWork")
-            const urlBase = "http://localhost:5678/api/works/"
-            const figureDeleteId = document.querySelector(".miniGallery figure").id
-            console.log(target.innerHTML)
-            if(target){
-                console.log("deleted")
-            }
-    
-        })
-    }
-
     function openModal(){
         const modalHTML = document.querySelector(".modal-div-link")
         modalHTML.addEventListener("click", function () {
@@ -77,7 +63,6 @@ export function modalFunction() {
             createModalContent()
             const modalTag = document.getElementById("modal1")
             modalTag.classList.remove("d-none")
-            deleteWorks()
             closeModal()
         })
         
