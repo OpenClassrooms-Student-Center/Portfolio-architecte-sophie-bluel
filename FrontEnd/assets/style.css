@@ -150,7 +150,7 @@ nav a:hover {
 	width: 100%;
 }
 
-/* FORMULAIRE CONTACT */
+/* FORMULAIRE */
 #contact  {
 	width: 50%;
 	margin: auto;
@@ -161,26 +161,26 @@ nav a:hover {
 #contact  h2{
 	margin-bottom: 20px;
 }
-#contact  form {
-	text-align: left;
+form {
+	text-align: left !important;
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
 }
-#contact input {
+input, select {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#contact  label {
+label {
 	margin: 2em 0 1em 0;
 }
-#contact textarea {
+textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#contact input[type="submit"]{
+input[type="submit"]{
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
@@ -204,45 +204,15 @@ nav a:hover {
 	text-align: center;
 	margin-bottom: 20px;
 }
-#login  form {
-	text-align: left;
-	margin-top:30px;
-	display: flex;
-	flex-direction: column;
-}
-#login input {
-	height: 50px;
-	font-size: 1.2em;
-	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-}
-#login  label {
-	margin: 2em 0 1em 0;
-}
-#login textarea {
-	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-}
+
 #login p {
 	margin : auto ;
 }
 #login a {
-	/* text-decoration: none; */
 	color: #000000;
 	font-weight: 600;
 }
 
-#login input[type="submit"]{
-	font-family: 'Syne';
-	font-weight: 700;
-	color: white;
-	background-color: #1D6154;
-	margin : 2em auto ;
-	width: 180px;
-	text-align: center;
-	border-radius: 60px ;
-	cursor: pointer;
-}
 
 /* FOOTER */
 footer nav ul {
