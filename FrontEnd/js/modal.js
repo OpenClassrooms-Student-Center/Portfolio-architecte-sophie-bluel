@@ -39,6 +39,10 @@ export function modalWindow() {
 
 };
 
+
+/**
+ * Fetch all works to add in gallery
+ */
 async function getAllWorks() {
     const worksListe = await fetchJSON("http://localhost:5678/api/works");
     // Je crée tous les elements suivant le nombre de réponses trouvés
@@ -80,9 +84,12 @@ async function getAllWorks() {
 };
 
 
+/**
+ * Fetch all categories to add in select imput
+ */
 async function getAllCat() {
     const liste = await fetchJSON("http://localhost:5678/api/categories");
-    const selectContener = document.querySelector("#cat");
+    const selectContener = document.querySelector("#pictureCat");
     liste.forEach(item => {
         const optionCat = createElement("option", {
             "value": item.id
@@ -98,6 +105,9 @@ const openModal = function (e) {
     e.preventDefault();
     // Select modal with "href"
     modal = document.querySelector(e.target.getAttribute("href"));
+    // Pages
+    page1.style.display = null;
+    page2.style.display = "none";
     // List all selectors can be focus
     canFocus = Array.from(modal.querySelectorAll(listSelectorFocus)); // renvoi normalement un node, Array.from permet de le transformer en tableau !
     previouslyFocusedElement = document.querySelector(":focus");
@@ -116,13 +126,26 @@ const openModal = function (e) {
     // Go modal picture
     modal.querySelector("#myModalGallery .modal__btn--add").addEventListener("click", openPicture);
 
-
-
     // Add listener on link trash
     modal.querySelectorAll(".js_trashClick").forEach(trash => {
-        console.log(trash);
         trash.addEventListener("click", removePicture);
     });
+
+
+    // Add1 listener Back modal gallery
+    modal.querySelector(".js-myModal-before").addEventListener("click", backGallery);
+
+    // Add2 listener to choose picture
+    modal.querySelector("#pictureChoose").addEventListener("change", choosPicture);
+
+    // Add3 listener to change the button to active after control is not empty imput !
+    const allImputForm = Array.from(modal.querySelectorAll(".js-control"));
+    allImputForm.forEach(input => {
+        input.addEventListener("change", control);
+    });
+
+    // Add4 listener btn AddPicture
+    modal.querySelector("#pictureForm").addEventListener("submit", addPicture);
 
 
 };
@@ -147,15 +170,33 @@ const closeModal = function (e) {
 
     // Remove listener on link trash
     modal.querySelectorAll(".js_trashClick").forEach(trash => {
-        console.log(trash);
         trash.removeEventListener("click", removePicture);
     });
 
+    // Remove1
+    modal.querySelector(".js-myModal-before").removeEventListener("click", backGallery);
+    // Remove2
+    modal.querySelector("#pictureChoose").addEventListener("change", choosPicture);
+    // Remove3 listener to change the button to active after control is not empty imput !
+    const allImputForm = Array.from(modal.querySelectorAll(".js-control"));
+    allImputForm.forEach(input => {
+        input.removeEventListener("change", control);
+    });
+    // Remove4
+    modal.querySelector("#pictureForm").removeEventListener("submit", addPicture);
+
+    clearFormPicture();
 
     modal = null;
-    page1.style.display = null;
-    page2.style.display = "none";
 };
+
+
+const clearFormPicture = function () {
+    modal.querySelector("#pictureView").src = "./assets/icons/image.png";
+    modal.querySelector(".js-picture form").reset();
+}
+
+
 
 const stopPropagation = function (e) {
     e.stopPropagation();
@@ -180,79 +221,58 @@ const focusInModal = function (e) {
 
 const openPicture = function (e) {
     e.preventDefault();
-
+    clearFormPicture();
     // Change the page
     page1.style.display = "none";
     page2.style.display = null;
+};
 
-    // Add1 listener Back modal gallery
-    modal.querySelector(".js-myModal-before").addEventListener("click", backGallery);
 
-    // Add2 listener to choose picture
-    modal.querySelector("#choosePicture").addEventListener("change", choosPicture);
-
-    // Add3 listener to change the button to active after control is not empty imput !
-    const allImputForm = Array.from(modal.querySelectorAll(".js-control"));
-    allImputForm.forEach(input => {
-        console.log(input);
-        input.addEventListener("change", control);
-    });
-
-    // Add4 listener btn AddPicture
-    modal.querySelector("#addPicture").addEventListener("click", addPicture);
-
-}
-
+/**
+ * Get picture on form
+ * @returns 
+ */
 const choosPicture = function () {
 
-    let input = modal.querySelector("#choosePicture");
+    // variable
+    let input = modal.querySelector("#pictureChoose");
     let imageSrc = modal.querySelector("#pictureView");
     let buttonLabel = modal.querySelector(".addPicture__btn");
-
     const imgSizeMax = 4000000 * 1;
-    console.log(input.files[0]);
     let imgSelect = input.files[0];
     let imgSize = input.files[0].size;
 
     if (imgSize > imgSizeMax) {
-        alert("La photo est trop volumineuse");
+        console.log("La photo est trop volumineuse");
         return;
     } else {
-        alert("Je continu pour ajouter la photo");
+        console.log("Je continu pour ajouter la photo");
         imageSrc.src = URL.createObjectURL(imgSelect);
         buttonLabel.style = "display:none;";
         imageSrc.classList.add("addPicture__logo--full");
-    }
+    };
 
-    console.log(input.files[0].size / 1000000 + " MO");
 };
 
-const backGallery = function (e) {
-    e.preventDefault();
+
+/**
+ * Back to gallery
+ */
+const backGallery = function () {
+    // e.preventDefault();
     page1.style.display = null;
     page2.style.display = "none";
-    // Remove1
-    modal.querySelector(".js-myModal-before").removeEventListener("click", backGallery);
-    // Remove2
-    modal.querySelector("#choosePicture").addEventListener("change", choosPicture);
-    // Remove3 listener to change the button to active after control is not empty imput !
-    const allImputForm = Array.from(modal.querySelectorAll(".js-control"));
-    allImputForm.forEach(input => {
-        console.log(input);
-        input.removeEventListener("change", control);
-    });
-    // Remove4
-    modal.querySelector("#addPicture").removeEventListener("click", addPicture);
-}
+
+};
 
 
+/**
+ * remove picture with fetch
+ * @param {event} e 
+ * @returns 
+ */
 const removePicture = async function (e) {
     e.preventDefault();
-
-    console.log(e.target.parentElement.parentElement);
-    console.log(e.target);
-    console.log(e.target.getAttribute("data-id"));
-
     const pictureToDelete = e.target.parentElement.parentElement;
 
     // control if id isnumber
@@ -263,12 +283,8 @@ const removePicture = async function (e) {
     };
 
     const url = 'http://localhost:5678/api/works/' + idDelete;
-    console.log(url);
-
     const token = localStorage.getItem("SESSION");
-    console.log(token);
 
-    // return;
     // Connect to API
     const cnx = await fetch(url, {
         method: 'DELETE',
@@ -279,23 +295,20 @@ const removePicture = async function (e) {
 
     const r = cnx.status;
     const data = await cnx.json();
-    console.log(cnx);
-    console.log(data);
 
     // Controls connection
     if (r === 401) {
-        alert("Vous n'êtes pas autorisé(e)");
+        console.log("Vous n'êtes pas autorisé(e)");
         return;
     };
-
     if (r === 500) {
-        alert("la photo n'existe pas !");
+        console.log("le projet n'existe pas !");
         return;
     };
 
     // Connection OK => Next
     if (cnx.ok && r === 200) {
-        alert("Photo supprimée !");
+        console.log("Projet supprimé !");
     };
 
     pictureToDelete.remove();
@@ -303,35 +316,91 @@ const removePicture = async function (e) {
 };
 
 
-const addPicture = async function (e) {
-    e.preventDefault();
+/**
+ * Add picture with fetch
+ */
+const addPicture = async function (event) {
+    event.preventDefault();
 
-    console.log("ca marche")
+    const myForm = modal.querySelector("#pictureForm");
+    const myImg = modal.querySelector("#pictureChoose");
+
+
+    const formData = new FormData(myForm);
+
+    const image = formData.get("image").name;
+    const title = formData.get("title");
+    const category = formData.get("category") * 1;
+
+    const newProjet = {
+        image,
+        title,
+        category
+    };
+
+    // formData.forEach(item => {
+    //     console.log(item);
+    // });
+
+    console.log(newProjet);
+
+    saveProjetBeforeUpdate(newProjet);
+
+
+    backGallery();
+
+
+    //Rajouter l'image avec creatElement quand valider 
+
+    // utiliser le bouton "publier les changements pour fetch chaque nouveau projet dans localStorage !
+
+    // Supp le localStorage et reset la page !
 
 };
 
 
+/**
+ * Save all news projects before to update all changes
+ * @param {object} projet 
+ */
+function saveProjetBeforeUpdate(projet) {
+    let projets = JSON.parse(localStorage.getItem("projets")) || [];
+    projets = [...projets, projet];
+    localStorage.setItem('projets', JSON.stringify(projets));
+}
+
+
+/**
+ * use for unlock or lock the button
+ * @returns 
+ */
 const control = function () {
 
+    const btnAddPicture = modal.querySelector("#pictureSubmit");
+
     // Variables
-    const btnAddPicture = modal.querySelector("#addPicture");
-    let filePicture = modal.querySelector("#choosePicture").files[0];
-    let nameProjet = modal.querySelector("#titre");
-    let valueCategorie = modal.querySelector("#cat").value;
+    let filePicture = modal.querySelector("#pictureChoose").files[0];
+    let nameProjet = modal.querySelector("#pictureTitre");
+    let valueCategorie = modal.querySelector("#pictureCat").value;
 
 
+    // conditions voir pour creer une boucle !
     if (filePicture === "") {
         console.log("Merci de choisir une photo pour votre nouveau projet, s'il vous plaît");
+        btnAddPicture.classList.add("modal__btn--noComplet")
+        btnAddPicture.setAttribute("disabled", "");
         return;
     };
-
     if (nameProjet === "") {
         console.log("Merci de remplir le nom de votre nouveau projet, s'il vous plaît");
+        btnAddPicture.classList.add("modal__btn--noComplet")
+        btnAddPicture.setAttribute("disabled", "");
         return;
     };
-
     if (valueCategorie === "" || valueCategorie < 1) {
         console.log("Merci de choisir une catégorie pour votre nouveau projet, s'il vous plaît");
+        btnAddPicture.classList.add("modal__btn--noComplet")
+        btnAddPicture.setAttribute("disabled", "");
         return;
     };
 
@@ -339,3 +408,4 @@ const control = function () {
     btnAddPicture.removeAttribute("disabled");
 
 };
+

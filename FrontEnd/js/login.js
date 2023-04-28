@@ -72,8 +72,9 @@ export function setLogin() {
         if (cnx.ok && r === 200) {
             const data = await cnx.json();
             localStorage.setItem("SESSION", data.token);
+            // localStorage.setItem("UserId", data.userId);
             window.location.href = './index.html';
-            alert("Vous êtes connecté(e)");
+            alert("Bienvenue " + email);
         };
 
     });
