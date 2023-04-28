@@ -13,10 +13,8 @@ export function renderFilters() {
 
       //necessaire pour le hover effect sur les boutons des filtres
       allElementsButton.classList.add('btn')
-      allElementsButton.classList.add('active')
-
+      //so its already green when page appears
       addActiveClass(allElementsButton)
-      allElementsButton.classList.add('active')
       
       //On insere le btn dans la div filterDiv
       filterDiv.appendChild(allElementsButton);

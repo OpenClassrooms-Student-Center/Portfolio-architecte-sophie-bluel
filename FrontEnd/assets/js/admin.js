@@ -2,6 +2,14 @@ export function setAdminPage() {
 	const projetsTitle = document.getElementById("portfolio").querySelector("h2");
 	projetsTitle.remove()
 	const modalLink = createModalLink("admin-div", "modifier");
+	const portfolioSection = document.getElementById("portfolio");
+	portfolioSection.insertAdjacentElement("afterbegin", modalLink);
+
+	
+	const underMainPic = document.getElementById("introduction").querySelector("figure");
+	const modalLink2 = createModalLink("main-pic", "modifier");
+	underMainPic.insertAdjacentElement("beforeend", modalLink2);
+
 	const h2Title = document.createElement("h2")
 	h2Title.innerText = "Mes projets"
 	modalLink.prepend(h2Title)
@@ -33,8 +41,7 @@ function createModalLink(classModal, editText){
 	// 1st param to set the name of specific div to be able to change it
 	newDivTitle.className = classModal
 	newDivTitle.appendChild(modalDivLink)
-	const portfolioSection = document.getElementById("portfolio");
-	portfolioSection.insertAdjacentElement("afterbegin", newDivTitle);
+
 
 	return newDivTitle;
  

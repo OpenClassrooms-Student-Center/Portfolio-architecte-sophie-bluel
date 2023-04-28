@@ -1,5 +1,4 @@
 import { renderMiniWorks } from './miniWorks.js'
-import { deleteWorks } from './deleteWorks.js'
 
 
 export function modalFunction() {
@@ -56,32 +55,33 @@ export function modalFunction() {
 
     }
 
-    function openModal(){
-        const modalHTML = document.querySelector(".modal-div-link")
-        modalHTML.addEventListener("click", function () {
-            createModal()
-            createModalContent()
-            const modalTag = document.getElementById("modal1")
-            modalTag.classList.remove("d-none")
-            closeModal()
-        })
-        
-
-    }
-
-    function closeModal(){
-        const closeX = document.querySelector(".close")
-        const modalTag = document.getElementById('modal1')
-        closeX.addEventListener("click", function(){
-            const modalTag = document.getElementById('modal1')
-            modalTag.remove()
-        })
-
-    }
-
-
-
-openModal()
+    function openModal() {
+        const modalHTML = document.querySelector(".admin-div");
+        modalHTML.addEventListener("click", function() {
+          createModal();
+          createModalContent();
+          const modalTag = document.getElementById("modal1");
+          modalTag.classList.remove("d-none");
+          closeModal(modalTag);
+        });
+      }
+      
+      function closeModal(modal) {
+        const closeX = document.querySelector(".close");
+        const isModal = document.querySelector(".modal-content");
+        modal.addEventListener("click", function(e) {
+          if (isModal.contains(e.target)) {
+            // do nothing
+          } else {
+            modal.remove();
+          }
+        });
+        closeX.addEventListener("click", function() {
+          modal.remove();
+        });
+      }
+      
+      openModal();
 
 }
 
