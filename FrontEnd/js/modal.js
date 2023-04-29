@@ -274,9 +274,11 @@ const backGallery = function () {
 const removePicture = async function (e) {
     e.preventDefault();
     const pictureToDelete = e.target.parentElement.parentElement;
-
-    // control if id isnumber
     const idDelete = e.target.getAttribute("data-id") * 1;
+
+    // ------------------------------------------------------------------
+    // Mettre ce code dans le button "Publier les changements" !!!!!!!!
+    // control if id isnumber
     if (!Number.isInteger(idDelete)) {
         alert("Ce n'est pas un nombre !");
         return;
@@ -310,10 +312,27 @@ const removePicture = async function (e) {
     if (cnx.ok && r === 200) {
         console.log("Projet supprimé !");
     };
+    // ------------------------------------------------------------------
+
 
     pictureToDelete.remove();
 
+    const removeProjet = {
+        "id": idDelete
+    };
+
+    saveProjetBeforeRemove(removeProjet);
 };
+
+/**
+ * Save all remove projects before to update all changes
+ * @param {object} projet 
+ */
+function saveProjetBeforeRemove(projet) {
+    let removeProjets = JSON.parse(localStorage.getItem("removeProjets")) || [];
+    removeProjets = [...removeProjets, projet];
+    localStorage.setItem('removeProjets', JSON.stringify(removeProjets));
+}
 
 
 /**
@@ -365,9 +384,9 @@ const addPicture = async function (event) {
  * @param {object} projet 
  */
 function saveProjetBeforeUpdate(projet) {
-    let projets = JSON.parse(localStorage.getItem("projets")) || [];
-    projets = [...projets, projet];
-    localStorage.setItem('projets', JSON.stringify(projets));
+    let addProjets = JSON.parse(localStorage.getItem("addProjets")) || [];
+    addProjets = [...addNewPraddProjetsojets, projet];
+    localStorage.setItem('addProjets', JSON.stringify(addProjets));
 }
 
 
