@@ -1,6 +1,6 @@
-// import { renderWorks } from "./works.js";
 import { fetchJSON } from "./fonctions/api.js";
-import { createElement, addErrorMessage } from "./fonctions/dom.js";
+import { createElement } from "./fonctions/dom.js";
+import { choosPicture, removePicture, addPicture, addNewProjet } from "./image.js";
 
 
 // Variables
@@ -10,16 +10,22 @@ let canFocus = [];
 let previouslyFocusedElement = null;
 const page1 = document.querySelector(".js-gallery");
 const page2 = document.querySelector(".js-picture");
+
+// Cnx to API
 const worksListe = await fetchJSON("http://localhost:5678/api/works");
+const categoriesListe = await fetchJSON("http://localhost:5678/api/categories");
 
 
+/**
+ * MAIN CODE
+ */
 export function modalWindow() {
 
     // Get all the works
-    getWorks(worksListe);
+    creatWorksElementsFrom(worksListe);
 
     // Get all the categories
-    getAllCat();
+    creatCategoriesElementFrom(categoriesListe);
 
     // Open modal
     document.querySelectorAll(".editLink").forEach(a => {
@@ -44,7 +50,7 @@ export function modalWindow() {
 /**
  * Fetch all works to add in gallery
  */
-async function getWorks(liste) {
+function creatWorksElementsFrom(liste) {
     // Je crée tous les elements suivant le nombre de réponses trouvés
     liste.forEach(element => {
         // Je crée les balises suivant ma fonction c'est plus facile d'intégrer des para comme des class !
@@ -87,8 +93,7 @@ async function getWorks(liste) {
 /**
  * Fetch all categories to add in select imput
  */
-async function getAllCat() {
-    const liste = await fetchJSON("http://localhost:5678/api/categories");
+function creatCategoriesElementFrom(liste) {
     const selectContener = document.querySelector("#pictureCat");
     liste.forEach(item => {
         const optionCat = createElement("option", {
@@ -101,6 +106,10 @@ async function getAllCat() {
 };
 
 
+/**
+ * Open modal
+ * @param {event} e 
+ */
 const openModal = function (e) {
     e.preventDefault();
     // Select modal with "href"
@@ -150,6 +159,11 @@ const openModal = function (e) {
 
 };
 
+/**
+ * Close Modal
+ * @param {event} e 
+ * @returns 
+ */
 const closeModal = function (e) {
     if (modal === null) return;
     if (previouslyFocusedElement !== null) previouslyFocusedElement.focus();
@@ -185,23 +199,36 @@ const closeModal = function (e) {
     // Remove4
     modal.querySelector("#pictureForm").removeEventListener("submit", addPicture);
 
-    clearFormPicture();
+    initFormPicture();
 
     modal = null;
 };
 
 
-const clearFormPicture = function () {
+const initFormPicture = function () {
     modal.querySelector("#pictureView").src = "./assets/icons/image.png";
     modal.querySelector(".js-picture form").reset();
+
+    let imageSrc = modal.querySelector("#pictureView");
+    let buttonLabel = modal.querySelector(".addPicture__btn");
+    // buttonLabel.style = "display:null;";
+    // imageSrc.classList.remove("addPicture__logo--full");
 }
 
 
-
+/**
+ * stopPropagation
+ * @param {event} e 
+ */
 const stopPropagation = function (e) {
     e.stopPropagation();
 };
 
+
+/**
+ * keep focus when you leave modal
+ * @param {event} e 
+ */
 const focusInModal = function (e) {
     e.preventDefault();
     let index = canFocus.findIndex(f => f === modal.querySelector(":focus"));
@@ -219,207 +246,28 @@ const focusInModal = function (e) {
     canFocus[index].focus();
 };
 
+
+/**
+ * Open modal2 = pick picture
+ * @param {event} e 
+ */
 const openPicture = function (e) {
     e.preventDefault();
-    clearFormPicture();
     // Change the page
     page1.style.display = "none";
     page2.style.display = null;
 };
 
 
-/**
- * Get picture on form
- * @returns 
- */
-const choosPicture = function () {
-
-    // variable
-    let input = modal.querySelector("#pictureChoose");
-    let imageSrc = modal.querySelector("#pictureView");
-    let buttonLabel = modal.querySelector(".addPicture__btn");
-    const imgSizeMax = 4000000 * 1;
-    let imgSelect = input.files[0];
-    let imgSize = input.files[0].size;
-
-    if (imgSize > imgSizeMax) {
-        console.log("La photo est trop volumineuse");
-        return;
-    } else {
-        console.log("Je continu pour ajouter la photo");
-        imageSrc.src = URL.createObjectURL(imgSelect);
-        buttonLabel.style = "display:none;";
-        imageSrc.classList.add("addPicture__logo--full");
-    };
-
-};
-
 
 /**
  * Back to gallery
  */
 const backGallery = function () {
-    // e.preventDefault();
     page1.style.display = null;
     page2.style.display = "none";
-
+    initFormPicture();
 };
-
-
-/**
- * remove picture with fetch
- * @param {event} e 
- * @returns 
- */
-const removePicture = async function (e) {
-    e.preventDefault();
-    const pictureToDelete = e.target.parentElement.parentElement;
-    const idDelete = e.target.getAttribute("data-id") * 1;
-
-    // ------------------------------------------------------------------
-    // Mettre ce code dans le button "Publier les changements" !!!!!!!!
-    // control if id isnumber
-    if (!Number.isInteger(idDelete)) {
-        alert("Ce n'est pas un nombre !");
-        return;
-    };
-
-    const url = 'http://localhost:5678/api/works/' + idDelete;
-    const token = localStorage.getItem("SESSION");
-
-    // Connect to API
-    const cnx = await fetch(url, {
-        method: 'DELETE',
-        headers: {
-            'Authorization': `Basic ${token}`
-        }
-    });
-
-    const r = cnx.status;
-    const data = await cnx.json();
-
-    // Controls connection
-    if (r === 401) {
-        console.log("Vous n'êtes pas autorisé(e)");
-        return;
-    };
-    if (r === 500) {
-        console.log("le projet n'existe pas !");
-        return;
-    };
-
-    // Connection OK => Next
-    if (cnx.ok && r === 200) {
-        console.log("Projet supprimé !");
-    };
-    // ------------------------------------------------------------------
-
-
-    pictureToDelete.remove();
-
-    const removeProjet = {
-        "id": idDelete
-    };
-
-    saveProjetBeforeRemove(removeProjet);
-};
-
-/**
- * Save all remove projects before to update all changes
- * @param {object} projet 
- */
-function saveProjetBeforeRemove(projet) {
-    let removeProjets = JSON.parse(localStorage.getItem("removeProjets")) || [];
-    removeProjets = [...removeProjets, projet];
-    localStorage.setItem('removeProjets', JSON.stringify(removeProjets));
-}
-
-
-/**
- * Add picture with fetch
- */
-const addPicture = async function (event) {
-    event.preventDefault();
-
-    const myForm = modal.querySelector("#pictureForm");
-    const myImg = modal.querySelector("#pictureChoose");
-
-
-    const formData = new FormData(myForm);
-
-    const image = formData.get("image").name;
-    const title = formData.get("title");
-    const category = formData.get("category") * 1;
-
-    const newProjet = {
-        image,
-        title,
-        category
-    };
-
-    // formData.forEach(item => {
-    //     console.log(item);
-    // });
-
-    console.log(newProjet);
-
-    saveProjetBeforeUpdate(newProjet);
-
-
-    backGallery();
-
-    addNewProjet(image);
-
-    //Rajouter l'image avec creatElement quand valider 
-
-    // utiliser le bouton "publier les changements pour fetch chaque nouveau projet dans localStorage !
-
-    // Supp le localStorage et reset la page !
-
-};
-
-
-/**
- * Save all news projects before to update all changes
- * @param {object} projet 
- */
-function saveProjetBeforeUpdate(projet) {
-    let addProjets = JSON.parse(localStorage.getItem("addProjets")) || [];
-    addProjets = [...addNewPraddProjetsojets, projet];
-    localStorage.setItem('addProjets', JSON.stringify(addProjets));
-}
-
-
-function addNewProjet(srcImage) {
-    // Je crée les balises suivant ma fonction c'est plus facile d'intégrer des para comme des class !
-    const figureElement = createElement("figure");
-    const linkTrash = createElement("a", {
-        "href": "#",
-        "class": "js_trashClick"
-    });
-    const iconTrash = createElement("i", {
-        "class": "fa-solid fa-trash-can trash--position"
-    })
-    const imgElement = createElement("img", {
-        "src": "http://localhost:5678/images/" + srcImage,
-        "alt": "image sur : " + srcImage
-    });
-    const linkElement = createElement("a", {
-        "href": "#"
-    },
-        "Editer"
-    );
-    // Je declare la balise parent Ref!
-    const contenerWorks = document.querySelector(".modal__gallery");
-    // Je les inbrique et affiche
-    contenerWorks.appendChild(figureElement);
-    figureElement.appendChild(linkTrash);
-    linkTrash.appendChild(iconTrash);
-    // linkTrash.appendChild(iconArrows);
-    figureElement.appendChild(imgElement);
-    figureElement.appendChild(linkElement);
-}
-
 
 
 /**
