@@ -10,12 +10,13 @@ let canFocus = [];
 let previouslyFocusedElement = null;
 const page1 = document.querySelector(".js-gallery");
 const page2 = document.querySelector(".js-picture");
+const worksListe = await fetchJSON("http://localhost:5678/api/works");
 
 
 export function modalWindow() {
 
     // Get all the works
-    getAllWorks();
+    getWorks(worksListe);
 
     // Get all the categories
     getAllCat();
@@ -43,10 +44,9 @@ export function modalWindow() {
 /**
  * Fetch all works to add in gallery
  */
-async function getAllWorks() {
-    const worksListe = await fetchJSON("http://localhost:5678/api/works");
+async function getWorks(liste) {
     // Je crée tous les elements suivant le nombre de réponses trouvés
-    worksListe.forEach(element => {
+    liste.forEach(element => {
         // Je crée les balises suivant ma fonction c'est plus facile d'intégrer des para comme des class !
         const figureElement = createElement("figure", {
             "id": element.id
@@ -349,6 +349,7 @@ const addPicture = async function (event) {
 
     backGallery();
 
+    addNewProjet(image);
 
     //Rajouter l'image avec creatElement quand valider 
 
@@ -368,6 +369,38 @@ function saveProjetBeforeUpdate(projet) {
     projets = [...projets, projet];
     localStorage.setItem('projets', JSON.stringify(projets));
 }
+
+
+function addNewProjet(srcImage) {
+    // Je crée les balises suivant ma fonction c'est plus facile d'intégrer des para comme des class !
+    const figureElement = createElement("figure");
+    const linkTrash = createElement("a", {
+        "href": "#",
+        "class": "js_trashClick"
+    });
+    const iconTrash = createElement("i", {
+        "class": "fa-solid fa-trash-can trash--position"
+    })
+    const imgElement = createElement("img", {
+        "src": "http://localhost:5678/images/" + srcImage,
+        "alt": "image sur : " + srcImage
+    });
+    const linkElement = createElement("a", {
+        "href": "#"
+    },
+        "Editer"
+    );
+    // Je declare la balise parent Ref!
+    const contenerWorks = document.querySelector(".modal__gallery");
+    // Je les inbrique et affiche
+    contenerWorks.appendChild(figureElement);
+    figureElement.appendChild(linkTrash);
+    linkTrash.appendChild(iconTrash);
+    // linkTrash.appendChild(iconArrows);
+    figureElement.appendChild(imgElement);
+    figureElement.appendChild(linkElement);
+}
+
 
 
 /**
