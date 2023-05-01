@@ -1,5 +1,5 @@
-import { fetchJSON } from "./fonctions/api.js";
 
+import { backGallery } from "./modal.js";
 
 
 /**
@@ -38,55 +38,45 @@ export function choosPicture() {
  */
 export async function removePicture(e) {
     e.preventDefault();
+
     const pictureToDelete = e.target.parentElement.parentElement;
-    const idDelete = e.target.getAttribute("data-id") * 1;
 
-    // ------------------------------------------------------------------
-    // Mettre ce code dans le button "Publier les changements" !!!!!!!!
+    const idDelete = e.target.getAttribute("data-id");
+
     // control if id isnumber
-    // if (!Number.isInteger(idDelete)) {
-    //     alert("Ce n'est pas un nombre !");
-    //     return;
-    // };
 
-    // const url = 'http://localhost:5678/api/works/' + idDelete;
-    // const token = localStorage.getItem("SESSION");
+    const url = 'http://localhost:5678/api/works/' + idDelete;
+    const token = localStorage.getItem("SESSION");
 
-    // // Connect to API
-    // const cnx = await fetch(url, {
-    //     method: 'DELETE',
-    //     headers: {
-    //         'Authorization': `Basic ${token}`
-    //     }
-    // });
+    // Connect to API
+    const cnx = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
 
-    // const r = cnx.status;
-    // const data = await cnx.json();
+    const r = cnx.status;
+    const data = await cnx.json();
 
-    // // Controls connection
-    // if (r === 401) {
-    //     console.log("Vous n'êtes pas autorisé(e)");
-    //     return;
-    // };
-    // if (r === 500) {
-    //     console.log("le projet n'existe pas !");
-    //     return;
-    // };
+    // Controls connection
+    if (r === 401) {
+        console.log("Vous n'êtes pas autorisé(e)");
+        return;
+    };
+    if (r === 500) {
+        console.log("le projet n'existe pas !");
+        return;
+    };
 
-    // // Connection OK => Next
-    // if (cnx.ok && r === 200) {
-    //     console.log("Projet supprimé !");
-    // };
-    // ------------------------------------------------------------------
+    // Connection OK => Next
+    if (cnx.ok && r === 200) {
+        console.log("Projet supprimé !");
+    };
 
 
     pictureToDelete.remove();
 
-    const removeProjet = {
-        "id": idDelete
-    };
-
-    saveProjetBeforeRemove(removeProjet);
 };
 
 
@@ -97,16 +87,34 @@ export async function addPicture(event) {
     event.preventDefault();
 
     const myForm = document.querySelector("#pictureForm");
+    const myImage = document.querySelector("#pictureChoose");
 
-
-    console.log(event.target);
     const formData = new FormData(myForm);
+    const url = 'http://localhost:5678/api/works/';
+    const token = localStorage.getItem("SESSION");
 
+    // Connect to API
+    const cnx = await fetch(url, {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
+
+    const r = cnx.status;
+
+    const resultat = await cnx.json();
+
+    // MEttre une deconnection si erreur 401 !!!!!
+
+
+    console.log(resultat);
 
 
     backGallery();
 
-    addNewProjet(image);
+    addNewProjet(myImage);
 
 };
 
@@ -126,8 +134,8 @@ export function addNewProjet(srcImage) {
         "class": "fa-solid fa-trash-can trash--position"
     })
     const imgElement = createElement("img", {
-        "src": "http://localhost:5678/images/" + srcImage,
-        "alt": "image sur : " + srcImage
+        "src": srcImage,
+        "alt": "image sur : " + srcImage.name
     });
     const linkElement = createElement("a", {
         "href": "#"

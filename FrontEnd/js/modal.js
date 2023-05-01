@@ -263,7 +263,7 @@ const openPicture = function (e) {
 /**
  * Back to gallery
  */
-const backGallery = function () {
+export function backGallery() {
     page1.style.display = null;
     page2.style.display = "none";
     initFormPicture();
