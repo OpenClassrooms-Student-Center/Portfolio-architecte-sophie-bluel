@@ -1,6 +1,6 @@
 import { fetchJSON } from "./fonctions/api.js";
 import { createElement } from "./fonctions/dom.js";
-import { choosPicture, removePicture, addPicture, addNewProjet } from "./image.js";
+import { choosPicture, removePicture, addPicture } from "./image.js";
 
 
 // Variables
@@ -22,7 +22,7 @@ const categoriesListe = await fetchJSON("http://localhost:5678/api/categories");
 export function modalWindow() {
 
     // Get all the works
-    creatWorksElementsFrom(worksListe);
+    creatWorksElementsFrom(worksListe, ".modal__gallery");
 
     // Get all the categories
     creatCategoriesElementFrom(categoriesListe);
@@ -48,9 +48,11 @@ export function modalWindow() {
 
 
 /**
- * Fetch all works to add in gallery
+ * Add works element after fetch ON MODAL
+ * @param {Array} liste tableau d'objet(s)
+ * @param {tagName} parent tagName to the parent's contener
  */
-function creatWorksElementsFrom(liste) {
+export function creatWorksElementsFrom(liste, parent) {
     // Je crée tous les elements suivant le nombre de réponses trouvés
     liste.forEach(element => {
         // Je crée les balises suivant ma fonction c'est plus facile d'intégrer des para comme des class !
@@ -70,7 +72,9 @@ function creatWorksElementsFrom(liste) {
         // })
         const imgElement = createElement("img", {
             "src": element.imageUrl,
-            "alt": "image sur : " + element.category.name
+            // "alt": "image sur : " + element.category.name
+            "alt": "image sur : " + element.title
+
         });
         const linkElement = createElement("a", {
             "href": "#"
@@ -78,7 +82,8 @@ function creatWorksElementsFrom(liste) {
             "Editer"
         );
         // Je declare la balise parent Ref!
-        const contenerWorks = document.querySelector(".modal__gallery");
+        const contenerWorks = document.querySelector(parent);
+
         // Je les inbrique et affiche
         contenerWorks.appendChild(figureElement);
         figureElement.appendChild(linkTrash);
@@ -90,8 +95,10 @@ function creatWorksElementsFrom(liste) {
 };
 
 
+
 /**
- * Fetch all categories to add in select imput
+ * add categories after fetch to select imput to MODAL
+ * @param {Array} liste tableau d'objet
  */
 function creatCategoriesElementFrom(liste) {
     const selectContener = document.querySelector("#pictureCat");
@@ -135,11 +142,7 @@ const openModal = function (e) {
     // Go modal picture
     modal.querySelector("#myModalGallery .modal__btn--add").addEventListener("click", openPicture);
 
-    // Add listener on link trash
-    modal.querySelectorAll(".js_trashClick").forEach(trash => {
-        trash.addEventListener("click", removePicture);
-    });
-
+    addClickListenrerTrash();
 
     // Add1 listener Back modal gallery
     modal.querySelector(".js-myModal-before").addEventListener("click", backGallery);
@@ -150,14 +153,21 @@ const openModal = function (e) {
     // Add3 listener to change the button to active after control is not empty imput !
     const allImputForm = Array.from(modal.querySelectorAll(".js-control"));
     allImputForm.forEach(input => {
-        input.addEventListener("change", control);
+        input.addEventListener("change", ifEmptyInputModalPicture);
     });
 
     // Add4 listener btn AddPicture
     modal.querySelector("#pictureForm").addEventListener("submit", addPicture);
 
-
 };
+
+export function addClickListenrerTrash() {
+    // Add listener on link trash
+    modal.querySelectorAll(".js_trashClick").forEach(trash => {
+        trash.addEventListener("click", removePicture);
+    });
+};
+
 
 /**
  * Close Modal
@@ -181,7 +191,6 @@ const closeModal = function (e) {
     // Go modal picture
     modal.querySelector("#myModalGallery .modal__btn--add").removeEventListener("click", openPicture);
 
-
     // Remove listener on link trash
     modal.querySelectorAll(".js_trashClick").forEach(trash => {
         trash.removeEventListener("click", removePicture);
@@ -194,26 +203,27 @@ const closeModal = function (e) {
     // Remove3 listener to change the button to active after control is not empty imput !
     const allImputForm = Array.from(modal.querySelectorAll(".js-control"));
     allImputForm.forEach(input => {
-        input.removeEventListener("change", control);
+        input.removeEventListener("change", ifEmptyInputModalPicture);
     });
     // Remove4
     modal.querySelector("#pictureForm").removeEventListener("submit", addPicture);
 
-    initFormPicture();
+    initFormModalPicture();
 
     modal = null;
 };
 
-
-const initFormPicture = function () {
-    modal.querySelector("#pictureView").src = "./assets/icons/image.png";
+/**
+ * INIT FORM modal Picture
+ */
+const initFormModalPicture = function () {
     modal.querySelector(".js-picture form").reset();
-
-    let imageSrc = modal.querySelector("#pictureView");
-    let buttonLabel = modal.querySelector(".addPicture__btn");
-    // buttonLabel.style = "display:null;";
-    // imageSrc.classList.remove("addPicture__logo--full");
-}
+    modal.querySelector("#pictureView").src = "./assets/icons/image.png";
+    modal.querySelector("#pictureView").classList.remove("addPicture__logo--full");
+    modal.querySelector(".addPicture__btn").style = "display:null;";
+    modal.querySelector("#pictureSubmit").classList.add("modal__btn--noComplet")
+    modal.querySelector("#pictureSubmit").setAttribute("disabled", "");
+};
 
 
 /**
@@ -248,7 +258,7 @@ const focusInModal = function (e) {
 
 
 /**
- * Open modal2 = pick picture
+ * Go to => pick picture
  * @param {event} e 
  */
 const openPicture = function (e) {
@@ -261,7 +271,7 @@ const openPicture = function (e) {
 
 
 /**
- * Back to gallery
+ * Back to => edite's gallery
  */
 export function backGallery() {
     page1.style.display = null;
@@ -274,18 +284,17 @@ export function backGallery() {
  * use for unlock or lock the button
  * @returns 
  */
-const control = function () {
+const ifEmptyInputModalPicture = function () {
 
     const btnAddPicture = modal.querySelector("#pictureSubmit");
 
     // Variables
-    let filePicture = modal.querySelector("#pictureChoose").files[0];
-    let nameProjet = modal.querySelector("#pictureTitre");
+    let filePicture = modal.querySelector("#pictureChoose").files.length;
+    let nameProjet = modal.querySelector("#pictureTitre").value;
     let valueCategorie = modal.querySelector("#pictureCat").value;
 
 
-    // conditions voir pour creer une boucle !
-    if (filePicture === "") {
+    if (filePicture == 0) {
         console.log("Merci de choisir une photo pour votre nouveau projet, s'il vous plaît");
         btnAddPicture.classList.add("modal__btn--noComplet")
         btnAddPicture.setAttribute("disabled", "");

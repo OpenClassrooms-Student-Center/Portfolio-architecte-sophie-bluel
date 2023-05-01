@@ -11,15 +11,22 @@ try {
 };
 
 
+/**
+ * Add works element after fetch ON INDEX.HTML
+ * @param {Array} liste tableau d'objet
+ * @param {*} where tagName of parent's contener
+ */
 export async function renderWorks(liste = maListe, where = ".gallery") {
     try {
         // Je crée tous les elements suivant le nombre de réponses trouvés
         liste.forEach(element => {
             // Je crée les balises suivant ma fonction c'est plus facile d'intégrer des para comme des class !
-            const figureElement = createElement("figure");
+            const figureElement = createElement("figure", {
+                "data-id": element.id
+            });
             const imgElement = createElement("img", {
                 "src": element.imageUrl,
-                "alt": "image sur : " + element.category.name
+                "alt": "image sur : " + element.title
             });
             const captionElement = createElement("figcaption", {
                 // attributes

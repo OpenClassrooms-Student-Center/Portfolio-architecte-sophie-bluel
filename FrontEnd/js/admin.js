@@ -1,12 +1,11 @@
 import { createElement } from "./fonctions/dom.js";
 import { modalWindow } from "./modal.js";
 
-// Variables
-const tagLogin = document.querySelector("#login");
-
-
 // Add mode EDIT after control token
 export async function setAdmin() {
+
+    // Variables
+    const tagLogin = document.querySelector("#login");
 
     // update link login menu
     tagLogin.innerText = "logout";
@@ -24,7 +23,10 @@ export async function setAdmin() {
             "class": "editLink editLink-projets"
         });
 
-    logoutButton();
+
+
+    tagLogin.addEventListener("click", logout);
+
     modalWindow();
 };
 
@@ -32,13 +34,10 @@ export async function setAdmin() {
 /**
  * Event onClick for signOut and go to login.html
  */
-const logoutButton = function () {
-    tagLogin.addEventListener("click", function (e) {
-
-        e.preventDefault();
-        localStorage.removeItem("SESSION");
-        window.location.href = './index.html';
-    });
+export function logout(e) {
+    e.preventDefault();
+    localStorage.removeItem("SESSION");
+    window.location.href = './index.html';
 };
 
 

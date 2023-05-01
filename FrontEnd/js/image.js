@@ -1,5 +1,7 @@
 
-import { backGallery } from "./modal.js";
+import { backGallery, creatWorksElementsFrom, addClickListenrerTrash } from "./modal.js";
+import { logout } from "./admin.js";
+import { renderWorks } from "./works.js";
 
 
 /**
@@ -7,7 +9,6 @@ import { backGallery } from "./modal.js";
  * @returns 
  */
 export function choosPicture() {
-
     // variable
     let input = document.querySelector("#pictureChoose");
     let imageSrc = document.querySelector("#pictureView");
@@ -26,8 +27,8 @@ export function choosPicture() {
         buttonLabel.style = "display:none;";
         imageSrc.classList.add("addPicture__logo--full");
     };
-
 };
+
 
 
 
@@ -40,10 +41,9 @@ export async function removePicture(e) {
     e.preventDefault();
 
     const pictureToDelete = e.target.parentElement.parentElement;
-
     const idDelete = e.target.getAttribute("data-id");
 
-    // control if id isnumber
+    const pictureOnIndex = document.querySelector(`figure[data-id="${idDelete}"]`)
 
     const url = 'http://localhost:5678/api/works/' + idDelete;
     const token = localStorage.getItem("SESSION");
@@ -57,27 +57,23 @@ export async function removePicture(e) {
     });
 
     const r = cnx.status;
-    const data = await cnx.json();
 
     // Controls connection
     if (r === 401) {
         console.log("Vous n'êtes pas autorisé(e)");
-        return;
-    };
-    if (r === 500) {
-        console.log("le projet n'existe pas !");
+        logout();
         return;
     };
 
-    // Connection OK => Next
-    if (cnx.ok && r === 200) {
-        console.log("Projet supprimé !");
-    };
-
+    console.log("Projet supprimé !");
 
     pictureToDelete.remove();
+    pictureOnIndex.remove();
 
 };
+
+
+
 
 
 /**
@@ -87,9 +83,10 @@ export async function addPicture(event) {
     event.preventDefault();
 
     const myForm = document.querySelector("#pictureForm");
-    const myImage = document.querySelector("#pictureChoose");
+    const myProjet = [];
 
-    const formData = new FormData(myForm);
+    const formData = new FormData(event.target);
+
     const url = 'http://localhost:5678/api/works/';
     const token = localStorage.getItem("SESSION");
 
@@ -102,53 +99,21 @@ export async function addPicture(event) {
         }
     });
 
+    // Controls connection / i delete token if he is to old !!!
     const r = cnx.status;
+    if (r === 401) {
+        console.log("Vous n'êtes pas autorisé(e) ou token trop vieux");
+        logout();
+        return;
+    };
 
     const resultat = await cnx.json();
-
-    // MEttre une deconnection si erreur 401 !!!!!
-
-
-    console.log(resultat);
-
+    myProjet.push(resultat);
 
     backGallery();
 
-    addNewProjet(myImage);
+    creatWorksElementsFrom(myProjet, ".modal__gallery");
+    addClickListenrerTrash();
 
-};
-
-
-/**
- * 
- * @param {*} srcImage 
- */
-export function addNewProjet(srcImage) {
-    // Je crée les balises suivant ma fonction c'est plus facile d'intégrer des para comme des class !
-    const figureElement = createElement("figure");
-    const linkTrash = createElement("a", {
-        "href": "#",
-        "class": "js_trashClick"
-    });
-    const iconTrash = createElement("i", {
-        "class": "fa-solid fa-trash-can trash--position"
-    })
-    const imgElement = createElement("img", {
-        "src": srcImage,
-        "alt": "image sur : " + srcImage.name
-    });
-    const linkElement = createElement("a", {
-        "href": "#"
-    },
-        "Editer"
-    );
-    // Je declare la balise parent Ref!
-    const contenerWorks = document.querySelector(".modal__gallery");
-    // Je les inbrique et affiche
-    contenerWorks.appendChild(figureElement);
-    figureElement.appendChild(linkTrash);
-    linkTrash.appendChild(iconTrash);
-    // linkTrash.appendChild(iconArrows);
-    figureElement.appendChild(imgElement);
-    figureElement.appendChild(linkElement);
+    renderWorks(myProjet, ".gallery");
 };
