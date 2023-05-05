@@ -31,8 +31,6 @@ form.addEventListener("submit", function (e) {
 		//tranform response from API into json format
 		.then((response) => response.json())
 		.then((datas) => {
-			console.log(datas);
-			console.log(datas.token)
 
 			//store response from the api in localStorage
 			localStorage.setItem("token", datas.token);
