@@ -71,6 +71,11 @@ h1{
 	color: #B1663C
 }
 
+h1 a {
+	color: #B1663C;
+	text-decoration: none;
+}
+
 h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
@@ -98,6 +103,12 @@ nav li {
 li:hover {
 	color: #B1663C;
 }
+
+li a {
+	color: black;
+	text-decoration: none;
+}
+
 #introduction {
 	display: flex;
 	align-items: center;
@@ -139,7 +150,7 @@ li:hover {
 }
 #contact {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
 #contact > * {
 	text-align: center;
@@ -186,4 +197,366 @@ footer nav ul {
 	margin: 2em
 }
 
-/* test */
+#footer-index {
+	padding-top: 0px;
+}
+
+
+/*ajout du css des boutons filtres*/
+
+#filtre-liste {
+	display: flex;
+	padding: 20px 0px 50px 0px;
+	justify-content: center;
+	gap: 10px;
+
+}
+
+.gallery figcaption {
+	padding-top: 8px;
+}
+
+.filtre-selected {
+	background-color: #1D6154;
+	color: white;
+}
+
+button {
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 16px;
+	color: #1D6154;
+	padding: 0px 15px;
+	min-width: 100px;
+	height: 37px;
+	background-color: white;
+	border: 1px solid #1D6154;
+	border-radius: 60px;
+	cursor: pointer;
+}
+
+.gallery {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-column-gap: 20px;
+	grid-row-gap: 20px;
+}
+
+.gallery img {
+	width: 100%;
+	height: 490px;
+	object-fit: cover;
+}
+
+/*CSS de la page login.html*/
+#form h2 {
+	display: flex;
+	justify-content: center;
+	padding-top: 80px;
+}
+
+#form form {
+	display: flex;
+	flex-direction: column;
+	margin: 0px 370px;
+}
+
+#form label {
+	padding-bottom: 7px;
+	padding-top: 30px;
+}
+
+#form input {
+	font-size: 17px;
+	height: 40px;
+	border: none;
+	padding-left: 15px;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09)
+}
+
+#form button {
+	background-color: #1D6154;
+	color: white;
+	width: 180px;
+	margin: 15px 0px 25px 107px;
+}
+
+#form button:hover {
+	background-color: rgb(29, 97, 84, 0.8);
+}
+
+#form a {
+	color: black;
+	text-decoration: underline;
+	display: flex;
+	justify-content: center;
+}
+
+footer {
+	padding-top: 320px;
+}
+
+#login-error {
+	color: red;
+	margin-top: 15px;
+	display: flex;
+	justify-content: center;
+}
+
+/*CSS mode édition du haut de la page + bouton "modifier"*/
+#mode-edition {
+	color: white;
+	background-color: black;
+	height: 60px;
+}
+
+#mode-edition div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 16px;
+	height: 100%;
+	gap: 5px;
+}
+
+#mode-edition button {
+	color: black;
+	font-family: 'Work Sans';
+	font-size: 14px;
+	margin-left: 10px;
+	width: 20%;
+}
+
+#modifier {
+	display: flex;
+	padding-left: 470px;
+	padding-top: 100px;
+	gap: 30px;
+}
+
+#modifier a {
+	color: black;
+	text-decoration: none;
+	padding-top: 10px;
+}
+
+#modifier a:hover {
+	color: #B1663C;
+}
+
+/*CSS de la modale pour modifier la galerie*/
+
+#sect-modale {
+	position: fixed;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.8);
+	animation: fadeIn .3s both;
+	margin: 0;
+}
+
+.modale {
+	overflow: auto;
+	background-color: white;
+	width: 630px;
+	height: 730px;
+	padding: 20px;
+	border-radius: 10px;
+	animation: slide .3s both;
+}
+
+#icones {
+	font-size: 20px;
+	margin: 15px 15px 0px 15px;
+	display: flex;
+	justify-content: space-between;
+}
+
+#arrow {
+	visibility: hidden;
+	cursor: pointer;
+}
+
+#cross {
+	cursor: pointer;
+}
+
+
+/*CSS de la première modale (pour supprimer une photo de la galerie)*/
+#first-modale {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#first-modale h3 {
+	font-size: 26px;
+	padding-top: 30px;
+}
+
+#bouton-ajouter {
+	background-color: #1D6154;
+	color: white;
+	font-size: 14px;
+	width: 230px;
+	margin-top: 20px;
+	cursor: pointer;
+}
+
+#bouton-ajouter:hover {
+	background-color: rgb(29, 97, 84, 0.8);
+}
+
+#bouton-supprimer {
+	color: red;
+	border: none;
+	font-size: 14px;
+	font-weight: 400;
+	font-family: 'Work Sans';
+	margin-top: 15px;
+	cursor: pointer;
+}
+
+#bouton-supprimer:hover {
+	text-decoration: underline;
+}
+
+.modale-gallery {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-row-gap: 15px;
+	grid-column-gap: 10px;
+	margin: 40px 80px 20px 80px;
+	padding-bottom: 35px;
+	border-bottom: 1px solid #b3b3b3;
+}
+
+.modale-gallery img {
+	width: 100%;
+	height: 110px;
+	object-fit: cover;
+}
+
+.icone {
+	position: fixed;
+	margin-top: -122px;
+	margin-left: 65px;
+	padding: 4px;
+	font-size: 10px;
+	color: white;
+	background-color: #000;
+	border-radius: 2px;
+	cursor: pointer;
+}
+
+.arrow {
+	margin-left: 43px;
+	visibility: hidden;
+}
+
+figure:hover .arrow {
+	visibility: visible;
+}
+
+/*CSS de la deuxième modale (pour ajouter une photo dans la galerie)*/
+#second-modale {
+	display: none;
+	align-items: center;
+	flex-direction: column;
+	margin: 40px 80px 20px 80px;
+}
+
+#second-modale h3 {
+	font-size: 26px;
+	padding-bottom: 30px;
+}
+
+#add-photo {
+	background-color: #E8F1F6;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	border-radius: 8px;
+}
+
+.fa-image {
+	color: #B9C5CC;
+	font-size: 60px;
+	padding: 28px 0px 15px 0px;
+}
+
+#bouton-add {
+	background-color: #CBD6DC;
+	color: #306685;
+	font-size: 14px;
+	width: 170px;
+	height: 40px;
+	border-radius: 50px;
+	text-align: center;
+	line-height: 40px;
+	cursor: pointer;
+}
+
+#bouton-add:hover {
+	background-color: rgb(194, 207, 214, 1.3);
+}
+
+#bouton-search {
+	display: none;
+}
+
+#image-preview img {
+	width: 135px;
+	height: 180px;
+	object-fit: cover;
+}
+
+#subtitle-image {
+	color: #444444;
+	font-size: 12px;
+	padding: 10px 0px 20px 0px
+}
+
+#second-modale form {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	border-bottom: 1px solid #A7A7A7;
+	padding-bottom: 50px;
+}
+
+#form-image label {
+	padding-top: 30px;
+}
+
+#second-modale input,
+select {
+	font-size: 14px;
+	height: 50px;
+	padding-left: 15px;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09)
+}
+
+#bouton-valider {
+	color: white;
+	background-color: #A7A7A7;
+	font-size: 14px;
+	width: 230px;
+	margin-top: 35px;
+	border: none;
+	cursor: pointer;
+}
+
+#add-image-error {
+	padding-top: 10px;
+	gap: 5px;
+}
+

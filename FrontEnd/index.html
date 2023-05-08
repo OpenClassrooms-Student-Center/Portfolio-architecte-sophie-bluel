@@ -5,26 +5,33 @@
 	<title>Sophie Bluel - Architecte d'intérieur</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
-	<!--Google Fonts-->
 	<link rel="stylesheet" href="./assets/style.css">
+	<!--Google Fonts-->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<!--Font Awesome-->
 	<script src="https://kit.fontawesome.com/4af4c9fb23.js" crossorigin="anonymous"></script>
+
 </head>
-<body>
+
+<body>	
+	<div id="mode-edition" class="modifier">
+		<div><i class="fa-regular fa-pen-to-square"></i>Mode édtion<button>publier les changements</button></div>
+	</div>
+
 <header>
-	<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
+	<h1><a href="index.html">Sophie Bluel </a><span>ARCHITECTE D'INTÉRIEUR</span></h1>
 	<nav>
 		<ul>
-			<li>projets</li>
-			<li>contact</li>
-			<li>login</li>
-			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+			<li><a href="#portfolio">projets</a></li>
+			<li><a href="#contact">contact</a></li>
+			<li><a href="#" id="login-link">login</a></li>
+			<li><i class="fa-brands fa-instagram"></i></li>
 		</ul>
 	</nav>
 </header>
+
 <main>
 	<section id="introduction">
 		<figure>
@@ -32,26 +39,76 @@
 		</figure>
 		<article>
 			<h2>Designer d'espace</h2>
-			<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
-			<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
-			<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
+			<p>Je raconte votre histoire, je valorise vos idées. Je vous<br> 
+				accompagne de la conception à la livraison finale du<br> chantier.</p>
+			<p>Chaque projet sera étudié en commun, de façon à mettre<br> 
+				en valeur les volumes, les matières et les couleurs dans le<br> 
+				respect de l’esprit des lieux et le choix adapté des<br> 
+				matériaux. Le suivi du chantier sera assuré dans le souci<br> 
+				du détail, le respect du planning et du budget.</p>
+			<p>En cas de besoin, une équipe pluridisciplinaire peut-être<br> 
+				constituée : architecte DPLG, décorateur(trice)</p>
 		</article>
 	</section>
-	
+
+	<!--Section de la fenêtre modale "modifier"-->
+	<section id="sect-modale">
+		<div class="modale">
+			<div id="icones">
+				<i class="fa-solid fa-arrow-left-long" id="arrow"></i>
+				<i class="fa-solid fa-xmark" id="cross"></i>
+			</div>
+
+			<!--Première modale pour supprimer les photos-->
+			<div id="first-modale">
+				<h3>Galerie photo</h3>
+				<div class="modale-gallery"></div>
+				<button id="bouton-ajouter">Ajouter une photo</button>
+				<button id="bouton-supprimer">Supprimer la galerie</button>
+			</div>
+			
+			<!--Deuxième modale pour ajouter les photos-->
+			<div id="second-modale">
+				<h3>Ajout photo</h3>
+				<div id="add-photo">
+					<label class="send-image" for="bouton-search"><i class="fa-solid fa-image"></i></label>
+					<label class="send-image" for="bouton-search" id="bouton-add">+ Ajouter image
+						<input type="file" id="bouton-search" accept="image/jpeg,image/png,image/jpg">
+					</label>
+					<label class="send-image" id="subtitle-image">jpg.png : 4mo max</label>
+					<div id="image-preview"></div>
+				</div>
+				<form id="form-image">
+					<label>Titre</label>
+					<input type="text" id="title-image">
+					<label>Catégorie</label>
+					<select id="objet">
+						<option value="1">Objets</option>
+						<option value="2">Appartements</option>
+						<option value="3">Hôtels & restaurants</option>
+					</select>
+				</form>
+				<button id="bouton-valider" type="submit">Valider</button>
+				<div id="add-image-error"></div>
+			</div>
+		</div>
+			
+	</section>
+		
 	<section id="portfolio">
 		<div id="modifier">
-			<h2>Mes Projets</h2>
+			<h2>Mes projets</h2>
 			<a href="#" class="modifier" id="modifButton"><i class="fa-regular fa-pen-to-square"></i> modifier</a>
 		</div>
 		<div id="filtre-liste">
 			<button class="filtre filtre-selected" value="tous">Tous</button>
 			<button class="filtre" value="Objets">Objets</button>
 			<button class="filtre" value="Appartements">Appartements</button>
-			<button class="filtre" value="Hotels">Hotels</button>
+			<button class="filtre" value="Hotels">Hôtels & restaurants</button>
 		</div>
-		<div class="gallery">
+		<div class="gallery"></div>
 	</section>
-	
+
 	<section id="contact">
 		<h2>Contact</h2>
 		<p>Vous avez un projet ? Discutons-en !</p>
@@ -64,10 +121,10 @@
 			<textarea name="message" id="message" cols="30" rows="10"></textarea>
 			<input type="submit" value="Envoyer">
 		</form>
-	</section>
+	</section>	
 </main>
 
-<footer>
+<footer id="footer-index">
 	<nav>
 		<ul>
 			<li>Mentions Légales</li>
@@ -75,9 +132,9 @@
 	</nav>
 </footer>
 
-<script src="index.js"></script>
+	<!--Appel du fichier Javascript "index.js"-->
+	<script src="index.js"></script>
 
 </body>
-</html>
 
-<!-- test -->
+</html>
