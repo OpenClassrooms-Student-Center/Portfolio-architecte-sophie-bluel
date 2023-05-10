@@ -19,6 +19,7 @@ function getData() {
 }
 
 function displayProjects(projectsArray) {
+  // Crée une nouvelle instance de la classe Project pour chaque projet dans le tableau passé en argument
   for (let i = 0; i < projectsArray.length; i += 1) {
     const projet = new Project(projectsArray[i]);
     gallery.innerHTML += `
@@ -38,10 +39,10 @@ function displayAllProjects() {
 }
 
 function displayFilteredProjects(categoryName) {
+  // Récupère les projets
   getData().then((data) => {
-    // Récupère les projets
+    // Garde les projets dont la catégorie correspond à celle passée en argument
     const filteredArray = data.filter(
-      // Garde les projets dont la catégorie correspond à celle passée en argument
       (projet) => projet.category.name === categoryName
     );
     gallery.innerHTML = "";
