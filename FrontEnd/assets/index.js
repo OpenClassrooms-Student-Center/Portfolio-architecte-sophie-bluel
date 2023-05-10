@@ -30,6 +30,25 @@ function displayProjects(projectsArray) {
   }
 }
 
+function displayAllProjects() {
+  getData().then((data) => {
+    gallery.innerHTML = "";
+    displayProjects(data);
+  });
+}
+
+function displayFilteredProjects(categoryName) {
+  getData().then((data) => {
+    // Récupère les projets
+    const filteredArray = data.filter(
+      // Garde les projets dont la catégorie correspond à celle passée en argument
+      (projet) => projet.category.name === categoryName
+    );
+    gallery.innerHTML = "";
+    displayProjects(filteredArray); // Afficher les projets filtrés
+  });
+}
+
 function filterProjects() {
   allBtn.addEventListener("click", () => {
     displayAllProjects();
@@ -48,23 +67,6 @@ function filterProjects() {
   });
 
   displayAllProjects(); // Affiche tous les projets par défaut
-}
-
-function displayAllProjects() {
-  getData().then((data) => {
-    gallery.innerHTML = "";
-    displayProjects(data);
-  });
-}
-
-function displayFilteredProjects(categoryName) {
-  getData().then((data) => {
-    const filteredArray = data.filter(
-      (projet) => projet.category.name === categoryName
-    );
-    gallery.innerHTML = "";
-    displayProjects(filteredArray);
-  });
 }
 
 filterProjects();
