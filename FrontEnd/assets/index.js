@@ -7,8 +7,9 @@ const objetsBtn = document.querySelector(".objets");
 const appartementsBtn = document.querySelector(".apparts");
 const hotelsRestaurantsBtn = document.querySelector(".hotels");
 
-const token = localStorage.getItem("token");
-const loginLink = document.querySelector("#login");
+let token = localStorage.getItem("token");
+const loginEl = document.querySelector("#login");
+let loginStatus = false;
 
 class Project {
   constructor(data) {
@@ -96,18 +97,32 @@ function filterProjects() {
 
 filterProjects();
 
-function checkToken() {
-  if (token) {
-    console.log(token);
-  }
-}
-
-checkToken();
-
 function isUserLoggedIn() {
   if (token) {
-    loginLink.textContent = "logout";
+    loginEl.textContent = "logout";
+    loginStatus = true;
+  } else {
+    loginEl.textContent = "login";
   }
 }
 
 isUserLoggedIn();
+
+function logOut(e) {
+  if (loginStatus) {
+    e.preventDefault();
+    loginStatus = false;
+    token = "";
+    loginEl.textContent = "login";
+  }
+}
+
+loginEl.addEventListener("click", (e) => {
+  logOut(e);
+});
+
+// function enableEditionMode() {
+//   if(loginStatus){
+
+//   }
+// }
