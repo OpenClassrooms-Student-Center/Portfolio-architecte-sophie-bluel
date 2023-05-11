@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable no-console */
 const gallery = document.querySelector(".gallery");
 
@@ -8,6 +9,7 @@ const hotelsRestaurantsBtn = document.querySelector(".hotels");
 
 class Project {
   constructor(data) {
+    // Copie les propriétés de l'objet data vers l'instance de la classe Project
     Object.assign(this, data);
   }
 }
