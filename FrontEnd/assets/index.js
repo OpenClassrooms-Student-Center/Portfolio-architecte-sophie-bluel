@@ -7,6 +7,9 @@ const objetsBtn = document.querySelector(".objets");
 const appartementsBtn = document.querySelector(".apparts");
 const hotelsRestaurantsBtn = document.querySelector(".hotels");
 
+const token = localStorage.getItem("token");
+const loginLink = document.querySelector("#login");
+
 class Project {
   constructor(data) {
     // Copie les propriétés de l'objet data vers l'instance de la classe Project
@@ -92,3 +95,19 @@ function filterProjects() {
 }
 
 filterProjects();
+
+function checkToken() {
+  if (token) {
+    console.log(token);
+  }
+}
+
+checkToken();
+
+function isUserLoggedIn() {
+  if (token) {
+    loginLink.textContent = "logout";
+  }
+}
+
+isUserLoggedIn();
