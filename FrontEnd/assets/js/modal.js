@@ -4,14 +4,13 @@ export function modalFunction() {
 	const createModal = function (e) {
 		const divTag = document.createElement("div");
 		divTag.setAttribute("id", "modal1");
-		divTag.classList.add("modal", "d-none");
-		//divTag.classList.add('d-none')
+		divTag.classList.add("modal");
 		divTag.setAttribute("aria-hidden", "true");
 		divTag.setAttribute("role", "dialogue");
 		const main = document.querySelector("main");
 		main.appendChild(divTag);
 		return divTag;
-	};
+	  };
 
 	function createModalContent() {
 		const newOuterDiv = document.createElement("div");
@@ -35,8 +34,10 @@ export function modalFunction() {
 		ajouterPhotoBtn.innerText = "Ajouter une photo";
 		ajouterPhotoBtn.classList.add("ajouter-photo-btn");
 
-		ajouterPhotoBtn.addEventListener("click", function () {
+		ajouterPhotoBtn.addEventListener("click", function (e) {
 			removeModalContent();
+			e.stopPropagation();
+			e.preventDefault();
 			ajouterPhotoContent();
 		});
 
@@ -56,35 +57,37 @@ export function modalFunction() {
 		const modalDiv = document.getElementById("modal1");
 		modalDiv.appendChild(newOuterDiv);
 		renderMiniWorks();
-	}
+		closeModal();
 
+	}
+	
 	function openModal() {
 		const modalHTML = document.querySelector(".admin-div");
-		modalHTML.addEventListener("click", function () {
-			createModal();
-			createModalContent();
-			const modalTag = document.getElementById("modal1");
-			modalTag.classList.remove("d-none");
-			closeModal(modalTag);
+		modalHTML.addEventListener("click", function (e) {
+			e.preventDefault()
+		  const modalTag = createModal();
+		  createModalContent(modalTag);
+		  modalTag.classList.remove("d-none");
+		  closeModal();
 		});
-	}
+	  }
 
-	function closeModal(modal) {
+	function closeModal() {
 		const closeX = document.querySelector(".close");
-		const isModalContent = document.querySelector(".modal-content");
-		modal.addEventListener("click", function (e) {
-			if (e.target !== modal && !isModalContent.contains(e.target)) {
-				// clicked outside the modal - remove the modal
-				modal.remove();
-			}
-			if (e.target === closeX) {
-				// clicked on the closeX element - remove the modal
-				modal.remove();
-			}
+		const modalOverlay = document.querySelector(".modal")	  
+		// handle clicks on closeX and modal elements
+		closeX.addEventListener("click", function () {
+			modalOverlay.remove();
 		});
-	}
+		window.addEventListener("click", function(event) {
+			if (event.target == modalOverlay) {
+			  modalOverlay.remove()
+			}
+		  });
+	  }
 
 	openModal();
+	
 
 	//Second page of the modal
 
@@ -100,8 +103,13 @@ export function modalFunction() {
 		newInnerDiv.appendChild(closeX);
 
 		const returnArrow = document.createElement("i");
-		returnArrow.classList.add("return-arrow");
-		returnArrow.innerText = "<-";
+		returnArrow.classList.add("return-arrow", "fa-solid", "fa-arrow-left-long");
+		returnArrow.addEventListener("click", function () {
+			removeAjouterModalContent();
+			const divToRemove = document.querySelector(".modal-content")
+			divToRemove.remove()
+			createModalContent();
+		});
 		newInnerDiv.appendChild(returnArrow);
 
 		const modalTitle = document.createElement("h3");
@@ -109,11 +117,19 @@ export function modalFunction() {
 		newInnerDiv.appendChild(modalTitle);
 
 		const ajouterPhotoDiv = document.createElement("div");
+		ajouterPhotoDiv.classList.add("ajouter-photo-img-div");
 		const ajouterPhotoIcon = document.createElement("i");
-		ajouterPhotoIcon.classList.add("fa-thin", "fa-image");
-		const ajouterPhotoBtn = document.createElement("button");
+		ajouterPhotoIcon.classList.add(
+			"fa-regular",
+			"fa-image",
+			"image-placeholder"
+		);
+
+		const ajouterPhotoBtn = document.createElement("input");
 		ajouterPhotoBtn.innerText = " + Ajouter Photo";
 		ajouterPhotoBtn.classList.add("ajouter-btn");
+		ajouterPhotoBtn.setAttribute("type", "file");
+
 		const ajouterPhotoFormats = document.createElement("p");
 		ajouterPhotoFormats.innerText = "jpg, png : 4mo max";
 
@@ -121,14 +137,14 @@ export function modalFunction() {
 		ajouterPhotoDiv.appendChild(ajouterPhotoBtn);
 		ajouterPhotoDiv.appendChild(ajouterPhotoFormats);
 
-		newInnerDiv.appendChild(ajouterPhotoDiv);
-
 		//create form the inputs need to go into
 		const ajouterPhotoForm = document.createElement("form");
-		//<form enctype="multipart/form-data" method="post" name="fileinfo">
 		ajouterPhotoForm.setAttribute("enctype", "multipart/form-data");
 		ajouterPhotoForm.setAttribute("method", "post");
 		ajouterPhotoForm.setAttribute("name", "fileInfo");
+		ajouterPhotoForm.setAttribute("id", "ajouterPhotoForm");
+
+		ajouterPhotoForm.appendChild(ajouterPhotoDiv);
 
 		const ajouterPhotoTitleLabel = document.createElement("label");
 		ajouterPhotoTitleLabel.setAttribute("for", "titre");
@@ -138,6 +154,7 @@ export function modalFunction() {
 		const ajouterPhotoTitleInput = document.createElement("input");
 		ajouterPhotoTitleInput.setAttribute("type", "text");
 		ajouterPhotoTitleInput.setAttribute("name", "titre");
+		ajouterPhotoTitleInput.required = true;
 		ajouterPhotoTitleInput.classList.add("titre");
 
 		ajouterPhotoForm.appendChild(ajouterPhotoTitleLabel);
@@ -147,43 +164,88 @@ export function modalFunction() {
 		ajouterPhotoCategorieLabel.setAttribute("for", "categorie");
 		ajouterPhotoCategorieLabel.innerText = "Catégorie";
 		ajouterPhotoCategorieLabel.classList.add("titre", "titre-margin-top");
-		const ajouterPhotoCategorieInput = document.createElement("select");
-		ajouterPhotoCategorieInput.setAttribute("id", "categorieSelect");
-		ajouterPhotoCategorieInput.classList.add("titre");
-		//creating the options for the select
-		const ajouterPhotoCategorieOption1 = document.createElement("option");
-		ajouterPhotoCategorieOption1.innerText = "Bar & Restaurant";
-		ajouterPhotoCategorieInput.appendChild(ajouterPhotoCategorieOption1);
 		ajouterPhotoForm.appendChild(ajouterPhotoCategorieLabel);
-		ajouterPhotoForm.appendChild(ajouterPhotoCategorieInput);
-		newInnerDiv.appendChild(ajouterPhotoForm);
 
+		const selectCategory = document.createElement("select");
+		selectCategory.className = "select-category";
+		selectCategory.setAttribute("id", "select-category");
+		ajouterPhotoForm.appendChild(selectCategory);
+
+
+		// Dynamiser les categories pour qu'elles soient liés a l'API directement et non fait en dur
+		fetch("http://localhost:5678/api/categories")
+			.then((response) => response.json())
+
+			.then((categories) => {
+				const selectCategory = document.getElementById("select-category");
+				categories.forEach((category) => {
+					const newOption = document.createElement("option");
+					newOption.innerText = category.name;
+					newOption.setAttribute("value", category.name);
+					selectCategory.appendChild(newOption);
+				});
+			});
+	
 		const divider = document.createElement("hr");
 		divider.classList.add("divider", "titre-margin-top");
-		newInnerDiv.appendChild(divider);
-		const validerPhotoBtn = document.createElement("button");
-		validerPhotoBtn.innerText = "Valider";
+		ajouterPhotoForm.appendChild(divider)
+
+		const validerPhotoBtn = document.createElement("input");
+		validerPhotoBtn.setAttribute("type", "button")
+		validerPhotoBtn.setAttribute("value", "Valider")
 		validerPhotoBtn.classList.add("titre-margin-top", "valider-btn");
-		newInnerDiv.appendChild(validerPhotoBtn);
+		validerPhotoBtn.addEventListener("submit", function (e) {
+			e.preventDefault();
+			if (ajouterPhotoTitleInput.checkValidity()) {
+				uploadWork();
+			}
+		});
+		ajouterPhotoForm.appendChild(validerPhotoBtn)
+		newInnerDiv.appendChild(ajouterPhotoForm);
+
+		
 		const modalHTML = document.getElementById("modal1");
 
 		//put the new modal wrapper into the modal content box
 		newOuterDiv.appendChild(newInnerDiv);
 		modalHTML.appendChild(newOuterDiv);
+		closeModal();
 	}
+
 
 	function removeModalContent() {
 		const modalContent = document.querySelector(".modal-wrapper");
 		modalContent.remove();
 	}
 
-	const uploadWork = async function (formData) {
-		const response = await fetch("http://localhost:5678/api/works/" + id, {
+	function removeAjouterModalContent() {
+		const modalAjouterContent = document.querySelector(
+			".modal-ajouter-wrapper"
+		);
+		modalAjouterContent.remove();
+	}
+
+	function uploadWork() {
+		const ajouterPhotoForm = document.forms.namedItem("fileInfo");
+		ajouterPhotoForm.submit()
+		const formData = new FormData(ajouterPhotoForm);
+		const ajouterPhotoBtn = document.querySelector(".ajouter-btn");
+		formData.append("image", ajouterPhotoBtn.files[0]);
+
+		fetch("http://localhost:5678/api/works/", {
 			method: "POST",
 			headers: {
 				"content-type": "application/json",
 				Authorization: "Bearer " + window.localStorage.getItem("token"),
 			},
-		});
-	};
+			body: formData,
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				console.log("Success:", data);
+			})
+			.catch((error) => {
+				console.error("Error:", error);
+			});
+	}
 }

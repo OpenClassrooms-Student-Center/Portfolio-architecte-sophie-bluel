@@ -48,9 +48,13 @@ export function renderMiniWorks(category) {
 							},
 						}
 					);
-          document.getElementById(`list-${work.id}`).remove()
-          document.getElementById(`edit-${work.id}`).remove()
-
+					if (response.ok) {
+						document.getElementById(`work-${id}`).remove();
+						document.getElementById(`list-${id}`).remove();
+						document.getElementById(`edit-${id}`).remove();
+					  } else {
+						console.error("Error deleting work");
+					  }
 				};
 			});
 		})

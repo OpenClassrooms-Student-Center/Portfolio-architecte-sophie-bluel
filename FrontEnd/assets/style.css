@@ -471,6 +471,7 @@ footer nav ul {
 	background-color: #CBD6DC;
 	padding: 8px 20px;
 	border: transparent;
+	margin-bottom: 5px;
 }
 
 .titre{
@@ -500,4 +501,17 @@ input, select{
 
 form{
 	margin-top: 2rem;
+}
+
+.image-placeholder{
+	font-size: 4rem;
+	margin-bottom: 10px;
+	color: #B9C5CC;
+}
+
+.ajouter-photo-img-div{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
