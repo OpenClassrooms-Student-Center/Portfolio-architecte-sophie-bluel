@@ -19,9 +19,11 @@ class Project {
 }
 
 function getData() {
-  return fetch("http://localhost:5678/api/works").then((response) =>
-    response.json()
-  );
+  return fetch("http://localhost:5678/api/works")
+    .then((response) => response.json())
+    .catch((error) => {
+      console.error("Une erreur est survenue : ", error);
+    });
 }
 
 function displayProjects(projectsArray) {
@@ -91,7 +93,7 @@ function filterProjects() {
     displayFilteredProjects("Hotels & restaurants");
   });
 
-  setActiveFilterButton(allBtn); // On active le bouton "Tous" par défaut
+  setActiveFilterButton(allBtn); // Active le bouton "Tous" par défaut
   displayAllProjects(); // Affiche tous les projets par défaut
 }
 
