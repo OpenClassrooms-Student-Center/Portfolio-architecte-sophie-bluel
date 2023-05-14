@@ -80,8 +80,12 @@
         </ul>
       </nav>
     </footer>
-    <script type="module" src="./js/model.js"></script>
-    <script type="module" src="./js/controller.js"></script>
-    <script type="module" src="./js/view.js"></script>
+    <script src="./js/model.js"></script>
+    <script src="./js/view.js"></script>
+    <script src="./js/controller.js"></script>
+    <script>
+      const view = new View();
+      const controller = new Controller(view);
+    </script>
   </body>
 </html>

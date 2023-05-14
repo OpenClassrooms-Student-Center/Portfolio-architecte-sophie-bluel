@@ -27,7 +27,7 @@
     <main>
       <section class="login-form">
         <h2>Log in</h2>
-        <form action="#" method="post">
+        <form action="#" method="post" id="login-form">
           <label for="email">E-mail</label>
           <input type="email" name="email" id="email" required />
           <label for="password">Mot de passe</label>
@@ -47,8 +47,12 @@
         </ul>
       </nav>
     </footer>
-    <script type="module" src="./js/model.js"></script>
-    <script type="module" src="./js/controller.js"></script>
-    <script type="module" src="./js/view.js"></script>
+    <script src="./js/model.js"></script>
+    <script src="./js/view.js"></script>
+    <script src="./js/controller.js"></script>
+    <script>
+      const view = new View();
+      const controller = new Controller(view);
+    </script>
   </body>
 </html>
