@@ -31,5 +31,5 @@ class Project {
     return Project.getData();
   }
 }
-// Stocke les données de projets pour éviter de faire une requête HTTP à chaque fois qu'on filtre ou qu'on affiche les projets
+// Stocke les données de projets pour éviter de faire une requête HTTP à chaque fois qu'on filtre les projets
 Project.projectsData = null;

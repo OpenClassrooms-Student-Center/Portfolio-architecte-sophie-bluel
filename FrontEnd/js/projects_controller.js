@@ -4,7 +4,6 @@
 class Controller {
   constructor(view) {
     this.view = view;
-    this.filterController = this;
     this.init();
   }
 

@@ -9,17 +9,29 @@ class LoginController {
     this.model.setEmail(email);
     this.model.setPassword(password);
 
-    if (this.model.checkId()) {
-      localStorage.setItem(
-        "token",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MTg3NDkzOSwiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4"
-      );
-      this.view.showError("");
-      this.view.clearForm();
-      window.location.href = "index.html";
-    } else {
-      this.view.showError("Vos identifiants sont incorrects");
-    }
+    fetch("http://localhost:5678/api/users/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        const { token } = data;
+        if (token) {
+          sessionStorage.setItem("token", token);
+          this.view.showError("");
+          this.view.clearForm();
+          window.location.href = "index.html";
+        } else {
+          this.view.showError("Vos identifiants sont incorrects");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        this.view.showError("Une erreur s'est produite lors de la connexion.");
+      });
   }
 
   initView() {

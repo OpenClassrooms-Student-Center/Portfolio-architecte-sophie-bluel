@@ -11,8 +11,4 @@ class LoginModel {
   setPassword(password) {
     this.password = password;
   }
-
-  checkId() {
-    return this.email === "sophie.bluel@test.tld" && this.password === "S0phie";
-  }
 }

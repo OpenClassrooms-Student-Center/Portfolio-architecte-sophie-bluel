@@ -1,6 +1,6 @@
 class LoginStatus {
   constructor() {
-    this.token = localStorage.getItem("token");
+    this.token = sessionStorage.getItem("token");
     this.loginEl = document.querySelector("#login");
     this.loginStatus = false;
 
@@ -12,7 +12,6 @@ class LoginStatus {
     if (this.token) {
       this.loginEl.textContent = "logout";
       this.loginStatus = true;
-      console.log(this.token);
     } else {
       this.loginEl.textContent = "login";
     }
@@ -23,7 +22,7 @@ class LoginStatus {
       e.preventDefault();
       this.loginStatus = false;
       this.loginEl.textContent = "login";
-      localStorage.clear();
+      sessionStorage.removeItem("token");
     }
   }
 
