@@ -149,14 +149,68 @@ header {
   margin: 50px 0;
 }
 
+#edit-mode-panel {
+  display: none;
+  background: #000000;
+  height: 59px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  color: #ffffff;
+}
+
+#edit-mode-panel svg {
+  height: 20px;
+  fill: white;
+}
+
+#edit-mode-panel button {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
+  color: #000000;
+  background: #ffffff;
+  border-radius: 60px;
+  width: 216px;
+  height: 38px;
+}
+
+svg {
+  height: 20px;
+}
+
+figure svg {
+  margin-left: 55px;
+}
+
+.edit {
+  display: none;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3em;
+}
+
 button {
   border: none;
   background: white;
+  cursor: pointer;
 }
 
 a {
   text-decoration: none;
   color: black;
+  cursor: pointer;
 }
 
 section {
@@ -208,6 +262,7 @@ nav a:hover {
   display: block;
   margin: auto;
   width: 80%;
+  margin-bottom: 10px;
 }
 
 #introduction article {
@@ -222,7 +277,7 @@ nav a:hover {
 }
 #portfolio h2 {
   text-align: center;
-  margin-bottom: 1em;
+  margin-right: 20px;
 }
 
 #filtres {
@@ -239,11 +294,6 @@ nav a:hover {
   font-weight: bold;
   padding: 10px 25px;
 }
-
-/* #filtres .tous {
-  color: white;
-  background: #1d6154;
-} */
 
 .gallery {
   width: 100%;
@@ -297,6 +347,7 @@ input[type="submit"] {
   width: 180px;
   text-align: center;
   border-radius: 60px;
+  cursor: pointer;
 }
 
 footer nav ul {
@@ -358,4 +409,16 @@ form {
   text-decoration: underline;
   color: #3d3d3d;
   font-weight: 500;
+}
+
+#modal {
+  width: 630px;
+  height: 731px;
+  position: fixed;
+  width: 630px;
+  height: 731px;
+  left: 600px;
+  top: 180px;
+  background: grey;
+  border-radius: 10px;
 }
