@@ -411,6 +411,10 @@ form {
   font-weight: 500;
 }
 
+#error-message {
+  margin-top: 10px;
+}
+
 #modal {
   width: 630px;
   height: 731px;

@@ -25,7 +25,7 @@ class LoginController {
           this.view.clearForm();
           window.location.href = "index.html";
         } else {
-          this.view.showError("Vos identifiants sont incorrects");
+          this.view.showError("Erreur dans l’identifiant ou le mot de passe");
         }
       })
       .catch((error) => {
