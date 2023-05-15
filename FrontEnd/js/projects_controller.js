@@ -13,18 +13,16 @@ class Controller {
     this.setupFilterButtons();
   }
 
-  displayProjectsByCategory(categoryName = "Tous") {
-    if (categoryName === "Tous") {
-      Project.getAllProjects().then((projects) => {
-        this.view.gallery.innerHTML = "";
-        this.view.displayProjects(projects);
-      });
-    } else {
-      Project.filterProjectsByCategory(categoryName).then((projects) => {
-        this.view.gallery.innerHTML = "";
-        this.view.displayProjects(projects);
-      });
-    }
+  displayAllProjects() {
+    Project.getAllProjects().then((data) => {
+      this.view.displayAllProjects(data);
+    });
+  }
+
+  displayProjectsByCategory(categoryName) {
+    Project.getAllProjects().then((data) => {
+      this.view.displayProjectsByCategory(categoryName, data);
+    });
   }
 
   setupFilterButtons() {
@@ -65,12 +63,5 @@ class Controller {
 
     clickedButton.style.color = "white";
     clickedButton.style.backgroundColor = "#1d6154";
-  }
-
-  displayAllProjects() {
-    Project.getAllProjects().then((data) => {
-      this.view.gallery.innerHTML = "";
-      this.view.displayProjects(data);
-    });
   }
 }

@@ -25,4 +25,17 @@ class View {
         `;
     }
   }
+
+  displayAllProjects(projects) {
+    this.gallery.innerHTML = "";
+    this.displayProjects(projects);
+  }
+
+  displayProjectsByCategory(categoryName, projects) {
+    this.gallery.innerHTML = "";
+    const filteredProjects = projects.filter(
+      (projet) => projet.category.name === categoryName
+    );
+    this.displayProjects(filteredProjects);
+  }
 }
