@@ -41,9 +41,3 @@ class LoginController {
     this.view.addFormSubmitHandler(() => this.onSubmit());
   }
 }
-
-const model = new LoginModel();
-const view = new LoginView();
-const controller = new LoginController(model, view);
-
-controller.initView();

@@ -50,5 +50,12 @@
     <script src="./js/login_model.js"></script>
     <script src="./js/login_view.js"></script>
     <script src="./js/login_controller.js"></script>
+    <script>
+      // Initialisation du MVC
+      const model = new LoginModel();
+      const view = new LoginView();
+      const controller = new LoginController(model, view);
+      controller.initView();
+    </script>
   </body>
 </html>
