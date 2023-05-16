@@ -11,6 +11,23 @@ class Controller {
     this.setActiveFilterBtn(this.view.allBtn);
     this.displayAllProjects();
     this.setupFilterButtons();
+    this.setupModal();
+    this.setupCloseModal();
+  }
+
+  openModal() {
+    // Récupérer les projets existants
+    Project.getAllProjects().then((data) => {
+      // Afficher la modale avec la liste des projets
+      this.view.modalGallery.innerHTML = "";
+      this.view.displayProjectsInModal(data);
+
+      this.view.modal.style.display = "flex";
+    });
+  }
+
+  closeModal() {
+    this.view.modal.style.display = "none";
   }
 
   displayAllProjects() {
@@ -22,6 +39,22 @@ class Controller {
   displayProjectsByCategory(categoryName) {
     Project.getAllProjects().then((data) => {
       this.view.displayProjectsByCategory(categoryName, data);
+    });
+  }
+
+  setupModal() {
+    this.view.editButton.addEventListener("click", () => this.openModal());
+  }
+
+  setupCloseModal() {
+    window.addEventListener("click", (event) => {
+      if (event.target === this.view.modal) {
+        this.closeModal();
+      }
+    });
+
+    this.view.closeModalBtn.addEventListener("click", () => {
+      this.closeModal();
     });
   }
 

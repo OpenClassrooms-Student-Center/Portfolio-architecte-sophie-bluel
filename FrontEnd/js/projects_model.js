@@ -23,7 +23,7 @@ class Project {
 
   static filterProjectsByCategory(categoryName) {
     return Project.getData().then((data) =>
-      data.filter((projet) => projet.category.name === categoryName)
+      data.filter((project) => project.category.name === categoryName)
     );
   }
 

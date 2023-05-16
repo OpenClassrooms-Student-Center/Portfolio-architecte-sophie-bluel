@@ -11,16 +11,20 @@ class View {
     this.emailEl = document.querySelector("#email");
     this.passwordEl = document.querySelector("#password");
     this.errorMsgEl = document.querySelector("#error-message");
+    this.modal = document.querySelector("#modal");
+    this.modalGallery = document.querySelector("#modal-gallery");
+    this.editButton = document.querySelector("#edit-button");
+    this.closeModalBtn = document.querySelector("#close-modal");
   }
 
   displayProjects(projectsArray) {
     // Crée une nouvelle instance de la classe Project pour chaque projet dans le tableau passé en argument
     for (let i = 0; i < projectsArray.length; i += 1) {
-      const projet = new Project(projectsArray[i]);
+      const project = new Project(projectsArray[i]);
       this.gallery.innerHTML += `
           <figure>
-              <img src="${projet.imageUrl}" alt="${projet.title}" />
-              <figcaption>${projet.title}</figcaption>
+              <img src="${project.imageUrl}" alt="${project.title}" />
+              <figcaption>${project.title}</figcaption>
           </figure>
         `;
     }
@@ -34,8 +38,20 @@ class View {
   displayProjectsByCategory(categoryName, projects) {
     this.gallery.innerHTML = "";
     const filteredProjects = projects.filter(
-      (projet) => projet.category.name === categoryName
+      (project) => project.category.name === categoryName
     );
     this.displayProjects(filteredProjects);
+  }
+
+  displayProjectsInModal(projectsArray) {
+    for (let i = 0; i < projectsArray.length; i += 1) {
+      const project = new Project(projectsArray[i]);
+      this.modalGallery.innerHTML += `
+      <figure>
+        <img src="${project.imageUrl}" alt="${project.title}" />
+        <button>éditer</button>
+      </figure>
+    `;
+    }
   }
 }

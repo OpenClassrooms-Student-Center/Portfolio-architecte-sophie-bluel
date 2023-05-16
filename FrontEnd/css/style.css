@@ -430,7 +430,6 @@ form {
 }
 
 .modal-wrapper {
-  overflow: auto;
   width: 600px;
   max-width: calc(100vw - 20px);
   max-height: calc(100vh - 20px);
@@ -444,18 +443,39 @@ form {
 
 .modal-gallery {
   width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-column-gap: 20px;
-  grid-row-gap: 20px;
-  margin-top: 30px;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 30px 10px;
+  padding-left: 80px;
+}
+
+.modal-gallery figure {
+  width: 78px;
+  height: 104px;
+}
+
+.modal-gallery img {
+  width: 100%;
+  height: 100%;
+}
+
+.modal-gallery button {
+  font-size: 12px;
+  padding: 0;
+}
+
+.modal-wrapper i {
+  margin-left: auto;
+  font-size: 20px;
+  cursor: pointer;
 }
 
 .modal-wrapper > * {
   margin: 20px 0;
 }
 
-.modal p {
+.modal h2 {
   font-family: "Work Sans";
   font-size: 26px;
   line-height: 30px;
