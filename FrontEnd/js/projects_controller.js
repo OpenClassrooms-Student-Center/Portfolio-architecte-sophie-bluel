@@ -10,9 +10,7 @@ class Controller {
   init() {
     this.setActiveFilterBtn(this.view.allBtn);
     this.displayAllProjects();
-    this.setupFilterButtons();
-    this.setupModal();
-    this.setupCloseModal();
+    this.setupEventListeners();
   }
 
   openModal() {
@@ -42,23 +40,18 @@ class Controller {
     });
   }
 
-  setupModal() {
+  setupEventListeners() {
     this.view.editButton.addEventListener("click", () => this.openModal());
-  }
 
-  setupCloseModal() {
     window.addEventListener("click", (event) => {
-      if (event.target === this.view.modal) {
+      if (
+        event.target === this.view.modal ||
+        event.target === this.view.closeModalBtn
+      ) {
         this.closeModal();
       }
     });
 
-    this.view.closeModalBtn.addEventListener("click", () => {
-      this.closeModal();
-    });
-  }
-
-  setupFilterButtons() {
     this.view.allBtn.addEventListener("click", () => {
       this.setActiveFilterBtn(this.view.allBtn);
       this.displayAllProjects();
@@ -98,3 +91,49 @@ class Controller {
     clickedButton.style.backgroundColor = "#1d6154";
   }
 }
+
+/*
+
+  this.setupFilterButtons();
+  this.setupModal();
+  this.setupCloseModal();
+
+  setupModal() {
+    this.view.editButton.addEventListener("click", () => this.openModal());
+  }
+
+  setupCloseModal() {
+    window.addEventListener("click", (event) => {
+      if (event.target === this.view.modal) {
+        this.closeModal();
+      }
+    });
+
+    this.view.closeModalBtn.addEventListener("click", () => {
+      this.closeModal();
+    });
+  }
+
+  setupFilterButtons() {
+    this.view.allBtn.addEventListener("click", () => {
+      this.setActiveFilterBtn(this.view.allBtn);
+      this.displayAllProjects();
+    });
+
+    this.view.objetsBtn.addEventListener("click", () => {
+      this.setActiveFilterBtn(this.view.objetsBtn);
+      this.displayProjectsByCategory("Objets");
+    });
+
+    this.view.appartementsBtn.addEventListener("click", () => {
+      this.setActiveFilterBtn(this.view.appartementsBtn);
+      this.displayProjectsByCategory("Appartements");
+    });
+
+    this.view.hotelsRestaurantsBtn.addEventListener("click", () => {
+      this.setActiveFilterBtn(this.view.hotelsRestaurantsBtn);
+      this.displayProjectsByCategory("Hotels & restaurants");
+    });
+  }
+
+*/

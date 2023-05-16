@@ -15,6 +15,7 @@ class View {
     this.modalGallery = document.querySelector("#modal-gallery");
     this.editButton = document.querySelector("#edit-button");
     this.closeModalBtn = document.querySelector("#close-modal");
+    this.deleteProject = document.querySelector("#trash");
   }
 
   displayProjects(projectsArray) {
@@ -49,6 +50,7 @@ class View {
       this.modalGallery.innerHTML += `
       <figure>
         <img src="${project.imageUrl}" alt="${project.title}" />
+        <i class="fa-regular fa-trash-can trash" id="trash"></i>
         <button>éditer</button>
       </figure>
     `;

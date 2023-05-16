@@ -465,7 +465,7 @@ form {
   padding: 0;
 }
 
-.modal-wrapper i {
+.modal-wrapper > i {
   margin-left: auto;
   font-size: 20px;
   cursor: pointer;
@@ -481,6 +481,17 @@ form {
   line-height: 30px;
   text-align: center;
   color: #000000;
+}
+
+.trash {
+  position: relative;
+  bottom: 100px;
+  left: 55px;
+  color: white;
+  background: black;
+  padding: 4px;
+  font-size: 10px;
+  cursor: pointer;
 }
 
 hr {
