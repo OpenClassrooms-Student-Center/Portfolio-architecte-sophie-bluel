@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
 class LoginView {
   constructor() {
     this.emailEl = document.querySelector("#email");

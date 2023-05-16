@@ -36,13 +36,13 @@ class Project {
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error("La suppression du projet a échoué.");
+          throw new Error("La suppression du projet a échoué");
         }
-        console.log("Le projet a été supprimé avec succès.");
+        console.log("Le projet a été supprimé");
       })
       .catch((error) => {
         console.error(
-          "Une erreur est survenue lors de la suppression du projet : ",
+          "Une erreur est survenue lors de la suppression du projet :",
           error
         );
       });

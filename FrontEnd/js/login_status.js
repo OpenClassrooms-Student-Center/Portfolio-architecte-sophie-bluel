@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 class LoginStatus {
   constructor() {
     this.token = sessionStorage.getItem("token");
