@@ -7,6 +7,7 @@ class Controller {
     this.init();
   }
 
+  // Etat par défaut
   init() {
     this.view.styleActiveFilterBtn(this.view.allBtn);
     this.displayAllProjects();
@@ -26,6 +27,7 @@ class Controller {
   }
 
   setupEventListeners() {
+    // Ouvre la modale
     this.view.editButton.addEventListener("click", () => {
       Project.getAllProjects().then((data) => {
         this.view.displayProjectsInModal(data);
@@ -33,6 +35,7 @@ class Controller {
       this.view.openModal();
     });
 
+    // Ferme la modale
     window.addEventListener("click", (event) => {
       if (
         event.target === this.view.modal ||
@@ -42,6 +45,7 @@ class Controller {
       }
     });
 
+    // Supprime un projet
     this.view.modalGallery.addEventListener("click", (event) => {
       if (event.target.classList.contains("trash")) {
         const { projectId } = event.target.dataset;
@@ -49,6 +53,7 @@ class Controller {
       }
     });
 
+    // Boutons de filtre
     this.view.allBtn.addEventListener("click", () => {
       this.view.styleActiveFilterBtn(this.view.allBtn);
       this.displayAllProjects();

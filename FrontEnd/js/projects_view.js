@@ -19,7 +19,6 @@ class View {
   }
 
   displayProjects(projectsArray) {
-    // Efface la galerie existante
     this.gallery.innerHTML = "";
 
     // Crée une nouvelle instance de la classe Project pour chaque projet dans le tableau passé en argument
@@ -53,7 +52,6 @@ class View {
   }
 
   displayProjectsInModal(projectsArray) {
-    // Efface la galerie de la modale existante
     this.modalGallery.innerHTML = "";
 
     for (let i = 0; i < projectsArray.length; i += 1) {

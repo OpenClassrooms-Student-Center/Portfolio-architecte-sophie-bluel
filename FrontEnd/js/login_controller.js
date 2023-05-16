@@ -5,10 +5,12 @@ class LoginController {
   }
 
   onSubmit() {
+    // Récupère les valeurs du form depuis la vue et met à jour le model
     const { email, password } = this.view.getFormValues();
     this.model.setEmail(email);
     this.model.setPassword(password);
 
+    // Appel API pour la connexion
     fetch("http://localhost:5678/api/users/login", {
       method: "POST",
       headers: {
@@ -18,6 +20,7 @@ class LoginController {
     })
       .then((response) => response.json())
       .then((data) => {
+        // Si un token est retourné, connexion réussie
         const { token } = data;
         if (token) {
           sessionStorage.setItem("token", token);

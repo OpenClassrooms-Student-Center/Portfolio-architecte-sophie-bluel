@@ -7,9 +7,10 @@ class LoginStatus {
     this.loginStatus = false;
 
     this.checkLoginStatus();
-    this.addEventListeners();
+    this.setupLogin();
   }
 
+  // Si l'utilisateur est connecté, met à jour l'interface
   checkLoginStatus() {
     if (this.token) {
       this.loginEl.textContent = "logout";
@@ -17,12 +18,11 @@ class LoginStatus {
       this.editModePanel.style.display = "flex";
       this.editEl.style.display = "flex";
       Project.token = this.token;
-    } else {
-      this.loginEl.textContent = "login";
     }
   }
 
   logOut(e) {
+    // Vérifie si l'utilisateur est connecté
     if (this.loginStatus) {
       e.preventDefault();
       this.loginStatus = false;
@@ -34,7 +34,7 @@ class LoginStatus {
     }
   }
 
-  addEventListeners() {
+  setupLogin() {
     this.loginEl.addEventListener("click", (e) => {
       this.logOut(e);
     });
