@@ -19,6 +19,9 @@ class View {
   }
 
   displayProjects(projectsArray) {
+    // Efface la galerie existante
+    this.gallery.innerHTML = "";
+
     // Crée une nouvelle instance de la classe Project pour chaque projet dans le tableau passé en argument
     for (let i = 0; i < projectsArray.length; i += 1) {
       const project = new Project(projectsArray[i]);
@@ -31,29 +34,45 @@ class View {
     }
   }
 
-  displayAllProjects(projects) {
-    this.gallery.innerHTML = "";
-    this.displayProjects(projects);
-  }
+  styleActiveFilterBtn(clickedButton) {
+    // Boucle dans un array avec tous les boutons de filtre
+    [
+      this.allBtn,
+      this.objetsBtn,
+      this.appartementsBtn,
+      this.hotelsRestaurantsBtn,
+    ].forEach((button) => {
+      // Applique le style par défaut
+      button.style.color = "#1d6154";
+      button.style.backgroundColor = "white";
+    });
+    // Applique le style du bouton de filtre actif / cliqué
 
-  displayProjectsByCategory(categoryName, projects) {
-    this.gallery.innerHTML = "";
-    const filteredProjects = projects.filter(
-      (project) => project.category.name === categoryName
-    );
-    this.displayProjects(filteredProjects);
+    clickedButton.style.color = "white";
+    clickedButton.style.backgroundColor = "#1d6154";
   }
 
   displayProjectsInModal(projectsArray) {
+    // Efface la galerie de la modale existante
+    this.modalGallery.innerHTML = "";
+
     for (let i = 0; i < projectsArray.length; i += 1) {
       const project = new Project(projectsArray[i]);
       this.modalGallery.innerHTML += `
       <figure>
         <img src="${project.imageUrl}" alt="${project.title}" />
-        <i class="fa-regular fa-trash-can trash" id="trash"></i>
+        <i class="fa-regular fa-trash-can trash" id="trash" data-project-id="${project.id}"></i>
         <button>éditer</button>
       </figure>
     `;
     }
+  }
+
+  openModal() {
+    this.modal.style.display = "flex";
+  }
+
+  closeModal() {
+    this.modal.style.display = "none";
   }
 }
