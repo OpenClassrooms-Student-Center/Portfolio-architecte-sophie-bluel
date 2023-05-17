@@ -52,6 +52,39 @@ function createProjectContent() {
 
     }
 };
+ function createCategoriesList() {
+    const categoriesList = ["Tous"];
 
-createProjectContent();
-console.log(works);
+    
+    for (let i in works) {
+        if (categoriesList.includes(works[i].category.name) == false) {
+            categoriesList.push(works[i].category.name);
+        }
+    }
+
+    const filters = document.querySelector(".filters");
+    console.log(filters);
+
+    for (let i in categoriesList) {
+        const filter = document.createElement("div");
+        filter.classList.add("filter");
+        filters.appendChild(filter);
+        const checkBox = document.createElement("input");
+        checkBox.type = "checkbox";
+        checkBox.name = categoriesList[i];
+        checkBox.classList.add("filterCheck");
+        filter.appendChild(checkBox);
+        const button = document.createElement("button");
+        button.innerText = categoriesList[i];
+        button.classList.add("filter-button");
+        console.log(button);
+        filter.appendChild(button);
+    }
+ }
+
+function main (){
+    createProjectContent();
+    createCategoriesList();
+}
+
+main();
