@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
-class Project {
+class ProjectsModel {
   constructor() {
     /* Ancien code */
     // Copie les propriétés de l'objet data vers l'instance de la classe Project

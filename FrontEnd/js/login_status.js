@@ -19,7 +19,7 @@ class LoginStatus {
       this.loginStatus = true;
       this.editModePanel.style.display = "flex";
       this.editEl.style.display = "flex";
-      Project.token = this.token;
+      ProjectsModel.token = this.token;
     }
   }
 
@@ -31,7 +31,7 @@ class LoginStatus {
       this.loginEl.textContent = "login";
       this.editModePanel.style.display = "none";
       this.editEl.style.display = "none";
-      Project.token = null;
+      ProjectsModel.token = null;
       sessionStorage.removeItem("token");
     }
   }

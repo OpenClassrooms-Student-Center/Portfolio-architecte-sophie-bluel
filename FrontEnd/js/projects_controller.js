@@ -1,11 +1,11 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /* eslint-disable no-param-reassign */
-class Controller {
+class ProjectsController {
   constructor(view) {
     // Crée une instance de Project et l'assigne à la propriété projectsData pour gérer les données et interagir avec la view passée en paramètre
     this.view = view;
-    this.projectsData = new Project();
+    this.projectsData = new ProjectsModel();
     this.init();
   }
 
