@@ -8,9 +8,6 @@ class View {
     this.objetsBtn = document.querySelector(".objets");
     this.appartementsBtn = document.querySelector(".apparts");
     this.hotelsRestaurantsBtn = document.querySelector(".hotels");
-    this.emailEl = document.querySelector("#email");
-    this.passwordEl = document.querySelector("#password");
-    this.errorMsgEl = document.querySelector("#error-message");
     this.modal = document.querySelector("#modal");
     this.modalGallery = document.querySelector("#modal-gallery");
     this.editButton = document.querySelector("#edit-button");
@@ -23,7 +20,7 @@ class View {
 
     // Crée une nouvelle instance de la classe Project pour chaque projet dans le tableau passé en argument
     for (let i = 0; i < projectsArray.length; i += 1) {
-      const project = new Project(projectsArray[i]);
+      const project = projectsArray[i];
       this.gallery.innerHTML += `
           <figure>
               <img src="${project.imageUrl}" alt="${project.title}" />
@@ -55,7 +52,7 @@ class View {
     this.modalGallery.innerHTML = "";
 
     for (let i = 0; i < projectsArray.length; i += 1) {
-      const project = new Project(projectsArray[i]);
+      const project = projectsArray[i];
       this.modalGallery.innerHTML += `
       <figure>
         <img src="${project.imageUrl}" alt="${project.title}" />

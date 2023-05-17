@@ -1,19 +1,27 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
 class Project {
-  constructor(data) {
+  constructor() {
+    /* Ancien code */
     // Copie les propriétés de l'objet data vers l'instance de la classe Project
-    Object.assign(this, data);
+    // Object.assign(this, data);
+
+    this.projectsData = null;
+    // Accède au token via loginStatus pour l'utiliser dans deleteProject()
+    this.token = loginStatus.token;
   }
 
-  static getAllProjects() {
-    if (Project.projectsData !== null) {
-      return Promise.resolve(Project.projectsData);
+  getAllProjects() {
+    if (this.projectsData !== null) {
+      // Retourne une promesse résolue avec les données précédemment récupérées
+      return Promise.resolve(this.projectsData);
     }
 
     return fetch("http://localhost:5678/api/works")
       .then((response) => response.json())
       .then((data) => {
-        Project.projectsData = data;
+        this.projectsData = data;
         return data;
       })
       .catch((error) => {
@@ -21,13 +29,13 @@ class Project {
       });
   }
 
-  static filterProjectsByCategory(categoryName) {
-    return Project.getAllProjects().then((data) =>
+  filterProjectsByCategory(categoryName) {
+    return this.getAllProjects().then((data) =>
       data.filter((project) => project.category.name === categoryName)
     );
   }
 
-  static deleteProject(projectId) {
+  deleteProject(projectId) {
     return fetch(`http://localhost:5678/api/works/${projectId}`, {
       method: "DELETE",
       headers: {
@@ -48,5 +56,8 @@ class Project {
       });
   }
 }
-// Stocke les données de projets pour éviter de faire une requête HTTP à chaque fois qu'on filtre les projets
-Project.projectsData = null;
+
+/* Ancien code */
+
+// // Stocke les données de projets pour éviter de faire une requête HTTP à chaque fois qu'on filtre les projets
+// Project.projectsData = null;

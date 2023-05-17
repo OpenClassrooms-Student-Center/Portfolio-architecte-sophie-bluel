@@ -3,11 +3,12 @@
 /* eslint-disable no-param-reassign */
 class Controller {
   constructor(view) {
+    // Crée une instance de Project et l'assigne à la propriété projectsData pour gérer les données et interagir avec la view passée en paramètre
     this.view = view;
+    this.projectsData = new Project();
     this.init();
   }
 
-  // Etat par défaut
   init() {
     this.view.styleActiveFilterBtn(this.view.allBtn);
     this.displayAllProjects();
@@ -15,27 +16,27 @@ class Controller {
   }
 
   displayAllProjects() {
-    Project.getAllProjects().then((data) => {
+    this.projectsData.getAllProjects().then((data) => {
       this.view.displayProjects(data);
     });
   }
 
   displayProjectsByCategory(categoryName) {
-    Project.filterProjectsByCategory(categoryName).then((filteredProjects) => {
-      this.view.displayProjects(filteredProjects);
-    });
+    this.projectsData
+      .filterProjectsByCategory(categoryName)
+      .then((filteredProjects) => {
+        this.view.displayProjects(filteredProjects);
+      });
   }
 
   setupEventListeners() {
-    // Ouvre la modale
     this.view.editButton.addEventListener("click", () => {
-      Project.getAllProjects().then((data) => {
+      this.projectsData.getAllProjects().then((data) => {
         this.view.displayProjectsInModal(data);
       });
       this.view.openModal();
     });
 
-    // Ferme la modale
     window.addEventListener("click", (event) => {
       if (
         event.target === this.view.modal ||
@@ -45,15 +46,14 @@ class Controller {
       }
     });
 
-    // Supprime un projet
     this.view.modalGallery.addEventListener("click", (event) => {
       if (event.target.classList.contains("trash")) {
         const { projectId } = event.target.dataset;
-        Project.deleteProject(projectId);
+        this.projectsData.deleteProject(projectId);
       }
+      // Ajouter "si clique sur ajouter une photo..."
     });
 
-    // Boutons de filtre
     this.view.allBtn.addEventListener("click", () => {
       this.view.styleActiveFilterBtn(this.view.allBtn);
       this.displayAllProjects();
