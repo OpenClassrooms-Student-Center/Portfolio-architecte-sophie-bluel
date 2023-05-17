@@ -52,7 +52,7 @@ function createProjectContent() {
 
     }
 };
- function createCategoriesList() {
+function createCategoriesFilters() {
     const categoriesList = ["Tous"];
 
     
@@ -68,23 +68,24 @@ function createProjectContent() {
     for (let i in categoriesList) {
         const filter = document.createElement("div");
         filter.classList.add("filter");
-        filters.appendChild(filter);
+        
         const checkBox = document.createElement("input");
         checkBox.type = "checkbox";
         checkBox.name = categoriesList[i];
         checkBox.classList.add("filterCheck");
-        filter.appendChild(checkBox);
         const button = document.createElement("button");
         button.innerText = categoriesList[i];
         button.classList.add("filter-button");
         console.log(button);
+        filters.appendChild(filter);
+        filter.appendChild(checkBox);
         filter.appendChild(button);
     }
  }
 
 function main (){
     createProjectContent();
-    createCategoriesList();
+    createCategoriesFilters();
 }
 
 main();
