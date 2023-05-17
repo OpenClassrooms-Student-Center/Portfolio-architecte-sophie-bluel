@@ -42,5 +42,3 @@ class LoginStatus {
     });
   }
 }
-
-const loginStatus = new LoginStatus();
