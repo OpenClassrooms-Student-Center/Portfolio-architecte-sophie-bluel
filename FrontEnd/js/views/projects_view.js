@@ -3,11 +3,16 @@
 /* eslint-disable no-param-reassign */
 class ProjectsView {
   constructor() {
+    this.filtersList = document.querySelector("#filtres");
+    this.createFilterButtons();
     this.gallery = document.querySelector(".gallery");
-    this.allBtn = document.querySelector(".tous");
-    this.objetsBtn = document.querySelector(".objets");
-    this.appartementsBtn = document.querySelector(".apparts");
-    this.hotelsRestaurantsBtn = document.querySelector(".hotels");
+    this.filterButtonsArray = [
+      (this.allBtn = document.querySelector(".tous")),
+      (this.objetsBtn = document.querySelector(".objets")),
+      (this.appartementsBtn = document.querySelector(".apparts")),
+      (this.hotelsRestaurantsBtn = document.querySelector(".hotels")),
+    ];
+
     this.modal = document.querySelector("#modal");
     this.createModal();
     this.modalGallery = document.querySelector("#modal-gallery");
@@ -33,32 +38,24 @@ class ProjectsView {
 
   styleActiveFilterBtn(clickedButton) {
     // Boucle dans un array avec tous les boutons de filtre
-    [
-      this.allBtn,
-      this.objetsBtn,
-      this.appartementsBtn,
-      this.hotelsRestaurantsBtn,
-    ].forEach((button) => {
+    this.filterButtonsArray.forEach((button) => {
       // Applique le style par défaut
       button.classList.add("default-button");
       button.classList.remove("active-button");
     });
     // Applique le style du bouton de filtre actif / cliqué
     clickedButton.classList.add("active-button");
+    clickedButton.classList.remove("default-button");
   }
 
-  // createFilterButtons() {
-  //   if (!this.token) {
-  //     this.filtersList.innerHTML = `
-  //     <button class="tous">Tous</button>
-  //     <button class="objets">Objets</button>
-  //     <button class="apparts">Appartements</button>
-  //     <button class="hotels">Hôtels & Restaurants</button>
-  //     `;
-  //   } else {
-  //     this.filtersList.innerHTML = "";
-  //   }
-  // }
+  createFilterButtons() {
+    this.filtersList.innerHTML = `
+      <button class="tous">Tous</button>
+      <button class="objets">Objets</button>
+      <button class="apparts">Appartements</button>
+      <button class="hotels">Hôtels & Restaurants</button>
+      `;
+  }
 
   createModal() {
     this.modal.innerHTML = "";
