@@ -295,6 +295,16 @@ nav a:hover {
   padding: 10px 25px;
 }
 
+.default-button {
+  color: #1d6154;
+  background-color: white;
+}
+
+.active-button {
+  color: white;
+  background-color: #1d6154;
+}
+
 .gallery {
   width: 100%;
   display: grid;

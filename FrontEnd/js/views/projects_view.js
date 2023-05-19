@@ -39,13 +39,11 @@ class ProjectsView {
       this.hotelsRestaurantsBtn,
     ].forEach((button) => {
       // Applique le style par défaut
-      button.style.color = "#1d6154";
-      button.style.backgroundColor = "white";
+      button.classList.add("default-button");
+      button.classList.remove("active-button");
     });
     // Applique le style du bouton de filtre actif / cliqué
-
-    clickedButton.style.color = "white";
-    clickedButton.style.backgroundColor = "#1d6154";
+    clickedButton.classList.add("active-button");
   }
 
   displayProjectsInModal(projectsArray) {
