@@ -21,24 +21,21 @@
 // const login = document.querySelector(".login");
 // login.addEventListener('click', myFunction);
 
-
-
-let works = window.localStorage.getItem("works");
-if (works == null){
+async function getWorks() {
+    
     const worksResponse = await fetch('http://localhost:5678/api/works');
-    works = await worksResponse.json();
-    window.localStorage.setItem("works", JSON.stringify(works)); // attention pas besoin ni de creer 
-    // une nouvelle variable ni meme d'utiliser le local storage
- }else{
-    works = JSON.parse(works);
-}
+    const works = await worksResponse.json();
+    return works;
+    
+};
+    
 
 
-function createProjectContent() {
+async function createProjectContent() {
+    const works = await getWorks();
     for (let i in works) {
 
         const gallery = document.querySelector(".gallery");
-
 
         const work = document.createElement("figure");
         const workImage = document.createElement("img")
@@ -50,60 +47,158 @@ function createProjectContent() {
         gallery.appendChild(work);
         work.appendChild(workImage);
         work.appendChild(workTitle);
-console.log(works);
     }
 };
-function createCategoriesFilters() {
+async function createCategoriesFilters() {
+    const works = await getWorks();
     const categoriesList = ["Tous"];
-    const categoriesId = [];
+    const categoriesId = [0];
     
     for (let i in works) {
         if (categoriesList.includes(works[i].category.name) == false) {
             categoriesList.push(works[i].category.name);
             categoriesId.push(works[i].category.id);
-            console.log(categoriesList);
-            console.log(categoriesId);
         }
     }
     
     const filters = document.querySelector(".filters");
     for (let i in categoriesList) {
         const filter = document.createElement("div");
-        filter.classList.add("filter");
-        
+        filter.classList.add("filter");        
         const checkBox = document.createElement("input");
         checkBox.type = "checkbox";
         checkBox.name = categoriesList[i];
         checkBox.classList.add("filterCheck");
+        checkBox.classList.add(`checkCat${categoriesId[i]}`);
         const button = document.createElement("button");
         button.innerText = categoriesList[i];
         button.classList.add("filter-button");
-        console.log(button);
         filters.appendChild(filter);
         filter.appendChild(checkBox);
         filter.appendChild(button);
     }
-    
-}
-
-// I want to create a function that will filter the projects by category when checking the boxes
-function filterProjects() {
-    const filterChecks = document.querySelectorAll(".filterCheck");
-    const gallery = document.querySelector(".gallery");
-    console.log(filterButtons);
-    console.log(filterChecks);
-    console.log(gallery);
-
-    
 }
 
 
 
-
-
-function main (){
-    createProjectContent();
-    createCategoriesFilters();
+async function main(){
+    await createProjectContent();
+    await createCategoriesFilters();
 }
 
-main();
+await main();
+
+/******FILTERS *******/
+/*functions*/
+    const articles = document.querySelectorAll(".cat0, .cat1, .cat2, .cat3");
+    console.log(articles);
+
+    function uncheckExcept(value){
+        const checkBoxs = document.querySelectorAll(".filterCheck");
+        for (let i = 0; i < checkBoxs.length; i++){
+            if (checkBoxs[i].classList.contains(`${value}`) == false) {
+                checkBoxs[i].checked = false;
+            }
+        };
+    }
+
+    // function hideAll(){
+    //     const articles = document.querySelectorAll("figure");
+    //     for (let i in articles){
+    //         articles[i].style.display = "none";
+    //     };
+    // }
+    function showAll(){
+        uncheckExcept("checkCat0");
+        for (let i in articles){
+            articles[i].style.display = "block";
+        };
+    }
+
+    function showCategory(value){
+        uncheckExcept(`checkCat${value}`);
+        for (let i in articles){
+            if (articles[i].classList.contains(`cat${value}`) == true) {
+                articles[i].style.display = "block";
+            }else{
+                articles[i].style.display = "none";
+            }
+        };
+    }
+/*checkboxes*/
+/*OBJETS*/
+const checkObjet = document.querySelector(".checkCat1");
+checkObjet.addEventListener('click', function(){
+    if (checkObjet.checked == true) {
+        showCategory("1")
+    }else if (checkObjet.checked == false) {
+        showAll();
+    }
+})
+/*APPART*/
+const checkAppart = document.querySelector(".checkCat2");
+checkAppart.addEventListener('click', function(){
+    if (checkAppart.checked == true) {
+        showCategory("2")
+    }else if (checkAppart.checked == false) {
+        showAll();
+    }
+})
+/*RESTO*/
+const checkResto = document.querySelector(".checkCat3");
+checkResto.addEventListener('click', function(){
+    if (checkResto.checked == true) {
+        showCategory("3")
+    }else if (checkResto.checked == false) {
+        showAll();
+    }
+})
+
+/*TOUS*/
+const checkAll = document.querySelector(".checkCat0");
+checkAll.addEventListener('click', function(){
+    if (checkAll.checked == true) {
+        showAll();
+    }
+})
+
+
+
+// console.log(checkAll);
+// console.log(checkObjet);
+// const checkAppart = document.querySelector(".checkCat2");
+// console.log(checkAppart);
+// const checkResto = document.querySelector(".checkCat3");
+// console.log(checkResto);
+
+// function hideAll(){
+//     const articles = document.querySelectorAll("figure");
+//     for (let i in articles){
+//         articles[i].style.display = "none";
+//     };
+// }
+// function showAll(){
+//     const articles = document.querySelectorAll("figure");
+//     for (let i in articles){
+//         articles[i].style.display = "block";
+//     };
+// }
+
+// const objets = document.querySelector(".cat1");
+// console.log(objets);
+
+// const articles = document.querySelectorAll("figure");
+// console.log(articles);
+// checkObjet.addEventListener('click', function(){
+//     if (checkObjet.checked == true) {
+//         hideAll().then(objets.style.display = "block");
+//     } else {
+//         objets.style.display = "none";
+//     }
+// });
+
+// if (checkAll.checked == true) {
+//     for (let i in articles){
+//         articles[i].style.display = "block";
+//     };
+// }
