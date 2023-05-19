@@ -49,7 +49,6 @@ export function renderMiniWorks(category) {
 						}
 					);
 					if (response.ok) {
-						document.getElementById(`work-${id}`).remove();
 						document.getElementById(`list-${id}`).remove();
 						document.getElementById(`edit-${id}`).remove();
 					  } else {

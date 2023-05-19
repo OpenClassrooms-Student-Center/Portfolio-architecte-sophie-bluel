@@ -253,7 +253,6 @@ input[type="submit"]{
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
-	background-color: #1D6154;
 	margin : 2em auto ;
 	width: 180px;
 	text-align: center;
@@ -267,7 +266,7 @@ footer nav ul {
 }
 
 .d-none{
-	display: none;
+	display: none !important;
 }
 
 .active{
@@ -342,16 +341,16 @@ footer nav ul {
 	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
-.modal-content, .modal-ajouter-content{
+.modal-content, .modal-ajouter-content {
     background-color: white;
-    height: 662px;
-    width: 600px;
+    height: 670px;
+    width: 500px;
     top: 10%;
     left: 35%;
     position: absolute;
-	border-radius: 10px;
-
-
+    border-radius: 10px;
+    padding-left: 90px;
+    padding-right: 90px;
 }
 
 .modal-wrapper, .modal-ajouter-wrapper{
@@ -359,9 +358,7 @@ footer nav ul {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	padding : 56px;
-	padding-left: 90px;
-	padding-right: 90px;
+	padding-top: 45px;
 
 }
 
@@ -405,6 +402,7 @@ footer nav ul {
 
 .divider{
 	width: 100%;
+	margin-top: 25px;
 }
 
 .miniGallery{
@@ -442,10 +440,10 @@ footer nav ul {
 	font-size: 8px;
 }
 
-.d-none{
-	display: none;
+#image-preview{
+	width: 200px;
+	height: 169px;
 }
-
 .main-pic{
 	margin-left: 10%;
 	margin-top: 2%;
@@ -453,25 +451,40 @@ footer nav ul {
 
 .modal-ajouter-wrapper h3{
 	font-size: 25px;
-	margin-bottom: 2rem;
+	margin-bottom: 1rem;
 }
 
 .modal-ajouter-wrapper div{
 	background-color: #E8F1F6;
 	width: 100%;
-    height: 150px;
+    height: 169px;
 	display: flex;
     flex-direction: column;
     align-items: center;
+	border-radius: 3px;
+    margin-bottom: 40px;
 }
-
+.select-category{
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+}
 .ajouter-btn{
-	width: 190px;
+	width: 173px;
 	color: #306685;
 	background-color: #CBD6DC;
 	padding: 8px 20px;
 	border: transparent;
 	margin-bottom: 5px;
+	cursor: pointer;
+	border-radius: 50px;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 36px;
+}
+
+.green-bg{
+	background-color: #1D6154 !important;
 }
 
 .titre{
@@ -493,18 +506,23 @@ input, select{
 }
 
 .valider-btn{
-	width: 245px;
-	background-color: #A7A7A7;
+	width: 237px !important;
+	background-color : #A7A7A7;
 	color: white;
-	height: 45px;
+	height: 36px !important;
+	border-radius: 60px !important;
+	display: flex;
+    justify-content: center;
 }
-
+.list-formats{
+	font-size: 10px;
+}
 form{
 	margin-top: 2rem;
 }
 
 .image-placeholder{
-	font-size: 4rem;
+	font-size:  46px;
 	margin-bottom: 10px;
 	color: #B9C5CC;
 }

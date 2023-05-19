@@ -25,21 +25,19 @@ export function modalFunction() {
 		const modalTitle = document.createElement("h3");
 		modalTitle.innerText = "Galerie Photo";
 
-		const gallery = document.querySelector(".gallery");
-
 		const divider = document.createElement("hr");
 		divider.className = "divider";
 
-		const ajouterPhotoBtn = document.createElement("button");
-		ajouterPhotoBtn.innerText = "Ajouter une photo";
-		ajouterPhotoBtn.classList.add("ajouter-photo-btn");
+		const addPhotoBtn = document.createElement("button");
+		addPhotoBtn.innerText = "Ajouter une photo";
 
-		ajouterPhotoBtn.addEventListener("click", function (e) {
-			removeModalContent();
+		addPhotoBtn.addEventListener("click", function (e) {
 			e.stopPropagation();
 			e.preventDefault();
-			ajouterPhotoContent();
+			removeModalContent();
+			addPhotoContent();
 		});
+
 
 		const deleteGalleryLink = document.createElement("a");
 		deleteGalleryLink.innerText = "Supprimer la galerie";
@@ -48,7 +46,7 @@ export function modalFunction() {
 		newInnerDiv.appendChild(closeX);
 		newInnerDiv.appendChild(modalTitle);
 		newInnerDiv.appendChild(divider);
-		newInnerDiv.appendChild(ajouterPhotoBtn);
+		newInnerDiv.appendChild(addPhotoBtn);
 		newInnerDiv.appendChild(deleteGalleryLink);
 		//adding the styling div into the shell
 		newOuterDiv.appendChild(newInnerDiv);
@@ -56,6 +54,7 @@ export function modalFunction() {
 		//finally adding them into the modal html done above
 		const modalDiv = document.getElementById("modal1");
 		modalDiv.appendChild(newOuterDiv);
+
 		renderMiniWorks();
 		closeModal();
 
@@ -66,7 +65,7 @@ export function modalFunction() {
 		modalHTML.addEventListener("click", function (e) {
 			e.preventDefault()
 		  const modalTag = createModal();
-		  createModalContent(modalTag);
+		  createModalContent();
 		  modalTag.classList.remove("d-none");
 		  closeModal();
 		});
@@ -75,7 +74,6 @@ export function modalFunction() {
 	function closeModal() {
 		const closeX = document.querySelector(".close");
 		const modalOverlay = document.querySelector(".modal")	  
-		// handle clicks on closeX and modal elements
 		closeX.addEventListener("click", function () {
 			modalOverlay.remove();
 		});
@@ -91,7 +89,7 @@ export function modalFunction() {
 
 	//Second page of the modal
 
-	function ajouterPhotoContent() {
+	function addPhotoContent() {
 		const newOuterDiv = document.querySelector(".modal-content");
 
 		const newInnerDiv = document.createElement("div");
@@ -105,7 +103,7 @@ export function modalFunction() {
 		const returnArrow = document.createElement("i");
 		returnArrow.classList.add("return-arrow", "fa-solid", "fa-arrow-left-long");
 		returnArrow.addEventListener("click", function () {
-			removeAjouterModalContent();
+			removeAddModalContent();
 			const divToRemove = document.querySelector(".modal-content")
 			divToRemove.remove()
 			createModalContent();
@@ -116,61 +114,115 @@ export function modalFunction() {
 		modalTitle.innerText = "Ajout Photo";
 		newInnerDiv.appendChild(modalTitle);
 
-		const ajouterPhotoDiv = document.createElement("div");
-		ajouterPhotoDiv.classList.add("ajouter-photo-img-div");
-		const ajouterPhotoIcon = document.createElement("i");
-		ajouterPhotoIcon.classList.add(
+		const addPhotoDiv = document.createElement("div");
+		addPhotoDiv.classList.add("ajouter-photo-img-div");
+		const addPhotoIcon = document.createElement("i");
+		addPhotoIcon.classList.add(
 			"fa-regular",
 			"fa-image",
 			"image-placeholder"
 		);
 
-		const ajouterPhotoBtn = document.createElement("input");
-		ajouterPhotoBtn.innerText = " + Ajouter Photo";
-		ajouterPhotoBtn.classList.add("ajouter-btn");
-		ajouterPhotoBtn.setAttribute("type", "file");
+		const addPhotoForm = document.createElement("form");
+		addPhotoForm.setAttribute("enctype", "multipart/form-data");
+		addPhotoForm.setAttribute("method", "post");
+		addPhotoForm.setAttribute("name", "ajouterPhotoForm");
+		addPhotoForm.setAttribute("id", "ajouterPhotoForm");
 
-		const ajouterPhotoFormats = document.createElement("p");
-		ajouterPhotoFormats.innerText = "jpg, png : 4mo max";
+		const addPhotoBtn2 = document.createElement("input");
+		addPhotoBtn2.setAttribute("name", "image")
+		addPhotoBtn2.setAttribute("id", "image")
+		addPhotoBtn2.classList.add("d-none");
+		addPhotoBtn2.setAttribute("type", "file");
+		const addPhotoLabel = document.createElement("label")
+		addPhotoLabel.setAttribute("for", "image")
+		addPhotoLabel.setAttribute("class", "ajouter-btn")
+		addPhotoLabel.innerText = "+ Ajouer Photo"
 
-		ajouterPhotoDiv.appendChild(ajouterPhotoIcon);
-		ajouterPhotoDiv.appendChild(ajouterPhotoBtn);
-		ajouterPhotoDiv.appendChild(ajouterPhotoFormats);
+		const addPhotoFormats = document.createElement("p");
+		addPhotoFormats.classList.add("list-formats")
+		addPhotoFormats.innerText = "jpg, png : 4mo max";
 
-		//create form the inputs need to go into
-		const ajouterPhotoForm = document.createElement("form");
-		ajouterPhotoForm.setAttribute("enctype", "multipart/form-data");
-		ajouterPhotoForm.setAttribute("method", "post");
-		ajouterPhotoForm.setAttribute("name", "fileInfo");
-		ajouterPhotoForm.setAttribute("id", "ajouterPhotoForm");
+		const imagePreviewDiv = document.createElement("div");
+		imagePreviewDiv.setAttribute("id", "image-preview-div");
+		imagePreviewDiv.classList.add("d-none")
 
-		ajouterPhotoForm.appendChild(ajouterPhotoDiv);
+		addPhotoForm.appendChild(imagePreviewDiv);
 
-		const ajouterPhotoTitleLabel = document.createElement("label");
-		ajouterPhotoTitleLabel.setAttribute("for", "titre");
-		ajouterPhotoTitleLabel.innerText = "Titre";
-		ajouterPhotoTitleLabel.classList.add("titre", "titre-margin-top");
-		newInnerDiv.appendChild(ajouterPhotoTitleLabel);
-		const ajouterPhotoTitleInput = document.createElement("input");
-		ajouterPhotoTitleInput.setAttribute("type", "text");
-		ajouterPhotoTitleInput.setAttribute("name", "titre");
-		ajouterPhotoTitleInput.required = true;
-		ajouterPhotoTitleInput.classList.add("titre");
+		addPhotoLabel.appendChild(addPhotoBtn2)
+		addPhotoDiv.appendChild(addPhotoIcon);
+		addPhotoDiv.appendChild(addPhotoLabel)
+		addPhotoDiv.appendChild(addPhotoFormats);
 
-		ajouterPhotoForm.appendChild(ajouterPhotoTitleLabel);
-		ajouterPhotoForm.appendChild(ajouterPhotoTitleInput);
 
-		const ajouterPhotoCategorieLabel = document.createElement("label");
-		ajouterPhotoCategorieLabel.setAttribute("for", "categorie");
-		ajouterPhotoCategorieLabel.innerText = "Catégorie";
-		ajouterPhotoCategorieLabel.classList.add("titre", "titre-margin-top");
-		ajouterPhotoForm.appendChild(ajouterPhotoCategorieLabel);
+		addPhotoForm.appendChild(addPhotoDiv);
+
+
+		const addPhotoTitleLabel = document.createElement("label");
+		addPhotoTitleLabel.setAttribute("for", "title");
+		addPhotoTitleLabel.innerText = "Titre";
+		addPhotoTitleLabel.classList.add("titre", "titre-margin-top");
+		newInnerDiv.appendChild(addPhotoTitleLabel);
+		const addPhotoTitleInput = document.createElement("input");
+		addPhotoTitleInput.setAttribute("type", "text");
+		addPhotoTitleInput.required = true;
+		addPhotoTitleInput.setAttribute("name", "title")
+		addPhotoTitleInput.setAttribute("id", "title")
+		addPhotoTitleInput.classList.add("titre");
+
+		 // Add event listeners to image and title inputs to change color of validate button
+		 addPhotoTitleInput.addEventListener("input", function () {
+			if (addPhotoTitleInput.value.trim() !== "" && addPhotoBtn2.files.length > 0) {
+			  validatePhotoBtn.classList.add("green-bg");
+			} else {
+			  validatePhotoBtn.classList.remove("green-bg");
+			}
+		  });
+
+		  addPhotoBtn2.addEventListener("change", function (e) {
+			const file = e.target.files[0];
+			const reader = new FileReader();
+		  
+			reader.onload = function (event) {
+			  const imagePreview = document.createElement("img");
+			  imagePreview.setAttribute("id", "image-preview");
+			  imagePreview.src = event.target.result;
+		  
+			  const previewDiv = document.getElementById("image-preview-div");
+			  previewDiv.innerHTML = ""; // Clear previous preview
+			  previewDiv.classList.remove("d-none")
+			  const imageInputDiv = document.querySelector(".ajouter-photo-img-div");
+			  imageInputDiv.classList.add("d-none")
+			  
+			  previewDiv.appendChild(imagePreview);
+		  
+			  if (addPhotoTitleInput.value.trim() !== "" && addPhotoBtn2.files.length > 0) {
+				validatePhotoBtn.classList.add("green-bg");
+			  } else {
+				validatePhotoBtn.classList.remove("green-bg");
+			  }
+			};
+		  
+			if (file) {
+			  reader.readAsDataURL(file);
+			}
+		  });
+		  
+
+		addPhotoForm.appendChild(addPhotoTitleLabel);
+		addPhotoForm.appendChild(addPhotoTitleInput);
+
+		const addPhotoCategorieLabel = document.createElement("label");
+		addPhotoCategorieLabel.setAttribute("for", "category");
+		addPhotoCategorieLabel.innerText = "Catégorie";
+		addPhotoCategorieLabel.classList.add("titre", "titre-margin-top");
+		addPhotoForm.appendChild(addPhotoCategorieLabel);
 
 		const selectCategory = document.createElement("select");
 		selectCategory.className = "select-category";
 		selectCategory.setAttribute("id", "select-category");
-		ajouterPhotoForm.appendChild(selectCategory);
-
+		selectCategory.setAttribute("name", "category")
+		addPhotoForm.appendChild(selectCategory)
 
 		// Dynamiser les categories pour qu'elles soient liés a l'API directement et non fait en dur
 		fetch("http://localhost:5678/api/categories")
@@ -187,21 +239,25 @@ export function modalFunction() {
 			});
 	
 		const divider = document.createElement("hr");
-		divider.classList.add("divider", "titre-margin-top");
-		ajouterPhotoForm.appendChild(divider)
+		divider.classList.add("divider");
+		addPhotoForm.appendChild(divider)
 
-		const validerPhotoBtn = document.createElement("input");
-		validerPhotoBtn.setAttribute("type", "button")
-		validerPhotoBtn.setAttribute("value", "Valider")
-		validerPhotoBtn.classList.add("titre-margin-top", "valider-btn");
-		validerPhotoBtn.addEventListener("submit", function (e) {
+		const validatePhotoBtn = document.createElement("input");
+		validatePhotoBtn.setAttribute("type", "submit")
+		validatePhotoBtn.setAttribute("value", "Valider")
+		validatePhotoBtn.classList.add("titre-margin-top", "valider-btn");
+		
+		addPhotoForm.addEventListener("submit", function (e) {
 			e.preventDefault();
-			if (ajouterPhotoTitleInput.checkValidity()) {
+			if (addPhotoTitleInput.checkValidity()) {
 				uploadWork();
+				e.preventDefault();
 			}
 		});
-		ajouterPhotoForm.appendChild(validerPhotoBtn)
-		newInnerDiv.appendChild(ajouterPhotoForm);
+
+
+		addPhotoForm.appendChild(validatePhotoBtn)
+		newInnerDiv.appendChild(addPhotoForm);
 
 		
 		const modalHTML = document.getElementById("modal1");
@@ -209,6 +265,8 @@ export function modalFunction() {
 		//put the new modal wrapper into the modal content box
 		newOuterDiv.appendChild(newInnerDiv);
 		modalHTML.appendChild(newOuterDiv);
+
+
 		closeModal();
 	}
 
@@ -218,24 +276,20 @@ export function modalFunction() {
 		modalContent.remove();
 	}
 
-	function removeAjouterModalContent() {
-		const modalAjouterContent = document.querySelector(
-			".modal-ajouter-wrapper"
-		);
-		modalAjouterContent.remove();
+	function removeAddModalContent() {
+		const modalAddContent = document.querySelector(".modal-ajouter-wrapper");
+		modalAddContent.remove();
 	}
-
+	
 	function uploadWork() {
-		const ajouterPhotoForm = document.forms.namedItem("fileInfo");
-		ajouterPhotoForm.submit()
-		const formData = new FormData(ajouterPhotoForm);
-		const ajouterPhotoBtn = document.querySelector(".ajouter-btn");
-		formData.append("image", ajouterPhotoBtn.files[0]);
+		const addPhotoForm = document.getElementById("ajouterPhotoForm")
+		const formData = new FormData(addPhotoForm);
+	
+		console.log(formData)
 
 		fetch("http://localhost:5678/api/works/", {
 			method: "POST",
 			headers: {
-				"content-type": "application/json",
 				Authorization: "Bearer " + window.localStorage.getItem("token"),
 			},
 			body: formData,

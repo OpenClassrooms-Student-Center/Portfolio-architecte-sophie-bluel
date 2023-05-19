@@ -2,7 +2,7 @@ export function renderWorks(category) {
   const gallery = document.querySelector(".gallery");
   gallery.innerHTML = "";
 
-  fetch("http://localhost:5678/api/works")
+  fetch("http://localhost:5678/api/works?timestamp=" + Date.now())
     .then((response) => {
       if (response.ok) {
         return response.json();
