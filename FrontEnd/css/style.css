@@ -473,6 +473,8 @@ form {
 .modal-gallery button {
   font-size: 12px;
   padding: 0;
+  position: relative;
+  right: 20px;
 }
 
 .modal-wrapper > i {
