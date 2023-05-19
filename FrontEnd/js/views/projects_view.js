@@ -9,6 +9,7 @@ class ProjectsView {
     this.appartementsBtn = document.querySelector(".apparts");
     this.hotelsRestaurantsBtn = document.querySelector(".hotels");
     this.modal = document.querySelector("#modal");
+    this.createModal();
     this.modalGallery = document.querySelector("#modal-gallery");
     this.editButton = document.querySelector("#edit-button");
     this.closeModalBtn = document.querySelector("#close-modal");
@@ -44,6 +45,34 @@ class ProjectsView {
     });
     // Applique le style du bouton de filtre actif / cliqué
     clickedButton.classList.add("active-button");
+  }
+
+  // createFilterButtons() {
+  //   if (!this.token) {
+  //     this.filtersList.innerHTML = `
+  //     <button class="tous">Tous</button>
+  //     <button class="objets">Objets</button>
+  //     <button class="apparts">Appartements</button>
+  //     <button class="hotels">Hôtels & Restaurants</button>
+  //     `;
+  //   } else {
+  //     this.filtersList.innerHTML = "";
+  //   }
+  // }
+
+  createModal() {
+    this.modal.innerHTML = "";
+
+    this.modal.innerHTML = `
+    <div class="modal-wrapper">
+    <i class="fa-solid fa-xmark" id="close-modal"></i>
+    <h2>Galerie photo</h2>
+    <div class="modal-gallery" id="modal-gallery"></div>
+    <hr />
+    <button class="add-project">Ajouter une photo</button>
+    <button class="delete-gallery">Supprimer la galerie</button>
+  </div>
+    `;
   }
 
   displayProjectsInModal(projectsArray) {
