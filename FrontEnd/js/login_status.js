@@ -6,6 +6,7 @@ class LoginStatus {
     this.loginEl = document.querySelector("#login");
     this.editModePanel = document.querySelector("#edit-mode-panel");
     this.editEl = document.querySelector(".edit");
+    this.filtersList = document.querySelector("#filtres");
     this.loginStatus = false;
 
     this.checkLoginStatus();
@@ -19,6 +20,7 @@ class LoginStatus {
       this.loginStatus = true;
       this.editModePanel.style.display = "flex";
       this.editEl.style.display = "flex";
+      this.filtersList.style.display = "none";
       ProjectsModel.token = this.token;
     }
   }
@@ -31,6 +33,7 @@ class LoginStatus {
       this.loginEl.textContent = "login";
       this.editModePanel.style.display = "none";
       this.editEl.style.display = "none";
+      this.filtersList.style.display = "flex";
       ProjectsModel.token = null;
       sessionStorage.removeItem("token");
     }

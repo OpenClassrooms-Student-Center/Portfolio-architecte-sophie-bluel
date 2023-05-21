@@ -36,6 +36,10 @@ class ProjectsModel {
   }
 
   deleteProject(projectId) {
+    if (!confirm("Voulez-vous vraiment supprimer ce projet ?")) {
+      return Promise.resolve(); // Annule la suppression si l'utilisateur clique sur Annuler
+    }
+
     return fetch(`http://localhost:5678/api/works/${projectId}`, {
       method: "DELETE",
       headers: {
