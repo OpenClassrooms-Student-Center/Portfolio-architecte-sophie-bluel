@@ -52,7 +52,7 @@ body {
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
-	background-color: #e5e5e5;
+	background-color: #FFFEF8;
 }
 header {
 	display: flex;
@@ -136,7 +136,7 @@ li:hover {
 .categorie-button {
 	font-family: 'Syne';
 	color: #1D6154;
-	background-color: #e5e5e5;
+	background-color: #FFFEF8;
 	margin-left: 1rem;
 	padding: 9px 20px;
 	border: 1px solid #1D6154;
@@ -198,9 +198,70 @@ input[type="submit"]{
 	border-radius: 60px ;
 }
 
+footer {
+	background-color: #FFFFFF;
+	height: 60px;
+}
+
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em
 }
 
+/************************* Page Login ****************************/
+
+#login  {
+	width: 50%;
+	margin: auto;
+	text-align: center;
+}
+
+#login h2 {
+	padding: 50px 0;
+}
+
+.mail, .password {
+	width: 70%;
+	display: flex;
+	flex-direction: column;
+	margin: auto;
+}
+
+.mail label, .password label {
+	text-align: start;
+	margin-bottom: 10px;
+}
+
+.mail input, .password input {
+	height: 50px;
+	width: 100%;
+	margin-bottom: 30px;
+	background: #FFFFFF;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+#login button {
+	background: #1D6154;
+	border: none;
+	border-radius: 60px;
+	padding: 10px 40px;
+	margin-top: 20px;
+}
+
+#login span {
+	color: #FFFFFF;
+}
+
+.ancre {
+	margin: 40px 0 20px 0;
+}
+
+#login a {
+	color: black;
+}
+
+.footer {
+	margin-top: 50px;
+}
