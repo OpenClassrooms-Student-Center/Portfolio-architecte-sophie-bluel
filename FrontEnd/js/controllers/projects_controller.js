@@ -46,10 +46,12 @@ class ProjectsController {
       }
     });
 
-    this.view.modalGallery.addEventListener("click", (event) => {
+    this.view.modal.addEventListener("click", (event) => {
       if (event.target.classList.contains("trash")) {
         const { projectId } = event.target.dataset;
         this.projectsData.deleteProject(projectId);
+      } else if (event.target.classList.contains("add-project")) {
+        this.view.changeModal();
       }
       // Ajouter "si clique sur ajouter une photo..."
     });

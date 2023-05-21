@@ -149,6 +149,10 @@ header {
   margin: 50px 0;
 }
 
+.hidden {
+  display: none;
+}
+
 #edit-mode-panel {
   display: none;
   background: #000000;
@@ -409,6 +413,7 @@ footer nav ul {
 form {
   display: flex;
   flex-direction: column;
+  gap: 20px;
 }
 
 .password-reset {
@@ -436,7 +441,6 @@ form {
   height: 100%;
   background: rgba(0, 0, 0, 0.8);
   animation: fadeIn 0.3s both;
-  border-radius: 10px;
 }
 
 .modal-wrapper {
@@ -449,6 +453,7 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius: 10px;
 }
 
 .modal-gallery {
@@ -488,8 +493,8 @@ form {
 }
 
 .modal h2 {
-  font-family: "Work Sans";
   font-size: 26px;
+  font-weight: 400;
   line-height: 30px;
   text-align: center;
   color: #000000;
@@ -531,4 +536,75 @@ hr {
   line-height: 17px;
   text-align: center;
   color: #d65353;
+}
+
+.modal-nav {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.modal-nav i {
+  font-size: 21px;
+}
+
+.add-photo {
+  width: 420px;
+  height: 150px;
+  background: #e8f1f7;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0 0 0;
+  gap: 15px;
+}
+
+.add-photo i {
+  font-size: 58px;
+  color: #b9c5cc;
+}
+
+.add-photo label {
+  width: 173px;
+  height: 36px;
+  background: #cbd6dc;
+  border-radius: 50px;
+  font-weight: 500;
+  font-size: 14px;
+  text-align: center;
+  color: #306685;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.add-photo span {
+  font-weight: 400;
+  font-size: 10px;
+  text-align: center;
+  color: #444444;
+}
+
+.modal input[type="text"],
+select {
+  width: 420px;
+  height: 51px;
+  background: #ffffff;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+.modal input[type="submit"] {
+  width: 237px;
+  height: 36px;
+  background: #a7a7a7;
+  border-radius: 60px;
+  font-family: "Syne";
+  font-weight: 700;
+  font-size: 14px;
+  text-align: center;
+  color: #ffffff;
+  border: none;
 }
