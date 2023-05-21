@@ -87,7 +87,7 @@ class ProjectsView {
     }
   }
 
-  changeModal() {
+  changeModalContent() {
     this.modal.innerHTML = `
       <div class="modal-wrapper">
         <div class="modal-nav">
@@ -95,12 +95,10 @@ class ProjectsView {
           <i class="fa-solid fa-xmark" id="close-modal"></i>
         </div>
         <h2>Ajout photo</h2>
-        <div class="add-photo">
+        <div class="add-photo" id="add-photo">
           <i class="fa-solid fa-image"></i>
           <label for="add-photo-btn">+ Ajouter photo</label>
-          <input class="add-photo-btn hidden" type="file"
-       id="add-photo-btn" name="add-photo-btn"
-       accept="image/png, image/jpeg">
+          <input class="add-photo-btn hidden" type="file" id="add-photo-btn" name="add-photo-btn" accept="image/png, image/jpeg">
           <span>jpg, png : 4mo max</span>
         </div>
         <form>
@@ -118,6 +116,39 @@ class ProjectsView {
         </form>
       </div>
     `;
+  }
+
+  setupAddPhotoEventListener() {
+    this.addPhotoBtn = document.querySelector("#add-photo-btn");
+    this.addPhotoDiv = document.querySelector("#add-photo");
+
+    this.addPhotoBtn.addEventListener("change", (event) => {
+      this.file = event.target.files[0];
+      this.reader = new FileReader();
+
+      this.reader.onload = () => {
+        this.imageElement = document.createElement("img");
+        this.imageElement.src = this.reader.result;
+        this.imageElement.style.width = "30%";
+        this.imageElement.style.height = "100%";
+        this.imageElement.style.objectFit = "cover";
+
+        while (this.addPhotoDiv.firstChild) {
+          this.addPhotoDiv.firstChild.remove();
+        }
+
+        this.addPhotoDiv.appendChild(this.imageElement);
+      };
+
+      if (this.file) {
+        this.reader.readAsDataURL(this.file);
+      }
+    });
+  }
+
+  changeModal() {
+    this.changeModalContent();
+    this.setupAddPhotoEventListener();
   }
 
   openModal() {

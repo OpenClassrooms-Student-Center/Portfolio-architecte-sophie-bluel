@@ -53,7 +53,7 @@ class ProjectsController {
       } else if (event.target.classList.contains("add-project")) {
         this.view.changeModal();
       }
-      // Ajouter "si clique sur ajouter une photo..."
+      // Ajouter form complete post data
     });
 
     this.view.allBtn.addEventListener("click", () => {

@@ -546,6 +546,7 @@ hr {
 
 .modal-nav i {
   font-size: 21px;
+  cursor: pointer;
 }
 
 .add-photo {
@@ -556,7 +557,6 @@ hr {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px 0 0 0;
   gap: 15px;
 }
 
