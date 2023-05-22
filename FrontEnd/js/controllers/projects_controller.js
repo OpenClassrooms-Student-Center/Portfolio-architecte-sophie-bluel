@@ -19,7 +19,6 @@ class ProjectsController {
   displayAllProjects() {
     this.projectsData.getAllProjects().then((data) => {
       this.view.displayProjects(data);
-      console.log(data);
     });
   }
 
@@ -34,14 +33,10 @@ class ProjectsController {
 
   // Ajoute un projet à la base de données
   addProjectToDatabase() {
-    const titleInput = document.getElementById("title");
-    const categorySelect = document.getElementById("category");
-    const imageInput = this.view.addPhotoBtn;
+    const { value: title } = document.getElementById("title");
+    const { value: category } = document.getElementById("category");
+    const [image] = this.view.addPhotoBtn.files;
     const token = sessionStorage.getItem("token");
-
-    const title = titleInput.value;
-    const category = categorySelect.value;
-    const image = imageInput.files[0];
 
     const formData = new FormData();
     formData.append("title", title);
@@ -110,7 +105,6 @@ class ProjectsController {
           this.view.displayProjectsInModal(data);
         });
       }
-      // Ajouter form complete post data
     });
 
     // Écouteurs d'événement pour les boutons de filtre
