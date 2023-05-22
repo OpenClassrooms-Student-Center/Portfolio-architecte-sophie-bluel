@@ -63,6 +63,7 @@ class ProjectsModel {
   }
 
   addProject(title, category, image) {
+    // Encapsule les données du formulaire dans l'objet formData
     const formData = new FormData();
     formData.append("title", title);
     formData.append("category", category);
@@ -79,9 +80,8 @@ class ProjectsModel {
         if (response.ok) {
           console.log("Le projet a été ajouté avec succès");
           return this.getAllProjects(); // Récupère la liste des projets mise à jour
-        } else {
-          throw new Error("Erreur lors de l'ajout du projet");
         }
+        throw new Error("Erreur lors de l'ajout du projet");
       })
       .catch((error) => {
         console.error(

@@ -32,6 +32,7 @@ class ProjectsController {
   }
 
   addProject() {
+    // Récupère les valeurs du formulaire et le fichier d'image
     const { value: title } = document.getElementById("title");
     const { value: category } = document.getElementById("category");
     const [image] = this.view.addPhotoBtn.files;
