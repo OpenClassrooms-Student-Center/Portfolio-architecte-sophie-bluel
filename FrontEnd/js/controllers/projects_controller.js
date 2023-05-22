@@ -31,47 +31,21 @@ class ProjectsController {
       });
   }
 
-  // Ajoute un projet à la base de données
-  addProjectToDatabase() {
+  addProject() {
     const { value: title } = document.getElementById("title");
     const { value: category } = document.getElementById("category");
     const [image] = this.view.addPhotoBtn.files;
-    const token = sessionStorage.getItem("token");
 
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("category", category);
-    formData.append("image", image);
-
-    fetch("http://localhost:5678/api/works", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      body: formData,
-    })
-      .then((response) => {
-        if (response.ok) {
-          console.log("Le projet a été ajouté avec succès");
-          // Met à jour la liste des projets affichée
-          this.displayAllProjects();
-        } else {
-          throw new Error("Erreur lors de l'ajout du projet");
-        }
-      })
-      .catch((error) => {
-        console.error(
-          "Une erreur est survenue lors de l'ajout du projet :",
-          error
-        );
-      });
+    this.projectsData.addProject(title, category, image).then((data) => {
+      this.view.displayProjects(data);
+    });
   }
 
   setupEventListeners() {
     // Écouteur d'événement pour le formulaire modal
     this.view.modal.addEventListener("submit", (event) => {
       event.preventDefault();
-      this.addProjectToDatabase();
+      this.addProject();
     });
 
     // Écouteur d'événement pour le bouton d'édition

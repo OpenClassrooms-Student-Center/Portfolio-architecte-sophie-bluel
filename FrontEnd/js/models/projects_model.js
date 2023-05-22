@@ -61,6 +61,35 @@ class ProjectsModel {
         );
       });
   }
+
+  addProject(title, category, image) {
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("category", category);
+    formData.append("image", image);
+
+    return fetch("http://localhost:5678/api/works", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${this.token}`,
+      },
+      body: formData,
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log("Le projet a été ajouté avec succès");
+          return this.getAllProjects(); // Récupère la liste des projets mise à jour
+        } else {
+          throw new Error("Erreur lors de l'ajout du projet");
+        }
+      })
+      .catch((error) => {
+        console.error(
+          "Une erreur est survenue lors de l'ajout du projet :",
+          error
+        );
+      });
+  }
 }
 
 /* Ancien code */
