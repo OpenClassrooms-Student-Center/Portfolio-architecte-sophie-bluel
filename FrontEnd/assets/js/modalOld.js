@@ -30,11 +30,17 @@ export function modalFunction() {
 
 		const addPhotoBtn = document.createElement("button");
 		addPhotoBtn.innerText = "Ajouter une photo";
-		addPhotoBtn.classList.add("next-page")
 
-		addPhotoBtn.addEventListener('click', function(){
-			nextPageModal()
-		})
+		addPhotoBtn.addEventListener("click", function (e) {
+			e.stopPropagation();
+			e.preventDefault();
+			//need to remove these 2 functions and play with display none instead
+			const modalContent = document.querySelector('.modal-wrapper')
+			modalContent.classList.add("d-none");
+			const nextPage = document.querySelector('.modal-ajouter-wrapper')
+			nextPage.classList.remove("d-none")
+		});
+
 
 		const deleteGalleryLink = document.createElement("a");
 		deleteGalleryLink.innerText = "Supprimer la galerie";
@@ -110,7 +116,12 @@ export function modalFunction() {
 		const returnArrow = document.createElement("i");
 		returnArrow.classList.add("return-arrow", "fa-solid", "fa-arrow-left-long");
 		returnArrow.addEventListener("click", function () {
-			previousPageModal()
+
+			const divToHide = document.querySelector(".modal-ajouter-wrapper")
+			divToHide.classList.add('d-none')
+			const divToShow = document.querySelector("modal-wrapper")
+			console.log(divToShow)
+			divToShow.classList.remove('d-none')
 		});
 		newInnerDiv.appendChild(returnArrow);
 
@@ -276,23 +287,15 @@ export function modalFunction() {
 
 
 	function nextPageModal() {
-		const addPhotoBtn = document.querySelector('.next-page')
-		addPhotoBtn.addEventListener("click", function (e) {
-			e.stopPropagation();
-			e.preventDefault();
-			const modalContent = document.querySelector('.modal-wrapper')
-			modalContent.classList.add("d-none");
-			const nextPage = document.querySelector('.modal-ajouter-wrapper')
-			nextPage.classList.remove("d-none")
-		});
-
-	}
-
-	function previousPageModal() {
 		const divToHide = document.querySelector(".modal-ajouter-wrapper")
 		divToHide.classList.add('d-none')
-		const divToShow = document.querySelector(".modal-wrapper")
+		const divToShow = document.querySelector("modal-wrapper")
 		divToShow.classList.remove('d-none')
+	}
+
+	function removeAddModalContent() {
+		const modalAddContent = document.querySelector(".modal-ajouter-wrapper");
+		modalAddContent.remove();
 	}
 	
 	function uploadWork() {
@@ -311,24 +314,8 @@ export function modalFunction() {
 			.then((response) => response.json())
 			.then((data) => {
 				//ici mettre la suite pour l'ajout de la gallerie
-				const gallery = document.querySelector('.gallery');
-				const miniGallery = document.querySelector('.miniGallery');
-				const figureGallery = document.createElement('figure'); // Create a figure element for the gallery
-				const figureMiniGallery = document.createElement('figure'); // Create a figure element for the miniGallery
-				const title = document.createElement('figcaption');
-				const img = document.createElement('img');
-				img.src = data.imageUrl;
-				title.innerText = data.title;
-
-				figureGallery.appendChild(img);
-				figureGallery.appendChild(title);
-				gallery.appendChild(figureGallery);
-
-				// Clone the figure element for the miniGallery
-				const figureClone = figureGallery.cloneNode(true);
-				miniGallery.appendChild(figureClone);
+				//pour lancer le back a partir du front - cd .. cd backend
 				console.log("Success:", data);
-				alert('Photo uploaded')
 			})
 			.catch((error) => {
 				console.error("Error:", error);

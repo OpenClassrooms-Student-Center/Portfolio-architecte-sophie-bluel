@@ -215,7 +215,14 @@ button{
 
 .gallery img {
 	width: 100%;
+	flex: 1;
 
+}
+
+.gallery figure {
+	display: flex;
+    background-size: cover;
+    flex-direction: column;
 }
 #contact {
 	width: 50%;
@@ -257,6 +264,8 @@ input[type="submit"]{
 	width: 180px;
 	text-align: center;
 	border-radius: 60px ;
+	background-color: #1D6154;
+
 }
 
 footer nav ul {
@@ -351,6 +360,7 @@ footer nav ul {
     border-radius: 10px;
     padding-left: 90px;
     padding-right: 90px;
+	overflow-y: auto;
 }
 
 .modal-wrapper, .modal-ajouter-wrapper{
@@ -359,6 +369,7 @@ footer nav ul {
 	justify-content: center;
 	align-items: center;
 	padding-top: 45px;
+	margin-bottom: 20px;
 
 }
 
@@ -413,7 +424,6 @@ footer nav ul {
 	flex-wrap: wrap;
 	gap:10px;
 	margin-top:3em;
-	justify-content: space-between;
 }
 
 .miniGallery figure{
@@ -422,10 +432,14 @@ footer nav ul {
 	gap:3px;
 	margin-bottom:5px;
 	position: relative;
+	background-size: cover;
+
 }
 
 .miniGallery img{
 	height:100px;
+	flex: 1;
+	width: 104px;
 }
 
 .miniGallery i{
@@ -443,6 +457,7 @@ footer nav ul {
 #image-preview{
 	width: 200px;
 	height: 169px;
+	object-fit: cover;
 }
 .main-pic{
 	margin-left: 10%;
