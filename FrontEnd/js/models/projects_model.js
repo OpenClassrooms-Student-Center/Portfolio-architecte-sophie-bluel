@@ -1,6 +1,8 @@
+/* eslint-disable no-alert */
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
+
 class ProjectsModel {
   constructor() {
     /* Ancien code */

@@ -15,7 +15,6 @@ class ProjectsView {
 
     this.modal = document.querySelector("#modal");
     this.createModal();
-    this.modalGallery = document.querySelector("#modal-gallery");
     this.editButton = document.querySelector("#edit-button");
     this.closeModalBtn = document.querySelector("#close-modal");
     this.deleteProject = document.querySelector("#trash");
@@ -61,15 +60,16 @@ class ProjectsView {
     this.modal.innerHTML = "";
 
     this.modal.innerHTML = `
-    <div class="modal-wrapper">
-    <i class="fa-solid fa-xmark" id="close-modal"></i>
-    <h2>Galerie photo</h2>
-    <div class="modal-gallery" id="modal-gallery"></div>
-    <hr />
-    <button class="add-project">Ajouter une photo</button>
-    <button class="delete-gallery">Supprimer la galerie</button>
-  </div>
+      <div class="modal-wrapper">
+        <i class="fa-solid fa-xmark" id="close-modal"></i>
+        <h2>Galerie photo</h2>
+        <div class="modal-gallery" id="modal-gallery"></div>
+        <hr />
+        <button class="add-project">Ajouter une photo</button>
+        <button class="delete-gallery">Supprimer la galerie</button>
+      </div>
     `;
+    this.modalGallery = document.querySelector("#modal-gallery");
   }
 
   displayProjectsInModal(projectsArray) {
@@ -78,12 +78,12 @@ class ProjectsView {
     for (let i = 0; i < projectsArray.length; i += 1) {
       const project = projectsArray[i];
       this.modalGallery.innerHTML += `
-      <figure>
-        <img src="${project.imageUrl}" alt="${project.title}" />
-        <i class="fa-regular fa-trash-can trash" id="trash" data-project-id="${project.id}"></i>
-        <button>éditer</button>
-      </figure>
-    `;
+        <figure>
+          <img src="${project.imageUrl}" alt="${project.title}" />
+          <i class="fa-regular fa-trash-can trash" id="trash" data-project-id="${project.id}"></i>
+          <button>éditer</button>
+        </figure>
+      `;
     }
   }
 
@@ -101,18 +101,18 @@ class ProjectsView {
           <input class="add-photo-btn hidden" type="file" id="add-photo-btn" name="add-photo-btn" accept="image/png, image/jpeg">
           <span>jpg, png : 4mo max</span>
         </div>
-        <form>
+        <form id="modal-form">
           <label for="title">Titre</label>
           <input type="text" name="title" id="title" required />
           <label for="category">Catégorie</label>
           <select name="category" id="category">
             <option value=""></option>
-            <option value="Objets">Objets</option>
-            <option value="Appartements">Appartements</option>
-            <option value="Hotels & restaurants">Hotels & restaurants</option>
+            <option value="1">Objets</option>
+            <option value="2">Appartements</option>
+            <option value="3">Hotels & restaurants</option>
           </select>
           <hr>
-          <input type="submit" value="Valider">
+          <input type="submit" value="Valider" class="submit-project">
         </form>
       </div>
     `;
@@ -123,7 +123,8 @@ class ProjectsView {
     this.addPhotoDiv = document.querySelector("#add-photo");
 
     this.addPhotoBtn.addEventListener("change", (event) => {
-      this.file = event.target.files[0];
+      const [file] = event.target.files;
+      this.file = file;
       this.reader = new FileReader();
 
       this.reader.onload = () => {
