@@ -118,15 +118,17 @@ class ProjectsView {
     `;
   }
 
-  setupAddPhotoEventListener() {
+  setupPhotoUploadListener() {
     this.addPhotoBtn = document.querySelector("#add-photo-btn");
     this.addPhotoDiv = document.querySelector("#add-photo");
 
     this.addPhotoBtn.addEventListener("change", (event) => {
       const [file] = event.target.files;
       this.file = file;
+      // Permet de lire le contenu du fichier
       this.reader = new FileReader();
 
+      // Lorsque la lecture du fichier est terminée, crée un élément img et lui attribue la src du fichier
       this.reader.onload = () => {
         this.imageElement = document.createElement("img");
         this.imageElement.src = this.reader.result;
@@ -134,13 +136,14 @@ class ProjectsView {
         this.imageElement.style.height = "100%";
         this.imageElement.style.objectFit = "cover";
 
+        // Vide la div add photo
         while (this.addPhotoDiv.firstChild) {
           this.addPhotoDiv.firstChild.remove();
         }
 
         this.addPhotoDiv.appendChild(this.imageElement);
       };
-
+      // Si un fichier a été sélectionné, lis le fichier en tant qu'URL de données (utilisable en src de <img>)
       if (this.file) {
         this.reader.readAsDataURL(this.file);
       }
@@ -149,7 +152,7 @@ class ProjectsView {
 
   changeModal() {
     this.changeModalContent();
-    this.setupAddPhotoEventListener();
+    this.setupPhotoUploadListener();
   }
 
   openModal() {
