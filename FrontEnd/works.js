@@ -33,6 +33,7 @@ async function getWorks() {
 
 async function createProjectContent() {
     const works = await getWorks();
+    console.log(works);
     for (let i in works) {
 
         const gallery = document.querySelector(".gallery");
@@ -49,10 +50,12 @@ async function createProjectContent() {
         work.appendChild(workTitle);
     }
 };
+
+const categoriesList = ["Tous"];
+const categoriesId = [0];
+//here we add a 0 for the "tous" category
 async function createCategoriesFilters() {
     const works = await getWorks();
-    const categoriesList = ["Tous"];
-    const categoriesId = [0];
     
     for (let i in works) {
         if (categoriesList.includes(works[i].category.name) == false) {
@@ -79,8 +82,6 @@ async function createCategoriesFilters() {
     }
 }
 
-
-
 async function main(){
     await createProjectContent();
     await createCategoriesFilters();
@@ -90,8 +91,12 @@ await main();
 
 /******FILTERS *******/
 /*functions*/
-    const articles = document.querySelectorAll(".cat0, .cat1, .cat2, .cat3");
-    console.log(articles);
+console.log(categoriesList);
+console.log(categoriesId);
+    
+    function selectAllCat(){
+           return document.querySelectorAll(`.cat1, .cat2, .cat3`);
+         }
 
     function uncheckExcept(value){
         const checkBoxs = document.querySelectorAll(".filterCheck");
@@ -109,6 +114,7 @@ await main();
     //     };
     // }
     function showAll(){
+        const articles = selectAllCat();
         uncheckExcept("checkCat0");
         for (let i in articles){
             articles[i].style.display = "block";
@@ -116,6 +122,7 @@ await main();
     }
 
     function showCategory(value){
+        const articles = selectAllCat();
         uncheckExcept(`checkCat${value}`);
         for (let i in articles){
             if (articles[i].classList.contains(`cat${value}`) == true) {
