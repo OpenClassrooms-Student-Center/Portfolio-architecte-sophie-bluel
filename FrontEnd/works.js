@@ -118,7 +118,6 @@ const checkBoxs = document.querySelectorAll(".filterCheck");
         };
     }
     function showAll(){
-        console.log(articles);
         uncheckExcept("0");
         for (let i=0; i<articles.length; i++){
             articles[i].style.display = "block";
@@ -174,7 +173,7 @@ function filter(){
                     console.log("0");
                     showAll()
                     marker = true;
-                }else if(allUnchecked()){
+                }else if( allUnchecked() ){
                     console.log("all unchecked");
                     showAll()
                     marker = true;
