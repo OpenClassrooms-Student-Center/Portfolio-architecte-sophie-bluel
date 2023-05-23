@@ -157,10 +157,7 @@ button{
 	font-weight: 700;
 	border: solid 1px 
 }
-/* button:focus-within{
-	color: white;
-	background-color: #1D6154;
-} */
+
 .login__form a{
 	color: #3D3D3D;
 	font-size: 14px;
@@ -216,6 +213,7 @@ button{
 .gallery img {
 	width: 100%;
 	flex: 1;
+	object-fit: cover;
 
 }
 
