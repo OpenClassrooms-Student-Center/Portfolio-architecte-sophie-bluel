@@ -48,7 +48,7 @@ async function createProjectContent() {
         const work = document.createElement("figure");
         const workImage = document.createElement("img")
         const workTitle = document.createElement("figcaption");
-        work.classList.add(`cat${works[i].category.id}`);
+        work.classList.add(`${works[i].category.id}`);
         workImage.src = works[i].imageUrl;
         workTitle.textContent = works[i].title;
 
@@ -74,7 +74,7 @@ async function createCategoriesFilters() {
         checkBox.type = "checkbox";
         checkBox.name = categories[i].name;
         checkBox.classList.add("filterCheck");
-        checkBox.classList.add(`checkCat${categories[i].id}`);
+        checkBox.classList.add(`${categories[i].id}`);
         const button = document.createElement("button");
         button.innerText = categories[i].name;
         button.classList.add("filter-button");
@@ -94,23 +94,19 @@ await main();
 /******FILTERS *******/
 /*functions*/
     
-    function selectAllCat(){
-        const articles = document.querySelectorAll("figure[class]");
-        return articles;
-    }
-const articles = selectAllCat();
-console.log(articles);
+const articles = document.querySelectorAll("figure[class]");
+const checkBoxs = document.querySelectorAll(".filterCheck");
+
     
 function uncheckExcept(value){
-        const checkBoxs = document.querySelectorAll(".filterCheck");
+        
         for (let i = 0; i < checkBoxs.length; i++){
             if (checkBoxs[i].classList.contains(`${value}`) == false) {
                 checkBoxs[i].checked = false;
             }
         };
     }
-function uncheck(value){
-        const checkBoxs = document.querySelectorAll(".filterCheck");
+function uncheck(value){        
         for (let i = 0; i < checkBoxs.length; i++){
             if (checkBoxs[i].classList.contains(`${value}`) == true) {
                 checkBoxs[i].checked = false;
@@ -118,71 +114,67 @@ function uncheck(value){
         };
     }
     function hideAll(){
-        const articles = selectAllCat();
-        for (let i in articles){
+        for (let i=0; i<articles.length; i++){
             articles[i].style.display = "none";
         };
     }
     function showAll(){
-        const articles = selectAllCat();
-        uncheckExcept("checkCat0");
-        for (let i in articles){
+        console.log(articles);
+        uncheckExcept("0");
+        for (let i=0; i<articles.length; i++){
             articles[i].style.display = "block";
         };
     }
 
     function showCategory(value){
-        uncheck("checkCat0");
-        const articles = selectAllCat();
-        for (let i in articles){
-            if (articles[i].classList.contains(`cat${value}`) == true) {
+        uncheck("0");
+        for (let i=0; i<articles.length; i++){
+            if (articles[i].classList.contains(`${value}`) == true) {
                 articles[i].style.display = "block";
             }
         };
     }
     function hideCategory(value){
-        const articles = selectAllCat();
-        for (let i in articles){
-            if (articles[i].classList.contains(`cat${value}`) == true) {
+        for (let i=0; i<articles.length; i++){
+            if (articles[i].classList.contains(`${value}`) == true) {
                 articles[i].style.display = "none";
             }
         };
     }
-/*checkboxes*/
-/*OBJETS*/
-const checkObjet = document.querySelector(".checkCat1");
-checkObjet.addEventListener('click', function(){
-    if (checkObjet.checked == true) {
-        showCategory("1")
-    }else if (checkObjet.checked == false) {
-        hideCategory("1");
-    }
-})
-/*APPART*/
-const checkAppart = document.querySelector(".checkCat2");
-checkAppart.addEventListener('click', function(){
-    if (checkAppart.checked == true) {
-        showCategory("2")
-    }else if (checkAppart.checked == false) {
-        hideCategory("2");
-    }
-})
-/*RESTO*/
-const checkResto = document.querySelector(".checkCat3");
-checkResto.addEventListener('click', function(){
-    if (checkResto.checked == true) {
-        showCategory("3")
-    }else if (checkResto.checked == false) {
-        hideCategory("3");
-    }
-})
 
-/*TOUS*/
-const checkAll = document.querySelector(".checkCat0");
-checkAll.addEventListener('click', function(){
-    if (checkAll.checked == true) {
-        showAll();
+function toogle(check, id) {
+    if(check.checked == true){
+        showCategory(id)
+    }else{
+        hideCategory(id)
     }
-})
+}
 
 
+
+function filter(){    
+    console.log(checkBoxs);
+    let marker = true;
+    for (let i = 0; i < checkBoxs.length; i++) {
+        const filter = checkBoxs[i];
+        console.log(filter);
+        const id = filter.classList[1];
+        console.log(id);
+        filter.addEventListener('click', function name() {
+                if (id == "0") {
+                    console.log("0");
+                    showAll()
+                    marker = true;
+                }else {
+                    if(marker == true){
+                        hideAll();
+                        marker = false;
+                    };
+                    console.log(id);
+                    toogle(filter, id)
+                }
+        })
+    }
+}
+
+filter();
