@@ -249,7 +249,7 @@ footer nav ul {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-#connect {
+.button {
 	background: #1D6154;
 	border: none;
 	border-radius: 60px;
@@ -257,7 +257,7 @@ footer nav ul {
 	margin-top: 20px;
 }
 
-#login span {
+.connect {
 	color: #FFFFFF;
 }
 
