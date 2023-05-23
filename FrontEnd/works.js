@@ -48,7 +48,7 @@ async function createProjectContent() {
         const work = document.createElement("figure");
         const workImage = document.createElement("img")
         const workTitle = document.createElement("figcaption");
-        work.classList.add(`${works[i].category.id}`);
+        work.dataset.id = works[i].category.id;
         workImage.src = works[i].imageUrl;
         workTitle.textContent = works[i].title;
 
@@ -74,7 +74,7 @@ async function createCategoriesFilters() {
         checkBox.type = "checkbox";
         checkBox.name = categories[i].name;
         checkBox.classList.add("filterCheck");
-        checkBox.classList.add(`${categories[i].id}`);
+        checkBox.dataset.id = categories[i].id;
         const button = document.createElement("button");
         button.innerText = categories[i].name;
         button.classList.add("filter-button");
@@ -92,23 +92,22 @@ async function main(){
 await main();
 
 /******FILTERS *******/
-/*functions*/
-    
-const articles = document.querySelectorAll("figure[class]");
-const checkBoxs = document.querySelectorAll(".filterCheck");
 
     
-function uncheckExcept(value){
-        
+const articles = document.querySelectorAll("figure[data-id]");
+const checkBoxs = document.querySelectorAll(".filterCheck");
+
+   /****tool functions for filters****/ 
+    function uncheckExcept(value){
         for (let i = 0; i < checkBoxs.length; i++){
-            if (checkBoxs[i].classList.contains(`${value}`) == false) {
+            if (checkBoxs[i].dataset.id !== value) {
                 checkBoxs[i].checked = false;
             }
         };
     }
-function uncheck(value){        
+    function uncheck(value){        
         for (let i = 0; i < checkBoxs.length; i++){
-            if (checkBoxs[i].classList.contains(`${value}`) == true) {
+            if (checkBoxs[i].dataset.id == value) {
                 checkBoxs[i].checked = false;
             }
         };
@@ -129,43 +128,57 @@ function uncheck(value){
     function showCategory(value){
         uncheck("0");
         for (let i=0; i<articles.length; i++){
-            if (articles[i].classList.contains(`${value}`) == true) {
+            if (articles[i].dataset.id == value) {
                 articles[i].style.display = "block";
             }
         };
     }
     function hideCategory(value){
         for (let i=0; i<articles.length; i++){
-            if (articles[i].classList.contains(`${value}`) == true) {
+            if (articles[i].dataset.id == value) {
                 articles[i].style.display = "none";
             }
         };
     }
-
-function toogle(check, id) {
-    if(check.checked == true){
-        showCategory(id)
-    }else{
-        hideCategory(id)
+    function allUnchecked() {
+        let state = true;
+        for (let i = 0; i < checkBoxs.length; i++) {
+            if(checkBoxs[i].checked == true){
+                state = false;
+            };
+        }
+        console.log(state);
+        return state
     }
-}
+
+    function toogle(check, id) {
+        if(check.checked == true){
+            showCategory(id)
+        }else{
+            hideCategory(id)
+        }
+    }
 
 
-
+/***** main filter functiom *****/
 function filter(){    
     console.log(checkBoxs);
     let marker = true;
     for (let i = 0; i < checkBoxs.length; i++) {
         const filter = checkBoxs[i];
         console.log(filter);
-        const id = filter.classList[1];
+        const id = filter.dataset.id;
         console.log(id);
-        filter.addEventListener('click', function name() {
+        filter.addEventListener('click', function () {
                 if (id == "0") {
                     console.log("0");
                     showAll()
                     marker = true;
-                }else {
+                }else if(allUnchecked()){
+                    console.log("all unchecked");
+                    showAll()
+                    marker = true;
+                }else{
                     if(marker == true){
                         hideAll();
                         marker = false;
@@ -178,3 +191,5 @@ function filter(){
 }
 
 filter();
+
+ 
