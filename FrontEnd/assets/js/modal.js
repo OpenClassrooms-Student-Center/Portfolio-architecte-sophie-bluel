@@ -104,6 +104,12 @@ export function modalFunction() {
 		const closeX = document.createElement("span");
 		closeX.className = "close";
 		closeX.innerText = "x";
+		closeX.addEventListener("click", function () {
+			const modalTag = document.getElementById('modal1');
+			const modalContent = document.querySelector('.modal-content')
+			modalTag.classList.add("d-none");
+			modalContent.classList.add("d-none");
+		});
 		newInnerDiv.appendChild(closeX);
 		const divToShow = document.querySelector("modal-wrapper")
 
