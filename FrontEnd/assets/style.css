@@ -387,6 +387,27 @@ footer {
 	cursor: pointer;
 }
 
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes slide {
+	from {
+		transform: translateY(-50px);
+	}
+
+	to {
+		transform: translateY(0px);
+	}
+}
+
+
 
 /*CSS de la première modale (pour supprimer une photo de la galerie)*/
 #first-modale {
