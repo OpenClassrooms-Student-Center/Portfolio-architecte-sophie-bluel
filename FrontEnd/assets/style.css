@@ -78,9 +78,9 @@ h1 a {
 
 h1 > span {
 	font-family: 'Work Sans';
-	font-size:10px;
+	font-size:9px;
 	letter-spacing: 0.1em;
-;
+	margin-top: 0.5em;
 }
 
 h2{
@@ -560,3 +560,54 @@ select {
 	gap: 5px;
 }
 
+/*CSS modale avertissement suppression d'image*/
+
+#third-modale {
+	display: none;
+	position: fixed;
+	align-items: center;
+	justify-content: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.3);
+}
+
+#delete-modale {
+	position: absolute;
+	background-color: white;
+	color: #1D6154;
+	width: 500px;
+	height: 150px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 15px;
+	border-radius: 10px;
+	border: 2px solid #1D6154;
+}
+
+#delete-modale p {
+	margin-top: 40px;
+	border-bottom: 1px solid #1D6154;
+	padding-bottom: 25px;
+}
+
+#delete-modale button {
+	font-family: 'Work Sans';
+	font-weight: 500;
+	border-radius: 5px;
+	height: 35px;
+	border: none;
+}
+
+#confirm-yes {
+	background-color: #1D6154;
+	color: white;
+	margin-left: 10px;
+}
+
+#confirm-no {
+	background-color: #CBD6DC;
+}
