@@ -62,6 +62,29 @@ body {
 	font-size: 14px;
 	background-color: #FFFEF8;
 }
+/* .modal-container {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: 100vh;
+}
+.overlay {
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 0.3);
+}
+.modal {
+	position: absolute;
+	width: 630px;
+	height: 730px;
+	background: #FFFFFF;
+	border-radius: 10px;
+	top: 27%;
+	left: 50%;
+	padding: 50px auto;
+	transform: translate(-50%, -50%);
+} */
 .hidden-mode {
 	display: none;
 }
@@ -161,9 +184,16 @@ li:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
+
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
+}
+.photo-hidden {
+	display: flex;
+	width: 14px;
+	height: 14px;
+	margin: 15px 0 0 55px;
 }
 .projet {
 	display: flex;
@@ -177,10 +207,15 @@ li:hover {
 	padding-top: 0.75em;
 	margin-left: 30px;
 }
-.edit img {
+.btn-edit {
 	width: 14px;
 	height: 14px;
-	margin-right: 10px;
+}
+.modal-btn {
+	background-color: #FFFEF8;
+	border: none;
+	height: 15px;
+	cursor: pointer;
 }
 .button-filter {
 	display: block;
