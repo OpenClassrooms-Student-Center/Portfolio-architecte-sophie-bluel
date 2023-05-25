@@ -72,18 +72,13 @@ body {
 	height: 60px;
 	background-color: #000;
 }
-.mode div:first-child{
-	width: 16px;
-	height: 16px;
-	background-color: #fff;
-}
-.mode i {
-	color: #000;
-	font-size: 15px;
+.mode img {
+	width: 20px;
+	height: 20px;
 }
 .mode p {
 	color: #FFFFFF;
-	margin: 0 20px 0 10px;
+	margin: 0 20px 0 7px;
 }
 .mode button {
 	background-color: #fff;
@@ -192,7 +187,9 @@ li:hover {
 	text-align: center;
   margin-bottom: 2em;
 }
-
+.button-filter-hidden{
+	display: none;
+}
 .categorie-button {
 	font-family: 'Syne';
 	color: #1D6154;
@@ -202,7 +199,6 @@ li:hover {
 	border: 1px solid #1D6154;
 	border-radius: 60px;
 }
-
 .gallery {
 	width: 100%;
 	display: grid;
@@ -210,10 +206,8 @@ li:hover {
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
 }
-
 .gallery img {
 	width: 100%;
-
 }
 #contact {
 	width: 50%;
@@ -221,7 +215,6 @@ margin: auto;
 }
 #contact > * {
 	text-align: center;
-
 }
 #contact h2{
 	margin-bottom: 20px;
@@ -232,7 +225,6 @@ margin: auto;
 	display: flex;
 	flex-direction: column;
 }
-
 #contact input {
 	height: 50px;
 	font-size: 1.2em;
@@ -246,7 +238,6 @@ margin: auto;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-
 input[type="submit"]{
 	font-family: 'Syne';
 	font-weight: 700;
@@ -257,7 +248,6 @@ input[type="submit"]{
 	text-align: center;
 	border-radius: 60px ;
 }
-
 footer {
 	background-color: #FFFFFF;
 	position: absolute;

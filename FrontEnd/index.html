@@ -13,9 +13,9 @@
 <body>
 	<div id="conteneur-page">
 
-		<div class="hidden-mode">
+		<div id="hiddenMode" class="hidden-mode">
 			<div>
-				<i class="fa-regular fa-pen-to-square fa-2xs"></i>
+				<img src="./assets/icons/pen-to-square white.png" alt="icône modifier">
 			</div>
 			<p>Mode édition</p>
 			<div>
@@ -48,12 +48,12 @@
 			<section id="portfolio">
 				<div class="projet">
 					<h2>Mes Projets</h2>
-					<div class="hidden">
+					<div class="hidden" id="hiddenFilter">
 						<img src="./assets/icons/pen-to-square-regular.svg" alt="icône modifier">
 						<p>modifier</p> 
 					</div>
 				</div>
-				<div class="button-filter"></div>
+				<div class="button-filter" class="button-filter-hidden" id="buttonFilterHidden"></div>
 				<div class="gallery"></div>
 			</section>
 			<section id="contact">
