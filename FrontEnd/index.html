@@ -13,6 +13,15 @@
 <body>
 	<div id="conteneur-page">
 
+		<div class="hidden-mode">
+			<div>
+				<i class="fa-regular fa-pen-to-square fa-2xs"></i>
+			</div>
+			<p>Mode édition</p>
+			<div>
+				<button><span> publier les changements</span></button>
+			</div>
+		</div>
 		<header>
 			<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 			<nav>
@@ -37,7 +46,13 @@
 				</article>
 			</section>
 			<section id="portfolio">
-				<h2>Mes Projets</h2>
+				<div class="projet">
+					<h2>Mes Projets</h2>
+					<div class="hidden">
+						<img src="./assets/icons/pen-to-square-regular.svg" alt="icône modifier">
+						<p>modifier</p> 
+					</div>
+				</div>
 				<div class="button-filter"></div>
 				<div class="gallery"></div>
 			</section>

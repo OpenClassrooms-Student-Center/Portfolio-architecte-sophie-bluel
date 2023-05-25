@@ -62,6 +62,35 @@ body {
 	font-size: 14px;
 	background-color: #FFFEF8;
 }
+.hidden-mode {
+	display: none;
+}
+.mode {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 60px;
+	background-color: #000;
+}
+.mode div:first-child{
+	width: 16px;
+	height: 16px;
+	background-color: #fff;
+}
+.mode i {
+	color: #000;
+	font-size: 15px;
+}
+.mode p {
+	color: #FFFFFF;
+	margin: 0 20px 0 10px;
+}
+.mode button {
+	background-color: #fff;
+	border: none;
+	border-radius: 60px;
+	padding: 10px 23px;
+}
 header {
 	display: flex;
 	justify-content: space-between;
@@ -141,11 +170,27 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
-
+.projet {
+	display: flex;
+	justify-content: center;
+}
+.hidden {
+	display: none;
+}
+.edit {
+	display: flex;
+	padding-top: 0.75em;
+	margin-left: 30px;
+}
+.edit img {
+	width: 14px;
+	height: 14px;
+	margin-right: 10px;
+}
 .button-filter {
 	display: block;
 	text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 2em;
 }
 
 .categorie-button {
