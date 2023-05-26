@@ -21,7 +21,7 @@
 		<button>Supprimer la galerie</button>
 	</div>
 		<div id="conteneur-page">
-			<div id="hiddenMode" class="hidden-mode">
+			<div id="hiddenMode" class="hidden">
 				<div>
 					<img src="./assets/icons/pen-to-square white.png" alt="icône modifier">
 				</div>
@@ -36,7 +36,7 @@
 					<ul>
 						<li>projets</li>
 						<li>contact</li>
-						<li><a href="./login.html" class="logout">login</a></li>
+						<li><a href="./login.html" id="logout">login</a></li>
 						<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 					</ul>
 				</nav>
@@ -46,8 +46,8 @@
 					<figure>
 						<img src="./assets/images/sophie-bluel.png" alt="">
 						<div class="hidden" id="photoHidden">
-							<img  class="btn-edit" src="./assets/icons/pen-to-square-regular.svg" alt="icône modifier">
-							<button class="modal-trigger modal-btn">modifier</button> 
+							<img  class="img-edit" src="./assets/icons/pen-to-square-regular.svg" alt="icône modifier">
+							<button class="edit-btn">modifier</button> 
 						</div>
 					</figure>
 					<article>
@@ -61,11 +61,11 @@
 					<div class="projet">
 						<h2>Mes Projets</h2>
 						<div class="hidden" id="hiddenFilter">
-							<img class="btn-edit" src="./assets/icons/pen-to-square-regular.svg" alt="icône modifier">
-							<button class="modal-trigger modal-btn">modifier</button> 
+							<img class="img-edit" src="./assets/icons/pen-to-square-regular.svg" alt="icône modifier">
+							<button class="modal-trigger edit-btn">modifier</button> 
 						</div>
 					</div>
-					<div class="button-filter" class="button-filter-hidden" id="buttonFilterHidden"></div>
+					<div class="hidden button-filter" id="buttonFilterHidden"></div>
 					<div class="gallery"></div>
 				</section>
 				<section id="contact">

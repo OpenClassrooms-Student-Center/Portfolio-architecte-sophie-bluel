@@ -85,7 +85,7 @@ body {
 	padding: 50px auto;
 	transform: translate(-50%, -50%);
 } */
-.hidden-mode {
+.hidden {
 	display: none;
 }
 .mode {
@@ -117,9 +117,6 @@ header {
 header a {
 	text-decoration: none;
 	color: black;
-}
-header strong {
-	font-weight: 600;
 }
 section {
 	margin: 50px 0
@@ -161,6 +158,9 @@ nav li {
 li:hover {
 	color: #B1663C;
 }
+li a:hover {
+	color: #B1663C;
+}
 #introduction {
 	display: flex;
 	align-items: center;
@@ -199,19 +199,17 @@ li:hover {
 	display: flex;
 	justify-content: center;
 }
-.hidden {
-	display: none;
-}
+
 .edit {
 	display: flex;
 	padding-top: 0.75em;
 	margin-left: 30px;
 }
-.btn-edit {
+.img-edit {
 	width: 14px;
 	height: 14px;
 }
-.modal-btn {
+.edit-btn {
 	background-color: #FFFEF8;
 	border: none;
 	height: 15px;
@@ -221,9 +219,6 @@ li:hover {
 	display: block;
 	text-align: center;
   margin-bottom: 2em;
-}
-.button-filter-hidden{
-	display: none;
 }
 .categorie-button {
 	font-family: 'Syne';
@@ -299,28 +294,30 @@ footer nav ul {
 
 /************************* Page Login ****************************/
 
+li span {
+	/* font-weight: 900; */
+}
 #login  {
 	width: 50%;
 	margin: auto;
 	text-align: center;
 }
-
 #login h2 {
 	padding: 50px 0;
 }
-
+#login a {
+	color: black;
+}
 .mail, .password {
 	width: 70%;
 	display: flex;
 	flex-direction: column;
 	margin: auto;
 }
-
 .mail label, .password label {
 	text-align: start;
 	margin-bottom: 10px;
 }
-
 .mail input, .password input {
 	height: 50px;
 	width: 100%;
@@ -329,7 +326,6 @@ footer nav ul {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-
 .button {
 	background: #1D6154;
 	border: none;
@@ -337,17 +333,12 @@ footer nav ul {
 	padding: 10px 40px;
 	margin-top: 20px;
 }
-
 .connect {
 	color: #FFFFFF;
 }
-
 .ancre {
 	margin: 40px 0 20px 0;
 }
 
-#login a {
-	color: black;
-}
 
 
