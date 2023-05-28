@@ -105,7 +105,7 @@ body {
 }
 .modal {
 	position: absolute;
-	width: 630px;
+	width: 760px;
 	height: 730px;
 	background: #FFFFFF;
 	border-radius: 10px;
@@ -129,21 +129,25 @@ body {
 	font-size: 26px;
 	text-align: center;
 }
+/** div avec tous les projets **/
 .modal-contain-projects {
 	position: absolute;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	top: 300px;
+	top: 320px;
 	display: grid;
-	grid-template-columns: repeat(5, 90px);
+	grid-template-columns: repeat(5, 100px);
 }
+/** élément figure **/
 .modal-figure-project {
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	width: 90%;
-	height: 90%;
+	height: 100%;
 	margin-top: 15px;
 }
+/** div contenant icône poubelle **/
 .modal-delete-contain {
 	position: absolute;
 	background-color: #000000;
@@ -151,14 +155,33 @@ body {
 	border-radius: 2px;
 	width: 14px;
 	height: 14px;
-	/* top: 20px;
-	right: 15px; */
+	top: 5px;
+	right: 5px;
+	cursor: pointer;
 }
-.modal-delete-project {
+/** div contenant icône flêche **/
+.modale-arrow-contain {
+	display: none;
+}
+/** active icône flêche au survol de l'image **/
+.modal-image-project:hover ~ .modale-arrow-contain {
+	display: block;
+	position: absolute;
+	background-color: #000000;
+	border: none;
+	border-radius: 2px;
+	width: 14px;
+	height: 14px;
+	top: 5px;
+	right: 22px;
+} 
+/** style des deux images "poubelle" et "flêche" **/
+.modal-delete-project, .modale-arrow-project {
 	width: 10px;
 	height: 10px;
 	padding: 2px;
 }
+/** bouton "éditer"  **/
 .modal-button-project {
 	background-color: #fff;
 	border: none;
@@ -170,14 +193,14 @@ body {
 .modal hr {
 	position: absolute;
 	width: 420px;
-	bottom: 162px;
+	bottom: 155px;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	border: 1px solid #B3B3B3;
 }
 #addPicture {
 	position: absolute;
-	bottom: 88px;
+	bottom: 80px;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	background: #1D6154;
@@ -185,15 +208,17 @@ body {
 	border: none;
 	color: #fff;
 	padding: 10px 50px;
+	cursor: pointer;
 }
 #deleteAllPicture {
 	position: absolute;
-	bottom: 48px;
+	bottom: 45px;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	background-color: #fff;
 	color: #D65353;
 	border: none;
+	cursor: pointer;
 }
 
 /********************************* HEADER **********************/
