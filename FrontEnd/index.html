@@ -12,6 +12,37 @@
 </head>
 <body>
 	<div id="conteneur-page">
+		<div class="modal-container">
+			<div class="overlay modal-trigger"></div>
+			<div class="modal modal-hidden">
+				<button class="close-modal modal-trigger">X</button>
+				<h3>Galerie photo</h3>
+				<div class="modal-contain-projects"></div>
+				<hr>
+				<button id="addPicture">Ajouter une photo</button>
+				<button id="deleteAllPicture">Supprimer la galerie</button>
+			</div>
+			<div class="modal modal-hidden">
+				<button class="close-modal modal-trigger">X</button>
+				<button class="return-modal modal-trigger"><img src="./assets/icons/arrow-left-long-solid.svg" alt="icône flêche return"></button>
+				<h3>Ajout photo</h3>
+				<div class="picture-modal">
+					<div class="picture-modal-contain">
+						<img src="./assets/icons/icons-image.png" alt="icône d'une image">
+						<button>+ Ajouter photo</button>
+						<p>jpg, png : 4mo max</p>
+					</div>
+					<div class="input-modal-picture">
+						<label for="title-picture">Titre</label>
+						<input type="text" name="title-picture" id="title-picture">
+						<label for="categorie-picture">Catégorie</label>
+						<input type="text" name="categorie-picture" id="categorie-picture">
+					</div>
+					<hr>
+					<button type="submit" id="submitPicture">Valider</button>
+				</div>
+			</div>
+		</div>
 		<div id="hiddenMode" class="hidden">
 			<div>
 				<img src="./assets/icons/pen-to-square white.png" alt="icône modifier">
@@ -19,17 +50,6 @@
 			<p>Mode édition</p>
 			<div>
 				<button><span> publier les changements</span></button>
-			</div>
-		</div>
-		<div class="modal-container">
-			<div class="overlay modal-trigger"></div>
-			<div class="modal">
-				<button class="close-modal modal-trigger">X</button>
-				<h3>Galerie photo</h3>
-				<div class="modal-contain-projects"></div>
-				<hr>
-				<button id="addPicture">Ajouter une photo</button>
-				<button id="deleteAllPicture">Supprimer la galerie</button>
 			</div>
 		</div>
 		<header>
