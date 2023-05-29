@@ -64,7 +64,7 @@ body {
 	background-color: #FFFEF8;
 }
 
-/************************* MODALE GALERIE  ************************/
+/************************* MODALES GENERALES ************************/
 .modal-container {
 	display: none;
 }
@@ -77,16 +77,27 @@ body {
 	height: 100%;
 	background-color: rgba(0, 0, 0, 0.3);
 }
-.modal-hidden {
-	display: none;
-}
 .modal {
 	position: absolute;
 	background: #FFFFFF;
 	border-radius: 10px;
 	left: 50%;
 	transform: translate(-50%, -50%);
+	top: 27%;
+	width: 67%;
+	height: 21%;
 }
+
+/***** Modale de la galerie *****/
+
+.modal h3 {
+	position: absolute;
+	width: 100%;
+	top: 60px;
+	font-size: 26px;
+	text-align: center;
+}
+/** bouton pour fermer la modale **/
 .close-modal {
 	position: absolute;
 	top: 26px;
@@ -94,20 +105,6 @@ body {
 	background-color: #FFFFFF;
 	border: none;
 	cursor: pointer;
-}
-/********** modale de la galerie *********/
-.modal-gallery {
-	display: block;
-	top: 27%;
-	width: 67%;
-	height: 21%;
-}
-.modal h3 {
-	position: absolute;
-	width: 100%;
-	top: 60px;
-	font-size: 26px;
-	text-align: center;
 }
 /** div avec tous les projets **/
 .modal-contain-projects {
@@ -127,7 +124,7 @@ body {
 	height: 100%;
 	margin-top: 15px;
 }
-/** div contenant icône poubelle **/
+/** icône poubelle **/
 .modal-delete-contain {
 	position: absolute;
 	background-color: #000000;
@@ -139,7 +136,7 @@ body {
 	right: 5px;
 	cursor: pointer;
 }
-/** div contenant icône flêche **/
+/** icône flêche **/
 .modale-arrow-contain {
 	display: none;
 }
@@ -169,6 +166,7 @@ body {
 	font-size: 12px;
 	text-align: start;
 	margin-top: 2px;
+	cursor: pointer;
 }
 .modal hr {
 	position: absolute;
@@ -178,6 +176,7 @@ body {
 	transform: translate(-50%, -50%);
 	border: 1px solid #B3B3B3;
 }
+/** Ajouter une photo **/
 #addPicture {
 	position: absolute;
 	bottom: 80px;
@@ -190,6 +189,7 @@ body {
 	padding: 10px 50px;
 	cursor: pointer;
 }
+/** Supprimer toutes les photos **/
 #deleteAllPicture {
 	position: absolute;
 	bottom: 45px;
@@ -200,14 +200,16 @@ body {
 	border: none;
 	cursor: pointer;
 }
-/***********Modale ajout photo ************/
-.modal-ajout-picture {
-	display: block;
-	position: absolute;
-	top: 26.5%;
-	width: 67%;
-	min-height: 19%;
+/*********** Modale ajout photo ************/
+.modal-hidden {
+	display: none;
 }
+/** conteneur pour ajouter l'image **/
+.modal-ajout-picture {
+	width: 100%;
+	height: 100%;
+}
+/** bouton retour à la modale galerie **/
 .return-modal {
 	position: absolute;
 	width: 40px;
@@ -227,8 +229,8 @@ body {
 .picture-modal-contain {
 	position: absolute;
 	width: 420px;
-	height: 170px;
-	top: 200px;
+	height: 190px;
+	top: 210px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -262,7 +264,7 @@ body {
 	position: absolute;
 	display: flex;
 	flex-direction: column;
-	top: 410px;
+	top: 440px;
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
@@ -273,13 +275,14 @@ body {
 #title-picture, #categorie-picture {
 	width: 420px;
 	height: 50px;
-	margin: 10px 0 21px 0;
+	margin: 10px 0 25px 0;
 	border: none;
 	background: #FFFFFF;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 .picture-modal hr {
-	bottom: 123px;
+	position: absolute;
+	bottom: 150px;
 }
 #submitPicture {
 	position: absolute;
@@ -290,7 +293,7 @@ body {
 	transform: translate(-50%, -50%);
 	padding: 10px 49px;
 	color: #fff;
-	bottom: 50px;
+	bottom: 70px;
 	width: 240px;
 	cursor: pointer;
 }
@@ -399,7 +402,7 @@ h2{
 	margin-bottom: 1em;
 }
 /** modifier la photo de profil **/
-#photoHidden {
+.photo-hidden {
 	display: flex;
 	width: 14px;
 	height: 14px;

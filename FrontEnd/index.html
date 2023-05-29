@@ -14,32 +14,36 @@
 	<div id="conteneur-page">
 		<div class="modal-container">
 			<div class="overlay modal-trigger"></div>
-			<div class="modal modal-hidden">
-				<button class="close-modal modal-trigger">X</button>
-				<h3>Galerie photo</h3>
-				<div class="modal-contain-projects"></div>
-				<hr>
-				<button id="addPicture">Ajouter une photo</button>
-				<button id="deleteAllPicture">Supprimer la galerie</button>
-			</div>
-			<div class="modal modal-hidden">
-				<button class="close-modal modal-trigger">X</button>
-				<button class="return-modal modal-trigger"><img src="./assets/icons/arrow-left-long-solid.svg" alt="icône flêche return"></button>
-				<h3>Ajout photo</h3>
-				<div class="picture-modal">
-					<div class="picture-modal-contain">
-						<img src="./assets/icons/icons-image.png" alt="icône d'une image">
-						<button>+ Ajouter photo</button>
-						<p>jpg, png : 4mo max</p>
-					</div>
-					<div class="input-modal-picture">
-						<label for="title-picture">Titre</label>
-						<input type="text" name="title-picture" id="title-picture">
-						<label for="categorie-picture">Catégorie</label>
-						<input type="text" name="categorie-picture" id="categorie-picture">
-					</div>
+			<div class="modal">
+				<div id="modalGallery">
+					<button class="close-modal modal-trigger">X</button>
+					<h3>Galerie photo</h3>
+					<div class="modal-contain-projects"></div>
 					<hr>
-					<button type="submit" id="submitPicture">Valider</button>
+					<button id="addPicture">Ajouter une photo</button>
+					<button id="deleteAllPicture">Supprimer la galerie</button>
+				</div>
+				<div id="modalEditPicture">
+					<div class="modal-hidden" id="modalPicture">
+						<button class="close-modal modal-trigger">X</button>
+						<button class="return-modal"><img src="./assets/icons/arrow-left-long-solid.svg" alt="icône flêche return"></button>
+						<h3>Ajout photo</h3>
+						<div class="picture-modal">
+							<div class="picture-modal-contain">
+								<img src="./assets/icons/icons-image.png" alt="icône d'une image">
+								<button>+ Ajouter photo</button>
+								<p>jpg, png : 4mo max</p>
+							</div>
+							<div class="input-modal-picture">
+								<label for="title-picture">Titre</label>
+								<input type="text" name="title-picture" id="title-picture">
+								<label for="categorie-picture">Catégorie</label>
+								<input type="text" name="categorie-picture" id="categorie-picture">
+							</div>
+							<hr>
+							<button type="submit" id="submitPicture">Valider</button>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -84,7 +88,7 @@
 					<h2>Mes Projets</h2>
 					<div class="hidden" id="hiddenFilter">
 						<img class="img-edit" src="./assets/icons/pen-to-square-regular.svg" alt="icône modifier">
-						<button class="modal-trigger edit-btn">modifier</button> 
+						<button class="modal-trigger edit-btn" id="editBtn">modifier</button> 
 					</div>
 				</div>
 				<div class="hidden button-filter" id="buttonFilterHidden"></div>
