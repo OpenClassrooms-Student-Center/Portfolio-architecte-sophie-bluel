@@ -82,10 +82,11 @@ body {
 	background: #FFFFFF;
 	border-radius: 10px;
 	left: 50%;
-	transform: translate(-50%, -50%);
-	top: 27%;
+	transform: translateX(-50%);
+	top: 600px;
 	width: 67%;
-	height: 21%;
+	min-height: 450px;
+	height: 750px;
 }
 
 /***** Modale de la galerie *****/
@@ -110,10 +111,11 @@ body {
 .modal-contain-projects {
 	position: absolute;
 	left: 50%;
-	transform: translate(-50%, -50%);
-	top: 320px;
+	transform: translateX(-50%);
+	top: 100px;
 	display: grid;
 	grid-template-columns: repeat(5, 100px);
+	min-height: 200px;
 }
 /** élément figure **/
 .modal-figure-project {
@@ -124,24 +126,32 @@ body {
 	height: 100%;
 	margin-top: 15px;
 }
+/** bouton image poubelle**/
+.modal-delete-btn {
+	position: absolute;
+	background-color: transparent;
+	border: none;
+	top: 5px;
+	right: 5px;
+	width: 14px;
+	height: 14px;
+	cursor: pointer;
+}
 /** icône poubelle **/
 .modal-delete-project {
 	position: absolute;
 	background-color: #000000;
 	border: none;
 	border-radius: 2px;
-	width: 14px;
-	height: 14px;
-	top: 5px;
-	right: 5px;
-	cursor: pointer;
+	top: 0;
+	right: 0;
 }
 /** icône flêche **/
-.modale-arrow-contain {
+.modale-arrow-project {
 	display: none;
 }
 /** active icône flêche au survol de l'image **/
-.modal-image-project:hover ~ .modale-arrow-contain {
+.modal-image-project:hover ~ .modale-arrow-project {
 	display: block;
 	position: absolute;
 	background-color: #000000;
@@ -150,7 +160,8 @@ body {
 	width: 14px;
 	height: 14px;
 	top: 5px;
-	right: 22px;
+	right: 25px;
+
 } 
 /** style des deux images "poubelle" et "flêche" **/
 .modale-arrow-project {
