@@ -1,6 +1,6 @@
 //Code js de la page index.html
 
-//Fonction fetch qui envoie un requête pour récupèrer les données du backend via l'API
+//Fonction fetch qui envoie un requête pour récupérer les données du backend via l'API
 let photoFiltre = []
 async function fetchCard() {
     const response = await fetch("http://localhost:5678/api/works");

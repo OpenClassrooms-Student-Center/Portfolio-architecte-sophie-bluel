@@ -12,7 +12,7 @@ async function login() {
     body: JSON.stringify(data)
 });
 
-//Si identifiant/mot de passe inconnu afficher "Identifiant/ mot de passe incorrect"
+//Si identifiant/mot de passe inconnu affiche "Identifiant/ mot de passe incorrect"
 if (!response.ok) {
     document.getElementById("login-error").innerText = "Identifiant / mot de passe incorrect"
 //Sinon connexion de l'utilisateur + création du token + redirection vers "index.html"
