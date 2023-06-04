@@ -12,20 +12,20 @@
 </head>
 <body>
 	<div id="conteneur-page">
-		<div class="modal-container">
-			<div class="overlay modal-trigger"></div>
-			<div class="modal">
-				<div id="modalGallery">
-					<button class="close-modal modal-trigger">X</button>
+		<div class="modal-container" id="modalContainer">
+			<div class="overlay closeModal"></div>
+			<div class="modal" id="modalWrapper">
+				<div class="modalGallery">
+					<button class="closeModal close-btn">X</button>
 					<h3>Galerie photo</h3>
 					<div class="modal-contain-projects"></div>
 					<hr>
 					<button id="addPicture">Ajouter une photo</button>
 					<button id="deleteAllPicture">Supprimer la galerie</button>
 				</div>
-				<div id="modalEditPicture">
+				<div class="modalEditPicture">
 					<div class="modal-hidden" id="modalPicture">
-						<button class="close-modal modal-trigger">X</button>
+						<button class="closeModal close-btn">X</button>
 						<button class="return-modal-gallery"><img src="./assets/icons/arrow-left-long-solid.svg" alt="icône flêche return"></button>
 						<h3>Ajout photo</h3>
 						<div class="picture-modal">
@@ -88,7 +88,7 @@
 					<h2>Mes Projets</h2>
 					<div class="hidden" id="hiddenFilter">
 						<img class="img-edit" src="./assets/icons/pen-to-square-regular.svg" alt="icône modifier">
-						<button class="modal-trigger edit-btn" id="editBtn">modifier</button> 
+						<button class="edit-btn" id="editBtn">modifier</button> 
 					</div>
 				</div>
 				<div class="hidden button-filter" id="buttonFilterHidden"></div>

@@ -68,7 +68,7 @@ body {
 .modal-container {
 	display: none;
 }
-.modal-container.active{
+.modal-container-active{
 	display: block;
 }
 .overlay {
@@ -88,6 +88,9 @@ body {
 	min-height: 450px;
 	height: 750px;
 }
+.modal-hidden {
+	display: none;
+}
 
 /***** Modale de la galerie *****/
 
@@ -99,7 +102,7 @@ body {
 	text-align: center;
 }
 /** bouton pour fermer la modale **/
-.close-modal {
+.close-btn {
 	position: absolute;
 	top: 26px;
 	right: 30px;
@@ -212,9 +215,7 @@ body {
 	cursor: pointer;
 }
 /*********** Modale ajout photo ************/
-.modal-hidden {
-	display: none;
-}
+
 /** conteneur pour ajouter l'image **/
 .modal-ajout-picture {
 	width: 100%;
