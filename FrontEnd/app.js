@@ -41,16 +41,19 @@ fetch('http://localhost:5678/api/works')
             buttonElement.textContent = category;
 
             // Mettre à jour la galerie lorsque le bouton est cliqué
-            // Mettre à jour la galerie lorsque le bouton est cliqué
             buttonElement.addEventListener('click', () => {
                 // Supprimer la classe "button-selected" de tous les boutons
                 const buttons = filterContainerElement.querySelectorAll('button');
                 buttons.forEach(button => {
                     button.classList.remove('button-selected');
+                    button.style.backgroundColor = 'white'; // Réinitialiser la couleur de fond
+                    button.style.color = '#1D6154'; 
                 });
 
                 // Ajouter la classe "button-selected" au bouton sélectionné
                 buttonElement.classList.add('button-selected');
+                buttonElement.style.backgroundColor = '#1D6154'; // Changer la couleur de fond
+                buttonElement.style.color='white'; 
 
                 // Vider la galerie
                 const galleryElement = document.getElementById('gallery');
@@ -64,6 +67,7 @@ fetch('http://localhost:5678/api/works')
                     categories[selectedCategory].forEach(work => appendWorkToGallery(work, galleryElement));
                 }
             });
+
 
             filterContainerElement.appendChild(buttonElement);
         });
