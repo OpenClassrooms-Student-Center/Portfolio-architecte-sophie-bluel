@@ -46,13 +46,13 @@ fetch('http://localhost:5678/api/works')
                 const buttons = filterContainerElement.querySelectorAll('button');
                 buttons.forEach(button => {
                     button.classList.remove('button-selected');
-                    button.style.backgroundColor = 'white'; // Réinitialiser la couleur de fond
+                    button.style.backgroundColor = 'white'; 
                     button.style.color = '#1D6154'; 
                 });
 
                 // Ajoute la classe "button-selected" au bouton sélectionné
                 buttonElement.classList.add('button-selected');
-                buttonElement.style.backgroundColor = '#1D6154'; // Changer la couleur de fond
+                buttonElement.style.backgroundColor = '#1D6154'; 
                 buttonElement.style.color='white'; 
 
                 // Vide la galerie
