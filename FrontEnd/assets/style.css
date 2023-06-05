@@ -252,9 +252,9 @@ body {
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
-.picture-modal-contain img {
-	width: 70px;
-	height: 70px;
+#imagePreview {
+	min-width: 70px;
+	min-height: 70px;
 }
 .picture-modal-contain button {
 	width: 175px;
@@ -456,6 +456,7 @@ h2{
 	padding: 9px 20px;
 	border: 1px solid #1D6154;
 	border-radius: 60px;
+	cursor: pointer;
 }
 /********************** GALLERIES D'IMAGES ****************/
 .gallery {
