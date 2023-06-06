@@ -29,28 +29,27 @@
 						<button class="return-modal-gallery"><img src="./assets/icons/arrow-left-long-solid.svg" alt="icône flêche return"></button>
 						<h3>Ajout photo</h3>
 						<div class="picture-modal">
-							<div class="picture-modal-contain">
-								<img class="iconePreview" src="./assets/icons/icons-image.png" alt="icône d'une image">
-								<form runat="server">
-									<input class="hidden" type="file" accept="image/*" id="imageInput" required>
-									<img id="imagePreview" class="hidden" src="#" alt="your project">
+							<div>
+								<form action="" class="formSubmit">
+									<div runat="server" class="picture-modal-contain">
+										<img class="iconePreview" src="./assets/icons/icons-image.png" alt="icône d'une image">
+										<input class="hidden" type="file" accept="image/*" id="imageInput" name="picture">
+										<img id="imagePreview" class="hidden" src="#" alt="your project">
+										<button id="buttonAddProject">+ Ajouter photo</button>
+										<p class="textPreview">jpg, png : 4mo max</p>
+									</div>
+									<div class="input-modal-picture">    
+										<label for="titlePicture">Titre</label>
+										<input type="text" name="titlePicture" id="title-picture">
+										<label for="categorie-picture">Catégorie</label>
+										<select name="categories" id="categorie-picture">
+											<option value=""></option>
+										</select>
+									</div>
+									<hr>
+									<input type="submit" id="submitPicture" value="Valider"></input>
 								</form>
-								<button id="buttonAddProject">+ Ajouter photo</button>
-								<p class="texte-Preview">jpg, png : 4mo max</p>
 							</div>
-							<div class="input-modal-picture">    
-								<label for="title-picture">Titre</label>
-								<input type="text" name="title-picture" id="title-picture" required>
-								<label for="categorie-picture">Catégorie</label>
-								<select name="categories" id="categorie-picture" required>
-									<option value=""></option>
-									<option value="objet">Objets</option>
-									<option value="appartement">Appartements</option>
-									<option value="bar & restaurant">Hôtels & Restaurant</option>
-								</select>
-							</div>
-							<hr>
-							<button type="submit" id="submitPicture">Valider</button>
 						</div>
 					</div>
 				</div>
