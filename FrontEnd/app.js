@@ -46,14 +46,14 @@ fetch('http://localhost:5678/api/works')
                 const buttons = filterContainerElement.querySelectorAll('button');
                 buttons.forEach(button => {
                     button.classList.remove('button-selected');
-                    button.style.backgroundColor = 'white'; 
-                    button.style.color = '#1D6154'; 
+                    button.style.backgroundColor = 'white';
+                    button.style.color = '#1D6154';
                 });
 
                 // Ajoute la classe "button-selected" au bouton sélectionné
                 buttonElement.classList.add('button-selected');
-                buttonElement.style.backgroundColor = '#1D6154'; 
-                buttonElement.style.color='white'; 
+                buttonElement.style.backgroundColor = '#1D6154';
+                buttonElement.style.color = 'white';
 
                 // Vide la galerie
                 const galleryElement = document.getElementById('gallery');
@@ -111,3 +111,28 @@ fetch('http://localhost:5678/api/works')
         filterContainerElement.querySelector('button').click();
     })
     .catch(error => console.error('Erreur:', error));
+
+
+
+
+
+const form = document.querySelector('form');
+
+form.addEventListener('submit', (e) => {
+    e.preventDefault(); // Empêche le comportement par défaut du formulaire
+
+    const formData = new FormData(form); // Récupère les données du formulaire
+
+    fetch('http://exemple.com/votre-endpoint', {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => {
+            // Gérer la réponse du serveur
+            console.log('Réponse du serveur:', response);
+        })
+        .catch(error => {
+            // Gérer les erreurs
+            console.error('Erreur:', error);
+        });
+});
