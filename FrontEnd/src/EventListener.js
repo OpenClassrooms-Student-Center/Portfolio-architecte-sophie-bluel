@@ -1,6 +1,7 @@
 import ApiDataProvider from "./ApiDataProvider.js";
 import CardBuilder from "./CardBuilder.js";
 import ModalBuilder from "./ModalBuilder.js";
+import UserLogin from "./UserLogin.js";
 
 export default class EvenListener {
   static listen() {
@@ -106,46 +107,90 @@ export default class EvenListener {
     return false;
   }
 
-  // evenement pour prévisualiser la photo à ajouter
   static previewProject() {
+    // evenement pour prévisualiser et conserver la photo à ajouter
     const imageInput = document.getElementById("imageInput");
     const imagePreview = document.getElementById("imagePreview");
     const btnAddProject = document.getElementById("buttonAddProject");
 
-    document;
-    btnAddProject.addEventListener("click", () => {
+    btnAddProject.addEventListener("click", (event) => {
+      event.preventDefault();
       imageInput.click();
     });
 
     imageInput.addEventListener("change", () => {
       const [file] = imageInput.files;
+      const reader = new FileReader();
+      // console.log(file);
       if (file) {
+        if (file.size > 4194304) {
+          alert(
+            "Votre photo dépasse les 4Mo autorisé, elle ne peut pas être ajouté à votre galerie"
+          );
+        }
         imagePreview.src = URL.createObjectURL(file);
+        imagePreview.alt = file.name;
+        // console.log(imagePreview); // src en blob
+        // console.log(file);
         imagePreview.classList.remove("hidden");
         imageInput.classList.add("hidden");
         btnAddProject.classList.add("hidden");
         document.querySelector(".iconePreview").classList.add("hidden");
         document.querySelector(".textPreview").classList.add("hidden");
+
+        reader.addEventListener(
+          "load",
+          () => {
+            // On convertit l'image en chaine de caractère
+            imagePreview.src = reader.result;
+          },
+          false
+        );
+        reader.readAsDataURL(file);
+        // console.log(imagePreview); // src est en database64
       }
     });
   }
 
   // evenement pour sauvegarder l'ajout du projet au submit
   static saveProject() {
-    const pictureForm = document.querySelector(".formSubmit");
+    const data = {};
+    // s'assurer que tous les inputs sont renseignés et colorer le bouton submit
+    const inputImage = document.getElementById("imageInput");
+    const inputTitle = document.getElementById("title-picture");
+    const inputCategory = document.getElementById("categorie-picture");
+    const allInputs = [inputImage, inputTitle, inputCategory];
 
+    allInputs.forEach((input) => {
+      input.addEventListener("input", () => {
+        const allInputsFlled = allInputs.every((input) => input.value !== "");
+        if (allInputsFlled) {
+          document.getElementById("submitPicture").style.backgroundColor =
+            "#1D6154";
+          document.getElementById("submitPicture").style.cursor = "pointer";
+        }
+      });
+    });
+
+    // evenenement submit pour récupérer les données du formulaire et l'envoyer à l'api
+    const pictureForm = document.querySelector(".formSubmit");
     pictureForm.addEventListener("submit", (event) => {
       event.preventDefault();
 
       const formData = new FormData(pictureForm);
-      const image = formData.get("picture");
-      // console.log(image);
-      const title = formData.get("titlePicture");
-      // console.log(title);
-      const category = formData.get("categories");
-      // console.log(category);
+      formData.append("image", imagePreview.src);
 
-      ApiDataProvider.addNewProjects({ image, title, category });
+      for (const pair of formData.entries()) {
+        data[pair[0]] = pair[1];
+      }
+      console.log(data);
+
+      // const image = formData.get("imagePreview.src");
+      // const title = formData.get("titlePicture");
+      // const category = formData.get("categories");
+      // console.log({ image, title, category });
+
+      ApiDataProvider.addNewProjects(data);
 
       // document.querySelector(".modal-contain-projects").innerHTML = "";
 

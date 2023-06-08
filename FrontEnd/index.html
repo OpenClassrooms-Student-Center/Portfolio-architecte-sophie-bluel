@@ -33,16 +33,16 @@
 								<form action="" class="formSubmit">
 									<div runat="server" class="picture-modal-contain">
 										<img class="iconePreview" src="./assets/icons/icons-image.png" alt="icône d'une image">
-										<input class="hidden" type="file" accept="image/*" id="imageInput" name="picture">
+										<input class="hidden" type="file" accept="image/png, image/jpeg" id="imageInput">
 										<img id="imagePreview" class="hidden" src="#" alt="your project">
 										<button id="buttonAddProject">+ Ajouter photo</button>
 										<p class="textPreview">jpg, png : 4mo max</p>
 									</div>
 									<div class="input-modal-picture">    
-										<label for="titlePicture">Titre</label>
-										<input type="text" name="titlePicture" id="title-picture">
-										<label for="categorie-picture">Catégorie</label>
-										<select name="categories" id="categorie-picture">
+										<label for="title">Titre</label>
+										<input type="text" name="title" id="title-picture" >
+										<label for="category">Catégorie</label>
+										<select name="category" id="categorie-picture">
 											<option value=""></option>
 										</select>
 									</div>

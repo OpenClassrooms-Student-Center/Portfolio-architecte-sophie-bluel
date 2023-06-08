@@ -51,14 +51,20 @@ export default class ApiDataProvider {
 
   // requête POST pour ajouter des projet
   static addNewProjects(data) {
-    fetch("http://localhost:5678/api/works"),
-      {
-        method: "POST",
-        headers: {
-          accept: "application/json",
-          Authorization: `Bearer ${window.localStorage.getItem("token")}`,
-        },
-        body: JSON.stringify(data),
-      };
+    fetch("http://localhost:5678/api/works", {
+      method: "POST",
+      headers: {
+        accept: "application/json",
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(data),
+    }).then((response) => {
+      if (response.ok) {
+        console.log("Votre projet a été ajouté");
+      } else {
+        console.log("Nous avons rencontré une erreur");
+      }
+    });
   }
 }
