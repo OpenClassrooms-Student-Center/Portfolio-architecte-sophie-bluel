@@ -147,7 +147,7 @@ export default class EvenListener {
           false
         );
         reader.readAsDataURL(file);
-        // console.log(imagePreview); // src est en database64
+        console.log(imagePreview); // src est en database64
       }
     });
   }
@@ -165,8 +165,7 @@ export default class EvenListener {
       input.addEventListener("input", () => {
         const allInputsFlled = allInputs.every((input) => input.value !== "");
         if (allInputsFlled) {
-          document.getElementById("submitPicture").style.backgroundColor =
-            "#1D6154";
+          document.querySelector("#submitPicture").disabled = false;
           document.getElementById("submitPicture").style.cursor = "pointer";
         }
       });
@@ -177,20 +176,27 @@ export default class EvenListener {
     pictureForm.addEventListener("submit", (event) => {
       event.preventDefault();
 
-      const formData = new FormData(pictureForm);
+      const formData = new FormData();
+      // formData.append("image", inputImage.files[0]);
       formData.append("image", imagePreview.src);
+      formData.append("title", inputTitle.value);
+      formData.append("category", inputCategory.value);
 
       for (const pair of formData.entries()) {
         data[pair[0]] = pair[1];
       }
+
       console.log(data);
-
-      // const image = formData.get("imagePreview.src");
-      // const title = formData.get("titlePicture");
-      // const category = formData.get("categories");
-      // console.log({ image, title, category });
-
       ApiDataProvider.addNewProjects(data);
+
+      // remettre à blanc la modale "ajout photo"
+      pictureForm.reset();
+      imagePreview.src = "#";
+      imagePreview.alt = "";
+      document.getElementById("buttonAddProject").classList.remove("hidden");
+      document.querySelector(".iconePreview").classList.remove("hidden");
+      document.querySelector(".textPreview").classList.remove("hidden");
+      document.getElementById("imagePreview").classList.add("hidden");
 
       // document.querySelector(".modal-contain-projects").innerHTML = "";
 

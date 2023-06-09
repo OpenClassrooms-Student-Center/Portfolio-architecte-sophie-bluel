@@ -30,7 +30,7 @@
 						<h3>Ajout photo</h3>
 						<div class="picture-modal">
 							<div>
-								<form action="" class="formSubmit">
+								<form action="" class="formSubmit" method="post" enctype="multipart/form-data">
 									<div runat="server" class="picture-modal-contain">
 										<img class="iconePreview" src="./assets/icons/icons-image.png" alt="icône d'une image">
 										<input class="hidden" type="file" accept="image/png, image/jpeg" id="imageInput">
@@ -47,7 +47,7 @@
 										</select>
 									</div>
 									<hr>
-									<input type="submit" id="submitPicture" value="Valider"></input>
+									<input type="submit" id="submitPicture" value="Valider" disabled></input>
 								</form>
 							</div>
 						</div>

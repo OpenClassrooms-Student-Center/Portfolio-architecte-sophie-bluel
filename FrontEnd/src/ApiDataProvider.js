@@ -55,7 +55,8 @@ export default class ApiDataProvider {
       method: "POST",
       headers: {
         accept: "application/json",
-        "Content-Type": "multipart/form-data",
+        "Content-Type": "multipart/form-data; boundary=MyBoundary",
+
         Authorization: `Bearer ${window.localStorage.getItem("token")}`,
       },
       body: JSON.stringify(data),

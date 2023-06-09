@@ -3,6 +3,11 @@ function userLogin() {
   document.querySelector("form").addEventListener("submit", (event) => {
     // console.log("test");
     event.preventDefault();
+    const errorExist = document.querySelector(".errorLoging");
+    if (errorExist) {
+      errorExist.innerHTML = "";
+    }
+
     const user = {
       email: event.target.querySelector("#email").value,
       password: event.target.querySelector("#mdp").value,
@@ -31,7 +36,11 @@ async function postUserLogin(user) {
           window.localStorage.setItem("token", login.token);
           window.location.href = "index.html";
         } else {
-          alert("Votre identifiant ou votre mot de passe est incorrect");
+          const errorLoging = document.createElement("p");
+          errorLoging.className = "errorLoging";
+          errorLoging.innerHTML =
+            "Votre identifiant ou votre mot de passe est incorrect";
+          document.querySelector(".password").appendChild(errorLoging);
         }
       });
   }

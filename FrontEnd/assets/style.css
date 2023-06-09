@@ -299,7 +299,7 @@ body {
 }
 #submitPicture {
 	position: absolute;
-	background-color: #A7A7A7;
+	background-color: #1D6154;
 	border: none;
 	border-radius: 60px;
 	left: 50%;
@@ -308,6 +308,10 @@ body {
 	color: #fff;
 	bottom: 60px;
 	width: 240px;
+}
+
+#submitPicture:disabled {
+	background-color: #A7A7A7;
 }
 
 /************************* MODE EDITION **********************/
@@ -554,6 +558,10 @@ footer nav ul {
 	background: #FFFFFF;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+.errorLoging{
+	color: red;
+	font-weight: 700;
 }
 .button {
 	background: #1D6154;
