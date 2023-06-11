@@ -1,0 +1,123 @@
+[
+    {
+      "id": 1,
+      "title": "Abajour Tahina",
+      "imageUrl": "images/abajour-tahina.png",
+      "categoryId": 1,
+      "userId": 1,
+      "category": {
+        "id": 1,
+        "name": "Objets"
+      }
+    },
+    {
+      "id": 2,
+      "title": "Appartement Paris V",
+      "imageUrl": "images/appartement-paris-.png",
+      "categoryId": 2,
+      "userId": 1,
+      "category": {
+        "id": 2,
+        "name": "Appartements"
+      }
+    },
+    {
+      "id": 3,
+      "title": "Restaurant Sushisen - Londres",
+      "imageUrl": "images/restaurant-sushisen-.png",
+      "categoryId": 3,
+      "userId": 1,
+      "category": {
+        "id": 3,
+        "name": "Hotels & restaurants"
+      }
+    },
+    {
+      "id": 4,
+      "title": "Villa “La Balisiere” - Port Louis",
+      "imageUrl": "images/la-balisiere.png",
+      "categoryId": 2,
+      "userId": 1,
+      "category": {
+        "id": 2,
+        "name": "Appartements"
+      }
+    },
+    {
+      "id": 5,
+      "title": "Structures Thermopolis",
+      "imageUrl": "images/structures-thermopolis.png",
+      "categoryId": 1,
+      "userId": 1,
+      "category": {
+        "id": 1,
+        "name": "Objets"
+      }
+    },
+    {
+      "id": 6,
+      "title": "Appartement Paris X",
+      "imageUrl": "images/appartement-paris.png",
+      "categoryId": 2,
+      "userId": 1,
+      "category": {
+        "id": 2,
+        "name": "Appartements"
+      }
+    },
+    {
+      "id": 7,
+      "title": "Pavillon “Le coteau” - Cassis",
+      "imageUrl": "./assets/images/le-coteau-cassis.png",
+      "categoryId": 2,
+      "userId": 1,
+      "category": {
+        "id": 2,
+        "name": "Appartements"
+      }
+    },
+    {
+      "id": 8,
+      "title": "Villa Ferneze - Isola d’Elba",
+      "imageUrl": "images/villa-ferneze.png",
+      "categoryId": 2,
+      "userId": 1,
+      "category": {
+        "id": 2,
+        "name": "Appartements"
+      }
+    },
+    {
+      "id": 9,
+      "title": "Appartement Paris XVIII",
+      "imageUrl": "images/appartement-paris.png",
+      "categoryId": 2,
+      "userId": 1,
+      "category": {
+        "id": 2,
+        "name": "Appartements"
+      }
+    },
+    {
+      "id": 10,
+      "title": "Bar “Lullaby” - Paris",
+      "imageUrl": "images/bar-lullaby.png",
+      "categoryId": 3,
+      "userId": 1,
+      "category": {
+        "id": 3,
+        "name": "Hotels & restaurants"
+      }
+    },
+    {
+      "id": 11,
+      "title": "Hotel First Arte - New Delhi",
+      "imageUrl": "images/hotel-first-arte-new-delhi.png",
+      "categoryId": 3,
+      "userId": 1,
+      "category": {
+        "id": 3,
+        "name": "Hotels & restaurants"
+      }
+    }
+  ]

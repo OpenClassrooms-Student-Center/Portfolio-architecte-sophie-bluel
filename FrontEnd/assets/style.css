@@ -137,31 +137,56 @@ li:hover {
 	width: 100%;
 
 }
+
+#login-main {
+	display: flex;
+	flex-direction:  column;
+	align-items: center;
+	text-align: center;
+	margin-top: 190px;
+}
 #contact {
 	width: 50%;
 margin: auto;
 }
-#contact > * {
+#contact > * ,
+#login-section > *{
 	text-align: center;
-
 }
-#contact h2{
+
+#login-section {
+	display: flex;
+	flex-direction: column;
+	justify-content:center;
+	width: 35%;
+}
+#contact h2,
+#login-section h2{
 	margin-bottom: 20px;
 }
-#contact form {
+#contact form,
+#login-section form {
 	text-align: left;
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
 }
 
-#contact input {
+#contact input,
+#login-section input {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#contact label {
+
+#login-section input[type="email"],
+#login-section input[type="password"] {
+	width: 100%;
+}
+
+#contact label ,
+#login-section label{
 	margin: 2em 0 1em 0;
 }
 #contact textarea {
@@ -180,9 +205,55 @@ input[type="submit"]{
 	border-radius: 60px ;
 }
 
+#login-section a {
+	color:  #3D3D3D;
+	font-size: 14px;
+}
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em
 }
 
+.filter {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin-top: 20px;
+	padding: 20px 0px;
+}
+.btn-filter {
+	height: 37px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 1px solid #1D6154;
+	background-color: white ;
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 19.2px;
+	color:#1D6154 ;
+	margin : 10px 5px ;
+	padding: 9px;
+	cursor: pointer;
+	border-radius: 60px ;
+}
+
+.filter button:focus {
+	color: white;
+	background-color: #1D6154;
+}
+
+.filter-tous {
+	padding: 0px 21px;
+}
+.filter-1 {
+	padding: 0px 13px;
+}
+.filter-2 {
+	padding: 0px 6px;
+}
+.filter-3 {
+	padding: 0px 0px;
+}
