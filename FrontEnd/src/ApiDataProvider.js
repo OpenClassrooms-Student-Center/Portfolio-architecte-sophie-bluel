@@ -54,12 +54,10 @@ export default class ApiDataProvider {
     fetch("http://localhost:5678/api/works", {
       method: "POST",
       headers: {
-        accept: "application/json",
-        "Content-Type": "multipart/form-data; boundary=MyBoundary",
-
+        Accept: "application/json",
         Authorization: `Bearer ${window.localStorage.getItem("token")}`,
       },
-      body: JSON.stringify(data),
+      body: data,
     }).then((response) => {
       if (response.ok) {
         console.log("Votre projet a été ajouté");

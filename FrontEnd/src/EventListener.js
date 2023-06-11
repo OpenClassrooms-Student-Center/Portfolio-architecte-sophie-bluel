@@ -154,7 +154,6 @@ export default class EvenListener {
 
   // evenement pour sauvegarder l'ajout du projet au submit
   static saveProject() {
-    const data = {};
     // s'assurer que tous les inputs sont renseignés et colorer le bouton submit
     const inputImage = document.getElementById("imageInput");
     const inputTitle = document.getElementById("title-picture");
@@ -177,17 +176,11 @@ export default class EvenListener {
       event.preventDefault();
 
       const formData = new FormData();
-      // formData.append("image", inputImage.files[0]);
-      formData.append("image", imagePreview.src);
+      formData.append("image", inputImage.files[0]);
       formData.append("title", inputTitle.value);
       formData.append("category", inputCategory.value);
 
-      for (const pair of formData.entries()) {
-        data[pair[0]] = pair[1];
-      }
-
-      console.log(data);
-      ApiDataProvider.addNewProjects(data);
+      ApiDataProvider.addNewProjects(formData);
 
       // remettre à blanc la modale "ajout photo"
       pictureForm.reset();
@@ -198,12 +191,12 @@ export default class EvenListener {
       document.querySelector(".textPreview").classList.remove("hidden");
       document.getElementById("imagePreview").classList.add("hidden");
 
-      // document.querySelector(".modal-contain-projects").innerHTML = "";
+      document.querySelector(".modal-contain-projects").innerHTML = "";
 
-      // ApiDataProvider.getProjects().then((projects) => {
-      //   CardBuilder.displayProjects(projects);
-      //   ModalBuilder.displayModalProjects(projects);
-      // });
+      ApiDataProvider.getProjects().then((projects) => {
+        CardBuilder.displayProjects(projects);
+        ModalBuilder.displayModalProjects(projects);
+      });
     });
   }
 }
