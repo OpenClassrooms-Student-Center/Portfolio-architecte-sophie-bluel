@@ -27,7 +27,10 @@ fetch('http://localhost:5678/api/works')
         filterContainerElement.id = 'filterContainer';
 
         // Crée un bouton pour chaque catégorie
-        ['Tous', ...Object.keys(categories)].forEach(category => {
+        let categoryKeys = ['Tous'].concat(Object.keys(categories));
+        for (let i = 0; i < categoryKeys.length; i++) {
+            let category = categoryKeys[i];
+            
             const buttonElement = document.createElement('button');
             buttonElement.style.margin = '0 10px';
             buttonElement.style.width = 'auto';
@@ -69,7 +72,7 @@ fetch('http://localhost:5678/api/works')
             });
 
             filterContainerElement.appendChild(buttonElement);
-        });
+        }
 
         // Ajoute le conteneur de filtres au document, avant la galerie
         const galleryElement = document.getElementById('gallery');
@@ -106,7 +109,6 @@ fetch('http://localhost:5678/api/works')
         contentElement.appendChild(filterContainerElement);
         contentElement.appendChild(element);
 
-
         // Déclenche manuellement l'événement 'click' sur le premier bouton pour remplir la galerie avec tous les travaux
         filterContainerElement.querySelector('button').click();
     })
@@ -116,23 +118,5 @@ fetch('http://localhost:5678/api/works')
 
 
 
-const form = document.querySelector('form');
 
-form.addEventListener('submit', (e) => {
-    e.preventDefault(); // Empêche le comportement par défaut du formulaire
 
-    const formData = new FormData(form); // Récupère les données du formulaire
-
-    fetch('http://exemple.com/votre-endpoint', {
-        method: 'POST',
-        body: formData
-    })
-        .then(response => {
-            // Gérer la réponse du serveur
-            console.log('Réponse du serveur:', response);
-        })
-        .catch(error => {
-            // Gérer les erreurs
-            console.error('Erreur:', error);
-        });
-});
