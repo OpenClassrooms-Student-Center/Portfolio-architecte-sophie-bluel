@@ -85,6 +85,7 @@ body {
 	transform: translateX(-50%);
 	top: 600px;
 	width: 67%;
+	display: inline-block;
 	min-height: 450px;
 	height: 750px;
 }
@@ -118,7 +119,8 @@ body {
 	top: 100px;
 	display: grid;
 	grid-template-columns: repeat(5, 100px);
-	min-height: 200px;
+	overflow: scroll;
+	height: 470px; 
 }
 /** élément figure **/
 .modal-figure-project {
@@ -136,8 +138,8 @@ body {
 	border: none;
 	top: 5px;
 	right: 5px;
-	width: 14px;
-	height: 14px;
+	width: 17px;
+	height: 17px;
 	cursor: pointer;
 }
 /** icône poubelle **/
@@ -152,6 +154,10 @@ body {
 /** icône flêche **/
 .modale-arrow-project {
 	display: none;
+}
+/** Image de la modale **/
+.modal-image-project {
+	height: 75%; 
 }
 /** active icône flêche au survol de l'image **/
 .modal-image-project:hover ~ .modale-arrow-project {
@@ -380,6 +386,7 @@ li:hover {
 }
 li a:hover {
 	color: #B1663C;
+	cursor: pointer;
 }
 
 /***********  SECTION 1 AVEC PHOTO ET PARAGRAPHE **********/
@@ -472,6 +479,8 @@ h2{
 }
 .gallery img {
 	width: 100%;
+	height: 90%;
+	margin-bottom: 10px;
 }
 /********************* FORMULAIRE DE CONTACT ****************/
 #contact {
@@ -569,6 +578,7 @@ footer nav ul {
 	border-radius: 60px;
 	padding: 10px 40px;
 	margin-top: 20px;
+	cursor: pointer;
 }
 .connect {
 	color: #FFFFFF;

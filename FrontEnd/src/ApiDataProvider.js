@@ -1,5 +1,8 @@
+import CardBuilder from "./CardBuilder.js";
+import ModalBuilder from "./ModalBuilder.js";
+
 export default class ApiDataProvider {
-  // fonction getProjects qui récupère tous les projets de l'Api
+  // méthode getProjects qui récupère tous les projets de l'Api
   static getProjects() {
     return fetch("http://localhost:5678/api/works")
       .then((res) => res.json())
@@ -8,7 +11,7 @@ export default class ApiDataProvider {
       });
   }
 
-  // fonction GetProjectsByCatgerotyId qui récupère en filtrant sur les projets selon l'id du projet
+  // méthode GetProjectsByCatgerotyId qui récupère en filtrant sur les projets selon l'id du projet
   static getProjectsByCategoryId(categoryId) {
     return ApiDataProvider.getProjects().then((projects) => {
       return projects.filter((project) => {
@@ -17,7 +20,7 @@ export default class ApiDataProvider {
     });
   }
 
-  // fonction getCategories qui récupère les différents filtres de l'Api
+  // méthode getCategories qui récupère les différents filtres de l'Api
   static getCategories() {
     return fetch("http://localhost:5678/api/categories")
       .then((res) => res.json())
@@ -30,7 +33,7 @@ export default class ApiDataProvider {
       });
   }
 
-  // requête DELETE afin de supprimer un projet
+  // méthode DELETE afin de supprimer un projet
   static deleteProjects(id) {
     fetch("http://localhost:5678/api/works/" + id, {
       method: "DELETE",
@@ -41,6 +44,11 @@ export default class ApiDataProvider {
     }).then((response) => {
       if (response.ok) {
         console.log("Votre projet a été supprimé");
+        document.querySelector(".modal-contain-projects").innerHTML = "";
+        return ApiDataProvider.getProjects().then((projects) => {
+          CardBuilder.displayProjects(projects);
+          ModalBuilder.displayModalProjects(projects);
+        });
       } else {
         console.log(
           "Nous avons rencontrer un problème lors de suppression de votre projet"
@@ -49,7 +57,7 @@ export default class ApiDataProvider {
     });
   }
 
-  // requête POST pour ajouter des projet
+  // méthode POST pour ajouter des projet
   static addNewProjects(data) {
     fetch("http://localhost:5678/api/works", {
       method: "POST",
@@ -61,6 +69,11 @@ export default class ApiDataProvider {
     }).then((response) => {
       if (response.ok) {
         console.log("Votre projet a été ajouté");
+        document.querySelector(".modal-contain-projects").innerHTML = "";
+        return ApiDataProvider.getProjects().then((projects) => {
+          CardBuilder.displayProjects(projects);
+          ModalBuilder.displayModalProjects(projects);
+        });
       } else {
         console.log("Nous avons rencontré une erreur");
       }

@@ -1,17 +1,16 @@
 import ApiDataProvider from "./ApiDataProvider.js";
 import CardBuilder from "./CardBuilder.js";
 import ModalBuilder from "./ModalBuilder.js";
-import UserLogin from "./UserLogin.js";
 
 export default class EvenListener {
   static listen() {
     this.listenClickOnButtonFilter();
+    this.loginLogout();
     this.openModal();
     this.closeModal();
     this.removeProject();
     this.previewProject();
     this.saveProject();
-    // addProject, saveProject
   }
 
   // Fonction pour faire jouer le filtre
@@ -42,6 +41,18 @@ export default class EvenListener {
       });
   }
 
+  //méthode pour se connecter ou se deconnecter
+  static loginLogout() {
+    document.getElementById("log").addEventListener("click", () => {
+      if (window.localStorage.getItem("token")) {
+        window.localStorage.removeItem("token");
+        window.location.reload();
+      } else {
+        window.location.href = "./login.html";
+      }
+    });
+  }
+
   // évenement au click pour ouvrir la modale
   static openModal() {
     // ouvrir la modale gallery avec click sur bouton "modifier"
@@ -58,7 +69,7 @@ export default class EvenListener {
       document.getElementById("modalPicture").classList.remove("modal-hidden");
     });
 
-    // ouvrir la modal gallery au click sur la flèche retour
+    // ouvrir la modale gallery au click sur la flèche retour
     document
       .querySelector(".return-modal-gallery")
       .addEventListener("click", () => {
@@ -95,13 +106,6 @@ export default class EvenListener {
             .dataset["id"];
 
           ApiDataProvider.deleteProjects(projectId);
-
-          document.querySelector(".modal-contain-projects").innerHTML = "";
-
-          ApiDataProvider.getProjects().then((projects) => {
-            CardBuilder.displayProjects(projects);
-            ModalBuilder.displayModalProjects(projects);
-          });
         }
       });
     return false;
@@ -130,8 +134,6 @@ export default class EvenListener {
         }
         imagePreview.src = URL.createObjectURL(file);
         imagePreview.alt = file.name;
-        // console.log(imagePreview); // src en blob
-        // console.log(file);
         imagePreview.classList.remove("hidden");
         imageInput.classList.add("hidden");
         btnAddProject.classList.add("hidden");
@@ -147,31 +149,21 @@ export default class EvenListener {
           false
         );
         reader.readAsDataURL(file);
-        console.log(imagePreview); // src est en database64
       }
     });
   }
 
   // evenement pour sauvegarder l'ajout du projet au submit
   static saveProject() {
-    // s'assurer que tous les inputs sont renseignés et colorer le bouton submit
-    const inputImage = document.getElementById("imageInput");
-    const inputTitle = document.getElementById("title-picture");
-    const inputCategory = document.getElementById("categorie-picture");
-    const allInputs = [inputImage, inputTitle, inputCategory];
-
-    allInputs.forEach((input) => {
-      input.addEventListener("input", () => {
-        const allInputsFlled = allInputs.every((input) => input.value !== "");
-        if (allInputsFlled) {
-          document.querySelector("#submitPicture").disabled = false;
-          document.getElementById("submitPicture").style.cursor = "pointer";
-        }
-      });
-    });
+    // activer le bouton "valider" de modale picture
+    ModalBuilder.activeSubmit();
 
     // evenenement submit pour récupérer les données du formulaire et l'envoyer à l'api
     const pictureForm = document.querySelector(".formSubmit");
+    const inputImage = document.getElementById("imageInput");
+    const inputTitle = document.getElementById("title-picture");
+    const inputCategory = document.getElementById("categorie-picture");
+
     pictureForm.addEventListener("submit", (event) => {
       event.preventDefault();
 
@@ -183,20 +175,10 @@ export default class EvenListener {
       ApiDataProvider.addNewProjects(formData);
 
       // remettre à blanc la modale "ajout photo"
-      pictureForm.reset();
-      imagePreview.src = "#";
-      imagePreview.alt = "";
-      document.getElementById("buttonAddProject").classList.remove("hidden");
-      document.querySelector(".iconePreview").classList.remove("hidden");
-      document.querySelector(".textPreview").classList.remove("hidden");
-      document.getElementById("imagePreview").classList.add("hidden");
+      ModalBuilder.blankModalPicture();
 
-      document.querySelector(".modal-contain-projects").innerHTML = "";
-
-      ApiDataProvider.getProjects().then((projects) => {
-        CardBuilder.displayProjects(projects);
-        ModalBuilder.displayModalProjects(projects);
-      });
+      document.querySelector(".modalGallery").classList.remove("modal-hidden");
+      document.getElementById("modalPicture").classList.add("modal-hidden");
     });
   }
 }

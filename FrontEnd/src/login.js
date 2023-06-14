@@ -1,7 +1,6 @@
 //fonction pour recupérer les données saisies à la validation du form + vérifier validité par l'api
 function userLogin() {
   document.querySelector("form").addEventListener("submit", (event) => {
-    // console.log("test");
     event.preventDefault();
     const errorExist = document.querySelector(".errorLoging");
     if (errorExist) {
@@ -36,6 +35,7 @@ async function postUserLogin(user) {
           window.localStorage.setItem("token", login.token);
           window.location.href = "index.html";
         } else {
+          // afficher un messge d'erreur
           const errorLoging = document.createElement("p");
           errorLoging.className = "errorLoging";
           errorLoging.innerHTML =

@@ -37,7 +37,7 @@ export default class ModalBuilder {
     });
   }
 
-  // fonction pour ajouter les categories
+  // méthode pour ajouter les categories
   static selectCategoryId() {
     const selectCategorie = document.getElementById("categorie-picture");
 
@@ -51,5 +51,37 @@ export default class ModalBuilder {
         selectCategorie?.appendChild(optionSelect);
       }
     });
+  }
+
+  // méthode pour desactiver le disabled
+  static activeSubmit() {
+    const inputImage = document.getElementById("imageInput");
+    const inputTitle = document.getElementById("title-picture");
+    const inputCategory = document.getElementById("categorie-picture");
+    const allInputs = [inputImage, inputTitle, inputCategory];
+
+    allInputs.forEach((input) => {
+      input.addEventListener("input", () => {
+        const allInputsFlled = allInputs.every((input) => input.value !== "");
+        if (allInputsFlled) {
+          document.querySelector("#submitPicture").disabled = false;
+          document.getElementById("submitPicture").style.cursor = "pointer";
+        }
+      });
+    });
+  }
+
+  // méthode pour remttre à blanc la modale picture
+  static blankModalPicture() {
+    const pictureForm = document.querySelector(".formSubmit");
+    pictureForm.reset();
+    imagePreview.src = "#";
+    imagePreview.alt = "";
+    document.getElementById("buttonAddProject").classList.remove("hidden");
+    document.querySelector(".iconePreview").classList.remove("hidden");
+    document.querySelector(".textPreview").classList.remove("hidden");
+    document.getElementById("imagePreview").classList.add("hidden");
+    document.querySelector("#submitPicture").disabled = true;
+    document.getElementById("submitPicture").style.cursor = "default";
   }
 }

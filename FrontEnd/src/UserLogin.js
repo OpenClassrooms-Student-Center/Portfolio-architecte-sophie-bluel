@@ -1,11 +1,11 @@
 export default class UserLogin {
-  // fonction pour changer la page d'accueil après la connexion de l'utilisation
-
+  // méthode pour changer la page d'accueil après la connexion de l'utilisation
   static validToken() {
+    const ancre = document.getElementById("log");
     if (window.localStorage.getItem("token")) {
       hiddenMode.classList.remove("hidden");
       hiddenMode.classList.add("mode");
-      logout.innerText = "logout";
+      ancre.innerText = "logout";
       photoHidden.classList.remove("hidden");
       photoHidden.classList.add("photo-hidden");
       hiddenFilter.classList.add("edit");
