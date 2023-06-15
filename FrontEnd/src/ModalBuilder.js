@@ -84,4 +84,16 @@ export default class ModalBuilder {
     document.querySelector("#submitPicture").disabled = true;
     document.getElementById("submitPicture").style.cursor = "default";
   }
+
+  // méthode pour lancer un message d'erreur si le projet n'a pas été ajouter
+  static errorAddPicture() {
+    const errorWorks = document.createElement("p");
+    document.querySelector(".modalGallery").appendChild(errorWorks);
+    errorWorks.className = "errorMessage";
+    errorWorks.innerHTML =
+      "Nous avons rencontré une erreur, merci de contacter l'administrateur";
+    setTimeout(() => {
+      errorWorks.innerHTML = "";
+    }, 7000);
+  }
 }

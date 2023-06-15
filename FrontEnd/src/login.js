@@ -37,7 +37,7 @@ async function postUserLogin(user) {
         } else {
           // afficher un messge d'erreur
           const errorLoging = document.createElement("p");
-          errorLoging.className = "errorLoging";
+          errorLoging.className = "errorLogin";
           errorLoging.innerHTML =
             "Votre identifiant ou votre mot de passe est incorrect";
           document.querySelector(".password").appendChild(errorLoging);

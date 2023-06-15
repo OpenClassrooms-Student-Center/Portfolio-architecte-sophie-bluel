@@ -64,6 +64,7 @@ body {
 	background-color: #FFFEF8;
 }
 
+
 /************************* MODALES GENERALES ************************/
 .modal-container {
 	display: none;
@@ -94,7 +95,12 @@ body {
 }
 
 /***** Modale de la galerie *****/
-
+.errorMessage{
+	color: red;
+	font-weight: 700;
+	text-align: center;
+	padding-top: 10px;
+}
 .modal h3 {
 	position: absolute;
 	width: 100%;
@@ -191,15 +197,15 @@ body {
 .modal hr {
 	position: absolute;
 	width: 420px;
-	bottom: 155px;
+	bottom: 150px;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	border: 1px solid #B3B3B3;
 }
-/** Ajouter une photo **/
+/** bouton Ajouter une photo **/
 #addPicture {
 	position: absolute;
-	bottom: 80px;
+	bottom: 70px;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	background: #1D6154;
@@ -212,7 +218,7 @@ body {
 /** Supprimer toutes les photos **/
 #deleteAllPicture {
 	position: absolute;
-	bottom: 45px;
+	bottom: 35px;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	background-color: #fff;
@@ -568,10 +574,6 @@ footer nav ul {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-.errorLoging{
-	color: red;
-	font-weight: 700;
-}
 .button {
 	background: #1D6154;
 	border: none;
@@ -585,6 +587,10 @@ footer nav ul {
 }
 .ancre {
 	margin: 40px 0 20px 0;
+}
+.errorLogin{
+	color: red;
+	font-weight: 700;
 }
 
 

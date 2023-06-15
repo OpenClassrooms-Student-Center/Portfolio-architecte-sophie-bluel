@@ -43,7 +43,6 @@ export default class ApiDataProvider {
       },
     }).then((response) => {
       if (response.ok) {
-        console.log("Votre projet a été supprimé");
         document.querySelector(".modal-contain-projects").innerHTML = "";
         return ApiDataProvider.getProjects().then((projects) => {
           CardBuilder.displayProjects(projects);
@@ -57,7 +56,7 @@ export default class ApiDataProvider {
     });
   }
 
-  // méthode POST pour ajouter des projet
+  // méthode POST pour ajouter des travaux
   static addNewProjects(data) {
     fetch("http://localhost:5678/api/works", {
       method: "POST",
@@ -68,14 +67,13 @@ export default class ApiDataProvider {
       body: data,
     }).then((response) => {
       if (response.ok) {
-        console.log("Votre projet a été ajouté");
         document.querySelector(".modal-contain-projects").innerHTML = "";
         return ApiDataProvider.getProjects().then((projects) => {
           CardBuilder.displayProjects(projects);
           ModalBuilder.displayModalProjects(projects);
         });
       } else {
-        console.log("Nous avons rencontré une erreur");
+        ModalBuilder.errorAddPicture();
       }
     });
   }
