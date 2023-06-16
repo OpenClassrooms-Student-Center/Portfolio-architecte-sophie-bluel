@@ -2,7 +2,7 @@
 function userLogin() {
   document.querySelector("form").addEventListener("submit", (event) => {
     event.preventDefault();
-    const errorExist = document.querySelector(".errorLoging");
+    const errorExist = document.querySelector(".error");
     if (errorExist) {
       errorExist.innerHTML = "";
     }
@@ -37,7 +37,7 @@ async function postUserLogin(user) {
         } else {
           // afficher un messge d'erreur
           const errorLoging = document.createElement("p");
-          errorLoging.className = "errorLogin";
+          errorLoging.className = "error";
           errorLoging.innerHTML =
             "Votre identifiant ou votre mot de passe est incorrect";
           document.querySelector(".password").appendChild(errorLoging);

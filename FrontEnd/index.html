@@ -38,16 +38,23 @@
 										<button id="buttonAddProject">+ Ajouter photo</button>
 										<p class="textPreview">jpg, png : 4mo max</p>
 									</div>
+									<p class="hidden errorSubmit" id="theImage"> Merci d'ajouter une image</p>
 									<div class="input-modal-picture">    
-										<label for="title">Titre</label>
-										<input type="text" name="title" id="title-picture" >
-										<label for="category">Catégorie</label>
-										<select name="category" id="categorie-picture">
-											<option value=""></option>
-										</select>
+										<div>
+											<label for="title">Titre</label>
+											<input type="text" name="title" id="title-picture" >
+											<p class="hidden errorSubmit" id="theTitle"> Merci de renseigner un titre</p>
+										</div>
+										<div>
+											<label for="category">Catégorie</label>
+											<select name="category" id="categorie-picture">
+												<option value=""></option>
+											</select>
+											<p class="hidden errorSubmit" id="theCategory"> Merci de renseigner une catégorie</p>
+										</div>
 									</div>
 									<hr>
-									<input type="submit" id="submitPicture" value="Valider" disabled></input>
+									<input type="submit" id="submitPicture" value="Valider"></input>
 								</form>
 							</div>
 						</div>

@@ -53,8 +53,8 @@ export default class ModalBuilder {
     });
   }
 
-  // méthode pour desactiver le disabled
-  static activeSubmit() {
+  // méthode pour activer la couleur du bouton submit
+  static activeBtnSubmit() {
     const inputImage = document.getElementById("imageInput");
     const inputTitle = document.getElementById("title-picture");
     const inputCategory = document.getElementById("categorie-picture");
@@ -62,9 +62,10 @@ export default class ModalBuilder {
 
     allInputs.forEach((input) => {
       input.addEventListener("input", () => {
-        const allInputsFlled = allInputs.every((input) => input.value !== "");
-        if (allInputsFlled) {
-          document.querySelector("#submitPicture").disabled = false;
+        const allInputsFilled = allInputs.every((input) => input.value !== "");
+        if (allInputsFilled) {
+          document.getElementById("submitPicture").style.backgroundColor =
+            "#1D6154";
           document.getElementById("submitPicture").style.cursor = "pointer";
         }
       });
@@ -81,12 +82,11 @@ export default class ModalBuilder {
     document.querySelector(".iconePreview").classList.remove("hidden");
     document.querySelector(".textPreview").classList.remove("hidden");
     document.getElementById("imagePreview").classList.add("hidden");
-    document.querySelector("#submitPicture").disabled = true;
     document.getElementById("submitPicture").style.cursor = "default";
   }
 
   // méthode pour lancer un message d'erreur si le projet n'a pas été ajouter
-  static errorAddPicture() {
+  static errorMessageModaleGallery() {
     const errorWorks = document.createElement("p");
     document.querySelector(".modalGallery").appendChild(errorWorks);
     errorWorks.className = "errorMessage";
@@ -95,5 +95,13 @@ export default class ModalBuilder {
     setTimeout(() => {
       errorWorks.innerHTML = "";
     }, 7000);
+  }
+
+  // méthode pour mettre à blanc les messages d'erreur au submit
+  static blankMessageErrorSubmit() {
+    const allMessageErrorSubmit = document.querySelectorAll(".errorSubmit");
+    allMessageErrorSubmit.forEach((messageErrorSubmit) => {
+      messageErrorSubmit.classList.add("hidden");
+    });
   }
 }

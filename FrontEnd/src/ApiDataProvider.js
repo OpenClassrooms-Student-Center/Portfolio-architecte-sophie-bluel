@@ -49,9 +49,7 @@ export default class ApiDataProvider {
           ModalBuilder.displayModalProjects(projects);
         });
       } else {
-        console.log(
-          "Nous avons rencontrer un problème lors de suppression de votre projet"
-        );
+        ModalBuilder.errorMessageModaleGallery();
       }
     });
   }
@@ -68,12 +66,13 @@ export default class ApiDataProvider {
     }).then((response) => {
       if (response.ok) {
         document.querySelector(".modal-contain-projects").innerHTML = "";
-        return ApiDataProvider.getProjects().then((projects) => {
+
+        ApiDataProvider.getProjects().then((projects) => {
           CardBuilder.displayProjects(projects);
           ModalBuilder.displayModalProjects(projects);
         });
       } else {
-        ModalBuilder.errorAddPicture();
+        ModalBuilder.errorMessageModaleGallery();
       }
     });
   }

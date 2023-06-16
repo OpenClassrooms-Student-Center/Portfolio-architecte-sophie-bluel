@@ -67,12 +67,19 @@ export default class EvenListener {
     document.getElementById("addPicture").addEventListener("click", () => {
       document.querySelector(".modalGallery").classList.add("modal-hidden");
       document.getElementById("modalPicture").classList.remove("modal-hidden");
+      ModalBuilder.blankMessageErrorSubmit();
+      document.getElementById("submitPicture").style.backgroundColor =
+        "#A7A7A7";
+      document.getElementById("submitPicture").style.cursor = "default";
     });
 
     // ouvrir la modale gallery au click sur la flèche retour
     document
       .querySelector(".return-modal-gallery")
       .addEventListener("click", () => {
+        // remettre à blanc la modale "ajout photo"
+        ModalBuilder.blankModalPicture();
+        //changer de modale
         document
           .querySelector(".modalGallery")
           .classList.remove("modal-hidden");
@@ -155,18 +162,31 @@ export default class EvenListener {
 
   // evenement pour sauvegarder l'ajout du projet au submit
   static saveProject() {
-    // activer le bouton "valider" de modale picture
-    ModalBuilder.activeSubmit();
+    // changer le style du bouton "valider" si tous les champs sont renseignés
+    ModalBuilder.activeBtnSubmit();
 
-    // evenenement submit pour récupérer les données du formulaire et l'envoyer à l'api
     const pictureForm = document.querySelector(".formSubmit");
-    const inputImage = document.getElementById("imageInput");
-    const inputTitle = document.getElementById("title-picture");
-    const inputCategory = document.getElementById("categorie-picture");
-
     pictureForm.addEventListener("submit", (event) => {
       event.preventDefault();
+      // s'assurer aucun message d'erreur afficher sur la modale picture
+      ModalBuilder.blankMessageErrorSubmit();
 
+      const inputImage = document.getElementById("imageInput");
+      const inputTitle = document.getElementById("title-picture");
+      const inputCategory = document.getElementById("categorie-picture");
+
+      // verifier que tous les élements sont renseignés avant d'envoyer le formulaire
+      if (inputImage.value === "") {
+        document.getElementById("theImage").classList.remove("hidden");
+      }
+      if (inputTitle.value === "") {
+        document.getElementById("theTitle").classList.remove("hidden");
+      }
+      if (inputCategory.value === "") {
+        document.getElementById("theCategory").classList.remove("hidden");
+      }
+
+      // récupérer les données du formulaire et l'envoyer à l'api
       const formData = new FormData();
       formData.append("image", inputImage.files[0]);
       formData.append("title", inputTitle.value);
