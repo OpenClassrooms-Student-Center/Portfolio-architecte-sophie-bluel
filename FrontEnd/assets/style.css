@@ -126,8 +126,10 @@ body {
 	display: grid;
 	grid-template-columns: repeat(5, 100px);
 	overflow: scroll;
-	height: 470px; 
+	min-height: 270px; 
+	max-height: 460px;
 }
+
 /** élément figure **/
 .modal-figure-project {
 	position: relative;

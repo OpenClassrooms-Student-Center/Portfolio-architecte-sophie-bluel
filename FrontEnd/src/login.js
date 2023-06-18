@@ -2,23 +2,19 @@
 function userLogin() {
   document.querySelector("form").addEventListener("submit", (event) => {
     event.preventDefault();
-    const errorExist = document.querySelector(".error");
-    if (errorExist) {
-      errorExist.innerHTML = "";
-    }
 
     const user = {
       email: event.target.querySelector("#email").value,
       password: event.target.querySelector("#mdp").value,
     };
-    // console.log(user);
+
     postUserLogin(user);
   });
 }
 // requête post  ///
 async function postUserLogin(user) {
   let tokenUser = window.localStorage.getItem("token");
-  // console.log(tokenUser);
+
   if (tokenUser === null) {
     await fetch("http://localhost:5678/api/users/login", {
       method: "POST",
@@ -36,11 +32,7 @@ async function postUserLogin(user) {
           window.location.href = "index.html";
         } else {
           // afficher un messge d'erreur
-          const errorLoging = document.createElement("p");
-          errorLoging.className = "error";
-          errorLoging.innerHTML =
-            "Votre identifiant ou votre mot de passe est incorrect";
-          document.querySelector(".password").appendChild(errorLoging);
+          document.getElementById("errorLoging").classList.remove("hidden");
         }
       });
   }
