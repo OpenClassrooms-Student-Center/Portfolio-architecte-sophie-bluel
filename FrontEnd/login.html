@@ -2,7 +2,8 @@
 <html lang="fr">
 <head>
 	<meta charset="UTF-8">
-	<title>Sophie Bluel - Architecte d'intérieur</title>
+	<title>Sophie Bluel - Architecte d'intérieur</title> 
+	<script src="./assets/login.js" type="module" defer></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,36 +12,39 @@
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
-<header>
-	<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
-	<nav>
-		<ul>
-			<li>projets</li>
-			<li>contact</li>
-			<li>login</li>
-			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
-		</ul>
-	</nav>
-</header>
-<main id="login-main">
-    <h2>Login</h2>
-    <section id="login-section">     
-        <form action="#" method="post">
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" required>
-            <label for="message">Mot de passe</label>
-            <input type="password" name="password" id="password" required>
-            <input type="submit" value="Se connecter">
-        </form>
-        <a href="#"> Mot de passe oublié</a>
-    </section>
-</main>
-<footer>
-	<nav>
-		<ul>
-			<li>Mentions Légales</li>
-		</ul>
-	</nav>
-</footer>
+	<div class="main-container">
+		<header>
+			<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
+			<nav>
+				<ul>
+					<li>projets</li>
+					<li>contact</li>
+					<li><a href="login.html">login</a></li>
+					<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+				</ul>
+			</nav>
+		</header>
+		<main id="login-main">
+			<h2>Login</h2>
+			<section id="login-section">     
+				<form action="#" method="post">
+					<label for="email">Email</label>
+					<input type="email" name="email" id="email" required>
+					<label for="message">Mot de passe</label>
+					<input type="password" name="password" id="password" required>
+					<input type="submit" value="Se connecter">
+				</form>
+				<a href="#"> Mot de passe oublié</a>
+			</section>
+		</main>
+		<footer>
+			<nav>
+				<ul>
+					<li>Mentions Légales</li>
+				</ul>
+			</nav>
+		</footer>
+
+	</div>
 </body>
 </html>
