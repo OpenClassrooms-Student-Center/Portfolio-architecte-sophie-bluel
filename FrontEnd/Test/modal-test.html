@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modal Part</title>
+</head>
+<body>
+    /***************************** MODAL FENETRE DE MODIFICATION ************/
+        <div id="modal-container">
+            <div class="modal-controleur">
+                <a href="" class="modal-icon js-modal-open"><i class="fa-solid fa-arrow-left"></i></a>
+                <a href="#" class="modal-icon js-modal-close"><i class="fa-solid fa-xmark "></i></a>
+            </div>
+            <div class="modal-gallery-container">
+                <h4>Galerie photo</h4>
+                <div class="modal-gallery">
+                </div>
+                <hr>
+                <a  href="" class="js-modal-open modal-modification-button" >Ajouter une photo</a>
+                <a href="#" class="modal-modification-suppAll">Supprimer la galerie</a>
+            </div>
+        </div>
+
+    /**************************** MODAL UPLOAD NOUVELLE IMAGE **************/
+
+    <div id="modal-container">
+        <div class="modal-controleur">
+            <a href="" class="modal-icon js-modal-open"><i class="fa-solid fa-arrow-left"></i></a>
+            <a href="#" class="modal-icon js-modal-close"><i class="fa-solid fa-xmark "></i></a>
+        </div>
+        <div class="modal-upload-container" >
+            <h4 class="modal-title">Ajout photo</h4>
+            <form action="#" method="post">
+                <div class="modal-upload-container">
+                    <i class="fa-sharp fa-regular fa-image"></i>
+                    <label for="imgUpload" type=""button>+ Ajouter photo</label>
+                    <input type="file" name="imgUpload" id="imgUpload" size="4000" accept="image/png, image/jpeg" hidden required></button>
+                    <p class="modal-upload-condition">jpg, png: 4moi max</p>
+                </div>
+                <div class="modal-upload-categories">
+                    <label for="modal-upload-title">Titre</label>
+                    <input type="text" name="modal-upload-title" id="modal-upload-title" required>
+                    <label for="modal-upload-category">Catégorie</label>
+                    <select name="modal-upload-category" id="modal-upload-category" required>
+                        <option value=''> </option>
+                    </select>
+                    <hr>
+                    <input type="submit" value="Valider">
+                </div>
+            </form>
+        </div>
+</body>
+</html>

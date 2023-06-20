@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Diag Window</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" 
+	integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer">
+	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+	<meta name="description" content="">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style-test.css">
+    <script src="script-test.js" type="module" defer></script>
+</head>
+<body>
+    <div class="main-container">
+        <header>
+            <h1>Test Fenetre d'édition</h1>
+        </header>
+        <main>
+            <div class="login-container">
+                <div class="button-container">
+                    <a href="#modal-overlay" class="js-modal-display" id="Edition-Projet">Open Edition Mode</a>
+                </div>
+                <!-- Fond transparent noir -->
+                <aside class="overlay js-modal-allclose" id="modal-overlay" role="dialog" aria-labelledby="modal-title">
+                    <!-- Box Blanche commune -->
+                    <div class="modal-wrapper">
+                        <!-- Controleur fermeture et retour -->
+                        <div class="modal-controleur">
+                            <a href="" class="modal-icon js-modal-open"><i class="fa-solid fa-arrow-left"></i></a>
+                            <a href="#" class="modal-icon js-modal-allclose"><i class="fa-solid fa-xmark "></i></a>
+                        </div>
+                        <!-- /***************************** MODAL FENETRE DE MODIFICATION ************/ -->
+                            <div class="modal-container" id="modal-gallery-id">
+                                <h4 class="modal-title">Galerie photo</h4>
+                                <div class="modal-gallery">
+                                </div>
+                                <hr>
+                                <a  href="" class="js-modal-modification modal-modification-button" >Ajouter une photo</a>
+                                <a href="#" class="modal-modification-suppAll">Supprimer la galerie</a>
+                            </div>
+                    <!-- /**************************** MODAL UPLOAD NOUVELLE IMAGE **************/ -->
+                        <div class="modal-container" id="modal-upload-id">
+                            <h4 class="modal-title">Ajout photo</h4>
+                            <form action="#" method="post" id="modal-upload-form">
+                                <div class="modal-upload-container">
+                                    <i class="fa-sharp fa-regular fa-image"></i>
+                                    <label for="imgUpload" type="button">+ Ajouter photo</label>
+                                    <input type="file" name="imgUpload" id="imgUpload" size="4000" accept="image/png, image/jpeg" hidden="true" required="'true"></button>
+                                    <p class="modal-upload-condition">jpg, png: 4moi max</p>
+                                </div>
+                                <div class="modal-upload-categories">
+                                    <label for="modal-upload-title">Titre</label>
+                                    <input type="text" name="modal-upload-title" id="modal-upload-title" required="'true">
+                                    <label for="modal-upload-category">Catégorie</label>
+                                    <select name="modal-upload-category" id="modal-upload-category" required="'true">
+                                        <option value=''> </option>
+                                    </select>
+                                    <hr>
+                                    <input type="submit" value="Valider" disabled="true">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+        </main>
+    </div>
+</body>
+</html>
