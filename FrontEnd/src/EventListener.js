@@ -187,18 +187,25 @@ export default class EvenListener {
       }
 
       // récupérer les données du formulaire et l'envoyer à l'api
-      const formData = new FormData();
-      formData.append("image", inputImage.files[0]);
-      formData.append("title", inputTitle.value);
-      formData.append("category", inputCategory.value);
+      if (
+        inputImage.value !== "" &&
+        inputTitle.value !== "" &&
+        inputCategory.value !== ""
+      ) {
+        const formData = new FormData();
+        formData.append("image", inputImage.files[0]);
+        formData.append("title", inputTitle.value);
+        formData.append("category", inputCategory.value);
 
-      ApiDataProvider.addNewProjects(formData);
+        ApiDataProvider.addNewProjects(formData);
+        // remettre à blanc la modale "ajout photo"
+        ModalBuilder.blankModalPicture();
 
-      // remettre à blanc la modale "ajout photo"
-      ModalBuilder.blankModalPicture();
-
-      document.querySelector(".modalGallery").classList.remove("modal-hidden");
-      document.getElementById("modalPicture").classList.add("modal-hidden");
+        document
+          .querySelector(".modalGallery")
+          .classList.remove("modal-hidden");
+        document.getElementById("modalPicture").classList.add("modal-hidden");
+      }
     });
   }
 }

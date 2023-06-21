@@ -37,7 +37,7 @@ export default class ModalBuilder {
     });
   }
 
-  // méthode pour ajouter les categories
+  // méthode pour ajouter les categories dans la modal ajoutPicture
   static selectCategoryId() {
     const selectCategorie = document.getElementById("categorie-picture");
 

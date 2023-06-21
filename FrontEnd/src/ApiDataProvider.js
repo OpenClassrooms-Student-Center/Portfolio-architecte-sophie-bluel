@@ -11,7 +11,7 @@ export default class ApiDataProvider {
       });
   }
 
-  // méthode GetProjectsByCatgerotyId qui récupère en filtrant sur les projets selon l'id du projet
+  // méthode GetProjectsByCatgerotyId qui récupère en filtrant les projets selon l'id
   static getProjectsByCategoryId(categoryId) {
     return ApiDataProvider.getProjects().then((projects) => {
       return projects.filter((project) => {
