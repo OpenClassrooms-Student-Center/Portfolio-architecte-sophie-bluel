@@ -126,10 +126,6 @@ li:hover {
 	margin-bottom: 1em;
 }
 
-.button_category {
-	
-}
-
 .gallery {
 	width: 100%;
 	display: grid;
@@ -191,3 +187,80 @@ footer nav ul {
 	margin: 2em
 }
 
+/****** Code css page login *********/
+
+#login {
+	text-align: center;
+}
+
+.title {
+	padding-bottom: 30px;
+}
+
+.email {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding-bottom: 40px;
+}
+
+.email1 {
+	display: flex;
+	position: relative;
+	right: 16%;
+	padding-bottom: 7px;
+}
+
+input {
+	width: 379px;
+	background: #ffffff;
+	border: 1px solid #ffffff;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	height: 51px;
+}
+
+.password {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding-bottom: 37px;
+}
+
+.pass1 {
+	display: flex;
+	position: relative;
+	right: 14%;
+	padding-bottom: 6px;
+}
+
+.buttonLog {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.bt1 {
+	border-radius: 60px;
+    width: 179px;
+    height: 36px;
+    background: #1D6154;
+    color: white;
+	margin-bottom: 37px;
+}
+
+.mdp {
+	text-decoration: none;
+    text-decoration-line: underline;
+    color: #3D3D3D;
+	padding-bottom: 55%;
+}
+
+.footer {
+	position: relative;
+	left: 85%;
+}
+
+.footer1 {
+text-decoration: none;
+color: #000000;
+}

@@ -24,44 +24,27 @@ fetch("http://localhost:5678/api/works")
   });
 
 function categoryFilter(dataFilter) {
-  const portFolio = document.getElementById("portfolio");
-
-  const divFilter = document.createElement("div");
-
   const buttonT = document.createElement("button");
   buttonT.textContent = "Tous";
 
-  // const buttonO = document.createElement("button");
-  // buttonO.innerHtml = dataFilter[0].name;
+  const divFilter = document.createElement("div");
 
-  // const buttonA = document.createElement("button");
-  // buttonA.innerHTML = dataFilter[1].name;
-  // console.log(buttonA);
+  for (let i = 0; i < dataFilter.length; i++) {
+    const portFolio = document.getElementById("portfolio");
 
-  // const buttonH = document.createElement("button");
-  // buttonH.innerHTML = dataFilter[2].name;
+    portFolio.appendChild(divFilter);
+    divFilter.appendChild(buttonT);
 
-  // portFolio.appendChild(divFilter);
-  // divFilter.appendChild(buttonT);
-  // divFilter.appendChild(buttonO);
-  // divFilter.appendChild(buttonA);
-  // divFilter.appendChild(buttonH);
-
-  buttonT.classList.add(".button_category");
-  divFilter.classList.add(".button_div");
-  divFilter.appendChild(buttonT);
-  dataFilter.forEach((category) => {
     const buttonCategory = document.createElement("button");
-    buttonCategory.textContent = category.name;
-    buttonCategory.classList.add("button_category");
+    buttonCategory.textContent = dataFilter[i].name;
     divFilter.appendChild(buttonCategory);
-    buttonCategory.addEventListener("click", () => {
-      const categoryName = buttonCategory.textContent;
-      const filterWorks = data.filter((data) => {
-        return data.category.name === categoryName;
-      });
+    // console.log(buttonCategory);
+    buttonT.addEventListener("click", () => {
+      const buttonAll = buttonT.textContent;
+      buttonAll === data.length;
+      console.log(buttonT);
     });
-  });
+  }
 }
 
 fetch("http://localhost:5678/api/categories")
@@ -71,3 +54,34 @@ fetch("http://localhost:5678/api/categories")
 
     categoryFilter(dataFilter);
   });
+
+// function categoryFilter(data) {
+//   const portFolio = document.getElementById("portfolio");
+//   portFolio.appendChild(divFilter);
+//   const divFilter = document.createElement("div");
+
+//   const buttonT = document.createElement("button");
+//   buttonT.textContent = "Tous";
+//   buttonT.addEventListener("click", () => {
+//     pictureGallery(data);
+//   });
+//   buttonT.classList.add(".button_category");
+//   divFilter.classList.add("button_div");
+//   divFilter.appendChild(buttonT);
+//   dataFilter.forEach((category) => {
+//     const buttonCategory = document.createElement("button");
+//     buttonCategory.textContent = category.name;
+//     buttonCategory.classList.add(".button_category");
+//     divFilter.appendChild(buttonCategory);
+//     buttonCategory.addEventListener("click", () => {
+//       const categoryName = buttonCategory.textContent;
+//       const filterWorks = data.filter((work) => {
+//         return work.category.name === categoryName;
+//       });
+//       console.log(filterWorks);
+//       pictureGallery(filterWorks);
+//     });
+//   });
+//   const secondChild = portFolio.children[1];
+//   portFolio.insertBefore(divFilter, secondChild);
+// }
