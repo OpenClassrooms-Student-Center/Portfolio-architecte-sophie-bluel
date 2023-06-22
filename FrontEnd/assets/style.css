@@ -126,6 +126,27 @@ li:hover {
 	margin-bottom: 1em;
 }
 
+.filters {
+	text-align: center;
+	margin-bottom: 40px;
+}
+
+.filter-button {
+	width: 165px;
+	border-radius: 50px;
+	margin-right: 12px;
+	height: 40px;
+	border: 1px solid #1D6154;
+	background: #ffffff;
+	color: #1D6154;
+	font-size: 16px;
+}
+
+.filter-button.active {
+	background: #1D6154;
+	color: #ffffff;
+}
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -207,7 +228,7 @@ footer nav ul {
 .email1 {
 	display: flex;
 	position: relative;
-	right: 16%;
+	right: 15%;
 	padding-bottom: 7px;
 }
 
@@ -229,7 +250,7 @@ input {
 .pass1 {
 	display: flex;
 	position: relative;
-	right: 14%;
+	right: 13%;
 	padding-bottom: 6px;
 }
 

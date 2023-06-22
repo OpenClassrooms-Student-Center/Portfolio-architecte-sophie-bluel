@@ -1,87 +1,79 @@
-const gallery = document.querySelector(".gallery");
-// console.log(gallery);
+import {
+  getWorks as getWorksAPI,
+  getCategories as getCategoriesAPI,
+} from "../api.js";
 
-function pictureGallery(data) {
-  for (let i = 0; i < data.length; i++) {
+const galleryElement = document.querySelector(".gallery");
+const filtersElement = document.querySelector(".filters");
+
+function getWorksByCategoryId(works, categoryId) {
+  console.log(categoryId);
+  if (categoryId === "all" || !categoryId) {
+    return works;
+  }
+  return works.filter((work) => work.categoryId == categoryId);
+}
+
+function customEventListener(data, element) {
+  element.addEventListener("click", function (e) {
+    handleFilterClick(data, e.target.dataset.categoryId);
+    // const active = allCategoryButton === active;
+    // console.log(active);
+  });
+}
+
+function displayGalleryWorks(works) {
+  return works.map((work) => {
     const fig = document.createElement("figure");
     const image = document.createElement("img");
-    image.src = data[i].imageUrl;
+    image.src = work.imageUrl;
     const title = document.createElement("figcaption");
-    title.innerHTML = data[i].title;
+    title.innerHTML = work.title;
+    fig.dataset.categoryId = work.categoryId;
 
-    gallery.appendChild(fig);
     fig.appendChild(image);
     fig.appendChild(title);
-  }
+    galleryElement.appendChild(fig);
+  });
 }
 
-fetch("http://localhost:5678/api/works")
-  .then((reponse) => reponse.json())
-  .then((data) => {
-    console.log(data);
+function displayGalleryCategories(categories) {
+  const allCategoryButton = document.createElement("button");
+  allCategoryButton.textContent = "Tous";
+  allCategoryButton.setAttribute("class", "filter-button");
+  allCategoryButton.dataset.categoryId = "all";
+  filtersElement.appendChild(allCategoryButton);
 
-    pictureGallery(data);
+  categories.map((category) => {
+    const categoryButton = document.createElement("button");
+    categoryButton.textContent = category.name;
+    categoryButton.setAttribute("class", "filter-button");
+    categoryButton.dataset.categoryId = category.id;
+    filtersElement.appendChild(categoryButton);
   });
-
-function categoryFilter(dataFilter) {
-  const buttonT = document.createElement("button");
-  buttonT.textContent = "Tous";
-
-  const divFilter = document.createElement("div");
-
-  for (let i = 0; i < dataFilter.length; i++) {
-    const portFolio = document.getElementById("portfolio");
-
-    portFolio.appendChild(divFilter);
-    divFilter.appendChild(buttonT);
-
-    const buttonCategory = document.createElement("button");
-    buttonCategory.textContent = dataFilter[i].name;
-    divFilter.appendChild(buttonCategory);
-    // console.log(buttonCategory);
-    buttonT.addEventListener("click", () => {
-      const buttonAll = buttonT.textContent;
-      buttonAll === data.length;
-      console.log(buttonT);
-    });
-  }
 }
 
-fetch("http://localhost:5678/api/categories")
-  .then((response) => response.json())
-  .then((dataFilter) => {
-    console.log(dataFilter);
+function handleFilterClick(data, categoryId) {
+  galleryElement.innerHTML = "";
+  const newWorks = getWorksByCategoryId(data, categoryId);
+  displayGalleryWorks(newWorks);
+}
 
-    categoryFilter(dataFilter);
+async function main() {
+  const works = await getWorksAPI();
+  displayGalleryWorks(works);
+
+  const categories = await getCategoriesAPI();
+  displayGalleryCategories(categories);
+
+  const filterButtons = [...document.querySelectorAll(".filter-button")];
+  if (!filterButtons) {
+    return;
+  }
+
+  return filterButtons.map((button) => {
+    customEventListener(works, button);
   });
+}
 
-// function categoryFilter(data) {
-//   const portFolio = document.getElementById("portfolio");
-//   portFolio.appendChild(divFilter);
-//   const divFilter = document.createElement("div");
-
-//   const buttonT = document.createElement("button");
-//   buttonT.textContent = "Tous";
-//   buttonT.addEventListener("click", () => {
-//     pictureGallery(data);
-//   });
-//   buttonT.classList.add(".button_category");
-//   divFilter.classList.add("button_div");
-//   divFilter.appendChild(buttonT);
-//   dataFilter.forEach((category) => {
-//     const buttonCategory = document.createElement("button");
-//     buttonCategory.textContent = category.name;
-//     buttonCategory.classList.add(".button_category");
-//     divFilter.appendChild(buttonCategory);
-//     buttonCategory.addEventListener("click", () => {
-//       const categoryName = buttonCategory.textContent;
-//       const filterWorks = data.filter((work) => {
-//         return work.category.name === categoryName;
-//       });
-//       console.log(filterWorks);
-//       pictureGallery(filterWorks);
-//     });
-//   });
-//   const secondChild = portFolio.children[1];
-//   portFolio.insertBefore(divFilter, secondChild);
-// }
+main();
