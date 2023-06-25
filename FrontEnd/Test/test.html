@@ -46,22 +46,22 @@
                     <!-- /**************************** MODAL UPLOAD NOUVELLE IMAGE **************/ -->
                         <div class="modal-container" id="modal-upload-id">
                             <h4 class="modal-title">Ajout photo</h4>
-                            <form action="#" method="post" id="modal-upload-form">
+                            <form action="#" method="post" id="modal-upload-form" enctype="multipart/form-data">
                                 <div class="modal-upload-container">
-                                    <i class="fa-sharp fa-regular fa-image"></i>
-                                    <label for="imgUpload" type="button">+ Ajouter photo</label>
+                                    <i class="fa-sharp fa-regular fa-image" style="display: block;"></i>
+                                    <label for="imgUpload" type="button" id="imgUploadLabel" style="display: block;">+ Ajouter photo</label>
                                     <input type="file" name="imgUpload" id="imgUpload" size="4000" accept="image/png, image/jpeg" hidden="true" required="'true"></button>
-                                    <p class="modal-upload-condition">jpg, png: 4moi max</p>
+                                    <p class="modal-upload-condition" style="display: block;">jpg, png: 4moi max</p>
                                 </div>
                                 <div class="modal-upload-categories">
                                     <label for="modal-upload-title">Titre</label>
                                     <input type="text" name="modal-upload-title" id="modal-upload-title" required="'true">
                                     <label for="modal-upload-category">Catégorie</label>
                                     <select name="modal-upload-category" id="modal-upload-category" required="'true">
-                                        <option value=''> </option>
+                                        <option value=> </option>
                                     </select>
                                     <hr>
-                                    <input type="submit" value="Valider" disabled="true">
+                                    <input type="submit" value="Valider">
                                 </div>
                             </form>
                         </div>

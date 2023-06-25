@@ -1,13 +1,15 @@
 //********************** IMPORTS *************/
-const reponseCategory = await fetch("http://localhost:5678/api/categories");
+
+//********************** FETCH *************/
+const apiUrl = "http://localhost:5678/api/"
+const urlWork = `${apiUrl}works`
+const reponseCategory = await fetch(`${apiUrl}categories`);
 const category = await reponseCategory.json();
 
-const reponseWorks = await fetch("http://localhost:5678/api/works");
+const reponseWorks = await fetch(`${urlWork}`);
 const library = await reponseWorks.json();
 //********************** VARIABLES ***********/
 
-let modal = null
-let modalCible = null
 const overlay = document.querySelector('#modal-overlay');
 const modalWrapper = document.querySelector('.modal-wrapper');
 const modalUploadContainer = document.querySelector('#modal-upload-id');
@@ -17,20 +19,21 @@ const modalArrow = document.querySelector('.fa-arrow-left');
 const modalXmark = document.querySelector('.fa-xmark');
 const ajoutPhotoButton = document.querySelector('.modal-modification-button')
 const modalCtrl = document.querySelector('.modal-controleur')
-//********************** INIT *****/
+const cardGallery = document.querySelectorAll('.card-gallery')
+const modalGallery = document.querySelector('.modal-gallery');
+const token = localStorage.getItem('token');
+const formUpload = document.querySelector('#modal-upload-form')
+const inputFileImage = document.querySelector('#imgUpload');
+//********************** INIT ******************/
 function init(){
-    console.log(`Modal est ${modal}`);
-    console.log(`Modal ciblé est ${modalCible}`);
-    console.log(`Le Style de Modal est ${overlay.style.display}`);
-    console.log(modalModificationContainer);
     library.forEach((element) => {
          cardModalCreate(element);
-    
     })
 }
 
 init();
-//********************** OUVERTURE MODAL *****/
+//********************** OUVERTURE/FERMETURE/ SWITCH  MODAL *****/
+// Methode Grafikart
      //clique sur le bouton js-modal-open ouvre le modal href sur lien depuis modal.html ou index.html
                 //annule l'action de base de redirection du lien
                 //modalCible = href du lien pour afficher le contenu necessaire depuis js ou html
@@ -41,12 +44,13 @@ init();
                 // clique sur la croix , ferme tout
 
 
-
+// Useless ? 
 const stopPropagation = function (e){
     e.stopPropagation();
 
 };
 
+//Button Ouvrir la modal
 editionButton.addEventListener('click',(e) => {
     e.preventDefault();
     isActive(overlay);
@@ -57,6 +61,7 @@ editionButton.addEventListener('click',(e) => {
 
 })
 
+// Useless ? 
 // document.querySelectorAll('.js-modal-allclose').forEach((a) =>
 //     a.addEventListener('click',(a) => {
 //     if(a.target === overlay){
@@ -65,48 +70,61 @@ editionButton.addEventListener('click',(e) => {
 //     }
 //     allClose(a)
 // }););
+
+// Fermture modal sur clique de BG opaque
 overlay.addEventListener('click',(e) => {
     if(e.target === overlay){
         allClose(e)
     }
 });
 
+// Fermture modeal sur le X
 modalXmark.addEventListener('click',(e) => {
     allClose(e)
 });
 
+// Switch de page modal sur le bouton
 ajoutPhotoButton.addEventListener('click',(e) => {
-    e.preventDefault();
-    isClose(modalModificationContainer);
-    wrapperHeightRemove(modalWrapper);
-    isActive(modalArrow);
-    isActive(modalUploadContainer);
+    isEdit(e);
+    resetUploadContainer();
 })
 
+// Switch de page modal sur le bouton
 modalArrow.addEventListener('click',(e) => {
     e.preventDefault();
     isClose(modalArrow)
     isClose(modalUploadContainer);
     wrapperHeightActive(modalWrapper);
     isActive(modalModificationContainer);
-    
+    resetUploadContainer();
+    if(document.querySelector('.imageDisplayUploadBox')!= null){
+    document.querySelector('.imageDisplayUploadBox').remove()}
+    else{return}
 })
 
-
-
+/**
+ * 
+ * @param {string} element 
+ */
 function isActive(element){
     element.classList.add('active')
     if(modalWrapper){
         element.classList.add('height')
     }
-    console.log(element + `est affiché`);
 }
 
+/**
+ * 
+ * @param {string} element 
+ */
 function isToggle(element){
     element.classList.toggle('active');
-    console.log(`${element} est modifié`);
 }
 
+/**
+ * 
+ * @param {string} e 
+ */
 function allClose(e){
     e.preventDefault();
     isClose(modalModificationContainer);
@@ -117,26 +135,65 @@ function allClose(e){
     isClose(modalXmark);
     isClose(modalCtrl);
 }
+
+/**
+ * 
+ * @param {string} element 
+ */
+function isEdit(element){
+    if(element.target ==ajoutPhotoButton){
+    element.preventDefault();}
+    isClose(modalModificationContainer);
+    wrapperHeightRemove(modalWrapper);
+    isActive(modalArrow);
+    isActive(modalUploadContainer);
+}
+/**
+ * 
+ * @param {string} element 
+ */
 function isClose (element){
     element.classList.remove('active');
     if(modalWrapper){
         element.classList.remove('height')
     }
-    console.log(`${element} est fermé`);
 }
 
+/**
+ * 
+ * @param {string} element 
+ */
 function wrapperHeightRemove(element) {
     element.classList.remove('height')
 }
 
+/**
+ * 
+ * @param {string} element 
+ */
 function wrapperHeightActive(element) {
     element.classList.add('height')
 }
 
+function resetUploadContainer () {
+    const i = document.querySelector('.fa-image');
+    const b = document.querySelector('#imgUploadLabel');
+    const p = document.querySelector('.modal-upload-condition');
+    formUpload.reset()
+    i.style.opacity ='1';
+    b.style.opacity ='1';
+    p.style.opacity ='1';
+}
+
+//************************** */ CARD MODAL GALLERY ******************//
+/**
+ * 
+ * @param {object} element 
+ */
 function cardModalCreate (element) {
-    const modalGallery = document.querySelector('.modal-gallery');
     const cardGallery = document.createElement('div');
     cardGallery.classList.add('card-gallery')
+    cardGallery.setAttribute('data-id',element.id)
     const cardGalleryIMG = document.createElement('img');
     cardGalleryIMG.src = element.imageUrl;
     const cardGalleryArrow = document.createElement('i');
@@ -150,25 +207,213 @@ function cardModalCreate (element) {
     cardGallery.appendChild(cardGalleryTrash);
     cardGallery.appendChild(cardGallerySpan);
     modalGallery.appendChild(cardGallery);
-    console.log(`${element} card Modal créé`);
 }
 
+/**
+ * Supprimer un projet de l'api
+ */
 
+    const trashButton = document.querySelectorAll('.fa-trash-can').forEach((element, index)=>{
+    element.addEventListener('click', (event) =>{
+        console.log('click');
+        if(confirm(`Voulez-vous supprimer l'élement ciblé?`)){
+            const idParent = library[index].id;
+            let elementSupp = document.querySelector(`[data-id="${idParent}"]`);
+            console.log(elementSupp);
+            console.log(`${apiUrl}works/${idParent} supprime: ${library[index].title}`);
+             const suppression = fetch (`${urlWork}/${idParent}`,{
+                method : 'DELETE',
+                headers : {'Authorization': `Bearer`+ token,
+                            "Accept": "*/*"}
+            })
+            .then(suppression => suppression.ok)
+            .then(console.log('Suprression reussi !'),
+                elementSupp.remove(),
+                messageValidModal( document.querySelector('body'),"Suppression reussi !"),
+                console.log(library)
+            )
+
+        }else{return}
+    });
+});
+// ****************** OPTION SELECT D'UPLOAD ************************//
 category.forEach((element) => {
     const optionCategory = document.createElement('option')
-    optionCategory.setAttribute('value', element.name)
+    optionCategory.setAttribute('value', element.id)
     optionCategory.innerText = element.name
     const selectUpload = document.querySelector('#modal-upload-category')
     selectUpload.append(optionCategory)
-    console.log(`${element} filtre créé`);
 })
-//********************** FERMETURE MODAL *****/
 
-        //clique sur le bouton js-modal-close ferme le modal 
-            // annule l'action de base de redirection du lien
-            //modal toujours le moment 
-            //clique sur le modal( background noir) ferme tout
-            // clique sur la croix , ferme tout
+//********************** ACTION MODAL ********************************/
+
+//********************** UPLOAD IMAGE ********************************/
+var imageBase64
+inputFileImage.addEventListener('change',(file) =>{
+    const inputImg = file.target.files[0]
+    console.log("inputImg est :", inputImg);
+    recupInputImage(inputImg)
+});
+function recupInputImage (inputImg) {
+    if(!inputImg){ 
+        messageErreurModal(modalWrapper , "Pas de fichier à upload !")
+        return 
+    } 
+    const fileReader = new FileReader();
+    console.log("erreur FileReader :",fileReader.error);
+    console.log("FileReader :",fileReader.error);
+    fileReader.onload = function(event) {
+        imageBase64 = event.target.result;
+        console.log("imageBase64 :", imageBase64);
+        displayImage(imageBase64, inputImg);
+        return imageBase64
+    };
+    fileReader.readAsDataURL(inputImg)
+
+};
+
+function displayImage(imageBase64, file) {
+    const modalUploadContainerInput = document.querySelector('.modal-upload-container');
+    // Supprime img deja presente dans l'upload
+    const imgExistante = modalUploadContainerInput.querySelector('img')
+    if(imgExistante){
+        imgExistante.remove();} 
+
+    // Creation de l'image a afficher
+    const imageDisplay = document.createElement('img');
+    imageDisplay.classList.add('imageDisplayUploadBox');
+    imageDisplay.src = imageBase64
+
+    // Cache des element deriere l'image quand elle est presente
+    if(imageDisplay){
+    let i = document.querySelector('.fa-image').style.opacity='0';
+    let b = document.querySelector('#imgUploadLabel').style.opacity='0';
+    let p = document.querySelector('.modal-upload-condition').style.opacity='0';
+    }
+    
+    modalUploadContainerInput.prepend(imageDisplay);
+}
+
+function messageErreurModal(lieu, message){
+    const Span = document.createElement('span');
+    Span.setAttribute('class','error modal-notification')
+    Span.innerText = ` ${message} !`
+    lieu.prepend(Span);
+    setTimeout(() => Span.remove(), 3000)
+}
+
+function messageValidModal(lieu, message){
+    const Span = document.createElement('span');
+    Span.setAttribute('class','valid modal-notification')
+    Span.innerText = ` ${message} !`
+    lieu.prepend(Span);
+    setTimeout(() => Span.remove(), 1500)
+}
+
+/************************* UPLOAD TITRE *****************************/
+const inputFileTitre = document.querySelector('#modal-upload-title');
+/************************* UPLOAD CATEGORIE *************************/
+const inputFileSelect = document.querySelector('#modal-upload-category');
+/************************* ENVOI UPLOAD ******************************/
+// async function addProjet (){
 
 
-//********************** ACTION MODAL *****/
+formUpload.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const titre = inputFileTitre.value.trim();
+    const category = inputFileSelect.value;
+    const myRegex = /^[a-zA-Z\s-]+$/;
+
+
+
+    if (!myRegex.test(titre)) {
+         messageErreurModal(modalWrapper, "Titre invalide");
+        return;
+    } else if (!inputFileImage.files[0]) {
+        messageErreurModal(modalWrapper, "Image non conforme");
+        return;
+    }
+    
+    // const fileReader = new FileReader();
+    // fileReader.onload = async function() {
+        // const imageBase64 = fileReader.result;
+        // console.log("file base64:", imageBase64);
+        // console.log("inuptFileImage.files.[0] :", inputFileImage.files[0]);
+        let formData = new FormData();
+
+        formData.append('image', inputFileImage.files[0]);
+        formData.append('title', titre);
+        formData.append('category', category);
+        console.log("formData :",formData);
+
+        /**
+         * Envoi du formulaire au serveur
+         */
+        try {
+            let sendWork = await fetch(`${urlWork}`, {
+                method: 'POST',
+                body: formData,
+                headers: { "Accept": "application/json;  charset=utf-8",
+                    "Authorization": `Bearer ${token}`,
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+    
+
+            if (sendWork.ok) {
+                console.log("Envoi réussi!");
+                messageValidModal(modalWrapper, "Envoi réussi !");
+                console.log(library);
+            } else {
+                messageErreurModal(modalWrapper, "Envoi refusé !")
+                console.log("Échec de l'envoi !");
+            }
+        } 
+        catch (error) {
+                console.log("Erreur accès serveur");
+                messageErreurModal(modalWrapper, "Impossible d'accéder au serveur");
+        }
+    // };
+    // fileReader.readAsDataURL(inputFileImage.files[0]);
+  });
+// }
+//***************************** FACULTATIVE **************************/
+//****************** OUVERTURE EDITION D'UN PROJET ******************/
+
+
+/**
+ * Lors du clique sur "editer"  // DONE
+ * ça switch sur modal-upload-container // DONE
+ * const modalUploadContainerInput = document.querySelector('.modal-upload-container') //DONE
+ * modalUploadContainerInput.remove(document.querySelector('i')); //DONE
+ * const imageDisplay = document.createElement('img'); // DONE
+ * imageDisplay.src = document.querySelector('cardGallery img') ;  //DONE
+ * imageDisplay.classList.add('imageDisplayUploadBox');  //DONE
+ * modalUploadContainerInput.prepend(imageDisplay); 
+ * const titreUploadInput = document.querySelector('#modal-upload-title);
+ * const titreDisplay = document.querySelector(card.title)
+ * titreUploadInput.innerText =titreDisplay 
+ * const categoryUploadInput = document.querySelector('#modal-upload-title);
+ * const categoryDisplay = document.querySelector(card.category.id)
+ * categoryUploadInput.selectedIndex= categoryDisplay - 1
+ */
+/**
+ * 
+ * @param {string} balise 
+ */
+// function displayBaliseNone(balise){ 
+//         const arrayModalUploadContainerInput = Array.from(modalUploadContainerInput);
+//         console.log(arrayModalUploadContainerInput);
+//         arrayModalUploadContainerInput.forEach((balise,index)=> {
+//             const balisechild = balise
+//             balise.style.display ="none"});
+//         }
+      
+
+// document.querySelectorAll('.card-gallery span').forEach((span, index) => {
+//     span.addEventListener('click',(card) => {
+//         ;
+
+//     })
+// })

@@ -5,6 +5,17 @@
 
 }
 
+@keyframes notifAnimation {
+    0%{transform: scale(1);}
+    50%{transform: scale(1.2);}
+    100%{transform: scale(1);}
+}
+
+@keyframes opacityBox {
+    from{opacity: 0;}
+    to{opacity: 1;}
+}
+
 body {
     background-color: antiquewhite;
 }
@@ -100,7 +111,7 @@ h1 {
 .modal-container {
     display: flex;
     flex-direction: column;
-    width: 420px;
+    width: 100%;
     margin-top: 60px;
     align-items: center;
     position: absolute;
@@ -143,25 +154,53 @@ h1 {
     cursor: pointer;
     transform: translateY(-100px);
     opacity: 0;
-    transition: all 0.25s ease-out;
+    transition: transform 0.25s ease-out;
 }
 
 .modal-controleur.active {
     opacity: 1;
     transform: translateY(0px);
+    transition: all 0.1s;
 }
+
+.modal-notification {
+    position: absolute;
+    top: 45%;
+    z-index: 100;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    border: 1px red;
+    border-radius: 10px;
+    padding: 10px;
+    font-family: 'Work Sans';
+    font-size: 16px;
+
+    
+}
+
+.error {
+    background-color: rgb(219, 86, 86);
+    color: rgb(82, 13, 13);
+    animation: notifAnimation infinite 1s ease-in-out ;
+    animation: opacityBox 0.5s ease-in-out ease-in-out;
+}
+
+.valid{
+    background-color: #3fb466;
+    color: #CBD6DC;
+    animation: notifAnimation infinite 2s ease-in-out ;
+}
+
 
 .fa-solid {
     color: black;
     transform: scale(1);
-    transition: all 0.1s;
+    transition: transform 0.3s;
     opacity: 1;
 }
 
-.fa-solid:focus {
-    transform: scale(2);
+.fa-solid:hover {
+    transform: scale(1.5);
     color: black;
-    opacity: 0;
 }
 
 
@@ -186,6 +225,8 @@ h1 {
     width: 70%;
     height: 386px;
     margin: 46px 0px;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .modal-modification-button,
@@ -230,20 +271,27 @@ background-color :#A7A7A7 ;
 }
 #modal-upload-form {
     width: 100%;
+    max-width: 420px;
 }
 .modal-upload-container{
+    position: relative;
     background-color:#E8F1F6;
-    width: 70%;
+    width:100%;
     height: 169px;
     border-radius: 3px;
     margin-top: 30px ;
 }
 
 .modal-upload-container i {
-    font-size: 70px;
+    font-size: 60px;
     color: #B9C5CC;
 }
-
+.imageDisplayUploadBox {
+    height: 100%;
+    width: auto;
+    position: absolute;
+    top: 0;
+}
 .modal-upload-container label {
         background-color: #CBD6DC;
     color: #306685;
@@ -265,7 +313,7 @@ background-color :#A7A7A7 ;
 
 .modal-upload-categories {
     margin-top: 7px;
-    width: 70%;
+    width: 100%;
 }
 
 .modal-upload-categories hr{
@@ -294,7 +342,55 @@ background-color :#A7A7A7 ;
     margin-bottom: 47px;
 }
 
-.modal-upload-categories  select option{
-    
+
+/* ---------CARD GALERY MODAL ---------- */
+
+.card-gallery {
+    width: 78.12px;
+    height: 120px;
+    margin: 5px 3.5px;
+    position: relative;
+    padding-bottom: 3px;
 }
 
+.card-gallery .fa-solid {
+    position: absolute;
+    color: white;
+    font-size: 12px;
+    top: 0;
+    right: 0;
+    margin: 6px;
+    padding: 2.5px;
+    background-color: #000000;
+    border-radius: 2px;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.3s ease-out;
+}
+
+.card-gallery:hover .fa-solid {
+    opacity: 1;
+}
+
+.card-gallery .fa-arrows-up-down-left-right{
+    margin-right: 25px;
+}
+
+.card-gallery img {
+    width: 100%;
+    height: 90%;
+}
+
+.card-gallery span {
+    cursor: pointer;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-size: 12px;
+    font-family: 'Work Sans';
+    padding-top: 1px;
+}
+
+.card-gallery span:hover {
+    font-weight: bold;
+}

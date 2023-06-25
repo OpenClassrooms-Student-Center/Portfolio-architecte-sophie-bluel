@@ -29,8 +29,10 @@ formLogin.addEventListener('submit',async function(element){
                     const data = await reponse.json();
                     console.table(data);
                     localStorage.setItem("token", data.token);
-                    console.log(localStorage.getItem("token"))
-                    window.location.href="index.html"
+                    localStorage.setItem("userID", data.userId);
+                    console.log(localStorage.getItem("token"));
+                    console.log(localStorage.getItem("userId"));
+                    window.location.href="index.html";
                 }
                 else{
                     createMessageErreur('#login-section',messageErreur);
