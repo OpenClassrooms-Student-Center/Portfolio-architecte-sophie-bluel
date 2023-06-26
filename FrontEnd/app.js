@@ -80,6 +80,36 @@ function appendWorkToGallery(work, galleryElement) {
     div.appendChild(title);
     galleryElement.appendChild(div);
 }
+function appendWorkToModal(work, modalElement) {
+    let div = document.createElement('div');
+    div.style.display = 'flex';
+    div.style.flexDirection = 'column';
+    div.style.alignItems = 'flex-start';
+    div.style.margin = '10px';
+
+    // crée un nouvel élément img
+    let img = document.createElement('img');
+    img.style.margin = '10px';
+    let title = document.createElement('h3');
+
+    // attribut src de l'élément img pour pointer vers l'image
+    img.src = work.imageUrl;
+    title.textContent = work.title;
+    title.style.marginLeft = '10px'
+    // Crée un bouton de suppression pour chaque travail
+    let deleteButton = document.createElement('button');
+    deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i>';
+    deleteButton.addEventListener('click', function () {
+        deleteWork(work.id);
+    });
+
+    // ajoute l'élément img à l'élément gallery
+    div.appendChild(img);
+    div.appendChild(title);
+    modalElement.appendChild(div);
+    div.appendChild(deleteButton);
+    modalElement.appendChild(div);
+}
 
 // Crée un bouton pour chaque catégorie
 function createCategoryButton(category, categories, data, filterContainerElement) {
@@ -155,6 +185,25 @@ function appendElementsToContent(filterContainerElement, galleryElement) {
     contentElement.appendChild(galleryElement);
 }
 
+function deleteWork(workId) {
+    fetch('http://localhost:5678/api/works/' + workId, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token'),
+        },
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(response.status);
+        }
+        // Actualisez la galerie pour retirer l'œuvre supprimée
+        refreshGallery();
+    })
+    .catch(error => {
+        console.error('Erreur:', error);
+    });
+}
+
 // Utilisation des fonctions 
 fetchWorks().then(data => {
     if (data) {
@@ -205,20 +254,25 @@ form.addEventListener('submit', (e) => {
 });
 
 
-let modal = null
+let modal = null;
+let focusables = [];
+const focusablesSelector = 'button, a, input, textarea';
+
 const openModal = function (e) {
-    e.preventDefault()
-    const target = document.querySelector(e.target.getAttribute('href'))
-    target.style.display = null
-    target.removeAttribute('aria-hidden')
-    target.setAttribute('aria-modal', 'true')
-    modal = target
-    modal.addEventListener('click', closeModal)
-    modal.querySelector('.js-close-modal').addEventListener('click', closeModal)
-    modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
-
-
+    e.preventDefault();
+    const target = document.querySelector(e.target.getAttribute('href'));
+    if (target) { // Vérifie que l'élément cible existe
+        target.style.display = null;
+        target.removeAttribute('aria-hidden');
+        target.setAttribute('aria-modal', 'true');
+        modal = target;
+        focusables = Array.from(modal.querySelectorAll(focusablesSelector)); 
+        modal.addEventListener('click', closeModal);
+        modal.querySelector('.js-close-modal').addEventListener('click', closeModal);
+        modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation);
+    }
 }
+
 const closeModal = function (e) {
     if (modal === null) return
     e.preventDefault()
@@ -235,9 +289,36 @@ const stopPropagation = function (e) {
     e.stopPropagation()
 }
 
+const focusInModal = function (e) {
+    e.preventDefault();
+    let index = focusables.findIndex(f => f === modal.querySelector(':focus'));
+    if (e.shiftKey === true) { 
+        index--;
+    } else { 
+        index++;
+    }
+    if (index >= focusables.length) { 
+        index = 0;
+    }
+    if (index < 0) { 
+        index = focusables.length - 1;
+    }
+    focusables[index].focus();
+}
+
+
 document.querySelectorAll('.js-modal').forEach(a => {
     a.addEventListener('click', openModal)
 
+})
+
+window.addEventListener('keydown', function (e){
+    if (e.key === 'Escape'|| e.key === 'Esc' ){
+        closeModal(e)
+    }
+    if (e.key === 'Tab' && modal !== null){
+        focusInModal(e)
+    }
 })
 
 const modalGallery = document.querySelector('#modal1 .gallerie');
@@ -245,9 +326,49 @@ const modalGallery = document.querySelector('#modal1 .gallerie');
 fetchWorks().then(data => {
     // Ajoute les travaux à la galerie modale
     const modalGalleryElement = document.querySelector('#modal1 .gallerie');
-    data.forEach(work => appendWorkToGallery(work, modalGalleryElement));
+    data.forEach(work => appendWorkToModal(work, modalGalleryElement));
 
 });
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const addWorkForm = document.querySelector('#addWorkForm');
+// addWorkForm.addEventListener('submit', function (e) {
+//     e.preventDefault();
+
+//     const formData = new FormData(addWorkForm);
+
+//     fetch('http://localhost:5678/api/works', {
+//         method: 'POST',
+//         headers: {
+//             'Authorization': 'Bearer ' + localStorage.getItem('token'),
+//         },
+//         body: formData,
+//     })
+//     .then(response => {
+//         if (!response.ok) {
+//             throw new Error(response.status);
+//         }
+//         // Actualisez la galerie pour inclure la nouvelle œuvre
+//         refreshGallery();
+//     })
+//     .catch(error => {
+//         console.error('Erreur:', error);
+//     });
+// });
