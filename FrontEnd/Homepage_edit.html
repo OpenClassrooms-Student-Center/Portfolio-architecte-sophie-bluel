@@ -9,8 +9,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
         rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+
     <meta name="description" content="">
     <link rel="stylesheet" href="./assets/style.css">
 </head>
@@ -18,15 +21,15 @@
 <body>
     <div class="mode-edit">
         <i class="fa-light fa-pen-to-square fa-xs"></i>
-        <h2>Mode Édition </h2>
+        <h4> <i class="fas fa-edit"></i>Mode Édition </h4>
         <button>Publier les changements </button>
     </div>
     <header>
         <h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
         <nav>
             <ul>
-                <li>projets</li>
-                <li>contact</li>
+                <li><a href="#portfolio">projets</a></li>
+                <li><a href="#contact">contact</a></li>
                 <li><a href="login.html">Login</a></li>
                 <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
             </ul>
@@ -38,6 +41,8 @@
                 <img src="./assets/images/sophie-bluel.png" alt="">
             </figure>
             <article>
+                <a href="#modal1" class="btn-modifier-intro"> <i class="fas fa-edit"></i>
+                    Modifier </a>
                 <h2>Designer d'espace</h2>
                 <p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison
                     finale du chantier.</p>
@@ -48,23 +53,66 @@
                     décorateur(trice)</p>
             </article>
         </section>
+        <a href="#modal1" class="btn-modifier-photo"> <i class="fas fa-edit"></i>
+            Modifier </a>
         <section id="portfolio">
             <h2>Mes Projets</h2>
             <i class="fa-light fa-pen-to-square fa-xs"></i>
+            <a href="#modal1" class="js-modal btn-modifier-galerie"> <i class="fas fa-edit"></i>
+                Modifier </a>
 
-            <a href="#modal1" class="js-modal"> Modifier </a>
-            
-            <aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="title-modal" style="display: none;">
+            <aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-modal="false"
+                aria-labelledby="title-modal" style="display: none;">
                 <div class="modal-content js-modal-stop gallery2 gallery2 ">
                     <button class="js-close-modal close-modal">
                         <i class="fas fa-times"></i>
                     </button>
-                    <h3 id="title-modal"> Gallerie photo </h3>
+                    <h3 id="title-modal"> Galerie photo </h3>
                     <div class="gallerie"></div>
-                    <button>Ajouter une photo </button>
-                    <button> Supprimer la gallerie</button>
+                    <hr>
+                    <a href="#modal2" class="js-modal btnAdd"> Ajouter une photo </a>
+                    <button class="buttonSup"> Supprimer la gallerie</button>
                 </div>
             </aside>
+            <aside id="modal2" class="modal" aria-hidden="true" role="dialog" aria-modal="false"
+                aria-labelledby="title-modal" style="display: none;">
+                <div class="modal-content js-modal-stop">
+                    <button class="js-close-modal close-modal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <form id="addWorkForm">
+                        <h2>Ajout photo</h2>
+
+                        <div class="photoUpload input-form">
+                            <input type="file" id="photoUpload" name="photoUpload" accept="image/png, image/jpeg"
+                                required>
+                            <p>jpg. png. 4 mo max</p>
+                        </div>
+
+                        <div class="input-form">
+                            <p>Titre</p>
+                            <input type="text" id="title" name="title" required>
+                        </div>
+
+                        <div class="input-form">
+                            <p>Catégorie</p>
+                            <select id="category" name="category" required>
+                                <option value=""></option>
+                                <option value="option1">Objets </option>
+                                <option value="option2"> Appartements</option>
+                                <option value="option3">Hôtels et restaurants</option>
+                            </select>
+                        </div>
+
+                        <hr>
+
+                        <button type="submit" id="btn-modal">Valider</button>
+                    </form>
+
+                </div>
+            </aside>
+
+
 
 
             <div id="content">

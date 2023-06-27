@@ -21,7 +21,7 @@ exports.create = async (req, res) => {
 		})
 		return res.status(201).json(work)
 	}catch (err) {
-		return res.status(500).json({ error: new Error('Something went wrong') })
+		return res.status(500).json({ error: new Error(err) })
 	}
 }
 

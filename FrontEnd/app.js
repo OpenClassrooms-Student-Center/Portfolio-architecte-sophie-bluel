@@ -1,3 +1,4 @@
+// récupère les données de l'api 
 function fetchWorks() {
     const token = localStorage.getItem('token');
 
@@ -53,11 +54,7 @@ function setupGalleryElement() {
     return element;
 }
 
-function appendModal() {
-
-}
-
-// Ajoute un élément de travail à la galerie
+// Ajoute un élément de travail à la galerie de la home page 
 function appendWorkToGallery(work, galleryElement) {
     let div = document.createElement('div');
     div.style.display = 'flex';
@@ -80,25 +77,24 @@ function appendWorkToGallery(work, galleryElement) {
     div.appendChild(title);
     galleryElement.appendChild(div);
 }
+// Ajoute un élément de travail à la galerie de la fenètre modal 
 function appendWorkToModal(work, modalElement) {
     let div = document.createElement('div');
-    div.style.display = 'flex';
-    div.style.flexDirection = 'column';
-    div.style.alignItems = 'flex-start';
-    div.style.margin = '10px';
-
+    div.className = 'img-content'
+  
     // crée un nouvel élément img
     let img = document.createElement('img');
-    img.style.margin = '10px';
-    let title = document.createElement('h3');
+    let title = document.createElement('h4');
 
     // attribut src de l'élément img pour pointer vers l'image
     img.src = work.imageUrl;
-    title.textContent = work.title;
-    title.style.marginLeft = '10px'
+    title.textContent = 'éditer';
+    
     // Crée un bouton de suppression pour chaque travail
     let deleteButton = document.createElement('button');
+    deleteButton.className = 'trash-btn'
     deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i>';
+    
     deleteButton.addEventListener('click', function () {
         deleteWork(work.id);
     });
@@ -184,7 +180,7 @@ function appendElementsToContent(filterContainerElement, galleryElement) {
     contentElement.appendChild(filterContainerElement);
     contentElement.appendChild(galleryElement);
 }
-
+// supprime un travail de la gallerie 
 function deleteWork(workId) {
     fetch('http://localhost:5678/api/works/' + workId, {
         method: 'DELETE',
@@ -192,183 +188,178 @@ function deleteWork(workId) {
             'Authorization': 'Bearer ' + localStorage.getItem('token'),
         },
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(response.status);
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(response.status);
+            }
+            
+            refreshGallery();
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+        });
+}
+
+if (window.location.pathname === "/FrontEnd/login.html") {
+    const form = document.querySelector('form');
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        let email = document.getElementById('email').value;
+        let password = document.getElementById('password');
+        if (password) {
+            password = password.value;
         }
-        // Actualisez la galerie pour retirer l'œuvre supprimée
-        refreshGallery();
-    })
-    .catch(error => {
-        console.error('Erreur:', error);
+        fetch('http://localhost:5678/api/users/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password }),
+        })
+            .then(response => {
+                if (response.status == "200") {
+                    return response.json();
+                } else {
+                    throw new Error(response.status)
+                }
+            })
+            .then(data => {
+                if (data.token) {
+                    localStorage.setItem('token', data.token);
+                    window.location.href = '/FrontEnd/Homepage_edit.html';
+                    return
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                const errorMessageElement = document.getElementById('errorMessage');
+                errorMessageElement.textContent = 'Erreur dans l’identifiant ou le mot de passe';
+                errorMessageElement.classList.add('error');
+                errorMessageElement.style.display = 'block';
+            });
     });
 }
 
-// Utilisation des fonctions 
-fetchWorks().then(data => {
-    if (data) {
-        const categories = organizeByCategory(data);
-        const galleryElement = setupGalleryElement();
-        const filterContainerElement = createFilterContainer();
-        addCategoryButtonsToFilterContainer(categories, data, filterContainerElement);
-        appendElementsToContent(filterContainerElement, galleryElement);
-        filterContainerElement.querySelector('button').click();
-    }
-});
 
-const form = document.querySelector('form');
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-
-    fetch('http://localhost:5678/api/users/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-    })
-        .then(response => {
-            if (response.status == "200") {
-                return response.json();
-            } else {
-                throw new Error(response.status)
-            }
-        })
-        .then(data => {
-            if (data.token) {
-                localStorage.setItem('token', data.token);
-                window.location.href = '/FrontEnd/Homepage_edit.html';
-                return
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            const errorMessageElement = document.getElementById('errorMessage');
-            errorMessageElement.textContent = 'Erreur dans l’identifiant ou le mot de passe';
-            errorMessageElement.classList.add('error');
-            errorMessageElement.style.display = 'block';
-        });
-});
-
-
-let modal = null;
+// modal 
+let modalStack = [];
 let focusables = [];
 const focusablesSelector = 'button, a, input, textarea';
 
 const openModal = function (e) {
     e.preventDefault();
     const target = document.querySelector(e.target.getAttribute('href'));
-    if (target) { // Vérifie que l'élément cible existe
+    if (target) {
         target.style.display = null;
         target.removeAttribute('aria-hidden');
         target.setAttribute('aria-modal', 'true');
+        modalStack.push(target);
         modal = target;
-        focusables = Array.from(modal.querySelectorAll(focusablesSelector)); 
-        modal.addEventListener('click', closeModal);
+        focusables = Array.from(modal.querySelectorAll(focusablesSelector));
+        modal.addEventListener('click', function (e) {
+            if (!e.target.closest('.js-modal-stop')) {
+                closeModal(e);
+            }
+        });
         modal.querySelector('.js-close-modal').addEventListener('click', closeModal);
         modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation);
     }
 }
 
 const closeModal = function (e) {
-    if (modal === null) return
-    e.preventDefault()
-    modal.style.display = 'none'
-    modal.setAttribute('aria-hidden', 'true')
-    modal.removeAttribute('aria-modal')
-    modal.removeEventListener('click', closeModal)
-    modal.querySelector('.js-close-modal').removeEventListener('click', closeModal)
-    modal.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation)
-    modal = null
+    const modal = modalStack.pop();
+    if (!modal) return;
+    e.preventDefault();
+    modal.style.display = 'none';
+    modal.setAttribute('aria-hidden', 'true');
+    modal.removeAttribute('aria-modal');
+    modal.removeEventListener('click', closeModal);
+    modal.querySelector('.js-close-modal').removeEventListener('click', closeModal);
+    modal.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation);
+    if (modalStack.length > 0) {
+        const lastModal = modalStack[modalStack.length - 1];
+        focusables = Array.from(lastModal.querySelectorAll(focusablesSelector));
+    }
 }
 
 const stopPropagation = function (e) {
     e.stopPropagation()
 }
-
 const focusInModal = function (e) {
     e.preventDefault();
     let index = focusables.findIndex(f => f === modal.querySelector(':focus'));
-    if (e.shiftKey === true) { 
+    if (e.shiftKey === true) {
         index--;
-    } else { 
+    } else {
         index++;
     }
-    if (index >= focusables.length) { 
+    if (index >= focusables.length) {
         index = 0;
     }
-    if (index < 0) { 
+    if (index < 0) {
         index = focusables.length - 1;
     }
     focusables[index].focus();
 }
 
+if (window.location.pathname == "/FrontEnd/Homepage_edit.html"|| window.location.pathname == "/FrontEnd/index.html") {
+    console.log("ici")
+    fetchWorks().then(data => {
+        if (data) {
+            const categories = organizeByCategory(data);
+            const galleryElement = setupGalleryElement();
+            const filterContainerElement = createFilterContainer();
+            addCategoryButtonsToFilterContainer(categories, data, filterContainerElement);
+            appendElementsToContent(filterContainerElement, galleryElement);
+            filterContainerElement.querySelector('button').click();
+        }
+    });
+    document.querySelectorAll('.js-modal').forEach(a => {
+        a.addEventListener('click', openModal)
 
-document.querySelectorAll('.js-modal').forEach(a => {
-    a.addEventListener('click', openModal)
+    })
 
-})
+    window.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' || e.key === 'Esc') {
+            closeModal(e)
+        }
+        if (e.key === 'Tab' && modal !== null) {
+            focusInModal(e)
+        }
+    })
 
-window.addEventListener('keydown', function (e){
-    if (e.key === 'Escape'|| e.key === 'Esc' ){
-        closeModal(e)
-    }
-    if (e.key === 'Tab' && modal !== null){
-        focusInModal(e)
-    }
-})
+    const modalGallery = document.querySelector('#modal1 .gallerie');
 
-const modalGallery = document.querySelector('#modal1 .gallerie');
+    fetchWorks().then(data => {
+        const modalGalleryElement = document.querySelector('#modal1 .gallerie');
+        data.forEach(work => appendWorkToModal(work, modalGalleryElement));
 
-fetchWorks().then(data => {
-    // Ajoute les travaux à la galerie modale
-    const modalGalleryElement = document.querySelector('#modal1 .gallerie');
-    data.forEach(work => appendWorkToModal(work, modalGalleryElement));
-
-});
-
-
-
-
-
-
-
-
-
-
-
-
+    });
 
 
+    const addWorkForm = document.querySelector('#addWorkForm');
+    addWorkForm.addEventListener('submit', function (e) {
+        e.preventDefault();
 
+        const formData = new FormData(addWorkForm);
+        fetch('http://localhost:5678/api/works', {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
+            },
+           
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(response.status);
+                }
+                
+                refreshGallery();
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+            });
+    });
 
-
-
-
-// const addWorkForm = document.querySelector('#addWorkForm');
-// addWorkForm.addEventListener('submit', function (e) {
-//     e.preventDefault();
-
-//     const formData = new FormData(addWorkForm);
-
-//     fetch('http://localhost:5678/api/works', {
-//         method: 'POST',
-//         headers: {
-//             'Authorization': 'Bearer ' + localStorage.getItem('token'),
-//         },
-//         body: formData,
-//     })
-//     .then(response => {
-//         if (!response.ok) {
-//             throw new Error(response.status);
-//         }
-//         // Actualisez la galerie pour inclure la nouvelle œuvre
-//         refreshGallery();
-//     })
-//     .catch(error => {
-//         console.error('Erreur:', error);
-//     });
-// });
+}

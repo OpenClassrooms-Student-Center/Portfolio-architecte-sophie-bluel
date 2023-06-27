@@ -22,6 +22,9 @@ nav a{
 }
 
 /* gallerie homepage*/
+.portfolio{
+    position: relative;
+}
 /* Style pour la galerie principale */
 #gallery img {
     width: 100%;
@@ -38,49 +41,35 @@ nav a{
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     
+    
 }
 
-
-
-.error {
-    color: red;
-    font-weight: bold;
-    margin: 10px 0;
-    padding: 12px;
-    border: 1px solid red;
-    border-radius: 5px;
-    background-color: #f8d7da;
-    display: none;  
-}
+/* mode edition */
 
 .mode-edit{
-    width: 100%;
+    min-width: 1140px; 
     height: 59px;
     background-color: black;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0;
 }
 
-.mode-edit h2{
-  font-size: 12px;
-    color: white;
-    margin-right: 10px;
-
-    font-weight: '200';
+.mode-edit h4{
+    color: #FFFFFF;
 }
-
 
 .mode-edit button{
-    width: 200px;
-    height: 40px;
-    font-size: 12px;
-    text-align: center;
-    background-color: #FFFFFF;
     color: black;
-    border-radius: 25px;
-  
+    background-color: #FFFFFF;
+    border: none;
+    border-radius: 50px;
+    padding: 10px;
+    width: 200px;
+    margin-left: 20px;
 }
+
 
 /* partie boite modale */
 .modal {
@@ -92,21 +81,41 @@ nav a{
     left: 0;
     height: 100%;
     width: 100%;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.30);
+}
+
+.modal h3 {
+    font-size: 26px;
+    margin-bottom: 50px;
 }
 
 .modal-content{
+    position: relative; 
     overflow: auto;
     background-color: #FFFFFF;
     width: 630px;
     height: 670px;
     border-radius: 10px;
-    max-width: calc(100vh - 20px);
-    max-height: calc(100vh - 20px);
+    max-height: calc(100vh - 30px); 
     padding: 20px;
     text-align: center;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     
 }
+
+.input-form{
+    width: 400px;
+}
+.input-form p {
+    text-align: start;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+
 
 .title-modal{
     font-size: 26px;
@@ -115,34 +124,135 @@ nav a{
 }
 
 .close-modal{
-    margin-left: 500px;
+    position: absolute;
+    left: 90%;
     background: none;
     border: none;
     font-size: 24px;
     
 }
 
+.img-content{
+    position: relative;
+    margin: 10px;
+}
 
+.trash-btn{
+    position: absolute;
+    top: 3%;
+    left: 60%;
+    font-size: 12px;
+    background-color: black;
+    color: #FFFFFF;
+    border: 10px;
+    
+}
 
+hr{
+    margin-top: 30px;
+    color: #848282;
+}
 
+#btn-modal{
+    width: 250px;
+    background-color: rgb(164, 157, 157);
+    color: #FFFFFF;
+    border-radius: 50px;
+    height: 40px;
+    margin-top: 30px;
+    border: none;
+    
+    
+}
 
+.btnAdd{
+    width: 250px;
+    color: #FFFFFF;
+    background-color: #1D6154;
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    text-decoration: none;
+    border-radius: 50px;
+    padding: 10px;
+    
+}
 
+.buttonSup{
+    border: none;
+    background-color: #FFFFFF;
+    color: rgb(234, 60, 60);
+    margin-top: 15px;
+}
 
+/* .js-modal{
+    max-width: 200px; 
+    background-color: #1D6154;
+    color: #FFFFFF;
+    border-radius: 60px;
+    height: 30px;
+    margin: auto;
 
+} */
 
+#photoUpload {
+    height: 100px;
+    background-color: #E8F1F6; 
+}
+
+.photoUpload{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* button modifier */
+
+.btn-modifier-galerie{
+    position: relative;
+    left: 62%;
+    bottom: 50px;
+    color: #3D3D3D;
+    text-decoration: none;
+}
+.btn-modifier-photo{
+    position: relative;
+    left: 11%;
+    bottom: 40px;
+    color: #3D3D3D;
+    text-decoration: none;
+    
+}
+.btn-modifier-intro{
+    position: relative;
+    bottom: 15px;
+    color: #3D3D3D;
+    text-decoration: none;
+    
+}
 
 
 .login {
     width: 100%;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
 }
 
 .form-container {
     width: 379px;
-    margin: 0 auto;
     padding: 20px;
+    
 
 
+}
+
+.addWorkForm h2{
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .form-container h2 {
@@ -157,9 +267,35 @@ nav a{
     margin-top: 30px;
 }
 
+
+.addWorkForm{
+    text-align: start;
+    color: #3D3D3D;
+    margin-top: 30px;
+    margin-bottom: 7px;
+}
+
 .form-container input[type="email"],
 .form-container input[type="password"] {
     width: 100%;
+    height: 35px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: #FFFFFF;
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.106);
+}
+.modal-content input[type="file"],
+.modal-content input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: #FFFFFF;
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.106);
+}
+#category {
+    width: 400px;
     height: 35px;
     padding: 10px;
     margin-bottom: 10px;
@@ -183,6 +319,10 @@ nav a{
     text-align: center;
     /* Ajout de cette ligne */
 }
+.modal-content form {
+    text-align: center;
+    /* Ajout de cette ligne */
+}
 
 .form-container a {
     display: block;
@@ -193,6 +333,19 @@ nav a{
 }
 
 
+
+/* message erreur login*/
+
+.error {
+    color: red;
+    font-weight: bold;
+    margin: 10px 0;
+    padding: 12px;
+    border: 1px solid red;
+    border-radius: 5px;
+    background-color: #f8d7da;
+    display: none;  
+}
 
 
 

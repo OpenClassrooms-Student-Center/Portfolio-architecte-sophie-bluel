@@ -48,18 +48,18 @@ table {
 }
 /** end reset css**/
 body {
-	max-width: 1140px;
-	margin:auto;
+	
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 }
 header {
+	max-width: 1140px;
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 50px 100px; 
 }
 section {
-	margin: 50px 0
+	margin: 50px 100px; 
 }
 
 h1{
