@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sophie Bluel - Architecte d'intérieur</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="./assets/style.css" />
+  </head>
+  <body>
+    <header>
+        <a href="./index.html">
+            <h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
+        </a>
+      <nav>
+        <ul>
+          <li>projets</li>
+          <li>contact</li>
+          <li class="login_btn">login</li>
+          <li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+        <section class="login__section">
+            <h2>Log In</h2 >
+              <p class="alert_connection"></p>
+                <form class="login__form">
+                    <div class="login__form__labelgroup">
+                        <label for="Email">E-mail</label>
+                        <input type="email" name="email" id="Email" value="" onfocus="this.value=''" >
+                        <p class="alert_mail">Merci d'entrer un email</p>
+                    </div>
+                    <div class="login__form__labelgroup">
+                        <label for="Password">Mot de passe</label>
+                        <input type="password" name="password" id="Password" value="" onfocus="this.value=''">
+                        <p class="alert_password">Merci d'entrer un mot de passe</p>
+                    </div>
+                    <div class="login__form__button">
+                        <button class="btn btn--loggin">Se connecter</button>
+                        <a href="#"><u>Mot de passe oublié</u></a>
+                    </div>
+                </form>
+        </section>
+    </main>
+    <footer>
+      <nav>
+        <ul>
+          <li>Mentions Légales</li>
+        </ul>
+      </nav>
+    </footer>
+    <script src="./login.js"></script>
+  </body>
+</html>
