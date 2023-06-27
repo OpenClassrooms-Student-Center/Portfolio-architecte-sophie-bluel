@@ -348,13 +348,17 @@ if (window.location.pathname == "/FrontEnd/Homepage_edit.html"|| window.location
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('token'),
             },
-           
+            body: JSON.stringify({
+                image: "Test",
+                title: "test",
+                category: 1
+            }),
         })
             .then(response => {
                 if (!response.ok) {
                     throw new Error(response.status);
                 }
-                
+                // Actualise la galerie pour inclure la nouvelle œuvre
                 refreshGallery();
             })
             .catch(error => {
