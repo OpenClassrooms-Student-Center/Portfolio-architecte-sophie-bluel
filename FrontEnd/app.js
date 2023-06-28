@@ -342,17 +342,21 @@ if (window.location.pathname == "/FrontEnd/Homepage_edit.html"|| window.location
     addWorkForm.addEventListener('submit', function (e) {
         e.preventDefault();
 
-        const formData = new FormData(addWorkForm);
+        const formData = new FormData();
+        let image = document.querySelector('#photoUpload').files[0]; 
+        let title = document.querySelector('#title').value 
+        let categorie = document.querySelector('#category').value; 
+
+        formData.append('image', image); 
+        formData.append('title', title); 
+        formData.append('category', categorie); 
+
         fetch('http://localhost:5678/api/works', {
             method: 'POST',
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('token'),
             },
-            body: JSON.stringify({
-                image: "Test",
-                title: "test",
-                category: 1
-            }),
+            body: formData 
         })
             .then(response => {
                 if (!response.ok) {
