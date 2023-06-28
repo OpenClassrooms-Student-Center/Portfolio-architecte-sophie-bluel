@@ -4,13 +4,10 @@ const buttonConnection = document.querySelector('input [type="submit"]')
 const valid = true;
 const messageErreur = "L'email ou/et le mot de passe sont incorrects"
 
-// Si input email et input password conforme  /check !
-
-// Je met email et password dans un objet user /
-
-// J'envoi user a l'api /login avec method POST /
+//Lors du clique sur le submit ça envoi 
 formLogin.addEventListener('submit',async function(element){
     element.preventDefault();
+    // entrer les valeurs des inputs
     const user = {
         email : document.querySelector('input[type="email"]').value ,
         password : document.querySelector('input[type="password"]').value
@@ -24,32 +21,23 @@ formLogin.addEventListener('submit',async function(element){
                             "Accept": "application/json"}
             });
                 if(reponse.ok){
-                    console.log(reponse);
-                    console.log('Connexion reussite !');
                     const data = await reponse.json();
-                    console.table(data);
                     localStorage.setItem("token", data.token);
-                    localStorage.setItem("userID", data.userId);
-                    console.log(localStorage.getItem("token"));
-                    console.log(localStorage.getItem("userId"));
                     window.location.href="index.html";
+                    alert('Connexion reussie !')
                 }
                 else{
                     createMessageErreur('#login-section',messageErreur);
                 }
         }
-        catch { console.log("Erreur acces serveur");
+        catch { 
         createMessageErreur('#login-section',messageErreur)
         };
 });
 
-// Transforme l'objet en JSON pour le lire /
-// Place le JSON en localStorage en token /
-//Si mail === admin mail et mot de passe === admin motde passe alors on envoi en local le token 
-// Cookie avec Token 
  /**
   * 
-  * @param {string} cible 
+  * @param {DOMElement} cible 
   * @param {string} message 
   * @returns element HTML de message d'erreur
   */

@@ -1,3 +1,4 @@
+
 * {
     margin: 0;
     padding: 0;
@@ -223,7 +224,6 @@ h1 {
 
 .modal-gallery{
     width: 70%;
-    height: 386px;
     margin: 46px 0px;
     display: flex;
     flex-wrap: wrap;

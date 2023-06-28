@@ -223,7 +223,7 @@ function cardModalCreate (element) {
             console.log(`${apiUrl}works/${idParent} supprime: ${library[index].title}`);
              const suppression = fetch (`${urlWork}/${idParent}`,{
                 method : 'DELETE',
-                headers : {'Authorization': `Bearer`+ token,
+                headers : {'Authorization': `Bearer ${token}`,
                             "Accept": "*/*"}
             })
             .then(suppression => suppression.ok)
@@ -251,7 +251,6 @@ category.forEach((element) => {
 var imageBase64
 inputFileImage.addEventListener('change',(file) =>{
     const inputImg = file.target.files[0]
-    console.log("inputImg est :", inputImg);
     recupInputImage(inputImg)
 });
 function recupInputImage (inputImg) {
@@ -260,8 +259,6 @@ function recupInputImage (inputImg) {
         return 
     } 
     const fileReader = new FileReader();
-    console.log("erreur FileReader :",fileReader.error);
-    console.log("FileReader :",fileReader.error);
     fileReader.onload = function(event) {
         imageBase64 = event.target.result;
         console.log("imageBase64 :", imageBase64);
@@ -335,11 +332,7 @@ formUpload.addEventListener('submit', async (event) => {
         return;
     }
     
-    // const fileReader = new FileReader();
-    // fileReader.onload = async function() {
-        // const imageBase64 = fileReader.result;
-        // console.log("file base64:", imageBase64);
-        // console.log("inuptFileImage.files.[0] :", inputFileImage.files[0]);
+ 
         let formData = new FormData();
 
         formData.append('image', inputFileImage.files[0]);
@@ -355,8 +348,7 @@ formUpload.addEventListener('submit', async (event) => {
                 method: 'POST',
                 body: formData,
                 headers: { "Accept": "application/json;  charset=utf-8",
-                    "Authorization": `Bearer ${token}`,
-                    'Content-Type': 'multipart/form-data'
+                    "Authorization": `Bearer ${token}`
                 }
             });
     
@@ -374,46 +366,6 @@ formUpload.addEventListener('submit', async (event) => {
                 console.log("Erreur accès serveur");
                 messageErreurModal(modalWrapper, "Impossible d'accéder au serveur");
         }
-    // };
-    // fileReader.readAsDataURL(inputFileImage.files[0]);
-  });
-// }
+    });
 //***************************** FACULTATIVE **************************/
 //****************** OUVERTURE EDITION D'UN PROJET ******************/
-
-
-/**
- * Lors du clique sur "editer"  // DONE
- * ça switch sur modal-upload-container // DONE
- * const modalUploadContainerInput = document.querySelector('.modal-upload-container') //DONE
- * modalUploadContainerInput.remove(document.querySelector('i')); //DONE
- * const imageDisplay = document.createElement('img'); // DONE
- * imageDisplay.src = document.querySelector('cardGallery img') ;  //DONE
- * imageDisplay.classList.add('imageDisplayUploadBox');  //DONE
- * modalUploadContainerInput.prepend(imageDisplay); 
- * const titreUploadInput = document.querySelector('#modal-upload-title);
- * const titreDisplay = document.querySelector(card.title)
- * titreUploadInput.innerText =titreDisplay 
- * const categoryUploadInput = document.querySelector('#modal-upload-title);
- * const categoryDisplay = document.querySelector(card.category.id)
- * categoryUploadInput.selectedIndex= categoryDisplay - 1
- */
-/**
- * 
- * @param {string} balise 
- */
-// function displayBaliseNone(balise){ 
-//         const arrayModalUploadContainerInput = Array.from(modalUploadContainerInput);
-//         console.log(arrayModalUploadContainerInput);
-//         arrayModalUploadContainerInput.forEach((balise,index)=> {
-//             const balisechild = balise
-//             balise.style.display ="none"});
-//         }
-      
-
-// document.querySelectorAll('.card-gallery span').forEach((span, index) => {
-//     span.addEventListener('click',(card) => {
-//         ;
-
-//     })
-// })
