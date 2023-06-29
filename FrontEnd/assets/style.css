@@ -99,13 +99,9 @@ body {
 /* modal */
 .modal {
 	position: fixed;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
+	inset: 0;
 	z-index: 100;
 	background-color: rgba(0, 0, 0, 0.5);
-	display: flex;
 	justify-content: center;
 	align-items: center;
 	display: none;
@@ -113,11 +109,10 @@ body {
 
 
 .modal__content {
-	width: 630px;
-	height: 731px;
+	width: auto;
+	/* padding: 100px; */
 	border-radius: 10px;
 	background-color: #FFFEF8;
-
 }
 
 .modal__content .button__group {
@@ -150,7 +145,8 @@ body {
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
-	height: 85%;
+	flex-wrap: nowrap;
+	align-content: center;
 }
 
 .modal__content__container h2{
@@ -162,6 +158,7 @@ body {
 
 .modal__content__container form {
 	width: 420px;
+	padding: 60px 105px 50px;
 }
 
 .submit__photos {
@@ -201,7 +198,8 @@ body {
 }
 
 .submit__photos img {
-	width: 40%;
+	width: 100px;
+	height: 80px;
 }
 
 .title {
@@ -225,41 +223,22 @@ body {
 	font-weight: 500;
 }
 
-
-.title div {
-	width: 100%;
-	display: flex;
-	position: relative;
-}
-
-.title div ul{
-	display: block;
-	position: absolute;
-	top: 60px;
-	background-color: #fff;
-	width: 100%;
+select {
+	height: 51px;
 	box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
-	display: none;
-}
-
-.title div ul li{
-	padding: 10px;
-	text-transform: capitalize;
-}
-
-.title div i{
-	position: absolute;
-	right: 10px;
-	top: 50%;
-	transform: translateY(-50%);
-	color: #3D3D3D;
+	border: none;
+	width: 100%;
+	outline: 0;
+	font-family: 'Work Sans';
+	padding: 4px;
 }
 
 .pictures__container {
 	display: grid;
-	grid-template-columns: repeat(4, 1fr);
+	grid-template-columns: repeat(5, 1fr);
 	row-gap: 26px;
 	column-gap: 19px;
+	padding: 60px 105px 50px;
 }
 
 .pictures__container figure {
@@ -285,13 +264,15 @@ body {
 
 .pictures__container figure img {
 	width: 100%;
+	height: 100%;
 	
 }
 
 .underline	{
 	height: 2px;
 	background-color: lightgray;
-	width: 65%;
+	width: 456px;
+	margin-top: 50px;
 }
 
 .btn--addphoto {
@@ -300,10 +281,11 @@ body {
 	color: white;
 	background-color: #1D6154;
 	padding: 9px 49px;
-	border-radius: 60px ;
+	border-radius: 50px ;
 	border: 1px solid #1D6154;
 	cursor: pointer;
 	transition: 0.5s;
+	margin: 50px 0;
 }
 
 .btn--addphoto:hover {
@@ -330,7 +312,10 @@ body {
 	border: 1px solid #1D6154;
 	cursor: pointer;
 	transition: 0.5s;
+	margin: 50px 0;
 }
+
+
 
 /* modal */
 
@@ -475,6 +460,7 @@ li:hover {
 
 .gallery img {
 	width: 100%;
+	height: 100%;
 
 }
 #contact {

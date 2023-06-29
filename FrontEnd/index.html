@@ -87,11 +87,11 @@
 			</ul>
 		</nav>
 	</footer>
-	<script src="/FrontEnd/app.js" type="module"></script>
+	
 	<script>
 		const previewModalPicture = (e) => {
 			const image = document.getElementById("preview");
-			const [picture] = e.files
+			const [picture] = e.files;
 			const types = ["image/jpg", "image/jpeg", "image/png"];
 
 			if (types.includes(picture.type)) {
@@ -105,6 +105,7 @@
 			}
 		}
 	</script>
+	<script src="/FrontEnd/app.js" type="module"></script>
 </body>
 
 </html>

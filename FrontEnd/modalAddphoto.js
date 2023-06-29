@@ -9,7 +9,7 @@ const modalAddPhoto = `	<div class="modal__content">
                                 <div class="submit__photos">
                                     <img src="./assets/images/icone.svg" alt="" id="preview">
                                     <label for="file">+ Ajouter photo</label>
-                                    <input type="file" name="file" id="file" onchange="previewModalPicture(this)" accept=".jpg, .png, .gif">
+                                    <input type="file" name="file" id="file" onchange="previewModalPicture(this)" accept=".jpg, .png">
                                     <span>jpg, png : 4mo max</span>
                                 </div>
                                 <div class="title">
@@ -18,29 +18,19 @@ const modalAddPhoto = `	<div class="modal__content">
                                 </div>
                                 <div class="title">
                                     <label for="cat">Catégorie</label>
-                                    <div>
-                                        <input type="cat" name="cat" id="cat" disabled>
-                                        <i class="fa-solid fa-chevron-down"></i>
-                                        <ul>
-                                            <li>
-                                                test1
-                                            </li>
-                                            <li>
-                                                test2
-                                            </li>
-                                            <li>
-                                                test3
-                                            </li>
-                                        </ul>
-                                    </div>
+                                        <select name="cat" id="cat">
+                                            <option value="">Choisissez une catégorie</option>
+                                        </select>
                                 </div>
 
                                 </form>
                                 <div class="underline"></div>
-                                <button class="btn--validate" disabled>Valider</button>
+                                <button type="submit" class="btn--validate">Valider</button>
                             </div>
                             </div>
                         </div>`
                         ;
 
 export default modalAddPhoto;
+
+
