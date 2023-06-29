@@ -1,20 +1,36 @@
 import modalGallery from "./modal.js";
 import modalAddPhoto from "./modalAddphoto.js";
 
+
+
 const saveBar = document.querySelector(".save__bar");
 const modal = document.querySelector(".modal");
 
 let works = [];
 let categories = [];
+
 getDatas();
 
 
 const closeModal = () => {
-  document.querySelector(".fa-xmark").addEventListener("click", () => {
+
+  const closeModalHandler = () => {
     saveBar.style.display = "none";
     modal.style.display = "none";
-  });
+  };
+
+  // Close modal when close button is clicked
+  document.querySelector(".fa-xmark").addEventListener("click", closeModalHandler);
+
+  // Close modal when click occurs outside the modal
+  
 };
+
+
+
+
+
+
 
 const displayGalleryModal = () => {
   modal.innerHTML = modalGallery;
@@ -43,6 +59,54 @@ const displayAddPhotosModal = () => {
   modal.innerHTML = modalAddPhoto;
   closeModal();
   document.querySelector(".fa-arrow-left").addEventListener("click", displayGalleryModal)
+  const catList = document.querySelector("#cat");
+  categories.forEach ((cat) => {
+    const option = document.createElement("option")
+    option.innerHTML=`<option value="${cat.id}">${cat.name}</option>`
+    catList.appendChild(option)
+  });
+  
+  const validateButton = document.querySelector(".btn--validate");
+
+  validateButton.addEventListener("click", () => {
+    let catIndex = categories.findIndex(cat => cat.name === catList.value);
+    let titleValue = document.querySelector("#title").value;
+    let imageValue = document.querySelector("#file").files[0];
+    
+    
+    if (catIndex>=0  && titleValue && imageValue) {
+      postNewProjectData(catIndex, titleValue, imageValue);
+    } else {
+      console.log("herllo")
+    }
+  })
+
+  
+
+};
+
+const postNewProjectData = async (index, title, imageFile) => {
+  const url = 'http://localhost:5678/api/works';
+  const token = sessionStorage.getItem("token");
+  const formData = new FormData();
+  formData.append('image' , imageFile, imageFile.name);
+  formData.append('title', title);
+  formData.append('category', index);
+
+  try {
+    const postProject = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'accept':'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: formData
+    });
+      const res = await postProject.json();
+      console.log(res);
+  } catch (e) {
+    console.error("error", e);
+  }
 };
 
 const modalContent = () => {
@@ -51,15 +115,15 @@ const modalContent = () => {
 
   displayGalleryModal();
   closeModal();
+  
 
   document
     .querySelector(".btn--addphoto")
     .addEventListener("click", displayAddPhotosModal);
 };
 
-const isToken = sessionStorage.getItem("token");
 
-if (isToken) {
+const isLogged = () => {
   const login_btn = document.querySelector(".login_btn");
   login_btn.innerText = "Logout";
   login_btn.href = "#";
@@ -69,8 +133,14 @@ if (isToken) {
     sessionStorage.removeItem("id");
     login_btn.innerText = "Login";
     login_btn.href = "./loggin.html";
-    window.location.href = "./index.html";
   });
+}
+
+const isToken = sessionStorage.getItem("token");
+
+if (isToken) {
+  isLogged();
+  
 
   const modifyBtn = document.querySelector(".modify__btn");
   modifyBtn.style.display = "inline-block";
