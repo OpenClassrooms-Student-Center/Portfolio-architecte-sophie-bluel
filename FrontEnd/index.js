@@ -17,8 +17,6 @@ function getWorksByCategoryId(works, categoryId) {
 function customEventListener(data, element) {
   element.addEventListener("click", function (e) {
     handleFilterClick(data, e.target.dataset.categoryId);
-    // const active = allCategoryButton === active;
-    // console.log(active);
   });
 }
 
@@ -77,3 +75,11 @@ async function main() {
 }
 
 main();
+
+const loginButton = document.querySelector(".log");
+// console.log(loginButton);
+
+loginButton.addEventListener("click", () => {
+  // console.log(loginButton);
+  window.location.href = "./login.html";
+});

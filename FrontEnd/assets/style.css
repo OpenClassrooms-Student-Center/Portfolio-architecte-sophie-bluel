@@ -142,7 +142,7 @@ li:hover {
 	font-size: 16px;
 }
 
-.filter-button.active {
+.filter-button:hover {
 	background: #1D6154;
 	color: #ffffff;
 }
@@ -210,8 +210,13 @@ footer nav ul {
 
 /****** Code css page login *********/
 
+
 #login {
 	text-align: center;
+}
+
+.log {
+	cursor: pointer;
 }
 
 .title {
