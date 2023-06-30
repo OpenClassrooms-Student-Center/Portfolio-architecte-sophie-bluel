@@ -1,4 +1,4 @@
-const deleteProject = async (id) => {
+export const deleteProject = async (id) => {
     const token = sessionStorage.getItem("token");
     try {
       const url =`http://localhost:5678/api/works/${id}`
@@ -15,5 +15,3 @@ const deleteProject = async (id) => {
       console.log("error", e);
     }
   }
-
-  module.exports = deleteProject;

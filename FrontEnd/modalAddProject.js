@@ -1,3 +1,8 @@
+import { displayGalleryModal } from "./ModalDisplayGallery.js";
+import { closeModal } from "./closeModal.js";
+import { categories } from "./app.js";
+import { postNewProjectData } from "./postNewProject.js";
+
 const modalAddPhoto = `	<div class="modal__content">
                             <div class="button__group">
                                 <i class="fa-solid fa-arrow-left"></i>
@@ -31,6 +36,32 @@ const modalAddPhoto = `	<div class="modal__content">
                         </div>`
                         ;
 
-export default modalAddPhoto;
-
-
+export const displayAddPhotosModal = (savebar, modal) => {
+    modal.innerHTML = "";
+    modal.innerHTML = modalAddPhoto;
+    closeModal(savebar, modal);
+    document
+  .querySelector(".fa-arrow-left")
+  .addEventListener("click", () => displayGalleryModal(modal, savebar));
+    const catList = document.querySelector("#cat");
+    categories.forEach((cat) => {
+        console.log(cat);
+      const option = document.createElement("option");
+      option.innerHTML = `<option value="${cat.id}">${cat.name}</option>`;
+      catList.appendChild(option);
+    });
+  
+    const validateButton = document.querySelector(".btn--validate");
+  
+    validateButton.addEventListener("click", () => {
+      let catIndex = categories.findIndex((cat) => cat.name === catList.value);
+      let titleValue = document.querySelector("#title").value;
+      let imageValue = document.querySelector("#file").files[0];
+  
+      if (catIndex >= 0 && titleValue && imageValue) {
+        postNewProjectData(catIndex, titleValue, imageValue);
+      } else {
+        console.log("fill the fields");
+      }
+    });
+  };
