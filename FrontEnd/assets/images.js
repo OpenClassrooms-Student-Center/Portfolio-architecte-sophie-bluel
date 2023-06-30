@@ -56,13 +56,14 @@ function init () {
                 loginContainer.innerHTML = htmlModal
             })
             try{
-                console.log("modal import");
-            window.addEventListener('load',() => {
-                console.log("page chargé");
+                console.log("modal import 1"); 
+                console.log("modal import 2");
+            modalWrapper.addEventListener('load',() => {
+                console.log("page chargé")
                 buildContent()
                 submitFunction()
                 Affichage()
-                console.log("page chargé")
+                console.log("page chargé et function activé")
             })
             }
             catch{ error => console.log("error:",error);}
