@@ -142,10 +142,10 @@ li:hover {
 	font-size: 16px;
 }
 
-.filter-button:hover {
+/* .active, .filter-button:hover {
 	background: #1D6154;
 	color: #ffffff;
-}
+} */
 
 .gallery {
 	width: 100%;
@@ -209,7 +209,10 @@ footer nav ul {
 }
 
 /****** Code css page login *********/
-
+.body {
+	overflow-x: hidden;
+	margin: 40px;
+}
 
 #login {
 	text-align: center;
@@ -233,7 +236,7 @@ footer nav ul {
 .email1 {
 	display: flex;
 	position: relative;
-	right: 15%;
+	right: 17%;
 	padding-bottom: 7px;
 }
 
@@ -255,7 +258,7 @@ input {
 .pass1 {
 	display: flex;
 	position: relative;
-	right: 13%;
+	right: 15%;
 	padding-bottom: 6px;
 }
 
