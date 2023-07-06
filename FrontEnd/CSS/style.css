@@ -53,6 +53,9 @@ table {
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
 }
 
 /** Log In Bandeau **/
@@ -65,6 +68,10 @@ table {
 	background: black;
 	padding: 10px 20px;
 	 z-index: 1;
+}
+
+#nav-logout{
+    display: none;
 }
 
 .buttonEdition {
@@ -163,10 +170,6 @@ li a:hover {
 
 #introduction p {
 	margin-bottom: 0.5em;
-}
-#portfolio h2 {
-	text-align: center;
-	margin-bottom: 1em;
 }
 .gallery {
 	width: 100%;
@@ -342,7 +345,7 @@ footer nav ul {
     background-color: white;
     position: relative;
     width: 630px;
-    height: 630px;
+    height: 635px;
     border-radius: 20px;
     position: relative;
     overflow: hidden;
@@ -350,7 +353,9 @@ footer nav ul {
 }
 
 .modal-wrapper.active.height {
-    height:731px;
+    box-sizing: content-box;
+    min-height:730px;
+    height: fit-content +90px;
 }
 
 .fa-arrow-left{
@@ -511,6 +516,7 @@ background-color :#A7A7A7 ;
     text-decoration: none;
     font-size: 14px;
     font-family: 'Syne';
+    padding-bottom: 30px;
 }
 
 #modal-upload-form,
@@ -648,20 +654,69 @@ background-color :#A7A7A7 ;
 }
 
 /************** LOGIN *************/
+
+#login-error-container {
+    position: absolute;
+    width: 100%;
+    max-width: 1440px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 #login-error {
 	background: #e490a5;
 	color: #6e1128;
-	position: absolute;
-	bottom: 130px;
+    z-index: 900;
+    transform: translate(0%,0%);
 	padding: 10px 20px;
 	border-radius: 20px;
 	transition: 0.5s ease 2s;
 	transform: scale(1);
 	opacity: 1;
+    margin-bottom: 40px;
 }
 
 #login-error::after {
 	content: "";
 	opacity: 0;
 	transform: scale(1.3);
+    transform: translate(-50%, -50%);
 }
+
+
+/*********** Bouton modifier ***/
+.modifier {
+    display: flex;
+
+    align-items: end;
+    cursor: pointer;
+}
+#introduction .modifier img,
+.modifier img{
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    
+}
+#introduction-article .modifier {
+    margin-bottom:15px ;
+}
+#introduction-img .modifier {
+    margin: 15px 0px 0px 10%;
+}
+
+#portfolio-title{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 1em;
+    text-align: center;
+}
+#portfolio-title .modifier{
+    display: flex;
+  align-items: center;
+  margin-left: 31px;
+}
+
+

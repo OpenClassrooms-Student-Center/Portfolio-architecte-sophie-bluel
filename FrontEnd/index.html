@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Sophie Bluel - Architecte d'intérieur</title>
-	<script src="./assets/images.js" type="module" defer></script>
+	<script src="./JS/app.js" type="module" defer></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,7 +12,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="./assets/style.css">
+	<link rel="stylesheet" href="./CSS/style.css">
 </head>
 <body>
 	<div class="login-action-container">
@@ -24,17 +24,18 @@
 				<ul>
 					<li>projets</li>
 					<li>contact</li>
-					<li><a href="login.html">login</a></li>
+					<li id="nav-login"><a href="login.html" >login</a></li>
+					<li id="nav-logout">logout</li>
 					<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 				</ul>
 			</nav>
 		</header>
 		<main>
 			<section id="introduction">
-				<figure>
+				<figure id="introduction-img">
 					<img src="./assets/images/sophie-bluel.png" alt="">
 				</figure>
-				<article>
+				<article id="introduction-article">
 					<h2>Designer d'espace</h2>
 					<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
 					<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
@@ -42,7 +43,7 @@
 				</article>
 			</section>
 			<section id="portfolio">
-				<h2>Mes Projets</h2>
+				<div id="portfolio-title"><h2>Mes Projets</h2></div>
 				<div class="filter">
 					<button class="btn-filter isActive" id="filterTous" type="button" name="Tous">Tous</button>
 					

@@ -27,11 +27,11 @@ formLogin.addEventListener('submit',async function(element){
                     alert('Connexion reussie !')
                 }
                 else{
-                    createMessageErreur('#login-section',messageErreur);
+                    createMessageErreur('.main-container',messageErreur);
                 }
         }
         catch { 
-        createMessageErreur('#login-section',messageErreur)
+        createMessageErreur('.main-container',messageErreur)
         };
 });
 
@@ -43,9 +43,13 @@ formLogin.addEventListener('submit',async function(element){
   */
 function createMessageErreur (cible, message){
     const element = document.querySelector(cible);
+    const div = document.createElement('div')
+    div.setAttribute('id','login-error-container');
     const spanError = document.createElement('span');
     spanError.setAttribute('id','login-error');
     spanError.innerText = message ;
-    element.insertAdjacentElement('afterbegin',spanError);
-    
+    div.append(spanError)
+    element.insertAdjacentElement('afterbegin',div);
+    setTimeout(()=>{
+        div.remove()}, 2000)
 }
