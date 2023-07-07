@@ -353,9 +353,7 @@ footer nav ul {
 }
 
 .modal-wrapper.active.height {
-    box-sizing: content-box;
-    min-height:730px;
-    height: fit-content +90px;
+    height:730px;
 }
 
 .fa-arrow-left{
@@ -374,7 +372,8 @@ footer nav ul {
     align-items: center;
     position: absolute;
 }
-#modal-gallery-id {
+#modal-gallery-id,
+.modal-gallery-button {
     visibility: hidden;
     opacity: 0;
     transition: transform 0.3s ease-out, opacity 0.2s;
@@ -393,7 +392,8 @@ footer nav ul {
     transform: translateX(0px);
 }
 
-#modal-gallery-id.active{
+#modal-gallery-id.active,
+.modal-gallery-button.active{
     visibility: visible;
     opacity: 1;
     transform: translateX(0);
@@ -439,7 +439,7 @@ footer nav ul {
     background-color: rgb(219, 86, 86);
     color: rgb(82, 13, 13);
     animation: notifAnimation infinite 1s ease-in-out ;
-    animation: opacityBox 0.5s ease-in-out ease-in-out;
+    animation: opacityBox 0.5s  ease-in-out;
 }
 
 .valid{
@@ -473,7 +473,8 @@ footer nav ul {
 
 }
 
-.modal-wrapper > hr {
+.modal-wrapper hr {
+
     color: #B3B3B3;
     width: 70%;
     height: 1px;
@@ -486,6 +487,15 @@ footer nav ul {
     flex-wrap: wrap;
 }
 
+.modal-gallery-button{
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 30px;
+    width: 100%;
+}
 .modal-modification-button,
 #modal-upload-id input[type="submit"] {
     background-color: #1D6154;

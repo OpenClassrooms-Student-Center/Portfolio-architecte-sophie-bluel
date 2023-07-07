@@ -35,12 +35,9 @@ function init () {
         initImage();
         filterAction();
         if(isTokenPresent === false){
-            console.log("pas connecté");
             return
         }
         else{  
-            console.log(
-                "token present",localStorage.getItem('token')); 
             logOut();
             addModifers();
             fetch('modal.html')
@@ -60,13 +57,17 @@ function init () {
                 addProjet();
             })
     }
-    
 };
 
 init();
 
 function isTokenPresent() {
-    return localStorage.getItem("token") !== null;
+    if(token === true){
+        return true
+    }
+    else{
+        return false
+    }
   }; 
 
 function logOut (){
@@ -87,7 +88,6 @@ function logOut (){
         } )
     })
 }
-
 
 function addModifers(){
     const figure = document.querySelector('#introduction-img')

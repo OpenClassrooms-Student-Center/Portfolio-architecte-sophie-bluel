@@ -48,6 +48,7 @@ export function filterBouton(element){
  */
 export function worksCreate (element){
     const figureElement = document.createElement('figure');
+    figureElement.setAttribute('data-id',element.id)
     const imgElement = document.createElement('img');
     imgElement.src = element.imageUrl;
     imgElement.alt = element.title
@@ -105,11 +106,5 @@ export function filterAction(){
         })
     })
 }
-//------------------------ TOKEN PRESENT -------------------//
 
-// si window.localStorage.getItem('token') === true alors
-/**
- * @param {boolean}
- * @returns True
- */
 
