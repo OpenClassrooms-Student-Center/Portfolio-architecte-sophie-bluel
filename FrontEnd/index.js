@@ -1,156 +1,166 @@
+let isAdminModeActive = false;
+
 async function fetchData(url) {
-    try {
-        const response = await fetch(url);  
-        const data = await response.json();
-        console.log('Data fetched:', data);
-        return data;
-    } catch (error) {
-        console.log(error)
-    }
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(
+      "There has been a problem with your fetch operation: ",
+      error
+    );
+  }
 }
 
+// Metre les différentes categories sauf "Tous" dans le select
+function initOptionCategories(categories) {
+  const filters = document.getElementById("categorie-projet");
+  filters.innerHTML = "";
 
-function createElement(work, container) {
-    const projectElement = document.createElement('figure');
-    projectElement.dataset.id = work.id;  
-    const imageElement = document.createElement('img');
+  for (const category of categories) {
+    if (category.name === "Tous") {
+      continue;
+    }
+    const optionElement = document.createElement("option");
+    optionElement.value = category.id;
+    optionElement.textContent = category.name;
+
+    filters.appendChild(optionElement);
+  }
+}
+
+function createWorks(works) {
+  const gallery = document.querySelector("#gallery");
+  gallery.innerHTML = "";
+
+  for (const work of works) {
+    const projectElement = document.createElement("figure");
+    projectElement.dataset.id = work.id;
+    const imageElement = document.createElement("img");
 
     imageElement.src = work.imageUrl;
     imageElement.alt = work.title;
     imageElement.className = work.category.name;
 
-    const captionElement = document.createElement('figcaption');
+    const captionElement = document.createElement("figcaption");
     captionElement.textContent = work.title;
 
     projectElement.appendChild(imageElement);
     projectElement.appendChild(captionElement);
-    container.appendChild(projectElement);
+    gallery.appendChild(projectElement);
+  }
 }
 
-async function deleteImage(event) {
-    if (!event.target.classList.contains('fa-trash-can')) {
-        return;
-    }
-    const workId = event.target.closest('.modal-image-container').dataset.id;
+function createWorksInModale(works) {
+  const galleryModale = document.querySelector(
+    "#modale-principale-conteneur-images"
+  );
+  galleryModale.innerHTML = "";
 
-    works = works.filter(work => work.id !== workId);
+  for (const work of works) {
+    const projectElement = document.createElement("figure");
+    projectElement.dataset.id = work.id;
+    const imageElement = document.createElement("img");
 
-    event.target.closest('.modal-image-container').remove();
+    imageElement.src = work.imageUrl;
+    imageElement.alt = work.title;
+    imageElement.className = work.category.name;
 
-    const gallery = document.querySelector('.gallery');
-    const imageElement = gallery.querySelector(`figure[data-id="${workId}"]`);
-    if (imageElement) {
-        imageElement.remove();
-    }
-    try {
-        const response = await fetch(`http://localhost:5678/api/works/${workId}`, {
-            method: 'DELETE',
-            headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            }
+    const captionElement = document.createElement("figcaption");
+    captionElement.textContent = "Editer";
+
+    projectElement.appendChild(imageElement);
+    projectElement.appendChild(captionElement);
+    galleryModale.appendChild(projectElement);
+
+    const conteneurIcone = document.createElement("div");
+    conteneurIcone.classList.add("container-icon");
+
+    const icone = document.createElement("i");
+    icone.classList.add("fa", "fa-solid", "fa-trash-can");
+
+    conteneurIcone.appendChild(icone);
+    projectElement.appendChild(conteneurIcone);
+
+    // Ajout des événements d'écoute à la poubelle pour supprimer l'image et envoyer une requête DELETE au serveur
+    icone.addEventListener("click", (event) => {
+      event.stopPropagation();
+      const imageId = Number(
+        event.target.parentElement.parentElement.dataset.id
+      );
+
+      event.target.parentElement.parentElement.remove();
+
+      fetch(`http://localhost:5678/api/works/${imageId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      })
+        .then((response) => {
+          console.log(response);
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          init();
+        })
+        .catch((error) => {
+          console.error(
+            "There has been a problem with your fetch operation: ",
+            error
+          );
         });
-
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-    } catch (error) {
-        console.error('There has been a problem with your fetch operation: ', error);
-    }
+    });
+  }
 }
 
-document.addEventListener('click', deleteImage);
+function createCategories(categories, works) {
+  const allCat = { id: 0, name: "Tous" };
+  categories.unshift(allCat);
+  const categoriesContainer = document.getElementById("categories");
 
+  categories.forEach((category) => {
+    const categoryElement = document.createElement("button");
+    categoryElement.textContent = category.name;
+    categoryElement.classList.add("category-button");
+    categoryElement.dataset.id = category.id;
+    categoryElement.addEventListener("click", function () {
+      const buttons = document.querySelectorAll(".category-button");
 
-function displayCategories(categories) {
-    const categoriesContainer = document.querySelector('.categories');
+      buttons.forEach((button) => button.classList.remove("active"));
 
-     const allCategoryElement = document.createElement('button');
-     allCategoryElement.textContent = 'Tous';
-     allCategoryElement.classList.add('category-button', 'active');  
-     allCategoryElement.dataset.id = '0'; 
+      this.classList.add("active");
 
-     allCategoryElement.addEventListener('click', function () {
-        const buttons = document.querySelectorAll('.category-button');
+      const newWorks = works.filter((work) => work.categoryId === category.id);
 
-        buttons.forEach(button => button.classList.remove('active'));
-
-        this.classList.add('active');
+      createWorks(newWorks);
     });
 
-     categoriesContainer.appendChild(allCategoryElement);
-
-    categories.forEach(category => {
-        const categoryElement = document.createElement('button');
-        categoryElement.textContent = category.name;
-        categoryElement.classList.add('category-button');
-        categoryElement.dataset.id = category.id;
-        categoryElement.addEventListener('click', function () {
-            const buttons = document.querySelectorAll('.category-button');
-
-            buttons.forEach(button => button.classList.remove('active'));
-
-            this.classList.add('active');
-        });
-
-        categoriesContainer.appendChild(categoryElement);
-    });
-}
-
-document.addEventListener('click', event => {
-    if (event.target.classList.contains('category-button')) {
-        filterWorksByCategory(event.target.dataset.id);
-    }
-});
-
-async function filterWorksByCategory(categoryId) {
-    const works = await fetchData('http://localhost:5678/api/works');
-
-    let filteredWorks;
-    if (categoryId === "0") { 
-        filteredWorks = works;
-    } else {
-        filteredWorks = works.filter(work => String(work.categoryId) === categoryId);
+    if (category.name === "Tous") {
+      categoryElement.classList.add("active");
     }
 
-    const gallery = document.querySelector('.gallery');
-    while (gallery.firstChild) {
-        gallery.removeChild(gallery.firstChild);
-    }
-
-    filteredWorks.forEach(work => {
-        createElement(work, gallery);
-    });
+    categoriesContainer.appendChild(categoryElement);
+  });
 }
-
-
-function fillCategoriesSelect(categories) {
-    const selectElement = document.getElementById('categorie-projet');
-
-    categories.forEach(category => {
-        const optionElement = document.createElement('option');
-        optionElement.text = category.name;
-        optionElement.value = category.id;
-        selectElement.appendChild(optionElement);
-    });
-}
-
 
 async function init() {
-    
-    const works = await fetchData('http://localhost:5678/api/works');
-    const categories = await fetchData('http://localhost:5678/api/categories');
-    const token = localStorage.getItem('token')
+  const works = await fetchData("http://localhost:5678/api/works");
+  const categories = await fetchData("http://localhost:5678/api/categories");
+  const token = localStorage.getItem("token");
 
-    localStorage.setItem('works', JSON.stringify(works));
+  createWorks(works);
+  initOptionCategories(categories);
+  createWorksInModale(works);
 
-    fillCategoriesSelect(categories);
-    const gallery = document.querySelector('#gallery');
-    works.forEach(work => {
-        createElement(work, gallery);
-    });
-    if (!token) {
-        displayCategories(categories);
-    }
+  if (token && !isAdminModeActive) {
+    displayAdminMode();
+    initEventListeners();
+    isAdminModeActive = true;
+  } else if (!token && isAdminModeActive) {
+    createCategories(categories, works);
+  }
 }
 
 init();

@@ -456,12 +456,21 @@ form a {
   margin-bottom: 37px;
 }
 
-.modal-image-container {
+#modale-principale-conteneur-images figure {
   display: flex;
   flex-direction: column;
   position: relative;
   width: 76px;
   margin-right: 7px;
+}
+
+#modale-principale-conteneur-images figure figcaption {
+  font-family: "Work Sans";
+  font-size: 12px;
+  font-weight: 400;
+  color: black;
+  text-align: left;
+  margin-top: 5px;
 }
 
 .container-icon {
