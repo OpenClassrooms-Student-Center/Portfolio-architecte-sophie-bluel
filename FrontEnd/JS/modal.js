@@ -34,6 +34,7 @@ let inputFileTitre = null
 let inputFileSelect = null
 let titre = null
 let categorySelect = null
+let inputSubmitButton = null
 
 //****** VARIABLE Pouvant etre lu apres l'import de la modal ********/
 export function initModal(){
@@ -56,6 +57,7 @@ export function initModal(){
     selectUpload = document.querySelector('#modal-upload-category');
     inputFileTitre = document.querySelector('#modal-upload-title');
     inputFileSelect = document.querySelector('#modal-upload-category');
+    inputSubmitButton = document.querySelector('#modal-upload-button');
 }
 
 
@@ -135,6 +137,7 @@ function allClose(e){
     isClose(arrowCtrl);
     isClose(modalXmark);
     isClose(modalCtrl);
+    isClose(galleryButton);
 }
 
 /**
@@ -323,6 +326,10 @@ function messageValidModal(lieu, message){
 /************************* ENVOI UPLOAD ******************************/
 export function addProjet (){
 
+formUpload.addEventListener('input', function () {
+    const ToutRempli = Array.from(formUpload.elements).every(element => element.checkValidity());
+    inputSubmitButton.disabled = !ToutRempli;
+  });
 
 formUpload.addEventListener('submit', async (event) => {
     event.preventDefault();
