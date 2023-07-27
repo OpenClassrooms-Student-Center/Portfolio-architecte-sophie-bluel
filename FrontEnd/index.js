@@ -1,5 +1,3 @@
-let isAdminModeActive = false;
-
 async function fetchData(url) {
   try {
     const response = await fetch(url);
@@ -13,7 +11,6 @@ async function fetchData(url) {
   }
 }
 
-// Metre les différentes categories sauf "Tous" dans le select
 function initOptionCategories(categories) {
   const filters = document.getElementById("categorie-projet");
   filters.innerHTML = "";
@@ -37,8 +34,8 @@ function createWorks(works) {
   for (const work of works) {
     const projectElement = document.createElement("figure");
     projectElement.dataset.id = work.id;
-    const imageElement = document.createElement("img");
 
+    const imageElement = document.createElement("img");
     imageElement.src = work.imageUrl;
     imageElement.alt = work.title;
     imageElement.className = work.category.name;
@@ -125,14 +122,18 @@ function createCategories(categories, works) {
     categoryElement.textContent = category.name;
     categoryElement.classList.add("category-button");
     categoryElement.dataset.id = category.id;
+
     categoryElement.addEventListener("click", function () {
       const buttons = document.querySelectorAll(".category-button");
-
       buttons.forEach((button) => button.classList.remove("active"));
-
       this.classList.add("active");
 
-      const newWorks = works.filter((work) => work.categoryId === category.id);
+      let newWorks;
+      if (category.name === "Tous") {
+        newWorks = works;
+      } else {
+        newWorks = works.filter((work) => work.categoryId === category.id);
+      }
 
       createWorks(newWorks);
     });
@@ -154,11 +155,10 @@ async function init() {
   initOptionCategories(categories);
   createWorksInModale(works);
 
-  if (token && !isAdminModeActive) {
+  if (token) {
     displayAdminMode();
     initEventListeners();
-    isAdminModeActive = true;
-  } else if (!token && isAdminModeActive) {
+  } else {
     createCategories(categories, works);
   }
 }

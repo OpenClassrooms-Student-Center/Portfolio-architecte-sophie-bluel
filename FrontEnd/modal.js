@@ -133,7 +133,7 @@ form.addEventListener("submit", (e) => {
     })
     .then(() => {
       modalTwo.style.display = "none";
-      modal.style.display = "flex";
+      modal.style.display = "none";
 
       init();
       form.reset();

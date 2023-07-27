@@ -223,6 +223,12 @@ li:hover {
   margin-bottom: 2em;
 }
 
+#categories {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2em;
+}
+
 .category-button {
   margin: 0 10px;
   font-size: 1.2em;
