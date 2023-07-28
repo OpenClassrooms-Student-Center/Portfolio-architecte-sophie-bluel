@@ -1,12 +1,12 @@
 const db = require('./../models');
 const Categories = db.categories
 
-exports.findAll = async (req, res) =>  {
-	try{
+exports.findAll = async (req, res) => {
+	try {
 		const works = await Categories.findAll();
 		return res.status(200).json(works);
-	}catch(err){
-		return res.status(500).json({ error: new Error('Something went wrong')})
+	} catch (err) {
+		return res.status(500).json({ error: new Error('Something went wrong') })
 	}
 
 }
@@ -14,7 +14,8 @@ exports.findAll = async (req, res) =>  {
 exports.create = async (req, res) => {
 
 	const category = await Categories.create({
-		name : req.body.name
+		name: req.body.name
 	})
+	console.log(category);
 	return res.status(201).json(category)
 }
