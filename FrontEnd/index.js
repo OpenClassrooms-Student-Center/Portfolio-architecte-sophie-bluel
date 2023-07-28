@@ -100,7 +100,7 @@ function createWorksInModale(works) {
           if (!response.ok) {
             throw new Error("Network response was not ok");
           }
-          init();
+          initImages();
         })
         .catch((error) => {
           console.error(
@@ -144,6 +144,15 @@ function createCategories(categories, works) {
 
     categoriesContainer.appendChild(categoryElement);
   });
+}
+
+async function initImages() {
+  const works = await fetchData("http://localhost:5678/api/works");
+  const categories = await fetchData("http://localhost:5678/api/categories");
+
+  createWorks(works);
+  initOptionCategories(categories);
+  createWorksInModale(works);
 }
 
 async function init() {

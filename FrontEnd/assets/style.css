@@ -347,6 +347,7 @@ footer nav ul {
 
 #submit-login {
   height: 36px;
+  border: none;
 }
 
 u {
@@ -756,4 +757,11 @@ form a {
   .modale-contenu {
     max-height: 78%;
   }
+}
+
+/* Litle edit */
+
+.form-login a {
+  color: #ffffff;
+  text-decoration: none;
 }

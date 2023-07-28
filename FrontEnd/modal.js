@@ -135,7 +135,7 @@ form.addEventListener("submit", (e) => {
       modalTwo.style.display = "none";
       modal.style.display = "none";
 
-      init();
+      initImages();
       form.reset();
       conteneurPrevisualisationImage.style.backgroundImage = "none";
       document.querySelector(".conteneur-formulaire").style.display = "flex";
