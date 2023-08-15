@@ -1,3 +1,5 @@
+// VERSION 1
+
 // async function fetchWorks() {
 //   try {
 //     const response = await fetch("http://localhost:5678/api/works");
@@ -35,7 +37,7 @@
 //   }
 // });
 
-alert("test");
+// VERSION 2
 
 async function fetchWorks() {
   try {
@@ -62,7 +64,5 @@ fetchWorks().then((works) => {
     projetFigure.appendChild(projetImg);
     projetFigure.appendChild(projetCaption);
     sectionProjet.appendChild(projetFigure);
-
-    console.log(works);
   });
 });

@@ -200,21 +200,20 @@ li:hover {
 #introduction p {
   margin-bottom: 0.5em;
 }
-#portfolio h2 {
-  text-align: center;
-  margin-bottom: 1em;
-}
-.gallery {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-column-gap: 20px;
-  grid-row-gap: 20px;
+
+.filtres {
+  display: flex;
+  justify-content: center;
 }
 
-.gallery img {
-  width: 100%;
+.filtres button {
+  border-radius: 60px;
+  border: 1px solid #1d6154;
+  background-color: transparent;
+  font-size: 1rem;
+  padding: 0.5em 1em;
 }
+
 #contact {
   width: 50%;
   margin: auto;
@@ -264,7 +263,10 @@ footer nav ul {
 }
 
 /******* JAVASCRIPT *********/
-
+.projets-section h2 {
+  text-align: center;
+  margin-bottom: 1em;
+}
 .projets {
   display: flex;
   justify-content: center;
