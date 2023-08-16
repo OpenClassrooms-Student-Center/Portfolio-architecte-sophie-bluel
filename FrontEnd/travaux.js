@@ -89,7 +89,33 @@ fetchWorks().then((works) => {
         (item) => item.category.name === categoryName
       );
 
+      function displayWorks(worksToDisplay) {
+        // Supprimez les projets existants
+        while (sectionProjet.firstChild) {
+          sectionProjet.removeChild(sectionProjet.firstChild);
+        }
+
+        const sectionProjet = document.querySelector(".projets");
+
+        filteredWorks.forEach((projet) => {
+          const projetFigure = document.createElement("figure");
+
+          const projetImg = document.createElement("img");
+          projetImg.src = projet.imageUrl;
+
+          const projetCaption = document.createElement("figcaption");
+          projetCaption.innerText = projet.title;
+
+          projetFigure.appendChild(projetImg);
+          projetFigure.appendChild(projetCaption);
+          sectionProjet.appendChild(projetFigure);
+        });
+      }
+
       console.log(filteredWorks);
     }
   });
 });
+
+// displayWorks(works);
+//     displayWorks(filteredWorks);
