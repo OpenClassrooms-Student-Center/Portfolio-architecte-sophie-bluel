@@ -65,4 +65,31 @@ fetchWorks().then((works) => {
     projetFigure.appendChild(projetCaption);
     sectionProjet.appendChild(projetFigure);
   });
+  // categorie unique
+  const category = works.map((item) => item.category.name);
+  console.log(category);
+  const uniqueCategory = [...new Set(category)];
+  console.log(uniqueCategory);
+
+  // buttons / filter
+  const filtresDiv = document.querySelector(".filtres");
+  const btnAll = document.createElement("button");
+  btnAll.innerText = "Tous";
+  filtresDiv.appendChild(btnAll);
+  //
+  uniqueCategory.forEach((categoryName) => {
+    const btn = document.createElement("button");
+    btn.innerText = categoryName;
+    filtresDiv.appendChild(btn);
+
+    btn.addEventListener("click", () => filterByCategory(categoryName));
+    // ************ FILTER CATEGORY ************
+    function filterByCategory(categoryName) {
+      const filteredWorks = works.filter(
+        (item) => item.category.name === categoryName
+      );
+
+      console.log(filteredWorks);
+    }
+  });
 });

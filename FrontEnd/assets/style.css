@@ -204,14 +204,21 @@ li:hover {
 .filtres {
   display: flex;
   justify-content: center;
+  margin: 4rem 0;
 }
 
 .filtres button {
   border-radius: 60px;
   border: 1px solid #1d6154;
   background-color: transparent;
-  font-size: 1rem;
-  padding: 0.5em 1em;
+  font-size: 1.2rem;
+  font-family: "Syne";
+  padding: 0.5rem 1rem;
+  margin: 0rem 1rem;
+}
+.filtres button:hover {
+  background-color: #1d6154;
+  color: white;
 }
 
 #contact {
@@ -265,7 +272,8 @@ footer nav ul {
 /******* JAVASCRIPT *********/
 .projets-section h2 {
   text-align: center;
-  margin-bottom: 1em;
+  margin-bottom: 1rem;
+  margin-top: 8rem;
 }
 .projets {
   display: flex;
