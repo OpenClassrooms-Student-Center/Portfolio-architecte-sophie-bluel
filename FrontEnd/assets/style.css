@@ -129,10 +129,11 @@ table {
 }
 /** end reset css**/
 body {
-  max-width: 1140px;
+  max-width: 1440px;
   margin: auto;
   font-family: "Work Sans";
   font-size: 14px;
+  background-color: #fffef8;
 }
 header {
   display: flex;
@@ -164,6 +165,12 @@ h2 {
   font-size: 30px;
   color: #1d6154;
 }
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 nav ul {
   display: flex;
   align-items: center;
@@ -269,7 +276,7 @@ footer nav ul {
   margin: 2em;
 }
 
-/******* JAVASCRIPT *********/
+/******* JAVASCRIPT PROJETS *********/
 .projets-section h2 {
   text-align: center;
   margin-bottom: 1rem;
@@ -291,4 +298,45 @@ footer nav ul {
 
 .projets img {
   width: 100%;
+}
+
+/********** login.html **********/
+
+#login {
+  height: 50vh;
+  width: 25%;
+  margin: auto;
+  margin: 12rem auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#login h2 {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+#login form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+}
+
+#login input {
+  height: 50px;
+  font-size: 1.2em;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+#login label {
+  margin: 2em 0 1em 0;
+  text-align: left;
+}
+
+#forgot-password {
+  text-align: center;
+  margin-top: 1rem;
 }
