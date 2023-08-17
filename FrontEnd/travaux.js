@@ -9,16 +9,12 @@ async function fetchWorks() {
 }
 
 fetchWorks().then((works) => {
-  function displayWorks(works) {
+  function displayWorks(worksToShow) {
     const sectionProjet = document.querySelector(".projets");
-    const filtresDiv = document.querySelector(".filtres");
-    // Effacer tout le contenu actuel
-    sectionProjet.innerHTML = "";
-    filtresDiv.innerHTML = "";
+    sectionProjet.innerHTML = ""; // Effacer tout le contenu actuel
 
-    works.forEach((projet) => {
+    worksToShow.forEach((projet) => {
       const projetFigure = document.createElement("figure");
-
       const projetImg = document.createElement("img");
       projetImg.src = projet.imageUrl;
 
@@ -29,43 +25,36 @@ fetchWorks().then((works) => {
       projetFigure.appendChild(projetCaption);
       sectionProjet.appendChild(projetFigure);
     });
+  }
 
-    // categorie unique
-
+  function setupButtons() {
     const category = works.map((item) => item.category.name);
-    // console.log(category);
     const uniqueCategory = [...new Set(category)];
-    // console.log(uniqueCategory);
 
-    // buttons / filter
+    const filtresDiv = document.querySelector(".filtres");
 
-    //bouton tous
     const btnAll = document.createElement("button");
     btnAll.innerText = "Tous";
     filtresDiv.appendChild(btnAll);
 
-    //bouton par catégorie
+    btnAll.addEventListener("click", () => displayWorks(works));
+
     uniqueCategory.forEach((categoryName) => {
       const btn = document.createElement("button");
       btn.innerText = categoryName;
       filtresDiv.appendChild(btn);
 
-      //Event listener
-      btnAll.addEventListener("click", () => displayWorks(works));
-
-      btn.addEventListener("click", () =>
-        filterByCategory(categoryName, works)
-      );
-      // ************ FILTER CATEGORY FUNCTION ************
-      function filterByCategory(categoryName, works) {
-        const filteredWorks = works.filter(
-          (item) => item.category.name === categoryName
-        );
-        displayWorks(filteredWorks);
-
-        console.log(filteredWorks);
-      }
+      btn.addEventListener("click", () => filterByCategory(categoryName));
     });
+
+    function filterByCategory(categoryName) {
+      const filteredWorks = works.filter(
+        (item) => item.category.name === categoryName
+      );
+      displayWorks(filteredWorks);
+    }
   }
+
   displayWorks(works);
+  setupButtons(); // C'est ici que nous configurons les boutons une seule fois
 });
