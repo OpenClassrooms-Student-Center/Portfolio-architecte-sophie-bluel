@@ -56,5 +56,5 @@ fetchWorks().then((works) => {
   }
 
   displayWorks(works);
-  setupButtons(); // C'est ici que nous configurons les boutons une seule fois
+  setupButtons();
 });
