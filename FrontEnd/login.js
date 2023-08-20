@@ -31,14 +31,32 @@ document.addEventListener("DOMContentLoaded", function () {
         localStorage.setItem("token", data.token);
 
         // Redirect to the homepage or show additional options
-        // location.href = "index.html";
+        location.href = "index.html";
       } else {
         // Handle errors, e.g., show a message to the user
-        alert(data.message);
+        const messageError = "Identifiant ou mot de passe incorrect";
+        alert(messageError);
+        console.log(messageError);
       }
     } catch (error) {
       console.error("Une erreur est survenue", error);
     }
   });
-  //   Chargement logout
+  //   Profil utilisateur connecté: liens du lien login --> logout
+  function checkToken() {
+    let tokenAuth = localStorage.getItem("token");
+    // console.log(tokenAuth);ok
+    let loginLink = document.getElementById("login-link");
+    // console.log(loginLink); ok
+    if (tokenAuth) {
+      // Si authToken existe, l'utilisateur est probablement connecté
+      loginLink.textContent = "Logout";
+      loginLink.setAttribute("href", "logout.html");
+    } else {
+      // Sinon, réinitialisez-le pour s'assurer qu'il indique "Login" et pointe vers la page de connexion
+      loginLink.textContent = "Login";
+      loginLink.setAttribute("href", "login.html");
+    }
+  }
+  checkToken();
 });
