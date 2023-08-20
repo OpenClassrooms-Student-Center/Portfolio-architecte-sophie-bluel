@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
   //   Profil utilisateur connecté: liens du lien login --> logout
-  function checkToken() {
+  function checkTokenLogin() {
     let tokenAuth = localStorage.getItem("token");
     // console.log(tokenAuth);ok
     let loginLink = document.getElementById("login-link");
@@ -58,5 +58,5 @@ document.addEventListener("DOMContentLoaded", function () {
       loginLink.setAttribute("href", "login.html");
     }
   }
-  checkToken();
+  checkTokenLogin();
 });
