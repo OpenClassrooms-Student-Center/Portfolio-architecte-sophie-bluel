@@ -1,4 +1,4 @@
-async function fetchWorks() {
+export async function fetchWorks() {
   try {
     const response = await fetch("http://localhost:5678/api/works");
     if (!response.ok) throw new Error("Problème avec la requête");
@@ -7,7 +7,7 @@ async function fetchWorks() {
     console.log(error);
   }
 }
-function displayAndFilterWorks() {
+export function displayAndFilterWorks() {
   fetchWorks().then((works) => {
     function displayWorks(worksToShow) {
       const sectionProjet = document.querySelector(".projets");
