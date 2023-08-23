@@ -1,8 +1,11 @@
-import { fetchWorks, displayAndFilterWorks } from "./works.js";
+// Récupération des projets sur l'API
+import { fetchWorks, displayWorks } from "./works.js";
+
+// Importation des fonctions de login
 import { handleFormSubmission, checkTokenLogin } from "./login.js";
 
 fetchWorks();
-displayAndFilterWorks();
+displayWorks();
 
 // Ajout de l'écouteur d'événements pour la soumission du formulaire
 const form = document.getElementById("login");
