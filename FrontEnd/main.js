@@ -1,4 +1,7 @@
+// Récupération des projets sur l'API
 import { fetchWorks, displayAndFilterWorks } from "./works.js";
+
+// Importation des fonctions de login
 import { handleFormSubmission, checkTokenLogin } from "./login.js";
 
 fetchWorks();
