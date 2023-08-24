@@ -69,6 +69,7 @@ categories.forEach(element => {
   filters.push(element.name)
 });
 console.log(filters);
+const filtersWithoutDuplicate = [...new Set(filters)]
 
 // Génération des filtres
 function generateFilters(filters) {
@@ -78,7 +79,6 @@ function generateFilters(filters) {
     const sectionFilters = document.querySelector('.filters');
     // Création d’une div dédiée à une catégorie
     const filterCategory = document.createElement("div");
-    filterCategory.dataset.id = filters[i].id;
     // Ajout du Html associé à workElement
     filterCategory.innerHTML = categorie;
     // Ajout du css
@@ -87,7 +87,7 @@ function generateFilters(filters) {
     sectionFilters.appendChild(filterCategory);
   }
 }
-generateFilters(filters);
+generateFilters(filtersWithoutDuplicate);
 
 
 // Bouton Filtrer pour chaque categorie
