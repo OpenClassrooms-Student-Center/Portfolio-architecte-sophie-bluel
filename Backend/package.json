@@ -1,7 +1,7 @@
 {
   "name": "dwf-projet6-backend",
   "version": "0.0.1",
-  "description": "",
+  "description": "Ce repo contient le code backend de l'architecte Sophie Bluel.",
   "main": "server.js",
   "scripts": {
     "start": "node server",
