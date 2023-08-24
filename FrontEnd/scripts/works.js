@@ -27,4 +27,33 @@ function generateWorks(works) {
   }
 }
 
-generateWorks(works);
+// generateWorks(works);
+
+
+// Génération des articles avec Template literals
+function generateWorksWithTemplateLiterals(works) {
+  for (let i = 0; i < works.length; i++) {
+    const figure = works[i];
+    // Récupération de l'élément du DOM qui accueillera les fiches
+    const sectionGallery = document.querySelector('.gallery');
+
+    // Création d’une balise dédiée à un work
+    const workElement = document.createElement("figure");
+    workElement.dataset.id = works[i].id;
+
+    // Création des variables à indenter imagesUrl et title
+    const imageUrl = figure.imageUrl;
+    const title = figure.title ?? "(aucun titre)";
+
+    // Ajout des variables et du Html associé à workElement
+    workElement.innerHTML=
+      `<img src="${imageUrl}" alt="${title}">
+      <figcaption> ${title}</figcaption>`
+    ;
+
+    // On rattache la balise figure a la section Gallery
+    sectionGallery.appendChild(workElement);
+  }
+}
+
+generateWorksWithTemplateLiterals(works);
