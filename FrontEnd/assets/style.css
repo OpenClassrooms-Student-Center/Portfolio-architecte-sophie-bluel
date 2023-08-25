@@ -248,3 +248,7 @@ footer nav {
   width: 1140px;
   margin: auto;
 }
+
+footer ul li {
+  font-weight: 100;
+}

@@ -57,6 +57,7 @@ let main = document.querySelector("main");
 let mainHTML = main.innerHTML;
 window.localStorage.setItem("main", mainHTML);
 
+
 ///////////// FILTERS //////////////
 
 
@@ -92,27 +93,32 @@ function generateFilters(filters) {
 generateFilters(filtersWithoutDuplicate);
 
 // Bouton Filtrer pour chaque categorie
-const buttonCategories = document.querySelectorAll(".filter");
 
-buttonCategories.forEach(buttonCategory => {
-  if (buttonCategory.innerText === "Tous") {
-    buttonCategory.addEventListener("click", function () {
-      document.querySelector(".gallery").innerHTML = "";
-      generateWorksWithTemplateLiterals(works);
-    });
-  } else {
-    buttonCategory.addEventListener("click", function () {
-      const FilteredWorks = works.filter(function (work) {
-        return work.category.name === buttonCategory.innerText;
+function filterByCategory() {
+  const buttonCategories = document.querySelectorAll(".filter");
+
+  buttonCategories.forEach(buttonCategory => {
+    if (buttonCategory.innerText === "Tous") {
+      buttonCategory.addEventListener("click", function () {
+        document.querySelector(".gallery").innerHTML = "";
+        generateWorksWithTemplateLiterals(works);
       });
-      document.querySelector(".gallery").innerHTML = "";
-      generateWorksWithTemplateLiterals(FilteredWorks);
-    });
-  };
-});
+    } else {
+      buttonCategory.addEventListener("click", function () {
+        const FilteredWorks = works.filter(function (work) {
+          return work.category.name === buttonCategory.innerText;
+        });
+        document.querySelector(".gallery").innerHTML = "";
+        generateWorksWithTemplateLiterals(FilteredWorks);
+      });
+    };
+  });
+}
+
+filterByCategory();
 
 // Stockage des informations dans le localStorage
-// A refacto avec une fonction à appeler
+// ***** A refacto avec une fonction à appeler ? *****
 let mainWithFilters = document.querySelector("main");
 let mainHTMLWithFilters = mainWithFilters.innerHTML;
 window.localStorage.setItem("main", mainHTMLWithFilters);
@@ -157,6 +163,7 @@ function MenuLinks() {
     } else {
       navLink.addEventListener("click", function () {
         main.innerHTML = mainHTMLWithFilters;
+        filterByCategory();
       });
     };
   });
