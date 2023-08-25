@@ -1,5 +1,3 @@
-
-
 // Récupération des works depuis l'API
 const reponse = await fetch("http://localhost:5678/api/works");
 const works = await reponse.json();
@@ -54,6 +52,10 @@ function generateWorksWithTemplateLiterals(works) {
 
 generateWorksWithTemplateLiterals(works);
 
+// Stockage des informations dans le localStorage
+const main = document.querySelector("main");
+const mainHTML = main.innerHTML;
+window.localStorage.setItem("main", mainHTML);
 
 ///////////// FILTERS //////////////
 
@@ -107,5 +109,52 @@ buttonCategories.forEach(buttonCategory => {
       document.querySelector(".gallery").innerHTML = "";
       generateWorksWithTemplateLiterals(FilteredWorks);
     });
-  }
+  };
 });
+
+
+////////////// NAV LINKS MENU /////////////////////////
+
+// Génération de la page de connexion (avec Template literals)
+function generateLogInHTML() {
+  // Création d’une balise dédiée
+  const sectionLogIn = document.createElement("section");
+  // Ajout du Html associé à formElement
+  sectionLogIn.innerHTML=
+    `<h2>Log In</h2>
+		<form action="#" method="post">
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email">
+			<label for="password">Mot de passe</label>
+			<input type="password" name="password" id="password">
+			<input type="submit" value="Se connecter">
+      <a href="#" id="forgotten-password">Mot de passe oublié</a>
+		</form>`
+  ;
+  // Ajout du Css
+  sectionLogIn.classList.add("form");
+  sectionLogIn.setAttribute("id", "login-form")
+  // On rattache la section à main
+  main.appendChild(sectionLogIn);
+}
+
+
+
+function MenuLinks() {
+  const longInNavLink = document.getElementById("login");
+  const navLinks = document.querySelectorAll(".nav-links");
+  navLinks.forEach(navLink => {
+    if (navLink === longInNavLink) {
+      navLink.addEventListener("click", function () {
+        main.innerHTML = "";
+        generateLogInHTML();
+      });
+    } else {
+      navLink.addEventListener("click", function () {
+        main.innerHTML = mainHTML;
+      });
+    };
+  });
+}
+
+MenuLinks();

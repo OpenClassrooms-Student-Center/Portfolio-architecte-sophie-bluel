@@ -48,18 +48,26 @@ table {
 }
 /** end reset css**/
 body {
-	max-width: 1140px;
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
+  background-color: #FFFEF8;
 }
 header {
+  max-width: 1140px;
+	margin:auto;
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	padding: 50px 0;
 }
+
+main {
+  max-width: 1140px;
+	margin:auto;
+}
+
 section {
-	margin: 50px 0
+	margin: 50px 0;
 }
 
 h1{
@@ -68,22 +76,26 @@ h1{
 	font-family: 'Syne';
 	font-size: 22px;
 	font-weight: 800;
-	color: #B1663C
+	color: #B1663C;
 }
 
 h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
-;
 }
 
 h2{
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
-	color: #1D6154
+	color: #1D6154;
 }
+
+p, figcaption, label {
+  color: #3D3D3D;
+}
+
 nav ul {
 	display: flex;
 	align-items: center;
@@ -153,8 +165,6 @@ li:hover {
   background-color: #1D6154;
 }
 
-
-
 .gallery {
 	width: 100%;
 	display: grid;
@@ -167,34 +177,34 @@ li:hover {
 	width: 100%;
 
 }
-#contact {
+.form {
 	width: 50%;
 margin: auto;
 }
-#contact > * {
+.form > * {
 	text-align: center;
 
 }
-#contact h2{
+.form h2{
 	margin-bottom: 20px;
 }
-#contact form {
+.form form {
 	text-align: left;
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
 }
 
-#contact input {
+.form input {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#contact label {
+.form label {
 	margin: 2em 0 1em 0;
 }
-#contact textarea {
+.form textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
@@ -207,11 +217,34 @@ input[type="submit"]{
 	margin : 2em auto ;
 	width: 180px;
 	text-align: center;
-	border-radius: 60px ;
+	border-radius: 60px;
 }
 
-footer nav ul {
-	display: flex;
-	justify-content: flex-end;
-	margin: 2em
+#login-form {
+  height: 650px;
+  max-width: 380px;
+}
+
+#forgotten-password {
+  color: #3D3D3D;
+  text-align: center;
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  width: 100%;
+}
+
+footer ul {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+	margin: 2em;
+}
+
+footer nav {
+  width: 1140px;
+  margin: auto;
 }
