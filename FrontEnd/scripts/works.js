@@ -53,8 +53,8 @@ function generateWorksWithTemplateLiterals(works) {
 generateWorksWithTemplateLiterals(works);
 
 // Stockage des informations dans le localStorage
-const main = document.querySelector("main");
-const mainHTML = main.innerHTML;
+let main = document.querySelector("main");
+let mainHTML = main.innerHTML;
 window.localStorage.setItem("main", mainHTML);
 
 ///////////// FILTERS //////////////
@@ -91,7 +91,6 @@ function generateFilters(filters) {
 }
 generateFilters(filtersWithoutDuplicate);
 
-
 // Bouton Filtrer pour chaque categorie
 const buttonCategories = document.querySelectorAll(".filter");
 
@@ -111,6 +110,12 @@ buttonCategories.forEach(buttonCategory => {
     });
   };
 });
+
+// Stockage des informations dans le localStorage
+// A refacto avec une fonction à appeler
+let mainWithFilters = document.querySelector("main");
+let mainHTMLWithFilters = mainWithFilters.innerHTML;
+window.localStorage.setItem("main", mainHTMLWithFilters);
 
 
 ////////////// NAV LINKS MENU /////////////////////////
@@ -151,7 +156,7 @@ function MenuLinks() {
       });
     } else {
       navLink.addEventListener("click", function () {
-        main.innerHTML = mainHTML;
+        main.innerHTML = mainHTMLWithFilters;
       });
     };
   });
