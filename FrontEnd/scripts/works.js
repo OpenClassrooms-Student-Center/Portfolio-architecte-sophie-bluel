@@ -159,6 +159,7 @@ function MenuLinks() {
       navLink.addEventListener("click", function () {
         main.innerHTML = "";
         generateLogInHTML();
+        authentication();
       });
     } else {
       navLink.addEventListener("click", function () {
@@ -170,3 +171,51 @@ function MenuLinks() {
 }
 
 MenuLinks();
+
+
+///////// AUTHENTICATION ///////////////////
+
+async function generateToken(user) {
+  const response = await fetch('http://localhost:5678/api/users/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(user)
+        });
+        const result = await response.json();
+        // Stockage du token dans le localStorage
+        const userToken = JSON.stringify(result.token);
+        window.localStorage.setItem("token", userToken);
+}
+
+function authentication() {
+  const user = {
+    "email": "sophie.bluel@test.tld",
+    "password": "S0phie"
+  };
+  let formLogIn = document.querySelector("form");
+
+  formLogIn.addEventListener("submit", function (event) {
+    event.preventDefault();
+    let emailInput = document.getElementById("email");
+    let email = emailInput.value;
+    let passwordInput = document.getElementById("password");
+    let password = passwordInput.value;
+
+    if (email === user.email && password === user.password ) {
+        // fetch api pour générer le token
+        generateToken(user);
+        // afficher page accueil
+        main.innerHTML = mainHTMLWithFilters;
+        filterByCategory();
+
+      } else if (email != user.email || password != user.password) {
+        // message erreur email non valide
+        window.alert("L'identifiant et/ou le mot de passe ne correspondent pas.");
+        throw new Error("L'identifiant et/ou le mot de passe ne correspondent pas.");
+      };
+  })
+}
+
+authentication();
