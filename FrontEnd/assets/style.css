@@ -340,3 +340,9 @@ footer nav ul {
   text-align: center;
   margin-top: 1rem;
 }
+
+.error-message {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+}

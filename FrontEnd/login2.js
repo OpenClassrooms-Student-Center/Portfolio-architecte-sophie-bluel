@@ -46,7 +46,8 @@ async function handleFormSubmission(event) {
     localStorage.setItem("token", response.data.token);
     location.href = "index.html";
   } else {
-    alert("Identifiant ou mot de passe incorrect");
+    const errorMessageElement = document.getElementById("error-message");
+    errorMessageElement.textContent = "Identifiant ou mot de passe incorrect";
   }
 }
 
