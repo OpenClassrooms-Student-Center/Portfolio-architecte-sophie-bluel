@@ -1,8 +1,7 @@
-// Importation des fonctions de login
-import { handleFormSubmission, checkTokenLogin } from "./login.js";
+import { initWorks } from "./works2.js";
 
-fetchWorks();
-displayWorks();
+// Lancer l'initialisation des travaux
+initWorks();
 
 // Ajout de l'écouteur d'événements pour la soumission du formulaire
 const form = document.getElementById("login");
