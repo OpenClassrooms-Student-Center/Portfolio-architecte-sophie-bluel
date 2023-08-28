@@ -55,8 +55,15 @@ async function handleFormSubmission(event) {
 function checkTokenLogin() {
   const tokenAuth = localStorage.getItem("token");
   const loginLink = document.getElementById("login-link");
+  const adminBar = document.getElementById("admin-bar");
 
-  loginLink.textContent = tokenAuth ? "logout" : "login";
+  if (tokenAuth) {
+    loginLink.textContent = "logout";
+    adminBar.classList.remove("hidden");
+  } else {
+    loginLink.textContent = "login";
+    adminBar.classList.add("hidden");
+  }
 }
 
 // Ajout de l'écouteur d'événements pour la soumission du formulaire

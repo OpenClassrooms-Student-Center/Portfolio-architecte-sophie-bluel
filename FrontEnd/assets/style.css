@@ -171,6 +171,23 @@ a {
   color: inherit;
 }
 
+/* Barre d'édition admin */
+.admin-bar {
+  background-color: #000000;
+  color: white;
+  padding: 10px;
+
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hidden {
+  display: none;
+}
+
 nav ul {
   display: flex;
   align-items: center;
