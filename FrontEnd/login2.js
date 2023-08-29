@@ -56,10 +56,13 @@ function checkTokenLogin() {
   const tokenAuth = localStorage.getItem("token");
   const loginLink = document.getElementById("login-link");
   const adminBar = document.getElementById("admin-bar");
+  const allFilterBtn = document.querySelector(".filtres");
+  console.log(allFilterBtn);
 
   if (tokenAuth) {
     loginLink.textContent = "logout";
     adminBar.classList.remove("hidden");
+    allFilterBtn.classList.remove("filtres");
   } else {
     loginLink.textContent = "login";
     adminBar.classList.add("hidden");

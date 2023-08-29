@@ -179,6 +179,7 @@ a {
 
   top: 0;
   width: 100%;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -306,6 +307,7 @@ footer nav ul {
 }
 
 .projets {
+  margin-top: 60px;
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
