@@ -176,8 +176,10 @@ a {
   background-color: #000000;
   color: white;
   padding: 10px;
+  position: absolute;
   top: 0;
-  width: 100%;
+  right: 0;
+  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -185,6 +187,17 @@ a {
 
 .hidden {
   display: none;
+}
+
+#edit-mode-btn {
+  background: transparent;
+  color: white;
+}
+
+#publish-changes-btn {
+  background: white;
+  border-radius: 60px;
+  padding: 10px 25px;
 }
 
 nav ul {
