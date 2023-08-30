@@ -323,7 +323,7 @@ footer nav ul {
   column-gap: 20px;
 }
 
-#add-project-btn {
+.add-project-btn {
   display: inline-block;
   background: transparent;
   border: none;

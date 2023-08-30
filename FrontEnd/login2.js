@@ -57,16 +57,17 @@ function checkTokenLogin() {
   const loginLink = document.getElementById("login-link");
   const adminBar = document.getElementById("admin-bar");
   const allFilterBtn = document.querySelector(".filtres");
-
-  console.log(allFilterBtn);
+  const modifierBtn = document.getElementById("add-project-btn");
 
   if (tokenAuth) {
     loginLink.textContent = "logout";
     adminBar.classList.remove("hidden");
+
     allFilterBtn.classList.remove("filtres");
   } else {
     loginLink.textContent = "login";
     adminBar.classList.add("hidden");
+    modifierBtn.parentNode.removeChild(modifierBtn);
   }
 }
 

@@ -64,7 +64,7 @@
       <section class="projets-section">
         <h2>
           Mes projets
-          <button id="add-project-btn">
+          <button id="add-project-btn" class="add-project-btn hidden">
             <i class="fa-regular fa-pen-to-square"></i>
             <p>modifier</p>
           </button>
@@ -95,6 +95,13 @@
         </ul>
       </nav>
     </footer>
+    <div id="edit-modal" class="modal hidden">
+      <div class="modal-content">
+        <span class="close-btn" id="close-modal">&times;</span>
+        <h2>Modifier la galerie</h2>
+        <!-- Ajouter ici le formulaire pour ajouter/supprimer des projets -->
+      </div>
+    </div>
     <script type="module" src="main2.js"></script>
   </body>
 </html>
