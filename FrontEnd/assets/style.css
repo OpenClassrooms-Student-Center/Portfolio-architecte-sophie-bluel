@@ -173,16 +173,18 @@ a {
 
 /* Barre d'édition admin */
 .admin-bar {
+  box-sizing: border-box;
   background-color: #000000;
   color: white;
   padding: 10px;
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100vw;
+  margin: 0;
+
+  /* position: absolute; */
+
   display: flex;
   justify-content: center;
   align-items: center;
+  column-gap: 25px;
 }
 
 .hidden {
@@ -192,12 +194,17 @@ a {
 #edit-mode-btn {
   background: transparent;
   color: white;
+  border: none;
+  font-size: 16px;
+  column-gap: 10px;
+  display: flex;
 }
 
 #publish-changes-btn {
   background: white;
   border-radius: 60px;
   padding: 10px 25px;
+  font-size: 1rem;
 }
 
 nav ul {
@@ -310,6 +317,12 @@ footer nav ul {
   text-align: center;
   margin-bottom: 1rem;
   margin-top: 8rem;
+}
+
+#add-project-btn {
+  display: inline-block;
+  background: transparent;
+  border: none;
 }
 .projets {
   display: flex;
