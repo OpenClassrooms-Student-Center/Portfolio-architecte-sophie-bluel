@@ -189,6 +189,36 @@ async function generateToken(user) {
         window.localStorage.setItem("token", userToken);
 }
 
+// Génération du mode édition (avec Template literals)
+function generateAuthenticationHTML() {
+
+  // Insertion de la barre mode édition
+  const header = document.querySelector("header");
+  const menu = document.querySelector(".header-menu");
+  const sectionEditMode = document.createElement("div");
+  sectionEditMode.innerHTML=
+    `<i class="fas fa-edit"></i>
+    <p>&nbsp;Mode édition</p>`
+  ;
+  // Ajout du Css
+  sectionEditMode.classList.add("edit-mode-banner");
+  // sectionLogIn.setAttribute("id", "login-form")
+  header.insertBefore(sectionEditMode, menu);
+
+  // Insertion de l'élément modifier projets
+  const elementEditProjects = document.createElement("div");
+  elementEditProjects.innerHTML=
+    `<i class="fas fa-edit"></i>
+    <p>&nbsp;modifier</p>`
+  ;
+  // const headerPortfolio = document.getElementById("header-portfolio");
+  const title = document.getElementById("title-portfolio");
+
+  elementEditProjects.classList.add("edit-btn");
+
+  title.after(elementEditProjects);
+}
+
 function authentication() {
   const user = {
     "email": "sophie.bluel@test.tld",
@@ -207,8 +237,10 @@ function authentication() {
         // fetch api pour générer le token
         generateToken(user);
         // afficher page accueil
+        // ajouter à main l'élément supplémentaire pour éditer la page (mainHTMLWithEditor)
         main.innerHTML = mainHTMLWithFilters;
         filterByCategory();
+        generateAuthenticationHTML();
 
       } else if (email != user.email || password != user.password) {
         // message erreur email non valide

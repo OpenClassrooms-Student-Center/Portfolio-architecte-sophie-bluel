@@ -53,7 +53,8 @@ body {
 	font-size: 14px;
   background-color: #FFFEF8;
 }
-header {
+
+.header-menu {
   max-width: 1140px;
 	margin:auto;
 	display: flex;
@@ -67,7 +68,7 @@ main {
 }
 
 section {
-	margin: 50px 0;
+	margin: 6em 0;
 }
 
 h1{
@@ -110,6 +111,22 @@ nav li {
 li:hover {
 	color: #B1663C;
 }
+
+.edit-mode-banner {
+  width: 100%;
+  height: 60px;
+  margin: 0;
+  color: white;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-mode-banner > p {
+  color: white;
+}
+
 #introduction {
 	display: flex;
 	align-items: center;
@@ -135,7 +152,20 @@ li:hover {
 }
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
+}
+
+.edit-btn {
+  color: #3D3D3D;
+  display: flex;
+  align-items: center;
+}
+
+.header-portfolio {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+	margin-bottom: 6em;
 }
 
 .filters {
