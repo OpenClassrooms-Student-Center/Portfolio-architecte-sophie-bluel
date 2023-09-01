@@ -189,6 +189,23 @@ async function generateToken(user) {
         window.localStorage.setItem("token", userToken);
 }
 
+// Génération de la modale
+function generateModal() {
+  const modal = document.querySelector('#modal');
+
+  if (document.querySelector('.js-open-button') != null) {
+    const openModal = document.querySelector('.js-open-button');
+    openModal.addEventListener("click", () => {
+      modal.showModal();
+    })
+  }
+  const closeModal = document.querySelector('.js-close-button');
+  closeModal.addEventListener("click", () => {
+    modal.close();
+  })
+}
+
+
 // Génération du mode édition (avec Template literals)
 function generateAuthenticationHTML() {
 
@@ -205,18 +222,10 @@ function generateAuthenticationHTML() {
   // sectionLogIn.setAttribute("id", "login-form")
   header.insertBefore(sectionEditMode, menu);
 
-  // Insertion de l'élément modifier projets
-  const elementEditProjects = document.createElement("div");
-  elementEditProjects.innerHTML=
-    `<i class="fas fa-edit"></i>
-    <p>&nbsp;modifier</p>`
-  ;
-  // const headerPortfolio = document.getElementById("header-portfolio");
-  const title = document.getElementById("title-portfolio");
-
-  elementEditProjects.classList.add("edit-btn");
-
-  title.after(elementEditProjects);
+  // Rendre visible l'élément modifier projets
+  const elementEditProjects = document.querySelector('.js-open-button');
+  elementEditProjects.style.display = "block";
+  generateModal();
 }
 
 function authentication() {

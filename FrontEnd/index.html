@@ -13,7 +13,6 @@
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
   <!-- <script></script> -->
-  <script type="module" src="scripts/works.js"></script>
 </head>
 <body>
 <header>
@@ -44,6 +43,8 @@
 	<section id="portfolio">
     <div class="header-portfolio">
       <h2 id="title-portfolio">Mes Projets</h2>
+      <button class="edit-btn js-open-button" id="test" style="display: none;"><i class="fas fa-edit"></i> modifier</button>
+      </div>
     </div>
     <div class="filters">
     </div>
@@ -63,6 +64,25 @@
 			<input type="submit" value="Envoyer">
 		</form>
 	</section>
+
+  <dialog class="modal" id="modal">
+    <div class="header-modal">
+      <button class="js-close-button close-btn" aria-labelledby="Close"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="content-modal">
+      <h2 class="title-modal"></h2>
+      <div class="icons-gallery">
+        <p>test</p>
+        <p>test</p>
+        <p>test</p>
+      </div>
+      <hr>
+    </div>
+    <div class="footer-modal">
+      <button class="btn">Ajouter une photo</button>
+    </div>
+  </dialog>
+
 </main>
 
 <footer>
@@ -72,5 +92,6 @@
 		</ul>
 	</nav>
 </footer>
+<script type="module" src="scripts/works.js"></script>
 </body>
 </html>
