@@ -1,61 +1,8 @@
-// Fonction pour afficher la fenêtre modale
-// function showModal() {
-//   const modal = document.getElementById("edit-modal");
-//   modal.classList.remove("hidden");
-// }
-
-// // Fonction pour cacher la fenêtre modale
-// function hideModal() {
-//   const modal = document.getElementById("edit-modal");
-//   modal.classList.add("hidden");
-// }
-
-// // Ajout d'un écouteur d'événements pour le bouton "Édition"
-// document.getElementById("edit-mode-btn").addEventListener("click", showModal);
-
-// // Ajout d'un écouteur d'événements pour le bouton de fermeture de la fenêtre modale
-// document.getElementById("close-modal").addEventListener("click", hideModal);
-
-// // Fermer la fenêtre modale en cliquant en dehors de la zone de contenu
-// document
-//   .getElementById("edit-modal")
-//   .addEventListener("click", function (event) {
-//     const modalContent = document.querySelector(".modal-content");
-//     if (!modalContent.contains(event.target)) {
-//       hideModal();
-//     }
-//   });
-
-// ------------------------------------------
 // Fonction pour basculer la visibilité de la fenêtre modale
 function toggleModal(isVisible) {
   const modal = document.getElementById("edit-modal");
   modal.classList.toggle("hidden", !isVisible);
 }
-
-// // ---------------------
-
-// // Ajout d'un écouteur d'événements pour le bouton "Édition"
-// document
-//   .getElementById("edit-mode-btn")
-//   .addEventListener("click", () => toggleModal(true));
-
-// // Ajout d'un écouteur d'événements pour le bouton de fermeture de la fenêtre modale
-// document
-//   .getElementById("close-modal")
-//   .addEventListener("click", () => toggleModal(false));
-
-// // Fermer la fenêtre modale en cliquant en dehors de la zone de contenu
-// document
-//   .getElementById("edit-modal")
-//   .addEventListener("click", function (event) {
-//     const modalContent = document.querySelector(".modal-content");
-//     if (!modalContent.contains(event.target)) {
-//       toggleModal(false);
-//     }
-//   });
-
-// ---------------------
 
 // Fonction pour copier les projets existants dans la fenêtre modale
 function populateModalWithExistingProjects() {
@@ -80,18 +27,6 @@ function populateModalWithExistingProjects() {
   });
 }
 
-// Fonction pour ajouter un nouveau projet (exemple)
-// async function addNewProject(event) {
-//   event.preventDefault();
-// Récupérez les données du formulaire et ajoutez le nouveau projet
-// Mettez à jour la base de données en utilisant AJAX
-// }
-
-// Ajout d'un écouteur d'événements pour le formulaire d'ajout de projet
-// document
-//   .getElementById("add-project-form")
-//   .addEventListener("submit", addNewProject);
-
 // Ajout d'un écouteur d'événements pour le bouton "Édition"
 document.getElementById("edit-mode-btn").addEventListener("click", function () {
   toggleModal(true);
@@ -112,3 +47,52 @@ document
       toggleModal(false);
     }
   });
+// ------------------------------------------------------------------------------------------------------------------
+//  Ajouter un écouteur d'événements pour la suppression V1
+
+// document.getElementById('existing-projects').addEventListener('click', async function(event) {
+//   if (event.target.closest('.delete-icon')) {
+//     const index = event.target.closest('.delete-icon').dataset.index;
+//     const projectId = /* Récupérez l'ID du projet à supprimer en fonction de l'index */;
+
+//     // Supprimez le projet de la base de données via AJAX
+//     const response = await fetch(`http://localhost:5678/api/works/${projectId}`, {
+//       method: 'DELETE',
+//     });
+
+//     if (response.ok) {
+//       // Supprimez le projet du DOM dans la fenêtre modale et dans la div .projets
+//       document.querySelectorAll('.projets img')[index].closest('figure').remove();
+//       document.querySelectorAll('#existing-projects img')[index].closest('.img-container').remove();
+//     }
+//   }
+// });
+
+// ------------------------------------------------------------------------------------------------------------------V2
+// document
+//   .getElementById("existing-projects")
+//   .addEventListener("click", async function (event) {
+//     if (event.target.closest(".delete-icon")) {
+//       const projectId = event.target
+//         .closest(".img-container")
+//         .querySelector("figure").dataset.id;
+
+//       // Supprimez le projet de la base de données via AJAX
+//       const response = await fetch(
+//         `http://localhost:5678/api/works/${projectId}`,
+//         {
+//           method: "DELETE",
+//         }
+//       );
+
+//       if (response.ok) {
+//         // Supprimez le projet du DOM dans la fenêtre modale et dans la div .projets
+//         document
+//           .querySelector(`.projets figure[data-id="${projectId}"]`)
+//           .remove();
+//         document
+//           .querySelector(`#existing-projects figure[data-id="${projectId}"]`)
+//           .remove();
+//       }
+//     }
+//   });

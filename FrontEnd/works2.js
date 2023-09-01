@@ -1,6 +1,7 @@
 // Factory functions pour la création d'éléments DOM
 function createFigure(projet) {
   const projetFigure = document.createElement("figure");
+  projetFigure.dataset.id = projet.id;
   const projetImg = document.createElement("img");
   projetImg.src = projet.imageUrl;
   projetFigure.appendChild(projetImg);

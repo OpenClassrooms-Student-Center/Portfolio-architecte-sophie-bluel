@@ -467,3 +467,24 @@ footer nav ul {
 .hidden {
   display: none;
 }
+
+.img-container {
+  position: relative;
+}
+
+.delete-icon {
+  position: absolute;
+  top: 0;
+  right: 10px;
+
+  cursor: pointer;
+}
+
+.delete-icon i {
+  font-size: 1rem;
+  color: white;
+  padding: 0.25rem;
+  background-color: black;
+  border: 1px solid black;
+  border-radius: 3px;
+}
