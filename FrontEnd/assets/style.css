@@ -415,11 +415,62 @@ footer nav ul {
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #fff;
-  padding: 20px;
-  width: 80%;
-  max-width: 500px;
+  padding: 50px 80px;
+  max-height: 730px;
+  max-width: 630px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
 }
 
+.modal-content h3 {
+  color: #000;
+
+  font-size: 1.625rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.modal-content button {
+  border: none;
+  background: transparent;
+  font-size: 1.5rem;
+  align-self: flex-end;
+  margin-right: -10%;
+}
+
+#existing-projects {
+  width: 100%;
+  border-bottom: #b3b3b3 solid 1px;
+}
+
+#existing-projects {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  margin-top: 30px;
+  padding-bottom: 30px;
+}
+
+#existing-projects img {
+  width: 100%;
+}
+
+#add-photo {
+  font-family: "Syne";
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: white;
+  background-color: #1d6154;
+  margin: 30px auto;
+  padding: 10px 50px;
+  width: 240px;
+  text-align: center;
+  border-radius: 60px;
+}
 .hidden {
   display: none;
 }

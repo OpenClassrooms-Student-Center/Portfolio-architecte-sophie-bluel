@@ -95,13 +95,21 @@
         </ul>
       </nav>
     </footer>
+    <
     <div id="edit-modal" class="modal hidden">
       <div class="modal-content">
-        <span class="close-btn" id="close-modal">&times;</span>
-        <h2>Modifier la galerie</h2>
-        <!-- Ajouter ici le formulaire pour ajouter/supprimer des projets -->
+        <button class="close-btn" id="close-modal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <h3>Galerie Photo</h3>
+        <div id="existing-projects"></div>
+        <button id="add-photo">
+          <p>Ajouter une photo</p>
+        </button>
       </div>
     </div>
+
     <script type="module" src="main2.js"></script>
+    <script src="modal.js"></script>
   </body>
 </html>
