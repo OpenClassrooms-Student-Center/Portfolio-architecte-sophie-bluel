@@ -62,10 +62,21 @@ function populateModalWithExistingProjects() {
   const existingProjects = document.querySelector(".projets").cloneNode(true);
   const modalProjects = document.getElementById("existing-projects");
   modalProjects.innerHTML = "";
+  // Filter pour ne garder que les images
   const images = existingProjects.querySelectorAll("img");
-  images.forEach((img) => {
+  images.forEach((img, index) => {
+    const imgContainer = document.createElement("div");
+    imgContainer.classList.add("img-container");
     const imgClone = img.cloneNode(true);
-    modalProjects.appendChild(imgClone);
+    imgContainer.appendChild(imgClone);
+
+    const deleteIcon = document.createElement("button");
+    deleteIcon.classList.add("delete-icon");
+    deleteIcon.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+    deleteIcon.dataset.index = index; // Pour identifier quel projet supprimer
+    imgContainer.appendChild(deleteIcon);
+
+    modalProjects.appendChild(imgContainer);
   });
 }
 

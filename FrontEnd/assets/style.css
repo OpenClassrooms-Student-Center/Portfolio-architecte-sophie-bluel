@@ -201,13 +201,6 @@ a {
   cursor: pointer;
 }
 
-#publish-changes-btn {
-  background: white;
-  border-radius: 60px;
-  padding: 10px 25px;
-  font-size: 1rem;
-}
-
 nav ul {
   display: flex;
   align-items: center;
