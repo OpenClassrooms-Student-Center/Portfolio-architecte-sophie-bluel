@@ -81,6 +81,11 @@ deleteExistingProjects.addEventListener("click", async function (event) {
       `http://localhost:5678/api/works/${projetId}`,
       {
         method: "DELETE",
+        headers: {
+          Authorization:
+            "Bearer " +
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5MzY0MDU2NCwiZXhwIjoxNjkzNzI2OTY0fQ.meTPbG-YAJ-swKz4r28bQfRy603-DwfBiC2K268BUCU", // Remplacez YOUR_ACCESS_TOKEN par votre jeton d'accès
+        },
       }
     );
 
