@@ -49,6 +49,7 @@ function setupButtons(works, filterContainer, displayContainer) {
   const btnAll = createFilterButton("Tous", () =>
     displayWorks(works, displayContainer)
   );
+
   filterContainer.appendChild(btnAll);
 
   uniqueCategories.forEach((categoryName) => {
@@ -102,7 +103,6 @@ function deleteWorks() {
     }
   });
 }
-
 // Exécution
 
 async function initWorks() {

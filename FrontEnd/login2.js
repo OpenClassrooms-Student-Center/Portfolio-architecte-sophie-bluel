@@ -61,20 +61,26 @@ function checkTokenLogin() {
 
   if (tokenAuth) {
     loginLink.textContent = "logout";
-    adminBar.classList.remove("hidden");
+    if (adminBar) {
+      adminBar.classList.remove("hidden");
 
-    allFilterBtn.classList.remove("filtres");
+      allFilterBtn.classList.add("hidden");
+    }
   } else {
     loginLink.textContent = "login";
-    adminBar.classList.add("hidden");
-    modifierBtn.parentNode.removeChild(modifierBtn);
+    if (adminBar) {
+      adminBar.classList.add("hidden");
+      modifierBtn.parentNode.removeChild(modifierBtn);
+    }
   }
 }
 
 // Ajout de l'écouteur d'événements pour la soumission du formulaire
 function initLoginForm() {
   const form = document.getElementById("login");
-  form.addEventListener("submit", handleFormSubmission);
+  if (form) {
+    form.addEventListener("submit", handleFormSubmission);
+  }
 }
 // ----------------------------
 document.addEventListener("DOMContentLoaded", checkTokenLogin);

@@ -33,10 +33,12 @@ function populateModalWithExistingProjects() {
 // // ---------------MODAL----------------
 // Ajout d'un écouteur d'événements pour le bouton "Édition"
 const editingBtn = document.getElementById("edit-mode-btn");
-editingBtn.addEventListener("click", function () {
-  toggleModal(true);
-  populateModalWithExistingProjects();
-});
+if (editingBtn) {
+  editingBtn.addEventListener("click", function () {
+    toggleModal(true);
+    populateModalWithExistingProjects();
+  });
+}
 
 // Ajout d'un écouteur d'événements pour le bouton de fermeture de la fenêtre modale
 document
