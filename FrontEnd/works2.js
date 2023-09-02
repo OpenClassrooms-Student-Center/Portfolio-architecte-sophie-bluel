@@ -2,6 +2,7 @@
 function createFigure(projet) {
   const projetFigure = document.createElement("figure");
   projetFigure.dataset.id = projet.id;
+  // console.log(projet.id);
   const projetImg = document.createElement("img");
   projetImg.src = projet.imageUrl;
   projetFigure.appendChild(projetImg);
@@ -60,6 +61,38 @@ export function setupButtons(works, filterContainer, displayContainer) {
     filterContainer.appendChild(btn);
   });
 }
+
+// ---------------DELETE----------------
+const deleteExistingProjects = document.getElementById("existing-projects");
+// console.log(deleteExistingProjects);OK
+
+deleteExistingProjects.addEventListener("click", async function (event) {
+  // console.log("Event triggered", event.target);OK
+  const imgContainer = event.target.closest(".img-container");
+  const deleteIcon = event.target.closest(".delete-icon");
+  // console.log(deleteIcon); OK
+  // console.log(imgContainer);OK
+  if (deleteIcon && imgContainer) {
+    const projetId = imgContainer.dataset.id;
+    console.log(projetId);
+
+    // Supprimez le projet de la base de données via AJAX
+    const response = await fetch(
+      `http://localhost:5678/api/works/${projetId}`,
+      {
+        method: "DELETE",
+      }
+    );
+
+    if (response.ok) {
+      // Supprimez le projet du DOM dans la fenêtre modale et dans la div .projets
+      document.querySelector(`.projets figure[data-id="${projetId}"]`).remove();
+      document
+        .querySelector(`#existing-projects figure[data-id="${projetId}"]`)
+        .remove();
+    }
+  }
+});
 
 // Exécution
 
