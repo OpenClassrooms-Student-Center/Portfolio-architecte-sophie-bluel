@@ -30,9 +30,10 @@ function populateModalWithExistingProjects() {
     modalProjects.appendChild(imgContainer);
   });
 }
-
+// // ---------------MODAL----------------
 // Ajout d'un écouteur d'événements pour le bouton "Édition"
-document.getElementById("edit-mode-btn").addEventListener("click", function () {
+const editingBtn = document.getElementById("edit-mode-btn");
+editingBtn.addEventListener("click", function () {
   toggleModal(true);
   populateModalWithExistingProjects();
 });

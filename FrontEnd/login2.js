@@ -76,6 +76,6 @@ function initLoginForm() {
   const form = document.getElementById("login");
   form.addEventListener("submit", handleFormSubmission);
 }
-
-// Vérification de l'état de connexion à l'initialisation
-export { checkTokenLogin, initLoginForm };
+// ----------------------------
+document.addEventListener("DOMContentLoaded", checkTokenLogin);
+initLoginForm();

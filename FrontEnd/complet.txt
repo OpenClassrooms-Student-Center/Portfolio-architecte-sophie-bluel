@@ -1,0 +1,457 @@
+main.js
+
+import { initWorks, deleteWorks } from "./works2.js";
+import { initLoginForm, checkTokenLogin } from "./login2.js";
+import { toggleModal, populateModalWithExistingProjects } from "./modal.js";
+
+// Vérifier l'état de connexion de l'utilisateur
+document.addEventListener("DOMContentLoaded", checkTokenLogin);
+
+initWorks();
+
+// // ---------------MODAL----------------
+// Ajout d'un écouteur d'événements pour le bouton "Édition"
+const editingBtn = document.getElementById("edit-mode-btn");
+editingBtn.addEventListener("click", function () {
+  toggleModal(true);
+  populateModalWithExistingProjects();
+});
+
+// Ajout d'un écouteur d'événements pour le bouton de fermeture de la fenêtre modale
+document
+  .getElementById("close-modal")
+  main2.js
+  
+  .addEventListener("click", () => toggleModal(false));
+
+// Fermer la fenêtre modale en cliquant en dehors de la zone de contenu
+document
+  .getElementById("edit-modal")
+  .addEventListener("click", function (event) {
+    const modalContent = document.querySelector(".modal-content");
+    if (!modalContent.contains(event.target)) {
+      toggleModal(false);
+    }
+  });
+
+// // ---------------DELETE----------------
+deleteWorks();
+
+// // ---------------LOGIN----------------
+initLoginForm();
+
+
+
+works2.js 
+
+// Factory functions pour la création d'éléments DOM
+function createFigure(projet) {
+  const projetFigure = document.createElement("figure");
+  projetFigure.dataset.id = projet.id;
+  // console.log(projet.id);
+  const projetImg = document.createElement("img");
+  projetImg.src = projet.imageUrl;
+  projetFigure.appendChild(projetImg);
+
+  const projetCaption = document.createElement("figcaption");
+  projetCaption.innerText = projet.title;
+  projetFigure.appendChild(projetCaption);
+
+  return projetFigure;
+}
+
+function createFilterButton(categoryName, callback) {
+  const btn = document.createElement("button");
+  btn.innerText = categoryName;
+  btn.addEventListener("click", callback);
+  return btn;
+}
+
+// Requete pour récupérer les données de l'API
+export async function fetchWorks() {
+  try {
+    const response = await fetch("http://localhost:5678/api/works");
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// Affichage des projets
+export function displayWorks(works, container) {
+  container.innerHTML = ""; // Effacer tout le contenu actuel
+  works.forEach((projet) => {
+    const projetFigure = createFigure(projet);
+    container.appendChild(projetFigure);
+  });
+}
+
+// Setup des boutons de filtre
+export function setupButtons(works, filterContainer, displayContainer) {
+  const categories = works.map((item) => item.category.name);
+  const uniqueCategories = [...new Set(categories)];
+
+  const btnAll = createFilterButton("Tous", () =>
+    displayWorks(works, displayContainer)
+  );
+  filterContainer.appendChild(btnAll);
+
+  uniqueCategories.forEach((categoryName) => {
+    const btn = createFilterButton(categoryName, () => {
+      const filteredWorks = works.filter(
+        (item) => item.category.name === categoryName
+      );
+      displayWorks(filteredWorks, displayContainer);
+    });
+    filterContainer.appendChild(btn);
+  });
+}
+
+// // ---------------DELETE----------------
+export function deleteWorks() {
+  const deleteExistingProjects = document.getElementById("existing-projects");
+
+  deleteExistingProjects.addEventListener("click", async function (event) {
+    event.preventDefault();
+    // console.log("Event triggered", event.target);OK
+    const imgContainer = event.target.closest(".img-container");
+    const deleteIcon = event.target.closest(".delete-icon");
+    //   // console.log(deleteIcon); OK
+    //   // console.log(imgContainer);OK
+    if (deleteIcon && imgContainer) {
+      const projetId = imgContainer.dataset.id;
+      const token = localStorage.getItem("token");
+
+      // Supprimez le projet de la base de données via AJAX
+
+      const response = await fetch(
+        `http://localhost:5678/api/works/${projetId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`, // Ajoutez le token d'authentification dans le header
+          },
+        }
+      );
+
+      if (response.ok) {
+        // Supprimez le projet du DOM dans la fenêtre modale et dans la div .projets
+        document
+          .querySelector(`.projets figure[data-id="${projetId}"]`)
+          .remove();
+        document
+          .querySelector(`#existing-projects figure[data-id="${projetId}"]`)
+          .remove();
+      }
+    }
+  });
+}
+
+// Exécution
+
+export async function initWorks() {
+  const works = await fetchWorks();
+
+  const sectionProjet = document.querySelector(".projets");
+  displayWorks(works, sectionProjet);
+
+  const filtresDiv = document.querySelector(".filtres");
+  setupButtons(works, filtresDiv, sectionProjet);
+}
+
+login2.js
+
+// Factory pour créer une fonction de récupération de valeur d'élément DOM
+function createDOMValueGetter(selector) {
+  return function () {
+    const element = document.querySelector(selector);
+    return element ? element.value : null;
+  };
+}
+
+// Factory pour la requête HTTP
+function createAPIPostRequest(url) {
+  return async function (body) {
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+
+      const data = await response.json();
+      return { data, status: response.status };
+    } catch (error) {
+      console.error("Une erreur est survenue", error);
+      return null;
+    }
+  };
+}
+
+// Gestion de la soumission du formulaire
+async function handleFormSubmission(event) {
+  event.preventDefault();
+
+  const getEmail = createDOMValueGetter("#login-email");
+  const getPassword = createDOMValueGetter("#login-password");
+  const loginUser = createAPIPostRequest(
+    "http://localhost:5678/api/users/login"
+  );
+
+  const email = getEmail();
+  const password = getPassword();
+  const response = await loginUser({ email, password });
+
+  if (response && response.status === 200) {
+    localStorage.setItem("user", JSON.stringify(response.data.userId));
+    localStorage.setItem("token", response.data.token);
+    location.href = "index.html";
+  } else {
+    const errorMessageElement = document.getElementById("error-message");
+    errorMessageElement.textContent = "Identifiant ou mot de passe incorrect";
+  }
+}
+
+// Vérifier l'état de connexion de l'utilisateur
+function checkTokenLogin() {
+  const tokenAuth = localStorage.getItem("token");
+  const loginLink = document.getElementById("login-link");
+  const adminBar = document.getElementById("admin-bar");
+  const allFilterBtn = document.querySelector(".filtres");
+  const modifierBtn = document.getElementById("add-project-btn");
+
+  if (tokenAuth) {
+    loginLink.textContent = "logout";
+    adminBar.classList.remove("hidden");
+
+    allFilterBtn.classList.remove("filtres");
+  } else {
+    loginLink.textContent = "login";
+    adminBar.classList.add("hidden");
+    modifierBtn.parentNode.removeChild(modifierBtn);
+  }
+}
+
+// Ajout de l'écouteur d'événements pour la soumission du formulaire
+function initLoginForm() {
+  const form = document.getElementById("login");
+  form.addEventListener("submit", handleFormSubmission);
+}
+
+// Vérification de l'état de connexion à l'initialisation
+export { checkTokenLogin, initLoginForm };
+
+
+modal.js
+
+// Fonction pour basculer la visibilité de la fenêtre modale
+export function toggleModal(isVisible) {
+  const modal = document.getElementById("edit-modal");
+  modal.classList.toggle("hidden", !isVisible);
+}
+
+// Fonction pour copier les projets existants dans la fenêtre modale
+export function populateModalWithExistingProjects() {
+  const existingProjects = document.querySelector(".projets").cloneNode(true);
+  const modalProjects = document.getElementById("existing-projects");
+  modalProjects.innerHTML = "";
+  // Filter pour ne garder que les images
+  const images = existingProjects.querySelectorAll("img");
+  images.forEach((img) => {
+    const imgContainer = document.createElement("div");
+    imgContainer.classList.add("img-container");
+    const originalFigure = img.closest("figure");
+    if (originalFigure && originalFigure.dataset.id) {
+      imgContainer.dataset.id = originalFigure.dataset.id;
+    }
+    const imgClone = img.cloneNode(true);
+    imgContainer.appendChild(imgClone);
+
+    const deleteIcon = document.createElement("button");
+    deleteIcon.classList.add("delete-icon");
+    deleteIcon.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+
+    imgContainer.appendChild(deleteIcon);
+
+    modalProjects.appendChild(imgContainer);
+  });
+}
+
+// ------------------------------------------------------------------------------------------------------------------
+
+
+
+index.html 
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sophie Bluel - Architecte d'intérieur</title>
+    <script
+      src="https://kit.fontawesome.com/98c0cd202d.js"
+      crossorigin="anonymous"
+    ></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="./assets/style.css" />
+  </head>
+  <body>
+    <div id="admin-bar" class="admin-bar hidden">
+      <button id="edit-mode-btn">
+        <i class="fa-regular fa-pen-to-square"></i>
+        <p>Mode édition</p>
+      </button>
+    </div>
+    <header id="header-margin">
+      <h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">projets</a></li>
+          <li>contact</li>
+          <li><a href="login.html" alt="login" id="login-link">login</a></li>
+          <li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section id="introduction">
+        <figure>
+          <img src="./assets/images/sophie-bluel.png" alt="" />
+        </figure>
+        <article>
+          <h2>Designer d'espace</h2>
+          <p>
+            Je raconte votre histoire, je valorise vos idées. Je vous accompagne
+            de la conception à la livraison finale du chantier.
+          </p>
+          <p>
+            Chaque projet sera étudié en commun, de façon à mettre en valeur les
+            volumes, les matières et les couleurs dans le respect de l’esprit
+            des lieux et le choix adapté des matériaux. Le suivi du chantier
+            sera assuré dans le souci du détail, le respect du planning et du
+            budget.
+          </p>
+          <p>
+            En cas de besoin, une équipe pluridisciplinaire peut-être constituée
+            : architecte DPLG, décorateur(trice)
+          </p>
+        </article>
+      </section>
+
+      <section class="projets-section">
+        <h2>
+          Mes projets
+          <button id="add-project-btn" class="add-project-btn hidden">
+            <i class="fa-regular fa-pen-to-square"></i>
+            <p>modifier</p>
+          </button>
+        </h2>
+        <div class="filtres"></div>
+        <div class="projets"></div>
+      </section>
+
+      <section id="contact">
+        <h2>Contact</h2>
+        <p>Vous avez un projet ? Discutons-en !</p>
+        <form action="#" method="post">
+          <label for="name">Nom</label>
+          <input type="text" name="name" id="name" />
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" />
+          <label for="message">Message</label>
+          <textarea name="message" id="message" cols="30" rows="10"></textarea>
+          <input type="submit" value="Envoyer" />
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <nav>
+        <ul>
+          <li>Mentions Légales</li>
+        </ul>
+      </nav>
+    </footer>
+
+    <div id="edit-modal" class="modal hidden">
+      <div class="modal-content">
+        <button class="close-btn" id="close-modal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <h3>Galerie Photo</h3>
+        <div id="existing-projects"></div>
+        <button id="add-photo">
+          <p>Ajouter une photo</p>
+        </button>
+      </div>
+    </div>
+
+    <script type="module" src="main2.js"></script>
+  </body>
+</html>
+
+
+login.html
+
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sophie Bluel - Architecte d'intérieur - login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="./assets/style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">projets</a></li>
+          <li>contact</li>
+          <li><a href="login.html" alt="login" id="login-link">login</a></li>
+          <li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
+        </ul>
+      </nav>
+    </header>
+    <!-- FORMULAIRE à intégrer -->
+    <main>
+      <div id="login">
+        <h2>Log In</h2>
+        <form action="#" method="post">
+          <label for="login-email">E-mail</label>
+          <input type="email" id="login-email" name="email" required />
+          <label for="login-password">Mot de passe</label>
+          <input type="password" id="login-password" name="password" required />
+          <input type="submit" value="Se connecter" />
+          <p id="error-message" class="error-message"></p>
+        </form>
+        <a href="#" id="forgot-password">Mot de passe oublié</a>
+      </div>
+    </main>
+    <footer>
+      <nav>
+        <ul>
+          <li>Mentions Légales</li>
+        </ul>
+      </nav>
+    </footer>
+
+    <script type="module" src="main2.js"></script>
+  </body>
+</html>

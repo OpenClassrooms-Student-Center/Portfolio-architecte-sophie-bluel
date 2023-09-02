@@ -22,7 +22,7 @@ function createFilterButton(categoryName, callback) {
 }
 
 // Requete pour récupérer les données de l'API
-export async function fetchWorks() {
+async function fetchWorks() {
   try {
     const response = await fetch("http://localhost:5678/api/works");
     const data = await response.json();
@@ -33,7 +33,7 @@ export async function fetchWorks() {
 }
 
 // Affichage des projets
-export function displayWorks(works, container) {
+function displayWorks(works, container) {
   container.innerHTML = ""; // Effacer tout le contenu actuel
   works.forEach((projet) => {
     const projetFigure = createFigure(projet);
@@ -42,7 +42,7 @@ export function displayWorks(works, container) {
 }
 
 // Setup des boutons de filtre
-export function setupButtons(works, filterContainer, displayContainer) {
+function setupButtons(works, filterContainer, displayContainer) {
   const categories = works.map((item) => item.category.name);
   const uniqueCategories = [...new Set(categories)];
 
@@ -63,47 +63,50 @@ export function setupButtons(works, filterContainer, displayContainer) {
 }
 
 // ---------------DELETE----------------
-const deleteExistingProjects = document.getElementById("existing-projects");
-// console.log(deleteExistingProjects);OK
+function deleteWorks() {
+  const deleteExistingProjects = document.getElementById("existing-projects");
 
-deleteExistingProjects.addEventListener("click", async function (event) {
-  // console.log("Event triggered", event.target);OK
-  const imgContainer = event.target.closest(".img-container");
-  const deleteIcon = event.target.closest(".delete-icon");
-  // console.log(deleteIcon); OK
-  // console.log(imgContainer);OK
-  if (deleteIcon && imgContainer) {
-    const projetId = imgContainer.dataset.id;
-    console.log(projetId);
+  deleteExistingProjects.addEventListener("click", async function (event) {
+    event.preventDefault();
+    event.stopPropagation();
+    // console.log("Event triggered", event.target);OK
+    const imgContainer = event.target.closest(".img-container");
+    const deleteIcon = event.target.closest(".delete-icon");
+    //   // console.log(deleteIcon); OK
+    //   // console.log(imgContainer);OK
+    if (deleteIcon && imgContainer) {
+      const projetId = imgContainer.dataset.id;
+      const token = localStorage.getItem("token");
 
-    // Supprimez le projet de la base de données via AJAX
-    const response = await fetch(
-      `http://localhost:5678/api/works/${projetId}`,
-      {
-        method: "DELETE",
-        headers: {
-          Authorization:
-            "Bearer " +
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5MzY0MDU2NCwiZXhwIjoxNjkzNzI2OTY0fQ.meTPbG-YAJ-swKz4r28bQfRy603-DwfBiC2K268BUCU", // Remplacez YOUR_ACCESS_TOKEN par votre jeton d'accès
-        },
+      // Supprimez le projet de la base de données via AJAX
+
+      const response = await fetch(
+        `http://localhost:5678/api/works/${projetId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`, // Ajoutez le token d'authentification dans le header
+          },
+        }
+      );
+
+      if (response.ok) {
+        // Supprimez le projet du DOM dans la fenêtre modale et dans la div .projets
+        document
+          .querySelector(`.projets figure[data-id="${projetId}"]`)
+          .remove();
+        document
+          .querySelector(`#existing-projects figure[data-id="${projetId}"]`)
+          .remove();
       }
-    );
-
-    if (response.ok) {
-      // Supprimez le projet du DOM dans la fenêtre modale et dans la div .projets
-      document.querySelector(`.projets figure[data-id="${projetId}"]`).remove();
-      document
-        .querySelector(`#existing-projects figure[data-id="${projetId}"]`)
-        .remove();
     }
-  }
-});
+  });
+}
 
 // Exécution
 
-export async function initWorks() {
+async function initWorks() {
   const works = await fetchWorks();
-  console.log(works);
 
   const sectionProjet = document.querySelector(".projets");
   displayWorks(works, sectionProjet);
@@ -111,3 +114,5 @@ export async function initWorks() {
   const filtresDiv = document.querySelector(".filtres");
   setupButtons(works, filtresDiv, sectionProjet);
 }
+
+initWorks();
