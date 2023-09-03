@@ -92,7 +92,7 @@ function deleteWorks() {
       );
 
       if (response.ok) {
-        // Supprimez le projet du DOM dans la fenêtre modale et dans la div .projets
+        // Supprimer le projet du DOM dans la fenêtre modale et dans la div .projets
         document
           .querySelector(`.projets figure[data-id="${projetId}"]`)
           .remove();
