@@ -464,9 +464,6 @@ footer nav ul {
   text-align: center;
   border-radius: 60px;
 }
-.hidden {
-  display: none;
-}
 
 .img-container {
   position: relative;
@@ -487,4 +484,75 @@ footer nav ul {
   background-color: black;
   border: 1px solid black;
   border-radius: 3px;
+}
+
+.modal-content-form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 50px 80px;
+  max-height: 730px;
+  width: 630px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+}
+
+/* #contact {
+  width: 50%;
+  margin: auto;
+} */
+.modal-content-form > * {
+  text-align: center;
+}
+.modal-content-form h3 {
+  color: #000;
+  font-size: 1.625rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.modal-content-form form {
+  text-align: left;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+image-upload {
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+.modal-content-form input {
+  height: 50px;
+  font-size: 1.2em;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+.modal-content-form label {
+  margin: 2em 0 1em 0;
+}
+.modal-content-form text {
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+.modal-content-form button {
+  font-family: "Syne";
+  font-weight: 700;
+  color: white;
+  background-color: #1d6154;
+  margin: 2em auto;
+  width: 180px;
+  text-align: center;
+  border-radius: 60px;
+}
+
+select {
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }

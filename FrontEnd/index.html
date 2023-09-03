@@ -108,6 +108,29 @@
       </div>
     </div>
 
+    <div id="add-photo-form-container" class="modal hidden">
+      <div class="modal-content-form">
+        <h3>Ajout photo</h3>
+        <form id="add-photo-form ">
+          <label for="image-upload">Importer une image</label>
+          <input type="file" id="image-upload" name="image" required />
+
+          <label for="project-title">Titre</label>
+          <input type="text" id="project-title" name="title" required />
+
+          <label for="project-category">Catégorie</label>
+          <select id="project-category" name="category" required>
+            <option value="1">Objets</option>
+            <option value="2">Appartements</option>
+            <option value="3">Hotels & restaurants</option>
+          </select>
+
+          <button type="submit">Valider</button>
+        </form>
+        <div id="form-error-message"></div>
+      </div>
+    </div>
+
     <script src="works2.js"></script>
     <script src="modal.js"></script>
     <script src="login2.js"></script>
