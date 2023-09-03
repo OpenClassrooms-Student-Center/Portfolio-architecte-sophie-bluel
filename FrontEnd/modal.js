@@ -5,7 +5,7 @@ function toggleModal(isVisible) {
 }
 
 // Fonction pour copier les projets existants dans la fenêtre modale
-function populateModalWithExistingProjects() {
+function importModalWithExistingProjects() {
   const existingProjects = document.querySelector(".projets").cloneNode(true);
   const modalProjects = document.getElementById("existing-projects");
   modalProjects.innerHTML = "";
@@ -36,7 +36,7 @@ const editingBtn = document.getElementById("edit-mode-btn");
 if (editingBtn) {
   editingBtn.addEventListener("click", function () {
     toggleModal(true);
-    populateModalWithExistingProjects();
+    importModalWithExistingProjects();
   });
 }
 
@@ -54,4 +54,4 @@ document
       toggleModal(false);
     }
   });
-// ------------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------
