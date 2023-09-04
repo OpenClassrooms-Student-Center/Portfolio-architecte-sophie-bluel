@@ -57,6 +57,7 @@ document
 
 // ---------------------Formulaire envoi photo---------------------------------------------------
 const addPhotoBtn = document.getElementById("add-photo");
+console.log(addPhotoBtn);
 
 addPhotoBtn.addEventListener("click", function () {
   // Cachez la galerie d'images et affichez le formulaire

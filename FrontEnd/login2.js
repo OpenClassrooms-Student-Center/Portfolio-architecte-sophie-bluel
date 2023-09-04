@@ -63,7 +63,6 @@ function checkTokenLogin() {
     loginLink.textContent = "logout";
     if (adminBar) {
       adminBar.classList.remove("hidden");
-
       allFilterBtn.classList.add("hidden");
     }
   } else {
