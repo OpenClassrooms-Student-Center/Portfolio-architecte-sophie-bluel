@@ -93,6 +93,7 @@ if (addPhotoForm)
 
     // Création de l'objet FormData pour envoyer le fichier et les autres données
     const formData = new FormData();
+    // const title = formData.get("title");   // Récupérer une valeur
     formData.append("image", imageUpload);
     formData.append("title", projectTitle);
     formData.append("categoryId", projectCategory);
