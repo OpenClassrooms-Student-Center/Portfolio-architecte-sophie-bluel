@@ -52,7 +52,7 @@ async function handleFormSubmission(event) {
 }
 
 // Vérifier l'état de connexion de l'utilisateur
-function checkTokenLogin() {
+export function checkTokenLogin() {
   const tokenAuth = localStorage.getItem("token");
   const loginLink = document.getElementById("login-link");
   const adminBar = document.getElementById("admin-bar");
@@ -75,7 +75,7 @@ function checkTokenLogin() {
 }
 
 // Ajout de l'écouteur d'événements pour la soumission du formulaire
-function initLoginForm() {
+export function initLoginForm() {
   const form = document.getElementById("login");
   if (form) {
     form.addEventListener("submit", handleFormSubmission);

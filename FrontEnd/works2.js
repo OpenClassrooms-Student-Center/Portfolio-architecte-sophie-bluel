@@ -22,7 +22,7 @@ function createFilterButton(categoryName, callback) {
 }
 
 // Requete pour récupérer les données de l'API
-async function fetchWorks() {
+export async function fetchWorks() {
   try {
     const response = await fetch("http://localhost:5678/api/works");
     const data = await response.json();
@@ -33,7 +33,7 @@ async function fetchWorks() {
 }
 
 // Affichage des projets
-function displayWorks(works, container) {
+export function displayWorks(works, container) {
   container.innerHTML = ""; // Effacer tout le contenu actuel
   works.forEach((projet) => {
     const projetFigure = createFigure(projet);
@@ -42,7 +42,7 @@ function displayWorks(works, container) {
 }
 
 // Setup des boutons de filtre
-function setupButtons(works, filterContainer, displayContainer) {
+export function setupButtons(works, filterContainer, displayContainer) {
   const categories = works.map((item) => item.category.name);
   const uniqueCategories = [...new Set(categories)];
 
@@ -64,55 +64,45 @@ function setupButtons(works, filterContainer, displayContainer) {
 }
 
 // ---------------DELETE----------------
-function deleteWorks() {
+export function deleteWorks() {
   const deleteExistingProjects = document.getElementById("existing-projects");
+  console.log("deleteWorks tourne");
 
-  deleteExistingProjects.addEventListener("click", async function (event) {
-    event.preventDefault();
-    event.stopPropagation();
-    // console.log("Event triggered", event.target);OK
-    const imgContainer = event.target.closest(".img-container");
-    const deleteIcon = event.target.closest(".delete-icon");
-    //   // console.log(deleteIcon); OK
-    //   // console.log(imgContainer);OK
-    if (deleteIcon && imgContainer) {
-      const projetId = imgContainer.dataset.id;
-      const token = localStorage.getItem("token");
+  if (deleteExistingProjects)
+    deleteExistingProjects.addEventListener("click", async function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      // console.log("Event triggered", event.target);
+      const imgContainer = event.target.closest(".img-container");
+      const deleteIcon = event.target.closest(".delete-icon");
+      //   // console.log(deleteIcon); OK
+      //   // console.log(imgContainer);OK
+      if (deleteIcon && imgContainer) {
+        const projetId = imgContainer.dataset.id;
+        const token = localStorage.getItem("token");
 
-      // Supprimez le projet de la base de données via AJAX
+        // Supprimez le projet de la base de données via AJAX
 
-      const response = await fetch(
-        `http://localhost:5678/api/works/${projetId}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`, // Ajoutez le token d'authentification dans le header
-          },
+        const response = await fetch(
+          `http://localhost:5678/api/works/${projetId}`,
+          {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${token}`, // Ajoutez le token d'authentification dans le header
+            },
+          }
+        );
+
+        if (response.ok) {
+          // Supprimer le projet du DOM dans la fenêtre modale et dans la div .projets
+          document
+            .querySelector(`.projets figure[data-id="${projetId}"]`)
+            .remove();
+          document
+            .querySelector(`#existing-projects figure[data-id="${projetId}"]`)
+            .remove();
         }
-      );
-
-      if (response.ok) {
-        // Supprimer le projet du DOM dans la fenêtre modale et dans la div .projets
-        document
-          .querySelector(`.projets figure[data-id="${projetId}"]`)
-          .remove();
-        document
-          .querySelector(`#existing-projects figure[data-id="${projetId}"]`)
-          .remove();
       }
-    }
-  });
+    });
 }
 // Exécution
-
-async function initWorks() {
-  const works = await fetchWorks();
-
-  const sectionProjet = document.querySelector(".projets");
-  displayWorks(works, sectionProjet);
-
-  const filtresDiv = document.querySelector(".filtres");
-  setupButtons(works, filtresDiv, sectionProjet);
-}
-
-initWorks();
