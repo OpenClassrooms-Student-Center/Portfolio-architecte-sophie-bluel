@@ -32,15 +32,21 @@ function importModalWithExistingProjects() {
 }
 // // ---------------MODAL----------------
 // Ajout d'un écouteur d'événements pour le bouton "Édition"
+const modalContent = document.querySelector(".modal-content");
+const modalContentForm = document.querySelector(".modal-content-form");
 const editingBtn = document.getElementById("edit-mode-btn");
+
 if (editingBtn) {
   editingBtn.addEventListener("click", function () {
     toggleModal(true);
     importModalWithExistingProjects();
+    modalContent.classList.remove("hidden");
+    modalContentForm.classList.add("hidden");
   });
 }
 
 // Ajout d'un écouteur d'événements pour le bouton de fermeture de la fenêtre modale
+
 document
   .getElementById("close-modal")
   .addEventListener("click", () => toggleModal(false));
@@ -49,23 +55,19 @@ document
 document
   .getElementById("edit-modal")
   .addEventListener("click", function (event) {
-    const modalContent = document.querySelector(".modal-content");
     if (!modalContent.contains(event.target)) {
       toggleModal(false);
     }
   });
 
 // ---------------------Formulaire envoi photo---------------------------------------------------
+
 const addPhotoBtn = document.getElementById("add-photo");
 console.log(addPhotoBtn);
 
 addPhotoBtn.addEventListener("click", function () {
-  // Cachez la galerie d'images et affichez le formulaire
-
-  document.getElementById("edit-modal").classList.add("hidden");
-  document
-    .getElementById("add-photo-form-container")
-    .classList.remove("hidden");
+  modalContent.classList.add("hidden");
+  modalContentForm.classList.remove("hidden");
 });
 
 const addPhotoForm = document.getElementById("add-photo-form");
