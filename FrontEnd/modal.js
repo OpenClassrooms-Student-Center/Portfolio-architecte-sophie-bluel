@@ -52,10 +52,14 @@ document
   .addEventListener("click", () => toggleModal(false));
 
 // Fermer la fenêtre modale en cliquant en dehors de la zone de contenu
+
 document
   .getElementById("edit-modal")
   .addEventListener("click", function (event) {
-    if (!modalContent.contains(event.target)) {
+    if (
+      !modalContent.contains(event.target) &&
+      !modalContentForm.contains(event.target)
+    ) {
       toggleModal(false);
     }
   });
@@ -63,7 +67,6 @@ document
 // ---------------------Formulaire envoi photo---------------------------------------------------
 
 const addPhotoBtn = document.getElementById("add-photo");
-console.log(addPhotoBtn);
 
 addPhotoBtn.addEventListener("click", function () {
   modalContent.classList.add("hidden");
