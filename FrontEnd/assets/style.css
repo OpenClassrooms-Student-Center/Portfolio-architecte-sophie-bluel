@@ -171,6 +171,36 @@ a {
   color: inherit;
 }
 
+/* Barre d'édition admin */
+.admin-bar {
+  box-sizing: border-box;
+  background-color: #000000;
+  color: white;
+  padding: 10px;
+  margin: 0;
+
+  /* position: absolute; */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 25px;
+}
+
+.hidden {
+  display: none;
+}
+
+#edit-mode-btn {
+  background: transparent;
+  color: white;
+  border: none;
+  font-size: 16px;
+  column-gap: 10px;
+  display: flex;
+  cursor: pointer;
+}
+
 nav ul {
   display: flex;
   align-items: center;
@@ -281,6 +311,19 @@ footer nav ul {
   text-align: center;
   margin-bottom: 1rem;
   margin-top: 8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 20px;
+}
+
+.add-project-btn {
+  display: inline-block;
+  background: transparent;
+  border: none;
+  display: flex;
+  column-gap: 10px;
+  margin-top: 5px;
 }
 .projets {
   display: flex;
@@ -289,6 +332,7 @@ footer nav ul {
 }
 
 .projets {
+  margin-top: 60px;
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -339,4 +383,182 @@ footer nav ul {
 #forgot-password {
   text-align: center;
   margin-top: 1rem;
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/********** modale **********/
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 9999;
+}
+
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 50px 80px;
+  max-height: 730px;
+  max-width: 630px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+}
+
+.modal-content h3 {
+  color: #000;
+
+  font-size: 1.625rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.modal-content button {
+  border: none;
+  background: transparent;
+  font-size: 1.5rem;
+  align-self: flex-end;
+  margin-right: -10%;
+}
+
+#existing-projects {
+  width: 100%;
+  border-bottom: #b3b3b3 solid 1px;
+}
+
+#existing-projects {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  margin-top: 30px;
+  padding-bottom: 30px;
+}
+
+#existing-projects img {
+  width: 100%;
+}
+
+#add-photo {
+  font-family: "Syne";
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: white;
+  background-color: #1d6154;
+  margin: 30px auto;
+  padding: 10px 50px;
+  width: 240px;
+  text-align: center;
+  border-radius: 60px;
+}
+
+.hidden {
+  display: none;
+}
+
+.img-container {
+  position: relative;
+}
+
+.delete-icon {
+  position: absolute;
+  top: 0;
+  right: 10px;
+
+  cursor: pointer;
+}
+
+.delete-icon i {
+  font-size: 1rem;
+  color: white;
+  padding: 0.25rem;
+  background-color: black;
+  border: 1px solid black;
+  border-radius: 3px;
+}
+
+.modal-content-form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 50px 80px;
+  max-height: 730px;
+  width: 630px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.hidden {
+  display: none;
+}
+
+/* #contact {
+  width: 50%;
+  margin: auto;
+} */
+.modal-content-form > * {
+  text-align: center;
+}
+.modal-content-form h3 {
+  color: #000;
+  font-size: 1.625rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.modal-content-form form {
+  text-align: left;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+image-upload {
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+.modal-content-form input {
+  height: 50px;
+  font-size: 1.2em;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+.modal-content-form label {
+  margin: 2em 0 1em 0;
+}
+.modal-content-form text {
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+.modal-content-form button {
+  font-family: "Syne";
+  font-weight: 700;
+  color: white;
+  background-color: #1d6154;
+  margin: 2em auto;
+  width: 180px;
+  text-align: center;
+  border-radius: 60px;
+}
+
+select {
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }

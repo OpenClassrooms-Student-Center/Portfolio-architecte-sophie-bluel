@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <title>Sophie Bluel - Architecte d'intérieur</title>
+    <script
+      src="https://kit.fontawesome.com/98c0cd202d.js"
+      crossorigin="anonymous"
+    ></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,7 +18,13 @@
     <link rel="stylesheet" href="./assets/style.css" />
   </head>
   <body>
-    <header>
+    <div id="admin-bar" class="admin-bar hidden">
+      <button id="edit-mode-btn">
+        <i class="fa-regular fa-pen-to-square"></i>
+        <p>Mode édition</p>
+      </button>
+    </div>
+    <header id="header-margin">
       <h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
       <nav>
         <ul>
@@ -51,7 +61,13 @@
       </section>
 
       <section class="projets-section">
-        <h2>Mes Projets</h2>
+        <h2>
+          Mes projets
+          <button id="add-project-btn" class="add-project-btn hidden">
+            <i class="fa-regular fa-pen-to-square"></i>
+            <p>modifier</p>
+          </button>
+        </h2>
         <div class="filtres"></div>
         <div class="projets"></div>
       </section>
@@ -78,6 +94,41 @@
         </ul>
       </nav>
     </footer>
-    <script type="module" src="main.js"></script>
+
+    <div id="edit-modal" class="modal hidden">
+      <div class="modal-content modal-click">
+        <button class="close-btn" id="close-modal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <h3>Galerie Photo</h3>
+        <div id="existing-projects"></div>
+        <button id="add-photo">
+          <p>Ajouter une photo</p>
+        </button>
+      </div>
+      <div class="modal-content-form modal-click">
+        <h3>Ajout photo</h3>
+        <form id="add-photo-form ">
+          <label for="image-upload">Importer une image</label>
+          <input type="file" id="image-upload" name="image" required />
+
+          <label for="project-title">Titre</label>
+          <input type="text" id="project-title" name="title" required />
+
+          <label for="project-category">Catégorie</label>
+          <select id="project-category" name="category" required>
+            <option value="1">Objets</option>
+            <option value="2">Appartements</option>
+            <option value="3">Hotels & restaurants</option>
+          </select>
+          <button type="submit">Valider</button>
+        </form>
+        <div id="form-error-message"></div>
+      </div>
+    </div>
+
+    <script src="modal.js"></script>
+
+    <script type="module" src="main2.js"></script>
   </body>
 </html>
