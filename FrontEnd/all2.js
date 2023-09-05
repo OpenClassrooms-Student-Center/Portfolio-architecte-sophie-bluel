@@ -178,6 +178,31 @@ const checkTokenLogin = () => {
 };
 
 // MODAL
+// ... (autres parties du code)
+
+// MODAL
+const modalContentForm = document.querySelector(".modal-content-form");
+const modalContent = document.querySelector(".modal-content");
+
+// Toggle Modal Visibility
+const toggleModal = (isVisible) =>
+  toggleClass(getElem("edit-modal"), "hidden", !isVisible);
+
+// Import Existing Projects into Modal
+const importModalWithExistingProjects = () => {
+  const existingProjects = cloneNode(".projets");
+  const modalProjects = getElem("existing-projects");
+  modalProjects.innerHTML = "";
+
+  queryAll("img", existingProjects).forEach((img) => {
+    const imgContainer = createElem("div", {
+      class: "img-container",
+      "data-id": closest("figure", img).dataset.id,
+    });
+    imgContainer.innerHTML = `${img.outerHTML}<button class="delete-icon"><i class="fa-solid fa-trash-can"></i></button>`;
+    modalProjects.appendChild(imgContainer);
+  });
+};
 
 // Initialisation
 (async () => {
@@ -195,3 +220,61 @@ checkTokenLogin();
 
 const form = getElem("login");
 form?.addEventListener("submit", handleFormSubmission);
+
+// Event Listeners
+if (getElem("edit-mode-btn")) {
+  addEvent("click", getElem("edit-mode-btn"), () => {
+    toggleModal(true);
+    importModalWithExistingProjects();
+    toggleClass(modalContentForm, "hide", true);
+    toggleClass(modalContent, "hide", false);
+  });
+}
+
+addEvent("click", getElem("close-modal"), () => toggleModal(false));
+
+addEvent("click", getElem("edit-modal"), (event) => {
+  if (
+    !contains(modalContent, event.target) &&
+    !contains(modalContentForm, event.target)
+  ) {
+    toggleModal(false);
+  }
+});
+
+addEvent("click", getElem("add-photo"), () => {
+  toggleClass(modalContent, "hide", true);
+  toggleClass(modalContentForm, "hide", false);
+});
+
+// Photo Submission Form
+if (getElem("add-photo-form")) {
+  addEvent("submit", getElem("add-photo-form"), async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const token = localStorage.getItem("token");
+
+    if (
+      !formData.get("image") ||
+      !formData.get("title") ||
+      !formData.get("categoryId")
+    ) {
+      getElem("form-error-message").innerText =
+        "Veuillez remplir tous les champs.";
+      return;
+    }
+
+    const response = await fetchAPI("http://localhost:5678/api/works", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}` },
+      body: formData,
+    });
+
+    alert(
+      response.ok
+        ? "Projet ajouté avec succès!"
+        : "Une erreur s'est produite. Veuillez réessayer."
+    );
+    if (response.ok) location.reload();
+  });
+}
