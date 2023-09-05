@@ -1,4 +1,22 @@
 // Fonctions utilitaires
+
+const queryAll = (selector, parent = document) =>
+  parent.querySelectorAll(selector);
+const closest = (selector, elem) => elem.closest(selector);
+const contains = (parent, child) => parent.contains(child);
+const createElem = (tag, attributes = {}) => {
+  const elem = document.createElement(tag);
+  for (const [key, value] of Object.entries(attributes)) {
+    elem.setAttribute(key, value);
+  }
+  return elem;
+};
+const addEvent = (type, elem, callback) =>
+  elem.addEventListener(type, callback);
+const toggleClass = (elem, className, condition) =>
+  elem.classList.toggle(className, condition);
+const cloneNode = (selector, deep = true) =>
+  document.querySelector(selector).cloneNode(deep);
 const getElem = (id) => document.getElementById(id);
 const getDOMValue = (selector) =>
   document.querySelector(selector)?.value || null;
@@ -132,6 +150,14 @@ const handleFormSubmission = async (event) => {
   }
 };
 
+const handleLogout = () => {
+  localStorage.removeItem("user");
+  localStorage.removeItem("token");
+  location.reload();
+  document.getElementById("login-email").textContent = "";
+  document.getElementById("login-password").textContent = "";
+};
+
 const checkTokenLogin = () => {
   const tokenAuth = localStorage.getItem("token");
   const loginLink = document.getElementById("login-link");
@@ -150,6 +176,8 @@ const checkTokenLogin = () => {
     modifierBtn?.parentNode.removeChild(modifierBtn);
   }
 };
+
+// MODAL
 
 // Initialisation
 (async () => {
