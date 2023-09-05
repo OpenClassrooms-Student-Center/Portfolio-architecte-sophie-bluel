@@ -187,10 +187,6 @@ a {
   column-gap: 25px;
 }
 
-.hidden {
-  display: none;
-}
-
 #edit-mode-btn {
   background: transparent;
   color: white;
@@ -465,10 +461,6 @@ footer nav ul {
   border-radius: 60px;
 }
 
-.hidden {
-  display: none;
-}
-
 .img-container {
   position: relative;
 }
@@ -502,9 +494,6 @@ footer nav ul {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-.hidden {
-  display: none;
 }
 
 /* #contact {
@@ -561,4 +550,11 @@ image-upload {
 select {
   border: none;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+.hidden {
+  display: none;
+}
+
+.hide {
+  display: none;
 }
