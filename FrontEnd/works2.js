@@ -22,7 +22,7 @@ function createFilterButton(categoryName, callback) {
 }
 
 // Requete pour récupérer les données de l'API
-export async function fetchWorks() {
+async function fetchWorks() {
   try {
     const response = await fetch("http://localhost:5678/api/works");
     const data = await response.json();
@@ -33,7 +33,7 @@ export async function fetchWorks() {
 }
 
 // Affichage des projets
-export function displayWorks(works, container) {
+function displayWorks(works, container) {
   container.innerHTML = ""; // Effacer tout le contenu actuel
   works.forEach((projet) => {
     const projetFigure = createFigure(projet);
@@ -42,7 +42,7 @@ export function displayWorks(works, container) {
 }
 
 // Setup des boutons de filtre
-export function setupButtons(works, filterContainer, displayContainer) {
+function setupButtons(works, filterContainer, displayContainer) {
   const categories = works.map((item) => item.category.name);
   const uniqueCategories = [...new Set(categories)];
 
@@ -64,7 +64,7 @@ export function setupButtons(works, filterContainer, displayContainer) {
 }
 
 // ---------------DELETE----------------
-export function deleteWorks() {
+function deleteWorks() {
   const deleteExistingProjects = document.getElementById("existing-projects");
   console.log("deleteWorks tourne");
 
@@ -106,3 +106,14 @@ export function deleteWorks() {
     });
 }
 // Exécution
+(async () => {
+  const works = await fetchWorks();
+
+  const sectionProjet = document.querySelector(".projets");
+  displayWorks(works, sectionProjet);
+
+  const filtresDiv = document.querySelector(".filtres");
+  setupButtons(works, filtresDiv, sectionProjet);
+})();
+
+deleteWorks();

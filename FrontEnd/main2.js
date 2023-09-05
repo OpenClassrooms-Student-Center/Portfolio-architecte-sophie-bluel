@@ -5,7 +5,7 @@ import {
   deleteWorks,
 } from "./works2.js";
 
-// import { toggleModal, populateModalWithExistingProjects } from "./modal.js";
+import { toggleModal, populateModalWithExistingProjects } from "./modal.js";
 
 (async () => {
   const works = await fetchWorks();
