@@ -4,13 +4,8 @@ import {
   setupButtons,
   deleteWorks,
 } from "./works2.js";
-import { initLoginForm, checkTokenLogin } from "./login2.js";
+
 // import { toggleModal, populateModalWithExistingProjects } from "./modal.js";
-
-// // ---------------LOGIN----------------
-checkTokenLogin;
-
-initLoginForm();
 
 (async () => {
   const works = await fetchWorks();
@@ -23,7 +18,3 @@ initLoginForm();
 })();
 
 deleteWorks();
-// Vérifier l'état de connexion de l'utilisateur
-
-// // ---------------DELETE----------------
-// deleteWorks();

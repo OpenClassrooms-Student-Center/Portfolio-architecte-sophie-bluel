@@ -1,58 +1,54 @@
-// Factory pour créer une fonction de récupération de valeur d'élément DOM
-function createDOMValueGetter(selector) {
-  return function () {
-    const element = document.querySelector(selector);
-    return element ? element.value : null;
-  };
-}
+// Fonctions utilitaires
+const getDOMValue = (selector) =>
+  document.querySelector(selector)?.value || null;
 
-// Factory pour la requête HTTP
-function createAPIPostRequest(url) {
-  return async function (body) {
-    try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      });
-
-      const data = await response.json();
-      return { data, status: response.status };
-    } catch (error) {
-      console.error("Une erreur est survenue", error);
-      return null;
-    }
-  };
-}
+// requetes
+const postToAPI = async (url, body) => {
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+    return { data: await response.json(), status: response.status };
+  } catch (error) {
+    console.error("Une erreur est survenue", error);
+    return null;
+  }
+};
 
 // Gestion de la soumission du formulaire
-async function handleFormSubmission(event) {
+const handleFormSubmission = async (event) => {
   event.preventDefault();
-
-  const getEmail = createDOMValueGetter("#login-email");
-  const getPassword = createDOMValueGetter("#login-password");
-  const loginUser = createAPIPostRequest(
-    "http://localhost:5678/api/users/login"
-  );
-
-  const email = getEmail();
-  const password = getPassword();
-  const response = await loginUser({ email, password });
+  const email = getDOMValue("#login-email");
+  const password = getDOMValue("#login-password");
+  const response = await postToAPI("http://localhost:5678/api/users/login", {
+    email,
+    password,
+  });
 
   if (response && response.status === 200) {
     localStorage.setItem("user", JSON.stringify(response.data.userId));
     localStorage.setItem("token", response.data.token);
     location.href = "index.html";
   } else {
-    const errorMessageElement = document.getElementById("error-message");
-    errorMessageElement.textContent = "Identifiant ou mot de passe incorrect";
+    document.getElementById("error-message").textContent =
+      "Identifiant ou mot de passe incorrect";
   }
-}
+};
+
+// Fonction pour gérer la déconnexion
+const handleLogout = () => {
+  localStorage.removeItem("user");
+  localStorage.removeItem("token");
+  location.reload();
+  document.getElementById("login-email").textContent = "";
+  document.getElementById("login-password").textContent = "";
+  // ou location.href = "login.html"; si vous souhaitez rediriger vers la page de connexion
+};
 
 // Vérifier l'état de connexion de l'utilisateur
-export function checkTokenLogin() {
+const checkTokenLogin = () => {
   const tokenAuth = localStorage.getItem("token");
   const loginLink = document.getElementById("login-link");
   const adminBar = document.getElementById("admin-bar");
@@ -61,26 +57,18 @@ export function checkTokenLogin() {
 
   if (tokenAuth) {
     loginLink.textContent = "logout";
-    if (adminBar) {
-      adminBar.classList.remove("hidden");
-      allFilterBtn.classList.add("hidden");
-    }
+    adminBar?.classList.remove("hidden");
+    allFilterBtn?.classList.add("hidden");
+    loginLink.addEventListener("click", handleLogout); // Ajout de l'écouteur d'événements
   } else {
     loginLink.textContent = "login";
-    if (adminBar) {
-      adminBar.classList.add("hidden");
-      modifierBtn.parentNode.removeChild(modifierBtn);
-    }
+    adminBar?.classList.add("hidden");
+    modifierBtn?.parentNode.removeChild(modifierBtn);
   }
-}
+};
 
-// Ajout de l'écouteur d'événements pour la soumission du formulaire
-export function initLoginForm() {
-  const form = document.getElementById("login");
-  if (form) {
-    form.addEventListener("submit", handleFormSubmission);
-  }
-}
-// ----------------------------
-document.addEventListener("DOMContentLoaded", checkTokenLogin);
-initLoginForm();
+// Initialisation
+
+checkTokenLogin();
+const form = document.getElementById("login");
+form?.addEventListener("submit", handleFormSubmission);
