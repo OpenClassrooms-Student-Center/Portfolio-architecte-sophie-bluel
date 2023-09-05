@@ -71,47 +71,47 @@ const setupButtons = (works, filterContainer, displayContainer) => {
   });
 };
 
-// const deleteWorks = () => {
-//   const deleteExistingProjects = document.getElementById("existing-projects");
-//   console.log("deleteWorks tourne");
+const deleteWorks = () => {
+  const deleteExistingProjects = document.getElementById("existing-projects");
+  console.log("deleteWorks tourne");
 
-//   if (deleteExistingProjects)
-//     deleteExistingProjects.addEventListener("click", async function (event) {
-//       event.preventDefault();
-//       event.stopPropagation();
-//       // console.log("Event triggered", event.target);
-//       const imgContainer = event.target.closest(".img-container");
-//       const deleteIcon = event.target.closest(".delete-icon");
-//       //   // console.log(deleteIcon); OK
-//       //   // console.log(imgContainer);OK
-//       if (deleteIcon && imgContainer) {
-//         const projetId = imgContainer.dataset.id;
-//         const token = localStorage.getItem("token");
+  if (deleteExistingProjects)
+    deleteExistingProjects.addEventListener("click", async function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      // console.log("Event triggered", event.target);
+      const imgContainer = event.target.closest(".img-container");
+      const deleteIcon = event.target.closest(".delete-icon");
+      //   // console.log(deleteIcon); OK
+      //   // console.log(imgContainer);OK
+      if (deleteIcon && imgContainer) {
+        const projetId = imgContainer.dataset.id;
+        const token = localStorage.getItem("token");
 
-//         // Supprimez le projet de la base de données via AJAX
+        // Supprimez le projet de la base de données via AJAX
 
-//         const response = await fetch(
-//           `http://localhost:5678/api/works/${projetId}`,
-//           {
-//             method: "DELETE",
-//             headers: {
-//               Authorization: `Bearer ${token}`, // Ajoutez le token d'authentification dans le header
-//             },
-//           }
-//         );
+        const response = await fetch(
+          `http://localhost:5678/api/works/${projetId}`,
+          {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${token}`, // Ajoutez le token d'authentification dans le header
+            },
+          }
+        );
 
-//         if (response.ok) {
-//           // Supprimer le projet du DOM dans la fenêtre modale et dans la div .projets
-//           document
-//             .querySelector(`.projets figure[data-id="${projetId}"]`)
-//             .remove();
-//           document
-//             .querySelector(`#existing-projects figure[data-id="${projetId}"]`)
-//             .remove();
-//         }
-//       }
-//     });
-// };
+        if (response.ok) {
+          // Supprimer le projet du DOM dans la fenêtre modale et dans la div .projets
+          document
+            .querySelector(`.projets figure[data-id="${projetId}"]`)
+            .remove();
+          document
+            .querySelector(`#existing-projects figure[data-id="${projetId}"]`)
+            .remove();
+        }
+      }
+    });
+};
 // Fonctions pour la gestion du login
 const handleFormSubmission = async (event) => {
   event.preventDefault();
@@ -152,19 +152,18 @@ const checkTokenLogin = () => {
 };
 
 // Initialisation
-document.addEventListener("DOMContentLoaded", async () => {
+(async () => {
   const works = await fetchAPI("http://localhost:5678/api/works");
-  if (works) {
-    const sectionProjet = document.querySelector(".projets");
-    displayWorks(works, sectionProjet);
 
-    const filtresDiv = document.querySelector(".filtres");
-    setupButtons(works, filtresDiv, sectionProjet);
-  }
+  const sectionProjet = document.querySelector(".projets");
+  displayWorks(works, sectionProjet);
 
-  // deleteWorks();
-  checkTokenLogin();
+  const filtresDiv = document.querySelector(".filtres");
+  setupButtons(works, filtresDiv, sectionProjet);
+})();
 
-  const form = getElem("login");
-  form?.addEventListener("submit", handleFormSubmission);
-});
+deleteWorks();
+checkTokenLogin();
+
+const form = getElem("login");
+form?.addEventListener("submit", handleFormSubmission);

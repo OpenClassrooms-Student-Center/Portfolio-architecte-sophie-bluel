@@ -67,10 +67,6 @@ const checkTokenLogin = () => {
   }
 };
 
-const importModalWithExistingProjects = () => {
-  // ... (code existant)
-};
-
 // Initialisation
 
 checkTokenLogin();

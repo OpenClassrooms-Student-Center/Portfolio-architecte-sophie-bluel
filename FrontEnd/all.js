@@ -191,12 +191,6 @@ const checkTokenLogin = () => {
   }
 };
 
-// // Initialisation
-
-// checkTokenLogin();
-// const form = document.getElementById("login");
-// form?.addEventListener("submit", handleFormSubmission);
-
 // MODAL
 
 const modalContentForm = document.querySelector(".modal-content-form");
@@ -223,32 +217,6 @@ const importModalWithExistingProjects = () => {
     modalProjects.appendChild(imgContainer);
   });
 };
-
-// // Écouteurs d'événements
-// if (getElem("edit-mode-btn")) {
-//   getElem("edit-mode-btn").addEventListener("click", () => {
-//     toggleModal(true);
-//     importModalWithExistingProjects();
-//     modalContentForm.classList.add("hide");
-//     modalContent.classList.remove("hide");
-//   });
-// }
-
-// getElem("close-modal").addEventListener("click", () => toggleModal(false));
-
-// getElem("edit-modal").addEventListener("click", (event) => {
-//   if (
-//     !modalContent.contains(event.target) &&
-//     !modalContentForm.contains(event.target)
-//   ) {
-//     toggleModal(false);
-//   }
-// });
-
-// getElem("add-photo").addEventListener("click", () => {
-//   modalContent.classList.add("hide");
-//   modalContentForm.classList.remove("hide");
-// });
 
 // Formulaire d'envoi de photo
 if (getElem("add-photo-form")) {
