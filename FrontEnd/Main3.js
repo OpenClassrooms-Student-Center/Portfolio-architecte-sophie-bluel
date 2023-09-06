@@ -1,39 +1,53 @@
-// UTILITAIRES & FONCTIONS
+// UTILITAIRES
 import {
-  fetchAPI,
-  displayWorks,
-  setupButtons,
-  deleteWorks,
-  checkTokenLogin,
-  handleFormSubmission,
+  query,
+  queryAll,
+  closest,
+  contains,
+  createElem,
+  addEvent,
+  toggleClass,
+  cloneNode,
+  getElem,
+  getDOMValue,
+} from "./utils.js";
+
+// FONCTIONS
+import { fetchAPI, displayWorks, setupButtons, deleteWorks } from "./works3.js";
+
+import { handleFormSubmission, checkTokenLogin } from "./login3.js";
+
+import {
   importModalWithExistingProjects,
   toggleModal,
   modalContentForm,
   modalContent,
-} from "./all2.js";
+} from "./modal3.js";
 
-const query = (selector, parent = document) => parent.querySelector(selector);
-const queryAll = (selector, parent = document) =>
-  parent.querySelectorAll(selector);
-const closest = (selector, elem) => elem.closest(selector);
-const contains = (parent, child) => parent.contains(child);
-const createElem = (tag, attributes = {}) => {
-  const elem = document.createElement(tag);
-  for (const [key, value] of Object.entries(attributes)) {
-    elem.setAttribute(key, value);
-  }
-  return elem;
-};
+// // ------UTILITAIRES------ //
+// export const query = (selector, parent = document) =>
+//   parent.querySelector(selector);
+// export const queryAll = (selector, parent = document) =>
+//   parent.querySelectorAll(selector);
+// export const closest = (selector, elem) => elem.closest(selector);
+// export const contains = (parent, child) => parent.contains(child);
+// export const createElem = (tag, attributes = {}) => {
+//   const elem = document.createElement(tag);
+//   for (const [key, value] of Object.entries(attributes)) {
+//     elem.setAttribute(key, value);
+//   }
+//   return elem;
+// };
 
-const addEvent = (type, elem, callback) =>
-  elem.addEventListener(type, callback);
-const toggleClass = (elem, className, condition) =>
-  elem.classList.toggle(className, condition);
-const cloneNode = (selector, deep = true) =>
-  document.querySelector(selector).cloneNode(deep);
-const getElem = (id) => document.getElementById(id);
-const getDOMValue = (selector) =>
-  document.querySelector(selector)?.value || null;
+// export const addEvent = (type, elem, callback) =>
+//   elem.addEventListener(type, callback);
+// export const toggleClass = (elem, className, condition) =>
+//   elem.classList.toggle(className, condition);
+// export const cloneNode = (selector, deep = true) =>
+//   document.querySelector(selector).cloneNode(deep);
+// export const getElem = (id) => document.getElementById(id);
+// export const getDOMValue = (selector) =>
+//   document.querySelector(selector)?.value || null;
 
 // ----------------- //
 // Initialisation
