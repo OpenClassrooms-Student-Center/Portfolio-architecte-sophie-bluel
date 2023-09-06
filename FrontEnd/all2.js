@@ -9,6 +9,7 @@
 
 // const token = TokenManager();
 // ----------------------
+const query = (selector, parent = document) => parent.querySelector(selector);
 const queryAll = (selector, parent = document) =>
   parent.querySelectorAll(selector);
 const closest = (selector, elem) => elem.closest(selector);
@@ -82,14 +83,14 @@ const displayWorks = (works, container) => {
 
 const setupButtons = (works, filterContainer, displayContainer) => {
   const btnAll = createElemWithText("button", "Tous");
-  btnAll.addEventListener("click", () => displayWorks(works, displayContainer));
+  addEvent("click", btnAll, () => displayWorks(works, displayContainer));
   filterContainer.appendChild(btnAll);
   const uniqueCategories = [
     ...new Set(works.map((work) => work.category.name)),
   ];
   uniqueCategories.forEach((category) => {
     const btn = createElemWithText("button", category);
-    btn.addEventListener("click", () => {
+    addEvent("click", btn, () => {
       const filteredWorks = works.filter(
         (work) => work.category.name === category
       );
@@ -100,11 +101,11 @@ const setupButtons = (works, filterContainer, displayContainer) => {
 };
 
 const deleteWorks = () => {
-  const deleteExistingProjects = document.getElementById("existing-projects");
+  const deleteExistingProjects = getElem("existing-projects");
   console.log("deleteWorks tourne");
 
   if (deleteExistingProjects)
-    deleteExistingProjects.addEventListener("click", async function (event) {
+    addEvent("click", deleteExistingProjects, async function (event) {
       event.preventDefault();
       event.stopPropagation();
       // console.log("Event triggered", event.target);
@@ -121,23 +122,20 @@ const deleteWorks = () => {
           {
             method: "DELETE",
             headers: {
-              Authorization: `Bearer ${token}`, // Ajoutez le token d'authentification dans le header
+              Authorization: `Bearer ${token}`, //
             },
           }
         );
 
         if (response.ok) {
-          // Supprimer le projet du DOM dans la fenêtre modale et dans la div .projets
-          document
-            .querySelector(`.projets figure[data-id="${projetId}"]`)
-            .remove();
-          document
-            .querySelector(`#existing-projects figure[data-id="${projetId}"]`)
-            .remove();
+          query(`.projets figure[data-id="${projetId}"]`).remove();
+
+          query(`#existing-projects figure[data-id="${projetId}"]`).remove();
         }
       }
     });
 };
+
 // Fonctions pour la gestion du login
 const handleFormSubmission = async (event) => {
   event.preventDefault();
@@ -153,7 +151,7 @@ const handleFormSubmission = async (event) => {
     localStorage.setItem("token", response.data.token);
     location.href = "index.html";
   } else {
-    document.getElementById("error-message").textContent =
+    getElem("error-message").textContent =
       "Identifiant ou mot de passe incorrect";
   }
 };
@@ -162,10 +160,10 @@ const handleLogout = () => {
   localStorage.removeItem("user");
   localStorage.removeItem("token");
   location.reload();
-  document.getElementById("login-email").textContent = "";
-  document.getElementById("login-password").textContent = "";
+  getElem("login-email").textContent = "";
+  getElem("login-password").textContent = "";
 };
-
+// --------Jusqu'ici Ok----------------
 const checkTokenLogin = () => {
   const tokenAuth = localStorage.getItem("token");
   const loginLink = document.getElementById("login-link");
