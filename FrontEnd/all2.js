@@ -1,14 +1,4 @@
-// Fonctions utilitaires
-// const TokenManager = () => {
-//   return {
-//     setToken: () => localStorage.setItem("token"),
-//     getToken: () => localStorage.getItem("token"),
-//     removeToken: () => localStorage.removeItem("token"),
-//   };
-// };
-
-// const token = TokenManager();
-// ----------------------
+// utilitaires
 const query = (selector, parent = document) => parent.querySelector(selector);
 const queryAll = (selector, parent = document) =>
   parent.querySelectorAll(selector);
@@ -32,7 +22,8 @@ const getElem = (id) => document.getElementById(id);
 const getDOMValue = (selector) =>
   document.querySelector(selector)?.value || null;
 
-const fetchAPI = async (url, options = {}) => {
+// Fonctions pour la gestion des requêtes API
+export const fetchAPI = async (url, options = {}) => {
   try {
     const response = await fetch(url, options);
     return response.ok ? await response.json() : null;
@@ -56,7 +47,7 @@ const postToAPI = async (url, body) => {
   }
 };
 
-// Fonctions pour la gestion des travaux
+// // Fonctions pour la gestion des travaux
 const createElemWithText = (tag, text) => {
   const elem = document.createElement(tag);
   elem.innerText = text;
@@ -76,12 +67,12 @@ const createFigure = ({ id, imageUrl, title }) => {
   return figure;
 };
 
-const displayWorks = (works, container) => {
+export const displayWorks = (works, container) => {
   container.innerHTML = "";
   works.forEach((work) => container.appendChild(createFigure(work)));
 };
 
-const setupButtons = (works, filterContainer, displayContainer) => {
+export const setupButtons = (works, filterContainer, displayContainer) => {
   const btnAll = createElemWithText("button", "Tous");
   addEvent("click", btnAll, () => displayWorks(works, displayContainer));
   filterContainer.appendChild(btnAll);
@@ -100,7 +91,7 @@ const setupButtons = (works, filterContainer, displayContainer) => {
   });
 };
 
-const deleteWorks = () => {
+export const deleteWorks = () => {
   const deleteExistingProjects = getElem("existing-projects");
   console.log("deleteWorks tourne");
 
@@ -137,7 +128,7 @@ const deleteWorks = () => {
 };
 
 // Fonctions pour la gestion du login
-const handleFormSubmission = async (event) => {
+export const handleFormSubmission = async (event) => {
   event.preventDefault();
   const email = getDOMValue("#login-email");
   const password = getDOMValue("#login-password");
@@ -156,26 +147,25 @@ const handleFormSubmission = async (event) => {
   }
 };
 
-const handleLogout = () => {
+export const handleLogout = () => {
   localStorage.removeItem("user");
   localStorage.removeItem("token");
   location.reload();
   getElem("login-email").textContent = "";
   getElem("login-password").textContent = "";
 };
-// --------Jusqu'ici Ok----------------
-const checkTokenLogin = () => {
+export const checkTokenLogin = () => {
   const tokenAuth = localStorage.getItem("token");
-  const loginLink = document.getElementById("login-link");
-  const adminBar = document.getElementById("admin-bar");
-  const allFilterBtn = document.querySelector(".filtres");
-  const modifierBtn = document.getElementById("add-project-btn");
+  const loginLink = getElem("login-link");
+  const adminBar = getElem("admin-bar");
+  const allFilterBtn = query(".filtres");
+  const modifierBtn = getElem("add-project-btn");
 
   if (tokenAuth) {
     loginLink.textContent = "logout";
     adminBar?.classList.remove("hidden");
     allFilterBtn?.classList.add("hidden");
-    loginLink.addEventListener("click", handleLogout); // Ajout de l'écouteur d'événements
+    addEvent("click", loginLink, handleLogout); // Ajout de l'écouteur d'événements
   } else {
     loginLink.textContent = "login";
     adminBar?.classList.add("hidden");
@@ -184,18 +174,14 @@ const checkTokenLogin = () => {
 };
 
 // MODAL
-// ... (autres parties du code)
+export const modalContentForm = query(".modal-content-form");
+export const modalContent = query(".modal-content");
 
-// MODAL
-const modalContentForm = document.querySelector(".modal-content-form");
-const modalContent = document.querySelector(".modal-content");
-
-// Toggle Modal Visibility
-const toggleModal = (isVisible) =>
+// Toggle Modal Visibilité
+export const toggleModal = (isVisible) =>
   toggleClass(getElem("edit-modal"), "hidden", !isVisible);
 
-// Import Existing Projects into Modal
-const importModalWithExistingProjects = () => {
+export const importModalWithExistingProjects = () => {
   const existingProjects = cloneNode(".projets");
   const modalProjects = getElem("existing-projects");
   modalProjects.innerHTML = "";
@@ -210,77 +196,77 @@ const importModalWithExistingProjects = () => {
   });
 };
 
-// Initialisation
-(async () => {
-  const works = await fetchAPI("http://localhost:5678/api/works");
+// // Initialisation
+// (async () => {
+//   const works = await fetchAPI("http://localhost:5678/api/works");
 
-  const sectionProjet = document.querySelector(".projets");
-  displayWorks(works, sectionProjet);
+//   const sectionProjet = query(".projets");
+//   displayWorks(works, sectionProjet);
 
-  const filtresDiv = document.querySelector(".filtres");
-  setupButtons(works, filtresDiv, sectionProjet);
-})();
+//   const filtresDiv = query(".filtres");
+//   setupButtons(works, filtresDiv, sectionProjet);
+// })();
 
-deleteWorks();
-checkTokenLogin();
+// deleteWorks();
+// checkTokenLogin();
 
-const form = getElem("login");
-form?.addEventListener("submit", handleFormSubmission);
+// const form = getElem("login");
+// if (form) addEvent("submit", form, handleFormSubmission);
 
-// Event Listeners
-if (getElem("edit-mode-btn")) {
-  addEvent("click", getElem("edit-mode-btn"), () => {
-    toggleModal(true);
-    importModalWithExistingProjects();
-    toggleClass(modalContentForm, "hide", true);
-    toggleClass(modalContent, "hide", false);
-  });
-}
+// // Event Listeners
+// if (getElem("edit-mode-btn")) {
+//   addEvent("click", getElem("edit-mode-btn"), () => {
+//     toggleModal(true);
+//     importModalWithExistingProjects();
+//     toggleClass(modalContentForm, "hide", true);
+//     toggleClass(modalContent, "hide", false);
+//   });
+// }
 
-addEvent("click", getElem("close-modal"), () => toggleModal(false));
+// addEvent("click", getElem("close-modal"), () => toggleModal(false));
 
-addEvent("click", getElem("edit-modal"), (event) => {
-  if (
-    !contains(modalContent, event.target) &&
-    !contains(modalContentForm, event.target)
-  ) {
-    toggleModal(false);
-  }
-});
+// addEvent("click", getElem("edit-modal"), (event) => {
+//   if (
+//     !contains(modalContent, event.target) &&
+//     !contains(modalContentForm, event.target)
+//   ) {
+//     toggleModal(false);
+//   }
+// });
 
-addEvent("click", getElem("add-photo"), () => {
-  toggleClass(modalContent, "hide", true);
-  toggleClass(modalContentForm, "hide", false);
-});
+// addEvent("click", getElem("add-photo"), () => {
+//   toggleClass(modalContent, "hide", true);
+//   toggleClass(modalContentForm, "hide", false);
+// });
 
 // Photo Submission Form
-if (getElem("add-photo-form")) {
-  addEvent("submit", getElem("add-photo-form"), async (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const token = localStorage.getItem("token");
+// if (getElem("add-photo-form")) {
+//   addEvent("submit", getElem("add-photo-form"), async (event) => {
+//     event.preventDefault();
+//     const formData = new FormData(event.target);
+//     const token = localStorage.getItem("token");
 
-    if (
-      !formData.get("image") ||
-      !formData.get("title") ||
-      !formData.get("categoryId")
-    ) {
-      getElem("form-error-message").innerText =
-        "Veuillez remplir tous les champs.";
-      return;
-    }
+//     if (
+//       !formData.get("image") ||
+//       !formData.get("title") ||
+//       !formData.get("categoryId")
+//     ) {
+//       getElem("form-error-message").innerText =
+//         "Veuillez remplir tous les champs.";
+//       return;
+//     }
 
-    const response = await fetchAPI("http://localhost:5678/api/works", {
-      method: "POST",
-      headers: { Authorization: `Bearer ${token}` },
-      body: formData,
-    });
+//     const response = await fetchAPI("http://localhost:5678/api/works", {
+//       method: "POST",
+//       headers: { Authorization: `Bearer ${token}` },
+//       body: formData,
+//     });
 
-    alert(
-      response.ok
-        ? "Projet ajouté avec succès!"
-        : "Une erreur s'est produite. Veuillez réessayer."
-    );
-    if (response.ok) location.reload();
-  });
-}
+//     alert(
+//       response.ok
+//         ? "Projet ajouté avec succès!"
+//         : "Une erreur s'est produite. Veuillez réessayer."
+//     );
+//     if (response.ok) location.reload();
+//   });
+// }
