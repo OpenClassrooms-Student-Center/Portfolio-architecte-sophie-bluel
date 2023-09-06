@@ -1,5 +1,14 @@
 // Fonctions utilitaires
+// const TokenManager = () => {
+//   return {
+//     setToken: () => localStorage.setItem("token"),
+//     getToken: () => localStorage.getItem("token"),
+//     removeToken: () => localStorage.removeItem("token"),
+//   };
+// };
 
+// const token = TokenManager();
+// ----------------------
 const queryAll = (selector, parent = document) =>
   parent.querySelectorAll(selector);
 const closest = (selector, elem) => elem.closest(selector);
@@ -11,6 +20,7 @@ const createElem = (tag, attributes = {}) => {
   }
   return elem;
 };
+
 const addEvent = (type, elem, callback) =>
   elem.addEventListener(type, callback);
 const toggleClass = (elem, className, condition) =>
@@ -105,8 +115,6 @@ const deleteWorks = () => {
       if (deleteIcon && imgContainer) {
         const projetId = imgContainer.dataset.id;
         const token = localStorage.getItem("token");
-
-        // Supprimez le projet de la base de données via AJAX
 
         const response = await fetch(
           `http://localhost:5678/api/works/${projetId}`,
