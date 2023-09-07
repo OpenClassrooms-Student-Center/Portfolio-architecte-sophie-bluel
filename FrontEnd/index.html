@@ -120,14 +120,28 @@
         </div>
         <h3>Ajout photo</h3>
         <form id="add-photo-form ">
-          <label for="image-upload">Importer une image</label>
-          <input type="file" id="image-upload" name="image" required />
+          <div class="custom-file-upload" id="image-upload-container">
+            <i class="fa-regular fa-image" id="image-upload-icon"></i>
+            <label for="image-upload"
+              ><button id="image-upload-btn">+ ajouter photo</button></label
+            >
+            <input
+              type="file"
+              id="image-upload"
+              name="image"
+              accept=".png, .jpg, .jpeg"
+              style="display: none"
+              required
+            />
+            <p>jpg, png: 4 mo max</p>
+          </div>
 
           <label for="project-title">Titre</label>
           <input type="text" id="project-title" name="title" required />
 
           <label for="project-category">Catégorie</label>
           <select id="project-category" name="category" required>
+            <option value="" selected></option>
             <option value="1">Objets</option>
             <option value="2">Appartements</option>
             <option value="3">Hotels & restaurants</option>

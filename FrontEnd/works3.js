@@ -68,7 +68,6 @@ export const setupButtons = (works, filterContainer, displayContainer) => {
 
 export const deleteWorks = () => {
   const deleteExistingProjects = getElem("existing-projects");
-  console.log("deleteWorks tourne");
 
   if (deleteExistingProjects)
     addEvent("click", deleteExistingProjects, async function (event) {
