@@ -55,6 +55,7 @@ allEditBtn.forEach((btn) => {
 });
 
 addEvent("click", getElem("close-modal"), () => toggleModal(false));
+addEvent("click", getElem("close-modal-form"), () => toggleModal(false));
 
 // addEvent("click", queryAll(".close-btn"), () => toggleModal(false));
 
@@ -66,8 +67,14 @@ addEvent("click", getElem("edit-modal"), (event) => {
     toggleModal(false);
   }
 });
-
+// Cliquer pour ajouter une photo (ouvrir le formulaire)
 addEvent("click", getElem("add-photo"), () => {
   toggleClass(modalContent, "hide", true);
   toggleClass(modalContentForm, "hide", false);
+});
+
+// Cliquer pour annuler l'ajout d'une photo (fermer le formulaire et revenir à la modal galerie)
+addEvent("click", getElem("back-form-modal"), () => {
+  toggleClass(modalContent, "hide", false);
+  toggleClass(modalContentForm, "hide", true);
 });
