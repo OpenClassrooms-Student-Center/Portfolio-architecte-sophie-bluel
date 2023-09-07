@@ -78,3 +78,36 @@ addEvent("click", getElem("back-form-modal"), () => {
   toggleClass(modalContent, "hide", false);
   toggleClass(modalContentForm, "hide", true);
 });
+
+// ---------------Image upload----------------------------- //
+
+document
+  .getElementById("image-upload-btn")
+  .addEventListener("click", function (e) {
+    e.preventDefault();
+    document.getElementById("image-upload").click();
+  });
+
+document.getElementById("image-upload").addEventListener("change", function () {
+  const file = this.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      // Mettre à jour l'attribut src de l'élément img avec l'image sélectionnée
+      const imgElem = document.getElementById("uploaded-image");
+      imgElem.src = e.target.result;
+      imgElem.style.display = "block"; // Afficher l'image
+
+      // Cacher les autres éléments
+      document.getElementById("image-upload-icon").style.display = "none";
+      document.getElementById("image-upload-btn").style.display = "none";
+      document.getElementById("file-info-text").style.display = "none";
+
+      // Ajouter un événement de clic à l'image pour permettre la sélection d'une autre image
+      imgElem.addEventListener("click", function () {
+        document.getElementById("image-upload").click();
+      });
+    };
+    reader.readAsDataURL(file);
+  }
+});

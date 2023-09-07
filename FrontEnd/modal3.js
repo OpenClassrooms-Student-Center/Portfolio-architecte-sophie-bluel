@@ -34,7 +34,8 @@ export const importModalWithExistingProjects = () => {
     modalProjects.appendChild(imgContainer);
   });
 };
-// -------------------------------------------- //
+// ---------------Ajout photo----------------------------- //
+
 // Photo Submission Form
 if (getElem("add-photo-form")) {
   addEvent("submit", getElem("add-photo-form"), async (event) => {

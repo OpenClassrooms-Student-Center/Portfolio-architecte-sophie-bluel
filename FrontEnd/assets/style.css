@@ -406,9 +406,10 @@ footer nav ul {
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #fff;
-  padding: 50px 80px;
+  padding: 30px 20px;
+  margin: auto;
   max-height: 730px;
-  max-width: 630px;
+  width: 630px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -429,7 +430,6 @@ footer nav ul {
   background: transparent;
   font-size: 1.5rem;
   align-self: flex-end;
-  margin-right: -10%;
 }
 
 #existing-projects {
@@ -470,7 +470,7 @@ footer nav ul {
 .delete-icon {
   position: absolute;
   top: 0;
-  right: 10px;
+  right: 0px;
 
   cursor: pointer;
 }
@@ -491,9 +491,9 @@ footer nav ul {
   margin: auto;
   transform: translate(-50%, -50%);
   background-color: #fff;
-  padding: 50px 20px;
-  max-height: 730px;
-  width: 630px;
+  padding: 30px 20px;
+  max-height: 630px;
+  width: 670px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -598,6 +598,11 @@ image-upload {
   font-weight: 500;
   padding: 10px 30px;
   margin: 10px 0;
+}
+
+#uploaded-image {
+  height: 100%;
+  object-fit: cover;
 }
 #project-title {
   margin-bottom: 20px;
