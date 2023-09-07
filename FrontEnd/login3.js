@@ -63,6 +63,7 @@ export const checkTokenLogin = () => {
     loginLink.textContent = "logout";
     adminBar?.classList.remove("hidden");
     allFilterBtn?.classList.add("hidden");
+    modifierBtn?.classList.remove("hidden");
     addEvent("click", loginLink, handleLogout); // Ajout de l'écouteur d'événements
   } else {
     loginLink.textContent = "login";

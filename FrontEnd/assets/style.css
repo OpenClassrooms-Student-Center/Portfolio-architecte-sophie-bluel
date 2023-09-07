@@ -178,6 +178,8 @@ a {
   color: white;
   padding: 10px;
   margin: 0;
+  width: 100vw;
+  margin-left: -165px;
 
   /* position: absolute; */
 
@@ -488,7 +490,7 @@ footer nav ul {
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #fff;
-  padding: 50px 80px;
+  padding: 50px 20px;
   max-height: 730px;
   width: 630px;
   display: flex;
@@ -547,6 +549,28 @@ image-upload {
   border-radius: 60px;
 }
 
+.back-and-close-form {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+#back-form-modal {
+  color: black;
+  background-color: transparent;
+  border: none;
+  font-size: 1.2rem;
+  margin: 0;
+  width: 2rem;
+}
+#close-modal-form {
+  color: black;
+  background-color: transparent;
+  border: none;
+  font-size: 1.2rem;
+  margin: 0;
+  width: 2rem;
+}
 select {
   border: none;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);

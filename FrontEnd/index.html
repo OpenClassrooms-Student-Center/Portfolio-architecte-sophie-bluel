@@ -19,7 +19,7 @@
   </head>
   <body>
     <div id="admin-bar" class="admin-bar hidden">
-      <button id="edit-mode-btn">
+      <button id="edit-mode-btn" class="open-modal">
         <i class="fa-regular fa-pen-to-square"></i>
         <p>Mode édition</p>
       </button>
@@ -63,7 +63,10 @@
       <section class="projets-section">
         <h2>
           Mes projets
-          <button id="add-project-btn" class="add-project-btn hidden">
+          <button
+            id="add-project-btn"
+            class="open-modal add-project-btn hidden"
+          >
             <i class="fa-regular fa-pen-to-square"></i>
             <p>modifier</p>
           </button>
@@ -107,6 +110,14 @@
         </button>
       </div>
       <div class="modal-content-form">
+        <div class="back-and-close-form">
+          <button class="back-btn" id="back-form-modal">
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+          <button class="close-btn" id="close-modal-form">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
         <h3>Ajout photo</h3>
         <form id="add-photo-form ">
           <label for="image-upload">Importer une image</label>
