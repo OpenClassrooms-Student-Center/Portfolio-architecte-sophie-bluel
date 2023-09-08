@@ -152,7 +152,7 @@ nav a:hover{
 }
 #contact {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
 #contact > * {
 	text-align: center;
@@ -180,6 +180,14 @@ margin: auto;
 #contact textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+#contact p {
+	text-decoration: underline;
+}
+
+.login {
+	padding:150px;
 }
 
 input[type="submit"]{
