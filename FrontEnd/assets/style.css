@@ -58,6 +58,7 @@ header {
 	justify-content: space-between;
 	margin: 50px 0
 }
+
 section {
 	margin: 50px 0
 }
@@ -95,9 +96,21 @@ nav li {
 	font-size: 1.2em;
 }
 
+/* enlever comportement par défaut du lien */
+nav a {
+	text-decoration: none;
+	color:black;
+}
+
 li:hover {
 	color: #B1663C;
 }
+
+/* remettre hover du nav */
+nav a:hover{
+	color: #B1663C;
+}
+
 #introduction {
 	display: flex;
 	align-items: center;
