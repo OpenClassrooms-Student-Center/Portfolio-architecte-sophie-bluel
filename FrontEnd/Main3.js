@@ -81,33 +81,63 @@ addEvent("click", getElem("back-form-modal"), () => {
 
 // ---------------Image upload----------------------------- //
 
-document
-  .getElementById("image-upload-btn")
-  .addEventListener("click", function (e) {
-    e.preventDefault();
-    document.getElementById("image-upload").click();
-  });
+addEvent("click", getElem("image-upload-btn"), (e) => {
+  e.preventDefault();
+  getElem("image-upload").click();
+});
 
-document.getElementById("image-upload").addEventListener("change", function () {
+addEvent("change", getElem("image-upload"), function () {
   const file = this.files[0];
   if (file) {
     const reader = new FileReader();
-    reader.onload = function (e) {
+    reader.onload = (e) => {
       // Mettre à jour l'attribut src de l'élément img avec l'image sélectionnée
-      const imgElem = document.getElementById("uploaded-image");
+      const imgElem = getElem("uploaded-image");
       imgElem.src = e.target.result;
       imgElem.style.display = "block"; // Afficher l'image
 
       // Cacher les autres éléments
-      document.getElementById("image-upload-icon").style.display = "none";
-      document.getElementById("image-upload-btn").style.display = "none";
-      document.getElementById("file-info-text").style.display = "none";
+      getElem("image-upload-icon").style.display = "none";
+      getElem("image-upload-btn").style.display = "none";
+      getElem("file-info-text").style.display = "none";
 
       // Ajouter un événement de clic à l'image pour permettre la sélection d'une autre image
-      imgElem.addEventListener("click", function () {
-        document.getElementById("image-upload").click();
+      addEvent("click", imgElem, () => {
+        getElem("image-upload").click();
       });
     };
     reader.readAsDataURL(file);
   }
 });
+
+// Photo Submission Form
+if (getElem("add-photo-form")) {
+  addEvent("submit", getElem("add-photo-form"), async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const token = localStorage.getItem("token");
+
+    if (
+      !formData.get("image") ||
+      !formData.get("title") ||
+      !formData.get("categoryId")
+    ) {
+      getElem("form-error-message").innerText =
+        "Veuillez remplir tous les champs.";
+      return;
+    }
+
+    const response = await fetchAPI("http://localhost:5678/api/works", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}` },
+      body: formData,
+    });
+
+    alert(
+      response.ok
+        ? "Projet ajouté avec succès!"
+        : "Une erreur s'est produite. Veuillez réessayer."
+    );
+    if (response.ok) location.reload();
+  });
+}
