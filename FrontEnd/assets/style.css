@@ -191,7 +191,7 @@ nav a:hover{
 	padding:150px;
 }
 
-button[type="submit"]{
+input[type="submit"]{
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
@@ -201,9 +201,6 @@ button[type="submit"]{
 	height:36px;
 	text-align: center;
 	border-radius: 60px ;
-
-	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09)
 }
 
 footer nav ul {
