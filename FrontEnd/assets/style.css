@@ -102,10 +102,6 @@ nav a {
 	color:black;
 }
 
-li:hover {
-	color: #B1663C;
-}
-
 /* remettre hover du nav */
 nav a:hover{
 	color: #B1663C;
