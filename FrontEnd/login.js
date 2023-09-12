@@ -1,23 +1,54 @@
+//Recup du formulaire
+
 let form = document.querySelector("form");
+let baliseMail = document.getElementById("email");
+let balisePassword = document.getElementById("password")
+
+//Recup span pour les messages d'erreur
 let errorMail=document.getElementById("errorMail");
 let errorPassword=document.getElementById("errorPassword");
 let errorLogin=document.getElementById("errorLogin");
 
-let regexMail = [A-Za-z0-9._-]+@[A-Za-z0-9_-]+\.[a-z]+;
-let regexPassword =[A-Za-z0-9];
+//Verif validité email 
+baliseMail.addEventListener('input', (event)=>{
+   errorLogin.innerHTML="";
 
+   let inputMail = event.target.value;
+   let regexMail = new RegExp("[a-z0-9._-]+@[a-z0-9._-]+\.[a-z]+");
 
+   let resultat = regexMail.test(inputMail);
+   if (resultat === false) {
+      errorMail.innerHTML="<br> Email non valide"
+   }
+   else{
+      errorMail.innerHTML=""
+   }
+})
 
-//verif mail et mdt avec API
+//Verif validité mdp
+balisePassword.addEventListener('input', (event)=>{
+   errorLogin.innerHTML="";
+
+   let inputPassword = event.target.value;
+   let regexPassword =new RegExp("(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]){6,}");
+
+   let resultat = regexPassword.test(inputPassword);
+   if (resultat === false) {
+      errorPassword.innerHTML="<br> Mot de passe non valide"
+   }
+   else{
+      errorPassword.innerHTML=""
+   }
+})
+
+//Tentative connection
 async function postLog(m,p) {
    const login = {
       email : m,
       password : p
    };
-   console.log(login);
 
    const chargeUtile = JSON.stringify(login);
-
     // Appel de la fonction fetch avec toutes les informations nécessaires
    let reponse = await fetch("http://localhost:5678/api/users/login", {
       method: "POST",
@@ -25,37 +56,37 @@ async function postLog(m,p) {
       body: chargeUtile
    });
 
-   console.log(reponse);
+   //Analyse de la réponse
 
    if (reponse.status === 200) {
+      //connection ok on recup le token
       const rep = await reponse.json();
       let valtoken = rep.token;
-      
-      window.localStorage.setItem("token",valtoken)
-      window.location.href="index.html"
+
+      window.localStorage.setItem("token",valtoken) //stock token dans localStorage
+      window.location.href="index.html" //Retour sur la page d'accueil
    }
 
    else if (reponse.status === 401) {
-      errorLogin.innerHTML="Accès non autorisé"
+      //connection pas ok
+      errorLogin.innerHTML="<br> Accès non autorisé"
    }
 
    else if (reponse.status === 404) {
+      //connection pas ok
       errorLogin.innerHTML="<br> Email ou mot de passe incorrect"
    }
 
 }
 
-
+//Evénement lors du clique sur bouton "Se connecter"
 form.addEventListener("submit", async (event) => {
-   event.preventDefault();
+   event.preventDefault(); //neutralise rechargement de la page
 
-   let inputMail = document.getElementById("email").value;
-   let inputPassword = document.getElementById("password").value;
+   //recup email et mdp entré par utilisateur
+   let inputMail = baliseMail.value;
+   let inputPassword = balisePassword.value;
 
-   errorLogin.innerHTML="";
-   errorMail.innerHTML="";
-   errorPassword.innerHTML="";
-
+   //Appel a la fonction de connection
    postLog(inputMail,inputPassword);
-
  });
