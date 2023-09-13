@@ -1,9 +1,5 @@
-//Récupération et affichage des travaux
-
-async function AfficherTravaux() {
-    const reponse = await fetch('http://localhost:5678/api/works');
-    const works = await reponse.json();
-
+//Fonction pour afficher les travaux "works"
+async function AddWorks(works) {
     document.querySelector(".gallery").innerHTML="";
     
     for (let i=0; i<works.length; i++){
@@ -28,5 +24,18 @@ async function AfficherTravaux() {
     }
 };
 
-AfficherTravaux();
+
+//Récupération et affichage de tous les travaux sur API
+async function AddAllWorks(){
+    const response = await fetch('http://localhost:5678/api/works');
+    if(!response.ok){
+        throw new Error("erreur API");
+    }
+    const allWorks = await response.json();
+    
+    AddWorks(allWorks);
+}
+
+AddAllWorks();
+
 
