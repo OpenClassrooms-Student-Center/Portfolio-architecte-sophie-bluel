@@ -36,34 +36,34 @@ export const importModalWithExistingProjects = () => {
 };
 // ---------------Ajout photo----------------------------- //
 
-// Photo Submission Form
-if (getElem("add-photo-form")) {
-  addEvent("submit", getElem("add-photo-form"), async (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const token = localStorage.getItem("token");
+// // Photo Submission Form
+// if (getElem("add-photo-form")) {
+//   addEvent("submit", getElem("add-photo-form"), async (event) => {
+//     event.preventDefault();
+//     const formData = new FormData(event.target);
+//     const token = localStorage.getItem("token");
 
-    if (
-      !formData.get("image") ||
-      !formData.get("title") ||
-      !formData.get("categoryId")
-    ) {
-      getElem("form-error-message").innerText =
-        "Veuillez remplir tous les champs.";
-      return;
-    }
+//     if (
+//       !formData.get("image") ||
+//       !formData.get("title") ||
+//       !formData.get("categoryId")
+//     ) {
+//       getElem("form-error-message").innerText =
+//         "Veuillez remplir tous les champs.";
+//       return;
+//     }
 
-    const response = await fetchAPI("http://localhost:5678/api/works", {
-      method: "POST",
-      headers: { Authorization: `Bearer ${token}` },
-      body: formData,
-    });
+//     const response = await fetchAPI("http://localhost:5678/api/works", {
+//       method: "POST",
+//       headers: { Authorization: `Bearer ${token}` },
+//       body: formData,
+//     });
 
-    alert(
-      response.ok
-        ? "Projet ajouté avec succès!"
-        : "Une erreur s'est produite. Veuillez réessayer."
-    );
-    if (response.ok) location.reload();
-  });
-}
+//     alert(
+//       response.ok
+//         ? "Projet ajouté avec succès!"
+//         : "Une erreur s'est produite. Veuillez réessayer."
+//     );
+//     if (response.ok) location.reload();
+//   });
+// }

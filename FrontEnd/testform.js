@@ -1,10 +1,10 @@
-document.getElementById("add-photo").addEventListener("click", function () {
-  // Cachez la galerie d'images et affichez le formulaire
-  document.getElementById("existing-projects").classList.add("hidden");
-  document
-    .getElementById("add-photo-form-container")
-    .classList.remove("hidden");
-});
+// document.getElementById("add-photo").addEventListener("click", function () {
+//   // Cachez la galerie d'images et affichez le formulaire
+//   document.getElementById("existing-projects").classList.add("hidden");
+//   document
+//     .getElementById("add-photo-form-container")
+//     .classList.remove("hidden");
+// });
 
 document
   .getElementById("add-photo-form")
@@ -33,6 +33,8 @@ document
     const response = await fetch("http://localhost:5678/api/works", {
       method: "POST",
       headers: {
+        "Content-Type": "application/json",
+
         Authorization: `Bearer ${token}`,
       },
       body: formData,

@@ -25,6 +25,10 @@ import {
 } from "./modal3.js";
 
 // Initialisation
+window.addEventListener("load", function () {
+  console.log("Page entièrement chargée");
+});
+
 (async () => {
   const works = await fetchAPI("http://localhost:5678/api/works");
 
@@ -38,13 +42,17 @@ import {
 deleteWorks();
 checkTokenLogin();
 
+window.addEventListener("load", function () {
+  console.log("Page entièrement chargée");
+});
+
 const form = getElem("login");
 if (form) addEvent("submit", form, handleFormSubmission);
 
 // Event Listeners
 
 const allEditBtn = queryAll(".open-modal");
-console.log(allEditBtn);
+
 allEditBtn.forEach((btn) => {
   addEvent("click", btn, () => {
     toggleModal(true);
@@ -67,6 +75,7 @@ addEvent("click", getElem("edit-modal"), (event) => {
     toggleModal(false);
   }
 });
+
 // Cliquer pour ajouter une photo (ouvrir le formulaire)
 addEvent("click", getElem("add-photo"), () => {
   toggleClass(modalContent, "hide", true);
@@ -83,10 +92,10 @@ addEvent("click", getElem("back-form-modal"), () => {
 
 addEvent("click", getElem("image-upload-btn"), (e) => {
   e.preventDefault();
-  getElem("image-upload").click();
+  getElem("image").click();
 });
 
-addEvent("change", getElem("image-upload"), function () {
+addEvent("change", getElem("image"), function () {
   const file = this.files[0];
   if (file) {
     const reader = new FileReader();
@@ -103,41 +112,60 @@ addEvent("change", getElem("image-upload"), function () {
 
       // Ajouter un événement de clic à l'image pour permettre la sélection d'une autre image
       addEvent("click", imgElem, () => {
-        getElem("image-upload").click();
+        getElem("image").click();
       });
     };
     reader.readAsDataURL(file);
   }
 });
 
-// Photo Submission Form
-if (getElem("add-photo-form")) {
-  addEvent("submit", getElem("add-photo-form"), async (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const token = localStorage.getItem("token");
+// ---------------Formulaire d'ajout de projet----------------------------- //
+const formPostProject = document.querySelector("#add-photo-form");
 
-    if (
-      !formData.get("image") ||
-      !formData.get("title") ||
-      !formData.get("categoryId")
-    ) {
-      getElem("form-error-message").innerText =
+if (formPostProject)
+  formPostProject.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const imageUpload = document.getElementById("image").files[0];
+    const projectTitle = document.getElementById("title").value;
+    const projectCategory = document.getElementById("project-category").value;
+
+    // Validation
+    if (!imageUpload || !projectTitle || !projectCategory) {
+      document.getElementById("form-error-message").innerText =
         "Veuillez remplir tous les champs.";
+
       return;
     }
 
-    const response = await fetchAPI("http://localhost:5678/api/works", {
+    // Création de l'objet FormData pour envoyer le fichier et les autres données
+    const formData = new FormData();
+    formData.append("image", imageUpload);
+    formData.append("title", projectTitle);
+    formData.append("category", projectCategory);
+
+    // Envoi à l'API
+    const token = localStorage.getItem("token");
+    const response = await fetch("http://localhost:5678/api/works", {
       method: "POST",
-      headers: { Authorization: `Bearer ${token}` },
+      headers: {
+        // 'Content-Type': 'multipart/form-data', // Généralement, ce n'est pas nécessaire avec FormData
+        // Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      },
       body: formData,
     });
 
-    alert(
-      response.ok
-        ? "Projet ajouté avec succès!"
-        : "Une erreur s'est produite. Veuillez réessayer."
-    );
-    if (response.ok) location.reload();
+    if (response.ok) {
+      // Réponse de l'API si le formulaire est correctement envoyé
+      alert("Projet ajouté avec succès!");
+      location.reload(); // Recharger la page pour voir le nouveau projet
+    } else {
+      // Message d'erreur
+      alert("Une erreur s'est produite. Veuillez réessayer.");
+    }
   });
-}
+
+window.addEventListener("load", function () {
+  console.log("Page entièrement chargée");
+});
