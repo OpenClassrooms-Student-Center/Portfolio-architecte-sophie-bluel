@@ -102,7 +102,7 @@ nav a {
 	color:black;
 }
 
-/* remettre hover du nav */
+/* change li par nav a pour hover */
 nav a:hover{
 	color: #B1663C;
 }
