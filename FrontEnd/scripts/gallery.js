@@ -74,11 +74,10 @@ function createButton(filters){
     //Creation du bouton TOUS
     const buttonAll = document.createElement("button");
     buttonAll.innerHTML="Tous";
-    buttonAll.classList.add("filters__button")
+    buttonAll.classList.add("filters__button","filters__buttonAll")
     divFilters.appendChild(buttonAll);
 
     buttonAll.addEventListener("click", () =>{
-        buttonAll.classList.add("filters__button--selected");
         AddAllWorks();
     })
 
@@ -99,10 +98,9 @@ function createButton(filters){
         const categoryId = category.id
 
         button.addEventListener("click", async () =>{
-            button.classList.add("filters__button--selected");
+            buttonAll.classList.remove("filters__buttonAll");
             const worksFilt = await FilterWorks(categoryId);
             AddWorks(worksFilt);
-
         })
 
     }

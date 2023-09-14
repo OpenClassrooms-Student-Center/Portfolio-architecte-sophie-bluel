@@ -229,12 +229,16 @@ footer nav ul {
 	background-color:rgba(255, 254, 248, 1);
 	height: 37px;
 	text-align: center;
-	padding:0 1em 0 1em;
+	padding:0 1em 0 1em; 
 	border-radius: 60px;
 	border: 1px solid #1D6154;
 }
 
-.filters__button--selected{
+.filters__buttonAll{
 	color: white;
 	background-color: #1D6154;
 }
+
+.filters__button:focus{
+	color: white;
+	background-color: #1D6154;}
