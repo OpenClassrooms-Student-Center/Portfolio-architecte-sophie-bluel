@@ -1,10 +1,10 @@
 // ---- DIV GALLERY
 
+//Recup elt du DOM qui accueillera les projets
+const gallery = document.querySelector(".gallery");
+
 //Fonction pour afficher les travaux "works"
 function AddWorks(works) {
-
-    //Recup elt du DOM qui accueillera les projets
-    const gallery = document.querySelector(".gallery");
     //Supprime tous les projets 
     gallery.innerHTML="";
     
@@ -37,7 +37,6 @@ async function AddAllWorks(){
     const allWorks = await response.json();
     
     await AddWorks(allWorks);
-    console.log(allWorks)
 }
 AddAllWorks();
 
@@ -46,18 +45,26 @@ AddAllWorks();
 //---- DIV FILTER
 
 // Fonction pour filtrer les travaux 
-async function FilterWorks(){
+async function FilterWorks(id){
     const response = await fetch('http://localhost:5678/api/works');
     if(!response.ok){
         throw new Error("erreur API");
     }
+
     const allWorks = await response.json();
 
-    for (let i=0; i<works.length; i++){
-        const project = works[i];
-        const categoryproject
+    let worksFilt= new Array();
+
+    for (let i=0; i<allWorks.length; i++){
+        const project = allWorks[i]; 
+        const categoryP= project.categoryId;
+
+        if(id === categoryP){
+            worksFilt.push(project);
+        }
     }
 
+    return worksFilt;
 }
 
 // Fonction pour afficher les filtres API + Tous
@@ -71,6 +78,7 @@ function createButton(filters){
     divFilters.appendChild(buttonAll);
 
     buttonAll.addEventListener("click", () =>{
+        buttonAll.classList.add("filters__button--selected");
         AddAllWorks();
     })
 
@@ -88,13 +96,14 @@ function createButton(filters){
         divFilters.appendChild(button);
 
         //Ajout eventListener
-        const categoryId = filters[i].categoryId;
+        const categoryId = category.id
 
-        button.addEventListener("clik", () =>{
+        button.addEventListener("click", async () =>{
+            button.classList.add("filters__button--selected");
+            const worksFilt = await FilterWorks(categoryId);
+            AddWorks(worksFilt);
 
-            const WorksFilt = await FilterWorks(categoryId);
-            await AddWorks(WorksFilt);
-        });
+        })
 
     }
 }

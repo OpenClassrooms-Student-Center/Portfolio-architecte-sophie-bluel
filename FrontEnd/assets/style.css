@@ -234,7 +234,7 @@ footer nav ul {
 	border: 1px solid #1D6154;
 }
 
-.filters__button--select{
+.filters__button--selected{
 	color: white;
 	background-color: #1D6154;
 }
