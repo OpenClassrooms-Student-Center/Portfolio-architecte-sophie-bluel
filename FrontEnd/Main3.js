@@ -42,10 +42,6 @@ window.addEventListener("load", function () {
 deleteWorks();
 checkTokenLogin();
 
-window.addEventListener("load", function () {
-  console.log("Page entièrement chargée");
-});
-
 const form = getElem("login");
 if (form) addEvent("submit", form, handleFormSubmission);
 
@@ -76,15 +72,15 @@ if (getElem("edit-modal"))
       toggleModal(false);
     }
   });
-
-addEvent("click", getElem("edit-modal"), (event) => {
-  if (
-    !contains(modalContent, event.target) &&
-    !contains(modalContentForm, event.target)
-  ) {
-    toggleModal(false);
-  }
-});
+if (getElem("edit-modal"))
+  addEvent("click", getElem("edit-modal"), (event) => {
+    if (
+      !contains(modalContent, event.target) &&
+      !contains(modalContentForm, event.target)
+    ) {
+      toggleModal(false);
+    }
+  });
 
 // Cliquer pour ajouter une photo (ouvrir le formulaire)
 if (getElem("add-photo"))
