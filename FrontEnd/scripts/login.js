@@ -42,7 +42,7 @@ balisePassword.addEventListener('input', (event)=>{
 })
 
 //Tentative connection
-async function postLog(m,p) {
+async function logIn(m,p) {
    const login = {
       email : m,
       password : p
@@ -88,5 +88,5 @@ form.addEventListener("submit", async (event) => {
    let inputPassword = balisePassword.value;
 
    //Appel a la fonction de connection
-   postLog(inputMail,inputPassword);
+   logIn(inputMail,inputPassword);
  });
