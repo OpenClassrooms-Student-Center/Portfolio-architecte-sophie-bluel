@@ -79,6 +79,24 @@ const setupButtons = (works, filterContainer, displayContainer) => {
   });
 };
 
+const deleteProjectFromDOM = (projectId) => {
+  const modalProject = query(
+    `#existing-projects .img-container[data-id="${projectId}"]`
+  );
+
+  const galleryProject = query(`.projets figure[data-id="${projectId}"]`);
+
+  // Supprimer de la modale
+  if (modalProject) {
+    modalProject.remove();
+  }
+
+  // Supprimer de la galerie principale
+  if (galleryProject) {
+    galleryProject.remove();
+  }
+};
+
 const deleteWorks = () => {
   const deleteExistingProjects = getElem("existing-projects");
 
@@ -91,11 +109,11 @@ const deleteWorks = () => {
       const deleteIcon = event.target.closest(".delete-icon");
 
       if (deleteIcon && imgContainer) {
-        const projetId = imgContainer.dataset.id;
+        const projectId = imgContainer.dataset.id;
         const token = localStorage.getItem("token");
 
         const response = await fetch(
-          `http://localhost:5678/api/works/${projetId}`,
+          `http://localhost:5678/api/works/${projectId}`,
           {
             method: "DELETE",
             headers: {
@@ -105,9 +123,7 @@ const deleteWorks = () => {
         );
 
         if (response.ok) {
-          query(`.projets figure[data-id="${projetId}"]`).remove();
-
-          query(`#existing-projects figure[data-id="${projetId}"]`).remove();
+          deleteProjectFromDOM(projectId);
         }
       }
     });
@@ -291,6 +307,30 @@ addEvent("change", getElem("image"), function () {
   }
 });
 
+// Mise à jour de l'ajour sur le DOM
+
+const addProjectToDOM = (project) => {
+  // Création de l'élément figure pour le projet
+  const newFigure = createFigure(project);
+
+  // Ajout à la galerie principale
+  const sectionProjet = query(".projets");
+  sectionProjet.appendChild(newFigure);
+
+  // Création de l'élément pour la modale
+  const imgContainer = createElem("div", {
+    class: "img-container",
+    "data-id": project.id,
+  });
+  imgContainer.innerHTML = `${
+    newFigure.querySelector("img").outerHTML
+  }<button class="delete-icon"><i class="fa-solid fa-trash-can"></i></button>`;
+
+  // Ajout à la modale
+  const modalProjects = getElem("existing-projects");
+  modalProjects.appendChild(imgContainer);
+};
+
 // ---------------Formulaire d'ajout de projet----------------------------- //
 const formPostProject = document.querySelector("#add-photo-form");
 
@@ -329,7 +369,8 @@ if (formPostProject)
     if (response.ok) {
       // Réponse de l'API si le formulaire est correctement envoyé
       alert("Projet ajouté avec succès!");
-      // location.reload(); // Recharger la page pour voir le nouveau projet
+      const newProject = await response.json(); // Obtenez les données du nouveau projet à partir de la réponse de l'API
+      addProjectToDOM(newProject); // Mettez à jour le DOM avec le nouveau projet
     } else {
       // Message d'erreur
       alert("Une erreur s'est produite. Veuillez réessayer.");
