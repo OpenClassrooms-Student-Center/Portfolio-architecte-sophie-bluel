@@ -119,27 +119,31 @@
           </button>
         </div>
         <h3>Ajout photo</h3>
-        <form id="add-photo-form ">
+        <form id="add-photo-form">
           <div class="custom-file-upload" id="image-upload-container">
             <i class="fa-regular fa-image" id="image-upload-icon"></i>
-            <label for="image-upload"
+            <label for="image"
               ><button id="image-upload-btn">+ ajouter photo</button></label
             >
             <input
               type="file"
-              id="image-upload"
+              id="image"
               name="image"
               accept=".png, .jpg, .jpeg"
               style="display: none"
               required
             />
             <p id="file-info-text">jpg, png: 4 mo max</p>
-            <img id="uploaded-image" src="" alt="Uploaded Image" style=
-            display:none;" />
+            <img
+              id="uploaded-image"
+              src=""
+              alt="Uploaded Image"
+              style="display: none"
+            />
           </div>
 
-          <label for="project-title">Titre</label>
-          <input type="text" id="project-title" name="title" required />
+          <label for="title">Titre</label>
+          <input type="text" id="title" name="title" required />
 
           <label for="project-category">Catégorie</label>
           <select id="project-category" name="category" required>
@@ -154,6 +158,6 @@
       </div>
     </div>
 
-    <script type="module" src="Main3.js"></script>
+    <script type="module" src="./Main3.js"></script>
   </body>
 </html>

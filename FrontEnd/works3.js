@@ -66,6 +66,24 @@ export const setupButtons = (works, filterContainer, displayContainer) => {
   });
 };
 
+const deleteProjectFromDOM = (projectId) => {
+  const modalProject = query(
+    `#existing-projects .img-container[data-id="${projectId}"]`
+  );
+
+  const galleryProject = query(`.projets figure[data-id="${projectId}"]`);
+
+  // Supprimer de la modale
+  if (modalProject) {
+    modalProject.remove();
+  }
+
+  // Supprimer de la galerie principale
+  if (galleryProject) {
+    galleryProject.remove();
+  }
+};
+
 export const deleteWorks = () => {
   const deleteExistingProjects = getElem("existing-projects");
 
@@ -76,14 +94,13 @@ export const deleteWorks = () => {
       // console.log("Event triggered", event.target);
       const imgContainer = event.target.closest(".img-container");
       const deleteIcon = event.target.closest(".delete-icon");
-      //   // console.log(deleteIcon); OK
-      //   // console.log(imgContainer);OK
+
       if (deleteIcon && imgContainer) {
-        const projetId = imgContainer.dataset.id;
+        const projectId = imgContainer.dataset.id;
         const token = localStorage.getItem("token");
 
         const response = await fetch(
-          `http://localhost:5678/api/works/${projetId}`,
+          `http://localhost:5678/api/works/${projectId}`,
           {
             method: "DELETE",
             headers: {
@@ -93,9 +110,7 @@ export const deleteWorks = () => {
         );
 
         if (response.ok) {
-          query(`.projets figure[data-id="${projetId}"]`).remove();
-
-          query(`#existing-projects figure[data-id="${projetId}"]`).remove();
+          deleteProjectFromDOM(projectId);
         }
       }
     });

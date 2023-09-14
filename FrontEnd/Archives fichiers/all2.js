@@ -93,17 +93,15 @@ export const setupButtons = (works, filterContainer, displayContainer) => {
 
 export const deleteWorks = () => {
   const deleteExistingProjects = getElem("existing-projects");
-  console.log("deleteWorks tourne");
 
   if (deleteExistingProjects)
     addEvent("click", deleteExistingProjects, async function (event) {
       event.preventDefault();
       event.stopPropagation();
-      // console.log("Event triggered", event.target);
+
       const imgContainer = event.target.closest(".img-container");
       const deleteIcon = event.target.closest(".delete-icon");
-      //   // console.log(deleteIcon); OK
-      //   // console.log(imgContainer);OK
+
       if (deleteIcon && imgContainer) {
         const projetId = imgContainer.dataset.id;
         const token = localStorage.getItem("token");
