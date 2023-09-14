@@ -29,7 +29,7 @@ const createElemWithText = (tag, text) => {
   return elem;
 };
 
-const createFigure = ({ id, imageUrl, title }) => {
+export const createFigure = ({ id, imageUrl, title }) => {
   const figure = document.createElement("figure");
   figure.dataset.id = id;
 
@@ -114,4 +114,28 @@ export const deleteWorks = () => {
         }
       }
     });
+};
+
+// Mise à jour de l'ajout sur le DOM avant rechargement de la page
+
+export const addProjectToDOM = (project) => {
+  // Création de l'élément figure pour le projet
+  const newFigure = createFigure(project);
+
+  // Ajout à la galerie principale
+  const sectionProjet = query(".projets");
+  sectionProjet.appendChild(newFigure);
+
+  // Création de l'élément pour la modale
+  const imgContainer = createElem("div", {
+    class: "img-container",
+    "data-id": project.id,
+  });
+  imgContainer.innerHTML = `${
+    newFigure.querySelector("img").outerHTML
+  }<button class="delete-icon"><i class="fa-solid fa-trash-can"></i></button>`;
+
+  // Ajout à la modale
+  const modalProjects = getElem("existing-projects");
+  modalProjects.appendChild(imgContainer);
 };
