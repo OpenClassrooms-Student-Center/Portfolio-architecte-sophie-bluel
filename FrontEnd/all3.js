@@ -168,8 +168,8 @@ const handleLogout = () => {
   localStorage.removeItem("user");
   localStorage.removeItem("token");
   location.reload();
-  getElem("login-email").textContent = "";
-  getElem("login-password").textContent = "";
+  // getElem("login-email").textContent = "";
+  // getElem("login-password").textContent = "";
 };
 const checkTokenLogin = () => {
   const tokenAuth = localStorage.getItem("token");
@@ -225,10 +225,10 @@ window.addEventListener("load", function () {
   const works = await fetchAPI("http://localhost:5678/api/works");
 
   const sectionProjet = query(".projets");
-  displayWorks(works, sectionProjet);
+  if (works && sectionProjet) displayWorks(works, sectionProjet);
 
   const filtresDiv = query(".filtres");
-  setupButtons(works, filtresDiv, sectionProjet);
+  if (works && filtresDiv) setupButtons(works, filtresDiv, sectionProjet);
 })();
 
 deleteWorks();
@@ -250,62 +250,68 @@ allEditBtn.forEach((btn) => {
   });
 });
 
-addEvent("click", getElem("close-modal"), () => toggleModal(false));
-addEvent("click", getElem("close-modal-form"), () => toggleModal(false));
+if (getElem("close-modal"))
+  addEvent("click", getElem("close-modal"), () => toggleModal(false));
+if (getElem("close-modal-form"))
+  addEvent("click", getElem("close-modal-form"), () => toggleModal(false));
 
 // addEvent("click", queryAll(".close-btn"), () => toggleModal(false));
 
-addEvent("click", getElem("edit-modal"), (event) => {
-  if (
-    !contains(modalContent, event.target) &&
-    !contains(modalContentForm, event.target)
-  ) {
-    toggleModal(false);
-  }
-});
+if (getElem("edit-modal"))
+  addEvent("click", getElem("edit-modal"), (event) => {
+    if (
+      !contains(modalContent, event.target) &&
+      !contains(modalContentForm, event.target)
+    ) {
+      toggleModal(false);
+    }
+  });
 
 // Cliquer pour ajouter une photo (ouvrir le formulaire)
-addEvent("click", getElem("add-photo"), () => {
-  toggleClass(modalContent, "hide", true);
-  toggleClass(modalContentForm, "hide", false);
-});
+if (getElem("add-photo"))
+  addEvent("click", getElem("add-photo"), () => {
+    toggleClass(modalContent, "hide", true);
+    toggleClass(modalContentForm, "hide", false);
+  });
 
 // Cliquer pour annuler l'ajout d'une photo (fermer le formulaire et revenir à la modal galerie)
-addEvent("click", getElem("back-form-modal"), () => {
-  toggleClass(modalContent, "hide", false);
-  toggleClass(modalContentForm, "hide", true);
-});
+if (getElem("back-form-modal"))
+  addEvent("click", getElem("back-form-modal"), () => {
+    toggleClass(modalContent, "hide", false);
+    toggleClass(modalContentForm, "hide", true);
+  });
 
 // ---------------Image upload----------------------------- //
+if (getElem("image-upload-btn"))
+  addEvent("click", getElem("image-upload-btn"), (e) => {
+    e.preventDefault();
+    getElem("image").click();
+  });
 
-addEvent("click", getElem("image-upload-btn"), (e) => {
-  e.preventDefault();
-  getElem("image").click();
-});
+if (getElem("image"))
+  addEvent("change", getElem("image"), function () {
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        // Mettre à jour l'attribut src de l'élément img avec l'image sélectionnée
+        const imgElem = getElem("uploaded-image");
+        imgElem.src = e.target.result;
+        imgElem.style.display = "block"; // Afficher l'image
 
-addEvent("change", getElem("image"), function () {
-  const file = this.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      // Mettre à jour l'attribut src de l'élément img avec l'image sélectionnée
-      const imgElem = getElem("uploaded-image");
-      imgElem.src = e.target.result;
-      imgElem.style.display = "block"; // Afficher l'image
+        // Cacher les autres éléments
+        getElem("image-upload-icon").style.display = "none";
+        getElem("image-upload-btn").style.display = "none";
+        getElem("file-info-text").style.display = "none";
 
-      // Cacher les autres éléments
-      getElem("image-upload-icon").style.display = "none";
-      getElem("image-upload-btn").style.display = "none";
-      getElem("file-info-text").style.display = "none";
-
-      // Ajouter un événement de clic à l'image pour permettre la sélection d'une autre image
-      addEvent("click", imgElem, () => {
-        getElem("image").click();
-      });
-    };
-    reader.readAsDataURL(file);
-  }
-});
+        // Ajouter un événement de clic à l'image pour permettre la sélection d'une autre image
+        addEvent("click", imgElem, () => {
+          getElem("image").click();
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+  });
 
 // Mise à jour de l'ajour sur le DOM
 
