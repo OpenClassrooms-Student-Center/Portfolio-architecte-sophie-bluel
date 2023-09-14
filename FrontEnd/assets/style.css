@@ -30,6 +30,8 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	background: rgba(255, 254, 248, 1);
+
 }
 ol, ul {
 	list-style: none;
@@ -200,9 +202,39 @@ input[type="submit"]{
 	border-radius: 60px ;
 }
 
+footer {
+	background-color: white;
+}
+
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em
 }
 
+/**** Bannière filtres ****/
+
+.filters {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 1em;
+	gap: 1em;
+}
+
+.filters__button{
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 16px;
+	color: #1D6154;
+	background-color:rgba(255, 254, 248, 1);
+	height: 37px;
+	text-align: center;
+	padding:0 1em 0 1em;
+	border-radius: 60px;
+	border: 1px solid #1D6154;
+}
+
+.filters__button--select{
+	color: white;
+	background-color: #1D6154;
+}
