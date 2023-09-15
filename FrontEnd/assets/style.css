@@ -303,6 +303,10 @@ footer nav ul {
 }
 
 /******* JAVASCRIPT PROJETS *********/
+.projets-section {
+  margin: 50px 0 80px 0;
+}
+
 .projets-section h2 {
   text-align: center;
   margin-bottom: 1rem;
@@ -413,8 +417,9 @@ footer nav ul {
   background-color: #fff;
   padding: 30px 20px;
   margin: auto;
-  max-height: 730px;
-  width: 630px;
+  height: 80vh;
+  width: 50%;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -443,7 +448,7 @@ footer nav ul {
   grid-column-gap: 10px;
   grid-row-gap: 25px;
   margin-top: 30px;
-  padding-bottom: 30px;
+  padding-bottom: 60px;
   width: 75%;
   border-bottom: #b3b3b3 solid 1px;
 }
@@ -475,15 +480,15 @@ footer nav ul {
 
 .delete-icon {
   position: absolute;
-  top: 0;
+  top: -4px;
   right: 0px;
   cursor: pointer;
 }
 
 .delete-icon i {
-  font-size: 1rem;
+  font-size: 0.7rem;
   color: white;
-  padding: 0.25rem;
+  padding: 0.12rem;
   background-color: black;
   border: 1px solid black;
   border-radius: 3px;
@@ -497,8 +502,9 @@ footer nav ul {
   transform: translate(-50%, -50%);
   background-color: #fff;
   padding: 30px 20px;
-  max-height: 630px;
-  width: 670px;
+  height: 80vh;
+  width: 50%;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -547,7 +553,7 @@ image-upload {
   font-weight: 700;
   color: white;
   background-color: #a7a7a7;
-  margin: 2em auto;
+  margin: 0 auto 2rem auto;
   width: 180px;
   text-align: center;
   border-radius: 60px;
@@ -616,10 +622,19 @@ image-upload {
   height: 50px;
   margin-top: 10px;
 }
+#title {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
 
 select {
   border: none;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+.line {
+  border: solid 1px #b3b3b3;
+  margin: 40px 0;
 }
 .hidden {
   display: none;
