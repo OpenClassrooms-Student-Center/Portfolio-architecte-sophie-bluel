@@ -174,15 +174,13 @@ a {
 /* Barre d'édition admin */
 .admin-bar {
   box-sizing: border-box;
+  position: fixed;
+  top: 0;
   background-color: #000000;
   color: white;
   padding: 10px;
-  margin: 0;
   width: 100vw;
-  margin-left: -165px;
-
-  /* position: absolute; */
-
+  z-index: 9999;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -339,8 +337,14 @@ footer nav ul {
   grid-row-gap: 20px;
 }
 
+.projets figure {
+  width: 100%;
+  aspect-ratio: 0.75;
+}
 .projets img {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /********** login.html **********/
@@ -434,21 +438,14 @@ footer nav ul {
 }
 
 #existing-projects {
-  width: 100%;
-  border-bottom: #b3b3b3 solid 1px;
-}
-
-#existing-projects {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-column-gap: 10px;
-  grid-row-gap: 10px;
+  grid-row-gap: 25px;
   margin-top: 30px;
   padding-bottom: 30px;
-}
-
-#existing-projects img {
-  width: 100%;
+  width: 75%;
+  border-bottom: #b3b3b3 solid 1px;
 }
 
 #add-photo {
@@ -466,13 +463,20 @@ footer nav ul {
 
 .img-container {
   position: relative;
+  width: 100%;
+  aspect-ratio: 0.75;
+}
+
+.img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .delete-icon {
   position: absolute;
   top: 0;
   right: 0px;
-
   cursor: pointer;
 }
 

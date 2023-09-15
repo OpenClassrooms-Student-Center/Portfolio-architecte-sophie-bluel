@@ -82,9 +82,9 @@ backFormModal();
 
 uploadImage();
 
-const formPostProject = document.querySelector("#add-photo-form");
+const formPostProject = query("#add-photo-form");
 if (formPostProject) {
-  formPostProject.addEventListener("submit", async function (event) {
+  addEvent("submit", formPostProject, async function (event) {
     event.preventDefault();
 
     const imageUpload = getImageUpload();
