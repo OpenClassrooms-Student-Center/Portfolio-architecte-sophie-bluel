@@ -10,10 +10,11 @@
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 	<script src="https://kit.fontawesome.com/aa05b37004.js" crossorigin="anonymous"></script>
-	<script src="scripts/gallery.js"  defer></script>
+	<script src="scripts/gallery.js" defer></script>
+	<script src="scripts/admin.js" defer></script>
 </head>
 <body>
-<aside class="edition">
+<aside class="editionBanner">
 	<i class="fa-regular fa-pen-to-square"></i>
 	<p>Mode édition</p>
 </aside>
@@ -23,7 +24,7 @@
 		<ul>
 			<li><a href="#portfolio">projets</a></li>
 			<li><a href="#contact">contact</a></li>
-			<li><a href="loginpage.html">login</a></li>
+			<li><a href="loginpage.html" id="login">login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li> <!-- ajout lien de la page login -->
 		</ul>
 	</nav>
@@ -41,7 +42,14 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+		<div class="title">
+			<h2>Mes Projets</h2>
+			<div class="editionButton">
+				<i class="fa-regular fa-pen-to-square"></i>
+				<p>modifier</p>
+			</div>
+		</div>
+		
 		<div class="filters">
 		</div>
 		<div class="gallery">
