@@ -1,15 +1,39 @@
-// ---- DIV GALLERY
-
 //Recup elt du DOM qui accueillera les projets
 const gallery = document.querySelector(".gallery");
 
-//Fonction pour afficher les travaux "works"
-function AddWorks(works) {
-    //Supprime tous les projets 
+let works = [];
+let categories = [];
+
+function GetWorks() {
+    fetch("http://localhost:5678/api/works")
+        .then((res) => res.json())
+        .then((data) => {
+            works = data;
+            DisplayWorks(works);
+        });
+    
+}
+GetWorks();
+
+function GetCategories() {
+    fetch("http://localhost:5678/api/categories")
+        .then((res) => res.json())
+        .then((data) => {
+            categories = data;
+            createButton(categories);
+        });
+}
+GetCategories();
+
+
+//Fonction pour afficher les travaux
+
+function DisplayWorks(arrayworks) {
+    //Supprime tous les projets
     gallery.innerHTML="";
     
     for (let i=0; i<works.length; i++){
-        const projet = works[i];
+        const projet = arrayworks[i];
 
         // Création d’une balise dédiée à un projet
         const figure = document.createElement("figure");
@@ -28,45 +52,6 @@ function AddWorks(works) {
 };
 
 
-//Récupération et affichage de tous les travaux sur API
-async function AddAllWorks(){
-    const response = await fetch('http://localhost:5678/api/works');
-    if(!response.ok){
-        throw new Error("erreur API");
-    }
-    const allWorks = await response.json();
-    
-    await AddWorks(allWorks);
-}
-AddAllWorks();
-
-
-
-//---- DIV FILTER
-
-// Fonction pour filtrer les travaux 
-async function FilterWorks(id){
-    const response = await fetch('http://localhost:5678/api/works');
-    if(!response.ok){
-        throw new Error("erreur API");
-    }
-
-    const allWorks = await response.json();
-
-    let worksFilt= new Array();
-
-    for (let i=0; i<allWorks.length; i++){
-        const project = allWorks[i]; 
-        const categoryP= project.categoryId;
-
-        if(id === categoryP){
-            worksFilt.push(project);
-        }
-    }
-
-    return worksFilt;
-}
-
 // Fonction pour afficher les filtres API + Tous
 function createButton(filters){
     const divFilters = document.querySelector(".filters");
@@ -78,13 +63,12 @@ function createButton(filters){
     divFilters.appendChild(buttonAll);
 
     buttonAll.addEventListener("click", () =>{
-        AddAllWorks();
+        DisplayWorks(works);
     })
 
     for (let i=0; i<filters.length; i++){
         //Recup elt du DOM qui accueillera les filtres
         const category= filters[i];
-        
         
         //Création des balises
         const button = document.createElement("button");
@@ -95,27 +79,15 @@ function createButton(filters){
         divFilters.appendChild(button);
 
         //Ajout eventListener
-        const categoryId = category.id
-
-        button.addEventListener("click", async () =>{
+        button.addEventListener("click", () =>{
             buttonAll.classList.remove("filters__buttonAll");
-            const worksFilt = await FilterWorks(categoryId);
-            AddWorks(worksFilt);
+            const worksFilt = works.filter((project)=>project.categoryId === category.id);
+            console.log(worksFilt);
+            DisplayWorks(worksFilt);
+            console.log(works);
+            console.log(worksFilt)
         })
 
     }
 }
-
-
-async function getCategories(){
-    const response = await fetch('http://localhost:5678/api/categories');
-    if(!response.ok){
-        throw new Error("erreur API");
-    }
-    const categories = await response.json();
-
-    await createButton(categories);
-}
-
-getCategories();
 
