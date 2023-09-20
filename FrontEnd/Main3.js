@@ -100,7 +100,12 @@ if (formPostProject) {
     const response = await submitProject(formData);
 
     if (response.ok) {
-      alert("Projet ajouté avec succès!");
+      const successMessage = document.getElementById("form-success-message");
+      successMessage.classList.remove("hidden");
+      setTimeout(function () {
+        successMessage.classList.add("hidden");
+        toggleModal(false);
+      }, 1000);
       const newProject = await response.json();
       addProjectToDOM(newProject);
     } else {

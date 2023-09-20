@@ -49,8 +49,10 @@ export const handleLogout = () => {
   localStorage.removeItem("user");
   localStorage.removeItem("token");
   location.reload();
-  // getElem("login-email").textContent = "";
-  // getElem("login-password").textContent = "";
+  if (getElem("login-email") && getElem("login-password")) {
+    getElem("login-email").textContent = "";
+    getElem("login-password").textContent = "";
+  }
 };
 export const checkTokenLogin = () => {
   const tokenAuth = localStorage.getItem("token");

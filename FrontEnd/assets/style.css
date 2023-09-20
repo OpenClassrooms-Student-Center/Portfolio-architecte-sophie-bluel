@@ -645,7 +645,31 @@ select {
 .line {
   border: solid 1px #b3b3b3;
   margin: 40px 0;
+  position: relative;
 }
+#form-error-message {
+  color: red;
+  text-align: center;
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  position: absolute;
+  top: 25px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.form-success {
+  color: green;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  position: absolute;
+  top: 25px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .hidden {
   display: none;
 }

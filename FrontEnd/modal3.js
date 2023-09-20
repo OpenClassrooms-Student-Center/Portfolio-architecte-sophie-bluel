@@ -139,8 +139,13 @@ export const validateFormInput = (
   projectCategory
 ) => {
   if (!imageUpload || !projectTitle || !projectCategory) {
-    document.getElementById("form-error-message").innerText =
-      "Veuillez remplir tous les champs.";
+    const errorFormMessage = document.getElementById("form-error-message");
+    errorFormMessage.classList.remove("hidden");
+
+    document.getElementById("image").addEventListener("click", () => {
+      errorFormMessage.classList.add("hidden");
+    });
+
     return false;
   }
   return true;

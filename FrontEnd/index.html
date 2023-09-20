@@ -131,7 +131,6 @@
               name="image"
               accept=".png, .jpg, .jpeg"
               style="display: none"
-              required
             />
             <p id="file-info-text">jpg, png: 4 mo max</p>
             <img
@@ -143,22 +142,43 @@
           </div>
 
           <label for="title">Titre</label>
-          <input type="text" id="title" name="title" required />
+          <input
+            type="text"
+            id="title"
+            name="title"
+            required
+            oninvalid="this.setCustomValidity('Veuillez renseigner un titre')"
+            oninput="this.setCustomValidity('')"
+          />
 
           <label for="project-category">Catégorie</label>
-          <select id="project-category" name="category" required>
+          <select
+            id="project-category"
+            name="category"
+            required
+            oninvalid="this.setCustomValidity('Chosissez une catégorie')"
+            oninput="this.setCustomValidity('')"
+          >
             <option value="" selected></option>
             <option value="1">Objets</option>
             <option value="2">Appartements</option>
             <option value="3">Hotels & restaurants</option>
           </select>
-          <div class="line"></div>
+          <div class="line">
+            <div id="form-error-message" class="hidden">
+              Veuillez remplir tous les champs.
+            </div>
+            <div id="form-success-message" class="form-success hidden">
+              Travail ajouté avec succès !
+            </div>
+          </div>
+
           <button class="submit-image" type="submit">Valider</button>
         </form>
-        <div id="form-error-message"></div>
       </div>
     </div>
 
-    <script type="module" src="./Main3.js"></script>
+    <!-- <script type="module" src="./Main3.js"></script> -->
+    <script src="All-Javascript.js"></script>
   </body>
 </html>
