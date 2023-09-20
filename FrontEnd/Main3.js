@@ -105,7 +105,7 @@ if (formPostProject) {
       setTimeout(function () {
         successMessage.classList.add("hidden");
         toggleModal(false);
-      }, 1000);
+      }, 2500);
       const newProject = await response.json();
       addProjectToDOM(newProject);
     } else {
