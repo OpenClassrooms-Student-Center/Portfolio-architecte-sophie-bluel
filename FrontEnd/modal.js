@@ -9,17 +9,20 @@ import {
   toggleClass,
   cloneNode,
   getElem,
-  getDOMValue,
 } from "./utils.js";
 
-// MODAL
+// MODALES
+
+// Fonctions pour gérer l'affichage et la fermeture de la modale.
+
 export const modalContentForm = query(".modal-content-form");
 export const modalContent = query(".modal-content");
 
-// Toggle Modal Visibilité
+// Active/désactive la visibilité de la modale.
 export const toggleModal = (isVisible) =>
   toggleClass(getElem("edit-modal"), "hidden", !isVisible);
 
+// Met à jour le contenu de la modale avec les projets existants.
 export const importModalWithExistingProjects = () => {
   const existingProjects = cloneNode(".projets");
   const modalProjects = getElem("existing-projects");
@@ -34,6 +37,8 @@ export const importModalWithExistingProjects = () => {
     modalProjects.appendChild(imgContainer);
   });
 };
+
+// Ouvre la modale.
 export const openModal = () => {
   const allEditBtn = queryAll(".open-modal");
   allEditBtn.forEach((btn) => {
@@ -90,7 +95,7 @@ export const backFormModal = () => {
     });
 };
 
-// Image upload
+// Gestion de l'upload d'image.
 export const uploadImage = () => {
   if (getElem("image-upload-btn"))
     addEvent("click", getElem("image-upload-btn"), (e) => {
@@ -103,8 +108,9 @@ export const uploadImage = () => {
       const file = this.files[0];
       if (file) {
         const reader = new FileReader();
+
+        // Mettre à jour l'attribut src de l'élément img avec l'image sélectionnée
         reader.onload = (e) => {
-          // Mettre à jour l'attribut src de l'élément img avec l'image sélectionnée
           const imgElem = getElem("uploaded-image");
           imgElem.src = e.target.result;
           imgElem.style.display = "block"; // Afficher l'image
@@ -125,7 +131,7 @@ export const uploadImage = () => {
 };
 
 // FORMULAIRE D'AJOUT DE PROJET
-// Récupérer les données du formulaire
+// Récupère les données du formulaire
 export const getImageUpload = () => document.getElementById("image").files[0];
 export const getProjectTitle = () => document.getElementById("title").value;
 export const getProjectCategory = () =>
@@ -151,7 +157,7 @@ export const validateFormInput = (
   return true;
 };
 
-// formData
+// Crée un objet FormData pour l'envoi à l'API.
 
 export const createFormData = (imageUpload, projectTitle, projectCategory) => {
   const formData = new FormData();

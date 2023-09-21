@@ -1,16 +1,5 @@
 // UTILITAIRES
-import {
-  query,
-  queryAll,
-  closest,
-  contains,
-  createElem,
-  addEvent,
-  toggleClass,
-  cloneNode,
-  getElem,
-  getDOMValue,
-} from "./utils.js";
+import { query, addEvent, toggleClass, getElem } from "./utils.js";
 
 // FONCTIONS
 import {
@@ -18,17 +7,13 @@ import {
   displayWorks,
   setupButtons,
   deleteWorks,
-  createFigure,
   addProjectToDOM,
-} from "./works3.js";
+} from "./works.js";
 
-import { handleFormSubmission, checkTokenLogin } from "./login3.js";
+import { handleFormSubmission, checkTokenLogin } from "./login.js";
 
 import {
-  importModalWithExistingProjects,
   toggleModal,
-  modalContentForm,
-  modalContent,
   openModal,
   closeModal,
   openAddPhotoModal,
@@ -40,15 +25,16 @@ import {
   validateFormInput,
   createFormData,
   submitProject,
-} from "./modal3.js";
+} from "./modal.js";
 
-// Initialisation
+// EXÉCUTION
+
 // Voir si la page est chargée
 window.addEventListener("load", function () {
   console.log("Page entièrement chargée");
 });
 
-// Afficher les projets sur la page dynamiquement
+// Affiche les projets sur la page dynamiquement
 
 (async () => {
   const works = await fetchAPI("http://localhost:5678/api/works");
@@ -73,16 +59,31 @@ if (form) addEvent("submit", form, handleFormSubmission);
 // Accès à la modale
 
 openModal();
-
 closeModal();
-
 openAddPhotoModal();
-
 backFormModal();
-
 uploadImage();
 
+// Soumission du formulaire d'ajout de projet.
+
 const formPostProject = query("#add-photo-form");
+if (formPostProject) {
+  addEvent("input", formPostProject, function (event) {
+    event.preventDefault();
+    const imageUpload = getImageUpload(); // Récupérer l'input file à faire
+    const projectTitle = getProjectTitle();
+    const projectCategory = getProjectCategory();
+    const btnValider = getElem("btn-valider");
+    if ((imageUpload, projectTitle, projectCategory)) {
+      toggleClass(btnValider, "submit-image-complete", true);
+      toggleClass(btnValider, "submit-image", false);
+    } else {
+      toggleClass(btnValider, "submit-image-complete", false);
+      toggleClass(btnValider, "submit-image", true);
+    }
+  });
+}
+
 if (formPostProject) {
   addEvent("submit", formPostProject, async function (event) {
     event.preventDefault();

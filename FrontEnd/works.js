@@ -1,18 +1,8 @@
-import {
-  query,
-  queryAll,
-  closest,
-  contains,
-  createElem,
-  addEvent,
-  toggleClass,
-  cloneNode,
-  getElem,
-  getDOMValue,
-} from "./utils.js";
+import { query, createElem, addEvent, getElem } from "./utils.js";
 
-// Fonctions pour la gestion des travaux
+// FONCTIONS POUR LA GESTIONS DES TRAVAUX
 
+// Exécute une requête API et retourne les données ou null en cas d'erreur.
 export const fetchAPI = async (url, options = {}) => {
   try {
     const response = await fetch(url, options);
@@ -23,12 +13,14 @@ export const fetchAPI = async (url, options = {}) => {
   }
 };
 
+// Crée un élément DOM avec du texte.
 const createElemWithText = (tag, text) => {
   const elem = document.createElement(tag);
   elem.innerText = text;
   return elem;
 };
 
+// Crée un élément <figure> pour représenter un projet: image + titre.
 export const createFigure = ({ id, imageUrl, title }) => {
   const figure = document.createElement("figure");
   figure.dataset.id = id;
@@ -42,11 +34,13 @@ export const createFigure = ({ id, imageUrl, title }) => {
   return figure;
 };
 
+// Affiche les projets dans un conteneur.
 export const displayWorks = (works, container) => {
   container.innerHTML = "";
   works.forEach((work) => container.appendChild(createFigure(work)));
 };
 
+// Configure les boutons de filtrage pour les œuvres.
 export const setupButtons = (works, filterContainer, displayContainer) => {
   const btnAll = createElemWithText("button", "Tous");
   addEvent("click", btnAll, () => displayWorks(works, displayContainer));
@@ -66,24 +60,24 @@ export const setupButtons = (works, filterContainer, displayContainer) => {
   });
 };
 
+// Supprime un projet du DOM
 const deleteProjectFromDOM = (projectId) => {
+  // Suppression dans la modale
   const modalProject = query(
     `#existing-projects .img-container[data-id="${projectId}"]`
   );
-
-  const galleryProject = query(`.projets figure[data-id="${projectId}"]`);
-
-  // Supprimer de la modale
   if (modalProject) {
     modalProject.remove();
   }
 
-  // Supprimer de la galerie principale
+  // Suppression dans la galerie principale
+  const galleryProject = query(`.projets figure[data-id="${projectId}"]`);
   if (galleryProject) {
     galleryProject.remove();
   }
 };
 
+// Supprime un projet en utilisant l'API
 export const deleteWorks = () => {
   const deleteExistingProjects = getElem("existing-projects");
 
@@ -91,7 +85,6 @@ export const deleteWorks = () => {
     addEvent("click", deleteExistingProjects, async function (event) {
       event.preventDefault();
       event.stopPropagation();
-      // console.log("Event triggered", event.target);
       const imgContainer = event.target.closest(".img-container");
       const deleteIcon = event.target.closest(".delete-icon");
 
