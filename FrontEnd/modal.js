@@ -132,10 +132,9 @@ export const uploadImage = () => {
 
 // FORMULAIRE D'AJOUT DE PROJET
 // Récupère les données du formulaire
-export const getImageUpload = () => document.getElementById("image").files[0];
-export const getProjectTitle = () => document.getElementById("title").value;
-export const getProjectCategory = () =>
-  document.getElementById("project-category").value;
+export const getImageUpload = () => getElem("image").files[0];
+export const getProjectTitle = () => getElem("title").value;
+export const getProjectCategory = () => getElem("project-category").value;
 
 // Validation des entrées du formulaire
 
@@ -145,10 +144,21 @@ export const validateFormInput = (
   projectCategory
 ) => {
   if (!imageUpload || !projectTitle || !projectCategory) {
-    const errorFormMessage = document.getElementById("form-error-message");
+    const errorFormMessage = getElem("form-error-message");
+    const imageForm = getElem("image");
+    const titleForm = getElem("title");
+    const categoryForm = getElem("project-category");
+
     errorFormMessage.classList.remove("hidden");
 
-    document.getElementById("image").addEventListener("click", () => {
+    addEvent("click", imageForm, () => {
+      errorFormMessage.classList.add("hidden");
+    });
+    addEvent("click", titleForm, () => {
+      errorFormMessage.classList.add("hidden");
+    });
+
+    addEvent("click", categoryForm, () => {
       errorFormMessage.classList.add("hidden");
     });
 

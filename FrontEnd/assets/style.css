@@ -627,6 +627,7 @@ image-upload {
   background-color: #b9c5cc;
   color: #306685;
   border: none;
+  border-radius: 60px;
   font-size: 0.875rem;
   font-weight: 500;
   padding: 10px 30px;

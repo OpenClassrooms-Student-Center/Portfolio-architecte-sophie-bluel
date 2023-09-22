@@ -101,8 +101,9 @@ if (formPostProject) {
     const response = await submitProject(formData);
 
     if (response.ok) {
-      const successMessage = document.getElementById("form-success-message");
+      const successMessage = getElem("form-success-message");
       successMessage.classList.remove("hidden");
+
       setTimeout(function () {
         successMessage.classList.add("hidden");
         toggleModal(false);
@@ -112,5 +113,6 @@ if (formPostProject) {
     } else {
       alert("Une erreur s'est produite. Veuillez réessayer.");
     }
+    formPostProject.reset();
   });
 }

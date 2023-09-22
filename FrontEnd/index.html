@@ -142,23 +142,10 @@
           </div>
 
           <label for="title">Titre</label>
-          <input
-            type="text"
-            id="title"
-            name="title"
-            required
-            oninvalid="this.setCustomValidity('Veuillez renseigner un titre')"
-            oninput="this.setCustomValidity('')"
-          />
+          <input type="text" id="title" name="title" />
 
           <label for="project-category">Catégorie</label>
-          <select
-            id="project-category"
-            name="category"
-            required
-            oninvalid="this.setCustomValidity('Chosissez une catégorie')"
-            oninput="this.setCustomValidity('')"
-          >
+          <select id="project-category" name="category">
             <option value="" selected></option>
             <option value="1">Objets</option>
             <option value="2">Appartements</option>
