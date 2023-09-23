@@ -194,7 +194,7 @@ nav a:hover{
 }
 
 
-input[type="submit"]{
+.button{
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
@@ -296,20 +296,24 @@ footer nav ul {
   }
 
 .modal {
-	width: 95%;
-	max-width: 630px;
-	min-width: 300px;
-	height:95%;
-	max-height: 688px;
-
+	width: 630px;
+	height: 688px;
 	border-radius: 10px;
 	background: rgba(255, 255, 255, 1);
 	position: absolute;
 	padding:40;
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
+	align-items: center;
 	gap: 40px;
 }
+
+.close-modal {
+	position: absolute;
+	top: 32px;
+	right: 32px;
+	cursor: pointer;
+  }
 
 .modal-title {
 	font-family: Work Sans;
@@ -320,13 +324,10 @@ footer nav ul {
 
 }
 
-.close-modal {
-	position: absolute;
-	top: 32px;
-	right: 32px;
-	cursor: pointer;
-  }
+
 
 .modal-galery {
+	width: 415px;
+	height: 430px;
 	border-bottom: 1px solid rgba(179, 179, 179, 1);
 }

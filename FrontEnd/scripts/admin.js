@@ -56,4 +56,7 @@ function DisplayModal(){
     modalGalery.classList.add("modal-galery");
     modal.appendChild(modalGalery);
 
+    buttonAdd= document.createElement("button")
+
+
 }
