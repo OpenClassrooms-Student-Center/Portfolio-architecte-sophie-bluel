@@ -195,6 +195,7 @@ nav a:hover{
 
 
 .button{
+	border:none;
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
@@ -278,6 +279,7 @@ footer nav ul {
 /**** MODAL ****/
 
 .modal-container {
+	visibility: hidden;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -288,14 +290,24 @@ footer nav ul {
 	justify-content: center;
 }
 
+.modal-container.active {
+	visibility: visible;
+}
+
 .overlay {
+	opacity: 0;
 	position: absolute;
 	width: 100%;
 	height: 100%;
 	background: #333333d3;
-  }
+}
+
+.modal-container.active .overlay {
+	opacity: 1;
+}
 
 .modal {
+	opacity: 0;
 	width: 630px;
 	height: 688px;
 	border-radius: 10px;
@@ -305,7 +317,11 @@ footer nav ul {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 40px;
+	gap:50px;
+}
+
+.modal-container.active .modal {
+	opacity: 1;
 }
 
 .close-modal {
@@ -321,13 +337,37 @@ footer nav ul {
 	font-weight: 400;
 	color: black;
 	margin-top: 60px;
+}
+
+.modal-gallery {
+	width: 420px;
+	height: 430px;
+	border-bottom: 1px solid rgba(179, 179, 179, 1);
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: 8px;
+	padding-bottom: 60px;
+}
+
+.modal-gallery img{
+	width:100%;
+}
+
+.projet{
+	position :relative;
 
 }
 
+.button-delete{
+	width: 17px;
+	height: 17px;
+	position: absolute;
+	top:5px;
+	right:5px;
+	border:none;
+	background-color:black;
+	display:flex;
+	align-items: center;
+	justify-content: center;
 
-
-.modal-galery {
-	width: 415px;
-	height: 430px;
-	border-bottom: 1px solid rgba(179, 179, 179, 1);
 }

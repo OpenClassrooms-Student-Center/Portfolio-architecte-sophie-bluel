@@ -10,10 +10,13 @@ function GetWorks() {
         .then((data) => {
             works = data;
             DisplayWorks(works);
+            DisplayModal();
+            return works
         });
     
 }
 GetWorks();
+
 
 function GetCategories() {
     fetch("http://localhost:5678/api/categories")
@@ -32,7 +35,7 @@ function DisplayWorks(arrayworks) {
     //Supprime tous les projets
     gallery.innerHTML="";
     
-    for (let i=0; i<works.length; i++){
+    for (let i=0; i<arrayworks.length; i++){
         const projet = arrayworks[i];
 
         // Création d’une balise dédiée à un projet

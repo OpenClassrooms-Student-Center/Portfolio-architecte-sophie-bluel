@@ -20,43 +20,72 @@ if (token) {
 
     editionButton.style.display="flex";
     editionButton.addEventListener("click", () => {
-        console.log('okoko');
         DisplayModal();
     });
 
     filters.style.display="none";
-
 }
 
-
-
 function DisplayModal(){
-    modalContainer = document.createElement("div");
-    modalContainer.classList.add("modal-container");
+    const modalContainer = document.createElement("div");
+    modalContainer.classList.add("modal-container","active");
     body.appendChild(modalContainer);
     
-    modalOverlay = document.createElement("div");
-    modalOverlay.classList.add("overlay");
+    const modalOverlay = document.createElement("div");
+    modalOverlay.classList.add("overlay","modal-trigger",);
     modalContainer.appendChild(modalOverlay);
 
-    modal = document.createElement("div");
+    const modal = document.createElement("div");
     modal.classList.add("modal");
     modalContainer.appendChild(modal);
 
-    buttonClose= document.createElement("i");
-    buttonClose.classList.add("close-modal", "fa-solid", "fa-xmark", "fa-xl");
+    const buttonClose = document.createElement("i");
+    buttonClose.classList.add("close-modal", "modal-trigger", "fa-solid", "fa-xmark", "fa-xl");
     modal.appendChild(buttonClose)
 
-    modalTitle= document.createElement("h1");
+    const modalTitle= document.createElement("h1");
     modalTitle.classList.add("modal-title");
     modalTitle.innerHTML="Galerie photo";
     modal.appendChild(modalTitle)
 
-    modalGalery = document.createElement("div");
-    modalGalery.classList.add("modal-galery");
-    modal.appendChild(modalGalery);
+    const modalGallery = document.createElement("div");
+    modalGallery.classList.add("modal-gallery");
+    modal.appendChild(modalGallery);
 
-    buttonAdd= document.createElement("button")
+    console.log(works);
 
+    for (let i=0; i<works.length; i++){
+        const projet = works[i];
 
+        // Création d’une balise dédiée à un projet
+        const figure = document.createElement("figure");
+        figure.classList.add("projet");
+
+        // Création des balises 
+        const imageProjet = document.createElement("img");
+        imageProjet.src=projet.imageUrl;
+
+        const buttonDelete =  document.createElement("button");
+        buttonDelete.classList.add("button-delete");
+        buttonDelete.innerHTML="<i class=\"fa-solid fa-trash-can fa-xs\" style=\"color: #ffffff;\"></i>"
+        
+
+        // Ajout nouveaux elt au DOM
+        modalGallery.appendChild(figure);
+        figure.appendChild(imageProjet);
+        figure.appendChild(buttonDelete);
+    }
+
+    const buttonAdd= document.createElement("button");
+    buttonAdd.innerHTML="Ajouter une photo";
+    buttonAdd.classList.add("button");
+    modal.appendChild(buttonAdd);
+
+    const modalTriggers = document.querySelectorAll(".modal-trigger");
+
+    modalTriggers.forEach(trigger => trigger.addEventListener("click", toggleModal));
+
+    function toggleModal(){
+        modalContainer.classList.remove("active")
+    };
 }
