@@ -28,32 +28,33 @@ if (token) {
 
 function DisplayModal(){
     const modalContainer = document.createElement("div");
-    modalContainer.classList.add("modal-container","active");
+    modalContainer.classList.add("modal-container");
     body.appendChild(modalContainer);
     
     const modalOverlay = document.createElement("div");
     modalOverlay.classList.add("overlay","modal-trigger",);
     modalContainer.appendChild(modalOverlay);
 
+    /*** CONTENU MODALE ***/
     const modal = document.createElement("div");
     modal.classList.add("modal");
     modalContainer.appendChild(modal);
 
+    /* Bouton fermeture */
     const buttonClose = document.createElement("i");
     buttonClose.classList.add("close-modal", "modal-trigger", "fa-solid", "fa-xmark", "fa-xl");
     modal.appendChild(buttonClose)
 
+    /* Titre */
     const modalTitle= document.createElement("h1");
     modalTitle.classList.add("modal-title");
     modalTitle.innerHTML="Galerie photo";
     modal.appendChild(modalTitle)
 
+    /* Galerie */
     const modalGallery = document.createElement("div");
     modalGallery.classList.add("modal-gallery");
     modal.appendChild(modalGallery);
-
-    console.log(works);
-
     for (let i=0; i<works.length; i++){
         const projet = works[i];
 
@@ -65,10 +66,22 @@ function DisplayModal(){
         const imageProjet = document.createElement("img");
         imageProjet.src=projet.imageUrl;
 
-        const buttonDelete =  document.createElement("button");
+        const buttonDelete =  document.createElement("button"); //Bouton suppression projet
         buttonDelete.classList.add("button-delete");
         buttonDelete.innerHTML="<i class=\"fa-solid fa-trash-can fa-xs\" style=\"color: #ffffff;\"></i>"
+        buttonDelete.addEventListener("click", deleteProject);
         
+        function deleteProject(){
+            const idProject = projet.id;
+            console.log(idProject);
+            fetch("http://localhost:5678/api/works/"+idProject, {
+                method: "DELETE",
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+            });
+            figure.remove();
+        };
 
         // Ajout nouveaux elt au DOM
         modalGallery.appendChild(figure);
@@ -76,16 +89,18 @@ function DisplayModal(){
         figure.appendChild(buttonDelete);
     }
 
+    /* Bouton Ajout */
     const buttonAdd= document.createElement("button");
     buttonAdd.innerHTML="Ajouter une photo";
     buttonAdd.classList.add("button");
     modal.appendChild(buttonAdd);
 
+
+    /*** FERMETURE MODALE ***/
     const modalTriggers = document.querySelectorAll(".modal-trigger");
-
     modalTriggers.forEach(trigger => trigger.addEventListener("click", toggleModal));
-
     function toggleModal(){
-        modalContainer.classList.remove("active")
+        modalContainer.remove();
     };
+
 }

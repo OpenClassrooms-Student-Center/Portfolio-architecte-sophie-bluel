@@ -10,7 +10,6 @@ function GetWorks() {
         .then((data) => {
             works = data;
             DisplayWorks(works);
-            DisplayModal();
             return works
         });
     
@@ -85,10 +84,7 @@ function createButton(filters){
         button.addEventListener("click", () =>{
             buttonAll.classList.remove("filters__buttonAll");
             const worksFilt = works.filter((project)=>project.categoryId === category.id);
-            console.log(worksFilt);
             DisplayWorks(worksFilt);
-            console.log(works);
-            console.log(worksFilt)
         })
 
     }

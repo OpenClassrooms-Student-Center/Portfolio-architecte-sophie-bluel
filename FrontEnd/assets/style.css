@@ -279,7 +279,6 @@ footer nav ul {
 /**** MODAL ****/
 
 .modal-container {
-	visibility: hidden;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -290,24 +289,18 @@ footer nav ul {
 	justify-content: center;
 }
 
-.modal-container.active {
-	visibility: visible;
-}
 
 .overlay {
-	opacity: 0;
+
 	position: absolute;
 	width: 100%;
 	height: 100%;
 	background: #333333d3;
 }
 
-.modal-container.active .overlay {
-	opacity: 1;
-}
+
 
 .modal {
-	opacity: 0;
 	width: 630px;
 	height: 688px;
 	border-radius: 10px;
@@ -320,9 +313,6 @@ footer nav ul {
 	gap:50px;
 }
 
-.modal-container.active .modal {
-	opacity: 1;
-}
 
 .close-modal {
 	position: absolute;
@@ -369,5 +359,6 @@ footer nav ul {
 	display:flex;
 	align-items: center;
 	justify-content: center;
+	cursor: pointer;
 
 }
