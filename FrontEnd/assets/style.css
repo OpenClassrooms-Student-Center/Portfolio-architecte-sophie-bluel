@@ -188,6 +188,7 @@ a {
   color: white;
   padding: 10px;
   width: 100vw;
+  height: 50px;
   z-index: 9999;
   display: flex;
   justify-content: center;
@@ -216,7 +217,7 @@ nav li {
 }
 
 li:hover {
-  color: #b1663c;
+  font-weight: 900;
 }
 #introduction {
   display: flex;
@@ -359,7 +360,7 @@ footer {
 }
 
 .projets figure {
-  aspect-ratio: 0.75;
+  aspect-ratio: 3/4;
 }
 .projets img {
   width: 100%;
@@ -405,6 +406,7 @@ footer {
 
 #forgot-password {
   text-align: center;
+  text-decoration: underline;
   margin-top: 1rem;
 }
 
@@ -488,7 +490,7 @@ footer {
 .img-container {
   position: relative;
   width: 100%;
-  aspect-ratio: 0.75;
+  aspect-ratio: 3/4;
 }
 
 .img-container img {

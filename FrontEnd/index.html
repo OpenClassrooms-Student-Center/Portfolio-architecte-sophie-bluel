@@ -21,7 +21,7 @@
     <div id="admin-bar" class="admin-bar hidden">
       <button id="edit-mode-btn" class="open-modal">
         <i class="fa-regular fa-pen-to-square"></i>
-        <p>Mode édition</p>
+        Mode édition
       </button>
     </div>
     <header id="header-margin">
@@ -30,7 +30,7 @@
         <ul>
           <li><a href="index.html">projets</a></li>
           <li><a href="#contact">contact</a></li>
-          <li><a href="login.html" alt="login" id="login-link">login</a></li>
+          <li><a href="login.html" id="login-link">login</a></li>
           <li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
         </ul>
       </nav>
@@ -38,7 +38,7 @@
     <main>
       <section id="introduction">
         <figure>
-          <img src="./assets/images/sophie-bluel.png" alt="" />
+          <img src="./assets/images/sophie-bluel.png" alt="photo-profile" />
         </figure>
         <article>
           <h2>Designer d'espace</h2>
@@ -67,8 +67,7 @@
             id="add-project-btn"
             class="open-modal add-project-btn hidden"
           >
-            <i class="fa-regular fa-pen-to-square"></i>
-            <p>modifier</p>
+            <i class="fa-regular fa-pen-to-square"></i>modifier
           </button>
         </h2>
         <div class="filtres"></div>
@@ -105,9 +104,7 @@
         </button>
         <h3 class="galerie-photo">Galerie Photo</h3>
         <div id="existing-projects"></div>
-        <button id="add-photo">
-          <p>Ajouter une photo</p>
-        </button>
+        <button id="add-photo">Ajouter une photo</button>
       </div>
       <div class="modal-content-form">
         <div class="back-and-close-form">
@@ -122,9 +119,8 @@
         <form id="add-photo-form">
           <div class="custom-file-upload" id="image-upload-container">
             <i class="fa-regular fa-image" id="image-upload-icon"></i>
-            <label for="image"
-              ><button id="image-upload-btn">+ ajouter photo</button></label
-            >
+            <button id="image-upload-btn">+ Ajouter photo</button>
+            <label for="image"></label>
             <input
               type="file"
               id="image"
@@ -135,8 +131,8 @@
             <p id="file-info-text">jpg, png: 4 mo max</p>
             <img
               id="uploaded-image"
-              src=""
-              alt="Uploaded Image"
+              src="./assets/images/pngtree-vector-picture-icon-png-image_695350.jpg"
+              alt="image chargée"
               style="display: none"
             />
           </div>
@@ -146,7 +142,7 @@
 
           <label for="project-category">Catégorie</label>
           <select id="project-category" name="category">
-            <option value="" selected></option>
+            <option selected label=" "></option>
             <option value="1">Objets</option>
             <option value="2">Appartements</option>
             <option value="3">Hotels & restaurants</option>
