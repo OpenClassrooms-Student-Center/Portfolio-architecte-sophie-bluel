@@ -43,14 +43,22 @@ export const displayWorks = (works, container) => {
 // Configure les boutons de filtrage pour les œuvres.
 export const setupButtons = (works, filterContainer, displayContainer) => {
   const btnAll = createElemWithText("button", "Tous");
-  addEvent("click", btnAll, () => displayWorks(works, displayContainer));
+  addEvent("click", btnAll, () => {
+    clearSelectedButtons(filterContainer);
+    btnAll.classList.add("selected");
+    displayWorks(works, displayContainer);
+  });
   filterContainer.appendChild(btnAll);
+
   const uniqueCategories = [
     ...new Set(works.map((work) => work.category.name)),
   ];
+
   uniqueCategories.forEach((category) => {
     const btn = createElemWithText("button", category);
     addEvent("click", btn, () => {
+      clearSelectedButtons(filterContainer);
+      btn.classList.add("selected");
       const filteredWorks = works.filter(
         (work) => work.category.name === category
       );
@@ -58,6 +66,12 @@ export const setupButtons = (works, filterContainer, displayContainer) => {
     });
     filterContainer.appendChild(btn);
   });
+};
+
+// Fonction pour supprimer la classe "selected" de tous les boutons
+const clearSelectedButtons = (container) => {
+  const buttons = container.querySelectorAll("button");
+  buttons.forEach((btn) => btn.classList.remove("selected"));
 };
 
 // Supprime un projet du DOM

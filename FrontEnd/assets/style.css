@@ -257,7 +257,12 @@ li:hover {
   padding: 0.5rem 1rem;
   margin: 0rem 1rem;
 }
-.filtres button:hover {
+/* .filtres button:hover {
+  background-color: #1d6154;
+  color: white;
+} */
+
+.filtres .selected {
   background-color: #1d6154;
   color: white;
 }
