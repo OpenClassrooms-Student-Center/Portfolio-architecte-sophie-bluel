@@ -9,7 +9,7 @@ a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
 b, u, i, center,
-dl, dt, dd, ol, ul, li,
+dl, dt, dd, ol, ul, li, a,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed,
@@ -110,13 +110,18 @@ nav ul {
 	list-style-type: none;
 
 }
-nav li {
+nav a {
 	padding: 0 10px;
 	font-size: 1.2em;
+  text-decoration: none;
 }
 
-li:hover {
+a:hover {
 	color: #B1663C;
+}
+
+a:visited {
+  color: black;
 }
 
 .btn {
@@ -146,7 +151,7 @@ li:hover {
 }
 
 #introduction {
-	display: flex;
+  display: flex;
 	align-items: center;
 }
 #introduction figure {
@@ -168,6 +173,7 @@ li:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
+
 #portfolio h2 {
 	text-align: center;
 }
@@ -228,7 +234,7 @@ li:hover {
 }
 .form {
 	width: 50%;
-margin: auto;
+  margin: auto;
 }
 .form > * {
 	text-align: center;

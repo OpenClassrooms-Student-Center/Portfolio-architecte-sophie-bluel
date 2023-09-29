@@ -52,14 +52,7 @@ function generateWorksWithTemplateLiterals(works) {
 
 generateWorksWithTemplateLiterals(works);
 
-// Stockage des informations dans le localStorage
-let main = document.querySelector("main");
-let mainHTML = main.innerHTML;
-window.localStorage.setItem("main", mainHTML);
-
-
 ///////////// FILTERS //////////////
-
 
 // Récupération des categories depuis l'API
 const reponseCategories = await fetch("http://localhost:5678/api/categories");
@@ -117,83 +110,42 @@ function filterByCategory() {
 
 filterByCategory();
 
-// Stockage des informations dans le localStorage
-// ***** A refacto avec une fonction à appeler ? *****
-let mainWithFilters = document.querySelector("main");
-let mainHTMLWithFilters = mainWithFilters.innerHTML;
-window.localStorage.setItem("main", mainHTMLWithFilters);
-
-
-////////////// NAV LINKS MENU /////////////////////////
-
-// Génération de la page de connexion (avec Template literals)
-function generateLogInHTML() {
-  // Création d’une balise dédiée
-  const sectionLogIn = document.createElement("section");
-  // Ajout du Html associé à formElement
-  sectionLogIn.innerHTML=
-    `<h2>Log In</h2>
-		<form action="#" method="post">
-      <label for="email">Email</label>
-      <input type="email" name="email" id="email">
-			<label for="password">Mot de passe</label>
-			<input type="password" name="password" id="password">
-			<input type="submit" value="Se connecter">
-      <a href="#" id="forgotten-password">Mot de passe oublié</a>
-		</form>`
-  ;
-  // Ajout du Css
-  sectionLogIn.classList.add("form");
-  sectionLogIn.setAttribute("id", "login-form")
-  // On rattache la section à main
-  main.appendChild(sectionLogIn);
-}
-
-
-
-function MenuLinks() {
-  const longInNavLink = document.getElementById("login");
-  const navLinks = document.querySelectorAll(".nav-links");
-  navLinks.forEach(navLink => {
-    if (navLink === longInNavLink) {
-      navLink.addEventListener("click", function () {
-        main.innerHTML = "";
-        generateLogInHTML();
-        authentication();
-      });
-    } else {
-      navLink.addEventListener("click", function () {
-        main.innerHTML = mainHTMLWithFilters;
-        filterByCategory();
-      });
-    };
-  });
-}
-
-MenuLinks();
-
-
 ///////// AUTHENTICATION ///////////////////
 
 async function generateToken(user) {
-  const response = await fetch('http://localhost:5678/api/users/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8'
-        },
-        body: JSON.stringify(user)
-        });
-        const result = await response.json();
-        // Stockage du token dans le localStorage
-        const userToken = JSON.stringify(result.token);
-        window.localStorage.setItem("token", userToken);
+
+  try {
+    const response = await fetch('http://localhost:5678/api/users/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify(user)
+    });
+
+    const result = await response.json();
+    // Attention, il pourra y avoir une erreur, à gérer, utiliser la syntaxe avec un try / catch
+    // encapsuler toute la requête qui marche dans un try
+    // catch va gérer le cas d'erreur >>> alerte
+    const userToken = JSON.stringify(result.token);
+    window.localStorage.setItem("token", userToken);
+    window.location.href = "http://127.0.0.1:5500"
+  } catch {
+    // message erreur email non valide
+    window.alert("L'identifiant et/ou le mot de passe ne correspondent pas.");
+    throw new Error("L'identifiant et/ou le mot de passe ne correspondent pas.");
+  }
 }
 
 // Génération de la modale
 function generateModal() {
   const modal = document.querySelector('#modal');
 
-  if (document.querySelector('.js-open-button') != null) {
+  // falsy truthy assimilé à true ou à false quand on va en évaluer la valeur
+  // les expressions dans le if true/false
+  // pl
+
+  if (document.querySelector('.js-open-button')) {
     const openModal = document.querySelector('.js-open-button');
     openModal.addEventListener("click", () => {
       modal.showModal();
@@ -203,6 +155,14 @@ function generateModal() {
   closeModal.addEventListener("click", () => {
     modal.close();
   })
+
+  // Générer modal index
+
+  // Générer modal new
+
+  // Générer modal create
+
+  // Générer delete
 }
 
 
@@ -228,35 +188,60 @@ function generateAuthenticationHTML() {
   generateModal();
 }
 
+// function authentication() {
+//   let formLogIn = document.getElementById("submit-btn");
+
+//   formLogIn.addEventListener("click", function (event) {
+//     event.preventDefault();
+//     let emailInput = document.getElementById("email");
+//     let email = emailInput.value;
+//     let passwordInput = document.getElementById("password");
+//     let password = passwordInput.value;
+
+//     const user = {
+//       "email": email,
+//       "password": password
+//     };
+
+//     generateToken(user);
+//     generateWorksWithTemplateLiterals(works);
+
+//     console.log(event);
+
+//     // au lieu de faire la vérif ici
+//     // construire user
+//     // envoyer la requête au back end et lui va vérifier si les infos saisies sont celles qu'il attend
+//     // statut 200 token
+//     // ou status 401 alert
+//   })
+// }
+
+
 function authentication() {
+  let emailInput = document.getElementById("email");
+  let email = emailInput.value;
+  let passwordInput = document.getElementById("password");
+  let password = passwordInput.value;
+
   const user = {
-    "email": "sophie.bluel@test.tld",
-    "password": "S0phie"
+    "email": email,
+    "password": password
   };
-  let formLogIn = document.querySelector("form");
 
-  formLogIn.addEventListener("submit", function (event) {
-    event.preventDefault();
-    let emailInput = document.getElementById("email");
-    let email = emailInput.value;
-    let passwordInput = document.getElementById("password");
-    let password = passwordInput.value;
+  generateToken(user);
+  // generateWorksWithTemplateLiterals(works);
 
-    if (email === user.email && password === user.password ) {
-        // fetch api pour générer le token
-        generateToken(user);
-        // afficher page accueil
-        // ajouter à main l'élément supplémentaire pour éditer la page (mainHTMLWithEditor)
-        main.innerHTML = mainHTMLWithFilters;
-        filterByCategory();
-        generateAuthenticationHTML();
+  // au lieu de faire la vérif ici
+  // construire user
+  // envoyer la requête au back end et lui va vérifier si les infos saisies sont celles qu'il attend
+  // statut 200 token
+  // ou status 401 alert
 
-      } else if (email != user.email || password != user.password) {
-        // message erreur email non valide
-        window.alert("L'identifiant et/ou le mot de passe ne correspondent pas.");
-        throw new Error("L'identifiant et/ou le mot de passe ne correspondent pas.");
-      };
-  })
 }
 
-authentication();
+
+
+
+// interaction via les modal
+// attendu ne doit pas recharger la page
+// toutes les modifs doivent se faire avec le dom, et uniquement la partie concernée par la modification.

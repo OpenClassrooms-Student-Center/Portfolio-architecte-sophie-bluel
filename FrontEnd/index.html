@@ -12,18 +12,18 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-  <!-- <script></script> -->
+  <script type="module" src="scripts/works.js"></script>
 </head>
 <body>
 <header>
   <div class="header-menu">
-    <h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
+    <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
     <nav>
       <ul>
-        <li class="nav-links">projets</li>
-        <li class="nav-links">contact</li>
-        <li class="nav-links" id="login">login</li>
-        <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+        <a class="nav-links">projets</a>
+        <a class="nav-links">contact</a>
+        <a class="nav-links" href="log_in.html" id="login">login</a>
+        <a><img src="./assets/icons/instagram.png" alt="Instagram"></a>
       </ul>
     </nav>
   </div>
@@ -58,12 +58,14 @@
 			<label for="name">Nom</label>
 			<input type="text" name="name" id="name">
 			<label for="email">Email</label>
-			<input type="email" name="email" id="email">
+			<input type="email" name="email" id="email-contact">
 			<label for="message">Message</label>
 			<textarea name="message" id="message" cols="30" rows="10"></textarea>
 			<input type="submit" value="Envoyer">
 		</form>
-	</section>
+  </section>
+  <section id="login">
+  </section>
 
   <dialog class="modal" id="modal">
     <div class="header-modal">
@@ -92,6 +94,5 @@
 		</ul>
 	</nav>
 </footer>
-<script type="module" src="scripts/works.js"></script>
 </body>
 </html>
