@@ -8,20 +8,22 @@ function generateWorks(works) {
   for (let i = 0; i < works.length; i++) {
     const figure = works[i];
     // Récupération de l'élément du DOM qui accueillera les fiches
-    const sectionGallery = document.querySelector(".gallery");
-    // Création d’une balise dédiée à un work
-    const workElement = document.createElement("figure");
-    workElement.dataset.id = works[i].id;
-    // Création de la balise img
-    const imageElement = document.createElement("img");
-    imageElement.src = figure.imageUrl;
-    // Création de la balise figcaption
-    const titleElement = document.createElement("figcaption");
-    titleElement.innerText = figure.title ?? "(aucun titre)";
-    // On rattache la balise figure a la section Gallery
-    sectionGallery.appendChild(workElement);
-    workElement.appendChild(imageElement);
-    workElement.appendChild(titleElement);
+    if (document.querySelector(".gallery")) {
+      const sectionGallery = document.querySelector(".gallery");
+      // Création d’une balise dédiée à un work
+      const workElement = document.createElement("figure");
+      workElement.dataset.id = works[i].id;
+      // Création de la balise img
+      const imageElement = document.createElement("img");
+      imageElement.src = figure.imageUrl;
+      // Création de la balise figcaption
+      const titleElement = document.createElement("figcaption");
+      titleElement.innerText = figure.title ?? "(aucun titre)";
+      // On rattache la balise figure a la section Gallery
+      sectionGallery.appendChild(workElement);
+      workElement.appendChild(imageElement);
+      workElement.appendChild(titleElement);
+    }
   }
 }
 
@@ -33,20 +35,22 @@ function generateWorksWithTemplateLiterals(works) {
   for (let i = 0; i < works.length; i++) {
     const figure = works[i];
     // Récupération de l'élément du DOM qui accueillera les fiches
-    const sectionGallery = document.querySelector('.gallery');
-    // Création d’une balise dédiée à un work
-    const workElement = document.createElement("figure");
-    workElement.dataset.id = works[i].id;
-    // Création des variables à indenter imagesUrl et title
-    const imageUrl = figure.imageUrl;
-    const title = figure.title ?? "(aucun titre)";
-    // Ajout des variables et du Html associé à workElement
-    workElement.innerHTML=
-      `<img src="${imageUrl}" alt="${title}">
-      <figcaption> ${title}</figcaption>`
-    ;
-    // On rattache la balise figure a la section Gallery
-    sectionGallery.appendChild(workElement);
+    if (document.querySelector('.gallery')) {
+      const sectionGallery = document.querySelector('.gallery');
+      // Création d’une balise dédiée à un work
+      const workElement = document.createElement("figure");
+      workElement.dataset.id = works[i].id;
+      // Création des variables à indenter imagesUrl et title
+      const imageUrl = figure.imageUrl;
+      const title = figure.title ?? "(aucun titre)";
+      // Ajout des variables et du Html associé à workElement
+      workElement.innerHTML=
+        `<img src="${imageUrl}" alt="${title}">
+        <figcaption> ${title}</figcaption>`
+      ;
+      // On rattache la balise figure a la section Gallery
+      sectionGallery.appendChild(workElement);
+    }
   }
 }
 
@@ -70,18 +74,20 @@ const filtersWithoutDuplicate = [...new Set(filters)]
 // Génération des filtres
 function generateFilters(filters) {
   for (let i = 0; i < filters.length; i++) {
-    const categorie = filters[i];
-    // Récupération de l'élément du DOM qui accueillera les fiches
-    const sectionFilters = document.querySelector('.filters');
-    // Création d’une div dédiée à une catégorie
-    const filterCategory = document.createElement("div");
-    // Ajout du Html associé à workElement
-    filterCategory.innerHTML = categorie;
-    // Ajout du css
-    filterCategory.classList.add("filter");
-    // On rattache la balise figure a la section Gallery
-    sectionFilters.appendChild(filterCategory);
-  }
+      const categorie = filters[i];
+      if (document.querySelector('.filters')) {
+        // Récupération de l'élément du DOM qui accueillera les fiches
+        const sectionFilters = document.querySelector('.filters');
+        // Création d’une div dédiée à une catégorie
+        const filterCategory = document.createElement("div");
+        // Ajout du Html associé à workElement
+        filterCategory.innerHTML = categorie;
+        // Ajout du css
+        filterCategory.classList.add("filter");
+        // On rattache la balise figure a la section Gallery
+        sectionFilters.appendChild(filterCategory);
+      }
+    }
 }
 generateFilters(filtersWithoutDuplicate);
 
