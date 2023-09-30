@@ -12,7 +12,7 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-  <script type="module" src="scripts/works.js"></script>
+  <script type="module" src="scripts/log_in.js"></script>
 </head>
 <body>
 <header>
@@ -31,12 +31,12 @@
 <main>
   <section id="login-form" class="form">
     <h2>Log In</h2>
- 		<form action="index.html" method="get" onsubmit="return authentication()">
+ 		<form action="" method="get">
       <label for="email">Email</label>
-      <input type="email" id="email">
+      <input type="email" name="email" id="email">
  			<label for="password">Mot de passe</label>
- 			<input type="password"  id="password">
- 			<input type="submit" value="Se connecter">
+ 			<input type="password" name="password" id="password">
+			<input type="submit" value="se connecter" id="js-login-btn">
       <a href="#" id="forgotten-password">Mot de passe oublié</a>
  		</form>
   </section>

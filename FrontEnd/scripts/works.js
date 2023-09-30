@@ -135,7 +135,8 @@ async function generateToken(user) {
     // catch va gérer le cas d'erreur >>> alerte
     const userToken = JSON.stringify(result.token);
     window.localStorage.setItem("token", userToken);
-    window.location.href = "http://127.0.0.1:5500"
+    window.location.href = "http://127.0.0.1:5500";
+    generateAuthenticationHTML();
   } catch {
     // message erreur email non valide
     window.alert("L'identifiant et/ou le mot de passe ne correspondent pas.");
@@ -223,28 +224,68 @@ function generateAuthenticationHTML() {
 // }
 
 
+// function authentication() {
+//   let emailInput = document.getElementById("email");
+//   let email = emailInput.value;
+//   let passwordInput = document.getElementById("password");
+//   let password = passwordInput.value;
+
+//   const user = {
+//     "email": email,
+//     "password": password
+//   };
+
+//   generateToken(user);
+
+//   // generateWorksWithTemplateLiterals(works);
+
+//   // au lieu de faire la vérif ici
+//   // construire user
+//   // envoyer la requête au back end et lui va vérifier si les infos saisies sont celles qu'il attend
+//   // statut 200 token
+//   // ou status 401 alert
+
+// }
+
+// function authentication() {
+//   const loginBtn = document.getElementById("login-btn");
+
+//   loginBtn.addEventListener("click", function () {
+
+//       let emailInput = document.getElementById("email");
+//       let email = emailInput.value;
+//       let passwordInput = document.getElementById("password");
+//       let password = passwordInput.value;
+
+//       const user = {
+//         "email": email,
+//         "password": password
+//       };
+
+//       generateToken(user);
+//   });
+
+// }
+
 function authentication() {
-  let emailInput = document.getElementById("email");
-  let email = emailInput.value;
-  let passwordInput = document.getElementById("password");
-  let password = passwordInput.value;
+  const loginBtn = document.getElementById("login-btn");
 
-  const user = {
-    "email": email,
-    "password": password
-  };
 
-  generateToken(user);
-  // generateWorksWithTemplateLiterals(works);
 
-  // au lieu de faire la vérif ici
-  // construire user
-  // envoyer la requête au back end et lui va vérifier si les infos saisies sont celles qu'il attend
-  // statut 200 token
-  // ou status 401 alert
+      let emailInput = document.getElementById("email");
+      let email = emailInput.value;
+      let passwordInput = document.getElementById("password");
+      let password = passwordInput.value;
+
+      const user = {
+        "email": email,
+        "password": password
+      };
+
+      generateToken(user);
+
 
 }
-
 
 
 
