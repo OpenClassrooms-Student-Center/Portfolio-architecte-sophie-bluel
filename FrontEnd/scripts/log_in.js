@@ -1,6 +1,4 @@
-
-
-///////// TOKEN AND REDIRECTION ///////////////////
+///////// TOKEN FETCHED AND SAVED ///////////////////
 
 async function generateToken(user) {
 
@@ -24,8 +22,9 @@ async function generateToken(user) {
 
     const userToken = JSON.stringify(result.token);
 
-    console.log(userToken);
+    // console.log(userToken);
     window.localStorage.setItem("token", userToken);
+    window.location.href = "http://127.0.0.1:5500/edit.html";
 
   } catch(error) {
     console.error(error);
@@ -53,10 +52,6 @@ function authentication() {
     };
 
     generateToken(user);
-
-    console.log(window.localStorage)
-    window.location.href = "http://127.0.0.1:5500";
-    // window.location.reload();
   });
 }
 

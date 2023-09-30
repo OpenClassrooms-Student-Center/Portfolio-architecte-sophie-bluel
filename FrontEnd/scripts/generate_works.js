@@ -96,24 +96,26 @@ generateFilters(filtersWithoutDuplicate);
 // Bouton Filtrer pour chaque categorie
 
 function filterByCategory() {
-  const buttonCategories = document.querySelectorAll(".filter");
+  if (document.querySelectorAll(".filter")) {
+    const buttonCategories = document.querySelectorAll(".filter");
 
-  buttonCategories.forEach(buttonCategory => {
-    if (buttonCategory.innerText === "Tous") {
-      buttonCategory.addEventListener("click", function () {
-        document.querySelector(".gallery").innerHTML = "";
-        generateWorksWithTemplateLiterals(works);
-      });
-    } else {
-      buttonCategory.addEventListener("click", function () {
-        const FilteredWorks = works.filter(function (work) {
-          return work.category.name === buttonCategory.innerText;
+    buttonCategories.forEach(buttonCategory => {
+      if (buttonCategory.innerText === "Tous") {
+        buttonCategory.addEventListener("click", function () {
+          document.querySelector(".gallery").innerHTML = "";
+          generateWorksWithTemplateLiterals(works);
         });
-        document.querySelector(".gallery").innerHTML = "";
-        generateWorksWithTemplateLiterals(FilteredWorks);
-      });
-    };
-  });
+      } else {
+        buttonCategory.addEventListener("click", function () {
+          const FilteredWorks = works.filter(function (work) {
+            return work.category.name === buttonCategory.innerText;
+          });
+          document.querySelector(".gallery").innerHTML = "";
+          generateWorksWithTemplateLiterals(FilteredWorks);
+        });
+      };
+    });
+  }
 }
 
 filterByCategory();

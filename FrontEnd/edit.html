@@ -13,10 +13,15 @@
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
   <script type="module" src="scripts/generate_works.js"></script>
+  <script type="module" src="scripts/edit.js"></script>
 
 </head>
 <body>
 <header>
+  <div class="edit-mode-banner">
+    <i class="fas fa-edit"></i>
+    <p>&nbsp;Mode édition</p>
+  </div>
   <div class="header-menu">
     <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
     <nav>
@@ -44,9 +49,8 @@
 	<section id="portfolio">
     <div class="header-portfolio">
       <h2 id="title-portfolio">Mes Projets</h2>
-    </div>
-    </div>
-    <div class="filters">
+      <button class="edit-btn js-open-button"><i class="fas fa-edit"></i> modifier</button>
+      </div>
     </div>
 		<div class="gallery">
 		</div>
