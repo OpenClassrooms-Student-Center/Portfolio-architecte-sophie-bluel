@@ -19,14 +19,12 @@ function generateIndex(works) {
     imageElement.src = icon.imageUrl;
     // Création de l'icône Delete
     const trashElement = document.createElement("button");
-    console.log(trashElement);
 
     trashElement.dataset.id = works[i].id;
     trashElement.classList.add("js-delete-btn");
     trashElement.classList.add("delete-btn");
     trashElement.setAttribute("id", `js-delete-btn-${works[i].id}`);
     trashElement.innerHTML=`<i class="fas fa-trash-alt"></i>`;
-    console.log(trashElement);
 
     // On rattache la balise icon a la section Gallery
     sectionGalleryModal.appendChild(workElement);
@@ -38,10 +36,6 @@ function generateIndex(works) {
 function generateModal() {
   const modal = document.querySelector('#modal');
 
-  // falsy truthy assimilé à true ou à false quand on va en évaluer la valeur
-  // les expressions dans le if true/false
-  // pl
-
   if (document.querySelector('.js-open-button')) {
     const openModal = document.querySelector('.js-open-button');
     openModal.addEventListener("click", () => {
@@ -52,6 +46,13 @@ function generateModal() {
   closeModal.addEventListener("click", () => {
     modal.close();
   })
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
 
   // Générer modal index
   generateIndex(works);
