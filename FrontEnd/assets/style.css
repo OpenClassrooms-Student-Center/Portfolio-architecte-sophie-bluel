@@ -320,6 +320,51 @@ input[type="submit"]{
   flex-direction: column;
 }
 
+.title-modal {
+  font-family: 'Work Sans';
+  font-size: 26px;
+  color: black;
+  margin-top: 48px;
+  font-weight: lighter;
+}
+
+.icons-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 8px;
+  column-gap: 8px;
+  width: 420px;
+  margin: 48px 0px 64px 0px;
+}
+
+.icon-modal {
+  position: relative;
+}
+
+.icon-modal img {
+  height: 100px;
+}
+
+.delete-btn {
+  background-color: black;
+  width: 17px;
+  height: 17px;
+  color: white;
+  position: absolute;
+  top: 6px;
+  left: 50px;
+  font-size: 12px;
+  border-radius: 2px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-btn {
+  margin-top: 32px;
+}
+
 .close-btn {
   border: none;
   background-color: transparent;
