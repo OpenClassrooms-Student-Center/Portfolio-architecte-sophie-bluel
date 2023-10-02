@@ -4,8 +4,15 @@ const banner = document.querySelector(".editionBanner");
 const editionButton = document.querySelector(".editionButton");
 const filters =document.querySelector(".filters");
 
-
 let token = localStorage.getItem("token");
+
+let modalContainer;
+let modalOverlay;
+let modal;
+let modalTitle;
+let modalGallery;
+let buttonClose;
+let buttonAdd;
 
 if (token) {
 
@@ -26,39 +33,43 @@ if (token) {
 
 function DisplayModal(){
 
-    const modalContainer = document.createElement("div");
+    modalContainer = document.createElement("div");
     modalContainer.classList.add("modal-container");
     body.appendChild(modalContainer);
     
-    const modalOverlay = document.createElement("div");
+    modalOverlay = document.createElement("div");
     modalOverlay.classList.add("overlay","modal-trigger",);
     modalContainer.appendChild(modalOverlay);
     
     /*** CONTENU MODALE ***/
-    const modal = document.createElement("div");
+    modal = document.createElement("div");
     modal.classList.add("modal");
     modalContainer.appendChild(modal);
 
     /* Titre */
-    const modalTitle= document.createElement("h1");
+    modalTitle= document.createElement("h1");
     modalTitle.classList.add("modal-title");
     modalTitle.innerHTML="Galerie photo";
     modal.appendChild(modalTitle);
 
     /* Galerie */
-    const modalGallery = document.createElement("div");
-    modalGallery.classList.add("modal-gallery");
+    modalGallery = document.createElement("div");
+    modalGallery.classList.add("modal-content","modal-gallery");
     modal.appendChild(modalGallery);
-    DisplayWorksModal(modalGallery);
+    DisplayWorksModal();
 
     /* Bouton Ajout */
-    const buttonAdd= document.createElement("button");
+    buttonAdd= document.createElement("button");
     buttonAdd.innerHTML="Ajouter une photo";
     buttonAdd.classList.add("button");
     modal.appendChild(buttonAdd);
+    buttonAdd.addEventListener("click", ()=>{
+        console.log('Edit project');
+        DisplayModalEdit();
+    })
     
     /* Bouton fermeture */
-    const buttonClose = document.createElement("i");
+    buttonClose = document.createElement("i");
     buttonClose.classList.add("close-modal", "modal-trigger", "fa-solid", "fa-xmark", "fa-xl");
     modal.appendChild(buttonClose);
     
@@ -70,7 +81,7 @@ function DisplayModal(){
     }
 }
 
-function DisplayWorksModal (g){
+function DisplayWorksModal (){
     for (let i=0; i<works.length; i++){
         const projet = works[i];
         // Création d’une balise dédiée à un projet
@@ -92,7 +103,7 @@ function DisplayWorksModal (g){
         figure.appendChild(imageProjet);
         figure.appendChild(buttonDelete);
 
-        g.appendChild(figure);
+        modalGallery.appendChild(figure);
     }
 }
 
@@ -107,4 +118,46 @@ function deleteProject(p,f){
     });
     f.remove();
     GetWorks();
-    }
+}
+
+
+/*** 2ème partie de la modal */
+
+function DisplayModalEdit(){
+    modalGallery.remove();
+    buttonAdd.remove();
+
+    modalTitle.innerHTML="Ajout photo";
+
+    const form =document.createElement("form");
+    form.classList.add("modal-form")
+    modal.appendChild(form);
+
+    
+
+
+    form.innerHTML=`
+        <div class="modal-content form__input">
+            <div class="form__inputImg">
+                <i class="fa-sharp fa-regular fa-image"></i>
+                <img src="" class="selected-img">
+                <label for="photo">+ Ajouter photo
+                <input type="file" id="photo" name="photo">
+                </label>
+                <p>jpg, png : 4mo max</p>
+            </div>
+
+            <label for="titre">Titre
+            <input type="text" id="titre" name="titre" autocomplete="off">
+            </label>
+
+            <label for="categorie">Catégorie
+            <select name="categorie" id="categorie">
+            <option value=""></option>
+            </select>
+            </label>
+        </div>
+        <button class="button">Valider</button>
+    `;
+
+}
