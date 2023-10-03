@@ -153,11 +153,19 @@ function DisplayModalEdit(){
 
             <label for="categorie">Catégorie
             <select name="categorie" id="categorie">
-            <option value=""></option>
+            ${AssignCategory()}
             </select>
             </label>
         </div>
         <button class="button">Valider</button>
     `;
+}
 
+function AssignCategory() {
+    let selectHTML ="";
+    for (let i=0; i<categories.length; i++){
+        const category=categories[i];
+        selectHTML += `<option value="${category.id}">${category.name}</option>`;
+    }
+    return selectHTML
 }
