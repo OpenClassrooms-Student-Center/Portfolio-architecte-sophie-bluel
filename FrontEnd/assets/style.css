@@ -186,3 +186,35 @@ footer nav ul {
 	margin: 2em
 }
 
+.button {
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 1.1429em;;
+	color:  #1D6154;
+	background-color: white;
+	margin : 2em auto ;
+	min-width: 100px;
+	height: 37px;;
+	border-radius: 60px ;
+	border: 1px solid #1D6154;
+	
+	
+}
+.btn{
+	display: flex;
+	flex-direction: row;
+	margin: auto;
+	justify-content: center;
+	width: 585px;
+	
+}
+.global {
+	background-color: #1D6154;
+	color: white;;
+}
+
+#portfolio{
+	display: flex;
+	flex-direction: column;
+
+}
