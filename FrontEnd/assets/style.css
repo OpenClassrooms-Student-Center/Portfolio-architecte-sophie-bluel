@@ -30,6 +30,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	
 }
 ol, ul {
 	list-style: none;
@@ -52,12 +53,38 @@ body {
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
+	background: #FFFEF8;
+	margin-top:50px;
 }
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin-top: 50px;
+	height: 42px;
 }
+#formContainer {
+	height: 743px;
+
+}
+
+footer {
+	height: 60px;
+	background-color: white;
+	
+	width: 1140px;
+	
+}
+
+footer nav ul {
+	display: flex;
+	justify-content: flex-end;
+	margin: 2em
+}
+
+footer nav ul li{
+	padding-top: 25px;
+}
+
 section {
 	margin: 50px 0
 }
@@ -75,7 +102,7 @@ h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
-;
+
 }
 
 h2{
@@ -98,6 +125,11 @@ nav li {
 li:hover {
 	color: #B1663C;
 }
+
+a {
+	text-decoration: none;
+}
+
 #introduction {
 	display: flex;
 	align-items: center;
@@ -121,6 +153,66 @@ li:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
+
+#inputLogin {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	align-items: center;
+}
+
+#inputLogin h2 {
+	text-align: center;
+	margin-top: 132px;
+
+}
+
+#inputLogin a {
+	font-weight: bold;
+	font-size: 0.875em;
+    text-decoration: underline;
+    color: #3d3d3d;
+    
+}
+#inputLogin form {
+	text-align: left;
+	margin-top:30px;
+	display: flex;
+	flex-direction: column;
+
+}
+
+#inputLogin input {
+	height: 51px;
+	width: 379px;
+	font-size: 0.875em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+
+	
+}
+
+#inputLogin input[type="submit"]{
+	width: 179px;
+	height: 36px;
+	margin-top: 35px;
+	margin-bottom: 30px;
+}
+
+
+#inputLogin label {
+	margin: 2em 0 1em 0;
+	margin-bottom: 7px;
+	margin-top: 30px
+
+;
+}
+#inputLogin textarea {
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
@@ -169,6 +261,7 @@ margin: auto;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
+
 input[type="submit"]{
 	font-family: 'Syne';
 	font-weight: 700;
@@ -178,13 +271,10 @@ input[type="submit"]{
 	width: 180px;
 	text-align: center;
 	border-radius: 60px ;
+	
 }
 
-footer nav ul {
-	display: flex;
-	justify-content: flex-end;
-	margin: 2em
-}
+
 
 .button {
 	font-family: 'Syne';
