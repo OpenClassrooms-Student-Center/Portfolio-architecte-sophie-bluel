@@ -124,10 +124,10 @@ function deleteProject(p,f){
 /*** 2ème partie de la modal */
 
 let modalForm;
-let balisePhoto;
-let baliseTitre;
-let baliseCategorie;
-let preview;
+let inputPhoto;
+let inputTitle;
+let inputCategory;
+
 
 function DisplayModalEdit(){
     modalGallery.remove();
@@ -151,6 +151,7 @@ function DisplayModalEdit(){
                 
                 <p>jpg, png : 4mo max</p>
             </div>
+            
 
             <label for="title">Titre</label>
             <input type="text" id="title" name="title" autocomplete="off">
@@ -163,11 +164,14 @@ function DisplayModalEdit(){
         <input type="submit" value="Valider" class="button">
     `;
 
-    previewPhoto = document.getElementById("preview");
-
     inputPhoto = document.getElementById("photo");
     inputTitle = document.getElementById("title");
     inputCategory = document.getElementById("category");
+
+    inputPhoto.addEventListener("change", ()=>{
+        PreviewFile();
+        console.log('image chargée');
+    })
 
 
     modalForm.addEventListener("submit", async (event) => {
@@ -187,19 +191,20 @@ function AssignCategory() {
     return selectHTML
 }
 
-function PreviewFile(photo,preview) {
-    const file = photo.files[0];
+function PreviewFile() {
+    let preview = document.querySelector(".preview");
+    const file = inputPhoto.files[0];
     const reader = new FileReader();
 
     reader.onload = (e) => {
-        selectedImage.src = e.target.result;
-        const addImgForm = document.querySelector(".add-img-form");
-        const formElements = addImgForm.querySelectorAll(".add-img-form > *");
+        preview.src = e.target.result;
+        const divInputPhoto = document.querySelector(".form__inputImg");
+        const formElements = divInputPhoto.querySelectorAll(".form__inputImg > *");
 
         formElements.forEach((element) => {
             element.style.display = "none";
         });
-        selectedImage.style.display = "flex";
+        preview.style.display = "flex";
     };
     reader.readAsDataURL(file);
 }
