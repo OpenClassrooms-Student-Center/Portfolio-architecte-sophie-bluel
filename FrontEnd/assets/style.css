@@ -419,3 +419,9 @@ footer nav ul {
 	color:#444444;
 
 }
+
+.preview {
+	display: none;
+	height: 100%;
+	width: 129px;
+}

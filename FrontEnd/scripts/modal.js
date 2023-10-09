@@ -123,43 +123,60 @@ function deleteProject(p,f){
 
 /*** 2ème partie de la modal */
 
+let modalForm;
+let balisePhoto;
+let baliseTitre;
+let baliseCategorie;
+let preview;
+
 function DisplayModalEdit(){
     modalGallery.remove();
     buttonAdd.remove();
 
     modalTitle.innerHTML="Ajout photo";
 
-    const form =document.createElement("form");
-    form.classList.add("modal-form")
-    modal.appendChild(form);
+    modalForm =document.createElement("form");
+    modalForm.classList.add("modal-form");
+    modal.appendChild(modalForm);
 
-    
-
-
-    form.innerHTML=`
+    formInput=document.createElement("div");
+    modalForm.innerHTML=`
         <div class="modal-content form__input">
             <div class="form__inputImg">
                 <i class="fa-sharp fa-regular fa-image"></i>
-                <img src="" class="selected-img">
-                <label for="photo">+ Ajouter photo
-                <input type="file" id="photo" name="photo">
-                </label>
+                <img src="" class="preview">
+
+                <label for="photo">+ Ajouter photo</label>
+                <input type="file" id="photo" name="photo" required >
+                
                 <p>jpg, png : 4mo max</p>
             </div>
 
-            <label for="titre">Titre
-            <input type="text" id="titre" name="titre" autocomplete="off">
-            </label>
+            <label for="title">Titre</label>
+            <input type="text" id="title" name="title" autocomplete="off">
+            
 
-            <label for="categorie">Catégorie
-            <select name="categorie" id="categorie">
-            ${AssignCategory()}
-            </select>
-            </label>
+            <label for="category">Catégorie</label>
+            <select name="category" id="category">${AssignCategory()}</select>
+            
         </div>
-        <button class="button">Valider</button>
+        <input type="submit" value="Valider" class="button">
     `;
+
+    previewPhoto = document.getElementById("preview");
+
+    inputPhoto = document.getElementById("photo");
+    inputTitle = document.getElementById("title");
+    inputCategory = document.getElementById("category");
+
+
+    modalForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        console.log('projet chargé')
+    })
+
 }
+
 
 function AssignCategory() {
     let selectHTML ="";
@@ -168,4 +185,21 @@ function AssignCategory() {
         selectHTML += `<option value="${category.id}">${category.name}</option>`;
     }
     return selectHTML
+}
+
+function PreviewFile(photo,preview) {
+    const file = photo.files[0];
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+        selectedImage.src = e.target.result;
+        const addImgForm = document.querySelector(".add-img-form");
+        const formElements = addImgForm.querySelectorAll(".add-img-form > *");
+
+        formElements.forEach((element) => {
+            element.style.display = "none";
+        });
+        selectedImage.style.display = "flex";
+    };
+    reader.readAsDataURL(file);
 }
