@@ -67,14 +67,9 @@ async function logIn(m,p) {
       window.location.href="index.html" //Retour sur la page d'accueil
    }
 
-   else if (reponse.status === 401) {
+   else {
       //connection pas ok
       errorLogin.innerHTML="<br> Accès non autorisé"
-   }
-
-   else if (reponse.status === 404) {
-      //connection pas ok
-      errorLogin.innerHTML="<br> Email ou mot de passe incorrect"
    }
 
 }
