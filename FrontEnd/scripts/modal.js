@@ -169,18 +169,17 @@ function DisplayModalEdit(){
     inputCategory = document.getElementById("category");
 
     inputPhoto.addEventListener("change", ()=>{
-        PreviewFile();
+        PreviewPhoto();
         console.log('image chargée');
     })
 
 
     modalForm.addEventListener("submit", async (event) => {
         event.preventDefault();
-        console.log('projet chargé')
+        AddProject();
     })
 
 }
-
 
 function AssignCategory() {
     let selectHTML ="";
@@ -191,7 +190,7 @@ function AssignCategory() {
     return selectHTML
 }
 
-function PreviewFile() {
+function PreviewPhoto() {
     let preview = document.querySelector(".preview");
     const file = inputPhoto.files[0];
     const reader = new FileReader();
@@ -207,4 +206,31 @@ function PreviewFile() {
         preview.style.display = "flex";
     };
     reader.readAsDataURL(file);
+}
+
+async function AddProject() {
+    const image = inputPhoto.files[0];
+    const title = inputTitle.value;
+    const category = inputCategory.value;
+
+    console.log(image,title,category)
+
+    let formData = new FormData();
+    formData.append("image", image);
+    formData.append("title", title);
+    formData.append("category", category);
+
+   let reponse = await fetch("http://localhost:5678/api/works", {
+      method: "POST",
+      headers: {
+        'Authorization': `Bearer ${token}`
+        },
+      body: formData,
+   });
+
+   if (reponse.status === 201) {
+   GetWorks();
+   DisplayWorksModal ();
+   }
+
 }
