@@ -64,7 +64,6 @@ function DisplayModal(){
     buttonAdd.classList.add("button");
     modal.appendChild(buttonAdd);
     buttonAdd.addEventListener("click", ()=>{
-        console.log('Edit project');
         DisplayModalEdit();
     })
     
@@ -127,16 +126,24 @@ let modalForm;
 let inputPhoto;
 let inputTitle;
 let inputCategory;
+let buttonValid;
+let buttonReturn;
 
 
 function DisplayModalEdit(){
     modalGallery.remove();
     buttonAdd.remove();
 
+    /* Bouton fermeture */
+    buttonReturn = document.createElement("i");
+    buttonReturn.classList.add("button-return","fa-solid", "fa-arrow-left", "fa-xl");
+    modal.appendChild(buttonReturn);
+
     modalTitle.innerHTML="Ajout photo";
 
     modalForm =document.createElement("form");
     modalForm.classList.add("modal-form");
+    modalForm.method="POST";
     modal.appendChild(modalForm);
 
     formInput=document.createElement("div");
@@ -159,24 +166,36 @@ function DisplayModalEdit(){
 
             <label for="category">Catégorie</label>
             <select name="category" id="category">${AssignCategory()}</select>
+
+            <p id="erreur"></p>
             
         </div>
-        <input type="submit" value="Valider" class="button">
+        <input type="submit" id="submit" value="Valider" class="button button__off" disabled>
     `;
 
     inputPhoto = document.getElementById("photo");
     inputTitle = document.getElementById("title");
     inputCategory = document.getElementById("category");
+    buttonValid = document.getElementById("submit");
 
     inputPhoto.addEventListener("change", ()=>{
         PreviewPhoto();
-        console.log('image chargée');
+    })
+
+    modalForm.addEventListener("input", ()=>{
+        VerifyInputs();
     })
 
 
     modalForm.addEventListener("submit", async (event) => {
         event.preventDefault();
+        console.log('cliiiick');
         AddProject();
+    })
+
+    buttonReturn.addEventListener("click", ()=>{
+        modalContainer.remove();
+        DisplayModal();
     })
 
 }
@@ -208,29 +227,50 @@ function PreviewPhoto() {
     reader.readAsDataURL(file);
 }
 
+function VerifyInputs(){
+    let erreur;
+
+    if(!inputPhoto.files[0]){
+        erreur='Veuillez ajouter une photo'
+    };
+
+    if (!inputTitle.value){
+        erreur='Veuillez ajouter un titre'
+    };
+
+    if (erreur) {
+        document.getElementById("erreur").innerHTML = erreur;
+        buttonValid.classList.add("button__off");
+        buttonValid.setAttribute('disabled','disabled');
+    }
+    else {
+        document.getElementById("erreur").innerHTML= '';
+        buttonValid.classList.remove("button__off");
+        buttonValid.removeAttribute("disabled");
+    };
+}
+
 async function AddProject() {
     const image = inputPhoto.files[0];
     const title = inputTitle.value;
     const category = inputCategory.value;
-
-    console.log(image,title,category)
 
     let formData = new FormData();
     formData.append("image", image);
     formData.append("title", title);
     formData.append("category", category);
 
-   let reponse = await fetch("http://localhost:5678/api/works", {
-      method: "POST",
-      headers: {
+    let reponse = await fetch("http://localhost:5678/api/works", {
+        method: "POST",
+        headers: {
         'Authorization': `Bearer ${token}`
         },
-      body: formData,
-   });
+    body: formData,
+    });
 
-   if (reponse.status === 201) {
-   GetWorks();
-   DisplayWorksModal ();
+    if (reponse.status === 201) {
+        GetWorks();
+        DisplayWorksModal ();
+        alert('projet ajouté avec succés')
    }
-
 }

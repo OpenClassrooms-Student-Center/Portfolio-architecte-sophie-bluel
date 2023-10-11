@@ -207,6 +207,10 @@ nav a:hover{
 	border-radius: 60px ;
 }
 
+.button__off{
+	background-color: #A7A7A7;
+}
+
 
 footer nav ul {
 	display: flex;
@@ -363,6 +367,13 @@ footer nav ul {
 	display:flex;
 	align-items: center;
 	justify-content: center;
+	cursor: pointer;
+}
+
+.button-return {
+	position: absolute;
+	top: 32px;
+	left: 32px;
 	cursor: pointer;
 }
 
