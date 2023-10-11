@@ -1,14 +1,19 @@
+
+document.addEventListener("DOMContentLoaded", function() {
 //Récupération des boutons dans le DOM
-const globalButton = document.querySelector("#btnGlobal");
-const objetsButton = document.querySelector("#btnObjets");
-const appartementsButton = document.querySelector("#btnAppartements");
-const hotelsRestaurantsButton = document.querySelector("#btnHotels");
+const globalButton = document.querySelector(".btnGlobal");
+const objetsButton = document.querySelector(".btnObjets");
+const appartementsButton = document.querySelector(".btnAppartements");
+const hotelsRestaurantsButton = document.querySelector(".btnHotels");
+
+
 
 // Ajout d'un gestionnaire d'événements à chaque bouton
 
 
+
 globalButton.addEventListener("click",function(event){
- 
+    
   event.preventDefault();
   
   // Afficher tous les travaux (aucun filtrage)
@@ -50,3 +55,4 @@ appartementsButton.addEventListener("click",function(event){
     //Affichage des valeurs de mon filtre hôtels restaurants
     genererTravaux(hotelsRestaurantsFiltres);
     });
+});
