@@ -4,27 +4,32 @@ const banner = document.querySelector(".editionBanner");
 const editionButton = document.querySelector(".editionButton");
 const filters =document.querySelector(".filters");
 
+/* récupère le token dans le local storage*/
 let token = localStorage.getItem("token");
 
-if (token) {
 
-    login.innerHTML = "logout";
+/*Condition sur l'existance du token pour ouvrir la page avec
+    fonctionnalité admin */ 
+if (token) {
+    login.innerHTML = "logout"; //change texte login ou logout
+    login.removeAttribute("href"); //enlève lien vers page de connection
+    /* fonction de deconnection */
     login.addEventListener("click", () => {
-        click.preventDefault();
         localStorage.removeItem("token");
         window.location.href="index.html";
-        }
-    )
+        })
 
-    banner.style.display="flex";
+    banner.style.display="flex"; //active bannière noire
 
-    editionButton.style.display="flex";
-    editionButton.addEventListener("click", DisplayModal);
-    filters.style.display="none";
+    editionButton.style.display="flex"; //active bouton modifier
+    editionButton.addEventListener("click", DisplayModal); //au clique affiche la modal
+    
+    filters.style.display="none"; //desactive les filtres
 }
 
 let modalContainer;let modalOverlay;let modal;let modalTitle;let modalGallery;let buttonClose;let buttonAdd;
 
+/*** AFFICAHGE DE LA MODALE ***/ 
 function DisplayModal(){
 
     modalContainer = document.createElement("div");
@@ -74,6 +79,7 @@ function DisplayModal(){
     }
 }
 
+/* affiche la galérie de la modale */
 function DisplayWorksModal (){
     for (let i=0; i<works.length; i++){
         const projet = works[i];
@@ -81,13 +87,15 @@ function DisplayWorksModal (){
         const figure = document.createElement("figure");
         figure.classList.add("projet");
 
-        // Création des balises images et bouton poubelle
+        // Création des balises images et bouton corbeille
         const imageProjet = document.createElement("img");
         imageProjet.src=projet.imageUrl;
 
         const buttonDelete =  document.createElement("button");
         buttonDelete.classList.add("button-delete");
         buttonDelete.innerHTML="<i class=\"fa-solid fa-trash-can fa-xs\" style=\"color: #ffffff;\"></i>";
+        // Au clique sur logo corbeille suppression du projet dans l'API et 
+        // de la div figure dans la galérie de la modale
         buttonDelete.addEventListener("click", ()=>{
             deleteProject(projet,figure)
         });
@@ -100,8 +108,8 @@ function DisplayWorksModal (){
     }
 }
 
-
-function deleteProject(p,f){
+/*** SUPPRESSION D'UN PROJET DANS L'API***/
+function DeleteProject(p,f){
     const idProject = p.id;
     fetch("http://localhost:5678/api/works/"+idProject, {
         method: "DELETE",

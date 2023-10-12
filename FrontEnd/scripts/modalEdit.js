@@ -123,66 +123,76 @@ function AssignCategory(e) {
     }
 }
 
+/* fonction qui affiche un aperçu de l'image sélectionnée*/
 function PreviewPhoto() {
     const file = inputPhoto.files[0];
     const reader = new FileReader();
 
-    reader.onload = (e) => {
-        preview.src = e.target.result;
-        const formElements = formInputImg.querySelectorAll(".form__inputImg > *");
+    /* lit le fichier "file" uploadé */ 
+    reader.readAsDataURL(file);
 
+    reader.onload = (e) => {
+        /* change l'URL de l'image avec le résultat du reader*/
+        preview.src = e.target.result;
+
+        /* empèche affichage des éléments de la div formInputImg */
+        const formElements = formInputImg.querySelectorAll(".form__inputImg > *");
         formElements.forEach((element) => {
-            element.style.display = "none";
+            element.style.display = "none"; 
         });
+
+        /* active l'affichage de l'img preview */
         preview.style.display = "flex";
     };
-    reader.readAsDataURL(file);
+
 }
 
+/* Fonction qui vérifie que tous les champs du formulaire sont remplis */
 function VerifyInputs(){
     let erreur;
 
-    if(!inputPhoto.files[0]){
-        erreur='Veuillez ajouter une photo'
-    };
+    if(!inputPhoto.files[0]){ 
+        erreur='Veuillez ajouter une photo'};
 
-    if (!inputTitle.value){
-        erreur='Veuillez ajouter un titre'
-    };
+    if (!inputTitle.value){ 
+        erreur='Veuillez ajouter un titre'};
 
     if(!inputPhoto.files[0] && !inputTitle.value){
-        erreur='Veuillez ajouter une photo et un titre'
-    };
+        erreur='Veuillez ajouter une photo et un titre'};
 
     if (erreur) {
         errorMessage.innerText = erreur;
         buttonValid.classList.add("button__off");
-        buttonValid.setAttribute('disabled','disabled');
-    }
+        buttonValid.setAttribute('disabled','disabled')}
     else {
         errorMessage.innerText= '';
         buttonValid.classList.remove("button__off");
-        buttonValid.removeAttribute("disabled");
-    };
+        buttonValid.removeAttribute("disabled")};
 }
 
+
+/* fonction qui ajoute un projet à l'API et au DOM*/
 async function AddProject() {
     let formData = new FormData();
     formData.append("image", inputPhoto.files[0]);
     formData.append("title", inputTitle.value);
     formData.append("category", inputCategory.value);
 
-    let reponse = await fetch("http://localhost:5678/api/works", {
+    fetch("http://localhost:5678/api/works", {
         method: "POST",
-        headers: {
-        'Authorization': `Bearer ${token}`
-        },
-    body: formData,
-    });
-
-    if (reponse.status === 201) {
-        GetWorks();
-        DisplayWorksModal ();
-        alert('projet ajouté avec succés')
-   }
+        headers: {'Authorization': `Bearer ${token}`},
+        body: formData,
+    })
+        .then((res) => res.json())
+        .then((data)=>{
+            console.log(data);
+            works.push(data);
+            return works;
+        })
+        .then(()=>{
+            alert('projet ajouté avec succés')
+            DisplayWorks(works);
+            modalContainer.remove();
+            DisplayModal();
+        })
 }
