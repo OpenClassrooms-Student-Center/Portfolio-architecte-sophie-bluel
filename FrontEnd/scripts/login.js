@@ -1,5 +1,4 @@
 //Recup du formulaire
-
 let form = document.querySelector("form");
 let baliseMail = document.getElementById("email");
 let balisePassword = document.getElementById("password")
