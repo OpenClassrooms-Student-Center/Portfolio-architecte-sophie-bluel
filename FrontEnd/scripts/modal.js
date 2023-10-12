@@ -97,7 +97,7 @@ function DisplayWorksModal (){
         // Au clique sur logo corbeille suppression du projet dans l'API et 
         // de la div figure dans la galérie de la modale
         buttonDelete.addEventListener("click", ()=>{
-            deleteProject(projet,figure)
+            DeleteProject(projet,figure)
         });
     
         //Ajout au DOM
