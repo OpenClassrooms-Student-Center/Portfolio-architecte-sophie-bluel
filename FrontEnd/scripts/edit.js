@@ -169,26 +169,3 @@ function generateModal() {
 }
 
 generateModal();
-
-///////// MODIFY BUTTON ///////////////////
-
-// Génération du mode édition (avec Template literals)
-// on affiche le bouton
-// tu crées le addeventlistener
-
-// Génération du bouton
-
-function generateButtonModify() {
-
-  if (window.localStorage.token) {
-    // Rendre visible l'élément modifier projets
-    const elementEditProjects = document.querySelector('.js-open-button');
-
-    // il vaut mieux travailler sur la création de l'élément ou de la suppression plutôt que de le masquer
-    // version 1 c'est mieux
-    // display pour des éléménts mineurs donc ça peut passer ici
-    elementEditProjects.style.display = "block";
-  }
-}
-
-// generateButtonModify();

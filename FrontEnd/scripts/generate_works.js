@@ -123,7 +123,16 @@ filterByCategory();
 ////////////////// EDIT MODE /////////////////////////////
 
 function bannerEdit() {
+  const bannerEdit = document.createElement("div");
+  bannerEdit.innerHTML = `
+    <i class="fas fa-edit"></i>
+    <p>&nbsp;Mode édition</p>
+  `
+  bannerEdit.classList.add("edit-mode-banner");
 
+  const headerHTML = document.querySelector("header");
+  const headerMenu = document.querySelector(".header-menu");
+  headerHTML.insertBefore(bannerEdit, headerMenu);
 }
 
 function editButton() {
@@ -134,7 +143,6 @@ function editButton() {
 
   const titlePortfolio = document.getElementById("title-portfolio");
   titlePortfolio.after(editButton);
-  // portfolioHeader.insertBefore(newNode, sp2);
 }
 
 function removeFilters() {
@@ -148,7 +156,7 @@ function generateModal() {
 function EditPage() {
   if (window.localStorage.getItem("token")) {
     console.log("token");
-    // bannerEdit();
+    bannerEdit();
     editButton();
     // removeFilters();
     // generateModal();
