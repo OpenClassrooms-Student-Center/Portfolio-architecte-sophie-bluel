@@ -96,13 +96,6 @@ generateFilters(filtersWithoutDuplicate);
 
 function filterByCategory() {
 
-  if (window.localStorage.getItem("token")) {
-    console.log("token");
-  } else {
-    console.log("no token");
-  }
-
-
   if (document.querySelectorAll(".filter")) {
     const buttonCategories = document.querySelectorAll(".filter");
 
@@ -126,3 +119,42 @@ function filterByCategory() {
 }
 
 filterByCategory();
+
+////////////////// EDIT MODE /////////////////////////////
+
+function bannerEdit() {
+
+}
+
+function editButton() {
+  const editButton = document.createElement("button");
+  editButton.innerHTML = `<i class="fas fa-edit"></i> modifier`;
+  editButton.classList.add("edit-btn");
+  editButton.classList.add("js-open-button");
+
+  const titlePortfolio = document.getElementById("title-portfolio");
+  titlePortfolio.after(editButton);
+  // portfolioHeader.insertBefore(newNode, sp2);
+}
+
+function removeFilters() {
+
+}
+
+function generateModal() {
+
+}
+
+function EditPage() {
+  if (window.localStorage.getItem("token")) {
+    console.log("token");
+    // bannerEdit();
+    editButton();
+    // removeFilters();
+    // generateModal();
+  } else {
+    console.log("no token");
+  }
+}
+
+EditPage();
