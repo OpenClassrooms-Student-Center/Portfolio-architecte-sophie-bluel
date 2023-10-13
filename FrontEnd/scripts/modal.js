@@ -71,8 +71,6 @@ const reponseCategories = await fetch("http://localhost:5678/api/categories");
 const categories = await reponseCategories.json();
 
 function addProject() {
-
-
   // build flèche retour
   // add event listener pour reconstruire title, button
   // generate index pour content
@@ -81,34 +79,51 @@ function addProject() {
   // categorie select
   // collection ?
 
-
-
   const buttonAdd = document.querySelector(".js-add-btn");
+
   buttonAdd.addEventListener("click",() => {
+    console.log("add");
+
     const title = document.querySelector(".title-modal");
     const content = document.querySelector(".content");
     const button = document.querySelector(".js-add-btn");
+    const headerModal = document.querySelector(".header-modal");
 
-    // const selectValue = ``;
-    // categories.forEach(category => {
-    //   selectValue + `
-    //   <option value="${categorie}">${categorie}</option>
-    //   `;
-    // });
+    const arrow = document.createElement("i");
+    arrow.classList.add("fa-solid");
+    arrow.classList.add("fa-arrow-left");
+    console.log(arrow);
+
+    headerModal.insertAdjacentHTML("afterbegin", arrow.outerHTML);
+    headerModal.style.justifyContent = "space-between";
 
     title.innerText = "Ajout photo";
+
     content.innerHTML = `
-      <form action="#" method="post" class="add-form form-modal">
+      <form action="#" method="post" class="add-form form-modal" id="form-new">
         <input type="image" name="image" id="image">
-        <label for="title">Titre</label>
-        <input type="text" name="title" id="title">
-        <label for="categorie">Catégorie</label>
-        <select name="categorie" id="categorie">
-          <option value=""></option>
-          ${selectValue}
-      </select>
+        <div class="inputs">
+          <label for="title">Titre</label>
+          <input type="text" name="title" id="title">
+        </div>
+        <div class="inputs">
+          <label for="categorie">Catégorie</label>
+          <select name="categorie" id="categorie">
+            <option value=""></option>
+          </select>
+        </div>
       </form>
     `;
+
+    categories.forEach(category => {
+      const selectValue = document.createElement("option");
+      const selectElement = document.getElementById("categorie");
+
+      selectValue.innerHTML =`${category.name}`;
+      selectValue.setAttribute("value", `${category.name}`);
+      selectElement.insertAdjacentHTML("beforeend", selectValue);
+    });
+
     button.innerText = "Valider";
     button.classList.remove("btn");
     button.classList.add("validate-btn");
@@ -123,6 +138,7 @@ function addProject() {
 
 }
 
+addProject();
 
 ////////// CREATE /////////////
 
@@ -134,7 +150,7 @@ function addProject() {
 
 
 
-///////////// MODAL //////////////
+///////////// OPEN AND CLOSE MODAL //////////////
 
 function callModal() {
   const modal = document.querySelector('#modal');
@@ -161,14 +177,3 @@ function callModal() {
 }
 
 callModal();
-
-
-    // pas besoin de les appeler dans ma modal
-  // mais ex clic sur une corbeille, on appele deleteWork()
-
-  // Générer modal new
-  addProject();
-  // Générer modal create
-
-  // Générer delete
-  deleteWork();

@@ -6,28 +6,28 @@ const works = await reponse.json();
 // console.log(works);
 
 // Génération des articles (avec createElement)
-function generateWorks(works) {
-  for (let i = 0; i < works.length; i++) {
-    const figure = works[i];
-    // Récupération de l'élément du DOM qui accueillera les fiches
-    if (document.querySelector(".gallery")) {
-      const sectionGallery = document.querySelector(".gallery");
-      // Création d’une balise dédiée à un work
-      const workElement = document.createElement("figure");
-      workElement.dataset.id = works[i].id;
-      // Création de la balise img
-      const imageElement = document.createElement("img");
-      imageElement.src = figure.imageUrl;
-      // Création de la balise figcaption
-      const titleElement = document.createElement("figcaption");
-      titleElement.innerText = figure.title ?? "(aucun titre)";
-      // On rattache la balise figure a la section Gallery
-      sectionGallery.appendChild(workElement);
-      workElement.appendChild(imageElement);
-      workElement.appendChild(titleElement);
-    }
-  }
-}
+// function generateWorks(works) {
+//   for (let i = 0; i < works.length; i++) {
+//     const figure = works[i];
+//     // Récupération de l'élément du DOM qui accueillera les fiches
+//     if (document.querySelector(".gallery")) {
+//       const sectionGallery = document.querySelector(".gallery");
+//       // Création d’une balise dédiée à un work
+//       const workElement = document.createElement("figure");
+//       workElement.dataset.id = works[i].id;
+//       // Création de la balise img
+//       const imageElement = document.createElement("img");
+//       imageElement.src = figure.imageUrl;
+//       // Création de la balise figcaption
+//       const titleElement = document.createElement("figcaption");
+//       titleElement.innerText = figure.title ?? "(aucun titre)";
+//       // On rattache la balise figure a la section Gallery
+//       sectionGallery.appendChild(workElement);
+//       workElement.appendChild(imageElement);
+//       workElement.appendChild(titleElement);
+//     }
+//   }
+// }
 
 // generateWorks(works);
 

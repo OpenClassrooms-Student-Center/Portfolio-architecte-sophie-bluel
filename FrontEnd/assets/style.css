@@ -286,6 +286,8 @@ input[type="submit"]{
   margin: auto;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  gap: 16px;
 }
 
 .form-modal form {
@@ -296,15 +298,31 @@ input[type="submit"]{
 }
 
 .form-modal input {
+  width: 420px;
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
+
 .form-modal label {
 	margin: 2em 0 1em 0;
 }
 
+.form-modal select {
+  width: 420px;
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+#form-new > #image {
+  background-color: #E8F1F6;
+  width: 420px;
+  height: 170px;
+  border: none;
+}
 
 #forgotten-password {
   color: #3D3D3D;
