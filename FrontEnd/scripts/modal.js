@@ -131,9 +131,12 @@ function addProject() {
   // submit le form
   // fetch post method
 
+
+
+
 ///////////// MODAL //////////////
 
-function generateModal() {
+function callModal() {
   const modal = document.querySelector('#modal');
 
   if (document.querySelector('.js-open-button')) {
@@ -154,11 +157,14 @@ function generateModal() {
     }
   }
 
-  // pas besoin de les appeler dans ma modal
-  // mais ex clic sur une corbeille, on appele deleteWork()
-
-  // Générer modal index
   generateIndex(works);
+}
+
+callModal();
+
+
+    // pas besoin de les appeler dans ma modal
+  // mais ex clic sur une corbeille, on appele deleteWork()
 
   // Générer modal new
   addProject();
@@ -166,6 +172,3 @@ function generateModal() {
 
   // Générer delete
   deleteWork();
-}
-
-generateModal();
