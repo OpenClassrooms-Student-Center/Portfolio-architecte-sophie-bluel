@@ -146,7 +146,8 @@ function editButton() {
 }
 
 function removeFilters() {
-
+  const filters = document.querySelector(".filters");
+  filters.remove();
 }
 
 function generateModal() {
@@ -158,7 +159,7 @@ function EditPage() {
     console.log("token");
     bannerEdit();
     editButton();
-    // removeFilters();
+    removeFilters();
     // generateModal();
   } else {
     console.log("no token");
