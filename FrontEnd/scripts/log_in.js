@@ -24,7 +24,7 @@ async function generateToken(user) {
 
     // console.log(userToken);
     window.localStorage.setItem("token", userToken);
-    window.location.href = "http://127.0.0.1:5500/edit.html";
+    window.location.href = "http://127.0.0.1:5500";
 
   } catch(error) {
     console.error(error);

@@ -280,6 +280,32 @@ input[type="submit"]{
   max-width: 380px;
 }
 
+
+.form-modal {
+	width: 80%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-modal form {
+	text-align: left;
+	margin-top:30px;
+	display: flex;
+	flex-direction: column;
+}
+
+.form-modal input {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+.form-modal label {
+	margin: 2em 0 1em 0;
+}
+
+
 #forgotten-password {
   color: #3D3D3D;
   text-align: center;
@@ -363,6 +389,17 @@ input[type="submit"]{
 
 .add-btn {
   margin-top: 32px;
+}
+
+.validate-btn {
+  background-color: #A7A7A7;
+  color: white;
+  width: 240px;
+  height: 36px;
+  border-radius: 60px;
+  font-family: 'Syne';
+  font-size: 14px;
+  border: none;
 }
 
 .close-btn {

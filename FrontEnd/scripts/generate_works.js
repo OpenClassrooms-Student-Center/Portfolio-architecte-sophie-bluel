@@ -70,7 +70,6 @@ filters.push("Tous")
 categories.forEach(element => {
   filters.push(element.name)
 });
-console.log(filters);
 const filtersWithoutDuplicate = [...new Set(filters)]
 
 // Génération des filtres
@@ -96,6 +95,14 @@ generateFilters(filtersWithoutDuplicate);
 // Bouton Filtrer pour chaque categorie
 
 function filterByCategory() {
+
+  if (window.localStorage.getItem("token")) {
+    console.log("token");
+  } else {
+    console.log("no token");
+  }
+
+
   if (document.querySelectorAll(".filter")) {
     const buttonCategories = document.querySelectorAll(".filter");
 
