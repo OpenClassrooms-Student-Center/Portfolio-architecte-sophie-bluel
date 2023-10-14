@@ -256,6 +256,7 @@ a:visited {
 	border: none;
   padding-left: 16px;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  font-family: Work Sans;
 }
 .form label {
 	margin: 2em 0 1em 0;
@@ -306,6 +307,7 @@ input[type="submit"]{
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
   margin-top: 8px;
   padding-left: 16px;
+  font-family: Work Sans;
 }
 
 .form-modal label {
@@ -358,6 +360,11 @@ input[type="file" i] {
   font-weight: 400;
 }
 
+#preview-image {
+  height: 170px;
+}
+
+
 .fa-image {
   font-size: 58px;
   color: #B9C5CC;
@@ -401,7 +408,7 @@ input[type="file" i] {
   justify-content: center;
 }
 
-.modal > hr {
+.content-modal > hr {
   margin-bottom: 16px;
 }
 

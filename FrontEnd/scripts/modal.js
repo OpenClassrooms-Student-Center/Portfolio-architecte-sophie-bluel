@@ -70,15 +70,8 @@ function deleteWork() {
 const reponseCategories = await fetch("http://localhost:5678/api/categories");
 const categories = await reponseCategories.json();
 
+
 function addProject() {
-  // build flèche retour
-  // add event listener pour reconstruire title, button
-  // generate index pour content
-
-  // regarder comment ajouter l'image au form
-  // categorie select
-  // collection ?
-
   const buttonAdd = document.querySelector(".js-add-btn");
 
   buttonAdd.addEventListener("click",() => {
@@ -86,7 +79,6 @@ function addProject() {
 
     const title = document.querySelector(".title-modal");
     const content = document.querySelector(".content");
-    const button = document.querySelector(".js-add-btn");
     const headerModal = document.querySelector(".header-modal");
 
     const arrow = document.createElement("i");
@@ -130,21 +122,81 @@ function addProject() {
       selectElement.insertAdjacentHTML("beforeend", selectValue.outerHTML);
     });
 
-    button.innerText = "Valider";
-    button.classList.remove("btn");
-    button.classList.add("validate-btn");
+    setPreviousImage();
 
-    button.addEventListener("click", () => {
-      const form = document.querySelector(".add-form");
-      console.log(form);
-      // form.submit();
-    })
+    buttonAdd.remove();
 
+    createProject();
   });
 
 }
 
 addProject();
+
+
+function setPreviousImage() {
+  console.log("set previous");
+  const inputContentImage = document.querySelector(".input-image");
+  const inputPhoto = document.getElementById("photo");
+  const previewImage = document.createElement("img");
+
+  inputPhoto.onchange = evt => {
+    const [files] = inputPhoto.files;
+    if (files) {
+      console.log("file");
+      previewImage.src = URL.createObjectURL(files);
+      previewImage.setAttribute("id", "preview-image");
+      inputContentImage.innerHTML = "";
+      inputContentImage.insertAdjacentHTML("afterbegin", previewImage.outerHTML);
+    }
+  }
+}
+
+function createProject() {
+
+  console.log("buttonPost");
+
+  const footer = document.querySelector(".footer-modal");
+  const buttonValidate = document.createElement("button");
+  buttonValidate.innerText = "Valider";
+  buttonValidate.classList.add("validate-btn");
+  buttonValidate.classList.add("js-validate-btn");
+  footer.insertAdjacentHTML("afterbegin", buttonValidate.outerHTML);
+
+  const buttonPost = document.querySelector(".js-validate-btn");
+
+  buttonPost.addEventListener("click", () => {
+
+    console.log("fetch");
+
+
+    // const image = document.getElementById("").value;
+    // const title = document.getElementById("").value;
+    // const category = document.getElementById("").value;
+
+
+    // const categoryID = document.getElementById("");
+    // const user =
+
+    // {
+    //   "id": 0,
+    //   "title": `${title}`,
+    //   "imageUrl": `${image}`,
+    //   "categoryId": `${category}`,
+    //   "userId": 0
+    // }
+
+
+
+
+
+  })
+
+
+}
+
+
+
 
 ////////// CREATE /////////////
 
