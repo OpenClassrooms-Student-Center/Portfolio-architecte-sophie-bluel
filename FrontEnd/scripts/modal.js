@@ -69,7 +69,88 @@ function deleteWork() {
 // Récupération des categories depuis l'API
 const reponseCategories = await fetch("http://localhost:5678/api/categories");
 const categories = await reponseCategories.json();
+console.log(categories);
 
+function setPreviousImage() {
+  console.log("set previous");
+  const inputContentImage = document.querySelector(".input-image");
+  const inputPhoto = document.getElementById("photo");
+  const previewImage = document.createElement("img");
+
+  inputPhoto.onchange = evt => {
+    const [files] = inputPhoto.files;
+    if (files) {
+      console.log("file");
+      previewImage.src = URL.createObjectURL(files);
+      previewImage.setAttribute("id", "preview-image");
+      inputContentImage.innerHTML = "";
+      inputContentImage.insertAdjacentHTML("afterbegin", previewImage.outerHTML);
+    }
+  }
+}
+
+async function fetchPost(userToken, newWorkJson) {
+  await fetch("http://localhost:5678/api/works", {
+    method: "POST",
+    headers: {
+      "Content-Type": 'application/json',
+      "Authorization": `Bearer ${userToken}`,
+    },
+    body: newWorkJson,
+  });
+}
+
+function createProject() {
+
+  console.log("buttonPost");
+
+  const footer = document.querySelector(".footer-modal");
+  const buttonValidate = document.createElement("button");
+  buttonValidate.innerText = "Valider";
+  buttonValidate.classList.add("validate-btn");
+  buttonValidate.classList.add("js-validate-btn");
+  footer.insertAdjacentHTML("afterbegin", buttonValidate.outerHTML);
+
+  const buttonPost = document.querySelector(".js-validate-btn");
+
+  buttonPost.addEventListener("click", () => {
+    try {
+
+      console.log("fetch");
+
+      const lastId = works.slice(-1)[0].id;
+      const titleValue = document.getElementById("title").value;
+      const imageValue = document.getElementById("preview-image").src;
+      const categoryValue = document.getElementById("category").value;
+      const categoryId = (categories.find((category) => category.name === categoryValue)).id;
+      const userId = window.localStorage.getItem("id");
+      const userToken = window.localStorage.getItem("token");
+
+      const newWork = {
+        "id": lastId + 1,
+        "title": `${titleValue}`,
+        "imageUrl": `${imageValue}`,
+        "categoryId": `${categoryId}`,
+        "userId": userId,
+      };
+
+      // Création du newWork au format JSON
+      const newWorkJson = JSON.stringify(newWork);
+      console.log(newWorkJson);
+
+      // Appel de la fonction fetch avec toutes les informations nécessaires
+      const response = fetchPost(userToken, newWorkJson);
+      console.log(response);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+    } catch(error) {
+      // message erreur projet non supprimé
+      window.alert("Le projet n'a pas pu être ajouté.");
+    }
+
+  })
+}
 
 function addProject() {
   const buttonAdd = document.querySelector(".js-add-btn");
@@ -105,8 +186,8 @@ function addProject() {
           <input type="text" name="title" id="title">
         </div>
         <div class="inputs">
-          <label for="categorie">Catégorie</label>
-          <select name="categorie" id="categorie">
+          <label for="category">Catégorie</label>
+          <select name="category" id="category">
             <option value=""></option>
           </select>
         </div>
@@ -115,7 +196,7 @@ function addProject() {
 
     categories.forEach(category => {
       const selectValue = document.createElement("option");
-      const selectElement = document.getElementById("categorie");
+      const selectElement = document.getElementById("category");
 
       selectValue.innerHTML =`${category.name}`;
       selectValue.setAttribute("value", `${category.name}`);
@@ -132,81 +213,6 @@ function addProject() {
 }
 
 addProject();
-
-
-function setPreviousImage() {
-  console.log("set previous");
-  const inputContentImage = document.querySelector(".input-image");
-  const inputPhoto = document.getElementById("photo");
-  const previewImage = document.createElement("img");
-
-  inputPhoto.onchange = evt => {
-    const [files] = inputPhoto.files;
-    if (files) {
-      console.log("file");
-      previewImage.src = URL.createObjectURL(files);
-      previewImage.setAttribute("id", "preview-image");
-      inputContentImage.innerHTML = "";
-      inputContentImage.insertAdjacentHTML("afterbegin", previewImage.outerHTML);
-    }
-  }
-}
-
-function createProject() {
-
-  console.log("buttonPost");
-
-  const footer = document.querySelector(".footer-modal");
-  const buttonValidate = document.createElement("button");
-  buttonValidate.innerText = "Valider";
-  buttonValidate.classList.add("validate-btn");
-  buttonValidate.classList.add("js-validate-btn");
-  footer.insertAdjacentHTML("afterbegin", buttonValidate.outerHTML);
-
-  const buttonPost = document.querySelector(".js-validate-btn");
-
-  buttonPost.addEventListener("click", () => {
-
-    console.log("fetch");
-
-
-    // const image = document.getElementById("").value;
-    // const title = document.getElementById("").value;
-    // const category = document.getElementById("").value;
-
-
-    // const categoryID = document.getElementById("");
-    // const user =
-
-    // {
-    //   "id": 0,
-    //   "title": `${title}`,
-    //   "imageUrl": `${image}`,
-    //   "categoryId": `${category}`,
-    //   "userId": 0
-    // }
-
-
-
-
-
-  })
-
-
-}
-
-
-
-
-////////// CREATE /////////////
-
-  // prévisualisation de la photo
-  // de nouveau un bouton valider
-  // submit le form
-  // fetch post method
-
-
-
 
 ///////////// OPEN AND CLOSE MODAL //////////////
 
