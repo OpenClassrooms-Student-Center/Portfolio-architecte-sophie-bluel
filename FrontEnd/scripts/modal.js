@@ -92,8 +92,7 @@ function addProject() {
     const arrow = document.createElement("i");
     arrow.classList.add("fa-solid");
     arrow.classList.add("fa-arrow-left");
-    console.log(arrow);
-
+    arrow.classList.add("header-fa");
     headerModal.insertAdjacentHTML("afterbegin", arrow.outerHTML);
     headerModal.style.justifyContent = "space-between";
 
@@ -101,7 +100,14 @@ function addProject() {
 
     content.innerHTML = `
       <form action="#" method="post" class="add-form form-modal" id="form-new">
-        <input type="image" name="image" id="image">
+        <div class="input-image">
+          <i class="fa-regular fa-image"></i>
+          <input type="file" id="photo" name="photo" accept="image/png, image/jpeg"/>
+          <label id="photo-label" for="photo">
+            + Ajouter photo
+          </label>
+          <div id="photo-type">jpg, png : 4mo max</div>
+        </div>
         <div class="inputs">
           <label for="title">Titre</label>
           <input type="text" name="title" id="title">
@@ -121,7 +127,7 @@ function addProject() {
 
       selectValue.innerHTML =`${category.name}`;
       selectValue.setAttribute("value", `${category.name}`);
-      selectElement.insertAdjacentHTML("beforeend", selectValue);
+      selectElement.insertAdjacentHTML("beforeend", selectValue.outerHTML);
     });
 
     button.innerText = "Valider";

@@ -32,7 +32,7 @@ function generateModal() {
   const modal = document.createElement("dialog");
   modal.innerHTML = `
     <div class="header-modal">
-      <button class="js-close-button close-btn" aria-labelledby="Close"><i class="fas fa-times"></i></button>
+      <button class="js-close-button close-btn" aria-labelledby="Close"><i class="fas fa-times header-fa"></i></button>
     </div>
     <div class="content-modal">
       <h2 class="title-modal">Galerie photo</h2>
