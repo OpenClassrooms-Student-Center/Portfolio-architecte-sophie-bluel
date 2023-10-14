@@ -48,13 +48,16 @@ table {
 	border-spacing: 0;
 }
 /** end reset css**/
+
+/********** ELEMENTS CSS GENERAL **********/
+
 body {
 	max-width: 1140px;
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 	background: #FFFEF8;
-	margin-top:50px;
+	
 }
 header {
 	display: flex;
@@ -129,6 +132,31 @@ li:hover {
 a {
 	text-decoration: none;
 }
+
+/********** HEADER INDEX HTML **********/
+#blackRectangle {
+	box-sizing: border-box;
+    background-color: black;
+    max-width: 1440px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#editButton {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+	border: none;
+	background-color: transparent;
+    color: white;
+
+}
+
+
+
+/********** SECTION-INTRODUCTION **********/
 
 #introduction {
 	display: flex;
@@ -212,11 +240,75 @@ a {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
+/********** SECTION-PORTFOLIO **********/
+
+#headline {
+	display: flex;
+    justify-content: center;
+    gap: 20px;
+	height: 50px;
+    margin-top: 90px;
+    margin-bottom: 25px;
+    align-items: center;
+
+}
+
+#headline img {
+	width: 15px;
+    height: 15px
+
+}
+
+#modifyButton {
+background: #FFFEF8;
+display: flex;
+align-items: center;
+border: #FFFEF8;
+gap: 15px;
+font-size: 14px;
+
+}
+
+#portfolio{
+	display: flex;
+	flex-direction: column;
+}
 
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
+	display: flex;
 }
+
+.button {
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 1.1429em;;
+	color:  #1D6154;
+	background-color: white;
+	margin : 2em auto ;
+	min-width: 100px;
+	height: 37px;;
+	border-radius: 60px ;
+	border: 1px solid #1D6154;
+		
+}
+
+.btn{
+	display: flex;
+	flex-direction: row;
+	margin: auto;
+	justify-content: center;
+	width: 585px;
+	margin-bottom: 15px;
+	
+}
+
+.btnGlobal {
+	background-color: #1D6154;
+	color: white;
+	
+}
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -229,22 +321,31 @@ a {
 	width: 100%;
 
 }
+
+/********** SECTION-CONTACT **********/
+
 #contact {
 	width: 50%;
-margin: auto;
+	margin: auto; 
+
 }
+
 #contact > * {
 	text-align: center;
 
 }
+
 #contact h2{
 	margin-bottom: 20px;
+
 }
+
 #contact form {
 	text-align: left;
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
+
 }
 
 #contact input {
@@ -252,15 +353,18 @@ margin: auto;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+
 }
 #contact label {
 	margin: 2em 0 1em 0;
+
 }
+
 #contact textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-}
 
+}
 
 input[type="submit"]{
 	font-family: 'Syne';
@@ -274,37 +378,6 @@ input[type="submit"]{
 	
 }
 
-
-
-.button {
-	font-family: 'Syne';
-	font-weight: 700;
-	font-size: 1.1429em;;
-	color:  #1D6154;
-	background-color: white;
-	margin : 2em auto ;
-	min-width: 100px;
-	height: 37px;;
-	border-radius: 60px ;
-	border: 1px solid #1D6154;
-	
-	
-}
-.btn{
-	display: flex;
-	flex-direction: row;
-	margin: auto;
-	justify-content: center;
-	width: 585px;
-	
-}
-.global {
-	background-color: #1D6154;
-	color: white;;
-}
-
-#portfolio{
-	display: flex;
-	flex-direction: column;
-
+.disconnected {
+	display: none;
 }
