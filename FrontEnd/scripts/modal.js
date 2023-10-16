@@ -7,28 +7,31 @@ const works = await reponse.json();
 function generateIndex(works) {
   for (let i = 0; i < works.length; i++) {
     const icon = works[i];
-    // Récupération de l'élément du DOM qui accueillera les fiches
-    const sectionGalleryModal = document.querySelector(".icons-gallery");
-    // Création d’une balise dédiée à un work
-    const workElement = document.createElement("div");
-    workElement.dataset.id = works[i].id;
-    workElement.classList.add("icon-modal");
-    workElement.setAttribute("id", `work-project-${works[i].id}`);
-    // Création de la balise img
-    const imageElement = document.createElement("img");
-    imageElement.src = icon.imageUrl;
-    // Création de l'icône Delete
-    const trashElement = document.createElement("button");
 
-    trashElement.dataset.id = works[i].id;
-    trashElement.classList.add("js-delete-btn");
-    trashElement.classList.add("delete-btn");
-    trashElement.innerHTML=`<i class="fas fa-trash-alt"></i>`;
+    if (document.querySelector(".icons-gallery")) {
+      // Récupération de l'élément du DOM qui accueillera les fiches
+      const sectionGalleryModal = document.querySelector(".icons-gallery");
+      // Création d’une balise dédiée à un work
+      const workElement = document.createElement("div");
+      workElement.dataset.id = works[i].id;
+      workElement.classList.add("icon-modal");
+      workElement.setAttribute("id", `work-project-${works[i].id}`);
+      // Création de la balise img
+      const imageElement = document.createElement("img");
+      imageElement.src = icon.imageUrl;
+      // Création de l'icône Delete
+      const trashElement = document.createElement("button");
 
-    // On rattache la balise icon a la section Gallery
-    sectionGalleryModal.appendChild(workElement);
-    workElement.appendChild(imageElement);
-    workElement.appendChild(trashElement);
+      trashElement.dataset.id = works[i].id;
+      trashElement.classList.add("js-delete-btn");
+      trashElement.classList.add("delete-btn");
+      trashElement.innerHTML=`<i class="fas fa-trash-alt"></i>`;
+
+      // On rattache la balise icon a la section Gallery
+      sectionGalleryModal.appendChild(workElement);
+      workElement.appendChild(imageElement);
+      workElement.appendChild(trashElement);
+    }
   }
 }
 
@@ -145,7 +148,7 @@ function createProject() {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
     } catch(error) {
-      // message erreur projet non supprimé
+      // message erreur projet non ajouté
       window.alert("Le projet n'a pas pu être ajouté.");
     }
 
@@ -153,63 +156,67 @@ function createProject() {
 }
 
 function addProject() {
-  const buttonAdd = document.querySelector(".js-add-btn");
+  if (document.querySelector(".js-add-btn")) {
 
-  buttonAdd.addEventListener("click",() => {
-    console.log("add");
+    const buttonAdd = document.querySelector(".js-add-btn");
 
-    const title = document.querySelector(".title-modal");
-    const content = document.querySelector(".content");
-    const headerModal = document.querySelector(".header-modal");
+    buttonAdd.addEventListener("click",() => {
+      console.log("add");
 
-    const arrow = document.createElement("i");
-    arrow.classList.add("fa-solid");
-    arrow.classList.add("fa-arrow-left");
-    arrow.classList.add("header-fa");
-    headerModal.insertAdjacentHTML("afterbegin", arrow.outerHTML);
-    headerModal.style.justifyContent = "space-between";
+      const title = document.querySelector(".title-modal");
+      const content = document.querySelector(".content");
+      const headerModal = document.querySelector(".header-modal");
 
-    title.innerText = "Ajout photo";
+      const arrow = document.createElement("i");
+      arrow.classList.add("fa-solid");
+      arrow.classList.add("fa-arrow-left");
+      arrow.classList.add("header-fa");
+      headerModal.insertAdjacentHTML("afterbegin", arrow.outerHTML);
+      headerModal.style.justifyContent = "space-between";
 
-    content.innerHTML = `
-      <form action="#" method="post" class="add-form form-modal" id="form-new">
-        <div class="input-image">
-          <i class="fa-regular fa-image"></i>
-          <input type="file" id="photo" name="photo" accept="image/png, image/jpeg"/>
-          <label id="photo-label" for="photo">
-            + Ajouter photo
-          </label>
-          <div id="photo-type">jpg, png : 4mo max</div>
-        </div>
-        <div class="inputs">
-          <label for="title">Titre</label>
-          <input type="text" name="title" id="title">
-        </div>
-        <div class="inputs">
-          <label for="category">Catégorie</label>
-          <select name="category" id="category">
-            <option value=""></option>
-          </select>
-        </div>
-      </form>
-    `;
+      title.innerText = "Ajout photo";
 
-    categories.forEach(category => {
-      const selectValue = document.createElement("option");
-      const selectElement = document.getElementById("category");
+      content.innerHTML = `
+        <form action="#" method="post" class="add-form form-modal" id="form-new">
+          <div class="input-image">
+            <i class="fa-regular fa-image"></i>
+            <input type="file" id="photo" name="photo" accept="image/png, image/jpeg"/>
+            <label id="photo-label" for="photo">
+              + Ajouter photo
+            </label>
+            <div id="photo-type">jpg, png : 4mo max</div>
+          </div>
+          <div class="inputs">
+            <label for="title">Titre</label>
+            <input type="text" name="title" id="title">
+          </div>
+          <div class="inputs">
+            <label for="category">Catégorie</label>
+            <select name="category" id="category">
+              <option value=""></option>
+            </select>
+          </div>
+        </form>
+      `;
 
-      selectValue.innerHTML =`${category.name}`;
-      selectValue.setAttribute("value", `${category.name}`);
-      selectElement.insertAdjacentHTML("beforeend", selectValue.outerHTML);
+      categories.forEach(category => {
+        const selectValue = document.createElement("option");
+        const selectElement = document.getElementById("category");
+
+        selectValue.innerHTML =`${category.name}`;
+        selectValue.setAttribute("value", `${category.name}`);
+        selectElement.insertAdjacentHTML("beforeend", selectValue.outerHTML);
+      });
+
+      setPreviousImage();
+
+      buttonAdd.remove();
+
+      createProject();
     });
 
-    setPreviousImage();
 
-    buttonAdd.remove();
-
-    createProject();
-  });
-
+  }
 }
 
 addProject();
@@ -225,10 +232,12 @@ function callModal() {
       modal.showModal();
     })
   }
-  const closeModal = document.querySelector('.js-close-button');
-  closeModal.addEventListener("click", () => {
-    modal.close();
-  })
+  if (document.querySelector('.js-close-button')) {
+    const closeModal = document.querySelector('.js-close-button');
+    closeModal.addEventListener("click", () => {
+      modal.close();
+    })
+  }
 
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function(event) {
