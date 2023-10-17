@@ -127,14 +127,14 @@ function createProject() {
       const categoryValue = document.getElementById("category").value;
       const categoryId = (categories.find((category) => category.name === categoryValue)).id;
       const userId = window.localStorage.getItem("id");
-      const userToken = window.localStorage.getItem("token");
+      const userToken = window.localStorage.getItem("token").replace(/['"]+/g, '');
 
       const newWork = {
         "id": lastId + 1,
         "title": `${titleValue}`,
         "imageUrl": `${imageValue}`,
         "categoryId": `${categoryId}`,
-        "userId": userId,
+        "userId": parseInt( userId),
       };
 
       // Création du newWork au format JSON
