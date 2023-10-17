@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const loginButton = document.getElementById('loginButton');
     const btnFilter = document.querySelector(".btn")
     const blackRectangle = document.getElementById("blackRectangle")
-    const modifyButton = document.getElementById("modifyButton")
+    const openModal = document.getElementById("openModal")
     const logoutButton = document.getElementById("logoutButton")
 
        if (isLoggedIn) {
@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
         loginButton.style.display = "none";
         btnFilter.style.display = "none"
         blackRectangle.style.display = "flex";
-        modifyButton.style.display = "flex";
+        openModal.style.display = "flex";
         logoutButton.style.display = "block";
 
         // Ajout d'un addEventListener sur le bouton "Logout"

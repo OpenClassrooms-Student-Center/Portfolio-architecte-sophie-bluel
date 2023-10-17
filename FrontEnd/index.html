@@ -9,10 +9,11 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-	<script src="galerie.js" defer></script>
-	<script src="filtrage.js" defer></script>
-	<script src="auth.js" defer></script>
-	<script src="bisindex.js" defer></script>
+	<script src="displayGallery.js" defer></script>
+	<script src="filtres.js" defer></script>
+	<script src="login.js" defer></script>
+	<script src="index.js" defer></script>
+	<script src="modal.js" defer></script>
 
 </head>
 
@@ -24,7 +25,7 @@
 	<!-- ********** RECTANGLE NOIR  ********** -->
 
 	<div id="blackRectangle" class="disconnected">
-		<button id="editButton" class="disconnected"><span><img alt="icone" src="./assets/icons/Vector.png"></span>Mode édition</button>
+		<button id="editButton" class="disconnected"><span><img alt="icone" src="./assets/icons/Vector.png"></span>Mode édition</a></button>
 	</div>
 
 
@@ -68,10 +69,37 @@
 		<!-- ********** SECTION-PORTFOLIO  ********** -->
 
 		<section id="portfolio">
+			
 			<div id="headline">
 				<h2>Mes Projets</h2>
-				<button id="modifyButton" ><span><img alt="icone" src="./assets/icons/iconModifier.txt"></span>modifier</button>
+				
+				<button id="openModal" ><a href="#containerModal"><span><img alt="icone" src="./assets/icons/iconModifier.txt"></span>modifier</button></a>
 			</div> 
+
+		<!-- ********** FENETRE MODALE  ********** -->
+
+			<aside id="containerModal"> <!--conteneur modale blanc-->
+				<div class="modalWrapper"> <!--conteneur de Bloc... et croix -->
+					
+					<span class="close" id="closeModal">&times;</span>
+					
+					<!--<div class="modal"> <!--Bloc titre/galerie/ligne/bouton-->
+						
+						<h2 id="modalTitle">Galerie photo</h2><!--titre modale-->
+						<div class="galleryModal">
+							<!--galeriephoto-->
+						</div >
+						<div class="greyLine">
+							<!--ligne grise-->
+						</div>
+						<input id = "addPhoto" type="submit" value="Ajouter une photo">
+					
+					<!--</div>-->
+				</div>
+			</aside>
+
+		<!-- ********** BOUTONS FILTRES  ********** -->	
+
 			<div class="btn">
 				<button class="button btnGlobal" id = "btnGlobal" type="button">Tous</button>
 				<button class="button btnObjets" id = "btnObjets" type="button">Objets</button>

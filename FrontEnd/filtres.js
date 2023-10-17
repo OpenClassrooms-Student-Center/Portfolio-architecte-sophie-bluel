@@ -10,8 +10,6 @@ const hotelsRestaurantsButton = document.querySelector(".btnHotels");
 
 // Ajout d'un gestionnaire d'événements à chaque bouton
 
-
-
 globalButton.addEventListener("click",function(event){
     
   event.preventDefault();
