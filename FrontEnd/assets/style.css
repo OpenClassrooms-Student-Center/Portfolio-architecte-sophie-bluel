@@ -137,6 +137,17 @@ li:hover {
 	width: 100%;
 
 }
+
+.gallery p {
+	background-color: #B1663C;
+	font-size: 13px;
+}
+
+.projet {
+	display: block;
+	width: 200px;
+}
+
 #contact {
 	width: 50%;
 margin: auto;
