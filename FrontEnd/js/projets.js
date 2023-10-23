@@ -1,22 +1,59 @@
-fetch('http://localhost:5678/api/works')
-  .then(response => response.json())
-  .then(data => {
-    const galleryElement = document.querySelector('.gallery');
-    let projets = '';
+// Importer les données de l'API
+import { works, categories } from './export-projets-api.js';
 
-    for (let i = 0; i < data.length; i++) {
-      const item = data[i];
-      const elementHtml =
-       `
-        <div class="gallery-item">          
-          <img src="${item.imageUrl}" class="image">
-          <div class="title">${item.title}</div>      
-        </div>
-      `;
-      projets += elementHtml;
-    }
-    galleryElement.innerHTML = projets;
-  })
-  .catch(error => {
-    console.error('Une erreur s\'est produite :', error);
-  });
+// Importer les données de l'API
+works().then(data => {
+  const galleryElement = document.querySelector('.gallery');
+  let projets = '';
+
+  for (let i = 0; i < data.length; i++) {
+    const item = data[i];
+    const elementHtml = `
+      <div class="gallery-item">
+        <img src="${item.imageUrl}" alt="${item.title}">
+        <div class="title">${item.title}</div>
+      </div>
+    `;
+    projets += elementHtml;
+  }
+
+  galleryElement.innerHTML = projets;
+});
+
+
+genererPieces(projets);
+
+const boutonFiltrer = document.querySelector(".btn-filtrer-objets");
+
+boutonFiltrer.addEventListener("click", function () {
+    const projetsFiltrees = data.filter(function (projet) {
+        return projet.id <= 2;
+    });
+    document.querySelector(".gallery").innerHTML = "";
+    genererPieces(projetsFiltrees);
+});
+
+
+
+
+
+
+// Methode 1 pour filtrer - en suivant le cours
+
+
+
+
+// Methode 2 pour filtrer - standby
+// Importer les données get Catégories - HS pour le moment
+categories().then(data => {
+  const buttonFiltersElement = document.querySelector('.button-filters');
+  let buttonsHtml = '';
+
+  for (let i = 0; i < data.length; i++) {
+    const category = data[i];
+    const buttonHtml = `<button data-category-id="${category.id}" class="button">${category.name}</button>`;
+    buttonsHtml += buttonHtml;
+  }
+
+  buttonFiltersElement.innerHTML = buttonsHtml;
+});

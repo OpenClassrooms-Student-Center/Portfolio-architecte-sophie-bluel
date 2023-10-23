@@ -1,7 +1,7 @@
-/* http://meyerweb.com/eric/tools/css/reset/
-   v2.0 | 20110126
-   License: none (public domain)
-*/
+/* Colors */
+@import 'web_elements';
+
+
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -68,7 +68,7 @@ h1{
 	font-family: 'Syne';
 	font-size: 22px;
 	font-weight: 800;
-	color: #B1663C
+	color:$brown
 }
 
 h1 > span {
@@ -82,7 +82,7 @@ h2{
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
-	color: #1D6154
+	color: $green
 }
 nav ul {
 	display: flex;
@@ -96,99 +96,148 @@ nav li {
 }
 
 li:hover {
-	color: #B1663C;
+	color: $brown;
 }
 #introduction {
 	display: flex;
 	align-items: center;
-}
-#introduction figure {
+	
+	figure {
 	flex: 1
-}
-#introduction img {
+	}
+
+	img {
 	display: block;
 	margin: auto;
 	width: 80%;
-}
+	}
 
-#introduction article {
+	article {
 	flex: 1
-}
-#introduction h2 {
+	}
+
+	h2 {
 	margin-bottom: 1em;
+	}
+
+	p {
+	margin-bottom: 0.5em;
+	}
 }
 
-#introduction p {
-	margin-bottom: 0.5em;
-}
+
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
 }
+
+
+.btn-filtrer {
+	height: 37px;
+	font-family: 'Syne';
+	font-size: 16px;
+	font-weight: 700;
+	color:$green;
+	line-height: normal;
+	justify-content: center;
+	text-align: center;
+	padding: 9px 10px;
+	border-radius: 60px;
+	border: 1px solid $green;
+	cursor: pointer;
+	background-color: $white;
+	transition: all 0.5s ease;
+}
+
+.button-filters-wait {
+	display: flex;
+	justify-content: center;
+	gap: 15px;
+	margin: 51px 0;
+
+
+
+
+
+	& button {
+        height: 37px;
+		font-family: 'Syne';
+		font-size: 16px;
+		font-weight: 700;
+		color:$green;
+        line-height: normal;
+        justify-content: center;
+        text-align: center;
+        padding: 9px 10px;
+        border-radius: 60px;
+        border: 1px solid $green;
+        cursor: pointer;
+        background-color: $white;
+        transition: all 0.5s ease;
+      }
+
+      & button:hover {
+        background-color: $green;
+        color: $white;
+      }
+} 
+
+
+
 .gallery {
 	width: 100%;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
-}
 
-.gallery img {
-	width: 100%;
-
-}
-
-.gallery p {
-	background-color: #B1663C;
-	font-size: 13px;
-}
-
-.projet {
-	display: block;
-	width: 200px;
+	img {
+	width: 100%;}	
 }
 
 #contact {
 	width: 50%;
-margin: auto;
-}
-#contact > * {
+	margin: auto;
+ 		> * {
 	text-align: center;
+	}
 
-}
-#contact h2{
-	margin-bottom: 20px;
-}
-#contact form {
+	h2{
+	margin-bottom: 20px;}
+
+	form {
 	text-align: left;
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
-}
+	}
 
-#contact input {
+	input {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-}
-#contact label {
+	}
+
+	label {
 	margin: 2em 0 1em 0;
-}
-#contact textarea {
+	}
+
+	textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-}
+	}
 
-input[type="submit"]{
+	input[type="submit"]{
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
-	background-color: #1D6154;
+	background-color: $green;
 	margin : 2em auto ;
 	width: 180px;
 	text-align: center;
 	border-radius: 60px ;
+	}
 }
 
 footer nav ul {
