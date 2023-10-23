@@ -82,13 +82,15 @@ function setPreviousImage() {
 
   inputPhoto.onchange = evt => {
     const [files] = inputPhoto.files;
+    console.log(inputPhoto);
+    console.log(inputPhoto.files[0]);
+
     if (files) {
-      console.log("file");
       previewImage.src = URL.createObjectURL(files);
       console.log("file");
 
       previewImage.setAttribute("id", "preview-image");
-      inputContentImage.innerHTML = "";
+      // inputContentImage.innerHTML = "";
       inputContentImage.insertAdjacentHTML("afterbegin", previewImage.outerHTML);
     }
   }
@@ -125,18 +127,24 @@ function createProject() {
 
       const lastId = works.slice(-1)[0].id;
       const titleValue = document.getElementById("title").value;
-      const imageValue = document.getElementById("preview-image").src;
+      // const imageValue = document.getElementById("preview-image").src;
       const categoryValue = document.getElementById("category").value;
       const categoryId = (categories.find((category) => category.name === categoryValue)).id;
       const userId = window.localStorage.getItem("id");
       const userToken = window.localStorage.getItem("token").replace(/['"]+/g, '');
 
+      // enregister dans une constante l'url de l'image
+      // la console logger
+      // tester de passer le fetch
+      const imageUrl = document.getElementById("photo").files[0].name;
+
+
       const newWork = {
         id: lastId + 1,
         title: `${titleValue}`,
-        imageUrl: `${imageValue}`,
-        categoryId: `${categoryId}`,
-        userId: parseInt( userId),
+        imageUrl: `http://localhost:5678/images/${imageUrl}`,
+        categoryId: parseInt(categoryId),
+        userId: parseInt(userId),
       };
 
       // Création du newWork au format JSON
