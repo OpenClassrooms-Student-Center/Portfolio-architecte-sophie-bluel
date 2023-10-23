@@ -1,7 +1,7 @@
 // Importer les données de l'API
 import { works, categories } from './export-projets-api.js';
 
-// Importer les données de l'API
+// Importer les données WORKS de l'API
 works().then(data => {
   const galleryElement = document.querySelector('.gallery');
   let projets = '';
@@ -21,6 +21,7 @@ works().then(data => {
 });
 
 
+// Methode 1 pour filtrer - en suivant le cours
 genererPieces(projets);
 
 const boutonFiltrer = document.querySelector(".btn-filtrer-objets");
@@ -32,14 +33,6 @@ boutonFiltrer.addEventListener("click", function () {
     document.querySelector(".gallery").innerHTML = "";
     genererPieces(projetsFiltrees);
 });
-
-
-
-
-
-
-// Methode 1 pour filtrer - en suivant le cours
-
 
 
 
