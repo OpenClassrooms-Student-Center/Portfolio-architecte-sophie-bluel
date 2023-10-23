@@ -85,6 +85,8 @@ function setPreviousImage() {
     if (files) {
       console.log("file");
       previewImage.src = URL.createObjectURL(files);
+      console.log("file");
+
       previewImage.setAttribute("id", "preview-image");
       inputContentImage.innerHTML = "";
       inputContentImage.insertAdjacentHTML("afterbegin", previewImage.outerHTML);
@@ -130,11 +132,11 @@ function createProject() {
       const userToken = window.localStorage.getItem("token").replace(/['"]+/g, '');
 
       const newWork = {
-        "id": lastId + 1,
-        "title": `${titleValue}`,
-        "imageUrl": `${imageValue}`,
-        "categoryId": `${categoryId}`,
-        "userId": parseInt( userId),
+        id: lastId + 1,
+        title: `${titleValue}`,
+        imageUrl: `${imageValue}`,
+        categoryId: `${categoryId}`,
+        userId: parseInt( userId),
       };
 
       // Création du newWork au format JSON
