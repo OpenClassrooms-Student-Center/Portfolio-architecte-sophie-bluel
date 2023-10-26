@@ -1,143 +1,158 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-	<meta charset="UTF-8">
-	<title>Sophie Bluel - Architecte d'intérieur</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
-	<meta name="description" content="">
-	<link rel="stylesheet" href="./assets/style.css">
-	<script src="displayGallery.js" defer></script>
-	<script src="filtres.js" defer></script>
-	<script src="login.js" defer></script>
-	<script src="index.js" defer></script>
-	<script src="modal.js" defer></script>
+	<head>
+		<meta charset="UTF-8">
+		<title>Sophie Bluel - Architecte d'intérieur</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+		<meta name="description" content="">
+		<link rel="stylesheet" href="./assets/style.css">
+		<script src="displayGallery.js" defer></script>
+		<script src="filtres.js" defer></script>
+		<script src="login.js" defer></script>
+		<script src="index.js" defer></script>
+		<script src="displayModal.js" defer></script>
+		<script src="deletegallery.js" defer></script>
+		<script src="addGallery.js" defer></script>
 
-</head>
+	</head>
+	<body>
+		<!-- ********** RECTANGLE NOIR  ********** -->
+		<div id="blackRectangle" class="disconnected">
+			<button id="editButton" class="disconnected"><span><img alt="icone" src="./assets/icons/Vector.png"></span>Mode édition</a></button>
+		</div>
 
-
-<body>
-
-
-
-	<!-- ********** RECTANGLE NOIR  ********** -->
-
-	<div id="blackRectangle" class="disconnected">
-		<button id="editButton" class="disconnected"><span><img alt="icone" src="./assets/icons/Vector.png"></span>Mode édition</a></button>
-	</div>
-
-
-
-
-	<!-- ********** HEADER  ********** -->
-
-	<header>
-	
-		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
-	
-		<nav>
-			<ul>
+		<!-- ********** HEADER  ********** -->
+		<header>
+			<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+			<nav>
+				<ul>
 					<li id="projectsButton"  ><a href="index.html"> projets</a></li>
 					<li id="contactButton"  ><a href="contact.html"></a>contact</a></li>
-					<li id="loginButton" ><a href="login.html">Login</a></li>
-					<li id="logoutButton" class="disconnected"><a href="login.html">Logout</a></li>
+					<li id="loginButton" ><a href="login.html">login</a></li>
+					<li id="logoutButton" class="disconnected"><a href="login.html">logout</a></li>
 					<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
-			</ul>
-		</nav>
-	</header>
+				</ul>
+			</nav>
+		</header>
 
-	
-	<main>
+		<!-- ********** MAIN  ********** -->
+		<main>
 
-		<!-- ********** SECTION-INTRODUCTION  ********** -->
-		
-		<section id="introduction">
-			<figure>
-				<img src="./assets/images/sophie-bluel.png" alt="">
-			</figure>
-			<article>
-				<h2>Designer d'espace</h2>
-				<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
-				<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
-				<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
-			</article>
-		</section>
+			<!-- ********** SECTION-INTRODUCTION  ********** -->
+			<section id="introduction">
+				<figure>
+					<img src="./assets/images/sophie-bluel.png" alt="">
+				</figure>
+				<article>
+					<h2>Designer d'espace</h2>
+					<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
+					<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect 
+						de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, 
+						le respect du planning et du budget.</p>
+					<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
+				</article>
+			</section>
 
+			<!-- ********** SECTION-PORTFOLIO  ********** -->
+			<section id="portfolio">
+				<div id="headline">
+					<h2>Mes Projets</h2>
+					<button id="openModal" >
+						<a href="#containerModal"><span><img alt="icone" src="./assets/icons/iconModifier.txt"></span>modifier</a>
+					</button>
+				</div> 
 
-		<!-- ********** SECTION-PORTFOLIO  ********** -->
-
-		<section id="portfolio">
-			
-			<div id="headline">
-				<h2>Mes Projets</h2>
-				
-				<button id="openModal" ><a href="#containerModal"><span><img alt="icone" src="./assets/icons/iconModifier.txt"></span>modifier</button></a>
-			</div> 
-
-		<!-- ********** FENETRE MODALE  ********** -->
-
-			<aside id="containerModal"> <!--conteneur modale blanc-->
-				<div class="modalWrapper"> <!--conteneur de Bloc... et croix -->
-					
-					<span class="close" id="closeModal">&times;</span>
-					
-					<!--<div class="modal"> <!--Bloc titre/galerie/ligne/bouton-->
-						
-						<h2 id="modalTitle">Galerie photo</h2><!--titre modale-->
+				<!-- ********** PREMIERE FENETRE MODALE  ********** -->
+				<aside id="modal1"> <!--conteneur modale noir translucide-->
+					<div class="modalWrapper1"> <!--conteneur de Bloc... et croix -->
+						<span class="close" id="closeModal1">&times;</span>
+						<h2 class="modalTitle1">Galerie photo</h2><!--titre modale-->
 						<div class="galleryModal">
-							<!--galeriephoto-->
+							<!--contenuGaleriePhoto-->
 						</div >
 						<div class="greyLine">
-							<!--ligne grise-->
+							
 						</div>
-						<input id = "addPhoto" type="submit" value="Ajouter une photo">
-					
-					<!--</div>-->
-				</div>
-			</aside>
+						<a href="#modal2"><input id = "addPhoto" type="submit" value="Ajouter une photo"></a>
+					</div>
+				</aside>
 
-		<!-- ********** BOUTONS FILTRES  ********** -->	
+				<!-- ********** DEUXIEME FENETRE MODALE ********** -->
+				<aside id="modal2"> <!--conteneur modale noir translucide-->
+					<div class="modalWrapper2"> <!--conteneur de Bloc... et croix -->	
+						<span class="close" id="closeModal2">&times;</span>
+						<span class="arrow">&larr;</span>
+						<h2 class="modalTitle2">Ajout photo</h2>
+						<form id="uploadForm" action="#" method="post">
+							<fieldset>
+								<div class="addPhotoModal">
+									<img id="photoLoad" src='./assets/icons/picture-svgrepo-com 1.png' class="image-preview" alt=""><br>
+									<button id="ajouterPhoto">
+										<label for="image" class="custom-file-upload">+ Ajouter photo</label>
+										<input type="file" id="image" name="image" accept="image/png, image/jpeg" max="4000">
+									</button><br>
+									<p>jpg, png : 4mo max</p><br>
+								</div>
+							</fieldset>
+							<fieldset>
+								<label for="title">Titre</label> <br>
+								<input class="modalInput2" type="text" name="title" id="title"> <br>
+							</fieldset>
+							<fieldset>
+								<label for="category">Catégorie</label><br>
+								<select class="modalInput2" name="category" id="category">
+									<option value="1">Objets</option>
+									<option value="2">Appartements</option>
+									<option value="3">Hôtels & Restaurants</option>
+								</select><br>
+							</fieldset>
+							<div class="greyLine">
+								<!--ligne grise-->
+							</div>
+							<input id="inputValider" type="submit" value="Valider"><br>
+						</form>
+					</div>
+				</aside>
 
-			<div class="btn">
-				<button class="button btnGlobal" id = "btnGlobal" type="button">Tous</button>
-				<button class="button btnObjets" id = "btnObjets" type="button">Objets</button>
-				<button class="button btnAppartements" id = "btnAppartements" type="button">Appartements</button>
-				<button class="button btnHotels" id = "btnHotels" type="button">Hôtels & restaurants</button>
-			</div>	 
-			<div class="gallery">
-			</div>	 
-		</section>
+				<!-- ********** BOUTONS FILTRES  ********** -->	
+				<div class="btn">
+					<button class="button btnGlobal" id = "btnGlobal" type="button">Tous</button>
+					<button class="button btnObjets" id = "btnObjets" type="button">Objets</button>
+					<button class="button btnAppartements" id = "btnAppartements" type="button">Appartements</button>
+					<button class="button btnHotels" id = "btnHotels" type="button">Hôtels & restaurants</button>
+				</div>	 
+				<div class="gallery">
+					<!--contenuGaleriePhotoFiltrée-->
+				</div>	 
+			</section>
 
-		<!-- ********** SECTION-CONTACT ********** -->
+			<!-- ********** SECTION-CONTACT ********** -->
+			<section id="contact">
+				<h2>Contact</h2>
+				<p>Vous avez un projet ? Discutons-en !</p>
+				<form action="#" method="post">
+					<label for="name">Nom</label>
+					<input type="text" name="name" id="name">
+					<label for="email">Email</label>
+					<input type="email" name="email" id="email">
+					<label for="message">Message</label>
+					<textarea name="message" id="message" cols="30" rows="10"></textarea>
+					<input type="submit" value="Envoyer">
+				</form>
+			</section>
+		</main>
 
-		<section id="contact">
-			<h2>Contact</h2>
-			<p>Vous avez un projet ? Discutons-en !</p>
-			<form action="#" method="post">
-				<label for="name">Nom</label>
-				<input type="text" name="name" id="name">
-				<label for="email">Email</label>
-				<input type="email" name="email" id="email">
-				<label for="message">Message</label>
-				<textarea name="message" id="message" cols="30" rows="10"></textarea>
-				<input type="submit" value="Envoyer">
-			</form>
-		</section>
+		<!-- ********** FOOTER  ********** -->
+		<footer>
+			<nav>
+				<ul>
+					<li>Mentions Légales</li>
+				</ul>
+			</nav>
+		</footer>
 
-
-	</main>
-
-	<!-- ********** FOOTER  ********** -->
-
-	<footer>
-		<nav>
-			<ul>
-				<li>Mentions Légales</li>
-			</ul>
-		</nav>
-	</footer>
-
-</body>
+	</body>
 </html>
