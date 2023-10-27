@@ -125,6 +125,9 @@ li:hover {
 }
 #introduction p {
   margin-bottom: 0.5em;
+  font-size: 119%;
+  text-align: justify;
+  line-height: 140%;
 }
 
 #portfolio h2 {
@@ -132,30 +135,13 @@ li:hover {
   margin-bottom: 1em;
 }
 
-.btn-filtrer {
-  height: 37px;
-  font-family: "Syne";
-  font-size: 16px;
-  font-weight: 700;
-  color: #1D6154;
-  line-height: normal;
-  justify-content: center;
-  text-align: center;
-  padding: 9px 10px;
-  border-radius: 60px;
-  border: 1px solid #1D6154;
-  cursor: pointer;
-  background-color: #ffffff;
-  transition: all 0.5s ease;
-}
-
-.button-filters-wait {
+.button-filter {
   display: flex;
   justify-content: center;
   gap: 15px;
   margin: 51px 0;
 }
-.button-filters-wait button {
+.button-filter button {
   height: 37px;
   font-family: "Syne";
   font-size: 16px;
@@ -164,14 +150,14 @@ li:hover {
   line-height: normal;
   justify-content: center;
   text-align: center;
-  padding: 9px 10px;
-  border-radius: 60px;
-  border: 1px solid #1D6154;
+  padding: 8px 10px;
   cursor: pointer;
   background-color: #ffffff;
+  border-radius: 60px;
+  border: 1px solid #1D6154;
   transition: all 0.5s ease;
 }
-.button-filters-wait button:hover {
+.button-filter button:hover {
   background-color: #1D6154;
   color: #ffffff;
 }

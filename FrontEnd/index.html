@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-
 	<meta charset="UTF-8">
 	<title>Sophie Bluel - Architecte d'intérieur</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,20 +8,18 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
-
+	<!-- Fichiers CSS -->
 	<link rel="stylesheet" href="./assets/scss/layout.css">
 	<link rel="stylesheet" href="./assets/scss/web_elements.css">
 	<link rel="stylesheet" href="./assets/scss/modal.css">
-
-
 	<!-- Fichiers JS -->
-	<script type="module" src="./js/export-projets-api.js" defer></script>
-	<script type="module" src="./js/projets.js" defer></script>
-
+	<!-- A script element with a defer attribute must not have a type attribute with the value module.-->
+	<script type="module" src="./js/export-projets-api.js"></script>
+	<script type="module" src="./js/projets.js"></script>
 </head>
-
 <body>
-<!-- HEADER start -->
+
+<!-- Header Start -->
 <header>
 	<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
 	<nav>
@@ -34,10 +31,9 @@
 		</ul>
 	</nav>
 </header>
+<!-- Header End -->
 
-<!-- HEADER  end -->
-
-<!-- MAIN start -->
+<!-- Main Start -->
 <main>
 	<section id="introduction">
 		<figure>
@@ -51,31 +47,22 @@
 		</article>
 	</section>
 
-	<!-- PORTFOLIO start-->
+	<!-- Portfolio Start -->
 	<section id="portfolio">
 		<h2>Mes Projets</h2>
-
-		<!-- BOUTONS DES FILTRES start -->
-		<div class="button-filters-wait">
-			
-			<button class="btn-filtrer-tous">Tous</button>
-			<button class="btn-filtrer-objets">Objets</button>
-			<button class="btn-filtrer-appartements">Appartements</button>
-			<button class="btn-filtrer-hotels">Hotels & restaurants</button>
-
-
+		<!-- Boutons Filtres Start -->
+		<div class="button-filter">
+			<!-- Affichage des projets de l'API -->
 		</div>
-		<!-- BOUTONS DES FILTRES end -->
-
+		<!-- Boutons Filtres End -->
 		<div class="gallery">
 			<div class="projet">	
 			</div>
-		</div>
-		
+		</div>		
 	</section>
-	<!-- PORTFOLIO end -->
+	<!-- Portfolio End -->
 
-	<!-- CONTACT start -->
+	<!-- Contact Start -->
 	<section id="contact">
 		<h2>Contact</h2>
 		<p>Vous avez un projet ? Discutons-en !</p>
@@ -89,11 +76,11 @@
 			<input type="submit" value="Envoyer">
 		</form>
 	</section>
-	<!-- CONTACT end -->
+	<!-- Contact End -->
 </main>
-<!-- MAIN end -->
+<!-- Main End -->
 
-<!-- FOOTER start -->
+<!-- Footer Start -->
 <footer>
 	<nav>
 		<ul>
@@ -101,6 +88,6 @@
 		</ul>
 	</nav>
 </footer>
-<!-- FOOTER end -->
+<!-- Footer End -->
 </body>
 </html>

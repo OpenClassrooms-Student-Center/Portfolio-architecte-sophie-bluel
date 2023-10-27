@@ -122,6 +122,9 @@ li:hover {
 
 	p {
 	margin-bottom: 0.5em;
+	font-size: 119%;
+	text-align: justify;
+	line-height: 140%;
 	}
 }
 
@@ -132,32 +135,11 @@ li:hover {
 }
 
 
-.btn-filtrer {
-	height: 37px;
-	font-family: 'Syne';
-	font-size: 16px;
-	font-weight: 700;
-	color:$green;
-	line-height: normal;
-	justify-content: center;
-	text-align: center;
-	padding: 9px 10px;
-	border-radius: 60px;
-	border: 1px solid $green;
-	cursor: pointer;
-	background-color: $white;
-	transition: all 0.5s ease;
-}
-
-.button-filters-wait {
+.button-filter {
 	display: flex;
 	justify-content: center;
 	gap: 15px;
 	margin: 51px 0;
-
-
-
-
 
 	& button {
         height: 37px;
@@ -168,11 +150,11 @@ li:hover {
         line-height: normal;
         justify-content: center;
         text-align: center;
-        padding: 9px 10px;
-        border-radius: 60px;
-        border: 1px solid $green;
+        padding: 8px 10px;
         cursor: pointer;
         background-color: $white;
+		border-radius: 60px;
+        border: 1px solid $green;
         transition: all 0.5s ease;
       }
 
