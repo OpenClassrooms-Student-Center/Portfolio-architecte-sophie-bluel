@@ -94,6 +94,9 @@ nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
 }
+nav li img {
+	height: 20px;
+}
 
 li:hover {
 	color: #B1663C;
@@ -185,4 +188,9 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em
 }
-
+/*------------------ galerie -------------*/
+.gallery figure figcaption {
+	padding-top: 0.5rem;
+	font-size: 1rem;
+	font-weight: 400;
+}
