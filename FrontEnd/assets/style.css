@@ -189,3 +189,9 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em
 }
+/*------------------ galerie -------------*/
+.gallery figure figcaption {
+	padding-top: 0.5rem;
+	font-size: 1rem;
+	font-weight: 400;
+}
