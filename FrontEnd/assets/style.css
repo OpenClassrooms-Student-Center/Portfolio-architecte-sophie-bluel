@@ -162,7 +162,6 @@ margin: auto;
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 #contact label {
 	margin: 2em 0 1em 0;
@@ -172,15 +171,25 @@ margin: auto;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-input[type="submit"]{
+.rounded-btn{
 	font-family: 'Syne';
 	font-weight: 700;
-	color: white;
-	background-color: #1D6154;
 	margin : 2em auto ;
 	width: 180px;
 	text-align: center;
 	border-radius: 60px ;
+	min-width: 100px;
+
+}
+
+.full-color-btn{
+	color: white;
+	background-color: #1D6154;
+	border: none;
+}
+
+input[type="submit"] {
+	width: 180px;
 }
 
 footer nav ul {
@@ -188,9 +197,32 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em
 }
+
 /*------------------ galerie -------------*/
 .gallery figure figcaption {
 	padding-top: 0.5rem;
 	font-size: 1rem;
 	font-weight: 400;
+}
+
+/*------------------ filtres -------------*/
+.filters-container {
+	display: flex;
+	justify-content: center;
+	padding: 2.5rem 0 2.5rem 0;
+}
+
+.filters-container button {
+	height: 50px;
+	font-size: 1.2em;
+	padding-left: 2rem;
+	padding-right: 2rem;
+	cursor: pointer;
+	margin: 0 0.5rem;
+}
+
+.filter-btn {
+	color:  #1D6154;
+	background-color: white;
+	border: #1D6154 solid 2px;
 }
