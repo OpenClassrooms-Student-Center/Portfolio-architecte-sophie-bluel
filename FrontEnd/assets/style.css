@@ -62,6 +62,15 @@ section {
 	margin: 50px 0
 }
 
+a {
+	color: black;
+	text-decoration: none;
+}
+a:hover {
+	color: #B1663C;
+}
+
+
 h1{
 	display: flex;
 	flex-direction: column;
@@ -88,7 +97,7 @@ nav ul {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
-
+	cursor: pointer;
 }
 nav li {
 	padding: 0 10px;
@@ -121,7 +130,7 @@ li:hover {
 #introduction article {
 	flex: 1
 }
-#introduction h2 {
+#introduction h2, #login h2 {
 	margin-bottom: 1em;
 }
 
@@ -144,31 +153,31 @@ li:hover {
 	width: 100%;
 
 }
-#contact {
+#contact, #login {
 	width: 50%;
 margin: auto;
 }
-#contact > * {
+#contact > *, #login > * {
 	text-align: center;
 
 }
-#contact h2{
+#contact h2 {
 	margin-bottom: 20px;
 }
-#contact form {
+#contact form, #login_form  {
 	text-align: left;
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
 }
 
-#contact input {
+#contact input, #login input {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#contact label {
+#contact label, #login_form label {
 	margin: 2em 0 1em 0;
 }
 #contact textarea {
@@ -230,4 +239,32 @@ footer nav ul {
 	color:  #1D6154;
 	background-color: white;
 	border: #1D6154 solid 2px;
+}
+/*------------------ login -------------*/
+#login_form {
+	display: flex;
+	flex-direction: column;
+}
+
+#message_erreur {
+	color: red;
+}
+
+#login {
+	padding-top: 7rem;
+	margin-bottom: 20rem;
+}
+#login a {
+	display: block;
+}
+#login_form label {
+	font-weight: 500;
+}
+
+#btn_connection {
+	width: 250px;
+}
+
+.login_active {
+	font-weight: 600;
 }

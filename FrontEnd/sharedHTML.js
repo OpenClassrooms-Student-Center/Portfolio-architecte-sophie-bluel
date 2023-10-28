@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <ul>
             <li>projets</li>
             <li>contact</li>
-            <li>login</li>
+            <li class="login"><a href="login.html">login</a></li>
             <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
         </ul>
     </nav>
