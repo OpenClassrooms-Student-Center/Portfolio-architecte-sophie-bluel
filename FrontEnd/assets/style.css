@@ -28,21 +28,25 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+
 body {
 	line-height: 1;
-	
 }
+
 ol, ul {
 	list-style: none;
 }
+
 blockquote, q {
 	quotes: none;
 }
+
 blockquote:before, blockquote:after,
 q:before, q:after {
 	content: '';
 	content: none;
 }
+
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
@@ -57,25 +61,23 @@ body {
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 	background: #FFFEF8;
-	
 }
+
 header {
 	display: flex;
 	justify-content: space-between;
 	margin-top: 50px;
 	height: 42px;
 }
+
 #formContainer {
 	height: 743px;
-
 }
 
 footer {
 	height: 60px;
 	background-color: white;
-	
 	width: 1140px;
-	
 }
 
 footer nav ul {
@@ -105,7 +107,6 @@ h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
-
 }
 
 h2{
@@ -114,19 +115,22 @@ h2{
 	font-size: 30px;
 	color: #1D6154
 }
+
 nav ul {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
-
 }
+
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
+	color: rgb(85, 26, 139);
+	cursor: context-menu;
 }
 
-li:hover {
-	color: #B1663C;
+nav li:hover {
+	font-weight: bold;
 }
 
 a {
@@ -134,6 +138,7 @@ a {
 }
 
 /********** HEADER INDEX HTML **********/
+
 #blackRectangle {
 	box-sizing: border-box;
     background-color: black;
@@ -143,6 +148,7 @@ a {
     align-items: center;
     justify-content: center;
 }
+
 #editButton {
 	display: flex;
     justify-content: center;
@@ -151,10 +157,7 @@ a {
 	border: none;
 	background-color: transparent;
     color: white;
-
 }
-
-
 
 /********** SECTION-INTRODUCTION **********/
 
@@ -162,9 +165,11 @@ a {
 	display: flex;
 	align-items: center;
 }
+
 #introduction figure {
 	flex: 1
 }
+
 #introduction img {
 	display: block;
 	margin: auto;
@@ -174,6 +179,7 @@ a {
 #introduction article {
 	flex: 1
 }
+
 #introduction h2 {
 	margin-bottom: 1em;
 }
@@ -192,7 +198,6 @@ a {
 #inputLogin h2 {
 	text-align: center;
 	margin-top: 132px;
-
 }
 
 #inputLogin a {
@@ -200,14 +205,13 @@ a {
 	font-size: 0.875em;
     text-decoration: underline;
     color: #3d3d3d;
-    
 }
+
 #inputLogin form {
 	text-align: left;
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
-
 }
 
 #inputLogin input {
@@ -215,9 +219,7 @@ a {
 	width: 379px;
 	font-size: 0.875em;
 	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-
-	
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);	
 }
 
 #inputLogin input[type="submit"]{
@@ -227,17 +229,19 @@ a {
 	margin-bottom: 30px;
 }
 
-
 #inputLogin label {
 	margin: 2em 0 1em 0;
 	margin-bottom: 7px;
-	margin-top: 30px
-
-;
+	margin-top: 30px;
 }
+
 #inputLogin textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+#projectsButton a {
+	cursor: context-menu;
 }
 
 /********** SECTION-PORTFOLIO **********/
@@ -250,13 +254,12 @@ a {
     margin-top: 90px;
     margin-bottom: 25px;
     align-items: center;
-
 }
 
 #headline img {
 	width: 15px;
-    height: 15px
-
+    height: 15px;
+	margin-right: 10px;
 }
 
 #openModal {
@@ -267,8 +270,6 @@ border: #FFFEF8;
 gap: 15px;
 font-size: 14px;
 cursor: pointer;
-
-
 }
 
 #portfolio{
@@ -292,7 +293,6 @@ cursor: pointer;
 	height: 37px;;
 	border-radius: 60px ;
 	border: 1px solid #1D6154;
-		
 }
 
 .btn{
@@ -302,13 +302,11 @@ cursor: pointer;
 	justify-content: center;
 	width: 585px;
 	margin-bottom: 15px;
-	
 }
 
 .btnGlobal {
 	background-color: #1D6154;
 	color: white;
-	
 }
 
 .gallery {
@@ -321,7 +319,6 @@ cursor: pointer;
 
 .gallery img {
 	width: 100%;
-
 }
 
 /********** SECTION-CONTACT **********/
@@ -329,17 +326,18 @@ cursor: pointer;
 #contact {
 	width: 50%;
 	margin: auto; 
-
 }
 
 #contact > * {
 	text-align: center;
+}
 
+#contactButton a {
+cursor: context-menu;
 }
 
 #contact h2{
 	margin-bottom: 20px;
-
 }
 
 #contact form {
@@ -347,7 +345,6 @@ cursor: pointer;
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
-
 }
 
 #contact input {
@@ -355,17 +352,15 @@ cursor: pointer;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-
 }
+
 #contact label {
 	margin: 2em 0 1em 0;
-
 }
 
 #contact textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-
 }
 
 input[type="submit"]{
@@ -377,23 +372,23 @@ input[type="submit"]{
 	width: 180px;
 	text-align: center;
 	border-radius: 60px ;
-	
+}
+
+#btnEnvoyer:hover {
+	background-color:#0E2F28;
 }
 
 .disconnected {
 	display: none;
 }
 
-
 /********** PREMIERE FENETRE MODALE **********/
 
 #addPhoto {		/* ouverture deuxième modale */
-
 	height: 36px;
     width: 237px;
     border: none;
 	cursor: pointer;
-
 }
 
 #modal1 {
@@ -407,9 +402,7 @@ input[type="submit"]{
 	justify-content: center;
     align-items: center;
 	box-sizing: border-box;
-	
 }
-
 
 .close {
     position: absolute;
@@ -421,7 +414,6 @@ input[type="submit"]{
 }
 
 .containerDelete {
-
 	background-color: black;
     height: 17px;
     width: 17px;
@@ -429,7 +421,6 @@ input[type="submit"]{
     right: 5px;
     top: 5px;
 	border-radius: 3px;
-
 }
 
 .deleteIcons {
@@ -443,14 +434,12 @@ input[type="submit"]{
   }
 
 .galleryModal {
-	
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
 	padding-bottom: 60px;
     padding-top: 40px;
-
 }
 
 .greyLine {
@@ -459,7 +448,6 @@ input[type="submit"]{
     background-color: #B3B3B3; 
 	box-sizing: border-box;
 	margin-bottom: 5px
-
 }
 
 .modalPhoto {
@@ -469,7 +457,6 @@ input[type="submit"]{
 	justify-content: left;
 	object-fit: cover;
 	position: relative;
-
 }
 
 .modalTitle1  {
@@ -484,7 +471,6 @@ input[type="submit"]{
 	color: black;
 	font-weight: 400;
 }
-
 
 .modalWrapper1 {
     background-color: #fff;
@@ -503,10 +489,23 @@ input[type="submit"]{
 	justify-content: center;
 	align-items: center; 
 	flex-direction: column;
-
 }
 
 /********** DEUXIEME FENETRE MODALE **********/
+
+#ajouterPhoto {
+	width: 173px;
+	height: 36px;
+	border-radius: 50px;
+	background: #CBD6DC;
+	color: #306685;
+	text-align: center;
+	font-family: Work Sans;
+	font-size: 14px;
+	font-weight: 500;
+	border: none;
+    padding: 5px;
+}
 
 #image {
 	height: 36px;
@@ -522,11 +521,7 @@ input[type="submit"]{
 	border: none;
 	cursor: pointer;
 	display: none;
-	
-	
 }
-
-
 
 #inputValider {
 height: 36px;
@@ -535,7 +530,6 @@ border-radius: 50px;
 background: #A7A7A7;
 border: none;
 cursor: pointer;
-
 }
 
 #modal2 {
@@ -549,28 +543,27 @@ cursor: pointer;
 	justify-content: center;
     align-items: center;
 	box-sizing: border-box;
-	
 }
 
 #photoLoad {
-
-	margin-top: 20px;
+	margin-top: 40px;
+	max-height: 100px;
 }
+
 .addPhotoModal {
 	height: 169px;
-	width: 420px;
+	max-width: 420px;
 	background: #E8F1F6;
 	margin-bottom: 30px;
 	display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-	
-	
 }
+
 .addPhotoModal p {
 	font-size: 10px;
-	padding-bottom: 10px;
+	padding-bottom: 30px;
 }
 
 .arrow {
@@ -582,27 +575,17 @@ cursor: pointer;
 	box-sizing: border-box;
 }
 
-.image-preview {
-	
-	max-height: 100px;
-    object-fit: cover;
-    display: block;
-    
-    margin-bottom: 5px;
-	
-  }
-  
 .modalTitle2  {
 	padding-top: 60px;
 	height: 30px;
 	width: 173px;
 	font-size: 26px;
 	font-family: 'Work Sans';
-	
 	color: black;
 	font-weight: 400;
 	padding-bottom: 40px;
 }
+
 .modalWrapper2 {
     background-color: #fff;
     padding: 20px;
@@ -617,22 +600,14 @@ cursor: pointer;
 	top: 20%;
 	left: 40%;
 	display: flex;
-	
 	align-items: center; 
 	flex-direction: column;
-
 }
-
-
-
-
 
 #modal2 form {
 	text-align: left;
-	
 	display: flex;
 	flex-direction: column;
-
 }
 
 .modalInput2 {
@@ -642,39 +617,21 @@ cursor: pointer;
 	margin-top: 10px;
     margin-bottom: 30px;
 	font-family: Work Sans;
-	
 	padding-left: 10px;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-
 }
+
 #modal2 label {
 	margin: 2em 0 1em 0;
 	font-weight: 500;
-
+	cursor: pointer;
 }
- fieldset {
+
+fieldset {
 	text-align: left;
- }
-/*
-input[type="submit"]{
-	font-family: 'Syne';
-	font-weight: 700;
-	color: white;
-	background-color: #1D6154;
-	margin : 2em auto ;
-	width: 180px;
-	text-align: center;
-	border-radius: 60px ;
-	
 }
 
-*/
-
-
-
-
-
-
-/********** TROISIEME FENETRE MODALE **********/
-  
+select.modalInput2 {
+    text-indent: 5px; 
+}

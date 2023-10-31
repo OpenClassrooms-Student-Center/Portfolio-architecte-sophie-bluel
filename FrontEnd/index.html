@@ -21,7 +21,7 @@
 	<body>
 		<!-- ********** RECTANGLE NOIR  ********** -->
 		<div id="blackRectangle" class="disconnected">
-			<button id="editButton" class="disconnected"><span><img alt="icone" src="./assets/icons/Vector.png"></span>Mode édition</a></button>
+			<button id="editButton" class="disconnected"><span><img alt="icone" src="./assets/icons/Vector.png"></span>Mode édition</button>
 		</div>
 
 		<!-- ********** HEADER  ********** -->
@@ -30,7 +30,7 @@
 			<nav>
 				<ul>
 					<li id="projectsButton"  ><a href="index.html"> projets</a></li>
-					<li id="contactButton"  ><a href="contact.html"></a>contact</a></li>
+					<li id="contactButton"  ><a href="#">contact</a></li>
 					<li id="loginButton" ><a href="login.html">login</a></li>
 					<li id="logoutButton" class="disconnected"><a href="login.html">logout</a></li>
 					<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
@@ -90,11 +90,11 @@
 							<fieldset>
 								<div class="addPhotoModal">
 									<img id="photoLoad" src='./assets/icons/picture-svgrepo-com 1.png' class="image-preview" alt=""><br>
-									<button id="ajouterPhoto">
+									<button id="ajouterPhoto" type="button">
 										<label for="image" class="custom-file-upload">+ Ajouter photo</label>
 										<input type="file" id="image" name="image" accept="image/png, image/jpeg" max="4000">
 									</button><br>
-									<p>jpg, png : 4mo max</p><br>
+									<p class="addPhotoParagraph">jpg, png : 4mo max</p><br>
 								</div>
 							</fieldset>
 							<fieldset>
@@ -103,7 +103,8 @@
 							</fieldset>
 							<fieldset>
 								<label for="category">Catégorie</label><br>
-								<select class="modalInput2" name="category" id="category">
+								<select  class="modalInput2" name="category" id="category">
+									<option disabled selected ></option>
 									<option value="1">Objets</option>
 									<option value="2">Appartements</option>
 									<option value="3">Hôtels & Restaurants</option>
@@ -140,7 +141,7 @@
 					<input type="email" name="email" id="email">
 					<label for="message">Message</label>
 					<textarea name="message" id="message" cols="30" rows="10"></textarea>
-					<input type="submit" value="Envoyer">
+					<input type="submit" id="btnEnvoyer" value="Envoyer">
 				</form>
 			</section>
 		</main>

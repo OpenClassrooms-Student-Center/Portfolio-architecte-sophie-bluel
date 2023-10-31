@@ -11,26 +11,30 @@ document.addEventListener('DOMContentLoaded', function () {
         password
       }
 
-      // Récupération des valeurs de l'API
-      const response = await fetch('http://localhost:5678/api/users/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(user)
-      })
+      try {
+        // Récupération des valeurs de l'API
+        const response = await fetch('http://localhost:5678/api/users/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(user)
+        })
 
-      if (response.ok) {
-        const data = await response.json()
-        if (data.token) {
-          const token = data.token
-          localStorage.setItem('token', token)
-          localStorage.setItem('isLoggedIn', true)
-          window.location.href = 'index.html'
-          alert("L'utilisateur est connecté")
+        if (response.ok) {
+          const data = await response.json()
+          if (data.token) {
+            const token = data.token
+            localStorage.setItem('token', token)
+            localStorage.setItem('isLoggedIn', true)
+            window.location.href = 'index.html'
+            alert("L'utilisateur est connecté")
+          }
+        } else {
+          alert('Vos identifiants ne sont pas valides')
         }
-      } else {
-        alert('Vos identifiants ne sont pas valides')
+      } catch (error) {
+        console.error('Une erreur s\'est produite lors de la connexion : ' + error)
       }
     })
   }

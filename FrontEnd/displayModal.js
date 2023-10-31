@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-// Fonction pour ouvrir une modale
+  // Fonction pour ouvrir une modale
   function openModal (modal) {
     modal.style.display = 'block'
   }
@@ -9,13 +9,6 @@ document.addEventListener('DOMContentLoaded', function () {
     modal.style.display = 'none'
   }
 
-  // Fonction pour retour sur fenêtre #modal1
-  function arrowReturn (modal1) {
-    // On masque la fenêtre actuelle
-    modal2.style.display = 'none'
-    // On affiche la fenêtre précédente
-    modal1.style.display = 'block'
-  }
   // Récupération des boutons de la première fenêtre modale
   const modal1 = document.getElementById('modal1')
   const openButton1 = document.getElementById('openModal')
@@ -30,16 +23,17 @@ document.addEventListener('DOMContentLoaded', function () {
   // Ajout d'un AddEventListener pour l'ouverture de la première fenêtre modale
   openButton1.addEventListener('click', () => {
     openModal(modal1)
-  })
+  });
 
   // Ajout d'un AddEventListener pour l'ouverture de la deuxième fenêtre modale
   openButton2.addEventListener('click', () => {
     openModal(modal2)
-  })
+  });
 
   // Ajout d'un addEventListener pour retour #modal1 en cliquant sur .arrow
   arrowSpan.addEventListener('click', () => {
-    arrowReturn(modal1)
+    closeModal(modal2) // Ferme la modale actuelle
+    openModal(modal1) // Ouvre la modale précédente
   })
 
   // Ajout d'un AddEvenetListener pour la fermeture de la première fenêtre modale
@@ -52,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
     closeModal(modal2)
   })
 
-  // Fermeture de la modale si l'utilisateur clique en dehors de la première ou de la deuxième fenêtre modale.
+  // Fermeture de la modale si l'utilisateur clique en dehors des modales.
   window.addEventListener('click', (event) => {
     if (event.target === modal1) {
       closeModal(modal1)
