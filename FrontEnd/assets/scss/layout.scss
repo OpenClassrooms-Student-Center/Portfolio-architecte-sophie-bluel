@@ -1,8 +1,6 @@
 /* Colors */
 @import 'web_elements';
 
-
-
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -23,11 +21,17 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+
+html {
+	box-sizing: border-box;
+  }
+
 body {
 	line-height: 1;
 }
@@ -49,7 +53,8 @@ table {
 /** end reset css**/
 body {
 	max-width: 1140px;
-	margin:auto;
+  	height: auto;
+  	margin: auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 }
@@ -75,7 +80,6 @@ h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
-;
 }
 
 h2{
@@ -89,12 +93,14 @@ nav ul {
 	align-items: center;
 	list-style-type: none;
 
+
 }
 nav li a {
-	padding: 0 10px;
+	padding: 0 30px;
 	font-size: 1.2em;
 	color:black;
 	text-decoration: none;
+	
 }
 
 
@@ -183,12 +189,19 @@ nav li a:hover {
 	width: 100%;}	
 }
 
+
 #contact {
-	width: 50%;
+width: 50%;
+}
+
+#connexion {
+	width: 34%;
+}
+
+
+#contact, #connexion {
 	margin: auto;
- 		> * {
-	text-align: center;
-	}
+
 
 	h2{
 	margin-bottom: 20px;}
@@ -205,6 +218,7 @@ nav li a:hover {
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	padding-left: 10px
 	}
 
 	label {
@@ -216,21 +230,43 @@ nav li a:hover {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 	}
 
-	input[type="submit"]{
+	.submit {
 	font-family: 'Syne';
 	font-weight: 700;
+	font-size: 14px;
 	color: white;
 	background-color: $green;
 	margin : 2em auto ;
 	width: 180px;
 	text-align: center;
-	border-radius: 60px ;
+	border-radius: 60px;
+	height: 36px;
+	cursor: pointer;
+	transition: all 0.4s ease;
+	}
+
+	.submit:hover {
+	background-color: $green-dark;
+	transform: scale(1.1);
+	}
+
+	a.forgot-password {
+	color: $green-dark;
+	text-align: center;
+	}
+	
+	a.forgot-password:hover {
+	color: $green
 	}
 }
 
-footer nav ul {
+footer {
 	display: flex;
 	justify-content: flex-end;
-	margin: 2em
+	align-items: last baseline;
+	margin: 2em;
+	height: 15vh;
+		nav ul {
+		margin:auto;
+		}
 }
-

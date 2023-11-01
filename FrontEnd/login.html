@@ -12,11 +12,9 @@
 
 	<link rel="stylesheet" href="./assets/scss/layout.css">
 	<link rel="stylesheet" href="./assets/scss/web_elements.css">
-	<link rel="stylesheet" href="./assets/scss/login.css">
 
 	<!-- Fichiers JS -->
-	<script type="module" src="./js/export-projets-api.js"></script>
-	<script type="module" src="./js/projets.js"></script>
+	<script type="module" src="./js/export-login-api.js"></script>
 	<script type="module" src="./js/login.js"></script>
 
 </head>
@@ -35,29 +33,25 @@
 	</nav>
 </header>
 <main>
-	<h2>Login Form</h2>
-
-	<form id="login">
-
-	
-	 
-		<label for="loginName"><b>Login</b></label>
-		<input type="text" placeholder="Votre login" name="logiName" required>
-	
-		<label for="psw"><b>Mot de passe</b></label>
-		<input type="password" placeholder="Votre mot de passe" name="psw" required>
-			
-		<button type="submit">Login</button>
-
-
-	
-
-	</form>
-
+	<!-- LOGIN FORM Start -->
+	<section id="connexion">
+		<h2>Log Inn</h2>
+		<form id="login-form">
+			<label for="email">Email</label>
+			<input type="email" name="email" id="email">
+			<label for="login-password">Mot de passe</label>
+			<input type="password" name="login-password" id="login-password">		
+			<input type="submit" class="submit" id="btn-login" value="Se connecter">
+			<a href="#" class="forgot-password">Mot de passe oublié</a>
+		</form>
+	</section>
+	<!-- LOGIN FORM End -->
 </main>
 <!-- MAIN end -->
 
 <!-- FOOTER start -->
+
+
 <footer>
 	<nav>
 		<ul>
@@ -65,6 +59,7 @@
 		</ul>
 	</nav>
 </footer>
+
 <!-- FOOTER end -->
 </body>
 </html>

@@ -1,5 +1,5 @@
 /* Colors */
-/****** Colors ***********/
+/****** COLORS ***********/
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -25,6 +25,10 @@ time, mark, audio, video {
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
+}
+
+html {
+  box-sizing: border-box;
 }
 
 body {
@@ -53,6 +57,7 @@ table {
 /** end reset css**/
 body {
   max-width: 1140px;
+  height: auto;
   margin: auto;
   font-family: "Work Sans";
   font-size: 14px;
@@ -97,7 +102,7 @@ nav ul {
 }
 
 nav li a {
-  padding: 0 10px;
+  padding: 0 30px;
   font-size: 1.2em;
   color: black;
   text-decoration: none;
@@ -177,48 +182,73 @@ nav li a:hover {
 
 #contact {
   width: 50%;
+}
+
+#connexion {
+  width: 34%;
+}
+
+#contact, #connexion {
   margin: auto;
 }
-#contact > * {
-  text-align: center;
-}
-#contact h2 {
+#contact h2, #connexion h2 {
   margin-bottom: 20px;
 }
-#contact form {
+#contact form, #connexion form {
   text-align: left;
   margin-top: 30px;
   display: flex;
   flex-direction: column;
 }
-#contact input {
+#contact input, #connexion input {
   height: 50px;
   font-size: 1.2em;
   border: none;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  padding-left: 10px;
 }
-#contact label {
+#contact label, #connexion label {
   margin: 2em 0 1em 0;
 }
-#contact textarea {
+#contact textarea, #connexion textarea {
   border: none;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#contact input[type=submit] {
+#contact .submit, #connexion .submit {
   font-family: "Syne";
   font-weight: 700;
+  font-size: 14px;
   color: white;
   background-color: #1D6154;
   margin: 2em auto;
   width: 180px;
   text-align: center;
   border-radius: 60px;
+  height: 36px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+#contact .submit:hover, #connexion .submit:hover {
+  background-color: #0e2f28;
+  transform: scale(1.1);
+}
+#contact a.forgot-password, #connexion a.forgot-password {
+  color: #0e2f28;
+  text-align: center;
+}
+#contact a.forgot-password:hover, #connexion a.forgot-password:hover {
+  color: #1D6154;
 }
 
-footer nav ul {
+footer {
   display: flex;
   justify-content: flex-end;
+  align-items: last baseline;
   margin: 2em;
+  height: 15vh;
+}
+footer nav ul {
+  margin: auto;
 }
 
 /*# sourceMappingURL=layout.css.map */

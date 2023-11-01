@@ -31,7 +31,7 @@ const displayGallery = (projet) => {
  * le nom des éléments du tableau categorie */
 
 const displayFilters = (categorie) => {
-    document.querySelector(".button-filter").innerHTML = "";
+    document.querySelector(".button-filter").innerHTML = '';
     const buttonAll = document.createElement("button");
     buttonAll.innerHTML = "Tous";
     filter.appendChild(buttonAll);

@@ -1,6 +1,74 @@
-/****** Colors ***********/
+/****** COLORS ***********/
 
 $brown: #B1663C;
 $green: #1D6154;
 $green-dark: #0e2f28;
 $white: #ffffff;
+$black: #000000;
+
+
+// BACKGROUND COLORS //
+$input-bg: #A7A7A7;
+$modal-bg: rgba(0, 0, 0, 0.6);
+
+
+// BOX SHADOWS //
+$shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+$shadow-modal: 0 0 20px 0 rgba(0, 0, 0, 0.3), 0 5px 5px 0 rgba(0, 0, 0, 0.25);
+
+
+
+// MIXINS FONTS
+@mixin fontSyne400 {
+    font-weight: 400;
+    font-style: normal;
+    font-family:"Syne"
+  }
+
+  @mixin fontSyne500 {
+    font-weight: 500;
+    font-style: normal;
+    font-family:"Syne"
+  }
+
+  @mixin fontSyne700{
+    font-weight: 700;
+    font-style: normal;
+    font-family:"Syne"
+  }
+
+  @mixin fontSyne800 {
+    font-weight: 800;
+    font-style: normal;
+    font-family:"Syne"
+  }
+
+  @mixin fontWorkSans400 {
+    font-weight: 400;
+    font-style: normal;
+    font-family:"Work Sans"
+  }
+
+  @mixin fontWorkSans500 {
+    font-weight: 500;
+    font-style: normal;
+    font-family:"Work Sans"
+  }
+
+  @mixin fontWorkSans600 {
+    font-weight: 600;
+    font-style: normal;
+    font-family:"Work Sans"
+  }
+
+  @mixin fontWorkSans700 {
+    font-weight: 700;
+    font-style: normal;
+    font-family:"Work Sans"
+  }
+
+  @mixin fontWorkSans800 {
+    font-weight: 800;
+    font-style: normal;
+    font-family:"Work Sans"
+  }
