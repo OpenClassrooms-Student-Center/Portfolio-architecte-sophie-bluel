@@ -9,8 +9,6 @@ const errorLogin = document.querySelector(".error-login")
 let emailInput = ""
 let passwordInput = ""
 
-console.log(email)
-
 /** Connexion avec l'input de l'email */
 email.addEventListener("input", (connexion) => {
     emailInput = connexion.target.value
@@ -21,28 +19,24 @@ password.addEventListener("input", (connexion) => {
     passwordInput = connexion.target.value
 })
 
-
-
 /** Connexion avec le bouton du login form */
 btnSubmit. addEventListener("click", async (connexion) => {
     connexion.preventDefault()
-    let user = {"email": emailInput, "password": passwordInput};
+    let user = {
+        "email": emailInput,
+        "password": passwordInput
+    };
     console.log(user)
 
-    /** Comparaison et action avec les données de l'API */
-
-    
+    /** Comparaison et action avec les données de l'API et répnse suivant le résultat */
     const answerLogin = await loginPortfolio(user)
     if (!answerLogin.ok || !emailInput || !passwordInput) {
         errorLogin.innerHTML = "Erreur dans l’identifiant ou le mot de passe";
     } else {
         let userOnline = await answerLogin.json()
+        // Stockage des données de utilisateur connecté
         sessionStorage.setItem("userOnline", JSON.stringify(userOnline))
+        // Redirection sur la page d'accueil
         window.location.href = "/FrontEnd/index.html";
     }
 })
-
-
-
-
-

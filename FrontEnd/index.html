@@ -12,16 +12,16 @@
 	<link rel="stylesheet" href="./assets/scss/layout.css">
 	<link rel="stylesheet" href="./assets/scss/web_elements.css">
 	<link rel="stylesheet" href="./assets/scss/modal.css">
-	<!-- Fichiers JS -->
-	<!-- A script element with a defer attribute must not have a type attribute with the value module.-->
+	<!-- Fichiers JS-->
 	<script type="module" src="./js/export-projets-api.js"></script>
 	<script type="module" src="./js/projets.js"></script>
+	<script type="module" src="./js/login-editor.js"></script>
 </head>
 <body>
 
 <!-- Header Start -->
 <header>
-	<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
+	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
 			<li><a href="http://127.0.0.1:5502/FrontEnd/index.html" class="nav-link">projets</a></li>
@@ -46,10 +46,11 @@
 			<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
 		</article>
 	</section>
-
 	<!-- Portfolio Start -->
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+		<div class="portfolio-title">
+			<h2>Mes Projets</h2>
+		</div>
 		<!-- Boutons Filtres Start -->
 		<div class="button-filter">
 			<!-- Affichage des projets de l'API -->

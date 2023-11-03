@@ -3,7 +3,7 @@ import {works, categories} from './export-projets-api.js';
 const gallery = document.querySelector(".gallery");
 const filter = document.querySelector(".button-filter");
 
-/** Affichage des projets */
+
 const displayGallery = (projet) => {
     document.querySelector(".gallery").innerHTML = "";
     for (let i in projet) {
@@ -12,14 +12,11 @@ const displayGallery = (projet) => {
         const image = document.createElement("img");
         const title = document.createElement("figcaption");
 
-        /** Ajout des attributs pour l'image */
         image.setAttribute("src", projet[i].imageUrl);
         image.setAttribute("alt", projet[i].title);
 
-        /** Ajout du texte pour le titre */
         title.innerHTML = projet[i].title;
 
-        /** Intégration des balises dans leurs parents */
         figure.appendChild(image);
         figure.appendChild(title);
         gallery.appendChild(figure);

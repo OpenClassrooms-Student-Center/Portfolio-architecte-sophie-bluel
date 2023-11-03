@@ -1,16 +1,12 @@
-/**
-* Données WORKS de l'API
-* Création d'une fonction vide (sans paramètres, ni valeurs) elle sert à récupérer les projets de l'API.
+/** Données WORKS de l'API
+* Création d'une fonction pour récupérer les projets de l'API.
 * @function worksPortfolio
-*Indique type de valeur qui indique que la fonction renvoie une promesse, pour sa disponibilité asyncrone.
+*Indique le type de valeur qui indique que la fonction renvoie une promesse, pour sa disponibilité asyncrone.
 * @returns {Promise}
-*/
 
-/**
-* la fonction worksPortfolio envoie une requête à une URL de l'API/works,
+/** la fonction worksPortfolio envoie une requête à une URL de l'API/works,
 * récupère les données JSON de la réponse de la requête, puis renvoie
-* ces données sous forme de promesse.
-*/
+* ces données sous forme de promesse. */
 export const worksPortfolio = async () => {
   try {
     const reponse = await fetch("http://localhost:5678/api/works");
@@ -22,16 +18,11 @@ export const worksPortfolio = async () => {
   }
 };
 
-/**
-* Données CATEGORIES de l'API
-* Création d'une fonction vide (sans paramètres, ni valeurs) elle sert à récupérer les projets de l'API.
+/** Données CATEGORIES de l'API
  / @function categoriesPortfolio
-*Indique type de valeur qui indique que la fonction renvoie une promesse, pour sa disponibilité asyncrone.
  / @returns {Promise}
- */
 
- /**
-* la fonction categoriesPortfolio envoie une requête à une URL de l'API/categories,
+/** la fonction categoriesPortfolio envoie une requête à une URL de l'API/categories,
 * récupère les données JSON de la réponse de la requête, puis renvoie
 * ces données sous forme de promesse.
 */
@@ -45,14 +36,8 @@ const categoriesPortfolio = async () => {
     console.error(error);
   }
 };
-
-
-/**
- * Exporte les variables contenants les résultats de la variable
+/** Exporte les variables contenants les résultats de la variable
  *  works et categories après que la promesse soit résolue
  */
 export const works = await worksPortfolio();
 export const categories = await categoriesPortfolio();
-
-
-
