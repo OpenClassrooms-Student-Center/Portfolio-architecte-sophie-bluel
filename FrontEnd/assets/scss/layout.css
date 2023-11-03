@@ -239,6 +239,14 @@ nav li a:hover {
 #contact a.forgot-password:hover, #connexion a.forgot-password:hover {
   color: #1D6154;
 }
+#contact .error-login, #connexion .error-login {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+  color: red;
+  padding-bottom: 5px;
+}
 
 footer {
   display: flex;

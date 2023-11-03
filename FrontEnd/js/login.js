@@ -4,6 +4,7 @@ import { loginPortfolio } from "./export-login-api.js"
 const email = document.getElementById("email");
 const Password = document.getElementById("login-password");
 const btnSubmit = document.getElementById("btn-login");
+const errorLogin = document.querySelector(".error-login")
 
 let emailInput = ""
 let passwordInput = ""
@@ -20,14 +21,28 @@ password.addEventListener("input", (connexion) => {
     passwordInput = connexion.target.value
 })
 
+
+
 /** Connexion avec le bouton du login form */
 btnSubmit. addEventListener("click", async (connexion) => {
     connexion.preventDefault()
-    let user = {"email": emailInput, "password": password};
+    let user = {"email": emailInput, "password": passwordInput};
     console.log(user)
+
+    /** Comparaison et action avec les données de l'API */
+
+    
+    const answerLogin = await loginPortfolio(user)
+    if (!answerLogin.ok || !emailInput || !passwordInput) {
+        errorLogin.innerHTML = "Erreur dans l’identifiant ou le mot de passe";
+    } else {
+        let userOnline = await answerLogin.json()
+        sessionStorage.setItem("userOnline", JSON.stringify(userOnline))
+        window.location.href = "/FrontEnd/index.html";
+    }
 })
 
-/** Comparaison et action avec les données de l'API */
+
 
 
 

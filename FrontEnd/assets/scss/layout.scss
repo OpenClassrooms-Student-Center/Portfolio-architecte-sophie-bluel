@@ -258,6 +258,17 @@ width: 50%;
 	a.forgot-password:hover {
 	color: $green
 	}
+
+	.error-login {
+		display: flex;
+		justify-content: center;
+		width: 100%;
+		text-align: center;
+		color: red;
+		padding-bottom: 5px;
+
+
+	}
 }
 
 footer {
