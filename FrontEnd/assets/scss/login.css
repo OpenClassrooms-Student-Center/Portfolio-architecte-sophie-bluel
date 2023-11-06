@@ -1,0 +1,81 @@
+/****** COLORS ***********/
+.login-edition {
+  width: 100%;
+  height: 50px;
+  margin: 0;
+  background-color: #000000;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  font-style: normal;
+  font-family: "Work Sans";
+  font-size: 16px;
+  color: #ffffff;
+  gap: 15px;
+}
+
+button.btn-publish {
+  width: 210px;
+  height: 35px;
+  text-align: center;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 60px;
+  font-size: 14px;
+  color: #000000;
+  font-style: normal;
+  font-weight: 500;
+  font-style: normal;
+  font-family: "Work Sans";
+  line-height: 16px;
+  cursor: pointer;
+}
+
+.btn-edition {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: #000000;
+  font-size: 16px;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+}
+
+i {
+  font-size: 17px;
+  margin-right: 7px;
+}
+
+.edit-image {
+  margin-top: 15px;
+  margin-left: 55px;
+}
+
+.btn-edit {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: #ffffff;
+  font-size: 14px;
+  color: #000000;
+  font-style: normal;
+  font-weight: 500;
+  font-style: normal;
+  font-family: "Work Sans";
+  border: none;
+  cursor: pointer;
+  margin-bottom: 30px;
+}
+
+.portfolio-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+/*# sourceMappingURL=login.css.map */

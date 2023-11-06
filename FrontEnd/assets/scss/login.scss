@@ -1,0 +1,76 @@
+@import 'web_elements';
+
+.login-edition {
+    width: 100%;
+    height: 50px;
+    margin: 0;
+    background-color: $black;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    @include fontWorkSans500;
+    font-size: 16px;
+    color: $white;
+    gap: 15px;
+    }
+
+  button.btn-publish {
+    width: 210px;
+    height: 35px;
+    text-align: center;
+    background-color: $white;
+    border: none;
+    border-radius: 60px;
+    font-size: 14px;
+    color:$black;;
+    font-style: normal;
+    @include fontWorkSans500;
+    line-height: 16px;
+    cursor: pointer;
+    }
+
+  .btn-edition {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	background: $black;
+    font-size: 16px;
+    color: $white;
+	border: none;
+	cursor: pointer;
+    }
+
+  i {
+    font-size: 17px;
+    margin-right: 7px;
+  }
+
+  .edit-image {
+	margin-top: 15px;
+	margin-left: 55px;
+  }
+
+  .btn-edit {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: $white;
+    font-size: 14px;
+    color:$black;;
+    font-style: normal;
+    @include fontWorkSans500;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 30px;
+  }
+
+
+  .portfolio-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+  }
+  

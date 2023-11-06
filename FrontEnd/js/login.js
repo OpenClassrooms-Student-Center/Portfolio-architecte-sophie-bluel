@@ -9,6 +9,7 @@ const errorLogin = document.querySelector(".error-login")
 let emailInput = ""
 let passwordInput = ""
 
+
 /** Connexion avec l'input de l'email */
 email.addEventListener("input", (connexion) => {
     emailInput = connexion.target.value
@@ -18,6 +19,7 @@ email.addEventListener("input", (connexion) => {
 password.addEventListener("input", (connexion) => {
     passwordInput = connexion.target.value
 })
+
 
 /** Connexion avec le bouton du login form */
 btnSubmit. addEventListener("click", async (connexion) => {
