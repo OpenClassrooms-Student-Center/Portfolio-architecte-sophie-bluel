@@ -1,44 +1,35 @@
-document.addEventListener('DOMContentLoaded', function () {
-  try {
-    // Vérifie si l'utilisateur est connecté
-    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true'
+document.addEventListener('DOMContentLoaded', function () { // Ajout d'un aEL pour chargé mon fichier JS une fois que mon HTML est chargé uniquement
+  try { // Bloc try : Série d'instrutions à effectuer
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true' // Récupération de la variable isLoggedIn évaluée à true justifiant de la connexion de l'utilisateur
 
-    // Récupération de l'élément du bouton de connexion
-    const loginButton = document.getElementById('loginButton')
-    const btnFilter = document.querySelector('.btn')
-    const blackRectangle = document.getElementById('blackRectangle')
-    const openModal = document.getElementById('openModal')
-    const logoutButton = document.getElementById('logoutButton')
+    const loginButton = document.getElementById('loginButton') // Récupération du bouton login
+    const btnFilters = document.querySelector('.btn') // Récupération de tous mes boutons pour filtrer
+    const blackRectangle = document.getElementById('blackRectangle') // Récupération du rectangle noir en haut de page 'edit'
+    const openModal = document.getElementById('openModal') // Récupération du bouton pour ouvrir la modale
+    const logoutButton = document.getElementById('logoutButton') // Récupération du bouton logout
 
-    if (isLoggedIn) {
-      // L'utilisateur est connecté, détermine le comportement de la page
-      loginButton.style.display = 'none'
-      btnFilter.style.display = 'none'
-      blackRectangle.style.display = 'flex'
-      openModal.style.display = 'flex'
-      logoutButton.style.display = 'block'
+    if (isLoggedIn) { // Si isLoggedIn est évalué à true, détermine le comportement de la page pour l'utilisateur connecté
+      loginButton.style.display = 'none' // Cache le bouton login
+      btnFilters.style.display = 'none' // Cache les boutons de mes filtres
+      blackRectangle.style.display = 'flex' // Affiche le rectangle noir du mode édition
+      openModal.style.display = 'flex' // Affiche le bouton pour l'ouverture de la modale
+      logoutButton.style.display = 'block' // A>ffiche le bouton logout pour la déconnexion
 
-      // Ajout d'un addEventListener sur le bouton "Logout"
-      logoutButton.addEventListener('click', function () {
-        try {
-          // Réinitialise l'indicateur de connexion dans le stockage local
-          localStorage.setItem('isLoggedIn', false)
-          // Suppression du token
-          localStorage.removeItem('token')
-          // Redirige l'utilisateur vers la page de connexion (ou ailleurs si nécessaire)
-          window.location.href = 'login.html'
-        } catch (error) {
-          console.error('Erreur lors de la gestion du stockage local:', error)
+      logoutButton.addEventListener('click', function () { // Ajout d'un aEL au click sur le bouton logout
+        try { // Bloc try : Série d'instrutions à effectuer
+          localStorage.setItem('isLoggedIn', false) // Modifie la valeur de isLoggedIn pour l'évaluer et false et affiche le mode déconnecté
+          localStorage.removeItem('token') // Suppression du token
+          window.location.href = 'login.html'// Redirige l'utilisateur vers la page de connexion
+        } catch (error) { // Le bloc catch attrapera l'erreur si une erreur se produit
+          console.error('Erreur lors de la gestion du stockage local:', error) // Affiche un message d'erreur et les détails de l'erreur
         }
       })
-    } else {
-      // L'utilisateur n'est pas connecté, détermine le comportement de la page
-
-      loginButton.style.display = 'block'
-      blackRectangle.style.display = 'none'
-      btnFilter.style.display = 'flex'
+    } else { // Détermine le comportement de la page si l'utilisateur n'est pas connecté
+      loginButton.style.display = 'block' // Affiche le bouton login
+      blackRectangle.style.display = 'none' // Cache le rectangle noir du mode édition
+      btnFilters.style.display = 'flex' // Affiche mes boutons de filtre
     }
-  } catch (error) {
-    console.error('Erreur lors de l\'accès au stockage local:', error)
+  } catch (error) { // Le bloc catch attrapera l'erreur si une erreur se produit
+    console.error('Erreur lors de l\'accès au stockage local:', error) // Affiche un message d'erreur et les détails de l'erreur
   }
 })
