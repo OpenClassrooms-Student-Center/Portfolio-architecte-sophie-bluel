@@ -4,17 +4,15 @@ const filter = document.querySelector(".button-filter");
 const portfolioTitle = document.querySelector(".portfolio-title");
 const introduction = document.querySelector("#introduction figure");
 
-
 /**
- * Fonction pour générer le mode édition.
+ * Fonction pour afficher le mode édition.
  */
 const loginEditor = () => {
-
     const editorTop = document.createElement("div");
     editorTop.className = "login-edition";
-    editorTop.innerHTML = `<a class="btn-edition"> <i class="fa-sharp fa-regular fa-pen-to-square"></i>login-edition</a>`;
+    editorTop.innerHTML = `<a class="btn-edition"> <i class="fa-sharp fa-regular fa-pen-to-square"></i>Mode édition</a>`;
     logout.textContent = "Logout";
-    portfolioTitle.innerHTML +=`<a class="edit-portfolio btn-edit "> <i class="fa-sharp fa-regular fa-pen-to-square"></i>modifier</a>`;
+    const btnModal = document.getElementById("modalBtn").style.display = "block";
     filter.style.cssText = "display: none;";
     /*Afficher est insérer au début de body */
     document.body.prepend(editorTop);

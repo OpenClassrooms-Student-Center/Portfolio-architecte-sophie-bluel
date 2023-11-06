@@ -16,23 +16,6 @@
   gap: 15px;
 }
 
-button.btn-publish {
-  width: 210px;
-  height: 35px;
-  text-align: center;
-  background-color: #ffffff;
-  border: none;
-  border-radius: 60px;
-  font-size: 14px;
-  color: #000000;
-  font-style: normal;
-  font-weight: 500;
-  font-style: normal;
-  font-family: "Work Sans";
-  line-height: 16px;
-  cursor: pointer;
-}
-
 .btn-edition {
   display: flex;
   flex-direction: row;
@@ -41,12 +24,6 @@ button.btn-publish {
   font-size: 16px;
   color: #ffffff;
   border: none;
-  cursor: pointer;
-}
-
-i {
-  font-size: 17px;
-  margin-right: 7px;
 }
 
 .edit-image {
@@ -74,8 +51,20 @@ i {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   gap: 15px;
+}
+
+button#modalBtn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding-top: 7px;
+}
+
+i {
+  font-size: 17px;
+  margin-right: 7px;
 }
 
 /*# sourceMappingURL=login.css.map */

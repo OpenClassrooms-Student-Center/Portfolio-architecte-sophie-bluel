@@ -16,11 +16,13 @@
 	<link rel="stylesheet" href="./assets/scss/web_elements.css">
 	<link rel="stylesheet" href="./assets/scss/modal.css">
 	<link rel="stylesheet" href="./assets/scss/login.css">
+	<link rel="stylesheet" href="./assets/scss/modal.css">
 
 	<!-- Fichiers JS-->
 	<script type="module" src="./js/export-projets-api.js"></script>
 	<script type="module" src="./js/projets.js"></script>
 	<script type="module" src="./js/login-editor.js"></script>
+	<script type="module" src="./js/modal.js"></script>
 </head>
 <body>
 
@@ -55,6 +57,23 @@
 	<section id="portfolio">
 		<div class="portfolio-title">
 			<h2>Mes Projets</h2>
+
+			<!-- Modal Start -->
+			<button id="modalBtn">
+				<i class="fa-sharp fa-regular fa-pen-to-square"></i>
+				modifier
+			</button>
+			<div id="myModal" class="modal">
+  				<div class="modal-content">
+				<span class="close">&times;</span>
+					<div class="modal-portfolio">
+						<p>Some text in the Modal..</p>
+					</div>
+  				</div>
+			</div>
+		<!-- Modal End -->
+
+
 		</div>
 		<!-- Boutons Filtres Start -->
 		<div class="button-filter">
