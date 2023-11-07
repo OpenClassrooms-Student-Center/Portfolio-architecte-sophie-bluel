@@ -4,7 +4,7 @@ const gallery = document.querySelector(".gallery");
 const filter = document.querySelector(".button-filter");
 
 
-const displayGallery = (projet) => {
+export const displayGallery = (projet) => {
     document.querySelector(".gallery").innerHTML = "";
     for (let i in projet) {
         /** Création des balises */

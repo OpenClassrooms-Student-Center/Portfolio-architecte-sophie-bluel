@@ -192,6 +192,40 @@ margin-bottom: 70px;
 	width: 100%;}	
 }
 
+.modal-portfolio {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: 20px;
+	grid-row-gap: 20px;
+	position: relative;
+
+	img {
+	width: 100%;
+	}
+}
+
+.display-mini-project {
+	display: grid;
+}
+
+.icon-trash {
+	position: relative;
+	top:30px;
+	right: -85px;
+	z-index: 1;
+	margin: 0;
+
+ 	i {
+	color: #fff;
+	background-color: #000;
+	padding: 5px;
+	font-size: 11px;
+	border-radius: 2px;
+	cursor: pointer;
+	}
+}
+
 
 #contact {
 width: 50%;
@@ -201,8 +235,6 @@ width: 50%;
 	width: 34%;
 	padding-top: 100px;	
 }
-
-
 
 #contact, #connexion {
 	margin: auto;
@@ -271,8 +303,6 @@ width: 50%;
 		text-align: center;
 		color: red;
 		padding-bottom: 5px;
-
-
 	}
 }
 
