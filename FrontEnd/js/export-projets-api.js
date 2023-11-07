@@ -46,23 +46,19 @@ export const categories = await categoriesPortfolio();
 
 
 
-
+/** Supprimer un fichier
 /**
  * @function deleteApi
- * Envoie une requête DELETE à l'API pour supprimer un projets.
- * @param {string} idOfWorks - L'ID du projets à supprimer.
- * @param {Object} userOnline - L'objet utilisateur contenant le jeton.
- * @returns {Promise} Une promesse qui se résout avec la réponse du serveur.
  */
-export const deleteApi = async (idOfWorks, userOnline) => {
+
+export const deleteApi = async (idWorks, user) => {
   try {
     const reponse = await fetch(
-      "http://localhost:5678/api/works/" + idOfWorks,
-
+      "http://localhost:5678/api/works/" + idWorks,
       {
         method: "DELETE",
         headers: {
-          Authorization: "Bearer " + userOnline.token,
+          Authorization: "Bearer" + user.token,
         },
       }
     );
