@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () { // Ajout d'un aEL po
   if (token) { // Création d'une condition pour vérifier si le token d'authentification est bien stocké
     let fileSelected = false // Variable pour suivre si le fichier a été sélectionné
 
-    fileInput.addEventListener('change', (event) => { // Ajout d'un aEL qui écoute le changement du fichier
+    fileInput.addEventListener('change', (event) => { // Ajout d'un aEL qui écoute le changement
       event.preventDefault() // Evite le comportement par défaut
       if (fileInput.files && fileInput.files[0]) { // Condition pour vérifier si la propriété files de l'élément fileInput contient un fichier
         if (fileInput.files.length > 0) { // Si un fichier a été inséré
@@ -56,13 +56,13 @@ document.addEventListener('DOMContentLoaded', function () { // Ajout d'un aEL po
       const categorieInput = formElement.querySelector('[name="category"]') // Récupération de la valeur du champ name correspondant à la catégorie sélectionnée
       let errorMessage = '' // Variable vide pour insérer le contenu du message selont la situation
 
-      if (!binaryData) { // Vérification si la conversion du fichier n'a pas eu lieu, que la variable binaryData est vide
+      if (!binaryData) { // Si binaryData est évaluée à false, que la variable est vide
         errorMessage = 'Veuillez sélectionner un fichier.' // Afficher le message d'erreur ...
       }
-      if (!titreInput.value) { // Vérification si le champ titre ne contient pas de message
+      if (!titreInput.value) { // Vérifie si le champ titre est évaluée à false, qu'il ne contient pas de message
         errorMessage = 'Veuillez saisir un titre.' // Afficher le message d'erreur ...
       }
-      if (!categorieInput.value) { // Vérification si le champ titre ne contient pas de message
+      if (!categorieInput.value) { // Vérifie si le champ catégorie est évaluée à false, qu'il ne contient pas de message
         errorMessage = 'Veuillez sélectionner une catégorie valide.' // Afficher le message d'erreur ...
       }
 

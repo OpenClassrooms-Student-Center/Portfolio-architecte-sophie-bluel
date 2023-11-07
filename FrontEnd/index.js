@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () { // Ajout d'un aEL po
       btnFilters.style.display = 'none' // Cache les boutons de mes filtres
       blackRectangle.style.display = 'flex' // Affiche le rectangle noir du mode édition
       openModal.style.display = 'flex' // Affiche le bouton pour l'ouverture de la modale
-      logoutButton.style.display = 'block' // A>ffiche le bouton logout pour la déconnexion
+      logoutButton.style.display = 'block' // Affiche le bouton logout pour la déconnexion
 
       logoutButton.addEventListener('click', function () { // Ajout d'un aEL au click sur le bouton logout
         try { // Bloc try : Série d'instrutions à effectuer

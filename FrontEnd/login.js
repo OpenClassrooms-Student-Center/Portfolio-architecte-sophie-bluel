@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () { // Ajout d'un aEL pour chargé mon fichier JS une fois que mon HTML est chargé uniquement
   const loginForm = document.querySelector('#loginForm') // Récupération de mon formulaire de connexion
 
-  if (loginForm) { // Si mon formulaire est complété avec les bonnes données de connexion
+  if (loginForm) { // Si loginForm existe alors ajoute un aEL
     loginForm.addEventListener('submit', async function (event) { // Ajout d'un aEL réagissant à la soumission - Async : déclare une fonction asynchrone
       event.preventDefault() // Empêche le comportement par défaut
       const email = document.getElementById('email').value // Récupération de la valeur d'email avec pour valeur l'email saisi par l'utilisateur dans email
