@@ -19,8 +19,8 @@ export const worksPortfolio = async () => {
 };
 
 /** Données CATEGORIES de l'API
- / @function categoriesPortfolio
- / @returns {Promise}
+/ @function categoriesPortfolio
+/ @returns {Promise}
 
 /** la fonction categoriesPortfolio envoie une requête à une URL de l'API/categories,
 * récupère les données JSON de la réponse de la requête, puis renvoie
@@ -49,6 +49,7 @@ export const categories = await categoriesPortfolio();
 
 
 
+/**  Supression d'un projet de l'API  */
 
 const token = "avanti";
 const projectId = 'data-id';
@@ -66,13 +67,8 @@ console.log("Token stored in localStorage:", localStorage.getItem('token'));
 */
 export function deleteApi(event, id) {
   event.preventDefault();
-  event.stopPropagation();
 
-  if (id === null || id === undefined) {
-    console.error("L'ID du projet est nul ou non défini. Veuillez spécifier un ID valide.");
-    return;
-  }
-
+  const userOnline = JSON.parse(sessionStorage.getItem("userOnline"));
   const token = localStorage.getItem('token');
   console.log("Bouton de suppression cliqué");
 
@@ -80,7 +76,7 @@ export function deleteApi(event, id) {
       method: 'DELETE',
       headers: {
         "content-Type": "application/json",
-        'Authorization': `Bearer ${token}`
+        'Authorization': "Bearer " + userOnline.token,
       }
   })
   .then(response => {
