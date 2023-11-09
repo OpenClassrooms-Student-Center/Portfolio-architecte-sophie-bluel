@@ -1,3 +1,6 @@
+/* Colors */
+@import 'web_elements';
+
 /* The Modal (background) */
 .modal {
     display: none; /* Hidden by default */
@@ -22,11 +25,13 @@
     width: 80%;
     max-width: 630px;
     border-radius: 10px;
+    padding: 30px;
+    padding-top: 20px;
   }
   
   /* The Close Button */
   .close {
-    color: #aaaaaa;
+    color: $black;
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -34,7 +39,7 @@
   
   .close:hover,
   .close:focus {
-    color: #000;
+    color:$black;
     text-decoration: none;
     cursor: pointer;
   }
@@ -47,3 +52,49 @@
 #modalBtn {
   display: none;
 }
+
+.display-mini-gallery {
+  padding: 60px;
+}
+
+.titre-modal {
+
+  h1 {
+  color: $black;
+  font-family: 'Work Sans' ;
+	font-size: 26px;
+  font-weight: 400;
+  text-align: center;
+  padding-bottom: 30px;
+  }
+}
+
+.submit-photo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 14px;
+	color: white;
+	background-color: $green;
+	margin : 2em auto ;
+	width: 237px;
+	text-align: center;
+	border-radius: 60px;
+  border:none;
+	height: 36px;
+	cursor: pointer;
+	transition: all 0.4s ease;
+	}
+
+	.submit-photo:hover {
+	background-color: $green-dark;
+	}
+
+  .top-stroke {
+    display: block;
+    border-top : 1px solid #B3B3B3;
+    margin-top: 67px;
+    padding-bottom: 10px;
+  }

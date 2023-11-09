@@ -1,6 +1,20 @@
 import { deleteApi, works, categories } from "./export-projets-api.js";
 import { displayGallery } from "./projets.js";
 
+
+
+/** MODAL GALERIE DE PROJETS Start */
+
+let contenuTitreGalerie = "Galerie Photo"
+let divTitreGalerie = document.createElement("div")
+let titreGalerie = document.createElement("h1")
+titreGalerie.textContent = contenuTitreGalerie
+
+divTitreGalerie.appendChild(titreGalerie)
+let titreModalGalerie = document.querySelector(".titre-modal")
+titreModalGalerie.appendChild(divTitreGalerie)
+
+
 const miniGallery = document.querySelector(".modal-portfolio");
 
 export const miniDisplayGallery = (projet) => {
@@ -15,6 +29,7 @@ export const miniDisplayGallery = (projet) => {
         const trashIcon = document.createElement("div");
         trashIcon.classList = "icon-trash";
         trashIcon.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+
 
         // Récupérez l'ID du projet à partir des données du projet
         const projectId = projet[i].id;
@@ -38,3 +53,24 @@ export const miniDisplayGallery = (projet) => {
 }
 
 miniDisplayGallery(works);
+
+
+// Footer du modal avec le trait et le bouton
+let topStroke = document.createElement("div");
+topStroke.classList.add("top-stroke");
+topStroke.textContent = "";
+
+
+let btnAjoutPhoto = document.createElement("button");
+btnAjoutPhoto.classList.add("submit-photo");
+btnAjoutPhoto.textContent = "Ajouter une photo";
+
+let divTopStroke = document.querySelector(".display-mini-gallery");
+let divBtnAjoutPhoto = document.querySelector(".display-mini-gallery");
+
+
+divTopStroke.appendChild(topStroke);
+divBtnAjoutPhoto.appendChild(btnAjoutPhoto);
+
+
+/** MODAL GALERIE DE PROJETS End */

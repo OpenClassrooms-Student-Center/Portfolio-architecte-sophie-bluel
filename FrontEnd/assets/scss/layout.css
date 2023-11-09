@@ -189,12 +189,16 @@ nav li a:hover {
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-column-gap: 20px;
-  grid-row-gap: 20px;
+  grid-column-gap: 10px;
+  grid-row-gap: 15px;
   position: relative;
 }
 .modal-portfolio img {
   width: 100%;
+}
+
+span.close {
+  color: #000000;
 }
 
 .display-mini-project {
@@ -203,14 +207,14 @@ nav li a:hover {
 
 .icon-trash {
   position: relative;
-  top: 30px;
-  right: -85px;
+  top: 27px;
+  right: -70px;
   z-index: 1;
   margin: 0;
 }
 .icon-trash i {
-  color: #fff;
-  background-color: #000;
+  color: #ffffff;
+  background-color: #000000;
   padding: 5px;
   font-size: 11px;
   border-radius: 2px;

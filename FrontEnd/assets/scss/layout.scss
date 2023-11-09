@@ -192,17 +192,22 @@ margin-bottom: 70px;
 	width: 100%;}	
 }
 
+
 .modal-portfolio {
 	width: 100%;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-	grid-column-gap: 20px;
-	grid-row-gap: 20px;
+	grid-column-gap: 10px;
+	grid-row-gap: 15px;
 	position: relative;
 
 	img {
 	width: 100%;
 	}
+}
+
+span.close {
+	color: $black;
 }
 
 .display-mini-project {
@@ -211,14 +216,14 @@ margin-bottom: 70px;
 
 .icon-trash {
 	position: relative;
-	top:30px;
-	right: -85px;
+	top:27px;
+	right: -70px;
 	z-index: 1;
 	margin: 0;
 
  	i {
-	color: #fff;
-	background-color: #000;
+	color: $white;
+	background-color: $black;
 	padding: 5px;
 	font-size: 11px;
 	border-radius: 2px;
