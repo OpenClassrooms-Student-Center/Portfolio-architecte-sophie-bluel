@@ -46,24 +46,60 @@ export const categories = await categoriesPortfolio();
 
 
 
-/** Supprimer un fichier
-/**
- * @function deleteApi
- */
 
-export const deleteApi = async (idWorks, user) => {
-  try {
-    const reponse = await fetch(
-      "http://localhost:5678/api/works/" + idWorks,
-      {
-        method: "DELETE",
-        headers: {
-          Authorization: "Bearer" + user.token,
-        },
-      }
-    );
-    return reponse;
-  } catch (error) {
-    console.error(error);
+
+
+
+const token = "avanti";
+const projectId = 'data-id';
+
+// Stocker le jeton d'authentification et l'ID du projet dans le localStorage
+localStorage.setItem('token', token);
+localStorage.setItem('data-id', projectId);
+
+console.log("Token stored in localStorage:", localStorage.getItem('token'));
+
+
+
+/** Fonction pour supprimer un projet.
+ * @function deleteApi
+*/
+export function deleteApi(event, id) {
+  event.preventDefault();
+  event.stopPropagation();
+
+  if (id === null || id === undefined) {
+    console.error("L'ID du projet est nul ou non défini. Veuillez spécifier un ID valide.");
+    return;
   }
-};
+
+  const token = localStorage.getItem('token');
+  console.log("Bouton de suppression cliqué");
+
+  fetch(`http://localhost:5678/api/works/${id}`, {
+      method: 'DELETE',
+      headers: {
+        "content-Type": "application/json",
+        'Authorization': `Bearer ${token}`
+      }
+  })
+  .then(response => {
+      if (response.ok) {
+          const figureElement = event.target.closest('figure');
+          if (figureElement) {
+              figureElement.remove();
+          }
+          console.log(`ID ${id} supprimé avec succès.`);
+      } else {
+          throw new Error(`Erreur lors de la suppression du projet ID ${id}`);
+      }
+  })
+  .catch(error => {
+    console.error("Erreur lors de la suppression du projet:", error);
+    if (error instanceof Response) {
+        if (error.status === 401) {
+            console.error("Erreur d'autorisation : Jeton invalide ou expiré.");
+        }
+    }
+  });
+}

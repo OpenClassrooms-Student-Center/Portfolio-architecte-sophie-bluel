@@ -16,13 +16,19 @@ export const miniDisplayGallery = (projet) => {
         trashIcon.classList = "icon-trash";
         trashIcon.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
 
+        // Récupérez l'ID du projet à partir des données du projet
+        const projectId = projet[i].id;
+
         trashIcon.addEventListener('click', function(event) {
             const figureElement = event.target.closest('display-mini-project');
             if (figureElement) {
-                const projectId = figureElement.getAttribute('data-id');
+                // Appelez deleteApi avec l'ID du projet récupéré
                 deleteApi(event, projectId);
             }
         });
+
+        // Ajoutez l'ID du projet en tant qu'attribut data-id à l'élément display-mini-project
+        displayMiniProject.setAttribute('data-id', projectId);
 
         displayMiniProject.appendChild(trashIcon);
         displayMiniProject.appendChild(image);
