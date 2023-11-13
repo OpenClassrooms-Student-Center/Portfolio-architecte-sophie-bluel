@@ -26,22 +26,31 @@ const addTopStroke = (shouldDisplayTopStroke) => {
   }
 };
 
-let contenuTitreGalerie = "Galerie Photo";
-let divTitreGalerie = document.createElement("div");
+
+let contenuTitreGalerie = "";
 let titreGalerie = document.createElement("h1");
 titreGalerie.textContent = contenuTitreGalerie;
-
+let divTitreGalerie = document.createElement("div");
 divTitreGalerie.appendChild(titreGalerie);
+
 let titreModalGalerie = document.querySelector(".titre-modal");
 titreModalGalerie.appendChild(divTitreGalerie);
+
+
 
 const miniGallery = document.querySelector(".modal-portfolio");
 
 export const miniDisplayGallery = (projet) => {
   document.querySelector(".modal-portfolio").innerHTML = "";
 
+contenuTitreGalerie = "Galerie photo";
+titreGalerie.textContent = contenuTitreGalerie;
+
+
   for (let i in projet) {
     /** Création des balises */
+
+    
     const displayMiniProject = document.createElement("display-mini-project");
     const image = document.createElement("img");
     image.classList = "image";
@@ -93,6 +102,11 @@ const clearContent = () => {
   miniGallery.innerHTML = "";
 };
 
+
+
+
+
+
 const hideBtnAjoutPhoto = () => {
   btnAjoutPhoto.remove(); // Supprime le bouton du DOM
 };
@@ -118,19 +132,33 @@ const generateAddImageForm = (newImage) => {
   hideBtnAjoutPhoto();
 
 
+
+ contenuTitreGalerie = "Ajout Photo";
+ titreGalerie.textContent = contenuTitreGalerie;
+
+ 
+ 
+
+// Ajouter un lien pour revenir à la galerie de projets
+
+
+
 // Créer le formulaire
   const addImageForm = document.createElement("form");
-// Ajouter un lien pour revenir à la galerie de projets
-  const backButton = document.createElement("a");
-  backButton.href = "#";
-  backButton.textContent = "Revenir à la galerie de projets";
-  backButton.addEventListener("click", () => {
-    miniDisplayGallery(works);
-    showBtnAjoutPhoto();
-  });
 
-  backButton.classList.add("backButton");
-  document.querySelector(".backform").appendChild(backButton);
+  const backForm = document.createElement("a");
+  backForm.href = "#";
+  backForm.textContent = "Bact to la galerie de projets";
+  backForm.addEventListener("click", () => {
+  miniDisplayGallery(works);
+  showBtnAjoutPhoto();
+});
+
+backForm.classList.add("backform");
+
+
+
+
 
 // Contenu du formulaire
 // Bouton pour ajouter une image
@@ -181,7 +209,7 @@ btnValiderNewProjet.classList.add("submit-photo");
   });
 
   // Ajouter les éléments créés au formulaire
-  addImageForm.appendChild(backButton);
+  addImageForm.appendChild(backForm);
   addImageForm.appendChild(btnAjoutImage);
   addImageForm.appendChild(titreAjoutPhotoInput);
   addImageForm.appendChild(categorieAjoutPhotoSelect);
@@ -203,4 +231,3 @@ addTopStroke(false);
 // Ajouter un gestionnaire d'événement au bouton btnAjoutPhoto
 
 btnAjoutPhoto.addEventListener("click", generateAddImageForm);
-
