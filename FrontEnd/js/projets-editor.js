@@ -69,86 +69,89 @@ divBtnAjoutPhoto.appendChild(btnAjoutPhoto);
 /** MODAL GALERIE DE PROJETS End */
 
 
+
+
+
 /** MODAL AJOUT PROJET Start */
 
-btnAjoutPhoto.addEventListener("click", () => {
-  // Efface le contenu HTML actuel
-  miniGallery.innerHTML = "";
+const clearContent = () => {
+miniGallery.innerHTML = "";
+};
 
-  // Création du formulaire d'ajout d'image
-  const ajoutPhotoFormulaire = document.createElement("form");
+// Fonction pour générer le formulaire d'ajout d'image
+const generateAddImageForm = () => {
+// Appeler la fonction pour effacer le contenu HTML
+clearContent();
 
-  // Ajouter un lien pour générer le précédent contenu HTML
-  const lienRetour = document.createElement("a");
-  lienRetour.href = "#";
-  lienRetour.textContent = "Revenir à la galerie de projets";
-  lienRetour.addEventListener("click", () => {
+// Créer le formulaire
+  const addImageForm = document.createElement("form");
+
+// Ajouter un lien pour revenir à la galerie de projets
+  const backButton = document.createElement("a");
+  backButton.href = "#";
+  backButton.textContent = "Revenir à la galerie de projets";
+  backButton.addEventListener("click", () => {
     miniDisplayGallery(works);
   });
 
-  ajoutPhotoFormulaire.appendChild(lienRetour);
+  backButton.classList.add("backButton");
+  document.querySelector(".backform").appendChild(backButton);
 
-  // Div pour le champ input text du titre
-  const divChampTitre = document.createElement("div");
 
-  // Création d'un champ input text pour le titre
-  const champTitre = document.createElement("input");
-  champTitre.type = "text";
-  champTitre.placeholder = "Titre de l'image";
-  divChampTitre.appendChild(champTitre);
-  ajoutPhotoFormulaire.appendChild(divChampTitre);
+// Bouton pour ajouter une image
+let btnAjoutImage = document.createElement("button");
+btnAjoutImage.textContent = "Ajouter une image";
+btnAjoutImage.type = "button";
 
-  // Ddiv pour la liste déroulante
-  const divListeDeroulante = document.createElement("div");
+// Champ input text pour ajouter un titre
+let titreAjoutPhotoInput = document.createElement("input");
+titreAjoutPhotoInput.setAttribute("type", "text");
+titreAjoutPhotoInput.setAttribute("placeholder", "Titre de la photo");
+titreAjoutPhotoInput.required = true;
 
-  // Création d'une liste déroulante des catégories
-  const listeDeroulante = document.createElement("select");
+// Liste déroulante avec les données de l'API (categories)
+let categorieAjoutPhotoSelect = document.createElement("select");
+categorieAjoutPhotoSelect.required = true;
 
-  // Récupérer les catégories depuis l'API (http://localhost:5678/api/categories)
-  categories.forEach((category) => {
-    const option = document.createElement("option");
+// Remplir la liste déroulante avec les catégories
+categories.forEach(category => {
+    let option = document.createElement("option");
     option.value = category.id;
-    option.textContent = category.name;
-    listeDeroulante.appendChild(option);
-  });
-
-  divListeDeroulante.appendChild(listeDeroulante);
-  ajoutPhotoFormulaire.appendChild(divListeDeroulante);
-
-  // Créer du bouton pour confirmer l'ajout de la nouvelle image
-  const btnValider = document.createElement("button");
-  btnValider.type = "submit";
-  btnValider.textContent = "Valider";
-
-  // Soumission du formulaire
-  ajoutPhotoFormulaire.addEventListener("submit", async (event) => {
-    event.preventDefault();
-
-    // Récupérer les données du formulaire
-    const titre = champTitre.value;
-    const categoryId = listeDeroulante.value;
-
-    // Appel de la fonction postApi pour ajouter un projet depuis l'API
-    try {
-      const response = await postApi(files, userOnline);
-      if (response.ok) {
-        // Si la requête est réussie, afficher un message et réinitialiser le formulaire
-        console.log("Nouvelle image ajoutée");
-        closeModal(); // Vous devez implémenter closeModal() pour fermer le modal
-        miniDisplayGallery(works); // Réinitialiser la galerie
-      } else {
-        // Si la requête échoue, afficher un message d'erreur
-        console.error("Erreur lors de l'ajout de l'image");
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  });
-
-  ajoutPhotoFormulaire.appendChild(btnValider);
-
-  // Ajouter le deuxième formulaire à l'élément miniGallery
-  miniGallery.appendChild(ajoutPhotoFormulaire);
+    option.text = category.name;
+    categorieAjoutPhotoSelect.appendChild(option);
 });
 
-/** MODAL AJOUT PROJET End */
+// Bouton "submit" pour ajouter la photo
+let submitAjoutPhotoBtn = document.createElement("button");
+submitAjoutPhotoBtn.textContent = "+ Ajout photo";
+submitAjoutPhotoBtn.type = "submit";
+
+  
+// Ajouter un bouton de soumission pour confirmer l'ajout de la nouvelle image
+const btnValiderNewProjet = document.createElement("button");
+btnValiderNewProjet.type = "submit";
+btnValiderNewProjet.textContent = "Valider";
+
+
+  // Ajouter un gestionnaire d'événements pour le bouton de soumission
+    btnValiderNewProjet.addEventListener("click", (event) => {
+    event.preventDefault();
+    console.log("Nouvelle image ajoutée");
+    // Vous pouvez ajouter ici la logique pour fermer le modal
+  });
+
+  // Ajouter les éléments créés au formulaire
+  addImageForm.appendChild(backButton);
+  addImageForm.appendChild(btnAjoutImage);
+  addImageForm.appendChild(titreAjoutPhotoInput);
+  addImageForm.appendChild(categorieAjoutPhotoSelect);
+  addImageForm.appendChild(submitAjoutPhotoBtn);
+
+  addImageForm.appendChild(btnValiderNewProjet);
+
+  // Ajouter le formulaire à l'élément miniGallery
+  miniGallery.appendChild(addImageForm);
+};
+
+// Ajouter un gestionnaire d'événement au bouton btnAjoutPhoto
+btnAjoutPhoto.addEventListener("click", generateAddImageForm);
