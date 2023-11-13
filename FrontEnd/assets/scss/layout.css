@@ -197,6 +197,52 @@ nav li a:hover {
   width: 100%;
 }
 
+.modal-ajout-photo {
+  width: 100%;
+  position: relative;
+}
+.modal-ajout-photo form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.modal-ajout-photo form input {
+  height: 50px;
+  font-size: 1.2em;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  padding-left: 10px;
+}
+.modal-ajout-photo select {
+  height: 50px;
+  font-size: 1.2em;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  padding-left: 10px;
+}
+.modal-ajout-photo .div-ajout-photo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #E8F1F6;
+}
+.modal-ajout-photo .ajout-photo {
+  font-family: "Syne";
+  font-weight: 700;
+  font-size: 14px;
+  color: #306685;
+  background-color: #CBD6DC;
+  margin: 2em auto;
+  width: 180px;
+  text-align: center;
+  border-radius: 60px;
+  border: none;
+  height: 36px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
 span.close {
   color: #000000;
 }
