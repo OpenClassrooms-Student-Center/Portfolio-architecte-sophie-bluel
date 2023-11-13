@@ -1,4 +1,4 @@
-/** Données WORKS de l'API
+/** Données WORKS de l'API Start
 * Création d'une fonction pour récupérer les projets de l'API.
 * @function worksPortfolio
 *Indique le type de valeur qui indique que la fonction renvoie une promesse, pour sa disponibilité asyncrone.
@@ -17,8 +17,11 @@ export const worksPortfolio = async () => {
     console.error(error);
   }
 };
+/** Données WORKS de l'API End *************
+ 
 
-/** Données CATEGORIES de l'API
+
+/** Données CATEGORIES de l'API Start
 / @function categoriesPortfolio
 / @returns {Promise}
 
@@ -42,16 +45,13 @@ const categoriesPortfolio = async () => {
 export const works = await worksPortfolio();
 export const categories = await categoriesPortfolio();
 
+/** Données CATEGORIES de l'API End *************
 
 
 
 
-
-
-
-/**  Supression d'un projet de l'API  */
-
-const token = "avanti";
+/**  Supression d'un projet de l'API  start */
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MTg3NDkzOSwiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4";
 const projectId = 'data-id';
 
 // Stocker le jeton d'authentification et l'ID du projet dans le localStorage
@@ -59,8 +59,6 @@ localStorage.setItem('token', token);
 localStorage.setItem('data-id', projectId);
 
 console.log("Token stored in localStorage:", localStorage.getItem('token'));
-
-
 
 /** Fonction pour supprimer un projet.
  * @function deleteApi
@@ -99,3 +97,28 @@ export function deleteApi(event, id) {
     }
   });
 }
+/**  Supression d'un projet de l'API  start *************
+
+
+
+/**  Ajout d'un projet de l'API  start */
+/**
+ * @function postApi
+ * 
+ * @returns {Promise} Une promesse qui se résout avec la réponse du serveur.
+ */
+export const postApi = async (files, userOnline) => {
+  try {
+    const reponse = await fetch("http://localhost:5678/api/works", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + userOnline.token,
+      },
+      body: files,
+    });
+
+    return reponse;
+  } catch (error) {
+    console.error(error);
+  }
+};
