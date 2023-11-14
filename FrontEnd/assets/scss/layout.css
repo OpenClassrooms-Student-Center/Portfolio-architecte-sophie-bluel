@@ -227,6 +227,11 @@ nav li a:hover {
   align-items: center;
   background-color: #E8F1F6;
 }
+.modal-ajout-photo .uploaded-image {
+  width: auto;
+  height: 169px;
+  margin: 0;
+}
 .modal-ajout-photo .ajout-photo {
   font-family: "Syne";
   font-weight: 700;

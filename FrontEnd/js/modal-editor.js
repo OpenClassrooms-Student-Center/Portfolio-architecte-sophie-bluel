@@ -7,7 +7,7 @@ import { displayGallery } from "./projets.js";
 
 // Fonction pour créer et ajouter topStroke
 const addTopStroke = (shouldDisplayTopStroke) => {
-  let divTopStroke = document.querySelector(".display-mini-gallery");
+const divTopStroke = document.querySelector(".display-mini-gallery");
 
   // Supprimer topStroke s'il existe déjà
   let existingTopStroke = divTopStroke.querySelector(".top-stroke");
@@ -89,7 +89,6 @@ miniDisplayGallery(works);
   divBtnAjoutPhoto.appendChild(btnAjoutPhoto);
 
 
-
 /*****************************************
 ******** MODAL AJOUT PROJET Start ********
 *****************************************/
@@ -99,16 +98,11 @@ const hideBtnAjoutPhoto = () => {
 };
 
 const showBtnAjoutPhoto = () => {
-
-
-  // Recréer le bouton btnAjoutPhoto
+  // RE-créer le bouton btnAjoutPhoto
   btnAjoutPhoto = document.createElement("button");
   btnAjoutPhoto.classList.add("submit-photo");
   btnAjoutPhoto.textContent = "Ajouter une photo";
   btnAjoutPhoto.type = "button";
-
-
-
 
   // Ajouter le gestionnaire d'événements au bouton récréé
   btnAjoutPhoto.addEventListener("click", generateAddImageForm);
@@ -119,79 +113,113 @@ const showBtnAjoutPhoto = () => {
 
 // Fonction pour générer le formulaire d'ajout d'image
 const generateAddImageForm = (newImage) => {
-  // Appeler la fonction pour effacer le contenu HTML
-  clearContent();
-  // Cacher le bouton btnAjoutPhoto
-  hideBtnAjoutPhoto();
+// Appeler la fonction pour effacer le contenu HTML
+clearContent();
+// Cacher le bouton btnAjoutPhoto
+hideBtnAjoutPhoto();
 
- contenuTitreGalerie = "Ajout Photo";
- titreGalerie.textContent = contenuTitreGalerie;
+contenuTitreGalerie = "Ajout Photo";
+titreGalerie.textContent = contenuTitreGalerie;
 
-// Formulaire d'ajout
+
+//////////////// Formulaire d'ajout ////////////////
 const addImageForm = document.createElement("form");
   // Le lien de retour sur formulaire
   const backForm = document.createElement("a");
-  backForm.href = "#";
-  backForm.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
-  backForm.addEventListener("click", () => {
-  miniDisplayGallery(works);
-  miniAddProjet.innerHTML = "";
-  showBtnAjoutPhoto();
-  });
+    backForm.href = "#";
+    backForm.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+
+    backForm.addEventListener("click", () => {
+        miniDisplayGallery(works);
+        miniAddProjet.innerHTML = "";
+        showBtnAjoutPhoto();
+    });
 
   backForm.classList.add("backform");
 
-  // Bouton "+ Ajout photo"
-  const divAjoutPhoto = document.createElement("div");
-  divAjoutPhoto.classList.add("div-ajout-photo");
-  let submitPhotoBtn = document.createElement("button");
-  submitPhotoBtn.textContent = "+ Ajout photo";
-  submitPhotoBtn.type = "button";
-  submitPhotoBtn.classList.add("ajout-photo");
-  divAjoutPhoto.appendChild(submitPhotoBtn);
+
+
+
+//fileZone
+const divAjoutPhoto = document.createElement("div");
+//fileInput
+const submitPhotoBtn = document.createElement("button");
+//titleInput
+const titreAjoutPhotoInput = document.createElement("input");
+//categorieInput
+const categorieAjoutPhoto = document.createElement("select");
+//
+const topStrokeAddPhoto = document.createElement("div");
+// Pas certain
+const btnValiderNewProjet = document.createElement("button");
+// ou
+const form = document.forms.namedItem("add-form");
+
+let previewIspresent = false;
+let imageElement = "";
+let imageTitle = "";
+let imageCategorie = "";
+let file = "";
+
+
+  
+// Les classes CSS
+divAjoutPhoto.classList.add("div-ajout-photo");
+submitPhotoBtn.classList.add("ajout-photo");
+btnValiderNewProjet.classList.add("submit-photo");
+
+
+
+
+// Bouton "+ Ajout photo"
+submitPhotoBtn.textContent = "+ Ajout photo";
+submitPhotoBtn.type = "button";
+divAjoutPhoto.append(submitPhotoBtn);
+
+
 
 // Champ input text pour ajouter un titre
-let titreAjoutPhotoInput = document.createElement("input");
 titreAjoutPhotoInput.setAttribute("type", "text");
 titreAjoutPhotoInput.setAttribute("placeholder", "Titre de la photo");
 titreAjoutPhotoInput.required = true;
 
-// Liste déroulante avec les données de l'API (categories)
-let categorieAjoutPhotoSelect = document.createElement("select");
-categorieAjoutPhotoSelect.required = true;
+for (let i in categories) {
+    const option = document.createElement("option");
+    option.innerText = categories[i].name;
+    option.value = categories[i].id;
+    categorieAjoutPhoto.append(option);
+};
 
-// Remplir la liste déroulante avec les catégories
-categories.forEach(category => {
-    let option = document.createElement("option");
-    option.value = category.id;
-    option.text = category.name;
-    categorieAjoutPhotoSelect.appendChild(option);
-});
 
-let topStrokeAddPhoto = document.createElement("div");
+
+
+
+
+// Filet au-dessus du bouton Valider
 topStrokeAddPhoto.classList.add("add-stroke");
 topStrokeAddPhoto.textContent = "";
 
 // Ajouter un bouton de soumission pour confirmer l'ajout de la nouvelle image
-const btnValiderNewProjet = document.createElement("button");
 btnValiderNewProjet.type = "submit";
 btnValiderNewProjet.textContent = "Valider";
-btnValiderNewProjet.classList.add("submit-photo");
 
-  // Ajouter un gestionnaire d'événements pour le bouton de soumission
-    btnValiderNewProjet.addEventListener("click", (event) => {
+
+// Ajouter un gestionnaire d'événements pour le bouton de soumission
+btnValiderNewProjet.addEventListener("click", (event) => {
     event.preventDefault();
     console.log("Nouvelle image ajoutée");
-    // Vous pouvez ajouter ici la logique pour fermer le modal
-  });
+    });
 
-  // Ajouter les éléments créés au formulaire
-  addImageForm.appendChild(backForm);
-  addImageForm.appendChild(divAjoutPhoto);
-  addImageForm.appendChild(titreAjoutPhotoInput);
-  addImageForm.appendChild(categorieAjoutPhotoSelect);
-  addImageForm.appendChild(topStrokeAddPhoto);
-  addImageForm.appendChild(btnValiderNewProjet);
+
+
+
+// Ajouter les éléments créés au formulaire
+addImageForm.appendChild(backForm);
+addImageForm.appendChild(divAjoutPhoto);
+addImageForm.appendChild(titreAjoutPhotoInput);
+addImageForm.appendChild(categorieAjoutPhoto);
+addImageForm.appendChild(topStrokeAddPhoto);
+addImageForm.appendChild(btnValiderNewProjet);
 
 // Ajouter le formulaire à l'élément miniGallery
 miniAddProjet.appendChild(addImageForm);
@@ -200,3 +228,7 @@ addTopStroke(false);
 
 // Ajouter un gestionnaire d'événement au bouton btnAjoutPhoto
 btnAjoutPhoto.addEventListener("click", generateAddImageForm);
+
+
+
+
