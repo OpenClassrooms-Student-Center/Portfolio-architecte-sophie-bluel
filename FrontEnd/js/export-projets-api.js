@@ -1,4 +1,6 @@
-/** Données WORKS de l'API Start
+/***********************************************
+************** DONNÉES WORKS API ***************
+************************************************
 * Création d'une fonction pour récupérer les projets de l'API.
 * @function worksPortfolio
 *Indique le type de valeur qui indique que la fonction renvoie une promesse, pour sa disponibilité asyncrone.
@@ -17,18 +19,18 @@ export const worksPortfolio = async () => {
     console.error(error);
   }
 };
-/** Données WORKS de l'API End *************
- 
 
 
-/** Données CATEGORIES de l'API Start
+/***********************************************
+************ DONNÉES CATÉGORIES API ************
+************************************************
 / @function categoriesPortfolio
 / @returns {Promise}
 
 /** la fonction categoriesPortfolio envoie une requête à une URL de l'API/categories,
 * récupère les données JSON de la réponse de la requête, puis renvoie
-* ces données sous forme de promesse.
-*/
+* ces données sous forme de promesse */
+
 const categoriesPortfolio = async () => {
   try {
     const reponse = await fetch("http://localhost:5678/api/categories");
@@ -40,17 +42,17 @@ const categoriesPortfolio = async () => {
   }
 };
 /** Exporte les variables contenants les résultats de la variable
- *  works et categories après que la promesse soit résolue
- */
+ *  works et categories après que la promesse soit résolue */
+
 export const works = await worksPortfolio();
 export const categories = await categoriesPortfolio();
 
-/** Données CATEGORIES de l'API End *************
 
 
+/***********************************************
+************ AUTORISATIONS API *****************
+************************************************/
 
-
-/**  Supression d'un projet de l'API  start */
 const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MTg3NDkzOSwiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4";
 const projectId = 'data-id';
 
@@ -60,9 +62,13 @@ localStorage.setItem('data-id', projectId);
 
 console.log("Token stored in localStorage:", localStorage.getItem('token'));
 
-/** Fonction pour supprimer un projet.
- * @function deleteApi
-*/
+
+
+/***********************************************
+************ SUPPRESSION PROJET API ************
+************************************************
+* @function deleteApi */
+
 export function deleteApi(event, id) {
   event.preventDefault();
 
@@ -97,28 +103,37 @@ export function deleteApi(event, id) {
     }
   });
 }
-/**  Supression d'un projet de l'API  start *************
 
-
-
-/**  Ajout d'un projet de l'API  start */
-/**
+/***********************************************
+*************** AJOUT PROJET API ***************
+************************************************
  * @function postApi
- * 
- * @returns {Promise} Une promesse qui se résout avec la réponse du serveur.
+ * @returns {Promise} 
  */
+
 export const postApi = async (files, userOnline) => {
   try {
-    const reponse = await fetch("http://localhost:5678/api/works", {
+    // Vérifier si files est une instance de FormData
+    if (!(files instanceof FormData)) {
+      throw new Error('Le paramètre "files" doit être une instance de FormData.');
+    }
+
+    const response = await fetch("http://localhost:5678/api/works", {
       method: "POST",
       headers: {
-        Authorization: "Bearer " + userOnline.token,
+        "content-Type": "application/json",
+        'Authorization': "Bearer " + userOnline.token,
       },
       body: files,
     });
 
-    return reponse;
+    // Vérifier si la réponse est ok
+    if (!response.ok) {
+      throw new Error(`Erreur lors de la requête POST. Statut : ${response.status}`);
+    }
+
+    return response;
   } catch (error) {
-    console.error(error);
+    console.error("Erreur lors de la requête POST :", error);
   }
 };

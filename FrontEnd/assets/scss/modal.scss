@@ -173,7 +173,7 @@ a#nextPageLink:hover {
 
   .icon-trash {
     position: relative;
-    top: -10;
+    top: 25px;
     right: -35%;
     z-index: 1;
     margin: 0;
@@ -187,4 +187,9 @@ a#nextPageLink:hover {
 	  cursor: pointer;
 	  }
   }
+}
+
+.preview-image {
+  width: 200px;
+  height: 200px;
 }
