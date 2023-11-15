@@ -122,11 +122,6 @@ hr {
   display: none;
 }
 
-.display-mini-gallery {
-  padding: 60px;
-  padding-bottom: 15px;
-}
-
 .modal h2 {
   color: #000000;
   font-family: "Work Sans";
@@ -136,11 +131,46 @@ hr {
   padding-bottom: 10px;
 }
 
-.modal-gallery,
+.display-mini-gallery {
+  padding-left: 60px;
+  padding-right: 60px;
+  padding-bottom: 15px;
+}
+
 .modal-ajout-gallery {
   background-color: bisque;
-  margin-left: 90px;
-  margin-right: 90px;
+}
+
+.display-mini-project {
+  display: grid;
+}
+
+.modal-portfolio {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-column-gap: 10px;
+  grid-row-gap: 15px;
+  position: relative;
+}
+.modal-portfolio img {
+  width: 100%;
+  position: relative;
+}
+.modal-portfolio .icon-trash {
+  position: relative;
+  top: -10;
+  right: -35%;
+  z-index: 1;
+  margin: 0;
+}
+.modal-portfolio .icon-trash i {
+  color: #ffffff;
+  background-color: #000000;
+  padding: 5px;
+  font-size: 11px;
+  border-radius: 2px;
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=modal.css.map */

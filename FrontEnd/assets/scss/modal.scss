@@ -128,10 +128,6 @@ a#nextPageLink:hover {
 }
 
 
-.display-mini-gallery {
-  padding: 60px;
-  padding-bottom: 15px;
-}
 
 .modal {
 
@@ -146,9 +142,49 @@ a#nextPageLink:hover {
 }
 
 
-.modal-gallery,
+.display-mini-gallery {
+  padding-left: 60px;
+  padding-right: 60px;
+  padding-bottom: 15px;
+}
+
 .modal-ajout-gallery {
   background-color: bisque;
-  margin-left: 90px;
-  margin-right: 90px;
+
+}
+
+
+.display-mini-project {
+	display: grid;
+}
+
+.modal-portfolio {
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	grid-column-gap: 10px;
+	grid-row-gap: 15px;
+	position: relative;
+
+	img {
+	  width: 100%;
+    position: relative;
+	}
+
+  .icon-trash {
+    position: relative;
+    top: -10;
+    right: -35%;
+    z-index: 1;
+    margin: 0;
+
+ 	i {
+	  color: $white;
+	  background-color: $black;
+	  padding: 5px;
+	  font-size: 11px;
+	  border-radius: 2px;
+	  cursor: pointer;
+	  }
+  }
 }
