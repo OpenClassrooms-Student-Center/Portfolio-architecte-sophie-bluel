@@ -22,10 +22,14 @@
 	<script type="module" src="./js/export-projets-api.js"></script>
 	<script type="module" src="./js/projets.js"></script>
 	<script type="module" src="./js/login-editor.js"></script>
-
+	<script type="module" src="./js/modal.js"></script>
 	<script type="module" src="./js/modal-editor.js"></script>
+
+
 </head>
+
 <body>
+
 <!-- Header Start -->
 <header>
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
@@ -56,41 +60,32 @@
 	<!-- Portfolio Start -->
 	<section id="portfolio">
 		<div class="portfolio-title">
-		<h2>Mes Projets</h2>
-		<!-- Modal Start -->
-			<!-- Bouton pour ouvrir le modal -->
+			<h2>Mes Projets</h2>
+			<!-- Modal Start -->
 			<button id="modalBtn">
-    			<i class="fa-sharp fa-regular fa-pen-to-square"></i>
-    			Modifier
+				<i class="fa-sharp fa-regular fa-pen-to-square"></i>
+				modifier
 			</button>
-			<!-- Modal Container -->
-			<div id="myModal" class="modal">a
-				<!-- Page 1 -->
-				<div class="modal-content">
-					<div class="container-link-close-modal">
-						<div class="close" onclick="closeModal()"><i class="fa-solid fa-xmark fa-xl"></i></div>			
+			<div id="myModal" class="modal">
+  				<div class="modal-content">
+				<span class="close">&times;</span>
+				<div class="backform">
+				</div>
+					<div class="display-mini-gallery">
+						<div class="titre-modal">
+						</div>				
+						<div class="modal-portfolio">
 						</div>
-						<h2>Galerie photo</h2>
-						<div class="modal-gallery">Contenu de la première page.</div>
-						<hr>
-						<a href="#" id="nextPageLink">Passer à l'affichage</a>
-  					</div>
-  				<!-- Page 2 -->
-					<div class="modal-content">
-						<div class="container-link-top-modal">
-						<a href="#" id="prevPageLink"><i class="fa-solid fa-arrow-left fa-xl"></i></a>
-						<div class="close" onclick="closeModal()"><i class="fa-solid fa-xmark fa-xl"></i></div>			
+						<div class="modal-ajout-photo">
 						</div>
-						<h2>Ajout photo</h2>
-						<div class="modal-ajout-gallery">Contenu de la deuxième page.</div>
-  					</div>
-				</div>  
+					</div>	
+  				</div>
 			</div>
-			<!-- Modal End -->
-
+		<!-- Modal End -->
+		</div>
 		<!-- Boutons Filtres Start -->
 		<div class="button-filter">
-		<!-- Affichage des projets de l'API -->
+			<!-- Affichage des projets de l'API -->
 		</div>
 		<!-- Boutons Filtres End -->
 		<div class="gallery">
@@ -127,6 +122,5 @@
 	</nav>
 </footer>
 <!-- Footer End -->
-<script type="module" src="./js/modal.js"></script>
 </body>
 </html>

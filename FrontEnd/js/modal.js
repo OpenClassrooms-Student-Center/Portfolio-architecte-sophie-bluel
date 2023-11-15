@@ -1,25 +1,51 @@
-// Get the modal
 var modal = document.getElementById("myModal");
-
-// Get the button that opens the modal
 var btn = document.getElementById("modalBtn");
-
-// Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
+var pages = document.getElementsByClassName("modal-content");
 
-// When the user clicks the button, open the modal 
-btn.onclick = function() {
-  modal.style.display = "block";
+btn.onclick = function () {
+  openModal();
 }
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
+span.onclick = function () {
+  closeModal();
 }
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
+window.onclick = function (event) {
   if (event.target == modal) {
-    modal.style.display = "none";
+    closeModal();
   }
 }
+
+function openModal() {
+  console.log("Opening modal");
+  modal.style.display = 'block';
+  pages[0].style.display = 'block';
+  document.getElementById('nextPageLink').addEventListener('click', nextPage);
+  document.getElementById('prevPageLink').addEventListener('click', prevPage);
+}
+
+// Déclarez closeModal en tant que fonction globale
+window.closeModal = function () {
+  console.log("Closing modal");
+  modal.style.display = 'none';
+  for (var i = 0; i < pages.length; i++) {
+    pages[i].style.display = 'none';
+  }
+  document.getElementById('nextPageLink').removeEventListener('click', nextPage);
+  document.getElementById('prevPageLink').removeEventListener('click', prevPage);
+}
+
+function nextPage() {
+  console.log("Going to next page");
+  pages[0].style.display = 'none';
+  pages[1].style.display = 'block';
+}
+
+function prevPage() {
+  console.log("Going back to the previous page");
+  pages[1].style.display = 'none';
+  pages[0].style.display = 'block';
+}
+
+//openModal();

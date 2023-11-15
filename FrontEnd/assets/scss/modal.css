@@ -1,6 +1,6 @@
 /* Colors */
 /****** COLORS ***********/
-/* The Modal (background) */
+/* Style du modal */
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
@@ -13,34 +13,105 @@
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0, 0, 0); /* Fallback color */
   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  transition: all 0.4s ease;
 }
 
-/* Modal Content */
+/* Style du contenu du modal */
 .modal-content {
-  background-color: #fefefe;
-  margin: auto;
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
   padding: 20px;
-  border: 1px solid #888;
+  text-align: center;
   width: 80%;
   max-width: 630px;
   border-radius: 10px;
-  padding-top: 20px;
-  padding-bottom: 0px;
 }
 
-/* The Close Button */
-.close {
-  color: #000000;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+.modal-content {
+  display: none;
 }
 
-.close:hover,
-.close:focus {
-  color: #000000;
-  text-decoration: none;
+.modal-content.active {
+  display: block;
+}
+
+a#nextPageLink {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: "Syne";
+  font-weight: 700;
+  font-size: 14px;
+  color: white;
+  background-color: #1D6154;
+  margin: 2em auto;
+  width: 237px;
+  text-align: center;
+  border-radius: 60px;
+  border: none;
+  padding: 10px;
   cursor: pointer;
+  text-decoration: none;
+  transition: all 0.4s ease;
+}
+
+a#nextPageLink:hover {
+  background-color: #0e2f28;
+}
+
+.container-link-top-modal {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 20px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.container-link-close-modal {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  height: 20px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#prevPageLink {
+  display: block;
+  color: #000000;
+  font-size: 16px;
+  transition: all 0.4s ease;
+}
+
+.close {
+  display: block;
+  font-size: 16px;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  transition: all 0.4s ease;
+}
+
+#prevPageLink:hover,
+.close:hover {
+  color: #1D6154;
+  scale: 1.5;
+}
+
+hr {
+  height: 1px;
+  background-color: #B3B3B3;
+  border: none;
+  margin-top: 40px;
 }
 
 #modalBtn {
@@ -56,63 +127,20 @@
   padding-bottom: 15px;
 }
 
-.titre-modal h1 {
+.modal h2 {
   color: #000000;
   font-family: "Work Sans";
   font-size: 26px;
   font-weight: 400;
   text-align: center;
-  padding-bottom: 30px;
-}
-
-.submit-photo {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  font-family: "Syne";
-  font-weight: 700;
-  font-size: 14px;
-  color: white;
-  background-color: #1D6154;
-  margin: 2em auto;
-  width: 237px;
-  text-align: center;
-  border-radius: 60px;
-  border: none;
-  height: 36px;
-  cursor: pointer;
-  transition: all 0.4s ease;
-}
-
-.submit-photo:hover {
-  background-color: #0e2f28;
-}
-
-.top-stroke {
-  display: block;
-  border-top: 1px solid #B3B3B3;
-  margin-top: 67px;
   padding-bottom: 10px;
 }
 
-.add-stroke {
-  display: block;
-  border-top: 1px solid #B3B3B3;
-  margin-top: 67px;
-  padding-bottom: 10px;
-}
-
-a.backform:link,
-a.backform:active,
-a.backform:visited {
-  display: block;
-  position: absolute;
-  left: -60px;
-  top: -110px;
-  background-color: rgb(205, 125, 50);
-  color: aquamarine;
-  width: 40px;
-  height: 40px;
+.modal-gallery,
+.modal-ajout-gallery {
+  background-color: bisque;
+  margin-left: 90px;
+  margin-right: 90px;
 }
 
 /*# sourceMappingURL=modal.css.map */

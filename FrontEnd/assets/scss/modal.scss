@@ -1,48 +1,121 @@
 /* Colors */
 @import 'web_elements';
 
-/* The Modal (background) */
+/* Style du modal */
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  }
-  
-  /* Modal Content */
-  .modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 630px;
-    border-radius: 10px;
-    padding-top: 20px;
-    padding-bottom: 0px;
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  transition: all 0.4s ease;
+}
 
+/* Style du contenu du modal */
+.modal-content {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  text-align: center;
+  width: 80%;
+  max-width: 630px;
+  border-radius: 10px;
+  
+}
+
+
+.modal-content {
+  display: none;
+}
+
+.modal-content.active {
+  display: block;
+}
+
+a#nextPageLink {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: 'Syne';
+  font-weight: 700;
+  font-size: 14px;
+  color: white;
+  background-color: $green;
+  margin : 2em auto ;
+  width: 237px;
+  text-align: center;
+  border-radius: 60px;
+  border:none;
+  padding: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.4s ease;
+}
+
+a#nextPageLink:hover {
+  background-color: $green-dark;
+  }
+
+.container-link-top-modal {
+  display: flex;
+  justify-content: space-between;
+  align-items:flex-start;
+  height: 20px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  }
+
+.container-link-close-modal {
+  display: flex;
+  justify-content: flex-end;
+  align-items:flex-start;
+  height: 20px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
   }
   
-  /* The Close Button */
-  .close {
-    color: $black;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+
+#prevPageLink {
+  display: block;
+  color:$black;
+  font-size: 16px;
+  transition: all 0.4s ease;
   }
-  
-  .close:hover,
-  .close:focus {
-    color:$black;
-    text-decoration: none;
-    cursor: pointer;
+
+.close {
+  display: block;
+  font-size: 16px;
+  cursor: pointer;
+  width: 20px;
+  height:20px;
+  transition: all 0.4s ease;
+  }
+
+#prevPageLink:hover,
+.close:hover {
+  color: $green;
+  scale: 1.5;
+  }
+
+  hr {
+    height: 1px;
+    background-color: #B3B3B3;
+    border: none;
+    margin-top: 40px;
   }
 
 
@@ -54,72 +127,28 @@
   display: none;
 }
 
+
 .display-mini-gallery {
   padding: 60px;
   padding-bottom: 15px;
 }
 
-.titre-modal {
+.modal {
 
-  h1 {
+  h2 {
   color: $black;
   font-family: 'Work Sans' ;
 	font-size: 26px;
   font-weight: 400;
   text-align: center;
-  padding-bottom: 30px;
+  padding-bottom: 10px;
   }
 }
 
-.submit-photo {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-	font-family: 'Syne';
-	font-weight: 700;
-	font-size: 14px;
-	color: white;
-	background-color: $green;
-	margin : 2em auto ;
-	width: 237px;
-	text-align: center;
-	border-radius: 60px;
-  border:none;
-	height: 36px;
-	cursor: pointer;
-	transition: all 0.4s ease;
-	}
 
-	.submit-photo:hover {
-	background-color: $green-dark;
-	}
-
-  .top-stroke {
-    display: block;
-    border-top : 1px solid #B3B3B3;
-    margin-top: 67px;
-    padding-bottom: 10px;
-  }
-
-  .add-stroke {
-    display: block;
-    border-top : 1px solid #B3B3B3;
-    margin-top: 67px;
-    padding-bottom: 10px;
-  }
-
-a.backform:link,
-a.backform:active,
-a.backform:visited {
-  display: block;
-  position: absolute;
-  left: -60px;
-  top: -110px;
-  background-color: rgb(205, 125, 50);
-  color: aquamarine;
-
-  width: 40px;
-  height: 40px;
-
-
+.modal-gallery,
+.modal-ajout-gallery {
+  background-color: bisque;
+  margin-left: 90px;
+  margin-right: 90px;
 }
