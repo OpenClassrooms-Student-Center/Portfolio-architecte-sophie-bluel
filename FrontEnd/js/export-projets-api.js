@@ -111,29 +111,33 @@ export function deleteApi(event, id) {
  * @returns {Promise} 
  */
 
-export const postApi = async (files, userOnline) => {
-  try {
-    // Vérifier si files est une instance de FormData
-    if (!(files instanceof FormData)) {
-      throw new Error('Le paramètre "files" doit être une instance de FormData.');
-    }
 
-    const response = await fetch("http://localhost:5678/api/works", {
+export const postApi = async (files, userOnline) => { {
+  try {
+    const reponse = await fetch("http://localhost:5678/api/works", {
       method: "POST",
       headers: {
-        "content-Type": "application/json",
+        "Content-Type": "application/json",
         'Authorization': "Bearer " + userOnline.token,
       },
-      body: files,
+      body: JSON.stringify(donnees),
     });
 
-    // Vérifier si la réponse est ok
-    if (!response.ok) {
-      throw new Error(`Erreur lors de la requête POST. Statut : ${response.status}`);
-    }
-
-    return response;
-  } catch (error) {
-    console.error("Erreur lors de la requête POST :", error);
+    const resultat = await reponse.json();
+    console.log("Réussite :", resultat);
+  } catch (erreur) {
+    console.error("Erreur :", erreur);
   }
-};
+}
+
+const donnees = { 
+  id: 0,
+  title: "string",
+  imageUrl: "string",
+  categoryId: "string",
+ };
+
+postApi(donnees);
+
+  }
+

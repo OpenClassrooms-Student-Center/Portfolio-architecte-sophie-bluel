@@ -131,14 +131,16 @@ hr {
   padding-bottom: 10px;
 }
 
+/* Contenu affichage contenu / API  */
 .display-mini-gallery {
-  padding-left: 60px;
-  padding-right: 60px;
+  padding-left: 70px;
+  padding-right: 70px;
   padding-bottom: 15px;
 }
 
 .modal-ajout-gallery {
-  background-color: bisque;
+  padding-left: 70px;
+  padding-right: 70px;
 }
 
 .display-mini-project {
@@ -173,9 +175,106 @@ hr {
   cursor: pointer;
 }
 
-.preview-image {
-  width: 200px;
-  height: 200px;
+.add-file-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centrer horizontalement */
+  justify-content: flex-start; /* Centrer verticalement */
+  background-color: #E8F1F6;
+  border-radius: 3px;
+  height: 169px;
+  margin-bottom: 10px;
+}
+.add-file-zone .custom-file-input {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centrer horizontalement */
+}
+.add-file-zone i {
+  color: #B9C5CC;
+  font-size: 64px;
+  margin-top: 50px;
+}
+.add-file-zone .preview-image {
+  width: 169px;
+  height: 169px;
+  margin-top: 0px;
+}
+.add-file-zone input[type=file] {
+  display: none; /* Masquer le vrai bouton de fichier */
+}
+.add-file-zone button {
+  display: block;
+  background-color: #CBD6DC;
+  color: #306685;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 50px;
+  margin-top: 40px;
+  width: 173px;
+  font-family: "Work Sans";
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+.add-file-zone button:hover {
+  background-color: #306685;
+  color: #CBD6DC;
+}
+.add-file-zone p {
+  color: #444444;
+  font-family: "Work Sans";
+  font-size: 10px;
+}
+
+.add-file-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Optionnel : centrer horizontalement */
+}
+.add-file-text label {
+  margin-bottom: 5px; /* Espacement entre le label et le champ */
+  text-align: left;
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+.add-file-text input {
+  height: 50px;
+  width: 100%;
+  font-size: 1.2em;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  padding-left: 10px;
+}
+.add-file-text select {
+  width: 100%;
+  height: 50px;
+  font-size: 1.2em;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  padding-left: 10px;
+  background-color: #ffffff;
+}
+
+input#file-submit {
+  font-family: "Syne";
+  font-weight: 700;
+  font-size: 14px;
+  color: #FFFFFF;
+  background-color: #A7A7A7;
+  margin: 2em auto;
+  width: 237px;
+  text-align: center;
+  border-radius: 60px;
+  border: none;
+  height: 36px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+input#file-submit:hover {
+  background-color: #626262;
 }
 
 /*# sourceMappingURL=modal.css.map */

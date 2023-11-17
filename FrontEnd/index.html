@@ -88,23 +88,25 @@
 						<div class="modal-ajout-gallery">
 							<form class="add-form" name="add-form" enctype="multipart/form-data" method="post">
 								<div class="add-file-zone">
-									<label for="add-file">+ Ajouter photo</label>
-									<p>jpg, png : 4mo max</p>
-									<input type="file" name="image" id="add-file" accept=".png, .jpeg, .jpg" />
+									<label for="add-file"></label>
+									<div class="custom-file-input">
+										<input type="file" name="image" id="add-file" accept=".png, .jpeg, .jpg" />
+										<button type="button" id="custom-file-button">+ Ajouter image</button>
+										<p>jpg, png : 4mo max</p>
+									</div>
 								</div>
 								<div class="add-file-text">
 									<label for="file-title">Titre</label>
 									<input type="text" name="title" id="file-title" />
 								</div>
 								<div class="add-file-text">
-									<label for="file-categorie">Categorie</label>
+									<label for="file-categorie">Catégorie</label>
 									<select name="category" id="file-categorie">
-										<option></option>
 									</select>
 								</div>
 								<hr>
 								<p class="errorChamp red"></p>
-								<input type="submit" id="file-submit" value="Valider" />
+								<input type="submit" class="btn-valider" id="file-submit" value="Valider" />
 							</form>
 						</div>
   					</div>
