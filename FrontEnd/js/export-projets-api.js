@@ -48,7 +48,7 @@ const categoriesPortfolio = async () => {
 ************ AUTORISATIONS API *****************
 ************************************************/
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MTg3NDkzOSwiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4";
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiO…Tk0fQ.5z_svrUqj2zQd-LtO6qdVJmOyCFY7ZGAKyxel6NZbuo";
 const projectId = 'data-id';
 
 // Stocker le jeton d'authentification et l'ID du projet dans le localStorage
@@ -57,7 +57,23 @@ localStorage.setItem('data-id', projectId);
 
 console.log("Token stored in localStorage:", localStorage.getItem('token'));
 
-const userOnline = JSON.parse(sessionStorage.getItem("userOnline"));
+const userOnlineKey = "userOnline"; // Set the key used to store userOnline in sessionStorage
+
+// Function to retrieve userOnline from sessionStorage
+export const getUserOnlineFromSessionStorage = () => {
+  if (sessionStorage.getItem(userOnlineKey)) {
+    return JSON.parse(sessionStorage.getItem(userOnlineKey));
+  } else {
+    console.error("userOnline key not found in sessionStorage. Make sure it's stored before trying to retrieve it.");
+    return null;
+  }
+};
+
+// Example usage in another part of your code
+const userOnline = getUserOnlineFromSessionStorage();
+// Now you can use `userOnline` in this part of your code
+console.log("userOnline retrieved from sessionStorage:", userOnline);
+
 
 console.log("Bouton de suppression cliqué");
 
@@ -97,6 +113,7 @@ export function deleteApi(event, id) {
   });
 }
 
+
 /***********************************************
 *************** AJOUT PROJET API ***************
 ************************************************
@@ -104,12 +121,17 @@ export function deleteApi(event, id) {
  * @returns {Promise} 
  */
 
-export const createProjectFormData = (title, image, category) => {
+const createProjectFormData = (title, imageUploaded, category) => {
   const formData = new FormData();
+
+  // Logging to check the values being appended
+  console.log('Title:', title);
+  console.log('Image:', imageUploaded);
+  console.log('Category:', category);
 
   // Ajouter les champs requis pour l'API
   formData.append('title', title);
-  formData.append('image', image);
+  formData.append('image', imageUploaded);
   formData.append('category', category);
 
   return formData;
@@ -123,7 +145,6 @@ export const postApi = async (projectId, userOnline) => {
       projectId.imageUrl,
       projectId.categoryId
     );
-
     const reponse = await fetch("http://localhost:5678/api/works", {
       method: "POST",
       headers: {
@@ -139,6 +160,7 @@ export const postApi = async (projectId, userOnline) => {
     console.error("Erreur :", erreur);
   }
 };
+
 
 /***********************************************
 ************ INITIALISATION DES DONNÉES *********
