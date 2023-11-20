@@ -41,11 +41,6 @@ const categoriesPortfolio = async () => {
     console.error(error);
   }
 };
-/** Exporte les variables contenants les résultats de la variable
- *  works et categories après que la promesse soit résolue */
-
-export const works = await worksPortfolio();
-export const categories = await categoriesPortfolio();
 
 
 
@@ -62,7 +57,9 @@ localStorage.setItem('data-id', projectId);
 
 console.log("Token stored in localStorage:", localStorage.getItem('token'));
 
+const userOnline = JSON.parse(sessionStorage.getItem("userOnline"));
 
+console.log("Bouton de suppression cliqué");
 
 /***********************************************
 ************ SUPPRESSION PROJET API ************
@@ -71,10 +68,6 @@ console.log("Token stored in localStorage:", localStorage.getItem('token'));
 
 export function deleteApi(event, id) {
   event.preventDefault();
-
-  const userOnline = JSON.parse(sessionStorage.getItem("userOnline"));
-  const token = localStorage.getItem('token');
-  console.log("Bouton de suppression cliqué");
 
   fetch(`http://localhost:5678/api/works/${id}`, {
       method: 'DELETE',
@@ -111,16 +104,33 @@ export function deleteApi(event, id) {
  * @returns {Promise} 
  */
 
+export const createProjectFormData = (title, image, category) => {
+  const formData = new FormData();
 
-export const postApi = async (files, userOnline) => { {
+  // Ajouter les champs requis pour l'API
+  formData.append('title', title);
+  formData.append('image', image);
+  formData.append('category', category);
+
+  return formData;
+};
+
+
+export const postApi = async (projectId, userOnline) => {
   try {
+    const formData = createProjectFormData(
+      projectId.title,
+      projectId.imageUrl,
+      projectId.categoryId
+    );
+
     const reponse = await fetch("http://localhost:5678/api/works", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
-        'Authorization': "Bearer " + userOnline.token,
+        "accept": "application/json",
+        "Authorization": "Bearer " + userOnline.token,
       },
-      body: JSON.stringify(donnees),
+      body: formData,
     });
 
     const resultat = await reponse.json();
@@ -128,16 +138,10 @@ export const postApi = async (files, userOnline) => { {
   } catch (erreur) {
     console.error("Erreur :", erreur);
   }
-}
+};
 
-const donnees = { 
-  id: 0,
-  title: "string",
-  imageUrl: "string",
-  categoryId: "string",
- };
-
-postApi(donnees);
-
-  }
-
+/***********************************************
+************ INITIALISATION DES DONNÉES *********
+************************************************/
+export const works = await worksPortfolio();
+export const categories = await categoriesPortfolio();
