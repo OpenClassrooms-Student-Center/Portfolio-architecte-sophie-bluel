@@ -59,7 +59,8 @@ header {
 	margin: 50px 0
 }
 section {
-	margin: 50px 0
+	margin: 50px 0;
+	margin-bottom: 139px;
 }
 
 h1{
@@ -115,7 +116,7 @@ li:hover {
 	flex: 1
 }
 #introduction h2 {
-	margin-bottom: 1em;
+	margin-bottom: 51px;
 }
 
 #introduction p {
@@ -123,8 +124,42 @@ li:hover {
 }
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
+	margin-bottom: 51px;
 }
+
+.categories {
+	display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 51px;
+    gap: 10px;
+}
+
+input[type=radio] {
+	display: none;
+  }
+
+  input[type=radio] + label{
+	border: solid 1px #1D6154;
+	border-radius:  60px;
+	color: #1D6154;
+	padding: 10px 15px;
+	background-color: white;
+	cursor: pointer;
+	user-select: none;
+	font-family: 'Syne';
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  input[type=radio]:checked + label{
+	border: solid 1px #1D6154;
+	color: white;
+	background-color: #1D6154;
+  }
+  
+
 .gallery {
 	width: 100%;
 	display: grid;

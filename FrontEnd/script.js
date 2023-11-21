@@ -1,21 +1,48 @@
-async function getAllWorks() {
-    let gallery = document.querySelector('.gallery')
-    let response = await fetch(`http://localhost:5678/api/works`)
-    console.log(response);
-    let works = await response.json()
-   
-    console.log(gallery);
-    works.forEach(work => {
-        let figureTemplate = `<figure>
-				<img src="${work.imageUrl}" alt="${work.title}">
-				<figcaption>${work.title}</figcaption>
-		</figure>
-        `
-        console.log(figureTemplate);
-        gallery.innerHTML += figureTemplate 
-        
+async function main() {
+  let works = await getAllWorks();
+  generateGallery(works);
+  addFiltersButtonEventListener();
+
+  function addFiltersButtonEventListener() {
+    let buttons = document.querySelectorAll(".filterButton");
+    buttons.forEach(function (button) {
+      button.addEventListener("click", function (e) {
+        filterName = e.target.value;
+        filterGallery(filterName);
+      });
     });
-    console.log(gallery);
+  }
+
+  function filterGallery(filterName) {
+    let filteredWorks;
+    if (filterName === "tous") {
+      filteredWorks = works;
+    } else {
+      filteredWorks = works.filter((work) => {
+        return work.category.name.includes(filterName);
+      });
+    }
+    console.log(filteredWorks);
+    generateGallery(filteredWorks);
+  }
+
+  function generateGallery(works) {
+    let gallery = document.querySelector(".gallery");
+    let newHtmlGallery = "";
+    works.forEach((work) => {
+      newHtmlGallery += `<figure>
+                      <img src="${work.imageUrl}" alt="${work.title}">
+                      <figcaption>${work.title}</figcaption>
+              </figure>
+              `;
+    });
+    gallery.innerHTML = newHtmlGallery;
+  }
+
+  async function getAllWorks() {
+    let works = await fetch(`http://localhost:5678/api/works`);
+    return works.json();
+  }
 }
 
-getAllWorks()
+main();
