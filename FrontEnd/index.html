@@ -21,6 +21,8 @@
 	<link rel="stylesheet" href="./assets/scss/modal.css">
 
 	<!-- Fichiers JS-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="module" src="./js/modal.js" defer></script>
 	<script type="module" src="./js/export-projets-api.js" defer></script>
 	<script type="module" src="./js/projets.js" defer></script>
 	<script type="module" src="./js/login-editor.js" defer></script>
@@ -34,8 +36,8 @@
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
-			<li><a href="http://127.0.0.1:5502/FrontEnd/index.html" class="nav-link">projets</a></li>
-			<li><a href="#" class="nav-link">contact</a></li>
+			<li><a href="#portfolio" class="nav-link">projets</a></li>
+			<li><a href="#contact" class="nav-link">contact</a></li>
 			<li><a href="http://127.0.0.1:5502/FrontEnd/login.html" id="login" class="nav-link">login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
@@ -155,6 +157,24 @@
 	</nav>
 </footer>
 <!-- Footer End -->
-<script type="module" src="./js/modal.js"></script>
+
+<!-- Script scrollsmooth -->
+	<script>
+	$(document).ready(function(){
+	  $("a").on('click', function(event) {
+		if (this.hash !== "") {
+		  event.preventDefault();
+		  var hash = this.hash;
+	
+		  $('html, body').animate({
+			scrollTop: $(hash).offset().top
+		  }, 800, function(){
+	   
+			window.location.hash = hash;
+		  });
+		} 
+	  });
+	});
+	</script>
 </body>
 </html>
