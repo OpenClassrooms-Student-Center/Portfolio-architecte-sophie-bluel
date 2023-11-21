@@ -100,17 +100,17 @@ export const deleteApi = async (event, id) => {
  * @function createProjectFormData
  */
 
-export const createProjectFormData = (title, image, category) => {
+export const createProjectFormData = (title, imageFile, category) => {
   const formData = new FormData();
 
   // Logging to check the values being appended
   console.log('Title:', title);
-  console.log('Image:', image);
+  console.log('Image:', imageFile);
   console.log('Category:', category);
 
   // Ajouter les champs requis pour l'API
   formData.append('title', title);
-  formData.append('image', image);
+  formData.append('image', imageFile);
   formData.append('category', category);
 
   return formData;
@@ -118,6 +118,7 @@ export const createProjectFormData = (title, image, category) => {
 
 export const postApi = async (projectId) => {
   try {
+    console.log('Données du formulaire :', projectId);
     const userOnline = getUserOnlineFromSessionStorage();
 
     if (!userOnline || !userOnline.token) {

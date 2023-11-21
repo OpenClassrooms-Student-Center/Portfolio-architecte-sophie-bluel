@@ -54,7 +54,7 @@ const ajoutProjet = () => {
         fileZone.prepend(defaultIconElement);
 
         // Ajout d'une image
-        const displayImage = (url) => {
+        const displayImage = (file) => {
             if (previewIsPresent) {
                 const existingImage = document.querySelector(".add-file-zone img:not(.default-image)");
                 if (existingImage) {
@@ -66,12 +66,12 @@ const ajoutProjet = () => {
                 }
             }
 
-            if (!url) {
-                return; // Si l'URL est vide, on ne charge pas d'image réelle
+            if (!file) {
+                return; // Si le fichier est vide, on ne charge pas d'image réelle
             }
 
             imageElement = document.createElement("img");
-            imageElement.src = url;
+            imageElement.src = URL.createObjectURL(file);
             imageElement.classList.add("uploaded-image");
 
             const iconElement = fileZone.querySelector("i");
@@ -118,9 +118,7 @@ const ajoutProjet = () => {
                 return;
             }
 
-            const imageUrl = URL.createObjectURL(file);
-
-            displayImage(imageUrl);
+            displayImage(file);
         });
 
         // Écouter l'événement de soumission du formulaire
@@ -130,7 +128,7 @@ const ajoutProjet = () => {
             // Appeler postApi avec les données du formulaire
             postApi({
                 title: titleInput.value,
-                image: imageElement.src,
+                image: fileInput.files[0], // Utiliser le fichier directement
                 category: categorieInput.value,
             });
         });
