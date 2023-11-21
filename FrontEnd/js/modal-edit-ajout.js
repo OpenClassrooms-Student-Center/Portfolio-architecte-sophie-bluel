@@ -1,10 +1,10 @@
-import { postApi, categories,getUserOnlineFromSessionStorage } from "./export-projets-api.js";
+import { postApi, categories, getUserOnlineFromSessionStorage } from "./export-projets-api.js";
 
 console.log("Script Ajout Projet principal chargé.");
 
 /************************************************
-************** MODAL AJOUT PROJET ***************
-*************************************************/
+ ************** MODAL AJOUT PROJET ***************
+ *************************************************/
 
 const formAddProjet = document.querySelector(".modal-ajout-gallery");
 
@@ -33,9 +33,6 @@ const ajoutProjet = () => {
 
     let previewIsPresent = false;
     let imageElement = "";
-    let imageTitle = "";
-    let imageCategorie = "";
-    let file = "";
 
     // Ajout des options de catégories au menu déroulant
     for (let i in categories) {
@@ -45,98 +42,101 @@ const ajoutProjet = () => {
         categorieInput.append(option);
     }
 
-       // Récupération userOnline
-       const userOnline = getUserOnlineFromSessionStorage();
+    // Récupération userOnline
+    const userOnline = getUserOnlineFromSessionStorage();
 
-       if (userOnline) {
-         console.log("userOnline présent dans le sessionStorage:", userOnline);
+    if (userOnline) {
+        console.log("userOnline présent dans le sessionStorage:", userOnline);
 
+        // Ajout d'une icône par défaut
+        const defaultIconElement = document.createElement("i");
+        defaultIconElement.classList.add("fa-regular", "fa-image", "fa-lg", "default-icon");
+        fileZone.prepend(defaultIconElement);
 
-
-    // Ajout d'une icône par défaut
-    const defaultIconElement = document.createElement("i");
-    defaultIconElement.classList.add("fa-regular", "fa-image", "fa-lg", "default-icon");
-    fileZone.prepend(defaultIconElement);
-
-    // Ajout d'une image
-    const displayImage = (url) => {
-        if (previewIsPresent) {
-            const existingImage = document.querySelector(".add-file-zone img:not(.default-image)");
-            if (existingImage) {
-                existingImage.remove();
+        // Ajout d'une image
+        const displayImage = (url) => {
+            if (previewIsPresent) {
+                const existingImage = document.querySelector(".add-file-zone img:not(.default-image)");
+                if (existingImage) {
+                    existingImage.remove();
+                }
+                const existingIcon = document.querySelector(".add-file-zone i.default-icon");
+                if (existingIcon) {
+                    existingIcon.remove();
+                }
             }
-            const existingIcon = document.querySelector(".add-file-zone i.default-icon");
-            if (existingIcon) {
-                existingIcon.remove();
+
+            if (!url) {
+                return; // Si l'URL est vide, on ne charge pas d'image réelle
             }
-        }
 
-        if (!url) {
-            return; // Si l'URL est vide, on ne charge pas d'image réelle
-        }
+            imageElement = document.createElement("img");
+            imageElement.src = url;
+            imageElement.classList.add("uploaded-image");
 
-        imageElement = document.createElement("img");
-        imageElement.src = url;
-        imageElement.classList.add("uploaded-image");
+            const iconElement = fileZone.querySelector("i");
 
-        const iconElement = fileZone.querySelector("i");
+            imageElement.classList.add("preview-image");
 
-        imageElement.classList.add("preview-image");
+            if (iconElement) {
+                iconElement.style.display = "none";
+            }
 
-        if (iconElement) {
-            iconElement.style.display = "none";
-        }
+            const labelElement = fileZone.querySelector("label");
 
-        const labelElement = fileZone.querySelector("label");
+            if (labelElement) {
+                labelElement.style.display = "none";
+            }
 
-        if (labelElement) {
-            labelElement.style.display = "none";
-        }
+            const paragraphElement = fileZone.querySelector("p");
 
-        const paragraphElement = fileZone.querySelector("p");
+            if (paragraphElement) {
+                paragraphElement.style.display = "none";
+            }
 
-        if (paragraphElement) {
-            paragraphElement.style.display = "none";
-        }
+            fileZone.prepend(imageElement);
+            previewIsPresent = true;
+            console.log("Affiche l'image prévisualisée est chargé.");
+            // Cacher le bouton personnalisé lorsque l'image est affichée
+            customFileButton.style.display = "none";
+        };
 
-        fileZone.prepend(imageElement);
-        previewIsPresent = true;
-        console.log("Affiche l'image prévisualisée est chargé.");
-        // Cacher le bouton personnalisé lorsque l'image est affichée
-        customFileButton.style.display = "none";
-    };
+        // Écouter l'événement de changement du fichier
+        fileInput.addEventListener("change", (e) => {
+            const fileExtensionRegex = /\.(jpe?g|png)$/i;
 
-    // Conformité du fichier
-    fileInput.addEventListener("change", (e) => {
-        const fileExtensionRegex = /\.(jpe?g|png)$/i;
+            if (e.target.files.length === 0 || !fileExtensionRegex.test(e.target.files[0].name)) {
+                return;
+            }
 
-        if (e.target.files.length === 0 || !fileExtensionRegex.test(e.target.files[0].name)) {
-            return;
-        }
+            const file = e.target.files[0];
 
-        const file = e.target.files[0];
+            if (file.size > maxSize) {
+                alert("Fichier trop volumineux. La taille maximale autorisée est de 4 Mo.");
+                // Réinitialisation pour sélectionner un nouveau fichier
+                fileInput.value = "";
+                return;
+            }
 
-        if (file.size > maxSize) {
-            alert("Fichier trop volumineux. La taille maximale autorisée est de 4 Mo.");
-            // Réinitialisation pour sélectionner un nouveau fichier
-            fileInput.value = "";
-            return;
-        }
+            const imageUrl = URL.createObjectURL(file);
 
-        const imageUrl = URL.createObjectURL(file);
+            displayImage(imageUrl);
+        });
 
-        displayImage(imageUrl);
+        // Écouter l'événement de soumission du formulaire
+        form.addEventListener("submit", (e) => {
+            e.preventDefault(); // Empêcher le formulaire de se soumettre normalement
 
-    // Appel du postApiavec les valeurs du formulaire
-    postApi({
-      title: titleInput.value,
-      imageUrl: imageUrl,
-      categoryId: categorieInput.value,
-    }, userOnline);
-  });
-} else {
-  console.error("Erreur d'authentification.");
-}
+            // Appeler postApi avec les données du formulaire
+            postApi({
+                title: titleInput.value,
+                image: imageElement.src,
+                category: categorieInput.value,
+            });
+        });
+    } else {
+        console.error("Erreur d'authentification.");
+    }
 };
 
 ajoutProjet();
