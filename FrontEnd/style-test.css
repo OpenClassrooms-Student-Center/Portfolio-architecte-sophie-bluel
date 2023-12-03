@@ -1,0 +1,26 @@
+.alignButton{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 50px;
+  gap: 20px;
+
+}
+
+button{
+  background-color: transparent;
+  color: #1D6154;
+  border: 1px solid;
+  border-radius: 50px;
+  font-size : 1.5em;
+  cursor: pointer;
+  padding : 7px 30px;
+  box-shadow: 0px 1px 5px #74777a;
+}
+
+button:hover{
+  background: #1D6154;
+  border:#1D6154 ;
+  color: #fff;
+}
+  
