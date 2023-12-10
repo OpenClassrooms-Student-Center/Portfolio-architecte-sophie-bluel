@@ -1,6 +1,8 @@
 let modal = null
 document.querySelector(".js-modal").addEventListener("click", openModal)
 
+
+// ouverture de la modal
 function openModal(e) {
     e.preventDefault()
     modal = document.querySelector(e.target.getAttribute('href'))
@@ -14,7 +16,8 @@ function openModal(e) {
     modal.querySelector(".modal-content").addEventListener("click", stopPropagation)
 } 
 
-function closeModal(e) {
+// fermeture de la modal
+ function closeModal(e) {
 
     if (modal === null) return
 
@@ -27,12 +30,21 @@ function closeModal(e) {
     modal.querySelector(".add-croix").removeEventListener("click", closeModal)
     modal.querySelector(".add-picture").removeEventListener("click", stopPropagation)
     modal.querySelector(".modal-content").removeEventListener("click", stopPropagation)
+    let modal1 = document.querySelector('.modal-content')
+    let modal2 = document.querySelector('.add-picture')
+
+    if (modal1.style.display === 'none') {
+        modal1.style.display = 'flex'
+        modal2.style.display = 'none'
+    } 
 }
 
+// fin de progation de la fermeture de la modal
 function stopPropagation(e) {
     e.stopPropagation()
 }
 
+// fermeture de la modal à l'aide du bouton escape
 window.addEventListener('keydown', function (e) {
     if (e.key === "Escape" || e.key === "Esc") {
         closeModal(e)
@@ -40,6 +52,7 @@ window.addEventListener('keydown', function (e) {
 })
 
 
+// passer d'une modal à l'autre 
 let modalAdd = document.querySelectorAll('.add')
 modalAdd.forEach(add => {
     add.addEventListener('click', switchModal)
@@ -58,7 +71,6 @@ function switchModal() {
 }
 
 
-
 const restriction = document.getElementById('restriction')
 const labelInputElment = document.getElementById('label-add')
 const inputElement = document.getElementById('add');
@@ -69,6 +81,8 @@ const errorMessagesContainer = document.getElementById('img-error');
 // Ajoutez un écouteur d'événements sur le changement du fichier
 inputElement.addEventListener('change', handleFileSelect);
 
+
+// verification du fichier sélectionner 
 function handleFileSelect(event) {
     // Réinitialise les messages d'erreur précédents
     errorMessagesContainer.innerHTML = '';
@@ -113,6 +127,7 @@ function handleFileSelect(event) {
     hideFileInput();
 }
 
+// affichage des erreur 
 function appendErrorMessage(message) {
     const errorMessageElement = document.createElement('p');
     errorMessageElement.setAttribute('class', 'error')
@@ -120,15 +135,18 @@ function appendErrorMessage(message) {
     errorMessagesContainer.appendChild(errorMessageElement);
 }
 
+// reset du formulaire d'ajout
 function resetImagePreview() {
+    const imagePreview = document.getElementById('imagePreview');
     imagePreview.src = './assets/icons/Vector 2.svg';
     imagePreview.alt = '';
     imagePreview.classList.remove('custom-image-size')
 
     // Réaffichez l'input, son label et la balise <p>
-    showFileInput();
+    resetForm();
 }
 
+// affichage de l'image sélectionnée
 function displayImagePreview(file) {
     const reader = new FileReader();
     reader.onload = function (e) {
@@ -139,6 +157,7 @@ function displayImagePreview(file) {
     reader.readAsDataURL(file);
 }
 
+// disparition de l'input file
 function hideFileInput() {
     inputElement.style.display = 'none';
     labelInputElment.style.display = 'none'
@@ -146,7 +165,10 @@ function hideFileInput() {
     // Vous pouvez également cacher le label et la balise <p> de manière similaire si nécessaire
 }
 
-function showFileInput() {
+// reset et apparition du formulaire
+function resetForm() {
+    const restriction = document.getElementById('restriction')
+const labelInputElment = document.getElementById('label-add')
     labelInputElment.style.display = 'flex';
     restriction.style.display = 'block';
     let optionElement = document.getElementById('category')
@@ -159,23 +181,33 @@ function showFileInput() {
     // Vous pouvez également afficher le label et la balise <p> de manière similaire si nécessaire
 }
 
+// reset de l'image et du formulaire au changement de la modal
 document.getElementById('return').addEventListener('click', resetImagePreview)
 
-let addPicture = document.getElementById('add')
-addPicture.addEventListener('change', validButoon)
-let addTitle = document.getElementById('add-title')
-addTitle.addEventListener('change', validButoon)
-let addCategory = document.getElementById('category')
-addCategory.addEventListener('change', validButoon)
 
-function validButoon() {
+// validation du formulaire 
+let addPicture = document.getElementById('add')
+addPicture.addEventListener('change', validButton)
+let addTitle = document.getElementById('add-title')
+addTitle.addEventListener('change', validButton)
+let addCategory = document.getElementById('category')
+addCategory.addEventListener('change', validButton)
+
+function validButton() {
     if (addPicture.value !== "" && addTitle.value !== "" && addCategory.value !== 'choose') {
         let buttonValid = document.querySelector('.disabled')
-        console.log(buttonValid);
+       
         buttonValid.removeAttribute('disabled')
-        buttonValid.classList.toggle('valid')
+        buttonValid.classList.add('valid')
     }   
 }
+
+
+
+// fermeture de la modal une fois qu'un projet est rajouter
+let valid = document.querySelector('.disabled').addEventListener('click', closeModal)
+
+
 
 
 

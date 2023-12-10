@@ -1,3 +1,6 @@
+
+ let login = document.querySelector('.conexion').addEventListener('click', submitForm)
+
 async function submitForm() {
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;

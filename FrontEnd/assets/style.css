@@ -128,21 +128,22 @@ table {
   border-spacing: 0;
 }
 /** end reset css**/
-body {
-  max-width: 1140px;
-  margin: auto;
-  font-family: "Work Sans";
-  font-size: 14px;
-  background-color: #fffef8;
+
+#active {
+  display: flex;
+}
+
+.edition-mode {
+  display: none;
 }
 
 .bar-edition {
-  display: flex;
   align-items: center;
   justify-content: center;
   background-color: black;
   color: white;
   height: 59px;
+  font-family: 'Work Sans';
   font-size: 16px;
   font-weight: 400;
   line-height: 18.77px;
@@ -151,6 +152,14 @@ body {
 .bar-edition img {
   height: 15.58px;
   width: 15.58px;
+}
+
+.main-container {
+  max-width: 1140px;
+  margin: auto;
+  font-family: "Work Sans";
+  font-size: 14px;
+  background-color: #fffef8;
 }
 
 header {
@@ -186,7 +195,6 @@ h1 > span {
 }
 
 .modify {
-  display: flex;
   justify-content: center;
   align-items: baseline;
   gap: 10px;
@@ -203,13 +211,6 @@ h1 > span {
   cursor: pointer;
 }
 
-.edition-mode {
-  display: none;
-}
-
-#active {
-  display: flex;
-}
 
 h2 {
   font-family: "Syne";
@@ -369,6 +370,12 @@ footer {
 
 /*modal.style*/
 
+   /*modal-delete-project.style*/
+
+.js-modal {
+  color: black;
+}
+
 .modal {
   position: fixed;
   display: flex;
@@ -447,6 +454,7 @@ footer {
 }
 
 .modal-gallery {
+  overflow: auto;
   width: 420px;
   height: 53%;
   display: grid;
@@ -465,20 +473,53 @@ footer {
   height: 102.57px;
 }
 
-.modal-gallery .delete {
-  z-index: 1;
-  padding: 3px;
-  background-color: black;
-  right: 0px;
-  width: 9px;
-  height: 11px;
-  border-radius: 2px;
-  margin-right: 6px;
-  margin-top: 6px;
+.modal-gallery button {
+  border: none;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    overflow: visible;
+    background: none;
 }
 
-.js-modal {
-  color: black;
+.modal-gallery .delete {
+  z-index: 1;
+    padding: 3px;
+    background-color: black;
+    right: 0px;
+    width: 9px;
+    height: 11px;
+    border-radius: 2px;
+    margin-right: 6px;
+    margin-top: -5px;
+    cursor: pointer;
+}
+
+   /*modal-add-project.style*/
+
+
+.add-picture nav {
+  width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#return {
+  margin-top: 26px;
+    margin-left: 30px;
+    margin-bottom:0 ;
+    border: none;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
+    height: 21px;
+    width: 21px;
+}
+
+.form {
+  display: flex;
+    flex-direction: column;
 }
 
 .add-form {
@@ -519,24 +560,9 @@ footer {
   text-align: center;
 }
 
-.disabled {
-	height: 36px;
-  width: 237px;
-  color: white;
-  background-color: #A7A7A7;
-  border-radius: 60px;
-  border: none;
-  font-family: "syne";
-  font-size: 14px;
-  line-height: 16.8px;
-  text-align: center;
-  margin-top: 38px;
-  margin-bottom: 45px;
-}
-
-.valid {
-  background-color: #1d6154;
-  cursor: pointer;
+.custom-image-size {
+	width: 129px;
+	height: 169px;
 }
 
 .error {
@@ -544,35 +570,7 @@ footer {
     text-decoration: underline;
     font-size: 13px;
     margin-bottom: 5px;
-}
-
-.custom-image-size {
-	width: 129px;
-	height: 169px;
-}
-
-#return {
-  margin-top: 26px;
-    margin-left: 30px;
-    margin-bottom:0 ;
-    border: none;
-    padding: 0;
-    background: transparent;
-    cursor: pointer;
-    height: 21px;
-    width: 21px;
-}
-
-.add-picture nav {
-  width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.form {
-  display: flex;
-    flex-direction: column;
+    text-align: center;
 }
 
 .form input {
@@ -602,4 +600,24 @@ footer {
 
 #category:focus {
   outline: none;
+}
+
+.disabled {
+	height: 36px;
+  width: 237px;
+  color: white;
+  background-color: #A7A7A7;
+  border-radius: 60px;
+  border: none;
+  font-family: "syne";
+  font-size: 14px;
+  line-height: 16.8px;
+  text-align: center;
+  margin-top: 38px;
+  margin-bottom: 45px;
+}
+
+.valid {
+  background-color: #1d6154;
+  cursor: pointer;
 }
