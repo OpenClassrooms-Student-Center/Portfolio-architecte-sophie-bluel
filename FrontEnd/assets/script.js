@@ -1,57 +1,10 @@
-//images
-//const gallery {
-//imageUrl:" img src="assets/images/abajour-tahina.png" alt="Abajour Tahina" "
-//Tagline_figcaption:				"Abajour Tahina"
+//variables globales
 
-
-//imageUrl:"img src="assets/images/appartement-paris-v.png" alt="Appartement Paris V""
-//Tagline_figcaption:"Appartement Paris V"
-			
-				
-		
-//imageUrl:	"img src="assets/images/restaurant-sushisen-londres.png" alt="Restaurant Sushisen - Londres""
-//Tagline_figcaption:			"Restaurant Sushisen - Londres"
-			
-
-
-//imageUrl : "img src="assets/images/la-balisiere.png" alt="Villa “La Balisiere” - Port Louis""
-//Tagline_figcaption:		"Villa “La Balisiere” - Port Louis"
-		
-//imageUrl:	"img src="assets/images/structures-thermopolis.png" alt="Structures Thermopolis""
-//Tagline_figcaption:"	Structures Thermopolis"
-		
-//imageUrl:	"img src="assets/images/appartement-paris-x.png" alt="Appartement Paris X""
-//Tagline_figcaption:		"Appartement Paris X"
-		
-//imageUrl:	"img src="assets/images/le-coteau-cassis.png" alt="Pavillon “Le coteau” - Cassis""
-//Tagline_figcaption:		"Pavillon “Le coteau” - Cassis"
-		
-//imageUrl:	"img src="assets/images/villa-ferneze.png" alt="Villa Ferneze - Isola d’Elba""
-//Tagline_figcaption:	"	Villa Ferneze - Isola d’Elba"
-		
-//imageUrl:	"img src="assets/images/appartement-paris-xviii.png" alt="Appartement Paris XVIII""
-//Tagline_figcaption:	"Appartement Paris XVIII"
-			
-//imageUrl:	"img src="assets/images/bar-lullaby-paris.png" alt="Bar “Lullaby” - Paris""
-//Tagline_figcaption:	"Bar “Lullaby” - Paris"
-			
-//imageUrl:	"img src="assets/images/hotel-first-arte-new-delhi.png" alt="Hotel First Arte - New Delhi""
-//Tagline_figcaption:	"Hotel First Arte - New Delhi"
-
-
-//Variables globales
-//const gallery = document.querySelector('.gallery')// selectionne la div "gallery"
-//const response = await fetch(`http://localhost:5678/api/works`)//recupere les donnees de l'api
-
-
-//fonctions
-
-//getAllWorks
+//Fonctions 
 
 
 
 
-// Scenario du projet: 
 
 //API FETCH
 
@@ -89,8 +42,22 @@ console.log(projects);
   
 
 
-getGalleryProjects ();//appel de la fonction getGalleryProjects
+  getGalleryProjects ();//appel de la fonction getGalleryProjects
 
+// En cours de construction
+
+  async function getGalleryProjectsByName(name){
+    const reponse = await fetch("http://localhost:5678/api/works/" + name);
+    const projects = await reponse.json();
+console.log(projects);
+
+
+for (let i = 0; i < projects.length; i++) {
+const sectionPortfolio = document.getElementById("#portfolio");//selectionne l'Id "portfolio"
+
+
+  }
+  }
 
 //1. L'utilisateur ajoute des images
     //1.a. L utilisateur clique sur le bouton ajouter une image
