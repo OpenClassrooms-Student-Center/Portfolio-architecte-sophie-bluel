@@ -1,0 +1,181 @@
+html {
+    display: flex;
+    justify-content: center;
+}
+
+body {
+    max-width: 1440px;
+    max-height: 1024px;
+    background: #FFFEF8; 
+}
+
+.page-title {
+    width: 1140px;
+    height: 42px;
+    margin-left: 150px;
+    margin-top: 50px;
+    margin-left: 150px;
+}
+
+.page-title h1 {
+    color: #B1663C;
+    text-align: center;
+    font-family: Syne;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    display: flex;
+    justify-self: flex-start;
+}
+
+.page-title p {
+    color: #93532F;
+    text-align: center;
+    font-family: Work Sans;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    display: flex;
+    justify-self: flex-start;
+}
+
+.page-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: -70px;
+    gap: 44px;
+}
+
+.page-nav a {
+    text-decoration: none;
+}
+
+.page-nav h2 {
+    color: #000;
+    text-align: center;
+    font-family: Work Sans;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    cursor: pointer;
+}
+
+.page-nav h2:nth-child(3) {
+    color: #000;
+    text-align: center;
+    font-family: Work Sans;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal; 
+}
+
+.page-nav img {
+    width: 22px;
+    height: 22px;
+    padding-top: 12px;
+    cursor: pointer;
+}
+
+.page-login {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 150px;
+}
+
+.page-login h1 {
+    color: #1D6154;
+    text-align: center;
+    font-family: Syne;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-left: 149px; 
+}
+
+.page-login h2 {
+    display: flex;
+    margin-left: 530px;
+    color: #3D3D3D;
+    font-family: Work Sans;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal; 
+}
+
+.page-login input {
+    width: 379px;
+    height: 51px;
+    flex-shrink: 0;
+    margin-left: 530px;
+    background: #FFF;
+    box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
+    border: 0;
+}
+
+.page-login button {
+    width: 179px;
+    height: 36px;
+    flex-shrink: 0;
+    border-radius: 60px;
+    background: #1D6154;
+    color: #FFF;
+    text-align: center;
+    font-family: Syne;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal; 
+    margin-left: 630px;
+    margin-top: 37px;
+    border: 0;
+    cursor: pointer;
+    }
+
+button:hover {
+    background: #0E2F28; 
+}
+
+.page-login span {
+    display: flex;
+    margin-left: 651px;
+    margin-top: 28px;
+    color: #3D3D3D;
+    font-family: Work Sans;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-decoration-line: underline;
+    cursor: pointer;
+}
+
+footer {
+    height: 60px; 
+    margin-top: 408px;
+    background: #FFF;
+}
+
+footer p {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 24px;
+    margin-top: 0px;
+    padding-right: 107px;
+    margin-bottom: 0px;
+    color: #000;
+    font-family: Work Sans;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal; 
+}

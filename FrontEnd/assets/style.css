@@ -30,6 +30,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	background: #FFFEF8; 
 }
 ol, ul {
 	list-style: none;
@@ -93,6 +94,22 @@ nav ul {
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
+	color:#000;
+	cursor: pointer;
+}
+
+nav a {
+	text-decoration: none;
+}
+
+li:nth-child(1):hover {
+	color: #000;
+	text-align: center;
+	font-family: Work Sans;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal; 
 }
 
 li:hover {
@@ -125,6 +142,47 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
+
+#bouttons-container {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	margin-bottom: 51px;
+}
+
+#bouttons-container button {
+	width: 100px;
+	height: 37px;
+	flex-shrink: 0;
+	border-radius: 60px;
+	border: 1px solid #1D6154;
+	color: #1D6154;
+	background: transparent;
+	font-family: Syne;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+	white-space: nowrap;
+	cursor: pointer;
+}
+#bouttons-container .active {
+	background: #1D6154;
+	color: #FFF;
+}
+
+#bouttons-container button:nth-child(3) {
+	width: 157px;
+}
+
+#bouttons-container button:nth-child(4) {
+	width: 198px;
+}
+
+.current {
+	background-color : #000
+}
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -186,3 +244,336 @@ footer nav ul {
 	margin: 2em
 }
 
+/*STYLE MODAL*/
+
+.modalButton {
+	display: flex;
+	justify-content: center;
+	margin-top: -22px;
+  	margin-left: 306px;
+	color: #000;
+	text-align: center;
+	font-family: Work Sans;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal; 
+	gap: 10px;
+	cursor: pointer;
+	z-index: 1;
+  }
+
+.modalButton span:hover {
+	text-decoration: underline;
+}
+
+.bandereau {
+		background-color: #000;
+		display: flex;
+		justify-content: center;
+		height: 59px;
+		gap: 11px;
+	}
+
+.bandereau img {
+	color: #FFF;
+	width: 15.58px;
+	height: 15.58px; 
+	margin-top: 20px;
+}
+
+.bandereau p {
+	color: #FFF;
+	text-align: center;
+	font-family: Work Sans;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal; 
+	margin-top: 19px;
+	cursor: pointer;
+}
+
+.bandereau p:hover {
+	text-decoration: underline;
+}
+
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: none;
+}
+
+.modale {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 630px;
+	height: 670px;
+	background-color: white;
+	box-shadow: rgba(99,99,99, 0.2) 0px 2px 8px 0px;
+	border-radius: 10px;
+	display: none
+}
+
+.modal__header {
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+}
+
+.modal__header__title {
+	color: #000;
+	text-align: center;
+	font-family: Work Sans;
+	font-size: 26px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal; 
+}
+
+.modal__close {
+	width: 24px;
+	height: 24px;
+	display: flex;
+	margin-left: 576px;
+	margin-right: 30px;
+	margin-top: -26px;
+	cursor: pointer;
+}
+
+.modal__arrow {
+	margin-left: 30px;
+	margin-top: 26px;
+	cursor: pointer;
+}
+
+.modal__upload {
+	width: 420px;
+	height: 169px;
+	flex-shrink: 0; 
+	border-radius: 3px;
+	background: #E8F1F6;
+	margin-left: 105px;
+	margin-top: 36px;
+	margin-bottom: 30px;
+	display: flex;
+  	justify-content: center;
+	flex-direction: column;
+}
+
+.gallery__modal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+	margin-left: 105px;
+	margin-right: 105px;
+}
+
+.gallery__modal img {
+    max-width: 100%;
+    max-height: 100%;
+	width: 78.123px;
+	height: 104.08px; 
+    margin-bottom: 10px;
+    flex: 0 0 calc(20% - 10px);
+}
+
+
+.modal__upload img {
+	width: 76px;
+	height: 76px; 
+	margin-left: 171px;
+}
+
+.modal__upload button {
+	width: 173px;
+	height: 36px;
+	flex-shrink: 0;
+	border-radius: 50px;
+	background: #CBD6DC;
+	border: 0;
+	cursor: pointer;
+	margin-left: 123px;
+	margin-top: 6px;
+}
+
+.modal__upload p {
+	color: #444;
+	text-align: center;
+	font-family: Work Sans;
+	font-size: 10px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+	margin-top: 7px;
+}
+
+.modal__body h4,select,input{
+	margin-left: 105px;
+}
+
+.modal__body h4:nth-child(4) {
+	margin-top: 21px;
+	margin-bottom: 10px;
+}
+
+.modal__body h4 {
+	color: #3D3D3D;
+	font-family: Work Sans;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: normal; 
+}
+
+.modal__body input, select {
+	width: 420px;
+	height: 51px;
+	flex-shrink: 0; 
+	background: #FFF;
+	box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
+	border: 0;
+	margin-top: 10px;
+	color: #444;
+	font-family: Work Sans;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+}
+
+.modal__body option {
+	color: #444;
+	font-family: Work Sans;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal; 
+}
+
+.modal--open {
+	display: block;
+}
+
+.modal--close {
+	display: none;
+}
+
+.modale--close {
+		margin-left: 500px;
+		cursor: pointer;
+}
+
+.ligne {
+	width: 420px;
+	height: 1px;
+	background: #B3B3B3; 
+	margin-left: 105px;
+	margin-top: 47px;
+}
+
+.modal__footer button {
+	width: 237px;
+	height: 36px;
+	flex-shrink: 0; 
+	border-radius: 60px;
+	border: 0;
+	margin-left: 195px;
+	margin-top: 32px;
+	margin-bottom: 55px;
+	cursor: pointer;
+}
+
+/*  */
+
+.modale__photo {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 630px;
+	height: 670px;
+	background-color: white;
+	box-shadow: rgba(99,99,99, 0.2) 0px 2px 8px 0px;
+	border-radius: 10px;
+	display: none
+}
+
+.modale__photo--open {
+	display: block;
+}
+
+.modal__photo__body {
+	display: flex;
+	justify-content: center;
+	color: #000;
+	text-align: center;
+	font-family: Work Sans;
+	font-size: 26px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal; 
+	margin-bottom: 46px;
+	margin-top: 15px;
+}
+
+.modale__photo .project {
+	width: 76.611px;
+	height: 102.064px; 
+	margin-left: 105px;
+}
+
+.modale__photo__footer button {
+	width: 237px;
+	height: 36px;
+	flex-shrink: 0;
+	border-radius: 60px;
+	background: #1D6154;
+	border: 0;
+	color: #FFF;
+	text-align: center;
+	font-family: Syne;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+	margin-left: 195px;
+	margin-top: 38px;
+	cursor: pointer;
+}
+
+
+.modale__photo .gallery h3 {
+	display: none;
+}
+
+.modale__photo--close {
+	margin-left: 576px;
+	margin-top: 26px;
+	cursor: pointer;
+}
+
+.modal-image-container button {
+	display: flex;
+	position: absolute;
+	margin-top: -108px;
+	margin-left: 54px;
+	width: 17px;
+	height: 17px;
+	cursor: pointer;
+	background-color: #000;
+	background-repeat: no-repeat;
+	border-radius: 2px;
+	background-position: center;
+}
+
+.green-button {
+    background-color: #1D6154;
+    color: white;
+}
