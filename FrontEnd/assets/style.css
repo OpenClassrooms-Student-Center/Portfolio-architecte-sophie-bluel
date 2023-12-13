@@ -235,6 +235,11 @@ button:hover{
 }
 
 /* Page de login*/
+.colDir{
+	display: flex;
+	flex-direction: column;
+}
+
 a {
 	text-decoration: none;
 	color: inherit; /* permet d'appliquer la couleur par défaut du paragraphe*/

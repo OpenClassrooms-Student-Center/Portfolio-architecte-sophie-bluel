@@ -10,16 +10,17 @@
 	<script src="https://kit.fontawesome.com/7be78ce38e.js" crossorigin="anonymous"></script>
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-	<script src="script_1.js" defer></script>
+	<script src="login.js" defer></script>
 </head>
 <body>
 <header>
+
     <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
     <nav>
         <ul>
-            <a href="index.html"><li>projets</li></a>
+            <li><a href="index.html">projets</a></li>
             <li>contact</li>
-            <li>login</li>
+            <li id="login">login</li>
             <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
         </ul>
     </nav>
@@ -31,13 +32,25 @@
 			<div class="centreLogIn">
 				<h2>Log In</h2>
 			</div>
-				<form id="loginForm" method="post" class="pageLogin_align">
-					<label for="e-mail">E-mail</label>
-					<input type="email" id="email" class="pageLogin_champSaisie" size="50" placeholder="E-mail">
-					<label for="pwd">Mot de passe</label>
-					<input type="password" id="mdp" class="pageLogin_champSaisie" size="50" placeholder="Mot de passe">
+				<form method="post" class="pageLogin_align" id="loginForm">
+					<!-- Adresse Mail -->
+					<div class="colDir">
+						<label for="email">E-mail</label>
+						<input name="email" class="pageLogin_champSaisie" size="50" placeholder="E-mail" id="email">
+						<span id="errorEmail"></span>
+					</div>
+
+					<!-- Mot de passe -->
+					<div class="colDir">
+						<label for="password">Mot de passe</label>
+						<input name="password" class="pageLogin_champSaisie" size="50" placeholder="Mot de passe" id="password">
+						<span id="errorPwd"></span>
+					</div>
+
+					<!-- Bouton de connexion -->
 					<div class="centreBtnConnexion">
-						<input type="submit" value="Se connecter" class="envoyer" size="60">
+						<input type="submit" value="Se connecter" class="envoyer" size="60" id="btnLogIn">
+						<!-- <button type="submit" class="" id="btnLogIn">Se connecter</button> -->
 						<a href="#">Mot de passe oublié</a>
 					</div>
 				</form>

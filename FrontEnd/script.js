@@ -1,3 +1,11 @@
+// Vérifier dans le local storage si présence du token
+// modifier le LOGIN en LOGOUT dans la page index.html puis,
+// Supprimer le token à la déconnexion removItem("token") 
+let token = window.localStorage.getItem("token");
+if(token){ // !token équivalent de token!== null
+    // Afficher la barre de connexion, etc ...
+}
+
 // ****************************************************************************
 // Insertion des boutons de filtres
 const btnPortfolio = document.querySelector('.alignButton');
