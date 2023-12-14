@@ -125,6 +125,18 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
+/*filtres*/
+.button {
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin : 2em auto ;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px ;
+}
+
 .gallery {
 	width: 100%;
 	display: grid;
