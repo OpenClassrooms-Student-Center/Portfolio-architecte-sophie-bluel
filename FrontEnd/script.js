@@ -1,15 +1,29 @@
 // Vérifier dans le local storage si présence du token
-// modifier le LOGIN en LOGOUT dans la page index.html puis,
+// Si TOKEN modifier le LOGIN en LOGOUT dans la page index.html
+// 1-Masquer les boutons filtres
+// 2-Afficher une span "Modifier" à côté de "Mes projets"
+// 3-Afficher une span au-dessus du header "Mode dition"
+// puis,
 // Supprimer le token à la déconnexion removItem("token") 
-let token = window.localStorage.getItem("token");
-if(token){ // !token équivalent de token!== null
-    // Afficher la barre de connexion, etc ...
+// refaire à l'inverse les point 1 à 3
+
+let token = window.localStorage.getItem('token');
+
+// Insertion des boutons de filtres
+const btnPortfolio = document.querySelector('.alignButton');
+const connectionSpan = document.querySelector('.connectionNavBarre');
+const modifierSpan = document.querySelector('.logon_mesProjets_Pen');
+const loginLogout = document.getElementById('loginLogout');
+
+if (token) {
+    // Si le token est présent, affiche l'état connecté
+    showLoggedIn();
+} else {
+    // Si le token n'est pas présent, affiche l'état déconnecté
+    showLoggedOut();
 }
 
 // ****************************************************************************
-// Insertion des boutons de filtres
-const btnPortfolio = document.querySelector('.alignButton');
-
 // Récupération des données du serveur
 async function createButtons() {
 
@@ -93,3 +107,55 @@ createButtons();
 
 // exécute la fonction de mise à jour de la galerie avec la catégorie par défaut (0 pour "Tous")
 updateGallery('0');
+
+// *************************************************************
+
+// Gestionnaire d'événement pour le clic sur le bouton de connexion/déconnexion
+loginLogout.addEventListener('click', function () {
+    if (token) {
+        // Si connecté, effectue les actions de déconnexion
+        window.localStorage.removeItem('token');
+        showLoggedOut();
+    } else {
+        // Si déconnecté, redirige vers la page de connexion
+        window.location.href = 'login.html';
+    }
+});
+
+// Gestionnaire d'événement pour le clic sur le bouton de connexion/déconnexion
+loginLogout.addEventListener('click', function () {
+    if (token) {
+        // Si connecté, effectue les actions de déconnexion
+        window.localStorage.removeItem('token');
+        showLoggedOut();
+    } else {
+        // Si déconnecté, redirige vers la page de connexion seulement si le bouton de connexion est cliqué
+        logIn();
+    }
+});
+
+function logIn() {
+    // Redirige vers la page de connexion
+    window.location.href = 'login.html';
+}
+
+function showLoggedIn() {
+    // Masque les boutons filtres
+    btnPortfolio.style.display = 'none';
+    // Modifie le texte du bouton de connexion/déconnexion
+    loginLogout.innerText = 'logout';
+    // Affiche les éléments liés à la connexion
+    connectionSpan.style.display = 'flex';
+    modifierSpan.style.display = 'flex';
+}
+
+function showLoggedOut() {
+    // Affiche les boutons filtres
+    btnPortfolio.style.display = 'flex';
+    // Modifie le texte du bouton de connexion/déconnexion
+    loginLogout.innerText = 'login';
+    // Masque les éléments liés à la connexion
+    connectionSpan.style.display = 'none';
+    modifierSpan.style.display = 'none';
+}
+
