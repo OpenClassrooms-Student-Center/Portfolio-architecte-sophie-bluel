@@ -30,6 +30,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	background-color:rgba(255, 254, 248, 1);
 }
 ol, ul {
 	list-style: none;
@@ -126,15 +127,50 @@ li:hover {
 	margin-bottom: 1em;
 }
 /*filtres*/
-.button {
+button {
 	font-family: 'Syne';
 	font-weight: 700;
-	color: white;
-	background-color: #1D6154;
-	margin : 2em auto ;
-	width: 180px;
+	color:#1D6154 ;
+	background-color: rgba(255, 254, 248, 1);
+	border: 1px solid #1D6154;
+	margin : 10px; 
+padding-left: 15px;
+padding-right: 15px;
+	height: 40px;
 	text-align: center;
 	border-radius: 60px ;
+}
+
+button:hover {
+	color: white;
+	background-color: #1D6154;
+}
+
+.filterAllWorks{
+	left:20%;
+	
+}
+
+.filterObjects{
+	left:35%;
+}
+
+.filterHotelsRestaurants{
+	left:45%;
+	width: 15%;
+}
+
+.filterAppartements{
+	left:60%;
+}
+
+
+.filters {
+	display: flex;
+	justify-content: center;
+	margin: 2em 0;
+	width: 100%;
+	height: 50px;
 }
 
 .gallery {

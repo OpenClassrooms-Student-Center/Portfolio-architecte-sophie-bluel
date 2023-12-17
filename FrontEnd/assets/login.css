@@ -52,6 +52,7 @@ body {
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
+	background-color: rgba(255, 254, 248, 1);
 }
 header {
 	display: flex;

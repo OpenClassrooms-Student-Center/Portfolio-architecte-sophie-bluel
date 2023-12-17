@@ -1,19 +1,22 @@
+
 //variables globales
 
-
-const figure = document.createElement("figure");//création de la balise figure
-const sectionGallery = document.querySelector(".gallery");//selectionne la div "gallery"
-const imageFigure = document.createElement("img");//création de la balise img
-const titleFigure = document.createElement("figcaption");//création de la balise figcaption
-const projectFigure = document.createElement("figure");//création de la balise figure
-const sectionPortfolio = document.getElementById("portfolio");//selectionne l'Id "portfolio"
-const filtersButtons = document.createElement("div");//création de la balise div
-
+const sectionGallery = document.querySelector(".gallery");
+const imageFigure = document.createElement("img");
+const titleFigure = document.createElement("figcaption");
+const projectFigure = document.createElement("figure");
+const portfolioDisplay = document.getElementById("#portfolio");
+const sectionFilters = document.querySelector(".filters");
 const projects =  getGalleryProjects();
+const filterAllWorks = document.createElement("button");//Methode à revoir
+const filterObjects = document.createElement("button");
+const filterHotelsRestaurants= document.createElement("button");
+const filterAppartements = document.createElement("button");
 
-
+let index = 0;
 
 //Fonctions 
+
 function main(){
   getGalleryProjects();
   displayProjects();
@@ -28,62 +31,86 @@ async function getGalleryProjects(){
  return await response.json();
   }
 
-  getGalleryProjects();
+getGalleryProjects();
 
 
 //Fonction pour afficher les projets de la galerie
 
 async function displayProjects(){
-  const projects = await getGalleryProjects();//recupere les donnees de l'api 
+  const projects = await getGalleryProjects();
   for (let i = 0; i < projects.length; i++) {//boucle for pour parcourir les donnees de l'api
-    const figure = projects[i];//recupere les donnees de l'api et les stocke dans la variable figure
-    const sectionGallery = document.querySelector(".gallery");//selectionne la div "gallery"
- // console.log(figure);//affiche les donnees de l'api
-  
-    const projectFigure = document.createElement("figure");//création de la balise figure
-    projectFigure.dataset.id = projects[i].id;//ajout de l'attribut data-id
-  
- // console.log(projectFigure);//affiche la balise figure
-    
-    const imageFigure = document.createElement("img");//création de la balise img
-    imageFigure.src = figure.imageUrl;//ajout de l'attribut src
-  
- // console.log(imageFigure);//affiche la balise img
-    const titleFigure = document.createElement("figcaption");//création de la balise figcaption
-    titleFigure.innerText = figure.title ?? "(aucun titre)";//ajout du titre
- // console.log(titleFigure);//affiche la balise figcaption
-   
-    sectionGallery.appendChild(projectFigure);//ajout de la balise figure dans la div "gallery"
-    projectFigure.appendChild(imageFigure);//ajout de la balise img dans la balise figure
-    projectFigure.appendChild(titleFigure);//ajout de la balise figcaption dans la balise figure
-  }
+    const figure = projects [i];
+    const sectionGallery = document.querySelector(".gallery");
+    const projectFigure = document.createElement("figure");
+    projectFigure.dataset.id = projects[i].id; 
 
+    const imageFigure = document.createElement("img");
+    imageFigure.src = figure.imageUrl; 
+
+    const titleFigure = document.createElement("figcaption");
+    titleFigure.innerText = figure.title ?? "(aucun titre)";
+   
+    sectionGallery.appendChild(projectFigure);
+    projectFigure.appendChild(imageFigure);
+    projectFigure.appendChild(titleFigure);
+
+  }
 
 }
 displayProjects();
 
-//fonction pour creer les boutons de filtre
 
+
+//fonction pour creer les boutons de filtre
+//revoir la methode. code trop long
 
 function displayFiltersButtons(){
-
-
-
-  const sectionPortfolio = document.getElementById("portfolio");//selectionne l'Id "portfolio"
-  const filtersButtons = document.createElement("div");//création de la balise div
-  const button = document.createElement("button");//création de la balise button
-  filtersButtons.classList.add("filters");//ajout de la class filters
- 
-  button.classList.add("button");//ajout de la class button
-  button.innerText = "Filter";//ajout du texte "filter" methode à revoir
-  sectionPortfolio.appendChild(button);//ajout de la balise button dans la div "portfolio"
   
+  const portfolioDisplay = document.getElementById("#portfolio");
+  const sectionFilters = document.querySelector(".filters");
+  const filterAllWorks = document.createElement("button");
+  const filterObjects = document.createElement("button");
+  const filterHotelsRestaurants= document.createElement("button");
+  const filterAppartements = document.createElement("button");
+
+  filterAllWorks.classList.add("filtersAllWorks");// Ajout de la classe buttonAllWorks à button
+  filterAllWorks.innerText = "Tous";
+
+  filterObjects.classList.add("filtersObjects");
+  filterObjects.innerText = "Objets";
+
+  filterAppartements.classList.add("filtersAppartements");
+  filterAppartements.innerText = "Appartements";
+ 
+  
+  filterHotelsRestaurants.classList.add("filtersHotelsRestaurants");
+  filterHotelsRestaurants.innerText = "Hotels & Restaurants";
+
+  sectionFilters.appendChild(filterAllWorks);
+  sectionFilters.appendChild(filterObjects);
+  sectionFilters.appendChild(filterHotelsRestaurants);
+  sectionFilters.appendChild(filterAppartements);
 };
 
-displayFiltersButtons();//appel de la fonction displayButton
+displayFiltersButtons();
 
 
 
 
+//const button = document.querySelector("button");//selectionne le bouton
+//filtersButtons.addEventListener("click", function () {//ajout d'un event listener sur le bouton
+  //      const projectsResearched = projects.filter(function (projects){//transforme les donnees de l'api en tableau
+       
+    //        return  projects.name;//methode à revoir 
+     //   });
+//console.log(projectsResearched);
+  //});
 
 
+function filterProjects(projects, filter){
+  const projectsResearched = projects.filter(function (projects){//transforme les donnees de l'api en tableau
+      
+    return  projects.name;//methode à revoir 
+});
+}
+filterProjects();
