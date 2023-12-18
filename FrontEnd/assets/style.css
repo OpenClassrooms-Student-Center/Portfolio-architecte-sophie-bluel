@@ -218,6 +218,7 @@ button:hover{
 	color: #fff;
 }
 
+/* ------------------------------------------------------------- */
 /* Barre de connection*/
 
 .connectionNavBarre {
@@ -241,6 +242,7 @@ button:hover{
 .logon_mesProjets_Pen{
 	display: none;
 	margin-bottom: 27px;
+	gap: 5px;
 }
 
 
@@ -302,4 +304,113 @@ a {
 }
 
 	
+/* ------------------------------------------------------------- */
+/* La modal : suppression d'une photo */
+h3{
+	font-size: 30px;
+	text-align: center;
+	margin: 40px 0 50px 0; 
+}
 
+.boutonAjouterImageAlign{
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	margin-top: 40px;
+}
+
+input[type="button"]{
+	border: solid 1px #1D6154;
+	background-color: #1D6154;
+	border-radius: 50px;
+	color : white;
+	width: 300px;
+	height: 40px;
+	font-size: 1.2em;
+	text-align: center;
+	margin:auto;
+}
+
+.modal{
+	display: none;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+}
+
+.modal-open {
+	opacity: 1;
+	pointer-events: auto;
+ }
+
+.modal-wrapper{
+    overflow: auto; /* permet d'afficher une barre de défilement si le contenu dépasse */
+    width: 630px;
+	height: 688px;
+    padding: 20px;
+	border-radius: 20px; 
+    background-color: #fff;
+	flex-direction: column;
+}
+
+.position {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	/* margin-left: 620px; */
+}
+.arrow{
+	display: none;
+}
+
+.galerie{
+	display: flex;
+	flex-wrap: wrap;
+	margin: auto;
+	width: 440px;
+	height: 440px;
+	justify-content: space-between;
+	border-bottom: 1px #B3B3B3 solid;
+}
+
+/* Positionnement et création du pseudo élément "corbeille" pour les vignettes */
+.galerie .crash{
+	position: relative;
+}
+
+.galerie .crash::after{
+	content: "\f2ed"; /* Code Unicode de l'icône de la corbeille dans Font Awesome */
+	font-family: 'Font Awesome 5 Free'; /* Permet d'afficher l'icône sinon affiche le Code Unicode */
+	color: white; /* Couleur de l'icone*/
+	position: absolute;
+	height: 20px;
+	width: 20px;
+	background-color: black;
+	display: grid;
+	place-items: center;
+	border-radius: 2px;
+	right: 0.7rem;
+	top: 0.7rem;
+}
+
+.vignette img{
+	width: 77px;
+	margin: 5px;
+}
+
+/* icone de la Corbeille
+<i class="fa-solid fa-trash-can" style="color: #ffffff;"></i>
+ Unicode : \f2ed*/
+
+/* icone de la croix pour fermer
+<i class="fa-solid fa-xmark" style="color: #000000;"></i>
+<i class="fa-solid fa-arrow-left" style="color: #000000;"></i>
+ */
+	
+/* ------------------------------------------------------------- */
+/* La modal : Ajout d'une photo */

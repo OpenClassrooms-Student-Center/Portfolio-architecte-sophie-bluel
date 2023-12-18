@@ -7,6 +7,11 @@
 // Supprimer le token à la déconnexion removItem("token") 
 // refaire à l'inverse les point 1 à 3
 
+
+// *****************************************************************************
+// GESTION DE LA GALERY EN FONCTION DE L'ID DE LA CATEGORIE
+// *****************************************************************************
+
 let token = window.localStorage.getItem('token');
 
 // Insertion des boutons de filtres
@@ -108,7 +113,9 @@ createButtons();
 // exécute la fonction de mise à jour de la galerie avec la catégorie par défaut (0 pour "Tous")
 updateGallery('0');
 
-// *************************************************************
+// *****************************************************************************
+// GESTION DU CLIC SUR LE BOUTON LOGIN / LOGOUT
+// *****************************************************************************
 
 // Gestionnaire d'événement pour le clic sur le bouton de connexion/déconnexion
 loginLogout.addEventListener('click', function () {

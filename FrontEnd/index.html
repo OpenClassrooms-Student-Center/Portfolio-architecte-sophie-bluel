@@ -11,6 +11,7 @@
 	<script src="https://kit.fontawesome.com/7be78ce38e.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="./assets/style.css">
 	<script src="script.js" defer></script>
+	<script src="modal.js" defer></script>
 </head>
 <body>
 	<span class="connectionNavBarre">
@@ -46,8 +47,9 @@
 			<h2>Mes Projets</h2>
 			<div class="logon_mesProjets_Pen">
 				<i class="fa-regular fa-pen-to-square " style="color: #000000;"></i>
-				<span>modifier</span>
+				<a href="#modal1" class="js-modal">Modifier</a>
 			</div>
+			<!-- <input type="button" value="test de mise en forme"> -->
 		</div>
 		<div class="alignButton">
 		</div>
@@ -67,6 +69,21 @@
 			<input type="submit" value="Envoyer">
 		</form>
 	</section>
+
+    <aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titlemodal" style="display:none;">
+        <div class="modal-wrapper js-modal-stop">
+			<div class="position">
+				<div>
+					<i class="fa-solid fa-arrow-left arrow" style="color: #000000;"></i>
+				</div>
+				<div>
+					<i class="fa-solid fa-xmark js-modal-close" style="color: #000000;"></i>
+				</div>
+			</div>
+			<div>
+				<h3 id="titreModal">Galerie photo</h3>	
+			</div>
+    </aside>
 </main>
 
 <footer>
