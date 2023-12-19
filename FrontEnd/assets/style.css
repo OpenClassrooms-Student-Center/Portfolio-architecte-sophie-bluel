@@ -146,6 +146,7 @@ button:hover {
 	background-color: #1D6154;
 }
 
+/*
 .filterAllWorks{
 	left:20%;
 	
@@ -163,7 +164,7 @@ button:hover {
 .filterAppartements{
 	left:60%;
 }
-
+*/
 
 .filters {
 	display: flex;
