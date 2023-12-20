@@ -7,12 +7,8 @@
 // Supprimer le token à la déconnexion removItem("token") 
 // refaire à l'inverse les point 1 à 3
 
-
-// *****************************************************************************
-// GESTION DE LA GALERY EN FONCTION DE L'ID DE LA CATEGORIE
-// *****************************************************************************
-
 let token = window.localStorage.getItem('token');
+let galerie = [];
 
 // Insertion des boutons de filtres
 const btnPortfolio = document.querySelector('.alignButton');
@@ -27,9 +23,12 @@ if (token) {
     // Si le token n'est pas présent, affiche l'état déconnecté
     showLoggedOut();
 }
+// *****************************************************************************
+// GESTION DE LA GALERY EN FONCTION DE L'ID DE LA CATEGORIE
+// *****************************************************************************
 
-// ****************************************************************************
 // Récupération des données du serveur
+
 async function createButtons() {
 
 // source : https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
@@ -71,13 +70,14 @@ function recupCategories(categories) {
 
 // ****************************************************************************
 // Création de la galerie de photos
+// ****************************************************************************
 
 const galleryContainer = document.querySelector('.gallery');
 
 async function updateGallery(categoryId) {
     // Connection à l'API pour récupérer les travaux
     const response = await fetch('http://localhost:5678/api/works');
-    const galerie = await response.json();
+    galerie = await response.json();
     console.table(galerie);
     // appel de la fonction createGallery avec les données JSON en tant qu'argument
     createGallery(galerie, categoryId);
@@ -124,18 +124,6 @@ loginLogout.addEventListener('click', function () {
         window.localStorage.removeItem('token');
         showLoggedOut();
     } else {
-        // Si déconnecté, redirige vers la page de connexion
-        window.location.href = 'login.html';
-    }
-});
-
-// Gestionnaire d'événement pour le clic sur le bouton de connexion/déconnexion
-loginLogout.addEventListener('click', function () {
-    if (token) {
-        // Si connecté, effectue les actions de déconnexion
-        window.localStorage.removeItem('token');
-        showLoggedOut();
-    } else {
         // Si déconnecté, redirige vers la page de connexion seulement si le bouton de connexion est cliqué
         logIn();
     }
@@ -165,4 +153,3 @@ function showLoggedOut() {
     connectionSpan.style.display = 'none';
     modifierSpan.style.display = 'none';
 }
-

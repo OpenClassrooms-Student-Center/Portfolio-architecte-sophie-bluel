@@ -67,8 +67,7 @@ window.addEventListener('keydown', function (e) {
 
 // Fonction pour mettre à jour la galerie dans la fenêtre modal
 const modalTitre = document.getElementById('titreModal');
-const modalWrapper = document.querySelector('.modal-wrapper');
-const modalGallery = document.querySelector('.galerie');
+const modalGallery = document.querySelector('.galleryModale');
 
 // Fonction pour mettre à jour la galerie dans la fenêtre modal
 function modalGaleriePhoto() {
@@ -77,10 +76,10 @@ function modalGaleriePhoto() {
 
     // Création de la galerie d'image
     const newDivGalerie = document.createElement('div');
-    newDivGalerie.classList.add('galerie');
+    newDivGalerie.classList.add('galleryModale');
 
     // Ajout des éléments dans la modal
-    modalWrapper.appendChild(newDivGalerie);
+    modalGallery.appendChild(newDivGalerie);
 
     // Récupération des données sur le serveur
     async function updateModalGallery() {
@@ -106,22 +105,7 @@ function modalGaleriePhoto() {
             newDivGalerie.appendChild(newFig);
             newFig.appendChild(imgGallery);
         }
-
-        // Création du bouton "Ajouter une image"
-        const newDivButton = document.createElement('div');
-        const newInput = document.createElement('input');
-
-        // Mise en forme du bouton
-        newDivButton.classList.add('boutonAjouterImageAlign');
-        // Propriétés de l'input
-        newInput.type = 'button';
-        newInput.value = 'Ajouter une image';
-
-        // Ajout du bouton dans la galerie
-        newDivButton.appendChild(newInput);
-        modalWrapper.appendChild(newDivButton);
     }
-
     updateModalGallery();
 }
 

@@ -42,6 +42,7 @@
 		</article>
 	</section>
 	<section id="portfolio">
+		<!-- **************************************************************** -->
 		<!-- Insérer ici les boutons de filtre -->
 		<div class="logon_mesProjets">
 			<h2>Mes Projets</h2>
@@ -49,7 +50,6 @@
 				<i class="fa-regular fa-pen-to-square " style="color: #000000;"></i>
 				<a href="#modal1" class="js-modal">Modifier</a>
 			</div>
-			<!-- <input type="button" value="test de mise en forme"> -->
 		</div>
 		<div class="alignButton">
 		</div>
@@ -69,7 +69,8 @@
 			<input type="submit" value="Envoyer">
 		</form>
 	</section>
-
+	<!-- **************************************************************** -->
+	<!-- Modale contenant la galerie / ajout d'images -->
     <aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titlemodal" style="display:none;">
         <div class="modal-wrapper js-modal-stop">
 			<div class="position">
@@ -81,9 +82,13 @@
 				</div>
 			</div>
 			<div>
-				<h3 id="titreModal">Galerie photo</h3>	
+				<h3 id="titreModal"></h3>	
 			</div>
-    </aside>
+			<div class="galleryModale"></div>
+			<div class="boutonAjouterImageAlign">
+				<input type="button" name="modalAjoutPhoto" id="modalAjoutPhoto" value="Ajouter une photo">
+			</div>
+			</aside>
 </main>
 
 <footer>

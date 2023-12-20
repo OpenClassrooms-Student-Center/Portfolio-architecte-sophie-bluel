@@ -368,7 +368,7 @@ input[type="button"]{
 	display: none;
 }
 
-.galerie{
+.galleryModale{
 	display: flex;
 	flex-wrap: wrap;
 	margin: auto;
@@ -379,11 +379,11 @@ input[type="button"]{
 }
 
 /* Positionnement et création du pseudo élément "corbeille" pour les vignettes */
-.galerie .crash{
+.galleryModale .crash{
 	position: relative;
 }
 
-.galerie .crash::after{
+.galleryModale .crash::after{
 	content: "\f2ed"; /* Code Unicode de l'icône de la corbeille dans Font Awesome */
 	font-family: 'Font Awesome 5 Free'; /* Permet d'afficher l'icône sinon affiche le Code Unicode */
 	color: white; /* Couleur de l'icone*/
@@ -398,7 +398,7 @@ input[type="button"]{
 	top: 0.7rem;
 }
 
-.vignette img{
+.galleryModale img{
 	width: 77px;
 	margin: 5px;
 }
@@ -412,5 +412,13 @@ input[type="button"]{
 <i class="fa-solid fa-arrow-left" style="color: #000000;"></i>
  */
 	
+ /* <i class="fa-regular fa-image" style="color: #c0c0c0;"></i>
+ Unicode : \f03e*/
+
 /* ------------------------------------------------------------- */
 /* La modal : Ajout d'une photo */
+
+input[type="file"]{
+	display: none;
+	
+}
