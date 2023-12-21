@@ -22,6 +22,7 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+	
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
@@ -48,7 +49,7 @@ table {
 }
 /** end reset css**/
 body {
-	max-width: 1140px;
+	
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
@@ -57,7 +58,10 @@ body {
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin-left: 10% ;
+	margin-right : 10%;
+	margin-top: 50px;
+	align-items: center;
 }
 section {
 	margin: 50px 0
@@ -98,4 +102,90 @@ nav li {
 
 li:hover {
 	color: #B1663C;
+}
+
+.login {
+	display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+	height: auto;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	align-content: center;
+	justify-content: center;
+	align-items: stretch;
+	top:10%;
+}
+
+label {
+	color: #3D3D3D;
+font-family: Work Sans;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+
+}
+
+footer {
+position: fixed;
+bottom: 0;
+width: 100%;
+height: 60px;
+background-color:white;
+}
+
+footer nav ul {
+margin-right :20%;
+display: flex;
+justify-content: flex-end;
+}
+
+
+#logIn{
+	border: none;
+	border-radius: 35px;
+	background-color:#1D6154;
+	
+	color: white;
+	font-family: syne;
+	width: 179px;
+height: 36px;
+flex-shrink: 0;
+margin-left: 100px;
+
+
+}
+
+
+input{
+	border: none;
+}
+
+#email, #password {
+	width: 379px;
+height: 51px;
+flex-shrink: 0;
+	background-color:white;
+	
+	
+}
+
+#forgetPwd{
+	color: #3D3D3D;
+font-family: Work Sans;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+text-decoration-line: underline;
+border : none;
+background-color:rgba(255, 254, 248, 1) ;
 }

@@ -21,6 +21,7 @@ function main(){
   getGalleryProjects();
   displayProjects();
  displayCategories();
+ filterProjectsByCategory();
 }
 
 
@@ -94,9 +95,9 @@ async function filterProjectsByCategory(categoryId){//fonction pour filtrer les 
 buttons.forEach(button => {//boucle pour parcourir les boutons
 
   button.addEventListener("click", (e) => {//ajout d'un event listener sur chaque bouton
-button = e.target.id;//recuperation de l'id du bouton cliqué
-sectionGallery.innerHTML = "";//vider la section gallery^
-console.log(button);
+  button = e.target.id;//recuperation de l'id du bouton cliqué
+  sectionGallery.innerHTML = "";//vider la section gallery^
+  console.log(button);
 
 
 if (button !== "0") {//si l'id du bouton est différent de 0
@@ -136,4 +137,6 @@ displayProjects();
 
 filterProjectsByCategory();
 
+
+/******************************************/
 
