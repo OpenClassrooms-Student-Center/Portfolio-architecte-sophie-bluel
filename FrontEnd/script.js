@@ -8,8 +8,11 @@
 // refaire à l'inverse les point 1 à 3
 
 let token = window.localStorage.getItem('token');
-let galerie = [];
+let work = [];
+let categorie = [];
 
+console.table(work);
+console.table(categorie);
 // Insertion des boutons de filtres
 const btnPortfolio = document.querySelector('.alignButton');
 const connectionSpan = document.querySelector('.connectionNavBarre');
@@ -30,14 +33,11 @@ if (token) {
 // Récupération des données du serveur
 
 async function createButtons() {
-
-// source : https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
-
     // Connexion à l'API pour récupérer les catégories des travaux
-    const response2 = await fetch('http://localhost:5678/api/categories');
-    const categories = await response2.json();
-    console.table(categories);
-    recupCategories(categories);
+    categorie = await fetch ('http://localhost:5678/api/categories').then(categorie => categorie.json());
+
+    // console.table(categorie);
+    recupCategorie(categorie);
 
     // Gestionnaire d'évènement pour les boutons de catégories
     // L'interface Event représente un évènement qui se produit dans le DOM.
@@ -53,50 +53,50 @@ async function createButtons() {
 }
 
 // Insertion des boutons de catégories en fonction des données du serveur
-function recupCategories(categories) {
+function recupCategorie(categorie) {
     // Ajout du bouton 'TOUS' et attribution de l'id 0
     let btnTous = document.createElement('button');
     btnTous.textContent = "Tous";
     btnTous.setAttribute('data-category', '0');
     btnPortfolio.appendChild(btnTous);
 
-    for (let i = 0; i < categories.length; i++) {
+    for (let i = 0; i < categorie.length; i++) {
         let newBtn = document.createElement('button');
-        newBtn.textContent = categories[i].name;
-        newBtn.setAttribute('data-category', categories[i].id);
+        newBtn.textContent = categorie[i].name;
+        newBtn.setAttribute('data-category', categorie[i].id);
         btnPortfolio.appendChild(newBtn);
     }
 }
 
 // ****************************************************************************
-// Création de la galerie de photos
+// CREATION DE LA GALERIE PHOTO
 // ****************************************************************************
-
 const galleryContainer = document.querySelector('.gallery');
 
 async function updateGallery(categoryId) {
     // Connection à l'API pour récupérer les travaux
-    const response = await fetch('http://localhost:5678/api/works');
-    galerie = await response.json();
-    console.table(galerie);
+    // const response = await fetch('http://localhost:5678/api/works');
+    // galerie = await response.json();
+    work = await fetch ('http://localhost:5678/api/works').then(work => work.json());
+    // console.table(work);
     // appel de la fonction createGallery avec les données JSON en tant qu'argument
-    createGallery(galerie, categoryId);
+    createGallery(work, categoryId);
 }
 
 // Ajout des photos dans la galerie
-function createGallery(galerie, categoryId) {
+function createGallery(work, categoryId) {
     // Effacement de la galerie
     galleryContainer.innerHTML = '';
 
-    for (let i = 0; i < galerie.length; i++) {
+    for (let i = 0; i < work.length; i++) {
         // Filtre des images en fonction de la catégorie sélectionnée
-        if (categoryId === '0' || galerie[i].category.id == categoryId) {
+        if (categoryId === '0' || work[i].category.id == categoryId) {
             const newFig = document.createElement('figure');
             const imgGallery = document.createElement('img');
             const imgFigcaption = document.createElement('figcaption');
-            const altLine = galerie[i].title;
+            const altLine = work[i].title;
 
-            imgGallery.setAttribute('src', `${galerie[i].imageUrl}`);
+            imgGallery.setAttribute('src', `${work[i].imageUrl}`);
             imgFigcaption.textContent = altLine;
             imgGallery.alt = altLine;
 

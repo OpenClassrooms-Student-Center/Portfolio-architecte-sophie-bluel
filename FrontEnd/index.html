@@ -75,7 +75,7 @@
         <div class="modal-wrapper js-modal-stop">
 			<div class="position">
 				<div>
-					<i class="fa-solid fa-arrow-left arrow" style="color: #000000;"></i>
+					<i id="arrow" class="fa-solid fa-arrow-left hidden" style="color: #000000;"></i>
 				</div>
 				<div>
 					<i class="fa-solid fa-xmark js-modal-close" style="color: #000000;"></i>
@@ -84,7 +84,33 @@
 			<div>
 				<h3 id="titreModal"></h3>	
 			</div>
-			<div class="galleryModale"></div>
+			<div>
+				<div id="modalFirst" class="hidden">
+				</div>
+				<div id="modalSecond" class="alignFormAjoutPhoto hidden">
+					<form action="#">
+						<div class="newProjetPhoto">
+							<i class="far fa-image fa-3x" style="color: #B9C5CC;"></i>
+							<label>
+								<span class="newProjetPhotoBtn">
+									+ Ajouter photo
+								</span>
+								<input type="file" name="imagePreview" id="imagePreview" accept="image/jpeg, image/jpg, image/png" hidden>
+							</label>
+							<p class="newProjetPhotoText">jpg, png : 4mo max</p>
+						</div>
+						<div class="inputAlignement">
+							<label for="title">Titre</label>
+							<input class="newProjetPhotoTitre" type="text" name="newProjetPhotoTitre" id="newProjetPhotoTitre">
+						</div>
+						<div class="inputAlignement">
+							<label for="category">Catégorie</label>
+							<select class="newProjetPhotoCategory" name="newProjetPhotoCategory" id="newProjetPhotoTitre"></select>
+						</div>
+
+					</form>
+				</div>
+			</div>
 			<div class="boutonAjouterImageAlign">
 				<input type="button" name="modalAjoutPhoto" id="modalAjoutPhoto" value="Ajouter une photo">
 			</div>
