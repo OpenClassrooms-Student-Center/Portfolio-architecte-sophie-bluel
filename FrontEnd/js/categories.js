@@ -11,9 +11,9 @@ function createCategoriesContainer() {
     portfolio.insertBefore(categories, images);
 
 }
-// // Ajouter les projets
+// // Ajouter les boutons de categories 
 function displayCategories(categories) {
-
+    createAllButton()
     for (let i = 0; i < categories.length; i++) {
         const category = categories[i];
         createCategoryButton(category)
@@ -21,13 +21,27 @@ function displayCategories(categories) {
 
 
 }
+function createAllButton() {
+    const button = document.createElement('button')
+    button.textContent = "Tous"
+    const categories = document.querySelector(".categories")
+    categories.appendChild(button)
+    button.addEventListener("click", () => {
+        displayAllWorks()
+    });
+
+}
+
+
+
+
 function createCategoryButton(category) {
     const button = document.createElement('button')
     button.textContent = category.name
     const categories = document.querySelector(".categories")
     categories.appendChild(button)
     // ECOUTEURS/LISTENERS D'EVENEMENTS EXECUTER AU CLICK
-   button.addEventListener("click", () => {
+    button.addEventListener("click", () => {
         filterWorks(category.id)
     });
 

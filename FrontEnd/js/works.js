@@ -28,7 +28,29 @@ function createWork(work) {
     figure.appendChild(figcaption)
     images.appendChild(figure) // rajout en dernier pour empecher les sursauts graphiques
 }
-function filterWorks(id) {
-    console.log(id);
+
+function displayAllWorks() {
+    loadWorks()
+    .then((works) => {
+      // Une fois les travaux recuperes on appel nos fonctions
+      clearWorks()
+      displayWorks(works) //Transmet works au displayworks
+    })
     
 }
+
+
+function filterWorks(categoryId) {
+    loadWorks()
+        .then((works) => {
+            // Une fois les travaux recuperes on appel nos fonctions
+            clearWorks()
+          
+            const categoryWorks = works.filter(work => work.categoryId ===categoryId)
+            displayWorks(categoryWorks) //Transmet works au displayworks
+        })
+       
+}
+
+
+
