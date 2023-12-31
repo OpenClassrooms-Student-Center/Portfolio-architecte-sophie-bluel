@@ -89,14 +89,16 @@
 				</div>
 				<div id="modalSecond" class="alignFormAjoutPhoto hidden">
 					<form action="#">
-						<div class="newProjetPhoto">
+						<div class="newProjetPhoto"> 
+							<div class="newPhotoMin" id="newPhotoMin">
+							</div>
 							<i class="far fa-image fa-3x" style="color: #B9C5CC;"></i>
-							<label>
-								<span class="newProjetPhotoBtn">
-									+ Ajouter photo
-								</span>
-								<input type="file" name="imagePreview" id="imagePreview" accept="image/jpeg, image/jpg, image/png" hidden>
-							</label>
+								<label>
+									<span class="newProjetPhotoBtn" id="selectImage">
+										+ Ajouter photo
+									</span>
+									<input type="file" name="imagePreview" id="imagePreview" accept="image/jpeg, image/jpg, image/png" hidden>
+								</label>
 							<p class="newProjetPhotoText">jpg, png : 4mo max</p>
 						</div>
 						<div class="inputAlignement">
@@ -105,14 +107,14 @@
 						</div>
 						<div class="inputAlignement">
 							<label for="category">Catégorie</label>
-							<select class="newProjetPhotoCategory" name="newProjetPhotoCategory" id="newProjetPhotoTitre"></select>
+							<select class="newProjetPhotoCategory" name="newProjetPhotoCategory" id="newProjetPhotoCategory"></select>
 						</div>
 
 					</form>
 				</div>
 			</div>
 			<div class="boutonAjouterImageAlign">
-				<input type="button" name="modalAjoutPhoto" id="modalAjoutPhoto" value="Ajouter une photo">
+				<input type="submit" name="modalAjoutPhoto" id="modalAjoutPhoto" value="Ajouter une photo">
 			</div>
 			</aside>
 </main>

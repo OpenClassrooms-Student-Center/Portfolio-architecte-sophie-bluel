@@ -334,6 +334,8 @@ input[type="button"]{
 	font-size: 1.2em;
 	text-align: center;
 	margin:auto;
+	font-family: 'Syne';
+	font-weight: 700;
 }
 
 .modal{
@@ -431,8 +433,6 @@ input[type="button"]{
 }
 
 .newProjetPhoto{
-	/* content:"\f03e";
-	font-family: 'Font Awesome 5 Free';	 */
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -441,6 +441,21 @@ input[type="button"]{
 	width: 420px;
 	height: 169px;
 	background-color: #E8F1F6;
+}
+
+.newPhotoMin{
+	display: none;
+	position: absolute;
+	height: 169px;
+	max-width: 420px;
+	overflow: hidden;
+	object-fit: cover;
+	width: 100%;
+	justify-content: center;
+}
+
+.newPhotoMin img{
+	height: 100%;
 }
 
 .fa-image {

@@ -1,9 +1,7 @@
 // *****************************************************************************
-// GESTION DE LA BOITE MODAL
+// GESTION DE LA BOITE MODAL (ouverture et fermeture)
 // *****************************************************************************
 
-console.table(work);
-console.table(categorie);
 // Permet de fermer la boite modale actuellement ouverte
 let modal = null;
 
@@ -41,6 +39,8 @@ const closeModal = function (e) {
     // let modaleGaleryImg  = document.querySelector('#modaleGaleryImg');
     modalFirst.classList.remove('hidden');
     modalSecond.classList.add('hidden');
+    modalBoutonRetour.classList.add('hidden');
+    modalFirst.innerHTML = '';
     // modaleGaleryImg .remove();
 
     // Cette fonction devient le contraire de la fonction précédente openModal
@@ -67,15 +67,9 @@ document.querySelectorAll('.js-modal').forEach((a) => {
     a.addEventListener('click', openModal);
 });
 
-// Permet de fermer la fenêtre modal en appuyant sur la touche ESC
-// window.addEventListener('keydown', function (e) {
-//     if (e.key === 'Escape' || e.key === 'Esc') {
-//         closeModal(e);
-//     }
-// });
 
 // *****************************************************************************
-// GESTION DE LA GALLERY PHOTO
+// GESTION DE LA GALLERY PHOTO (affichage des div modalFirst et modalSecond)
 // *****************************************************************************
 
 // Fonction pour mettre à jour la galerie dans la fenêtre modal
@@ -86,14 +80,21 @@ const modalFirst = document.querySelector('#modalFirst');
 const modalBoutonAjoutPhoto = document.querySelector('#modalAjoutPhoto');
 const modalBoutonRetour = document.querySelector("#arrow");
 const modalSecond = document.querySelector('#modalSecond');
+const previewFileTitre = document.querySelector('#newProjetPhotoTitre');
+const previewFileCategorie = document.querySelector('#newProjetPhotoCategory'); 
 
-function afficherModalAjoutPhoto(){
-    modalBoutonAjoutPhoto.addEventListener('click', function(){
+document.getElementById('modalAjoutPhoto').addEventListener('click', function () {
+    validerAjoutModalPhoto();
+});
+
+function afficherModalAjoutPhoto() {
+    modalBoutonAjoutPhoto.addEventListener('click', function () {
         modalFirst.classList.add('hidden');
         modalBoutonRetour.classList.remove('hidden');
         modalSecond.classList.remove('hidden');
         modalTitre.innerText = 'Ajout photo';
         modalBoutonAjoutPhoto.value = 'Valider';
+        previewFileTitre.value = '';
     })
 }
 
@@ -106,10 +107,61 @@ function retourModaleGalery(){
         modalFirst.classList.remove('hidden');
         modalTitre.innerText = 'Galerie photo';
         modalBoutonAjoutPhoto.value = 'Ajouter une photo';
+        // suppression de l'image sélectionnée
+        previewFile.innerHTML='';
+        previewFile.style.display = 'none';
+        previewFileCategorie.value='';
+        previewFileTitre.value = '';
     })
  }
  retourModaleGalery();
  
+ // *****************************************************************************
+// GESTION AJOUT PHOTO A LA GALERY
+// *****************************************************************************
+// Ajoutez un gestionnaire d'événements au bouton dans la deuxième div
+document.getElementById('modalAjoutPhoto')
+.addEventListener('click', function() {
+    validerAjoutModalPhoto();
+});
+
+function ajoutModalPhoto(){
+    modalTitre.innerText = 'Ajout photo'; 
+}
+
+function validerAjoutModalPhoto() {
+    const formulaireAjoutPhoto = document.querySelector('form');
+
+    if (!formulaireAjoutPhoto) {
+        console.error('formulaireAjoutPhoto is null');
+        return;
+    }
+
+    formulaireAjoutPhoto.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const ajoutPhoto = {
+            id:0,
+            title:event.target.querySelector('[name=titre]').value,
+            imageUrl:event.target.querySelector('[name=imageUrl]').value,
+            categoryId:event.target.querySelector('[name=categoryImg]').value,
+            userId:0
+        }
+
+        const chargeUtile = JSON.stringify(ajoutPhoto);
+
+        fetch('http://localhost:5678/api/works', {
+            method:'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: chargeUtile
+        });
+        
+        retourModaleGalery();
+        updateModalGallery();
+    });
+}
+
+
 // Fonction pour mettre à jour la galerie dans la fenêtre modal
 function modalGaleriePhoto() {
     // Titre de la modal
@@ -118,7 +170,6 @@ function modalGaleriePhoto() {
     // Création de la galerie d'image
     const newDivGalerie = document.createElement('div');
     newDivGalerie.classList.add('galleryModale');
-    newDivGalerie.id="modaleGaleryImg";
 
     // Ajout des éléments dans la modal
     modalFirst.appendChild(newDivGalerie);
@@ -127,7 +178,8 @@ function modalGaleriePhoto() {
     // Récupération des données sur le serveur
     async function updateModalGallery() {
         try {
-            const work = await fetch('http://localhost:5678/api/works').then(work => work.json());
+            // console.table(work);
+            // console.table(categorie);
             createModalGallery(work);
         } catch (error) {
             console.error('Erreur lors de la récupération des données de la galerie :', error);
@@ -157,9 +209,6 @@ function modalGaleriePhoto() {
     updateModalGallery();
 }
 
-modalGaleriePhoto();
-
-
 // *****************************************************************************
 // GESTION SUPPRESSION DE LA GALLERY PHOTO
 // *****************************************************************************
@@ -176,7 +225,7 @@ function deleteModalGalery(id) {
             // La suppression a réussi
             console.log(`L'élément avec l'ID ${id} a été supprimé avec succès.`);
             // Supprimer visuellement l'image de la galerie
-            const deletedImage = document.getElementById(`vignette¤${id}`);
+            const deletedImage = document.getElementById(`vignette${id}`);
             if (deletedImage) {
                 deletedImage.remove();
             }
@@ -194,95 +243,83 @@ function deleteModalGalery(id) {
     });
 }
 
-// *****************************************************************************
-// GESTION AJOUT PHOTO A LA GALERY
-// *****************************************************************************
-
-function ajoutModalPhoto(){
-    modalTitre.innerText = 'Ajout photo'; 
-}
-
-function validerAjoutModalPhoto(){
-    const formulaireAjoutPhoto = document.querySelector('.galleryModale form')
-    formulaireAjoutPhoto.addEventListener('submit', function (event) {
-        event.preventDefault();
-
-        const ajoutPhoto = {
-            id:0,
-            title:event.target.querySelector('[name=titre]').value,
-            imageUrl:event.target.querySelector('[name=imageUrl]').value,
-            categoryId:event.target.querySelector('[name=categoryImg]').value,
-            userId:0
-        }
-
-        const chargeUtile = JSON.stringify(ajoutPhoto);
-
-        fetch('http://localhost:5678/api/works', {
-            method:'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: chargeUtile
-        });    
-    });
-}
 
 // *****************************************************************************
 // GESTION PREVIEW
 // *****************************************************************************
-const imagePreview = document.querySelector('#imagePreview');
-imagePreview.addEventListener('change', previewFile);
 
-function previewFile() {
-    // regex permet de se limiter aux extensions de fichier désirées
+// Bouton de sélection de l'image
+const selectImage = document.querySelector('#selectImage');
+const inputFile = document.querySelector('#imagePreview');
+const previewFile = document.querySelector('.newPhotoMin');
+// regex permet de se limiter aux extensions de fichier désirées
     // $ : permet d'identifier l'extension après le point
     // i : pour dire que ce n'est pas sensible à la casse
         // Autre écriture de la regex : /\.(jpe?g|png)$/i; le "?" permet de dire que le "e" est facultatif
         // il prendra par défaut jpeg ou jpg
-    const file_extension_regex = /\.(jpg|jpeg|png)$/i;
-
-    // teste l'extension du fichier ; si renvoie false n'exécute pas le code
+const file_extension_regex = /\.(jpg|jpeg|png)$/i;
+// teste l'extension du fichier ; si renvoie false n'exécute pas le code
     // !file ... renvoie un boolean après avoir testé si le fichier a la bonne extension
     // si la réponse est false alors il n'affiche rien
+
+console.log(previewFileTitre); 
+
+selectImage.addEventListener('click', function(){
+    inputFile.click();
+});
+
+inputFile.addEventListener('change', function(){
     if (this.files.length === 0 || !file_extension_regex.test(this.files[0].name)) {
         return;
-    }
-    //console.log(this.files[0].name); // permet de récupérer le nom du fichier sélectionné
-    // stockage du fichier qui correspond à this.files[0]
-    const file = this.files[0];
-    // contient une instance de la classe FileReader
-    const file_reader = new FileReader();
-
-    // permet de lire le fichier stocké dans la variable file
-    file_reader.readAsDataURL(file);
-    // trigger evenement load de cet objet ... ???
-    file_reader.addEventListener('load', (event) =>
-        displayImage(event, file));
-}
-
-// permet de créer l'élément figure qui contient l'élément image qui contient un élément
-// figcaption et enfin un élément button pour la suppression de l'image
-function displayImage(event, file) {
-    // Création de l'élément parent
-    const figure_element = document.createElement('figure');
-    figure_element.id = 'image_selected';
-
-    // Insère la photo : mettre en place CSS pour réduire la taille de l'image
-    const image_element = document.createElement('img');
-    // Source = résultat du contenu du fichier
-    image_element.src = event.target.result;
-
-    // Insère le nom de l'image en légende
-    const figCaption_element = document.createElement('figcaption');
-    figCaption_element.textContent = `fichier sélectionné : ${file.name}`;
-
-    figure_element.appendChild(image_element);
-    figure_element.appendChild(figCaption_element);
-
-    // ajoute les éléments dans le main
-    document.body.querySelector('main').appendChild(figure_element);
-
-    // Ecoute le clic sur la corbeille pour supprimer l'imagedelete_button_element.addEventListener('click', (event) => {
-        if (confirm("Êtes-vous sûr de vouloir supprimer cette image ?")) {
-            imagePreview.value = "";
-            event.target.parentElement.remove();
-        }
     };
+    
+    const image = this.files[0];
+
+    // console.log(image);
+    if(image.size < 4000000){
+        const reader = new FileReader();
+
+        reader.onload = ()=> {
+            const imgUrl = reader.result;
+            const img = document.createElement('img');
+            img.src = imgUrl;
+
+            previewFile.innerHTML = ''; // Effacez le contenu précédent
+            previewFile.appendChild(img);
+            previewFile.style.display = 'flex';
+        }
+    reader.readAsDataURL(image);
+    } else {
+        alert('L`\'image dépasse les 4Mo');
+    }
+    
+});
+   
+// *****************************************************************************
+// GESTION DU CONTROLE SELECT
+// ***************************************************************************** 
+async function listeCategorie() {
+    try {
+        const response = await fetch('http://localhost:5678/api/categories');
+        const categories = await response.json();
+        updateSelect(categories);
+    } catch (error) {
+        console.error('Erreur lors de la récupération des catégories :', error);
+    }
+}
+function updateSelect(categories) {
+    const selectElement = document.querySelector('#newProjetPhotoCategory');
+    selectElement.innerHTML = '';
+    // Ajout d'un élélent vide en début de liste déroulante
+    let optionVide = document.createElement('option');
+    optionVide.textContent='';
+    selectElement.appendChild(optionVide);
+
+    // Ajout des catégories dans la liste de choix
+    for (let i = 0; i < categories.length; i++) {
+        let optionElement = document.createElement('option');
+        optionElement.textContent = categories[i].name;
+        selectElement.appendChild(optionElement);
+    }
+}
+document.addEventListener('DOMContentLoaded', listeCategorie);

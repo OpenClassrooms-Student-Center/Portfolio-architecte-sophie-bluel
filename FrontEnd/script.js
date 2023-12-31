@@ -11,8 +11,6 @@ let token = window.localStorage.getItem('token');
 let work = [];
 let categorie = [];
 
-console.table(work);
-console.table(categorie);
 // Insertion des boutons de filtres
 const btnPortfolio = document.querySelector('.alignButton');
 const connectionSpan = document.querySelector('.connectionNavBarre');
@@ -35,8 +33,8 @@ if (token) {
 async function createButtons() {
     // Connexion à l'API pour récupérer les catégories des travaux
     categorie = await fetch ('http://localhost:5678/api/categories').then(categorie => categorie.json());
+    console.table(categorie);
 
-    // console.table(categorie);
     recupCategorie(categorie);
 
     // Gestionnaire d'évènement pour les boutons de catégories
@@ -56,7 +54,7 @@ async function createButtons() {
 function recupCategorie(categorie) {
     // Ajout du bouton 'TOUS' et attribution de l'id 0
     let btnTous = document.createElement('button');
-    btnTous.textContent = "Tous";
+    btnTous.textContent = 'Tous';
     btnTous.setAttribute('data-category', '0');
     btnPortfolio.appendChild(btnTous);
 
@@ -78,7 +76,6 @@ async function updateGallery(categoryId) {
     // const response = await fetch('http://localhost:5678/api/works');
     // galerie = await response.json();
     work = await fetch ('http://localhost:5678/api/works').then(work => work.json());
-    // console.table(work);
     // appel de la fonction createGallery avec les données JSON en tant qu'argument
     createGallery(work, categoryId);
 }
