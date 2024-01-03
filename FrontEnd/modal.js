@@ -76,7 +76,7 @@ document.querySelectorAll('.js-modal').forEach((a) => {
 const modalTitre = document.getElementById('titreModal');
 const modalFirst = document.querySelector('#modalFirst');
 
-// Déclaration des variables pour AFFICHER / MASQUER la seconde modale
+// Déclaration des letiables pour AFFICHER / MASQUER la seconde modale
 const modalBoutonAjoutPhoto = document.querySelector('#modalAjoutPhoto');
 const modalBoutonRetour = document.querySelector("#arrow");
 const modalSecond = document.querySelector('#modalSecond');
@@ -223,11 +223,21 @@ function deleteModalGalery(id) {
     fetch(`http://localhost:5678/api/works/${id}`, {
         method: 'DELETE',
         headers: {
-            Authorization: `Bearer ${token}`,
-            // Authorization: `Bearer ${localStorage.getItem('token')}`,
+            // Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
     })
     .then(response => {
+        if (response.status === 400) {
+            alert("Veuillez vérifier les champs saisis !");
+        } else if (response.status === 401) {
+            alert("Veuillez vous authentifier avant d'ajouter un projet !");
+        } else if (response.status === 201) {
+            alert("Projet ajouté avec succès !");
+            return response.json();
+        } else {
+            throw new Error("Réponse inattendue du serveur");
+        }
         if (response.ok) {
             // La suppression a réussi
             console.log(`L'élément avec l'ID ${id} a été supprimé avec succès.`);
@@ -339,17 +349,19 @@ document.addEventListener('DOMContentLoaded', listeCategorie);
 
 function ajoutProjet() {
     // Récupérer les éléments DOM
-    var imageInput = document.getElementById("imagePreview");
-    var titleInput = document.getElementById("newProjetPhotoTitre");
-    var categorySelect = document.getElementById("newProjetPhotoCategory");
+    let imageInput = document.getElementById("imagePreview");
+    let titleInput = document.getElementById("newProjetPhotoTitre");
+    let categorySelect = document.getElementById("newProjetPhotoCategory");
 
     // Obtenez les valeurs des champs
-    var imageData = imageInput.files[0];
-    var titleValue = titleInput.value;
-    var categoryValue = categorySelect.value;
+    let imageData = imageInput.files[0];
+    let titleValue = titleInput.value;
+    let categoryValue = categorySelect.value;
+
+    let token = localStorage.getItem('token');
 
     // Créez un objet FormData
-    var formData = new FormData();
+    let formData = new FormData();
     formData.append("image", imageData);
     formData.append("title", titleValue);
     formData.append("category", categoryValue);
@@ -359,25 +371,27 @@ function ajoutProjet() {
         method: "POST",
         headers: {
             Accept: "application/json",
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
         body: formData,
     })
-    .then(response => response.json())
-        if (response.status == 400) {
-            alert("Veuillez verifier les champs saisis !");
-        }
-        if (response.status == 401) {
+    .then(response => {
+        if (response.status === 400) {
+            alert("Veuillez vérifier les champs saisis !");
+        } else if (response.status === 401) {
             alert("Veuillez vous authentifier avant d'ajouter un projet !");
-        }
-        if (response.status == 201) {
+        } else if (response.status === 201) {
             alert("Projet ajouté avec succès !");
             return response.json();
-        }   
+        } else {
+            throw new Error("Réponse inattendue du serveur");
+        }
+    })
     .then(data => {
-        if (data){
+        if (data) {
             console.log(data);
-            
+            modalGaleriePhoto();
+            updateGallery('0');
         }
     })
     .catch(error => {
@@ -388,5 +402,6 @@ function ajoutProjet() {
 
 // Ajouter un écouteur d'événement au clic sur le bouton "Ajouter une photo"
 document.getElementById("modalAjoutPhoto").addEventListener("click", ajoutProjet);
+
 
 
