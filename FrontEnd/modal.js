@@ -357,12 +357,28 @@ function ajoutProjet() {
     // Envoi de la requête fetch à l'API
     fetch("http://localhost:5678/api/works", {
         method: "POST",
+        headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`
+        },
         body: formData,
     })
     .then(response => response.json())
+        if (response.status == 400) {
+            alert("Veuillez verifier les champs saisis !");
+        }
+        if (response.status == 401) {
+            alert("Veuillez vous authentifier avant d'ajouter un projet !");
+        }
+        if (response.status == 201) {
+            alert("Projet ajouté avec succès !");
+            return response.json();
+        }   
     .then(data => {
-        // Traitez la réponse de l'API ici
-        console.log(data);
+        if (data){
+            console.log(data);
+            
+        }
     })
     .catch(error => {
         // Gérez les erreurs ici
