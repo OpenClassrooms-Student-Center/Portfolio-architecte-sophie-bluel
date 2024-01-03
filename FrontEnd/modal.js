@@ -119,7 +119,7 @@ function retourModaleGalery(){
  // *****************************************************************************
 // GESTION AJOUT PHOTO A LA GALERY
 // *****************************************************************************
-// Ajoutez un gestionnaire d'événements au bouton dans la deuxième div
+
 document.getElementById('modalAjoutPhoto')
 .addEventListener('click', function() {
     validerAjoutModalPhoto();
@@ -199,7 +199,7 @@ function modalGaleriePhoto() {
             });
 
             imgGallery.setAttribute('src', work[i].imageUrl);
-            newFig.classList.add('vignette', 'crash');
+            newFig.classList.add('crash');
             newFig.id = "vignette" + work[i].id;
             newDivGalerie.appendChild(newFig);
             newFig.appendChild(imgGallery);
@@ -213,11 +213,18 @@ function modalGaleriePhoto() {
 // GESTION SUPPRESSION DE LA GALLERY PHOTO
 // *****************************************************************************
 function deleteModalGalery(id) {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        console.error('Token manquant dans le localStorage.');
+        // Gérer le cas où le token est manquant, par exemple rediriger vers la page de connexion.
+        return;
+    }
+
     fetch(`http://localhost:5678/api/works/${id}`, {
         method: 'DELETE',
         headers: {
-            Accept: 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('token')}`
+            Authorization: `Bearer ${token}`,
+            // Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
     })
     .then(response => {
@@ -323,3 +330,47 @@ function updateSelect(categories) {
     }
 }
 document.addEventListener('DOMContentLoaded', listeCategorie);
+
+
+   
+// *****************************************************************************
+// GESTION AJOUT PROJET
+// ***************************************************************************** 
+
+function ajoutProjet() {
+    // Récupérer les éléments DOM
+    var imageInput = document.getElementById("imagePreview");
+    var titleInput = document.getElementById("newProjetPhotoTitre");
+    var categorySelect = document.getElementById("newProjetPhotoCategory");
+
+    // Obtenez les valeurs des champs
+    var imageData = imageInput.files[0];
+    var titleValue = titleInput.value;
+    var categoryValue = categorySelect.value;
+
+    // Créez un objet FormData
+    var formData = new FormData();
+    formData.append("image", imageData);
+    formData.append("title", titleValue);
+    formData.append("category", categoryValue);
+
+    // Envoi de la requête fetch à l'API
+    fetch("http://localhost:5678/api/works", {
+        method: "POST",
+        body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Traitez la réponse de l'API ici
+        console.log(data);
+    })
+    .catch(error => {
+        // Gérez les erreurs ici
+        console.error("Erreur lors de l'envoi de la requête fetch :", error);
+    });
+}
+
+// Ajouter un écouteur d'événement au clic sur le bouton "Ajouter une photo"
+document.getElementById("modalAjoutPhoto").addEventListener("click", ajoutProjet);
+
+
