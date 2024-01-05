@@ -1,6 +1,3 @@
-// VARIABLES ET ELEMENTS HTML
-(email)
-(password)
 
 
 // const gallery = document.querySelector(".gallery")  //
@@ -18,10 +15,10 @@ displayAllWorks()
 
 
 function getValue() {
-  //  // Sélectionner l'élément input et récupérer sa valeur
-  let email = document.getElementById("email").value;
+  // //  // Sélectionner l'élément input et récupérer sa valeur
+  // let email = document.getElementById("email").value;
   // Afficher la valeur
-  alert(input);
+  alert("input");
 // déclencher un événement sur le clic de bouton
   email.addEventListener("click", () => {
     console.log("Vous avez cliqué sur le bouton")
@@ -30,9 +27,9 @@ function getValue() {
 }
 
 
-function Sélectionner() {
-  //  // Sélectionner l'élément input et récupérer sa valeur
-  let password = document.getElementById("password").value;
+function selectionner() {
+  // //  // Sélectionner l'élément input et récupérer sa valeur
+  // let password = document.getElementById("password").value;
   // Afficher la valeur
   alert(input);
   // déclencher un événement sur le clic de bouton
@@ -45,24 +42,17 @@ function Sélectionner() {
 
 // Ajouter un message error sur le champ email si ce dernier n'est pas bon 
 function verifierChamp(email) {
-  if (email.value === "") {
-    email.classList.add("error")
-  } else {
-    email.classList.remove("error")
-  }
+  // if (email.value === "") {
+  //   email.classList.add("error")
+  // } else {
+  //   email.classList.remove("error")
+  // }
 }
 // Ajouter un message error sur le champ password si ce dernier n'est pas bon 
 function verifierChamp(password) {
-  if (password.value === "") {
-    password.classList.add("error")
-  } else {
-    password.classList.remove("error")
-  }
+  // if (password.value === "") {
+  //   password.classList.add("error")
+  // } else {
+  //   password.classList.remove("error")
+  // }
 }
-let form = document.querySelector("form")
-// Ajout d'un écouteur d'événement sur le formulaire pour écouter le submit
-form.addEventListener("submit", (event) => {
-// On empêche le comportement par défaut
-  event.preventDefault()
-
-})

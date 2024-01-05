@@ -1,7 +1,7 @@
 // Recuperer les infos du backend
 // on comunique avec le backend pour recuperer les projets 
 function loadWorks() {
-    //  RENVOIE DE TOUT LE FETCH(FONCTION-RACOURCI)
+    //  RENVOIE DE TOUT LE FETCH(FONCTION-RACOURCIE)
     return fetch("http://localhost:5678/api/works")
         .then(reponse => reponse.json())
         .then((works) => {
