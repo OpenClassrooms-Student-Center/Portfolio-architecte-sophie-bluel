@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () { // Ajout d'un aEL po
       }
 
       try { // Bloc try : Série d'instrutions à effectuer
-        const response = await fetch('http://localhost:5678/api/users/login', { // Envoi de notre requête POST via fetch pour la connexion à notre API - Await : Attend que la promesse soit résolue
+        const response = await fetch('http://localhost:5678/api/users/login', { // Envoi de la requête POST via fetch pour la connexion à l'API - Await : Attend que la promesse soit résolue
           method: 'POST', // Utilisation de la méthode POST
           headers: { // En-tête
             'Content-Type': 'application/json' // Contenu de mon en-tête - Contenu au format JSON

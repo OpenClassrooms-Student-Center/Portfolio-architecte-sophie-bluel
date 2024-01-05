@@ -1,12 +1,12 @@
-let works = [] // Création de la variable works contenant un tableau vide
+let works = [] // Création de la variable works contenant un tableau vide qui me servira à récupérer les données de la réponse de la requête API
 const galleryList = document.querySelector('.gallery') // Récupération de la galerie principale
 const galleryModal = document.querySelector('.galleryModal') // Récupération de la galerie de la modale
 
 document.addEventListener('DOMContentLoaded', function () { // Permet le chargement du fichier javaScript après les fichiers html
-  function genererTravaux (works) { // Création de la fonction pour générer les travaux
+  function genererTravaux (works) { // Fonction pour gérer l'affichage visuel de mon tableau appelée à l'intérieur de la fonction appelTravaux qui fait appel à l'API
     for (let i = 0; i < works.length; i++) { // Initialise mon compteur i correspondant à l'index des élément de mon tableau works
       // Création des éléments de ma galerie principale
-      const travail = works[i] // Crée la variable travail pour y stocker un élément individuel de mon tableau
+      const travail = works[i] // Crée la variable travail pour y stocker chaque élément de mon tableau en fonction de sa position
       const figureElement = document.createElement('figure') // Création d'un élément figure pour y stocker mon image et mon figcaption
       const imageElement = document.createElement('img') // Création d'un élément imageElement pour y stocker mon image
       const figCaptionElement = document.createElement('figcaption') // Création d'un élément figCaptionElement pour y stocker mon figcaption

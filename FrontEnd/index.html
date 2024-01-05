@@ -22,7 +22,7 @@
 		<!-- ********** RECTANGLE NOIR  ********** -->
 		<div id="blackRectangle" class="disconnected">
 			<button id="editButton" class="disconnected"><span><img alt="icone" src="./assets/icons/Vector.png"></span>Mode édition</button>
-    </div>
+    	</div>
 
 		<!-- ********** HEADER  ********** -->
 		<header>
@@ -56,7 +56,7 @@
 				</article>
 			</section>
 
-			<!-- ********** SECTION-PORTFOLIO  ********** -->
+			<!-- ********** HEADER-SECTION-PORTFOLIO  ********** -->
 			<section id="portfolio">
 				<div id="headline">
 					<h2>Mes Projets</h2>
@@ -65,59 +65,6 @@
 					</button>
 				</div> 
 
-				<!-- ********** PREMIERE FENETRE MODALE  ********** -->
-				<aside id="modal1"> <!--conteneur modale noir translucide-->
-					<div class="modalWrapper1"> <!--conteneur de Bloc... et croix -->
-						<span class="close" id="closeModal1">&times;</span>
-						<h2 class="modalTitle1">Galerie photo</h2><!--titre modale-->
-						<div class="galleryModal">
-							<!--contenuGaleriePhoto-->
-						</div >
-						<div class="greyLine">
-							
-						</div>
-						<a href="#modal2"><input id = "addPhoto" type="submit" value="Ajouter une photo"></a>
-					</div>
-				</aside>
-
-				<!-- ********** DEUXIEME FENETRE MODALE ********** -->
-				<aside id="modal2"> <!--conteneur modale noir translucide-->
-					<div class="modalWrapper2"> <!--conteneur de Bloc... et croix -->	
-						<span class="close" id="closeModal2">&times;</span>
-						<span class="arrow">&larr;</span>
-						<h2 class="modalTitle2">Ajout photo</h2>
-						<form id="uploadForm" action="#" method="post">
-							<fieldset>
-								<div class="addPhotoModal">
-									<img id="photoLoad" src='./assets/icons/picture-svgrepo-com 1.png' class="image-preview" alt=""><br>
-									<button id="ajouterPhoto" type="button">
-										<label for="image" class="custom-file-upload">+ Ajouter photo</label>
-										<input type="file" id="image" name="image" accept="image/png, image/jpeg">
-									</button><br>
-									<p class="addPhotoParagraph">jpg, png : 4mo max</p><br>
-								</div>
-							</fieldset>
-							<fieldset>
-								<label for="title">Titre</label> <br>
-								<input class="modalInput2" type="text" name="title" id="title"> <br>
-							</fieldset>
-							<fieldset>
-								<label for="category">Catégorie</label><br>
-								<select  class="modalInput2" name="category" id="category">
-									<option disabled selected ></option>
-									<option value="1">Objets</option>
-									<option value="2">Appartements</option>
-									<option value="3">Hôtels & Restaurants</option>
-								</select><br>
-							</fieldset>
-							<div class="greyLine">
-								<!--ligne grise-->
-							</div>
-							<input id="inputValider" type="submit" value="Valider"><br>
-						</form>
-					</div>
-				</aside>
-
 				<!-- ********** BOUTONS FILTRES  ********** -->	
 				<div class="btn">
 					<button class="button btnGlobal" id = "btnGlobal" type="button">Tous</button>
@@ -125,8 +72,9 @@
 					<button class="button btnAppartements" id = "btnAppartements" type="button">Appartements</button>
 					<button class="button btnHotels" id = "btnHotels" type="button">Hôtels & restaurants</button>
 				</div>	 
+				<!-- ********** AFFICHAGE GALERIE  ********** -->	
+
 				<div class="gallery">
-					<!--contenuGaleriePhotoFiltrée-->
 				</div>	 
 			</section>
 
@@ -144,8 +92,58 @@
 					<input type="submit" id="btnEnvoyer" value="Envoyer">
 				</form>
 			</section>
-		</main>
 
+			<!-- ********** PREMIERE FENETRE MODALE  ********** -->
+			<aside id="modal1"> <!--conteneur modale noir translucide-->
+				<div class="modalWrapper1"> <!--conteneur de Bloc... et croix -->
+					<span class="close" id="closeModal1">&times;</span>
+					<h2 class="modalTitle1">Galerie photo</h2><!--titre modale-->
+					<div class="galleryModal">
+					</div >
+					<div class="greyLine">
+					</div>
+					<a href="#modal2"><input id = "addPhoto" type="submit" value="Ajouter une photo"></a>
+				</div>
+			</aside>
+
+			<!-- ********** DEUXIEME FENETRE MODALE ********** -->
+			<aside id="modal2"> <!--conteneur modale noir translucide-->
+				<div class="modalWrapper2"> <!--conteneur de Bloc... et croix -->	
+					<span class="close" id="closeModal2">&times;</span>
+					<span class="arrow">&larr;</span>
+					<h2 class="modalTitle2">Ajout photo</h2>
+					<form id="uploadForm" action="#" method="post">
+						<fieldset>
+							<div class="addPhotoModal">
+								<img id="photoLoad" src='./assets/icons/picture-svgrepo-com 1.png' class="image-preview" alt=""><br>
+								<button id="ajouterPhoto" type="button">
+									<label for="image" class="custom-file-upload">+ Ajouter photo</label>
+									<input type="file" id="image" name="image" accept="image/png, image/jpeg">
+								</button><br>
+								<p class="addPhotoParagraph">jpg, png : 4mo max</p><br>
+							</div>
+						</fieldset>
+						<fieldset>
+							<label for="title">Titre</label> <br>
+							<input class="modalInput2" type="text" name="title" id="title"> <br>
+						</fieldset>
+						<fieldset>
+							<label for="category">Catégorie</label><br>
+							<select  class="modalInput2" name="category" id="category">
+								<option disabled selected ></option>
+								<option value="1">Objets</option>
+								<option value="2">Appartements</option>
+								<option value="3">Hôtels & Restaurants</option>
+							</select><br>
+						</fieldset>
+						<div class="greyLine">
+						</div>
+						<input id="inputValider" type="submit" value="Valider"><br>
+					</form>
+				</div>
+			</aside>
+		</main>
+		
 		<!-- ********** FOOTER  ********** -->
 		<footer>
 			<nav>

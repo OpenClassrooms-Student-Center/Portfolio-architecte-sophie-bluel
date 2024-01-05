@@ -22,9 +22,9 @@ document.addEventListener('DOMContentLoaded', function () { // Exécute le fichi
             const galleryFigure = document.querySelector(`.photoWorks[data-id="${figureId}"]`) // Création de la variable galleryFigure pour y stocker la valeur du data-id de mon figureId
             galleryFigure.remove() // Suppression de l'élément de ma galerie principale
 
-            console.log('La photo a été supprimée avec succès.') // Affiche un message
+            alert('La photo a été supprimée avec succès.') // Affiche un message à l'utilisateur
           } else {
-            console.error('La suppression de la photo a échoué. Statut de la réponse : ' + response.status) // Affiche un message d'erreur avec le statut de la reponse avec le code d'état HTTP
+            console.error('La suppression de la photo a échoué. Statut de la réponse : ' + response.status) // Affiche un message d'erreur avec le statut de la reponse avec le code d'état HTTP dans ma console
           }
         } catch (error) { // Le bloc catch attrapera l'erreur si une erreur se produit
           console.error('Une erreur s\'est produite lors de la suppression : ' + error) // Affiche le message d'erreur et les détails de l'erreur

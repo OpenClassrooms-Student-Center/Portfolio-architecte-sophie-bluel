@@ -99,10 +99,12 @@ document.addEventListener('DOMContentLoaded', function () { // Ajout d'un aEL po
           // Affichage de ma galerie principale après ajout fichier
           const imageUrl = data.imageUrl // Récupération des données de la réponse intégrée à la variable data et utilisation de la propriété imageUrl
           const imageAlt = data.title // Récupération des données de la réponse intégrée à la variable data et utilisation de la propriété title
+
+          const gallery = document.querySelector('.gallery') // Récupération des travaux de la galerie principale dans la variable gallery
+
           const newGalleryItem = document.createElement('figure') // Création d'un élément figure pour y stocker mon image et mon figcaption
           const newImage = document.createElement('img') // Création d'un élément image pour l'intégrer à l'élément figure newGalleryItem
           const newCaption = document.createElement('figcaption') // Création d'un élément figcaption pour l'intégrer à l'élément figure newGalleryItem avec l'image
-          const gallery = document.querySelector('.gallery') // Récupération des travaux de la galerie principale dans la variable gallery
 
           newGalleryItem.setAttribute('data-id', data.id) // Ajoute un attribut personnalisé "data-id" à newGalleryItem en utilisant les données de data
           newGalleryItem.classList.add('photoWorks') // Ajoute une classe photoworks à newGalleryItem
@@ -140,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function () { // Ajout d'un aEL po
         } else { // Si la requête ne fonctionne pas
           throw new Error('Échec de la requête.') // Renvoie un message d'erreur
         }
-      } catch (error) { // Le bloc catch attrapera l'erreur si une erreur se produit
+      } catch (error) { // Le bloc catch attrapera l'erreur si une erreur se produit lors de la requête API
         console.error('Erreur : ' + error) // Affiche un message d'erreur et les détails de l'erreur
       }
     })

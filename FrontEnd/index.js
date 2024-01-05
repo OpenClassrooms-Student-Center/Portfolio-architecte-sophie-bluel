@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () { // Ajout d'un aEL po
           localStorage.removeItem('token') // Suppression du token
           window.location.href = 'login.html'// Redirige l'utilisateur vers la page de connexion
         } catch (error) { // Le bloc catch attrapera l'erreur si une erreur se produit
-          console.error('Erreur lors de la gestion du stockage local:', error) // Affiche un message d'erreur et les détails de l'erreur
+          console.error('Erreur lors de l\'accès au localstorage:', error) // Affiche un message d'erreur et les détails de l'erreur
         }
       })
     } else { // Détermine le comportement de la page si l'utilisateur n'est pas connecté
@@ -30,6 +30,6 @@ document.addEventListener('DOMContentLoaded', function () { // Ajout d'un aEL po
       btnFilters.style.display = 'flex' // Affiche mes boutons de filtre
     }
   } catch (error) { // Le bloc catch attrapera l'erreur si une erreur se produit
-    console.error('Erreur lors de l\'accès au stockage local:', error) // Affiche un message d'erreur et les détails de l'erreur
+    console.error('Erreur lors de l\'accès au localstorage:', error) // Affiche un message d'erreur et les détails de l'erreur
   }
 })
