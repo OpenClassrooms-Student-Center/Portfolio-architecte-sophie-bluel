@@ -7,22 +7,12 @@ let modal = null;
 
 // Script d'ouverture / fermeture de la fenetre modal
 const openModal = function (e) {
-    // Suppression du comportement par défaut du click sur le lien
-    e.preventDefault();
-
-    
-    // Quel est l'élèment cible par rapport au lien?
-    // Sur le e.target récupère l'attribut href. e.target.getAttribute('href') = Ce qui va renvoyer : #modal1. Ne fonctionne que si ça commence par #
+    e.preventDefault();    
     modal = document.querySelector(e.target.getAttribute('href'));
-    // Affiche la boite modal
     modal.style.display = 'flex';
-    // Suppression de l'attribut pour rendre visible l'élément
     modal.removeAttribute('aria-hidden');
-    // modification de l'attribut pour le mettre à true et l'afficher
     modal.setAttribute('aria-modal', 'true');
-    // Ajout d'un eventListener sur la boite modale pour la fermer
     modal.addEventListener('click', closeModal);
-    // Cherche l'élément js-modal-close
     modal.querySelector('.js-modal-close').addEventListener('click', closeModal);
     modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation);
 
@@ -30,18 +20,14 @@ const openModal = function (e) {
 };
 
 const closeModal = function (e) {
-    // Si on essaie de fermer une modale qui n'existe pas
-    // alors fait un return
     if (modal === null) return;
     e.preventDefault();
 
-    // retour à l'état premier de la modale ... test
-    // let modaleGaleryImg  = document.querySelector('#modaleGaleryImg');
+    // retour à l'état premier de la modale
     modalFirst.classList.remove('hidden');
     modalSecond.classList.add('hidden');
     modalBoutonRetour.classList.add('hidden');
     modalFirst.innerHTML = '';
-    // modaleGaleryImg .remove();
 
     // Cette fonction devient le contraire de la fonction précédente openModal
     modal.style.display = 'none';
@@ -56,13 +42,12 @@ const closeModal = function (e) {
 };
 
 const stopPropagation = function (e) {
-    // permet de ne pas fermer la boite modale quand on clique n'importe où
+    // permet de ne pas fermer la boite modale quand on clique n'importe où dans la modal
     e.stopPropagation();
 };
 
 // Sélectionne tous les éléments qui ont la classe js-modal
 document.querySelectorAll('.js-modal').forEach((a) => {
-    // écoute le click sur chaque liens
     // pour chaque lien ajoute un eventListener, appel la fonction OpenModal
     a.addEventListener('click', openModal);
 });
@@ -76,24 +61,29 @@ document.querySelectorAll('.js-modal').forEach((a) => {
 const modalTitre = document.getElementById('titreModal');
 const modalFirst = document.querySelector('#modalFirst');
 
-// Déclaration des letiables pour AFFICHER / MASQUER la seconde modale
+// Déclaration des variables pour AFFICHER / MASQUER la seconde modale
 const modalBoutonAjoutPhoto = document.querySelector('#modalAjoutPhoto');
-const modalBoutonRetour = document.querySelector("#arrow");
+const modalBoutonValider = document.querySelector('#modalAjoutPhoto_1');
+const modalBoutonRetour = document.querySelector('#arrow');
 const modalSecond = document.querySelector('#modalSecond');
 const previewFileTitre = document.querySelector('#newProjetPhotoTitre');
 const previewFileCategorie = document.querySelector('#newProjetPhotoCategory'); 
 
 document.getElementById('modalAjoutPhoto').addEventListener('click', function () {
-    validerAjoutModalPhoto();
+    afficherModalAjoutPhoto();
 });
 
 function afficherModalAjoutPhoto() {
     modalBoutonAjoutPhoto.addEventListener('click', function () {
         modalFirst.classList.add('hidden');
         modalBoutonRetour.classList.remove('hidden');
+
+        // afficher/masquer les boutons ajouter/envoyer
+        modalBoutonValider.classList.remove('hidden');
+        modalBoutonAjoutPhoto.classList.add('hidden');
+
         modalSecond.classList.remove('hidden');
         modalTitre.innerText = 'Ajout photo';
-        modalBoutonAjoutPhoto.value = 'Valider';
         previewFileTitre.value = '';
     })
 }
@@ -106,8 +96,11 @@ function retourModaleGalery(){
         modalBoutonRetour.classList.add('hidden');
         modalFirst.classList.remove('hidden');
         modalTitre.innerText = 'Galerie photo';
-        modalBoutonAjoutPhoto.value = 'Ajouter une photo';
-        // suppression de l'image sélectionnée
+
+        // afficher/masquer les boutons ajouter/envoyer
+        modalBoutonValider.classList.add('hidden');
+        modalBoutonAjoutPhoto.classList.remove('hidden');
+
         previewFile.innerHTML='';
         previewFile.style.display = 'none';
         previewFileCategorie.value='';
@@ -115,52 +108,75 @@ function retourModaleGalery(){
     })
  }
  retourModaleGalery();
- 
+
  // *****************************************************************************
 // GESTION AJOUT PHOTO A LA GALERY
 // *****************************************************************************
 
-document.getElementById('modalAjoutPhoto')
-.addEventListener('click', function() {
-    validerAjoutModalPhoto();
-});
+function ajoutProjet() {
+    // Récupérer les éléments DOM
+    var imageInput = document.getElementById('imagePreview');
+    var titleInput = document.getElementById('newProjetPhotoTitre');
+    var categorySelect = document.getElementById('newProjetPhotoCategory');
 
-function ajoutModalPhoto(){
-    modalTitre.innerText = 'Ajout photo'; 
-}
+    // Obtenez les valeurs des champs
+    var imageData = imageInput.files[0];
+    var titleValue = titleInput.value;
+    var categoryValue = categorySelect.value;
 
-function validerAjoutModalPhoto() {
-    const formulaireAjoutPhoto = document.querySelector('form');
+    // Récupérer le token depuis le localStorage
+    const token = localStorage.getItem('token');
+    console.log(token);
 
-    if (!formulaireAjoutPhoto) {
-        console.error('formulaireAjoutPhoto is null');
+    // Vérifier si le token est présent
+    if (!token) {
+        alert('Veuillez vous authentifier avant d\'ajouter un projet !');
         return;
     }
 
-    formulaireAjoutPhoto.addEventListener('submit', function (event) {
-        event.preventDefault();
+    // Créez un objet FormData
+    var formData = new FormData();
+    formData.append('image', imageData);
+    formData.append('title', titleValue);
+    formData.append('category', categoryValue);
 
-        const ajoutPhoto = {
-            id:0,
-            title:event.target.querySelector('[name=titre]').value,
-            imageUrl:event.target.querySelector('[name=imageUrl]').value,
-            categoryId:event.target.querySelector('[name=categoryImg]').value,
-            userId:0
+    // Envoi de la requête fetch à l'API
+    fetch('http://localhost:5678/api/works', {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            Authorization: `Bearer ${token}`
+        },
+        body: formData,
+    })
+    .then(response => {
+        if (response.status === 400) {
+            alert('Veuillez vérifier les champs saisis !');
+        } else if (response.status === 401) {
+            alert('Veuillez vous authentifier avant d\'ajouter un projet !');
+        } else if (response.status === 201) {
+            alert('Projet ajouté avec succès !');
+            return response.json();
+        } else {
+            throw new Error('Réponse inattendue du serveur');
         }
+    })
+    .then(data => {
+        if (data) {
+            // Ajout du projet à la modal
 
-        const chargeUtile = JSON.stringify(ajoutPhoto);
-
-        fetch('http://localhost:5678/api/works', {
-            method:'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: chargeUtile
-        });
-        
-        retourModaleGalery();
-        updateModalGallery();
+            // Ajout du projet à la galerie
+            data.push()
+        }
+    })
+    .catch(error => {
+        // Gérez les erreurs ici
+        console.error('Erreur lors de l\'envoi de la requête fetch :', error);
     });
 }
 
+// Ajouter un écouteur d'événement au clic sur le bouton "Ajouter une photo"
+document.getElementById('modalAjoutPhoto_1').addEventListener('click', ajoutProjet);
 
 // Fonction pour mettre à jour la galerie dans la fenêtre modal
 function modalGaleriePhoto() {
@@ -200,7 +216,7 @@ function modalGaleriePhoto() {
 
             imgGallery.setAttribute('src', work[i].imageUrl);
             newFig.classList.add('crash');
-            newFig.id = "vignette" + work[i].id;
+            newFig.id = 'vignette' + work[i].id;
             newDivGalerie.appendChild(newFig);
             newFig.appendChild(imgGallery);
         }
@@ -223,20 +239,17 @@ function deleteModalGalery(id) {
     fetch(`http://localhost:5678/api/works/${id}`, {
         method: 'DELETE',
         headers: {
-            // Authorization: `Bearer ${token}`,
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${token}`,
+            // Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
     })
     .then(response => {
-        if (response.status === 400) {
-            alert("Veuillez vérifier les champs saisis !");
+        if (response.status === 200) {
+            alert('Projet supprimé');
         } else if (response.status === 401) {
-            alert("Veuillez vous authentifier avant d'ajouter un projet !");
-        } else if (response.status === 201) {
-            alert("Projet ajouté avec succès !");
-            return response.json();
+            alert('Veuillez vous authentifier avant de supprimer un projet !');
         } else {
-            throw new Error("Réponse inattendue du serveur");
+            throw new Error('Réponse inattendue du serveur');
         }
         if (response.ok) {
             // La suppression a réussi
@@ -260,9 +273,8 @@ function deleteModalGalery(id) {
     });
 }
 
-
 // *****************************************************************************
-// GESTION PREVIEW
+// GESTION DU PREVIEW DANS LA MODALE
 // *****************************************************************************
 
 // Bouton de sélection de l'image
@@ -307,7 +319,7 @@ inputFile.addEventListener('change', function(){
         }
     reader.readAsDataURL(image);
     } else {
-        alert('L`\'image dépasse les 4Mo');
+        alert('L\'image dépasse les 4Mo');
     }
     
 });
@@ -336,72 +348,9 @@ function updateSelect(categories) {
     for (let i = 0; i < categories.length; i++) {
         let optionElement = document.createElement('option');
         optionElement.textContent = categories[i].name;
+        optionElement.value=categories[i].id;
         selectElement.appendChild(optionElement);
     }
 }
 document.addEventListener('DOMContentLoaded', listeCategorie);
-
-
-   
-// *****************************************************************************
-// GESTION AJOUT PROJET
-// ***************************************************************************** 
-
-function ajoutProjet() {
-    // Récupérer les éléments DOM
-    let imageInput = document.getElementById("imagePreview");
-    let titleInput = document.getElementById("newProjetPhotoTitre");
-    let categorySelect = document.getElementById("newProjetPhotoCategory");
-
-    // Obtenez les valeurs des champs
-    let imageData = imageInput.files[0];
-    let titleValue = titleInput.value;
-    let categoryValue = categorySelect.value;
-
-    let token = localStorage.getItem('token');
-
-    // Créez un objet FormData
-    let formData = new FormData();
-    formData.append("image", imageData);
-    formData.append("title", titleValue);
-    formData.append("category", categoryValue);
-
-    // Envoi de la requête fetch à l'API
-    fetch("http://localhost:5678/api/works", {
-        method: "POST",
-        headers: {
-            Accept: "application/json",
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-        body: formData,
-    })
-    .then(response => {
-        if (response.status === 400) {
-            alert("Veuillez vérifier les champs saisis !");
-        } else if (response.status === 401) {
-            alert("Veuillez vous authentifier avant d'ajouter un projet !");
-        } else if (response.status === 201) {
-            alert("Projet ajouté avec succès !");
-            return response.json();
-        } else {
-            throw new Error("Réponse inattendue du serveur");
-        }
-    })
-    .then(data => {
-        if (data) {
-            console.log(data);
-            modalGaleriePhoto();
-            updateGallery('0');
-        }
-    })
-    .catch(error => {
-        // Gérez les erreurs ici
-        console.error("Erreur lors de l'envoi de la requête fetch :", error);
-    });
-}
-
-// Ajouter un écouteur d'événement au clic sur le bouton "Ajouter une photo"
-document.getElementById("modalAjoutPhoto").addEventListener("click", ajoutProjet);
-
-
 

@@ -36,12 +36,10 @@ function connexionFormulaire() {
         .then((data) => {
             if (data) {
                 const token = data.token;
-                const tokenValue = JSON.stringify(token);
-                window.localStorage.setItem("token", tokenValue);
-                console.log(tokenValue);
+                window.localStorage.setItem("token", token);
+                console.log(token);
                 window.location.href = "index.html";
-                // let jsLogOut = document.getElementById("login")
-                //modifier Login en Logout
+
             }
         })
         // Si un erreur se passe dans les blocs qui précédent, interception de l'erreur

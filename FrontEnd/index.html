@@ -43,7 +43,6 @@
 	</section>
 	<section id="portfolio">
 		<!-- **************************************************************** -->
-		<!-- Insérer ici les boutons de filtre -->
 		<div class="logon_mesProjets">
 			<h2>Mes Projets</h2>
 			<div class="logon_mesProjets_Pen">
@@ -51,10 +50,11 @@
 				<a href="#modal1" class="js-modal">Modifier</a>
 			</div>
 		</div>
-		<div class="alignButton">
-		</div>
-		<div class="gallery">
-		</div>
+		<!-- Boutons filtres -->
+		<div class="alignButton"></div>
+		<!-- Gallerie -->
+		<div class="gallery"></div>
+
 	</section>
 	<section id="contact">
 		<h2>Contact</h2>
@@ -85,10 +85,14 @@
 				<h3 id="titreModal"></h3>	
 			</div>
 			<div>
-				<div id="modalFirst" class="hidden">
-				</div>
+				<!-- Div pour l'affichage de la galerie de la modale et supression des items -->
+				<div id="modalFirst" class="hidden"></div>
+				
+				<!-- Div pour l'affichage du preview -->
 				<div id="modalSecond" class="alignFormAjoutPhoto hidden">
 					<form action="#">
+
+						<!-- Zone de preview -->
 						<div class="newProjetPhoto"> 
 							<div class="newPhotoMin" id="newPhotoMin">
 							</div>
@@ -101,10 +105,13 @@
 								</label>
 							<p class="newProjetPhotoText">jpg, png : 4mo max</p>
 						</div>
+
+						<!-- Input : titre de la photo à ajouter -->
 						<div class="inputAlignement">
 							<label for="title">Titre</label>
 							<input class="newProjetPhotoTitre" type="text" name="newProjetPhotoTitre" id="newProjetPhotoTitre">
 						</div>
+						<!-- Select : liste les catégrories -->
 						<div class="inputAlignement">
 							<label for="category">Catégorie</label>
 							<select class="newProjetPhotoCategory" name="newProjetPhotoCategory" id="newProjetPhotoCategory"></select>
@@ -114,7 +121,8 @@
 				</div>
 			</div>
 			<div class="boutonAjouterImageAlign">
-				<input type="submit" name="modalAjoutPhoto" id="modalAjoutPhoto" value="Ajouter une photo">
+				<input type="button" name="modalAjoutPhoto" id="modalAjoutPhoto" value="Ajouter une photo">
+				<input type="submit" name="modalAjoutPhoto" id="modalAjoutPhoto_1" value="Valider" class="hidden">
 			</div>
 			</aside>
 </main>
