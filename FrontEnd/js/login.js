@@ -44,10 +44,13 @@ function loginUser(email, password) {
         })
         .then((data) => {
             if (data.token) {
-
+                localStorage.setItem("token", data.token);
+                // Retour page Home
+                window.location.href = "index.html";
                 console.log(data.token);
             } else {
                 console.log(data);
+               
             }
 
         })
@@ -57,6 +60,25 @@ function loginUser(email, password) {
             );
         });
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // function password() {
 //     //  RENVOIE DE TOUT LE FETCH(FONCTION-RACOURCIE)

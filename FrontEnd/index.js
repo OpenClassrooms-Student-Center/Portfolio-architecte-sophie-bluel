@@ -56,3 +56,11 @@ function verifierChamp(password) {
   //   password.classList.remove("error")
   // }
 }
+
+//  Ajouter Bouton Modifier
+
+const modifierButton = document.createElement('modifierButton')
+modifierButton.textContent = "modifier"
+console.log(modifierButton);
+const images =document.getElementById('images')
+images.appendChild(modifierButton)
