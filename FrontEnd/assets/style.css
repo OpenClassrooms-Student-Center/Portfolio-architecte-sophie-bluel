@@ -378,7 +378,6 @@ input[type="submit"]{
 .galleryModale{
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-between;
 	margin: auto;
 	width: 440px;
 	height: 440px;
