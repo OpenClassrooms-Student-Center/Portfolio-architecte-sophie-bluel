@@ -19,7 +19,7 @@ function getValue() {
   // let email = document.getElementById("email").value;
   // Afficher la valeur
   alert("input");
-// déclencher un événement sur le clic de bouton
+  // déclencher un événement sur le clic de bouton
   email.addEventListener("click", () => {
     console.log("Vous avez cliqué sur le bouton")
 
@@ -34,8 +34,8 @@ function selectionner() {
   alert(input);
   // déclencher un événement sur le clic de bouton
   password.addEventListener("click", () => {
-  console.log("Vous avez cliqué sur le bouton")
-});
+    console.log("Vous avez cliqué sur le bouton")
+  });
 
 
 }
@@ -57,10 +57,22 @@ function verifierChamp(password) {
   // }
 }
 
-//  Ajouter Bouton Modifier
 
-const modifierButton = document.createElement('modifierButton')
-modifierButton.textContent = "modifier"
-console.log(modifierButton);
-const images =document.getElementById('images')
-images.appendChild(modifierButton)
+
+
+
+//  Ajouter Bouton Modifier
+const isLoggedIn = localStorage.getItem("token") !== null
+console.log(isLoggedIn);
+
+
+if (isLoggedIn) {
+  let nouveauButton = document.createElement("button")
+  const h2 = document.querySelector("#portfolio h2")
+  nouveauButton.textContent = "modifier"
+  h2.appendChild(nouveauButton)
+  nouveauButton.addEventListener("click", () =>  {
+    const dialog = document.querySelector("dialog")
+    dialog.open = true
+  })
+}

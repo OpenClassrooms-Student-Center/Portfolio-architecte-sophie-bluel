@@ -186,3 +186,23 @@ footer nav ul {
 	margin: 2em
 }
 
+
+dialog {
+	width: 300px;
+	height: 300px;
+	flex-direction: column;
+}
+dialog p , input {
+display: flex;
+text-align: center;
+justify-content: center;
+}
+dialog p {
+	padding-top: 25px;
+}
+.modale {
+	font-weight: bolder;
+	background-color: white;
+	border: transparent;
+	float: right;
+	  }
