@@ -87,7 +87,6 @@ function afficherModalAjoutPhoto() {
         previewFileTitre.value = '';
     })
 }
-
 afficherModalAjoutPhoto();
 
 function retourModaleGalery(){
@@ -105,6 +104,7 @@ function retourModaleGalery(){
         previewFile.style.display = 'none';
         previewFileCategorie.value='';
         previewFileTitre.value = '';
+
     })
  }
  retourModaleGalery();
@@ -156,17 +156,10 @@ function ajoutProjet() {
             alert('Veuillez vous authentifier avant d\'ajouter un projet !');
         } else if (response.status === 201) {
             alert('Projet ajouté avec succès !');
+            modalGaleriePhoto();  // Met à jour la galerie après l'ajout
             return response.json();
         } else {
             throw new Error('Réponse inattendue du serveur');
-        }
-    })
-    .then(data => {
-        if (data) {
-            // Ajout du projet à la modal
-
-            // Ajout du projet à la galerie
-            data.push()
         }
     })
     .catch(error => {
@@ -182,20 +175,22 @@ document.getElementById('modalAjoutPhoto_1').addEventListener('click', ajoutProj
 function modalGaleriePhoto() {
     // Titre de la modal
     modalTitre.innerText = 'Galerie photo';
-    
+
     // Création de la galerie d'image
     const newDivGalerie = document.createElement('div');
     newDivGalerie.classList.add('galleryModale');
 
     // Ajout des éléments dans la modal
+    modalFirst.innerHTML = ''; // Efface tout contenu précédent
     modalFirst.appendChild(newDivGalerie);
+    modalSecond.classList.add('hidden');
     modalFirst.classList.remove('hidden');
 
     // Récupération des données sur le serveur
     async function updateModalGallery() {
         try {
-            // console.table(work);
-            // console.table(categorie);
+            const response = await fetch('http://localhost:5678/api/works');
+            const work = await response.json();
             createModalGallery(work);
         } catch (error) {
             console.error('Erreur lors de la récupération des données de la galerie :', error);
@@ -224,7 +219,6 @@ function modalGaleriePhoto() {
 
     updateModalGallery();
 }
-
 // *****************************************************************************
 // GESTION SUPPRESSION DE LA GALLERY PHOTO
 // *****************************************************************************
@@ -246,6 +240,8 @@ function deleteModalGalery(id) {
     .then(response => {
         if (response.status === 200) {
             alert('Projet supprimé');
+            updateModalGallery();
+            updateGallery();
         } else if (response.status === 401) {
             alert('Veuillez vous authentifier avant de supprimer un projet !');
         } else {

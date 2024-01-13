@@ -39,7 +39,6 @@ function connexionFormulaire() {
                 window.localStorage.setItem("token", token);
                 console.log(token);
                 window.location.href = "index.html";
-
             }
         })
         // Si un erreur se passe dans les blocs qui précédent, interception de l'erreur

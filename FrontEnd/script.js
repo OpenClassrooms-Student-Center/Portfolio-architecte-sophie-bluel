@@ -129,6 +129,7 @@ loginLogout.addEventListener('click', function () {
 function logIn() {
     // Redirige vers la page de connexion
     window.location.href = 'login.html';
+    showLoggedIn();
 }
 
 function showLoggedIn() {
