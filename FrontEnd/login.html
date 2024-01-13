@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+	<title>Sophie Bluel - Architecte d'intérieur</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/7be78ce38e.js" crossorigin="anonymous"></script>
+	<meta name="description" content="">
+	<link rel="stylesheet" href="./assets/style.css">
+	<script src="login.js" defer></script>
+</head>
+<body>
+<header>
+
+    <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+    <nav>
+        <ul>
+            <li><a href="index.html">projets</a></li>
+            <li>contact</li>
+            <li id="login">login</li>
+            <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+        </ul>
+    </nav>
+</header>
+<main>
+	<!--<i class="fa-regular fa-pen-to-square" style="color: #000000;"></i>-->
+    <div class="pageLogin">
+		<section>
+			<div class="centreLogIn">
+				<h2>Log In</h2>
+			</div>
+				<form method="post" class="pageLogin_align" id="loginForm">
+					<!-- Adresse Mail -->
+					<div class="colDir">
+						<label for="email">E-mail</label>
+						<input name="email" class="pageLogin_champSaisie" size="50" placeholder="E-mail" id="email">
+						<span id="errorEmail"></span>
+					</div>
+
+					<!-- Mot de passe -->
+					<div class="colDir">
+						<label for="password">Mot de passe</label>
+						<input name="password" class="pageLogin_champSaisie" size="50" placeholder="Mot de passe" id="password">
+						<span id="errorPwd"></span>
+					</div>
+
+					<!-- Bouton de connexion -->
+					<div class="centreBtnConnexion">
+						<input type="submit" value="Se connecter" class="envoyer" size="60" id="btnLogIn">
+						<!-- <button type="submit" class="" id="btnLogIn">Se connecter</button> -->
+						<a href="#">Mot de passe oublié</a>
+					</div>
+				</form>
+		</section>
+
+	</div>
+</main>
+<footer>
+	<nav>
+		<ul>
+			<li>Mentions Légales</li>
+		</ul>
+	</nav>
+</footer>
+</body>
+</html>

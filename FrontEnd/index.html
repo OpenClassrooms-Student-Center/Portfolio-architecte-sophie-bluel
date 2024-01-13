@@ -8,16 +8,23 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
+	<script src="https://kit.fontawesome.com/7be78ce38e.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="./assets/style.css">
+	<script src="script.js" defer></script>
+	<script src="modal.js" defer></script>
 </head>
 <body>
+	<span class="connectionNavBarre">
+		<i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i>
+		<p>Mode edition</p>
+	</span>
 <header>
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
 			<li>projets</li>
 			<li>contact</li>
-			<li>login</li>
+			<li id="loginLogout">login</li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -35,53 +42,19 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
-		<div class="gallery">
-			<figure>
-				<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
-				<figcaption>Abajour Tahina</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-v.png" alt="Appartement Paris V">
-				<figcaption>Appartement Paris V</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/restaurant-sushisen-londres.png" alt="Restaurant Sushisen - Londres">
-				<figcaption>Restaurant Sushisen - Londres</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/la-balisiere.png" alt="Villa “La Balisiere” - Port Louis">
-				<figcaption>Villa “La Balisiere” - Port Louis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/structures-thermopolis.png" alt="Structures Thermopolis">
-				<figcaption>Structures Thermopolis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-x.png" alt="Appartement Paris X">
-				<figcaption>Appartement Paris X</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/le-coteau-cassis.png" alt="Pavillon “Le coteau” - Cassis">
-				<figcaption>Pavillon “Le coteau” - Cassis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/villa-ferneze.png" alt="Villa Ferneze - Isola d’Elba">
-				<figcaption>Villa Ferneze - Isola d’Elba</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-xviii.png" alt="Appartement Paris XVIII">
-				<figcaption>Appartement Paris XVIII</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/bar-lullaby-paris.png" alt="Bar “Lullaby” - Paris">
-				<figcaption>Bar “Lullaby” - Paris</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/hotel-first-arte-new-delhi.png" alt="Hotel First Arte - New Delhi">
-				<figcaption>Hotel First Arte - New Delhi</figcaption>
-			</figure>
+		<!-- **************************************************************** -->
+		<div class="logon_mesProjets">
+			<h2>Mes Projets</h2>
+			<div class="logon_mesProjets_Pen">
+				<i class="fa-regular fa-pen-to-square " style="color: #000000;"></i>
+				<a href="#modal1" class="js-modal">Modifier</a>
+			</div>
 		</div>
+		<!-- Boutons filtres -->
+		<div class="alignButton"></div>
+		<!-- Gallerie -->
+		<div class="gallery"></div>
+
 	</section>
 	<section id="contact">
 		<h2>Contact</h2>
@@ -96,6 +69,62 @@
 			<input type="submit" value="Envoyer">
 		</form>
 	</section>
+	<!-- **************************************************************** -->
+	<!-- Modale contenant la galerie / ajout d'images -->
+    <aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titlemodal" style="display:none;">
+        <div class="modal-wrapper js-modal-stop">
+			<div class="position">
+				<div>
+					<i id="arrow" class="fa-solid fa-arrow-left hidden" style="color: #000000;"></i>
+				</div>
+				<div>
+					<i class="fa-solid fa-xmark js-modal-close" style="color: #000000;"></i>
+				</div>
+			</div>
+			<div>
+				<h3 id="titreModal"></h3>	
+			</div>
+			<div>
+				<!-- Div pour l'affichage de la galerie de la modale et supression des items -->
+				<div id="modalFirst" class="hidden"></div>
+				
+				<!-- Div pour l'affichage du preview -->
+				<div id="modalSecond" class="alignFormAjoutPhoto hidden">
+					<form action="#">
+
+						<!-- Zone de preview -->
+						<div class="newProjetPhoto"> 
+							<div class="newPhotoMin" id="newPhotoMin">
+							</div>
+							<i class="far fa-image fa-3x" stynpm tartle="color: #B9C5CC;"></i>
+								<label>
+									<span class="newProjetPhotoBtn" id="selectImage">
+										+ Ajouter photo
+									</span>
+									<input type="file" name="imagePreview" id="imagePreview" accept="image/jpeg, image/jpg, image/png" hidden>
+								</label>
+							<p class="newProjetPhotoText">jpg, png : 4mo max</p>
+						</div>
+
+						<!-- Input : titre de la photo à ajouter -->
+						<div class="inputAlignement">
+							<label for="title">Titre</label>
+							<input class="newProjetPhotoTitre" type="text" name="newProjetPhotoTitre" id="newProjetPhotoTitre">
+						</div>
+						<!-- Select : liste les catégrories -->
+						<div class="inputAlignement">
+							<label for="category">Catégorie</label>
+							<select class="newProjetPhotoCategory" name="newProjetPhotoCategory" id="newProjetPhotoCategory"></select>
+						</div>
+
+					</form>
+				</div>
+			</div>
+			<div class="boutonAjouterImageAlign">
+				<input type="button" name="modalAjoutPhoto" id="modalAjoutPhoto" value="Ajouter une photo">
+				<input type="submit" name="modalAjoutPhoto" id="modalAjoutPhoto_1" value="Valider" class="hidden">
+			</div>
+			</aside>
 </main>
 
 <footer>

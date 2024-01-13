@@ -23,6 +23,7 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
@@ -75,7 +76,6 @@ h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
-;
 }
 
 h2{
@@ -88,7 +88,6 @@ nav ul {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
-
 }
 nav li {
 	padding: 0 10px;
@@ -169,20 +168,338 @@ margin: auto;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-input[type="submit"]{
-	font-family: 'Syne';
-	font-weight: 700;
-	color: white;
-	background-color: #1D6154;
-	margin : 2em auto ;
-	width: 180px;
-	text-align: center;
-	border-radius: 60px ;
-}
-
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em
 }
 
+/* ------------------------------------------------------------- */
+/* Ajout de code                                                 */
+/* ------------------------------------------------------------- */
+
+
+/* Mise en forme des boutons de filtrage */
+.alignButton{
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	margin: 50px;
+	gap: 20px;
+
+}
+
+button{
+	background-color: transparent;
+	color: #1D6154;
+	border: 1px solid;
+	border-radius: 50px;
+	font-family: 'Syne';
+	font-size : 1.5em;
+	cursor: pointer;
+	padding : 7px 30px;
+	box-shadow: 0px 1px 5px #74777a;
+}
+
+button:hover{
+	background: #1D6154;
+	border:1px solid #1D6154 ;
+	color: #fff;
+}
+
+/* ------------------------------------------------------------- */
+/* Barre de connection*/
+
+.connectionNavBarre {
+	display: none;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 59px;
+	background-color: black;
+	color: white;
+	gap: 10px;
+}
+
+.logon_mesProjets{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: 30px;
+}
+.logon_mesProjets_Pen{
+	display: none;
+	margin-bottom: 27px;
+	gap: 5px;
+}
+
+
+/* Page de login*/
+.colDir{
+	display: flex;
+	flex-direction: column;
+}
+
+a {
+	text-decoration: none;
+	color: inherit; /* permet d'appliquer la couleur par défaut du paragraphe*/
+}
+
+.centreLogIn{
+	display: flex;
+	justify-content: center;
+	padding-bottom: 50px;
+}
+
+.centreBtnConnexion{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.pageLogin{
+	display: flex;
+	justify-content:center;
+	width: 100%;
+	height: 800px;
+	gap: 10px;
+}
+
+.pageLogin_align{
+	display: flex;
+	flex-direction: column;
+}  
+
+.pageLogin_champSaisie{
+	margin: 10px 0 25px 0;
+	height: 45px;
+	border: 0;
+	box-shadow: 0px 1px 5px #b2b3b4;
+  }
+
+
+
+.envoyer{
+	background-color: #fff;
+	color: #1D6154;
+	border: none;
+	border-radius: 50px;
+	font-family: 'Syne';
+	font-size : 1em;
+	cursor: pointer;
+	box-shadow: 0px 1px 5px #74777a;
+	padding: 10px;
+}
+
+	
+/* ------------------------------------------------------------- */
+/* La modal : suppression d'une photo */
+
+.hidden {
+	display: none !important;
+}
+
+h3{
+	font-size: 30px;
+	text-align: center;
+	margin: 40px 0 50px 0; 
+}
+
+.boutonAjouterImageAlign{
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	margin-top: 40px;
+}
+
+input[type="button"]{
+	border: solid 1px #1D6154;
+	background-color: #1D6154;
+	border-radius: 50px;
+	color : white;
+	width: 300px;
+	height: 40px;
+	font-size: 1.2em;
+	text-align: center;
+	margin:1em auto;
+	font-family: 'Syne';
+	font-weight: 700;
+}
+
+input[type="submit"]{
+	border: solid 1px #1D6154;
+	background-color: #1D6154;
+	border-radius: 50px;
+	color : white;
+	width: 300px;
+	height: 40px;
+	font-size: 1.2em;
+	text-align: center;
+	margin:1em auto;
+	font-family: 'Syne';
+	font-weight: 700;
+}
+
+.modal{
+	display: none;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+}
+
+.modal-open {
+	opacity: 1;
+	pointer-events: auto;
+ }
+
+.modal-wrapper{
+    overflow: auto; /* permet d'afficher une barre de défilement si le contenu dépasse */
+    width: 630px;
+	height: 688px;
+    padding: 20px;
+	border-radius: 20px; 
+    background-color: #fff;
+	flex-direction: column;
+}
+
+.position {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	/* margin-left: 620px; */
+}
+
+.galleryModale{
+	display: flex;
+	flex-wrap: wrap;
+	margin: auto;
+	width: 440px;
+	height: 440px;
+	border-bottom: 1px #B3B3B3 solid;
+}
+
+/* Positionnement et création du pseudo élément "corbeille" pour les vignettes */
+.galleryModale .crash{
+	position: relative;
+}
+
+.galleryModale .crash::after{
+	content: "\f2ed"; /* Code Unicode de l'icône de la corbeille dans Font Awesome */
+	font-family: 'Font Awesome 5 Free'; /* Permet d'afficher l'icône sinon affiche le Code Unicode */
+	color: white; /* Couleur de l'icone*/
+	position: absolute;
+	height: 20px;
+	width: 20px;
+	background-color: black;
+	display: grid;
+	place-items: center;
+	border-radius: 2px;
+	right: 0.7rem;
+	top: 0.7rem;
+}
+
+.galleryModale img{
+	width: 77px;
+	margin: 5px;
+}
+
+/* icone de la Corbeille
+<i class="fa-solid fa-trash-can" style="color: #ffffff;"></i>
+ Unicode : \f2ed*/
+
+/* icone de la croix pour fermer
+<i class="fa-solid fa-xmark" style="color: #000000;"></i>
+<i class="fa-solid fa-arrow-left" style="color: #000000;"></i>
+ */
+	
+ /* <i class="fa-regular fa-image" style="color: #c0c0c0;"></i>
+ Unicode : \f03e*/
+
+/* ------------------------------------------------------------- */
+/* La modal : Ajout d'une photo */
+.alignFormAjoutPhoto{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin: auto;
+	width: 440px;
+	height: 440px;
+	border-bottom: 1px #B3B3B3 solid;
+}
+
+.newProjetPhoto{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	/* border: solid 1px black; */
+	width: 420px;
+	height: 169px;
+	background-color: #E8F1F6;
+}
+
+.newPhotoMin{
+	display: none;
+	position: absolute;
+	height: 169px;
+	max-width: 420px;
+	overflow: hidden;
+	object-fit: cover;
+	width: 100%;
+	justify-content: center;
+}
+
+.newPhotoMin img{
+	height: 100%;
+}
+
+.fa-image {
+	margin-bottom: 20px;
+}
+
+.newProjetPhotoBtn{
+	width: 173px;
+	height: 36px;
+	background-color: #CBD6DC;
+	border-radius: 50px;
+	border: none;
+	margin-bottom: 10px;
+	padding: 8px 35px 8px 35px;
+	box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.35);
+	color: #306685;
+}
+
+.newProjetPhotoText{
+	color: #444;
+	margin-top: 20px;
+}
+
+.inputAlignement{
+	display: flex;
+	flex-direction: column;
+	margin-top: 20px;
+}
+
+.newProjetPhotoTitre{
+	padding: 10px;
+	margin-top: 10px;
+	background: #FFF;
+	box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
+	border: none;
+}
+
+.newProjetPhotoCategory{
+	padding: 10px;
+	margin-top: 10px;
+	background: #FFF;
+	box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
+	border: none;
+	color: #000;
+}
