@@ -73,6 +73,17 @@ if (isLoggedIn) {
   h2.appendChild(nouveauButton)
   nouveauButton.addEventListener("click", () =>  {
     const dialog = document.querySelector("dialog")
+    const galerie = document.getElementById('back_galery');
     dialog.open = true
+    loadWorks().then((works) => {
+      console.log('2')
+      works.forEach(projet => {
+        const image = document.createElement('img');
+        image.src = projet.imageUrl;
+        image.style = "width: 50px"
+        galerie.appendChild(image)
+      });
+    })
+    console.log('1')
   })
 }
