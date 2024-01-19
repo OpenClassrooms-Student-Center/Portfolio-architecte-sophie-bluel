@@ -65,14 +65,46 @@ function verifierChamp(password) {
 const isLoggedIn = localStorage.getItem("token") !== null
 console.log(isLoggedIn);
 
-
 if (isLoggedIn) {
   let nouveauButton = document.createElement("button")
   const h2 = document.querySelector("#portfolio h2")
   nouveauButton.textContent = "modifier"
   h2.appendChild(nouveauButton)
-  nouveauButton.addEventListener("click", () =>  {
-    const dialog = document.querySelector("dialog")
-    dialog.open = true
+  nouveauButton.addEventListener("click", () => {
+    const fermetureModale = document.querySelector(".fermetureModale")
+    const galerie = document.getElementById('back_galery');
+    fermetureModale.open = true
+    loadWorks().then((works) => {
+      console.log('2')
+      works.forEach(projet => {
+        const image = document.createElement('img');
+        image.src = projet.imageUrl;
+
+        const span = document.createElement("span")
+        const trash = document.createElement("i")
+        trash.classList.add("fa-solid", "fa-trash-can")
+span.appendChild(trash)
+fermetureModale.appendChild(span)
+        image.style = "width: 76.61px"
+        // image.style = "display flex"
+        galerie.appendChild(image)
+      });
+    })
+    console.log('1')
   })
 }
+
+// Fermer la fenetre modale au click
+
+const fermetureModale = document.querySelector(".fermetureModale ")
+fermetureModale.addEventListener("click", () => {
+  fermetureModale.style.display = "none"
+})
+
+// Fermeture de la page transparente
+
+const modaleGrey = document.querySelector(".modaleGrey ")
+modaleGrey.addEventListener("click", () => {
+  modaleGrey.style.display = "none"
+})
+
