@@ -15,8 +15,8 @@
 </head>
 
 <body>
-	<div class="modaleGrey">
-		<dialog class="fermetureModale"><button>X</button>
+	<div class="modaleGrey"></div>
+		<dialog class="fermetureModale"><button id="close_back_galery">X</button>
 			<!-- <span><i class="fa-solid fa-xmark"></i></span> -->
 			<p>Galerie photo</p>
 
@@ -32,7 +32,7 @@
 				<input type="submit" value="Ajouter une photo">
 			</form>
 		</dialog>
-	</div>
+	
 
 	<header>
 		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
@@ -40,7 +40,7 @@
 			<ul>
 				<li><a href="#portfolio">projets</a></li>
 				<li><a href="#contact">contact</a></li>
-				<li><a href="./login.html">login</a></li>
+				<li id="login_link"><a href="./login.html">login</a></li>
 				<li class="insta"><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 			</ul>
 		</nav>
@@ -64,7 +64,6 @@
 		<section id="portfolio">
 			<!-- <img class="logo-Modifier"  src="assets/images/Vector (8).png" alt="logo"> -->
 			<h2>Mes Projets</h2>
-			<img class="logo-Modifier" src="assets/images/Vector (8).png" alt="logo">
 			<div id="images" class="gallery">
 				<figure>
 					<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
@@ -134,6 +133,7 @@
 			</ul>
 		</nav>
 	</footer>
+	<script src="./js/functions.js"></script>
 	<script src="./js/categories.js" defer></script>
 	<script src="./js/works.js" defer></script>
 	<script src="./js/fetch.js" defer></script>

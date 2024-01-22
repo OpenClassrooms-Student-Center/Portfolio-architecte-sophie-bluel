@@ -1,5 +1,7 @@
 
 
+const overlay = document.querySelector('.modaleGrey');
+const fermetureModale = document.querySelector(".fermetureModale")
 // const gallery = document.querySelector(".gallery")  //
 // LANCEMENT DE PAGE 
 loadCategories()
@@ -61,54 +63,67 @@ function verifierChamp(password) {
 
 
 
-//  Ajouter Bouton Modifier
-const isLoggedIn = localStorage.getItem("token") !== null
-console.log(isLoggedIn);
 
-if (isLoggedIn) {
+
+if (isAuthenticated()) {
   let nouveauButton = document.createElement("button")
   const h2 = document.querySelector("#portfolio h2")
   nouveauButton.textContent = "modifier"
+  const img = document.createElement('img');
+  img.src = "assets/images/Vector (8).png"
+  img.className = "logo-Modifier";
+  img.setAttribute('alt', 'bouton modifier') 
+  nouveauButton.appendChild(img)
   h2.appendChild(nouveauButton)
+  
   nouveauButton.addEventListener("click", () => {
-    const fermetureModale = document.querySelector(".fermetureModale")
+    
+    overlay.classList.add('opened');
+   
     const galerie = document.getElementById('back_galery');
+    galerie.innerHTML = '';
     fermetureModale.open = true
     loadWorks().then((works) => {
-      console.log('2')
+     
       works.forEach(projet => {
+        const container = document.createElement('div');
         const image = document.createElement('img');
         image.src = projet.imageUrl;
-// AJOUT DE LA POUBELLE
+        // AJOUT DE LA POUBELLE
         const span = document.createElement("span")
         const trash = document.createElement("i")
         trash.classList.add("fa-solid", "fa-trash-can")
         // Relier la poubelle à l'ID de l'image
-        // trash.id = image.id
+        trash.id = projet.id
         span.appendChild(trash)
         fermetureModale.appendChild(span)
-        image.style = "width: 76.61px"
+        
         // image.style = "display flex"
-        galerie.appendChild(image)
+        container.className = 'galery-item'
+        container.appendChild(image);
+        container.appendChild(span)
+        galerie.appendChild(container)
       });
     })
-    console.log('1')
+    
   })
   deletPhotos()
 }
 
-// Fermer la fenetre modale au click
+// Fermer la fenetre modale au click sur le bouton
 
-const fermetureModale = document.querySelector(".fermetureModale ")
-fermetureModale.addEventListener("click", () => {
-  fermetureModale.style.display = "none"
+const closeModalGaleryButton = document.getElementById('close_back_galery');
+closeModalGaleryButton.addEventListener("click", () => {
+  closeModal()
 })
+
 
 // Fermeture de la page transparente
 
-const modaleGrey = document.querySelector(".modaleGrey ")
-modaleGrey.addEventListener("click", () => {
-  modaleGrey.style.display = "none"
+
+overlay.addEventListener("click", () => {
+  console.log('test')
+  closeModal()
 })
 
 // Supprimer les photos au click 

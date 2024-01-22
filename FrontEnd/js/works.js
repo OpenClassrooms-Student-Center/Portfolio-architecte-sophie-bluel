@@ -13,6 +13,13 @@ function displayWorks(works) {
         const work = works[i];
         createWork(work)
     }
+    
+    if (isAuthenticated()) {
+        const login_link = document.getElementById('login_link');
+        login_link.style.display = 'none';
+    } else {
+        login_link.style.display = 'block';
+    }
 }
 
 function createWork(work) {
