@@ -79,12 +79,14 @@ if (isLoggedIn) {
       works.forEach(projet => {
         const image = document.createElement('img');
         image.src = projet.imageUrl;
-
+// AJOUT DE LA POUBELLE
         const span = document.createElement("span")
         const trash = document.createElement("i")
         trash.classList.add("fa-solid", "fa-trash-can")
-span.appendChild(trash)
-fermetureModale.appendChild(span)
+        // Relier la poubelle à l'ID de l'image
+        // trash.id = image.id
+        span.appendChild(trash)
+        fermetureModale.appendChild(span)
         image.style = "width: 76.61px"
         // image.style = "display flex"
         galerie.appendChild(image)
@@ -92,6 +94,7 @@ fermetureModale.appendChild(span)
     })
     console.log('1')
   })
+  deletPhotos()
 }
 
 // Fermer la fenetre modale au click
@@ -108,3 +111,8 @@ modaleGrey.addEventListener("click", () => {
   modaleGrey.style.display = "none"
 })
 
+// Supprimer les photos au click 
+function deletPhotos() {
+  const trashAll = document.querySelectorAll(".fa-trash-can")
+  console.log(trashAll);
+}
