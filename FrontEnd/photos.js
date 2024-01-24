@@ -35,8 +35,7 @@ genererPhotos(photos);
 //Récupérer toutes les catégories
 const categories=[];
 for (let i=0; i < photos.length; i++){
-    if (categories.includes(photos[i].category.name)){
-    }else{
+    if (!categories.includes(photos[i].category.name)){
         categories.push(photos[i].category.name);
     }   
 }
@@ -47,16 +46,31 @@ const filtres = document.createElement("div");
 filtres.classList = ("filtres");
 projets.appendChild(filtres);
 const filtreTous = document.createElement("button");
-    filtreTous.innerText = "Tous";
-    filtreTous.classList = "Tous";
-    filtres.appendChild(filtreTous);
+filtreTous.innerText = "Tous";
+filtreTous.classList = "Tous";
+filtres.appendChild(filtreTous);
 for (let index=0; index < categories.length; index++){
-    console.log(categories[index]);
     const filtre = document.createElement("button");
     filtre.innerText = categories[index];
-    filtre.classList = categories[index];
+    filtre.classList = "bouton"+index;
     filtres.appendChild(filtre);
+
+    //filtres sur event-listener des boutons
+    const bouton= document.querySelector(".bouton"+index);
+    bouton.addEventListener("click", function () {
+        const photosFiltrees = photos.filter(function (photos) {
+            return photos.categoryId === (index+1);
+        });
+        document.querySelector(".gallery").innerHTML = "";
+        genererPhotos(photosFiltrees);
+    });
 }
 
+//filtre Tous
+const boutonTous = document.querySelector(".Tous");
 
+boutonTous.addEventListener("click", function () {
+    document.querySelector(".gallery").innerHTML = "";
+    genererPhotos(photos);
+});
 
