@@ -125,6 +125,27 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
+#portfolio button {
+	font-family: 'Syne';
+	font-weight: 700;
+	color: #1D6154;
+	background-color: white;
+	min-width: 100px;
+	text-align: center;
+	border-radius: 60px ;
+	border-color: #1D6154;
+	padding:9px;
+	margin:0 5px 0 5px;
+
+}
+#portfolio button:hover {
+	color: white;
+	background-color: #1D6154;
+}
+.filtres {
+	margin:51px;
+}
+
 .gallery {
 	width: 100%;
 	display: grid;
