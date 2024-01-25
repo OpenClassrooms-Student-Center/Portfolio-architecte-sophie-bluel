@@ -59,7 +59,7 @@ header {
 	margin: 50px 0
 }
 section {
-	margin: 50px 0
+	margin: 50px 95px
 }
 
 h1{
@@ -87,32 +87,42 @@ h2{
 nav ul {
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
 	list-style-type: none;
+	width: 320px;
 
 }
-nav li {
-	padding: 0 10px;
+nav li a{
+	margin: 0 10px;
 	font-size: 1.2em;
+	text-decoration: none;
+	color:black
 }
 
-li:hover {
-	color: #B1663C;
+li a:hover {
+	font-weight: 700;
 }
+li a:after {
+	color: black;
+}
+li img{
+	height:22px;
+}
+
 #introduction {
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
 }
-#introduction figure {
-	flex: 1
+#introduction figure{
+	width:50%;
 }
 #introduction img {
 	display: block;
-	margin: auto;
-	width: 80%;
+	width: 100%;
 }
-
-#introduction article {
-	flex: 1
+#introduction article{
+	width: 43%;
 }
 #introduction h2 {
 	margin-bottom: 1em;
@@ -134,7 +144,7 @@ li:hover {
 	min-width: 100px;
 	text-align: center;
 	border-radius: 60px ;
-	border-color: #1D6154;
+	border: solid 1px #1D6154;
 	padding:9px;
 	margin:0 5px 0 5px;
 
@@ -160,8 +170,8 @@ li:hover {
 
 }
 #contact {
-	width: 50%;
-margin: auto;
+	width: 33%;
+	margin: auto;
 }
 #contact > * {
 	text-align: center;
@@ -200,6 +210,38 @@ input[type="submit"]{
 	width: 180px;
 	text-align: center;
 	border-radius: 60px ;
+}
+input[type="submit"]:hover{
+	background-color: #0E2F28;
+}
+
+#login {
+	width: 50%;
+	margin: auto;
+	margin-top:150px;
+}
+#login > * {
+	text-align: center;
+
+}
+#login h2{
+	margin-bottom: 20px;
+}
+#login form {
+	text-align: left;
+	margin-top:30px;
+	display: flex;
+	flex-direction: column;
+}
+
+#login input {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+#login label {
+	margin: 2em 0 1em 0;
 }
 
 footer nav ul {
