@@ -30,6 +30,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	background-color: #FFFEF8;
 }
 ol, ul {
 	list-style: none;
@@ -244,9 +245,14 @@ input[type="submit"]:hover{
 	margin: 2em 0 1em 0;
 }
 
-footer nav ul {
+footer nav {
 	display: flex;
 	justify-content: flex-end;
-	margin: 2em
+	padding: 2em;
+	background-color: #FFFFFF;
+	margin:0px;
+}
+footer nav ul {
+	justify-content: flex-end;
 }
 
