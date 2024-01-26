@@ -54,6 +54,7 @@ body {
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 }
+
 header {
 	display: flex;
 	justify-content: space-between;
@@ -99,19 +100,6 @@ nav li a{
 	text-decoration: none;
 	color:black
 }
-nav li button{
-	margin: 0 10px;
-	font-size: 1.2em;
-	text-decoration: none;
-	color:black;
-	border-color: transparent;
-	width:60px;
-	background-color: transparent;
-	font-family: 'Work Sans' ;
-}
-li button:hover {
-	font-weight: 700;
-}
 
 li a:hover {
 	font-weight: 700;
@@ -122,6 +110,8 @@ li a:after {
 li img{
 	height:22px;
 }
+
+/****************** introduction **************/
 
 #introduction {
 	display: flex;
@@ -145,6 +135,9 @@ li img{
 #introduction p {
 	margin-bottom: 0.5em;
 }
+
+/****************** portfolio **************/
+
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
@@ -154,7 +147,7 @@ li img{
 	font-family: 'Syne';
 	font-weight: 700;
 	color: #1D6154;
-	background-color: white;
+	background-color: transparent;
 	min-width: 100px;
 	text-align: center;
 	border-radius: 60px ;
@@ -183,31 +176,40 @@ li img{
 	width: 100%;
 
 }
+
+/****************** contact et login **************/
+
 #contact {
-	width: 33%;
+	width: 379px;
 	margin: auto;
 }
-#contact > * {
+#login {
+	width: 379px;
+	margin: auto;
+	margin-top:150px;
+}
+
+#contact > * , #login > * {
 	text-align: center;
 
 }
-#contact h2{
+#contact h2, #login h2 {
 	margin-bottom: 20px;
 }
-#contact form {
+#contact form, #login form  {
 	text-align: left;
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
 }
 
-#contact input {
+#contact input, #login input  {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#contact label {
+#contact label, #login label {
 	margin: 2em 0 1em 0;
 }
 #contact textarea {
@@ -215,7 +217,7 @@ li img{
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-input[type="submit"]{
+#contact input[type="submit"], #login input[type="submit"]{
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
@@ -224,38 +226,28 @@ input[type="submit"]{
 	width: 180px;
 	text-align: center;
 	border-radius: 60px ;
+	height: 36px;
 }
-input[type="submit"]:hover{
+#contact input[type="submit"]:hover, #login input[type="submit"]:hover{
 	background-color: #0E2F28;
 }
 
-#login {
-	width: 50%;
-	margin: auto;
-	margin-top:150px;
+#erreurMessage {
+	color: red;
+	text-align:center;
+	font-weight: 700;
 }
-#login > * {
-	text-align: center;
-
-}
-#login h2{
-	margin-bottom: 20px;
-}
-#login form {
-	text-align: left;
-	margin-top:30px;
-	display: flex;
-	flex-direction: column;
+.oubli {
+	text-decoration:underline;
+	margin-bottom: 355px;
 }
 
-#login input {
-	height: 50px;
-	font-size: 1.2em;
-	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-}
-#login label {
-	margin: 2em 0 1em 0;
+/****************** Footer ****************/
+footer{
+	width: 100vw;
+	position: relative;
+  	left: 50%;
+  	transform: translateX(-50%);
 }
 
 footer nav {
@@ -266,6 +258,5 @@ footer nav {
 	margin:0px;
 }
 footer nav ul {
-	justify-content: flex-end;
+	justify-content: center;
 }
-

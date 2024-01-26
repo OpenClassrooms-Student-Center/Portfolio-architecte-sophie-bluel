@@ -1,71 +1,73 @@
-export function affichageLogin(){
-    let loginSection = document.querySelector("main");
-    let boutonLogin = document.querySelector(".login");
-    //préparer tout le code HTML et voir comment retourner en arrière
-    boutonLogin.addEventListener("click", ()=> { 
-        loginSection.innerHTML="";
-        loginSection.innerHTML= "formulaire login";
+
+
+//EventListener du login
+let login = document.querySelector("#loginForm");
+login.addEventListener("submit", (event) =>{
+    event.preventDefault();
+    loginGestion();
+});
+
+// Gestion du login
+async function loginGestion() {
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+    // Envoi des id avec la fonction fetch
+    const reponse = await fetch("http://localhost:5678/api/users/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            email: email,
+            password: password,
+        })
     });
-    
-}
-
-
-
-
-
-// gestion du login
-export function loginGestion(){
-    let login = document.querySelector("#loginForm");
-    login.addEventListener("submit", (event) =>{
-        event.preventDefault();
-        try{
-            let email = document.getElementById("email").value;
-            let password = document.getElementById("password").value;
-            console.log(email, password);
-            validerId(email, password);
-            messageErreur("");
-            //ici redirection vers index avec ajout bouton
-            RedirectionJavascript();
-        } catch (erreur) {
-            messageErreur(erreur.message);
-        }  
-    });
-}
-
-/**
- * Vérification de l'email et mot de passe
- * @param {string} email 
- * @param {string} password
- * @throw {error} 
- */
-export function validerId(email, password){
-    if (email !== "sophie.bluel@test.tld" || password !== "S0phie"){
-        throw new Error("L'email ou le mot de passe n'est pas valide.");
+    const dataReponse = await reponse.json();
+    console.log(reponse.ok);
+    if (reponse.ok){
+        //  
+        //
+        // Enregistrer le token !!! S'en servir ensuite pour faire apparaitre le bouton modifier !!!
+        // 
+        //
+        document.location.href="index.html";
+    }else{
+        messageErreur();
     }
+    console.log(dataReponse);
 }
-/**
- * Afficher une seule fois un message d'erreur
- * @param {string} message 
- */
-export function messageErreur(message) {
+            
+  
+
+
+// Affichage d'un message d'erreur (une seule fois)
+function messageErreur() {
     let spanErreurMessage = document.getElementById("erreurMessage");
     if (!spanErreurMessage){
-        let popup = document.querySelector("#login h2");
+        let popup = document.querySelector("#login form");
         spanErreurMessage = document.createElement("p");
         spanErreurMessage.id = "erreurMessage";
-        popup.append(spanErreurMessage);
+        popup.prepend(spanErreurMessage);
     }
-    spanErreurMessage.innerText = message;
+    spanErreurMessage.innerText = "L'email ou le mot de passe n'est pas valide.";
 }
 
 
-//redirection
-export function Redirection(){
-    document.location.href="index.html";
+
+// a lancer dans photos si token ok !!!
+
+export function ajouterBouton(){
     let boutonModifier = document.querySelector(".gallery h2");
-    boutonModifier = document.createElement("p");
+    //boutonModifier = document.createElement("p");
     boutonModifier.innerHTML="Modifier";
+    console.log("fonction ok");
 }
+
+
+
+
+
+
+
+
 
 
 //email: sophie.bluel@test.tld
