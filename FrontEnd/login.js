@@ -1,19 +1,23 @@
-// gestion du login
 
-let login = document.querySelector("#loginForm");
-login.addEventListener("submit", (event) =>{
-    event.preventDefault();
-    try{
-        let email = document.getElementById("email").value;
-        let password = document.getElementById("password").value;
-        console.log(email, password);
-        validerId(email, password);
-        messageErreur("");
-    } catch (erreur) {
-        messageErreur(erreur.message);
-    }
-    
-});
+
+// gestion du login
+function loginGestion(){
+    let login = document.querySelector("#loginForm");
+    login.addEventListener("submit", (event) =>{
+        event.preventDefault();
+        try{
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+            console.log(email, password);
+            validerId(email, password);
+            messageErreur("");
+            //ici redirection vers index avec ajout bouton
+            RedirectionJavascript();
+        } catch (erreur) {
+            messageErreur(erreur.message);
+        }  
+    });
+}
 
 /**
  * Vérification de l'email et mot de passe
@@ -42,7 +46,13 @@ function messageErreur(message) {
 }
 
 
-
+//redirection
+function Redirection(){
+    document.location.href="index.html";
+    let boutonModifier = document.querySelector(".gallery h2");
+    boutonModifier = document.createElement("p");
+    boutonModifier.innerHTML="Modifier";
+}
 
 
 //email: sophie.bluel@test.tld

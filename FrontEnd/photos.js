@@ -1,3 +1,8 @@
+import {loginGestion, validerId, messageErreur, Redirection } from "./login.js";
+
+loginGestion();
+
+
 //récupération des photos et mise local storage
 let photos = window.localStorage.getItem("photos");
 
