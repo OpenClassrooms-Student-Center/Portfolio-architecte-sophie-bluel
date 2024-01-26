@@ -99,6 +99,19 @@ nav li a{
 	text-decoration: none;
 	color:black
 }
+nav li button{
+	margin: 0 10px;
+	font-size: 1.2em;
+	text-decoration: none;
+	color:black;
+	border-color: transparent;
+	width:60px;
+	background-color: transparent;
+	font-family: 'Work Sans' ;
+}
+li button:hover {
+	font-weight: 700;
+}
 
 li a:hover {
 	font-weight: 700;

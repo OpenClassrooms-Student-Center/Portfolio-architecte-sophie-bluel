@@ -1,6 +1,6 @@
-import {loginGestion, validerId, messageErreur, Redirection } from "./login.js";
+import {affichageLogin, loginGestion, validerId, messageErreur, Redirection } from "./login.js";
 
-loginGestion();
+affichageLogin();
 
 
 //récupération des photos et mise local storage
@@ -78,4 +78,5 @@ boutonTous.addEventListener("click", function () {
     document.querySelector(".gallery").innerHTML = "";
     genererPhotos(photos);
 });
+
 

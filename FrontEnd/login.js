@@ -1,7 +1,20 @@
+export function affichageLogin(){
+    let loginSection = document.querySelector("main");
+    let boutonLogin = document.querySelector(".login");
+    //préparer tout le code HTML et voir comment retourner en arrière
+    boutonLogin.addEventListener("click", ()=> { 
+        loginSection.innerHTML="";
+        loginSection.innerHTML= "formulaire login";
+    });
+    
+}
+
+
+
 
 
 // gestion du login
-function loginGestion(){
+export function loginGestion(){
     let login = document.querySelector("#loginForm");
     login.addEventListener("submit", (event) =>{
         event.preventDefault();
@@ -25,7 +38,7 @@ function loginGestion(){
  * @param {string} password
  * @throw {error} 
  */
-function validerId(email, password){
+export function validerId(email, password){
     if (email !== "sophie.bluel@test.tld" || password !== "S0phie"){
         throw new Error("L'email ou le mot de passe n'est pas valide.");
     }
@@ -34,7 +47,7 @@ function validerId(email, password){
  * Afficher une seule fois un message d'erreur
  * @param {string} message 
  */
-function messageErreur(message) {
+export function messageErreur(message) {
     let spanErreurMessage = document.getElementById("erreurMessage");
     if (!spanErreurMessage){
         let popup = document.querySelector("#login h2");
@@ -47,7 +60,7 @@ function messageErreur(message) {
 
 
 //redirection
-function Redirection(){
+export function Redirection(){
     document.location.href="index.html";
     let boutonModifier = document.querySelector(".gallery h2");
     boutonModifier = document.createElement("p");
