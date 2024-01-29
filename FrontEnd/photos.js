@@ -33,7 +33,6 @@ function genererPhotos(photos){
 }
 genererPhotos(photos);
 
-//Récupérer toutes les catégories
 const categories=[];
 for (let i=0; i < photos.length; i++){
     if (!categories.includes(photos[i].category.name)){
@@ -41,11 +40,8 @@ for (let i=0; i < photos.length; i++){
     }   
 }
 
-// création des boutons
-const projets = document.querySelector("#portfolio h2");
-const filtres = document.createElement("div");
-filtres.classList = ("filtres");
-projets.appendChild(filtres);
+// créer les boutons filtre
+const filtres = document.querySelector(".filtres");
 const filtreTous = document.createElement("button");
 filtreTous.innerText = "Tous";
 filtreTous.classList = "Tous";
@@ -67,11 +63,24 @@ for (let index=0; index < categories.length; index++){
     });
 }
 
-//filtre Tous
+//créer le bouton filtre Tous
 const boutonTous = document.querySelector(".Tous");
-
 boutonTous.addEventListener("click", function () {
     document.querySelector(".gallery").innerHTML = "";
     genererPhotos(photos);
 });
 
+
+//si un token est enregistré, faitre apparaître le bouton modifier
+let valeurToken = window.localStorage.getItem("token");
+console.log(valeurToken);
+if (valeurToken){
+    boutonProjets();
+}
+
+function boutonProjets (){
+    let projets = document.querySelector("#projets");
+    let modifier = document.createElement("div");
+    modifier.innerHTML = "<a href='#' class='bouton-filtre'><i class='fa-regular fa-pen-to-square'></i> modifier</a>";
+    projets.appendChild(modifier);
+}

@@ -1,5 +1,3 @@
-
-
 //EventListener du login
 let login = document.querySelector("#loginForm");
 login.addEventListener("submit", (event) =>{
@@ -20,24 +18,15 @@ async function loginGestion() {
             password: password,
         })
     });
+    //récupération du token et enregistrement dans le local storage, retour page accueil, sinon affichage du message d'erreur
     const dataReponse = await reponse.json();
-    console.log(reponse.ok);
     if (reponse.ok){
-        //  
-        //
-        // Enregistrer le token !!! S'en servir ensuite pour faire apparaitre le bouton modifier !!!
-        // 
-        //
-        document.location.href="index.html";
+        enregistrementToken(dataReponse);
     }else{
         messageErreur();
     }
-    console.log(dataReponse);
 }
-            
-  
-
-
+     
 // Affichage d'un message d'erreur (une seule fois)
 function messageErreur() {
     let spanErreurMessage = document.getElementById("erreurMessage");
@@ -50,19 +39,12 @@ function messageErreur() {
     spanErreurMessage.innerText = "L'email ou le mot de passe n'est pas valide.";
 }
 
-
-
-// a lancer dans photos si token ok !!!
-
-export function ajouterBouton(){
-    let boutonModifier = document.querySelector(".gallery h2");
-    //boutonModifier = document.createElement("p");
-    boutonModifier.innerHTML="Modifier";
-    console.log("fonction ok");
+function enregistrementToken(dataReponse){
+    const token = dataReponse.token;
+    const valeurToken = JSON.stringify(token);
+    window.localStorage.setItem("token", valeurToken);
+    window.location.href = "index.html";
 }
-
-
-
 
 
 
