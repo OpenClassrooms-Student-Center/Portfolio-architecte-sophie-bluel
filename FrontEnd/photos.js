@@ -1,4 +1,6 @@
 
+
+
 //récupération des photos et mise local storage
 let photos = window.localStorage.getItem("photos");
 
@@ -72,11 +74,14 @@ boutonTous.addEventListener("click", function () {
 
 
 //si un token est enregistré, faitre apparaître le bouton modifier
-let valeurToken = window.localStorage.getItem("token");
+let valeurToken = window.sessionStorage.getItem("token");
 console.log(valeurToken);
 if (valeurToken){
     boutonProjets();
 }
+
+
+
 
 function boutonProjets (){
     let projets = document.querySelector("#projets");
@@ -84,3 +89,14 @@ function boutonProjets (){
     modifier.innerHTML = "<a href='#' class='bouton-filtre'><i class='fa-regular fa-pen-to-square'></i> modifier</a>";
     projets.appendChild(modifier);
 }
+
+//supprimer le token du local storage si clic sur login
+function suppressionToken(){
+    const boutonLog = document.querySelector(".boutonLog");
+    boutonLog.addEventListener("click", function() {
+        console.log("clic");
+        sessionStorage.removeItem("token");  
+    }); 
+}
+
+suppressionToken();

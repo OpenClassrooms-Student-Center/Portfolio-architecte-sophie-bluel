@@ -39,12 +39,15 @@ function messageErreur() {
     spanErreurMessage.innerText = "L'email ou le mot de passe n'est pas valide.";
 }
 
+//enregistrement du token en session storage
 function enregistrementToken(dataReponse){
     const token = dataReponse.token;
     const valeurToken = JSON.stringify(token);
-    window.localStorage.setItem("token", valeurToken);
+    window.sessionStorage.setItem("token", valeurToken);
     window.location.href = "index.html";
 }
+
+
 
 
 
