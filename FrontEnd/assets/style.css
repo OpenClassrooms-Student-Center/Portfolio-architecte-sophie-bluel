@@ -110,6 +110,9 @@ li a:after {
 li img{
 	height:22px;
 }
+button:hover{
+	cursor: pointer;
+}
 
 /****************** introduction **************/
 
@@ -173,14 +176,51 @@ li img{
 	width: 100%;
 
 }
+/***************mode édition ********************/
 
-#projets a{
+.barreEdition{
+	width: 100vw;
+	position: relative;
+  	left: 50%;
+  	transform: translateX(-50%);
+	background-color: black;
+	display: flex;
+	justify-content: center;
+}
+
+.barreEdition button {
+	border: none;
+	padding: 2em;
+	font-size: 14px;
+	font-family: 'Work sans';
+	background-color:transparent;
+	color: white;
+}
+
+.logout{
+	margin: 0 10px;
+	font-size: 1.2em;
+	text-decoration: none;
+	color:black
+}
+.logout:hover{
+	cursor: pointer;
+	font-weight: 700;
+}
+
+#projets button{
 	padding-left: 31px;
 	font-size: 14px;
 	color:black;
 	font-family: 'Work sans';
-	text-decoration: none;
+	border: none;
 }
+#projets button:hover{
+	background:none;
+	color: black;
+	cursor: pointer;
+}
+
 #projets{
 	display: flex;
 	justify-content: center;
@@ -230,7 +270,7 @@ li img{
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-#contact input[type="submit"], #login input[type="submit"]{
+#contact input[type="submit"], #login input[type="submit"], .gestion button {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
@@ -240,9 +280,11 @@ li img{
 	text-align: center;
 	border-radius: 60px ;
 	height: 36px;
+	border-style: none;
 }
-#contact input[type="submit"]:hover, #login input[type="submit"]:hover{
+#contact input[type="submit"]:hover, #login input[type="submit"]:hover, .gestion button:hover{
 	background-color: #0E2F28;
+	cursor: pointer;
 }
 
 #erreurMessage {
@@ -272,4 +314,54 @@ footer nav {
 }
 footer nav ul {
 	justify-content: center;
+}
+
+/************* Fenetre de gestion ************/
+.fenetreGestion{
+ 	display: none;
+	background: rgba(0, 0, 0, 0.3);
+	position: fixed;
+	height:100%;
+	width: 100%;
+	top:0px;
+	left:0px;
+	text-align: center;
+}
+.gestion{
+	width: 630px;
+	height: max-content;
+	background: white;
+	border-radius:10px;
+	text-align: center;
+}
+.gestion h3{
+	font-size: 30px;
+	margin-top:60px;
+	margin-bottom: 46px;
+}
+.active {
+    display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.miniatures {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	column-gap: 9px;
+	row-gap: 29px;
+	margin-left:105px;
+	margin-right: 105px;
+	padding-bottom: 67.3px;
+	border-bottom: solid 1px #B3B3B3;
+}
+
+.miniatures img {
+	width: 100%;
+}
+
+.gestion button {
+	width:237px;
+	margin-top: 38px;
+	margin-bottom: 45px;
 }

@@ -29,14 +29,14 @@ async function loginGestion() {
      
 // Affichage d'un message d'erreur (une seule fois)
 function messageErreur() {
-    let spanErreurMessage = document.getElementById("erreurMessage");
-    if (!spanErreurMessage){
+    let ErreurMessage = document.getElementById("erreurMessage");
+    if (!ErreurMessage){
         let popup = document.querySelector("#login form");
-        spanErreurMessage = document.createElement("p");
-        spanErreurMessage.id = "erreurMessage";
-        popup.prepend(spanErreurMessage);
+        ErreurMessage = document.createElement("p");
+        ErreurMessage.id = "erreurMessage";
+        popup.prepend(ErreurMessage);
     }
-    spanErreurMessage.innerText = "L'email ou le mot de passe n'est pas valide.";
+    ErreurMessage.innerText = "L'email ou le mot de passe n'est pas valide.";
 }
 
 //enregistrement du token en session storage

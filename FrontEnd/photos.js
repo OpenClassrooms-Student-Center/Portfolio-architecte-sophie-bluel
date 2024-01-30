@@ -1,7 +1,5 @@
+//récupération des photos et mise local storage A METTRE DANS FONCTION ASYNCHRONE !
 
-
-
-//récupération des photos et mise local storage
 let photos = window.localStorage.getItem("photos");
 
 if (photos === null){
@@ -13,11 +11,10 @@ if (photos === null){
     photos = JSON.parse(photos);
 }
 
-function genererPhotos(photos){
+function genererPhotos(photos, location, avecTitres){
     for (let i = 0; i < photos.length; i++){
         const fichePhoto = photos[i];
-        const gallery = document.querySelector(".gallery");
-
+        
         //création des balises
         const figure = document.createElement("figure");
         figure.dataset.id = photos[i].id;
@@ -28,12 +25,21 @@ function genererPhotos(photos){
         titrePhoto.innerText=fichePhoto.title;
 
         //rattachement des éléments
-        gallery.appendChild(figure);
+        location.appendChild(figure);
         figure.appendChild(imagePhoto);
-        figure.appendChild(titrePhoto);
+
+        if (avecTitres === true){
+            figure.appendChild(titrePhoto);
+        }
     }
 }
-genererPhotos(photos);
+
+const gallery = document.querySelector(".gallery");
+genererPhotos(photos, gallery, true);
+
+const miniatures = document.querySelector(".miniatures");
+genererPhotos(photos, miniatures, false);
+
 
 const categories=[];
 for (let i=0; i < photos.length; i++){
@@ -61,7 +67,7 @@ for (let index=0; index < categories.length; index++){
             return photos.categoryId === (index+1);
         });
         document.querySelector(".gallery").innerHTML = "";
-        genererPhotos(photosFiltrees);
+        genererPhotos(photosFiltrees, gallery, true);
     });
 }
 
@@ -69,34 +75,46 @@ for (let index=0; index < categories.length; index++){
 const boutonTous = document.querySelector(".Tous");
 boutonTous.addEventListener("click", function () {
     document.querySelector(".gallery").innerHTML = "";
-    genererPhotos(photos);
+    genererPhotos(photos, gallery, true);
 });
 
 
-//si un token est enregistré, faitre apparaître le bouton modifier
+//si un token est enregistré, faitre apparaître les modifications (barre noire, bouton modifier et logout)
 let valeurToken = window.sessionStorage.getItem("token");
 console.log(valeurToken);
 if (valeurToken){
-    boutonProjets();
+    pageEdition();
 }
 
+function pageEdition(){
+    //barre noire
+    let header = document.querySelector ("body");
+    let barre = document.createElement("div");
+    barre.classList = "barreEdition";
+    barre.innerHTML = "<button class='bouton-filtre1'><i class='fa-regular fa-pen-to-square'></i> Mode édition</button>";
+    header.prepend(barre);
 
-
-
-function boutonProjets (){
+    //ajout bouton Modifier
     let projets = document.querySelector("#projets");
     let modifier = document.createElement("div");
-    modifier.innerHTML = "<a href='#' class='bouton-filtre'><i class='fa-regular fa-pen-to-square'></i> modifier</a>";
+    modifier.innerHTML = "<button class='bouton-filtre'><i class='fa-regular fa-pen-to-square'></i> modifier</button>";
     projets.appendChild(modifier);
+
+    // changement de login en logout
+    let log = document.querySelector(".boutonLog");
+    log.classList="logout";
+    log.innerText="logout";
 }
 
-//supprimer le token du local storage si clic sur login
+//supprimer le token du local storage si clic sur logout
 function suppressionToken(){
-    const boutonLog = document.querySelector(".boutonLog");
-    boutonLog.addEventListener("click", function() {
+    const logout = document.querySelector(".logout");
+    logout.addEventListener("click", function() {
         console.log("clic");
-        sessionStorage.removeItem("token");  
+        sessionStorage.removeItem("token");
+        window.location.href = "index.html";
     }); 
 }
 
 suppressionToken();
+
