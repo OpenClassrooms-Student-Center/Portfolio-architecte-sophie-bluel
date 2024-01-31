@@ -185,4 +185,35 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em
 }
+.btn {
 
+	
+	height: 37px;
+	flex-shrink: 0;
+	border-radius: 60px;
+	border: 1px solid #1D6154;
+	
+
+	/*style text*/
+
+	color: #1D6154;
+	text-align: center;
+	font-family: Syne;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+
+	padding: 9px 15px;
+
+}
+.btn:hover {
+	background: #1D6154;
+	color: #FFF;
+}
+.btn-container {
+	display: flex;
+	justify-content: center;
+	margin: 2em;
+	gap: 15px;
+}
