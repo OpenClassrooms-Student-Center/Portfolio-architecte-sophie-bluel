@@ -21,6 +21,9 @@ function genererPhotos(photos, location, avecTitres){
         const imagePhoto = document.createElement("img");
         imagePhoto.src = fichePhoto.imageUrl;
         imagePhoto.alt = fichePhoto.title;
+        const trashButton = document.createElement("button");
+        trashButton.classList = "trashButton";
+        trashButton.innerHTML = "<i class='fa-solid fa-trash-can'></i>";
         const titrePhoto = document.createElement("figcaption");
         titrePhoto.innerText=fichePhoto.title;
 
@@ -30,6 +33,8 @@ function genererPhotos(photos, location, avecTitres){
 
         if (avecTitres === true){
             figure.appendChild(titrePhoto);
+        } else {
+            figure.append(trashButton);
         }
     }
 }

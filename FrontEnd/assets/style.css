@@ -270,7 +270,7 @@ button:hover{
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-#contact input[type="submit"], #login input[type="submit"], .gestion button {
+#contact input[type="submit"], #login input[type="submit"], #ajoutPhoto {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
@@ -282,7 +282,7 @@ button:hover{
 	height: 36px;
 	border-style: none;
 }
-#contact input[type="submit"]:hover, #login input[type="submit"]:hover, .gestion button:hover{
+#contact input[type="submit"]:hover, #login input[type="submit"]:hover, #ajoutPhoto:hover{
 	background-color: #0E2F28;
 	cursor: pointer;
 }
@@ -360,8 +360,25 @@ footer nav ul {
 	width: 100%;
 }
 
-.gestion button {
+#ajoutPhoto {
 	width:237px;
 	margin-top: 38px;
 	margin-bottom: 45px;
+}
+
+.trashButton{
+	width: 17px;
+	height: 17px;
+	background-color: black;
+	color: white;
+	border-radius: 2px;
+	border: none;
+	position: relative;
+  	top: -80%;
+	left: 30%;
+	padding:0px;
+}
+.trashButton i{
+	font-size: 11px;	
+	text-align: center;
 }
