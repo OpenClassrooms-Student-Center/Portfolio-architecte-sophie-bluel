@@ -1,3 +1,6 @@
+import { suppression, supprimer} from "./edition.js";
+
+
 //récupération des photos et mise local storage A METTRE DANS FONCTION ASYNCHRONE !
 
 let photos = window.localStorage.getItem("photos");
@@ -11,7 +14,8 @@ if (photos === null){
     photos = JSON.parse(photos);
 }
 
-function genererPhotos(photos, location, avecTitres){
+
+export function genererPhotos(photos, location, avecTitres){
     for (let i = 0; i < photos.length; i++){
         const fichePhoto = photos[i];
         
@@ -22,7 +26,8 @@ function genererPhotos(photos, location, avecTitres){
         imagePhoto.src = fichePhoto.imageUrl;
         imagePhoto.alt = fichePhoto.title;
         const trashButton = document.createElement("button");
-        trashButton.classList = "trashButton";
+        trashButton.classList = "trashButton"+photos[i].id;
+        trashButton.dataset.id = photos[i].id;
         trashButton.innerHTML = "<i class='fa-solid fa-trash-can'></i>";
         const titrePhoto = document.createElement("figcaption");
         titrePhoto.innerText=fichePhoto.title;
@@ -86,7 +91,6 @@ boutonTous.addEventListener("click", function () {
 
 //si un token est enregistré, faitre apparaître les modifications (barre noire, bouton modifier et logout)
 let valeurToken = window.sessionStorage.getItem("token");
-console.log(valeurToken);
 if (valeurToken){
     pageEdition();
 }
@@ -123,3 +127,5 @@ function suppressionToken(){
 
 suppressionToken();
 
+
+suppression(photos);

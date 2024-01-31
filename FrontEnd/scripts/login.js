@@ -46,14 +46,3 @@ function enregistrementToken(dataReponse){
     window.sessionStorage.setItem("token", valeurToken);
     window.location.href = "index.html";
 }
-
-
-
-
-
-
-
-
-
-//email: sophie.bluel@test.tld
-//password: S0phie 

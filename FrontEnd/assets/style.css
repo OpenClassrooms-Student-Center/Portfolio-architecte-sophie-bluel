@@ -270,7 +270,7 @@ button:hover{
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-#contact input[type="submit"], #login input[type="submit"], #ajoutPhoto {
+#contact input[type="submit"], #login input[type="submit"], #ajoutPhoto, .supprimer button {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
@@ -282,7 +282,7 @@ button:hover{
 	height: 36px;
 	border-style: none;
 }
-#contact input[type="submit"]:hover, #login input[type="submit"]:hover, #ajoutPhoto:hover{
+#contact input[type="submit"]:hover, #login input[type="submit"]:hover, #ajoutPhoto:hover,.supprimer button:hover {
 	background-color: #0E2F28;
 	cursor: pointer;
 }
@@ -332,13 +332,25 @@ footer nav ul {
 	height: max-content;
 	background: white;
 	border-radius:10px;
-	text-align: center;
 }
 .gestion h3{
 	font-size: 30px;
-	margin-top:60px;
+	margin-top:10px;
 	margin-bottom: 46px;
 }
+.close {
+	border:none;
+	background-color: transparent;
+	width: 24px;
+	height: 24px;
+	margin-top: 26px;
+	margin-left : 550px;
+	padding:0px
+}
+.close i{
+	font-size: 18px;
+}
+
 .active {
     display: flex;
 	justify-content: center;
@@ -366,7 +378,7 @@ footer nav ul {
 	margin-bottom: 45px;
 }
 
-.trashButton{
+[class^="trashButton"]{
 	width: 17px;
 	height: 17px;
 	background-color: black;
@@ -378,7 +390,26 @@ footer nav ul {
 	left: 30%;
 	padding:0px;
 }
-.trashButton i{
+[class^="trashButton"] i{
 	font-size: 11px;	
 	text-align: center;
+}
+
+/************* confirmation suppression photo ********/
+.supprimer{
+	display: none;
+	position: fixed;
+	height:10%;
+	width: 40%;
+	top:28%;
+	left:28%;
+	text-align: center;
+	background-color: white;
+	border-radius: 10px;
+	padding:20px;
+	border: solid 1px #B3B3B3
+}
+
+.supprimer button{
+	width: 20%
 }
