@@ -27,7 +27,7 @@ async function loginGestion() {
     }
 }
      
-// Affichage d'un message d'erreur (une seule fois)
+// Affichage d'un message d'erreur(une seule fois)
 function messageErreur() {
     let ErreurMessage = document.getElementById("erreurMessage");
     if (!ErreurMessage){
@@ -46,3 +46,43 @@ function enregistrementToken(dataReponse){
     window.sessionStorage.setItem("token", valeurToken);
     window.location.href = "index.html";
 }
+
+//si un token est enregistré, faitre apparaître les modifications (barre noire, bouton modifier et logout)
+let valeurToken = window.sessionStorage.getItem("token");
+if (valeurToken){
+    pageEdition();
+    
+}
+
+function pageEdition(){
+    //barre noire
+    let header = document.querySelector ("body");
+    let barre = document.createElement("div");
+    barre.classList = "barreEdition";
+    barre.innerHTML = "<button class='bouton-filtre1'><i class='fa-regular fa-pen-to-square'></i> Mode édition</button>";
+    header.prepend(barre);
+
+    //ajout bouton Modifier
+    let projets = document.querySelector("#projets");
+    let modifier = document.createElement("div");
+    modifier.innerHTML = "<button id='boutonModifier'><i class='fa-regular fa-pen-to-square'></i> modifier</button>";
+    projets.appendChild(modifier);
+
+    // changement de login en logout
+    let log = document.querySelector(".boutonLog");
+    log.classList="logout";
+    log.innerText="logout";
+}
+
+//supprimer le token du local storage si clic sur logout
+function suppressionToken(){
+    const logout = document.querySelector(".logout");
+    logout.addEventListener("click", function() {
+        console.log("clic");
+        sessionStorage.removeItem("token");
+        window.location.href = "index.html";
+    }); 
+}
+
+suppressionToken();
+

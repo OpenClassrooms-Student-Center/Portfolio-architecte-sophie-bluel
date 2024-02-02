@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="./assets/style.css" />
     <script type="module" src="./scripts/photos.js" defer></script>
     <script type="module" src="./scripts/fenetreGestion.js" defer></script>
+    <script type="module" src="./scripts/edition.js" defer></script>
   </head>
   <body>
     <header>
@@ -92,6 +93,31 @@
           <!--affichage des miniatures ici-->
         </div>
         <button id="ajoutPhoto">Ajouter une photo</button>
+      </div>
+    </div>
+    <div class="fenetreAjout">
+      <div class="gestion">
+        <div class="nav">
+          <button class="retour"><i class="fa-solid fa-arrow-left"></i></button>
+          <button class="close"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <h3>Ajout photo</h3>
+       <form>
+        <div class="ajoutPhoto">
+          <div class="photoIcon"><i class="fa-regular fa-image"></i></div>
+          <input type="File" name="photo" id="photo">
+          <label for="photo">+ Ajouter photo</label>
+          <p>jpg, png : 4mo max</p>
+        </div>
+        <label for="titre">Titre</label>
+        <input type="text" name="titre" id="titre">
+        <label for="categorie">Catégorie</label>
+        <select name="categorie" id="categorie">
+          <option value=""></option>
+          <!--affichage de la liste des catégories ici-->
+        </select>
+        <input type="submit" value="Valider" class="valider"></input>
+       </form>
       </div>
     </div>
     <div class="supprimer">

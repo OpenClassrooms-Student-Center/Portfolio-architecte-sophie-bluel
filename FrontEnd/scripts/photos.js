@@ -1,20 +1,20 @@
-import { suppression, supprimer} from "./edition.js";
+import { suppression } from "./edition.js";
+import { initAddEventListenerGestion } from "./fenetreGestion.js";
 
 
-//récupération des photos et mise local storage A METTRE DANS FONCTION ASYNCHRONE !
-
-let photos = window.localStorage.getItem("photos");
-
-if (photos === null){
+//récupération des photos
+let photos = [];
+try {
     const reponse = await fetch("http://localhost:5678/api/works");
     photos = await reponse.json();
-    const valeurPhotos = JSON.stringify(photos);
-    window.localStorage.setItem("photos", valeurPhotos);    
-}else{
-    photos = JSON.parse(photos);
 }
-
-
+catch (error){
+    console.log("erreur");
+    const affichageErreur= document.createElement("p");
+    affichageErreur.innerText="Erreur : affichage des projets impossible.";
+    document.querySelector(".filtres").append(affichageErreur);
+}
+ 
 export function genererPhotos(photos, location, avecTitres){
     for (let i = 0; i < photos.length; i++){
         const fichePhoto = photos[i];
@@ -26,7 +26,7 @@ export function genererPhotos(photos, location, avecTitres){
         imagePhoto.src = fichePhoto.imageUrl;
         imagePhoto.alt = fichePhoto.title;
         const trashButton = document.createElement("button");
-        trashButton.classList = "trashButton"+photos[i].id;
+        trashButton.classList = "trashButton"+i;
         trashButton.dataset.id = photos[i].id;
         trashButton.innerHTML = "<i class='fa-solid fa-trash-can'></i>";
         const titrePhoto = document.createElement("figcaption");
@@ -45,10 +45,10 @@ export function genererPhotos(photos, location, avecTitres){
 }
 
 const gallery = document.querySelector(".gallery");
-genererPhotos(photos, gallery, true);
-
 const miniatures = document.querySelector(".miniatures");
+genererPhotos(photos, gallery, true);
 genererPhotos(photos, miniatures, false);
+
 
 
 const categories=[];
@@ -58,17 +58,26 @@ for (let i=0; i < photos.length; i++){
     }   
 }
 
-// créer les boutons filtre
+// créer les boutons filtre et les option du formulaire d'ajout
 const filtres = document.querySelector(".filtres");
 const filtreTous = document.createElement("button");
+const select = document.querySelector("#categorie");
 filtreTous.innerText = "Tous";
 filtreTous.classList = "Tous";
 filtres.appendChild(filtreTous);
 for (let index=0; index < categories.length; index++){
+
+    //créer les boutons filtres
     const filtre = document.createElement("button");
     filtre.innerText = categories[index];
     filtre.classList = "bouton"+index;
     filtres.appendChild(filtre);
+    
+    //créer les valeurs de sélection pour l'ajout de photo
+    const option = document.createElement("option");
+    option.value = index+1;
+    option.innerText = categories[index];
+    select.appendChild(option);
 
     //filtres sur event-listener des boutons
     const bouton= document.querySelector(".bouton"+index);
@@ -93,6 +102,7 @@ boutonTous.addEventListener("click", function () {
 let valeurToken = window.sessionStorage.getItem("token");
 if (valeurToken){
     pageEdition();
+    initAddEventListenerGestion();
 }
 
 function pageEdition(){
@@ -106,8 +116,10 @@ function pageEdition(){
     //ajout bouton Modifier
     let projets = document.querySelector("#projets");
     let modifier = document.createElement("div");
-    modifier.innerHTML = "<button class='bouton-filtre'><i class='fa-regular fa-pen-to-square'></i> modifier</button>";
+    modifier.innerHTML = "<button id='boutonModifier'><i class='fa-regular fa-pen-to-square'></i> modifier</button>";
     projets.appendChild(modifier);
+    
+
 
     // changement de login en logout
     let log = document.querySelector(".boutonLog");
@@ -126,6 +138,5 @@ function suppressionToken(){
 }
 
 suppressionToken();
-
 
 suppression(photos);

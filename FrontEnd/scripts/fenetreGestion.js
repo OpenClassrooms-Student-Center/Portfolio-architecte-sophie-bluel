@@ -1,56 +1,64 @@
-//Cette fonction affiche la fenêtre de gestion
-function afficherGestion() {
-    let fenetreGestion = document.querySelector(".fenetreGestion");
-    fenetreGestion.classList.add("active");
+const fenetreGestion = document.querySelector(".fenetreGestion");
+const fenetreAjout = document.querySelector(".fenetreAjout");
+
+//Fonctions pour afficher/masquer les fenêtres gestion et ajout
+function afficherGestion(fenetre) {
+    fenetre.classList.add("active");
+}
+function cacherGestion(fenetre) {
+    fenetre.classList.remove("active");
 }
 
-//Cette fonction cache la fenêtre de gestion
-function cacherGestion() {
-    let fenetreGestion = document.querySelector(".fenetreGestion");
-    fenetreGestion.classList.remove("active");
-}
 
-
-//afficher au clic sur modifier
-function initAddEventListenerGestion() {
-    const btnModifier = document.querySelector(".bouton-filtre");
-    const fenetreGestion = document.querySelector(".fenetreGestion");
-    const boutonClose = document.querySelector(".close");
-    btnModifier.addEventListener("click", () => {
-        afficherGestion();
+//affichage gestion
+export function initAddEventListenerGestion() {
+    const boutonModifier = document.querySelector("#boutonModifier");
+    boutonModifier.addEventListener("click", () => {
+        afficherGestion(fenetreGestion);
     });
 
     // masquer si clic ailleurs ou sur X
     fenetreGestion.addEventListener("click", (event) => {
         if (event.target === fenetreGestion) {
-            cacherGestion();
+            cacherGestion(fenetreGestion);
         }
     });
+    const boutonClose = document.querySelector(".fenetreGestion .close");
     boutonClose.addEventListener("click", () => {
-        cacherGestion();
+        cacherGestion(fenetreGestion);
     });
 }
 
-initAddEventListenerGestion();
+
 
 function ajoutPhoto(){
     const boutonAjout = document.querySelector("#ajoutPhoto");
     boutonAjout.addEventListener("click", ()=>{
-        champsAjout();
+        afficherGestion(fenetreAjout);
+        cacherGestion(fenetreGestion);
+
+    });
+    // masquer si clic ailleurs ou sur X
+    fenetreAjout.addEventListener("click", (event) => {
+        if (event.target === fenetreAjout) {
+            cacherGestion(fenetreAjout);
+        }
+    });
+    const boutonClose = document.querySelector(".fenetreAjout .close");
+    boutonClose.addEventListener("click", () => {
+        cacherGestion(fenetreAjout);
     });
 
 }
 
-function champsAjout(){
-    document.querySelector(".gestion h3").innerHTML = "Ajout photo";
-    document.querySelector(".miniatures").innerHTML = "";
-
-    const form = document.createElement("form");
-    const image = document.createElement("input");
-    image.type="image";
-    const title = document.createElement("input");
-    const categorie = document.createElement("input");
-    document.querySelector(".miniatures").append(form);
-    form.append(image, title, categorie);
+function retour(){
+    const boutonRetour = document.querySelector(".retour");
+    boutonRetour.addEventListener("click", ()=>{
+        afficherGestion(fenetreGestion);
+        cacherGestion(fenetreAjout);
+    });
 }
+
 ajoutPhoto();
+retour();
+
