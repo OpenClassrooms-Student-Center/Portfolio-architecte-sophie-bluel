@@ -1,6 +1,11 @@
 const fenetreGestion = document.querySelector(".fenetreGestion");
 const fenetreAjout = document.querySelector(".fenetreAjout");
 
+ajoutPhoto();
+retour();
+
+//FONCTIONS UTILISEES
+
 //Fonctions pour afficher/masquer les fenêtres gestion et ajout
 function afficherGestion(fenetre) {
     fenetre.classList.add("active");
@@ -8,7 +13,6 @@ function afficherGestion(fenetre) {
 function cacherGestion(fenetre) {
     fenetre.classList.remove("active");
 }
-
 
 //affichage gestion
 export function initAddEventListenerGestion() {
@@ -59,6 +63,5 @@ function retour(){
     });
 }
 
-ajoutPhoto();
-retour();
+
 
