@@ -176,7 +176,7 @@ button:hover{
 	width: 100%;
 }
 
-.filtres p{
+.erreur{
 	margin:30px;
 	font-size: 20px;
 	color: red;
@@ -422,14 +422,18 @@ footer nav ul {
 }
 .ajoutPhoto{
 	border-radius: 3px;
+	height: 169px;
 	background: #E8F1F6;
 	display:flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content:end;
+	overflow: hidden;
 }
 .ajoutPhoto input{
 	box-shadow: none;
 }
+
 input[type="file"] {
 	height: 0;
 	width: 0;
@@ -446,6 +450,10 @@ input[type="file"] {
 	font-family: 'Work Sans';
 	margin: 6px 0px;
   }
+
+.preview{
+	width: 129px;
+}
 
 .ajoutPhoto i{
 	font-size:68px;

@@ -12,6 +12,9 @@ function afficherGestion(fenetre) {
 }
 function cacherGestion(fenetre) {
     fenetre.classList.remove("active");
+    // reset du formulaire à la fermeture
+    document.getElementById("form").reset();
+    document.querySelector(".preview").remove();
 }
 
 //affichage gestion
@@ -62,6 +65,3 @@ function retour(){
         cacherGestion(fenetreAjout);
     });
 }
-
-
-
