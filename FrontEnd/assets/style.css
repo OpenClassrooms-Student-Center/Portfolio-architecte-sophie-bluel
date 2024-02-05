@@ -86,6 +86,13 @@ h2{
 	font-size: 30px;
 	color: #1D6154
 }
+
+.erreur, .erreurAjout{
+	margin:30px;
+	font-size: 20px;
+	color: red;
+}
+
 nav ul {
 	display: flex;
 	align-items: center;
@@ -176,11 +183,7 @@ button:hover{
 	width: 100%;
 }
 
-.erreur{
-	margin:30px;
-	font-size: 20px;
-	color: red;
-}
+
 /***************mode édition ********************/
 
 .barreEdition{

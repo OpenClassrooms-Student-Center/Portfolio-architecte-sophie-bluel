@@ -37,7 +37,7 @@ suppressionToken();
 
 //appel des fonctions de supression ou ajout des photos
 suppression(photos);
-preview();
+previewPhoto();
 envoiPhoto();
 
 // FONCTIONS UTILISEES
@@ -210,7 +210,7 @@ async function supprimer(i) {
 }
 
 //Fonction de prévisualisation photo avant envoi
-function preview() {
+function previewPhoto() {
   const photoInput = document.getElementById("photo");
   photoInput.addEventListener("change", preview);
   function preview({ target }) {
@@ -225,32 +225,82 @@ function preview() {
 }
 
 //fonction pour ajouter une photo
-
-// manque vérification des données plus ajout sans rafraichir (retour page galerie miniature ? ou formulaire vidé ?)
-
 async function envoiPhoto() {
   const envoi = document.querySelector(".fenetreAjout .valider");
   envoi.addEventListener("click", (event) => {
     event.preventDefault();
-    const photo = document.getElementById("photo").files[0];
-    const titre = document.getElementById("titre").value;
-    const categorie = document.getElementById("categorie").value;
-    const formData = new FormData();
-    formData.append("image", photo);
-    formData.append("title", titre);
-    formData.append("category", categorie);
-    console.log(formData);
-
     try {
-      const res = fetch("http://localhost:5678/api/works", {
-        method: "POST",
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-        body: formData,
-      });
+      const photo = document.getElementById("photo").files[0];
+      formatCheck(photo);
+      sizeCheck(photo);
+      const titre = document.getElementById("titre").value;
+      titleCheck(titre);
+      const categorie = document.getElementById("categorie").value;
+      categoryCheck(categorie);
+      const formData = new FormData();
+      formData.append("image", photo);
+      formData.append("title", titre);
+      formData.append("category", categorie);
+
+      formPost(formData);
     } catch (error) {
-      console.log(error.message);
+       //affichage de l'erreur
+       ErrorMessage(error);
     }
   });
+}
+
+async function formPost(formData) {
+  await fetch("http://localhost:5678/api/works", {
+    method: "POST",
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+    body: formData,
+  }).then((response) => {
+    if (response.ok) {
+      console.log("photo ajoutée");
+      //maj galeries
+      galleryRefresh(photos);
+    } else {
+      //affichage de l'erreur
+      const erreurMsg = "Ajout impossible : " + response.statusText
+      ErrorMessage(erreurMsg)
+    }
+  });
+}
+
+//fonctions de vérification des champs
+function titleCheck(titre) {
+  if (titre === "") {
+    throw new Error("le champ titre est obligatoire.");
+  }
+}
+function categoryCheck(categorie) {
+  if (categorie === "") {
+    throw new Error("le champ catégorie est obligatoire.");
+  }
+}
+function sizeCheck(photo) {
+  if (photo.size / 1024 > 4096) {
+    throw new Error("La taille de l'image est trop grande.");
+  }
+}
+function formatCheck(photo) {
+  const types = ["image/jpg", "image/jpeg", "image/png"];
+  if (!types.includes(photo.type)) {
+    throw new Error("L'image n'est pas au bon format.");
+  }
+}
+
+//Fonction pour afficher les erreurs dans l'ajout de photo
+function ErrorMessage(erreur) {
+  const erreurAjout = document.querySelector(".erreurAjout");
+  if (!erreurAjout){
+    const affichageErreur = document.createElement("p");
+  affichageErreur.classList = "erreurAjout";
+  affichageErreur.innerText = erreur;
+  document.querySelector(".fenetreAjout h3").append(affichageErreur);
+  }
+  erreurAjout.innerText = erreur;
 }
