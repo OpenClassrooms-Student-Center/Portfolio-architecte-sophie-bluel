@@ -267,6 +267,11 @@ button:hover {
 	background-color: #1D6154;
 }
 
+#portfolio .actived {
+	color: white;
+	background-color: #1D6154;
+}
+
 .filtres {
 	margin: 51px;
 	text-align: center;
@@ -415,6 +420,11 @@ select {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
+input:-webkit-autofill{
+    -webkit-box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09), 0 0 0 1000px white inset;
+}
+
+
 /*******************boutons***********************/
 #contact input[type="submit"],
 #login input[type="submit"],
@@ -452,24 +462,28 @@ footer {
 	position: relative;
 	left: 50%;
 	transform: translateX(-50%);
+	background-color: #FFFFFF;
 }
 
 footer nav {
 	display: flex;
 	justify-content: flex-end;
-	padding: 2em;
-	background-color: #FFFFFF;
-	margin: 0px;
+	padding: 2em 0;
+	margin: auto;
+	max-width: 1200px;
 }
 
 footer nav ul {
-	justify-content: center;
+	align-items: center;
+	width: auto;
 }
 
 /************* Fenetre de gestion ou ajout ************/
 .fenetreGestion,
 .fenetreAjout {
 	display: none;
+	justify-content: center;
+	align-items: center;
 	background: rgba(0, 0, 0, 0.3);
 	position: fixed;
 	height: 100%;
@@ -481,7 +495,7 @@ footer nav ul {
 
 .gestion {
 	width: 630px;
-	height: max-content;
+	height: 688px;
 	background: white;
 	border-radius: 10px;
 }
@@ -513,12 +527,6 @@ footer nav ul {
 	font-size: 18px;
 }
 
-.active {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
 #ajoutPhoto,
 .gestion input[type="submit"] {
 	width: 237px;
@@ -531,10 +539,10 @@ footer nav ul {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 	column-gap: 9px;
-	row-gap: 29px;
+	row-gap: 10px;
 	margin-left: 105px;
 	margin-right: 105px;
-	padding-bottom: 67.3px;
+	padding-bottom: 48.3px;
 	border-bottom: solid 1px #B3B3B3;
 }
 
@@ -598,6 +606,7 @@ input[type="file"]+label {
 	color: #306685;
 	font-family: 'Work Sans';
 	margin: 6px 0px;
+	cursor: pointer;
 }
 
 .preview {
@@ -623,15 +632,25 @@ input[type="file"]+label {
 	margin-bottom: 19px;
 }
 
-.gestion input[type="submit"] {
+.gestion input[type="submit"][disabled] {
 	background-color: #A7A7A7;
 }
 
+select {
+	border-right: inset 20px transparent;
+}
+
+hr{
+	border: solid 1px #B3B3B3;
+	width: 100%;
+	margin: 47px 0 0 0;
+}
 
 
 /************* confirmation suppression photo ********/
 .supprimer {
 	display: none;
+	flex-direction: column;
 	position: fixed;
 	height: 10%;
 	width: 40%;
@@ -647,3 +666,4 @@ input[type="file"]+label {
 .supprimer button {
 	width: 20%
 }
+

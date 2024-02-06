@@ -1,4 +1,8 @@
-import { initAddEventListenerGestion } from "./modalDisplay.js";
+import {
+  initAddEventListenerGestion,
+  afficherGestion,
+  cacherGestion,
+} from "./modalDisplay.js";
 
 //récupération des photos et catégories
 let photos = [];
@@ -40,9 +44,6 @@ suppression();
 previewPhoto();
 envoiPhoto();
 
-
-
-
 // FONCTIONS UTILISEES
 
 /**
@@ -56,7 +57,7 @@ export function genererPhotos(photos, location) {
 
     //création des balises
     const figure = document.createElement("figure");
-    figure.classList = "figure"+photos[i].id;
+    figure.classList = "figure" + photos[i].id;
     figure.dataset.id = photos[i].id;
     const imagePhoto = document.createElement("img");
     imagePhoto.src = fichePhoto.imageUrl;
@@ -122,6 +123,11 @@ function filtres() {
     const bouton = document.querySelector(".bouton" + index);
     bouton.addEventListener("click", function () {
       const photosFiltrees = photos.filter(function (photos) {
+        const boutonFiltre = document.querySelectorAll(".filtres button");
+        boutonFiltre.forEach(function (boutonF) {
+          boutonF.classList.remove("actived");
+        });
+        bouton.classList = "actived";
         return photos.categoryId === index + 1;
       });
       document.querySelector(".gallery").innerHTML = "";
@@ -131,7 +137,13 @@ function filtres() {
 
   //création du bouton filtre "Tous"
   const boutonTous = document.querySelector(".Tous");
+  boutonTous.classList = "actived";
   boutonTous.addEventListener("click", function () {
+    const boutonFiltre = document.querySelectorAll(".filtres button");
+    boutonFiltre.forEach(function (boutonF) {
+      boutonF.classList.remove("actived");
+    });
+    boutonTous.classList = "actived";
     document.querySelector(".gallery").innerHTML = "";
     genererPhotos(photos, gallery);
   });
@@ -156,6 +168,9 @@ function pageEdition() {
     "<button id='boutonModifier'><i class='fa-regular fa-pen-to-square'></i> modifier</button>";
   projets.appendChild(modifier);
 
+  //suppression des filtres
+  document.querySelector(".filtres").innerHTML = "<br>";
+
   // changement de login en logout
   let log = document.querySelector(".boutonLog");
   log.classList = "logout";
@@ -173,27 +188,39 @@ function suppressionToken() {
 
 // Fonction pour supprimer une photo en cliquant sur la corbeille
 function suppression() {
-  // event listener sur clic corbeille
-  const deleteButton = document.querySelectorAll(".trashButton");
-  deleteButton.forEach((button) => {
+  const deleteButtons = document.querySelectorAll(".trashButton");
+  deleteButtons.forEach((button) => {
     button.addEventListener("click", function (event) {
       event.preventDefault();
-      //demande de confirmation
-      const confirmation = window.confirm(
-        "Êtes-vous sûr de vouloir supprimer cette photo ?"
-      );
-      if (confirmation) {
-        const i = button.dataset.id;
-        supprimer(i);
-        
+      //demander confirmation de la suppression
+      const confirmationBox = document.querySelector(".supprimer");
+      afficherGestion(confirmationBox);
+      const id = button.dataset.id;
+      const noButton = document.querySelector(".no");
+      const yesButton = document.querySelector(".yes");
+      yesButton.addEventListener("click", handleConfirmation);
+      noButton.addEventListener("click", handleCancellation);
+
+      // Gestion de la confirmation puis supression des gestionnaires d'événements
+      function handleConfirmation() {
+        cacherGestion(confirmationBox);
+        supprimer(id);
+        yesButton.removeEventListener("click", handleConfirmation);
+        noButton.removeEventListener("click", handleCancellation);
+      }
+      // Gestion de l'annulation puis supression des gestionnaires d'événements
+      function handleCancellation() {
+        cacherGestion(confirmationBox);
+        yesButton.removeEventListener("click", handleConfirmation);
+        noButton.removeEventListener("click", handleCancellation);
       }
     });
   });
 }
 
 // fonction pour supprimer la photo demandée et actualiser l'affichage des 2 galeries
- function supprimer(i) {
-   fetch("http://localhost:5678/api/works/" + i, {
+function supprimer(i) {
+  fetch("http://localhost:5678/api/works/" + i, {
     method: "DELETE",
     headers: {
       "Content-type": "application/json",
@@ -247,10 +274,9 @@ async function envoiPhoto() {
       formData.append("category", categorie);
 
       formPost(formData);
-
     } catch (error) {
-       //affichage de l'erreur
-       ErrorMessage(error);
+      //affichage de l'erreur
+      ErrorMessage(error);
     }
   });
 }
@@ -267,13 +293,42 @@ async function formPost(formData) {
     if (response.ok) {
       //maj galeries
       galleryRefresh(photos);
+      document.querySelector(".retour").click();
     } else {
       //affichage de l'erreur
-      const erreurMsg = "Ajout impossible : " + response.statusText
-      ErrorMessage(erreurMsg)
+      const erreurMsg = "Ajout impossible : " + response.statusText;
+      ErrorMessage(erreurMsg);
     }
   });
 }
+
+//fonction d'activation du bouton valider
+var formulaire = document.getElementById("form");
+var champ1 = document.getElementById("photo");
+var champ2 = document.getElementById("titre");
+var champ3 = document.getElementById("categorie");
+var boutonSubmit = document.querySelector(".valider");
+
+// Fonction pour vérifier si les champs sont remplis
+function verifierChampsRemplis() {
+  if (champ1.files.length > 0 && champ2.value.trim() !== "" && champ3.value !== "") {
+    boutonSubmit.disabled = false;
+  } else {
+    boutonSubmit.disabled = true;
+  }
+}
+
+// Ajouter des écouteurs d'événements pour vérifier les champs lorsqu'ils sont modifiés
+champ1.addEventListener('input', verifierChampsRemplis);
+champ2.addEventListener('input', verifierChampsRemplis);
+champ3.addEventListener('input', verifierChampsRemplis);
+// Vérifier les champs au chargement de la page
+verifierChampsRemplis();
+
+
+
+
+
 
 //fonctions de vérification des champs
 function titleCheck(titre) {
@@ -301,11 +356,11 @@ function formatCheck(photo) {
 //Fonction pour afficher les erreurs dans l'ajout de photo
 function ErrorMessage(erreur) {
   const erreurAjout = document.querySelector(".erreurAjout");
-  if (!erreurAjout){
+  if (!erreurAjout) {
     const affichageErreur = document.createElement("p");
-  affichageErreur.classList = "erreurAjout";
-  affichageErreur.innerText = erreur;
-  document.querySelector(".fenetreAjout h3").append(affichageErreur);
+    affichageErreur.classList = "erreurAjout";
+    affichageErreur.innerText = erreur;
+    document.querySelector(".fenetreAjout h3").append(affichageErreur);
   }
   erreurAjout.innerText = erreur;
 }

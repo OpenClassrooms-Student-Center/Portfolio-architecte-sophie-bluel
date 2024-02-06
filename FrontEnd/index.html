@@ -17,8 +17,8 @@
       <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
       <nav>
         <ul>
-          <li><a href=#portfolio>projets</a></li>
-          <li><a href=#contact>contact</a></li>
+          <li><a href="#portfolio">projets</a></li>
+          <li><a href="#contact">contact</a></li>
           <li class="boutonLog"><a href="./login.html">login</a></li>
           <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
         </ul>
@@ -110,9 +110,10 @@
         <input type="text" name="titre" id="titre" required>
         <label for="categorie">Catégorie</label>
         <select name="categorie" id="categorie">
-          <option value="">
+          <option value=""></option>
           <!--affichage de la liste des catégories ici-->
         </select>
+        <hr />
         <input type="submit" value="Valider" class="valider">
        </form>
        
@@ -121,8 +122,8 @@
     <div class="supprimer">
       <p>Êtes-vous sûr de vouloir supprimer cette photo ?</p>
       <div class="choix">
-        <button>OUI</button>
-        <button>NON</button>
+        <button class="yes">OUI</button>
+        <button class="no">NON</button>
       </div>
     </div>
     <script type="module" src="./scripts/main.js"></script>

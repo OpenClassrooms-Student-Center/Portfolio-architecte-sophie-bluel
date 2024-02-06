@@ -7,12 +7,22 @@ retour();
 //FONCTIONS UTILISEES
 
 //Fonctions pour afficher/masquer les fenêtres gestion et ajout
-function afficherGestion(fenetre) {
-    fenetre.classList.add("active");
+export function afficherGestion(fenetre) {
+    fenetre.style.display = "flex"
 }
-function cacherGestion(fenetre) {
-    fenetre.classList.remove("active");
+export function cacherGestion(fenetre) {
+    fenetre.style.display = "none";
     formReset();
+    //suppressoin des messages d'erreur
+    const erreur = document.querySelector(".erreur");
+    if(erreur){
+        erreur.remove();
+    }
+    const erreurAjout = document.querySelector(".erreurAjout");
+    if(erreurAjout){
+        erreurAjout.remove();
+    }
+
 }
 
 // reset du formulaire 
