@@ -12,10 +12,18 @@ function afficherGestion(fenetre) {
 }
 function cacherGestion(fenetre) {
     fenetre.classList.remove("active");
-    // reset du formulaire à la fermeture
-    document.getElementById("form").reset();
-    document.querySelector(".preview").remove();
+    formReset();
 }
+
+// reset du formulaire 
+function formReset(){
+    document.getElementById("form").reset();
+    const preview = document.querySelector(".preview")
+    if(preview){
+        preview.remove();
+    }
+}
+    
 
 //affichage gestion
 export function initAddEventListenerGestion() {
@@ -63,5 +71,6 @@ function retour(){
     boutonRetour.addEventListener("click", ()=>{
         afficherGestion(fenetreGestion);
         cacherGestion(fenetreAjout);
+        formReset();
     });
 }

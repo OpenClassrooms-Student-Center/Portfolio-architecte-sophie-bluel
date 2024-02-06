@@ -36,9 +36,12 @@ if (valeurToken) {
 suppressionToken();
 
 //appel des fonctions de supression ou ajout des photos
-suppression(photos);
+suppression();
 previewPhoto();
 envoiPhoto();
+
+
+
 
 // FONCTIONS UTILISEES
 
@@ -53,6 +56,7 @@ export function genererPhotos(photos, location) {
 
     //création des balises
     const figure = document.createElement("figure");
+    figure.classList = "figure"+photos[i].id;
     figure.dataset.id = photos[i].id;
     const imagePhoto = document.createElement("img");
     imagePhoto.src = fichePhoto.imageUrl;
@@ -87,6 +91,8 @@ async function galleryRefresh(photos) {
   const miniatures = document.querySelector(".miniatures");
   document.querySelector(".miniatures").innerHTML = "";
   genererPhotos(photos, miniatures);
+  //relancement de la fonction suppression sur la nouvelle galerie
+  suppression();
 }
 
 //fonction pour créer les filtres et la liste de choix en mode édition en fonction de la liste de catégories
@@ -160,14 +166,13 @@ function pageEdition() {
 function suppressionToken() {
   const logout = document.querySelector(".logout");
   logout.addEventListener("click", function () {
-    console.log("clic");
     sessionStorage.removeItem("token");
     window.location.href = "index.html";
   });
 }
 
 // Fonction pour supprimer une photo en cliquant sur la corbeille
-function suppression(photos) {
+function suppression() {
   // event listener sur clic corbeille
   const deleteButton = document.querySelectorAll(".trashButton");
   deleteButton.forEach((button) => {
@@ -180,14 +185,15 @@ function suppression(photos) {
       if (confirmation) {
         const i = button.dataset.id;
         supprimer(i);
+        
       }
     });
   });
 }
 
 // fonction pour supprimer la photo demandée et actualiser l'affichage des 2 galeries
-async function supprimer(i) {
-  await fetch("http://localhost:5678/api/works/" + i, {
+ function supprimer(i) {
+   fetch("http://localhost:5678/api/works/" + i, {
     method: "DELETE",
     headers: {
       "Content-type": "application/json",
@@ -195,11 +201,9 @@ async function supprimer(i) {
     },
   }).then((response) => {
     if (response.ok) {
-      console.log("photo supprimée");
       //maj galeries
       galleryRefresh(photos);
     } else {
-      console.log(response);
       const affichageErreur = document.createElement("p");
       affichageErreur.classList = "erreur";
       affichageErreur.innerText =
@@ -243,6 +247,7 @@ async function envoiPhoto() {
       formData.append("category", categorie);
 
       formPost(formData);
+
     } catch (error) {
        //affichage de l'erreur
        ErrorMessage(error);
@@ -250,6 +255,7 @@ async function envoiPhoto() {
   });
 }
 
+// Fonction pour envoyer la photo et mettre à jour l'&affichage des galeries
 async function formPost(formData) {
   await fetch("http://localhost:5678/api/works", {
     method: "POST",
@@ -259,7 +265,6 @@ async function formPost(formData) {
     body: formData,
   }).then((response) => {
     if (response.ok) {
-      console.log("photo ajoutée");
       //maj galeries
       galleryRefresh(photos);
     } else {

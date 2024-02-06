@@ -3,19 +3,87 @@
    License: none (public domain)
 */
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -23,48 +91,69 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
 	display: block;
 }
+
 body {
 	line-height: 1;
 	background-color: #FFFEF8;
 }
-ol, ul {
+
+ol,
+ul {
 	list-style: none;
 }
-blockquote, q {
+
+blockquote,
+q {
 	quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
 	content: '';
 	content: none;
 }
+
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
 /** end reset css**/
 body {
 	max-width: 1140px;
-	margin:auto;
-	font-family: 'Work Sans' ;
+	margin: auto;
+	font-family: 'Work Sans';
 	font-size: 14px;
 }
 
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 50px 0 139px 0px;
 }
+
 section {
 	margin: 50px 95px
 }
 
-h1{
+h1 {
 	display: flex;
 	flex-direction: column;
 	font-family: 'Syne';
@@ -73,22 +162,23 @@ h1{
 	color: #B1663C
 }
 
-h1 > span {
+h1>span {
 	font-family: 'Work Sans';
-	font-size:10px;
+	font-size: 10px;
 	letter-spacing: 0.1em;
-;
+	;
 }
 
-h2{
+h2 {
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
 	color: #1D6154
 }
 
-.erreur, .erreurAjout{
-	margin:30px;
+.erreur,
+.erreurAjout {
+	margin: 30px;
 	font-size: 20px;
 	color: red;
 }
@@ -101,23 +191,27 @@ nav ul {
 	width: 320px;
 
 }
-nav li a{
+
+nav li a {
 	margin: 0 10px;
 	font-size: 1.2em;
 	text-decoration: none;
-	color:black
+	color: black
 }
 
 li a:hover {
 	font-weight: 700;
 }
+
 li a:after {
 	color: black;
 }
-li img{
-	height:22px;
+
+li img {
+	height: 22px;
 }
-button:hover{
+
+button:hover {
 	cursor: pointer;
 }
 
@@ -128,16 +222,20 @@ button:hover{
 	align-items: center;
 	justify-content: space-between;
 }
-#introduction figure{
-	width:50%;
+
+#introduction figure {
+	width: 50%;
 }
+
 #introduction img {
 	display: block;
 	width: 100%;
 }
-#introduction article{
+
+#introduction article {
 	width: 43%;
 }
+
 #introduction h2 {
 	margin-bottom: 1em;
 }
@@ -152,22 +250,25 @@ button:hover{
 #portfolio button {
 	font-family: 'Syne';
 	font-weight: 700;
+	font-size: 16px;
 	color: #1D6154;
 	background-color: transparent;
 	min-width: 100px;
 	text-align: center;
-	border-radius: 60px ;
+	border-radius: 60px;
 	border: solid 1px #1D6154;
-	padding:9px;
-	margin:0 5px 0 5px;
+	padding: 9px;
+	margin: 0 5px 0 5px;
 
 }
+
 #portfolio button:hover {
 	color: white;
 	background-color: #1D6154;
 }
+
 .filtres {
-	margin:51px;
+	margin: 51px;
 	text-align: center;
 }
 
@@ -182,15 +283,18 @@ button:hover{
 .gallery img {
 	width: 100%;
 }
-
+figcaption{
+	font-size: 13px;
+	margin-top:7px;
+}
 
 /***************mode édition ********************/
 
-.barreEdition{
+.barreEdition {
 	width: 100vw;
 	position: relative;
-  	left: 50%;
-  	transform: translateX(-50%);
+	left: 50%;
+	transform: translateX(-50%);
 	background-color: black;
 	display: flex;
 	justify-content: center;
@@ -201,35 +305,37 @@ button:hover{
 	padding: 2em;
 	font-size: 14px;
 	font-family: 'Work sans';
-	background-color:transparent;
+	background-color: transparent;
 	color: white;
 }
 
-.logout{
+.logout {
 	margin: 0 10px;
 	font-size: 1.2em;
 	text-decoration: none;
-	color:black
+	color: black
 }
-.logout:hover{
+
+.logout:hover {
 	cursor: pointer;
 	font-weight: 700;
 }
 
-#projets button{
+#projets button {
 	padding-left: 31px;
 	font-size: 14px;
-	color:black;
+	color: black;
 	font-family: 'Work sans';
 	border: none;
 }
-#projets button:hover{
-	background:none;
+
+#projets button:hover {
+	background: none;
 	color: black;
 	cursor: pointer;
 }
 
-#projets{
+#projets {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -244,69 +350,95 @@ button:hover{
 	width: 379px;
 	margin: auto;
 }
+
 #login {
 	width: 379px;
 	margin: auto;
-	margin-top:150px;
+	margin-top: 150px;
 }
 
-#contact > * , #login > * {
+#contact>*,
+#login>* {
 	text-align: center;
 
 }
-#contact h2, #login h2 {
+
+#contact h2,
+#login h2 {
 	margin-bottom: 20px;
 }
-#contact form, #login form, .gestion form  {
+
+#contact form,
+#login form,
+.gestion form {
 	text-align: left;
-	margin-top:30px;
+	margin-top: 30px;
 	display: flex;
 	flex-direction: column;
 }
+
 #erreurMessage {
 	color: red;
-	text-align:center;
+	text-align: center;
 	font-weight: 700;
 }
+
 .oubli {
-	text-decoration:underline;
+	text-decoration: underline;
 	margin-bottom: 355px;
 }
 
 /***************** input************************/
-#contact input, #login input, .gestion input, select  {
+#contact input,
+#login input,
+.gestion input,
+select {
 	height: 50px;
 	font-size: 14px;
 	font-weight: 400;
-	color:#444444;
-	padding-left:16px;
+	color: #444444;
+	padding-left: 16px;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#contact label, #login label, .gestion label {
+
+#contact label,
+#login label,
+.gestion label {
 	margin: 2em 0 1em 0;
-	font-weight: 600;
-	color:#3D3D3D
+	font-weight: 500;
+	color: #3D3D3D
 }
+
 #contact textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
 /*******************boutons***********************/
-#contact input[type="submit"], #login input[type="submit"], #ajoutPhoto, .supprimer button, .gestion input[type="submit"],  input[type="file"] + label  {
+#contact input[type="submit"],
+#login input[type="submit"],
+#ajoutPhoto,
+.supprimer button,
+.gestion input[type="submit"],
+input[type="file"]+label {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
 	background-color: #1D6154;
-	margin : 2em auto ;
+	margin: 2em auto;
 	width: 180px;
 	text-align: center;
-	border-radius: 60px ;
+	border-radius: 60px;
 	height: 36px;
 	border-style: none;
 }
-#contact input[type="submit"]:hover, #login input[type="submit"]:hover, #ajoutPhoto:hover,.supprimer button:hover, .gestion input[type="submit"]:hover {
+
+#contact input[type="submit"]:hover,
+#login input[type="submit"]:hover,
+#ajoutPhoto:hover,
+.supprimer button:hover,
+.gestion input[type="submit"]:hover {
 	background-color: #0E2F28;
 	cursor: pointer;
 }
@@ -315,11 +447,11 @@ button:hover{
 
 
 /****************** Footer ****************/
-footer{
+footer {
 	width: 100vw;
 	position: relative;
-  	left: 50%;
-  	transform: translateX(-50%);
+	left: 50%;
+	transform: translateX(-50%);
 }
 
 footer nav {
@@ -327,58 +459,69 @@ footer nav {
 	justify-content: flex-end;
 	padding: 2em;
 	background-color: #FFFFFF;
-	margin:0px;
+	margin: 0px;
 }
+
 footer nav ul {
 	justify-content: center;
 }
 
 /************* Fenetre de gestion ou ajout ************/
-.fenetreGestion, .fenetreAjout{
- 	display: none;
+.fenetreGestion,
+.fenetreAjout {
+	display: none;
 	background: rgba(0, 0, 0, 0.3);
 	position: fixed;
-	height:100%;
+	height: 100%;
 	width: 100%;
-	top:0px;
-	left:0px;
+	top: 0px;
+	left: 0px;
 	text-align: center;
 }
-.gestion{
+
+.gestion {
 	width: 630px;
 	height: max-content;
 	background: white;
-	border-radius:10px;
+	border-radius: 10px;
 }
-.gestion h3{
+
+.gestion h3 {
 	font-size: 30px;
-	margin-top:10px;
+	margin-top: 10px;
 	margin-bottom: 46px;
 }
-.nav{
+
+.nav {
 	display: flex;
 	justify-content: space-between;
-	margin:0px
+	margin: 0px
 }
-.close, .retour {
-	border:none;
+
+.close,
+.retour {
+	border: none;
 	background-color: transparent;
 	width: 24px;
 	height: 24px;
 	margin: 26px 30px 0px 30px;
-	padding:0px
+	padding: 0px
 }
-.close i, .retour i{
+
+.close i,
+.retour i {
 	font-size: 18px;
 }
+
 .active {
-    display: flex;
+	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 
-#ajoutPhoto, .gestion input[type="submit"] {
-	width:237px;
+#ajoutPhoto,
+.gestion input[type="submit"] {
+	width: 237px;
 	margin-top: 38px;
 	margin-bottom: 45px;
 }
@@ -389,7 +532,7 @@ footer nav ul {
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 	column-gap: 9px;
 	row-gap: 29px;
-	margin-left:105px;
+	margin-left: 105px;
 	margin-right: 105px;
 	padding-bottom: 67.3px;
 	border-bottom: solid 1px #B3B3B3;
@@ -399,7 +542,7 @@ footer nav ul {
 	width: 100%;
 }
 
-[class^="trashButton"]{
+[class^="trashButton"] {
 	width: 17px;
 	height: 17px;
 	background-color: black;
@@ -407,33 +550,36 @@ footer nav ul {
 	border-radius: 2px;
 	border: none;
 	position: relative;
-  	top: -80%;
+	top: -80%;
 	left: 30%;
-	padding:0px;
+	padding: 0px;
 }
-[class^="trashButton"] i{
-	font-size: 11px;	
+
+[class^="trashButton"] i {
+	font-size: 11px;
 	text-align: center;
 }
 
 
 /**********partie ajout photo***********/
 
-.gestion form{
-	padding-left:105px;
+.gestion form {
+	padding-left: 105px;
 	padding-right: 105px;
 }
-.ajoutPhoto{
+
+.ajoutPhoto {
 	border-radius: 3px;
 	height: 169px;
 	background: #E8F1F6;
-	display:flex;
+	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content:end;
+	justify-content: end;
 	overflow: hidden;
 }
-.ajoutPhoto input{
+
+.ajoutPhoto input {
 	box-shadow: none;
 }
 
@@ -441,28 +587,29 @@ input[type="file"] {
 	height: 0;
 	width: 0;
 	overflow: hidden;
-  }
-  
-  input[type="file"] + label {
+}
+
+input[type="file"]+label {
 	border: none;
-	background:#B9C5CC;
+	background: #B9C5CC;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	color: #306685;
 	font-family: 'Work Sans';
 	margin: 6px 0px;
-  }
-
-.preview{
-	width: 129px;
 }
 
-.ajoutPhoto i{
-	font-size:68px;
-	color:#B9C5CC;
+.preview {
+	height:169px;
 }
-.photoIcon{
+
+.ajoutPhoto i {
+	font-size: 68px;
+	color: #B9C5CC;
+}
+
+.photoIcon {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -471,32 +618,32 @@ input[type="file"] {
 	height: 76px;
 }
 
-.ajoutPhoto p{
+.ajoutPhoto p {
 	font-size: 10px;
 	margin-bottom: 19px;
 }
 
-.gestion input[type="submit"]{
+.gestion input[type="submit"] {
 	background-color: #A7A7A7;
 }
 
 
 
 /************* confirmation suppression photo ********/
-.supprimer{
+.supprimer {
 	display: none;
 	position: fixed;
-	height:10%;
+	height: 10%;
 	width: 40%;
-	top:28%;
-	left:28%;
+	top: 28%;
+	left: 28%;
 	text-align: center;
 	background-color: white;
 	border-radius: 10px;
-	padding:20px;
+	padding: 20px;
 	border: solid 1px #B3B3B3
 }
 
-.supprimer button{
+.supprimer button {
 	width: 20%
 }

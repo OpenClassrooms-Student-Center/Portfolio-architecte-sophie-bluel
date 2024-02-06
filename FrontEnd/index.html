@@ -1,19 +1,16 @@
 <!doctype html>
 <html lang="fr">
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8" >
     <title>Sophie Bluel - Architecte d'intérieur</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
-      rel="stylesheet"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+    <link rel="preconnect" href="https://fonts.googleapis.com" >
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin >
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <meta name="description" content="" />
-    <link rel="stylesheet" href="./assets/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="./assets/style.css">
   </head>
   <body>
     <header>
@@ -23,14 +20,14 @@
           <li><a href=#portfolio>projets</a></li>
           <li><a href=#contact>contact</a></li>
           <li class="boutonLog"><a href="./login.html">login</a></li>
-          <li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
+          <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
         </ul>
       </nav>
     </header>
     <main>
       <section id="introduction">
         <figure>
-          <img src="./assets/images/sophie-bluel.png" alt="" />
+          <img src="./assets/images/sophie-bluel.png" alt="">
         </figure>
         <article>
           <h2>Designer d'espace</h2>
@@ -53,7 +50,7 @@
       </section>
       <section id="portfolio">
         <div id="projets">
-          <h2>Mes Projets</h2>
+          <h2>Mes projets</h2>
         </div>
         <div class ="filtres"></div>
           <!-- affichage des filtres -->
@@ -66,12 +63,12 @@
         <p>Vous avez un projet ? Discutons-en !</p>
         <form action="#" method="post">
           <label for="name">Nom</label>
-          <input type="text" name="name" id="name" />
+          <input type="text" name="name" id="name" autocomplete="name">
           <label for="email">Email</label>
-          <input type="email" name="email" id="email" />
+          <input type="email" name="email" id="email" autocomplete="email">
           <label for="message">Message</label>
           <textarea name="message" id="message" cols="30" rows="10"></textarea>
-          <input type="submit" value="Envoyer" />
+          <input type="submit" value="Envoyer">
         </form>
       </section>
     </main>
@@ -102,7 +99,7 @@
           <button class="close"><i class="fa-solid fa-xmark"></i></button>
         </div>
         <h3>Ajout photo</h3>
-       <form method="post" url="/upload-picture" id="form">
+       <form method="post" id="form">
         <div class="ajoutPhoto">
           <div class="photoIcon"><i class="fa-regular fa-image"></i></div>
           <input type="File" name="photo" id="photo">
@@ -113,10 +110,10 @@
         <input type="text" name="titre" id="titre" required>
         <label for="categorie">Catégorie</label>
         <select name="categorie" id="categorie">
-          <option value=""></option>
+          <option value="">
           <!--affichage de la liste des catégories ici-->
         </select>
-        <input type="submit" value="Valider" class="valider"></input>
+        <input type="submit" value="Valider" class="valider">
        </form>
        
       </div>
