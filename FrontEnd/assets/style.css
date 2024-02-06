@@ -30,7 +30,30 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	background: #FFFEF8;
 }
+header {
+	background: #FFF;
+}
+footer {
+	background: #FFF;
+	padding: 2px 0px;
+	margin-top: 215px;
+
+	
+}
+
+input {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	border-bottom: solid 1px;
+}
+textarea {
+	border: none;
+	border-bottom: solid 1px;
+}
+
 ol, ul {
 	list-style: none;
 }
@@ -183,7 +206,7 @@ input[type="submit"]{
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
-	margin: 2em
+	margin: 2em;
 }
 .btn {
 

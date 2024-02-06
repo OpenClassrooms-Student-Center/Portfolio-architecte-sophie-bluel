@@ -166,6 +166,31 @@ async function filterWorks() {
 }
 
 
+async function getLogin() {
+    let url = 'http://localhost:5678/api/users/login';
+    try {
+        let res = await fetch(url);
+        console.log( "les users "+res);
+        return await res.json();
+    } catch (error) {
+        console.log(error);
+    }
+   
+}
+ function pageConnexion() {
+
+    let liLogin = document.querySelector(".login");
+    liLogin.addEventListener("click", (e) => {
+        window.location.href = "login.html";
+        
+        
+    })
+
+}
+//fonction pour recuperer les informations de l'utilisateur
+ 
+
+
 
 
 
@@ -177,6 +202,8 @@ function init() {
     getCategories();
     renderCategories();
     filterWorks();
+    getLogin();
+    pageConnexion();
 }
 
 init();
