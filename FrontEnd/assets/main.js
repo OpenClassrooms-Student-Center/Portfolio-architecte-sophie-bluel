@@ -170,16 +170,37 @@ async function filterWorks() {
  function pageConnexion() {
 
     let liLogin = document.querySelector(".login");
+    let liAcceuil = document.querySelector(".acceuil");
+    if(liLogin){
     liLogin.addEventListener("click", (e) => {
         window.location.href = "login.html";
+        
+        
+    })
+}
+}
+
+//lien vers la page d'acceuil
+
+function pageAcceuil() {
+    
+    const liAcceuil = document.getElementById("acceuil");
+    liAcceuil.addEventListener("click", (e) => {
+        window.location.href = "index.html";
+        console.log("tu es dans l'acceuil");
         
         
     })
 
 }
 
-
-
+function pageAdmin() {
+    const liAdmin = document.querySelector(".admin");
+    liAdmin.addEventListener("click", (e) => {
+        window.location.href = "admin.html";
+        
+    })
+}
 //si l'utilisateur est connecte on le redirige vers la page profil sinon on le redirige vers la page de connexion
 
 function sessionLogin(){
@@ -189,8 +210,11 @@ function sessionLogin(){
     const logout= document.querySelector('.login');
     if (loged) {
        
-        admin.textContent="Admin";
+        
         logout.textContent="logout"; 
+        admin.textContent="Admin";
+       
+       
         logout.addEventListener("click", (e) => {
             window.sessionStorage.clear();
             window.location.href = "login.html";
@@ -207,12 +231,15 @@ function init() {
 
     getWorks();
     renderWorks();
-    getCategories();
-    renderCategories();
-    filterWorks();
-    //getLogin();
-    pageConnexion();
 
+    getCategories();    
+    renderCategories();
+
+    filterWorks();
+   
+    pageConnexion();
+    pageAdmin();
+    
     sessionLogin();
     
 }

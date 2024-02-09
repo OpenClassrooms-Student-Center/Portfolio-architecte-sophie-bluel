@@ -5,8 +5,7 @@ const message = document.querySelector('form .erreur');
 const loged = window.localStorage.loged;
 const admin = document.querySelector('.admin');
 
-
-
+async function validateForm() {
     formulaire.addEventListener('submit', async(event) => {
 
         
@@ -33,12 +32,13 @@ const admin = document.querySelector('.admin');
        const data = await response.json();
         console.log(data);
 
-        console.log(data.email + ' ' + data.password + ' ' );
-
-        if (data.token) {
-            console.log(data.token);
-            window.location.href = 'index.html';
-
+        
+        
+        if (data.token) if (data.userId == 1) {
+            
+           // redirection
+           window.location.href = 'admin.html';
+          
             window.sessionStorage.loged = true;
         } else {
 
@@ -51,5 +51,21 @@ const admin = document.querySelector('.admin');
 
     })
 
+}
+    function pageAcceuil() {
+    
+        const liAcceuil = document.querySelector(".acceuil");
+        liAcceuil.addEventListener("click", (e) => {
+            window.location.href = "index.html";
+            console.log("tu es dans l'acceuil");
+            
+            
+        })
+    
+    }
 
-
+    function init() {
+        validateForm();
+        pageAcceuil();
+    }
+    init();
