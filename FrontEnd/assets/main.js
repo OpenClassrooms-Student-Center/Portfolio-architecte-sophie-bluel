@@ -166,17 +166,7 @@ async function filterWorks() {
 }
 
 
-async function getLogin() {
-    let url = 'http://localhost:5678/api/users/login';
-    try {
-        let res = await fetch(url);
-        console.log( "les users "+res);
-        return await res.json();
-    } catch (error) {
-        console.log(error);
-    }
-   
-}
+
  function pageConnexion() {
 
     let liLogin = document.querySelector(".login");
@@ -187,8 +177,26 @@ async function getLogin() {
     })
 
 }
-//fonction pour recuperer les informations de l'utilisateur
- 
+
+
+
+//si l'utilisateur est connecte on le redirige vers la page profil sinon on le redirige vers la page de connexion
+
+function sessionLogin(){
+    const loged= window.sessionStorage.loged;
+    console.log(" tu es loger  "+loged);
+    const admin= document.querySelector('.admin');
+    const logout= document.querySelector('.login');
+    if (loged) {
+       
+        admin.textContent="Admin";
+        logout.textContent="logout"; 
+        logout.addEventListener("click", (e) => {
+            window.sessionStorage.clear();
+            window.location.href = "login.html";
+        })   
+    }
+    }
 
 
 
@@ -202,8 +210,11 @@ function init() {
     getCategories();
     renderCategories();
     filterWorks();
-    getLogin();
+    //getLogin();
     pageConnexion();
+
+    sessionLogin();
+    
 }
 
 init();
