@@ -64,8 +64,44 @@ async function renderWorks() {
     container.innerHTML = html;
 }
 
+async function getMiniGallery() {
+    let works = await getWorks();
+    let html = '';
+    works.forEach(work => {
+        let htmlSegment = `<figure>
+                                <img src="${work.imageUrl}" >
+                               
+                                
+                            </figure>`;
 
+        html += htmlSegment;
+    });
 
+    let container = document.querySelector('.miniGallery');
+    container.innerHTML = html;
+
+}
+function closeModalIcon() {
+    
+    let modal = document.querySelector('.modal');
+    let fermer=document.querySelector('.fa-solid');
+    fermer.addEventListener("click", (e) => {
+        modal.style.display = "none";
+    })
+
+  
+    
+}
+function closeModal() {
+    
+    let modal = document.querySelector('.modal');
+    modal.addEventListener("click", (e) => {
+        if (e.target == modal) {
+            modal.style.display = "none";
+        }
+    })
+  
+}
 
 
 function pageConnexion() {
@@ -129,7 +165,19 @@ function modeCreation() {
 
 }
 
+function openModal() {
 
+    let modalLien = document.querySelector('.openModal');
+    modalLien.addEventListener("click", (e) => {
+        //afficher le modale
+        let modal = document.querySelector('.modal');
+        
+        modal.style.display = "flex";
+
+
+    })
+
+}
 
 
 
@@ -147,6 +195,11 @@ function init() {
     sessionLogin();
 
     modeCreation();
+    openModal();
+    getMiniGallery();
+
+    closeModalIcon();
+    closeModal();
 
 }
 

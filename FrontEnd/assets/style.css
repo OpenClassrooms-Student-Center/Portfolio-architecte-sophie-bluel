@@ -411,7 +411,126 @@ footer nav ul {
 	font-style: normal;
 	font-weight: 400;
 	line-height: normal;
-	
+
 	padding-left: 10px;
+
+}
+
+
+
+/* partie modal */
+.modal {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	border-radius: 10px;
+
+}
+
+.modal-content {
+	background-color: #fefefe;
+	margin:  auto;
+	padding: 80px;
+	border: 1px solid #888;
+	width: 45%;
+	height: 688px;
+	text-align: center;
+
+	display: flex;
+	flex-direction: column;
+
+	/* justify-content: center;*/
+	align-items: center;
+	position: relative;
+	left: 0;
+	right: 0;
+	/* margin-left: auto;
+	margin-right: auto; */
+
+
+	top: 100px;
+
+
+
+
+}
+
+.close {
+	color: #000;
+	width: 24px;
+	height: 24px;
+	cursor: pointer;
+	position: absolute;
+	top: 26px;
+	right: 30px;
+}
+
+
+
+.modal-content h2 {
+	color: #000;
+
+	text-align: center;
+	font-family: "Work Sans";
+	font-size: 26px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+	margin-top: 60px;
+	margin-bottom: 30px;
+
+	margin-left: 228px;
+	margin-right: 229px;
+
+
+}
+
+.modal-content .btn {
+
+	background: #1D6154;
+	color: #FFF;
+	width: 237px;
+	height: 36px;
+
+	position: absolute;
+	top: 680px;
+
+}
+
+.modal-content::after {
+
+	content: "";
+	display: block;
+	width: 420px;
+	height: 1px;
+	background-color: #B3B3B3;
+	position: absolute;
+	top: 580px;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+
+}
+
+/* gallerie modal */
+
+.miniGallery {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 0.5fr 0.5fr 0.5fr 0.5fr 0.5fr;
+	justify-content: space-around;
+		
+	gap: 5px;
+
+}
+
+.miniGallery img {
+	
+	width: 90%;
 
 }
