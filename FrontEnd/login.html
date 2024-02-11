@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sophie Bluel - Architecte d'intérieur</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
+      <nav>
+        <ul>
+          <li><a class="nav-link" href="./index.html">projets</a></li>
+          <li><a class="nav-link" href="#">contact</a></li>
+          <li>
+            <a class="nav-link" href="./login.html">login</a>
+          </li>
+          <li>
+            <a class="nav-link" href="http://www.instagram.com"
+              ><img src="./assets/icons/instagram.png" alt="Instagram"
+            /></a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section id="login">
+        <h2>Log in</h2>
+        <form method="post" id="js-login-form">
+          <label for="js-email">Email</label>
+          <input type="email" name="email" id="js-email" required />
+          <label for="js-password">Mot de passe</label>
+          <input id="js-password" type="password" name="password" required />
+
+          <p
+            id="js-error-message"
+            class="error-message"
+            role="alert"
+            aria-live="assertive"
+          ></p>
+
+          <input id="js-connect-button" type="submit" value="Se connecter" />
+          <a href="#" class="mdp-forget">Mot de passe oublié ?</a>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <nav>
+        <ul>
+          <li>Mentions Légales</li>
+        </ul>
+      </nav>
+    </footer>
+  </body>
+</html>
