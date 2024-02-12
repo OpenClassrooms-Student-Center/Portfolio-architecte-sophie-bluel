@@ -30,6 +30,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	background-color: #FFFEF8;
 }
 ol, ul {
 	list-style: none;
@@ -183,6 +184,93 @@ input[type="submit"]{
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
-	margin: 2em
+	background-color: WHITE;
+	height: 60px;
+	width: 100%;
+	
 }
 
+/***** login page *****/
+
+
+.login {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.titreLogIn {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding-bottom: 5%;
+}
+
+
+.formulaireConnexion {
+	display: flex;
+	flex-direction: column;
+	height: auto;
+	justify-content: space-around;
+	width: 100%;
+	margin-right: 150px;
+	gap: 10px;
+}
+
+.formulaireConnexion input {
+	gap: 10px;
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09)
+}
+
+.footer-login {
+	position: fixed;
+	bottom: 0;
+	background-color: WHITE;
+	height: 60px;
+	width: 100%;
+}
+
+/******* filters *******/
+
+
+.filter-container {
+    display: flex;
+    justify-content: center;
+	flex-direction: row;
+	gap: 10px;
+    margin: 50px 0;
+}
+
+.filter-button {
+	display: flex;
+	align-items: center;
+	border: 1px #1d6154 solid;
+	border-radius: 60px;
+	color: #1d6154;
+	background: #FFFEF8;
+	height: 37px;
+	font-family: "Syne", sans-serif;
+	font-weight: 700;
+	font-size: 16px;
+	text-align: center;
+	padding: 3px 20px;
+	cursor: pointer;
+
+}
+
+.filter-button:hover {
+    background: #1d6154;
+    color: #ffffff;
+}
+
+.filter-button:active {
+    background: #1d6154;
+    color: #ffffff;
+}

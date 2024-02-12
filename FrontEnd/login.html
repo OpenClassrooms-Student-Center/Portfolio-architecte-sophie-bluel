@@ -6,54 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet"/>
     <meta name="description" content="" />
-    <link rel="stylesheet" href="assets/style.css" />
+    <link rel="stylesheet" href="assets/style.css"/>
+    <script src="./assets/Js/login.js"></script>
   </head>
   <body>
+  
     <header>
       <h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
       <nav>
         <ul>
-          <li><a class="nav-link" href="./index.html">projets</a></li>
-          <li><a class="nav-link" href="#">contact</a></li>
-          <li>
-            <a class="nav-link" href="./login.html">login</a>
-          </li>
-          <li>
-            <a class="nav-link" href="http://www.instagram.com"
-              ><img src="./assets/icons/instagram.png" alt="Instagram"
-            /></a>
-          </li>
+          <li><a href="./index.html">projets</a></li>
+          <li><a href="./index.html">contact</a></li>
+          <li><a href="./login.html" id="login">login</a><a href="#logout" id="logout" style="display:none">logout</a></li>
+          <li><a href="https://www.instagram.com/"><img src="./assets/icons/instagram.png" alt="Instagram"></a></li>
         </ul>
       </nav>
     </header>
-    <main>
-      <section id="login">
-        <h2>Log in</h2>
-        <form method="post" id="js-login-form">
-          <label for="js-email">Email</label>
-          <input type="email" name="email" id="js-email" required />
-          <label for="js-password">Mot de passe</label>
-          <input id="js-password" type="password" name="password" required />
 
-          <p
-            id="js-error-message"
-            class="error-message"
-            role="alert"
-            aria-live="assertive"
-          ></p>
+    <section class="login">
+      <h2 class="titreLogIn">Log in</h2>
 
-          <input id="js-connect-button" type="submit" value="Se connecter" />
-          <a href="#" class="mdp-forget">Mot de passe oublié ?</a>
+      <div class="formulaire">
+
+        <form class="formulaireConnexion" id="formulaireLogin">
+          <label for="email">E-mail</label>
+          <input type="email" name="email" id="email" required />
+          <label for="password">Mot de passe</label>
+          <input type="password" name="password" id="password" autocomplete="off" required />
+          <p class="error"></p>
+          <input type="submit" class="submit" value="se connecter" />
+          <a href="" class="password_forgotten">Mot de passe oublié ?</a>
         </form>
-      </section>
-    </main>
 
-    <footer>
+      </div>
+
+    </section>
+
+    <footer class="footer-login">
       <nav>
         <ul>
           <li>Mentions Légales</li>
