@@ -3,7 +3,9 @@ const passwordUser = document.querySelector('#password');
 const formulaire = document.querySelector('form');
 const message = document.querySelector('form .erreur');
 const loged = window.localStorage.loged;
-const admin = document.querySelector('.admin');
+
+
+
 
 async function validateForm() {
     formulaire.addEventListener('submit', async(event) => {
@@ -34,38 +36,35 @@ async function validateForm() {
 
         
         
-        if (data.token) if (data.userId == 1) {
+        if (data.token) {
+            console.log(data.token);
+            //redirection vers la page d'accueil en mode creation
+       
             
-           // redirection
-           window.location.href = 'admin.html';
-          
-            window.sessionStorage.loged = true;
+
+           
+            window.sessionStorage.loged = true; 
+            window.location.href='index.html';
+            console.log(window.sessionStorage.loged);        
+
         } else {
 
             message.textContent = 'Erreur dans l’identifiant ou le mot de passe';
             message.style.color = 'red';
             window.localStorage.removeItem('token');
-            window.sessionStorage.removeItem('token');
+            // window.sessionStorage.removeItem('token');
 
         }
+ 
 
     })
 
 }
-    function pageAcceuil() {
-    
-        const liAcceuil = document.querySelector(".acceuil");
-        liAcceuil.addEventListener("click", (e) => {
-            window.location.href = "index.html";
-            console.log("tu es dans l'acceuil");
-            
-            
-        })
-    
-    }
+   
 
     function init() {
+        
         validateForm();
-        pageAcceuil();
+       
     }
     init();

@@ -215,6 +215,16 @@ nav li {
 	font-size: 1.2em;
 }
 
+nav li a {
+	color: #000;
+	text-decoration: none;
+
+}
+
+a {
+	text-decoration: none;
+}
+
 li:hover {
 	color: #B1663C;
 }
@@ -419,13 +429,14 @@ footer nav ul {
 
 
 /* partie modal */
+
 .modal {
 	display: none;
 	position: fixed;
 	top: 0;
 	left: 0;
-	width: 100%;
-	height: 100%;
+	width: 100vw;
+	height: 100vh;
 	background-color: rgba(0, 0, 0, 0.5);
 	border-radius: 10px;
 
@@ -433,12 +444,11 @@ footer nav ul {
 
 .modal-content {
 	background-color: #fefefe;
-	margin:  auto;
+	margin: auto;
 	padding: 80px;
 	border: 1px solid #888;
-	width: 45%;
-	height: 688px;
-	text-align: center;
+	width: 30%;
+	height: 500px;
 
 	display: flex;
 	flex-direction: column;
@@ -446,13 +456,15 @@ footer nav ul {
 	/* justify-content: center;*/
 	align-items: center;
 	position: relative;
+	top: 90px;
 	left: 0;
 	right: 0;
+
 	/* margin-left: auto;
 	margin-right: auto; */
 
 
-	top: 100px;
+	/* top: 100px; */
 
 
 
@@ -473,18 +485,18 @@ footer nav ul {
 
 .modal-content h2 {
 	color: #000;
-
+	width: 100%;
 	text-align: center;
 	font-family: "Work Sans";
 	font-size: 26px;
 	font-style: normal;
 	font-weight: 400;
 	line-height: normal;
-	margin-top: 60px;
+	/* margin-top: 30px; */
 	margin-bottom: 30px;
 
-	margin-left: 228px;
-	margin-right: 229px;
+	/* margin-left: 228px;
+	margin-right: 229px; */
 
 
 }
@@ -495,9 +507,13 @@ footer nav ul {
 	color: #FFF;
 	width: 237px;
 	height: 36px;
-
 	position: absolute;
-	top: 680px;
+	bottom: 40px;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+
 
 }
 
@@ -509,7 +525,8 @@ footer nav ul {
 	height: 1px;
 	background-color: #B3B3B3;
 	position: absolute;
-	top: 580px;
+
+	top: 550px;
 	left: 0;
 	right: 0;
 	margin-left: auto;
@@ -521,16 +538,83 @@ footer nav ul {
 
 .miniGallery {
 	width: 100%;
+
 	display: grid;
-	grid-template-columns: 0.5fr 0.5fr 0.5fr 0.5fr 0.5fr;
-	justify-content: space-around;
-		
-	gap: 5px;
+	grid: center;
+
+	grid-template-columns: repeat(5, minmax(85px, 0.1fr));
+
+
+	row-gap: 10px;
+	margin: 0;
+	padding: 0;
+	justify-content: center;
 
 }
 
 .miniGallery img {
-	
-	width: 90%;
+
+	padding: 0;
+	margin: 0;
+	width: 78.123px;
+	height: 104.08px;
+	border: 0;
+	position: relative;
+
+
+}
+
+
+
+
+figure {
+
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	gap: 10px;
+}
+
+
+.fa-trash-can {
+
+	position: absolute;
+	width: 137px;
+	height: 40px;
+	top: 10px;
+	right: -110px;
+
+
+}
+
+.formAjout {
+	background: yellow;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 100%;
+	gap: 10px;
+
+}
+
+input[type="file"] {
+
+	text-align: center;
+	width: 420px;
+	height: 169px;
+	border-radius: 3px;
+	background: #E8F1F6;
+
+
+}
+
+#titleInput,
+#categoryInput {
+	width: 420px;
+	height: 51px;
+	background: #FFF;
+
+	box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
 
 }

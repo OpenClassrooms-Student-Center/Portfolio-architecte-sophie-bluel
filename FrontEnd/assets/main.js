@@ -1,38 +1,3 @@
-// async function getWorks() {
-
-
-//     //recuperer les donnees depuis API
-//     const reponse = await fetch("http://localhost:5678/api/works");
-
-//     const travaux = await reponse.json();
-//     console.log(travaux);
-
-//     //ajouter les balise au DOM
-
-//     let racinePortfolio = document.querySelector("#portfolio");
-//     let galerie = document.querySelector(".gallery");
-
-//     //boucle pour afficher les travaux
-//     for (let i = 0; i < travaux.length; i++) {
-
-
-//         let figure = document.createElement("figure");
-//         let img = document.createElement("img");
-//         let figcaption = document.createElement("figcaption");
-
-
-//         galerie.appendChild(figure);
-//         figure.appendChild(img);
-//         figure.appendChild(figcaption);
-
-
-//         img.src = travaux[i].imageUrl;
-//         figcaption.innerText = travaux[i].title;
-
-//     }
-// }
-
-// getWorks();
 
 
 async function getWorks() {
@@ -44,24 +9,6 @@ async function getWorks() {
     } catch (error) {
         console.log(error);
     }
-}
-
-
-async function renderWorks() {
-    let works = await getWorks();
-    let html = '';
-    works.forEach(work => {
-        let htmlSegment = `<figure>
-                                <img src="${work.imageUrl}" >
-                                <figcaption>${work.title}</figcaption>
-                                
-                            </figure>`;
-
-        html += htmlSegment;
-    });
-
-    let container = document.querySelector('.gallery');
-    container.innerHTML = html;
 }
 
 
@@ -79,7 +26,7 @@ async function getCategories() {
     }
 }
 
-async function renderCategories() {
+async function boutonsByCategory() {
 
     let categories = await getCategories();
     let html = '<button class="btn">Tous</button>';
@@ -89,30 +36,45 @@ async function renderCategories() {
         html += htmlSegment;
         //let idCategory = category.id;
 
-        //  console.log(idCategory + ' ' + category.name);
         let btn = document.querySelector('.btn');
         btn.id = category.id;
-        console.log(btn.id);
 
     });
     let container = document.querySelector('.btn-container');
     container.innerHTML = html;
+
+
 
 }
 
 //filtrer les travaux par categorie
 async function filterWorks() {
 
+
+    let html = '';
+    let container = document.querySelector('.gallery');
+
     //recuperer les travaux
 
     let works = await getWorks();
-    //recuperer categoryId
 
-    // console.log(idCategory);
     works.forEach(work => {
+        let htmlSegment = `<figure>
+                                <img src="${work.imageUrl}" >
+                                <figcaption>${work.title}</figcaption>
+                                
+                            </figure>`;
+
+        html += htmlSegment;
+        //recuperer categoryId
         let btnId = work.categoryId;
-        //console.log(btnId + " cat "+ work.category.name);
-    })
+    });
+
+
+    container.innerHTML = html;
+
+
+
     //recuperer les boutons
 
 
@@ -121,6 +83,8 @@ async function filterWorks() {
     // //parcourir les boutons
 
     buttons.forEach(button => {
+
+
 
         //ajouter un ecouteur d'evenement pour chaque bouton
 
@@ -153,11 +117,24 @@ async function filterWorks() {
                     figcaption.innerText = work.title;
                 })
 
-            } else {
-                renderWorks();
+            }
+            else if (idCategory == "") {
+                //afficher tous les travaux
+                works.forEach(work => {
+                    let figure = document.createElement("figure");
+                    let img = document.createElement("img");
+                    let figcaption = document.createElement("figcaption");
+                    galery.appendChild(figure);
+                    figure.appendChild(img);
+                    figure.appendChild(figcaption);
+                    img.src = work.imageUrl;
+                    figcaption.innerText = work.title;
+                })
+
             }
 
         })
+
     })
 
 
@@ -167,81 +144,197 @@ async function filterWorks() {
 
 
 
- function pageConnexion() {
+function modeCreation() {
 
-    let liLogin = document.querySelector(".login");
-    let liAcceuil = document.querySelector(".acceuil");
-    if(liLogin){
-    liLogin.addEventListener("click", (e) => {
-        window.location.href = "login.html";
-        
-        
-    })
-}
-}
+    const loged = window.sessionStorage.loged;
+    const logout = document.querySelector('.login');
+    let racine = document.querySelector('body');
+    let div = document.createElement('div');
+    let title = document.querySelector('#portfolio h2');
+    let btnsFilter = document.querySelector('.btn-container');
 
-//lien vers la page d'acceuil
 
-function pageAcceuil() {
-    
-    const liAcceuil = document.getElementById("acceuil");
-    liAcceuil.addEventListener("click", (e) => {
-        window.location.href = "index.html";
-        console.log("tu es dans l'acceuil");
-        
-        
-    })
-
-}
-
-function pageAdmin() {
-    const liAdmin = document.querySelector(".admin");
-    liAdmin.addEventListener("click", (e) => {
-        window.location.href = "admin.html";
-        
-    })
-}
-//si l'utilisateur est connecte on le redirige vers la page profil sinon on le redirige vers la page de connexion
-
-function sessionLogin(){
-    const loged= window.sessionStorage.loged;
-    console.log(" tu es loger  "+loged);
-    const admin= document.querySelector('.admin');
-    const logout= document.querySelector('.login');
     if (loged) {
-       
-        
-        logout.textContent="logout"; 
-        admin.textContent="Admin";
-       
-       
+
+
+
+        //creer div pour le mode creation
+
+
+        div.classList.add('creation');
+
+        racine.appendChild(div);
+        div.innerHTML = `<a href="#"><i class="fas fa-pen-to-square"></i> Mode création</a>`;
+
+
+        //ajouter le lien modifier    
+
+
+
+        title.innerHTML = `<h2>Mes Projets<i class="fas  fa-pen-to-square"></i><a href="#" class="openModal">modifier</a></h2>`;
+
+
+
+
+        // changer login en logout
+
+        logout.textContent = "logout";
+        logout.innerHTML = `<a href="login.html">logout</a>`
+
         logout.addEventListener("click", (e) => {
+            console.log("tu es logout");
+            // window.sessionStorage.loged = false;
             window.sessionStorage.clear();
-            window.location.href = "login.html";
-        })   
-    }
-    }
 
 
+        })
+
+        createModal();
+
+
+
+        // retirer les boutons de filtrages
+
+        btnsFilter.style.background = "red";
+
+        let btns = document.querySelectorAll('.btn');
+        btnsFilter.style.display = "none";
+        console.log(btnsFilter.innerHTML);
+
+
+    }
+
+}
+
+
+
+
+
+
+function createModal() {
+
+
+    // Création des éléments
+
+    var modal = document.createElement('div');
+    modal.id = 'myModal';
+    modal.className = 'modal';
+
+    var modalContent = document.createElement('div');
+    modalContent.className = 'modal-content';
+
+    var title = document.createElement('h2');
+    title.textContent = 'Galerie photo';
+
+    var closeBtn = document.createElement('span');
+    closeBtn.className = 'close';
+    closeBtn.id = 'closeModalBtn';
+    closeBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+
+    var miniGallery = document.createElement('div');
+    miniGallery.className = 'miniGallery';
+
+
+
+    var addButton = document.createElement('button');
+    addButton.className = 'btn';
+    addButton.textContent = 'Ajouter une photo';
+
+
+    // Ajout des éléments à la modal
+    modalContent.appendChild(title);
+    modalContent.appendChild(closeBtn);
+    modalContent.appendChild(miniGallery);
+    modalContent.appendChild(addButton);
+
+    modal.appendChild(modalContent);
+
+    // Ajout de la modal à la fin du body
+    document.body.appendChild(modal);
+
+    // Event listener pour fermer la modal
+    closeBtn.addEventListener('click', function () {
+        modal.style.display = 'none';
+    });
+
+    // Event listener pour ouvrir la modal
+    addButton.addEventListener('click', function () {
+
+        //ajout photo
+
+        title.textContent = 'Ajout photo';
+        miniGallery.innerHTML = '';
+
+        var form = document.createElement('form');
+        form.className = 'formAjout';
+        miniGallery.appendChild(form);
+        var input = `<input type="file" id="fileInput" accept="image/jpg, png : 4mo max" />`;
+        var label = `<label for="fileInput">Ajouter une photo</label>`;
+
+        var labelTitle = `<label> Titre </label>`;
+        var inputTitle = `<input type="text" id="titleInput" />`;
+
+        var categoriesLab = `<label> Categorie </label>`;
+        var categories = `<select id="categoryInput"></select>`;
+
+        var submitBtn = `<button type="submit">Valider</button>`;
+
+
+        form.innerHTML = input + label + labelTitle + inputTitle + categoriesLab + categories + submitBtn;
+
+
+
+
+    });
+
+    // Event listener pour fermer la modal en cliquant à l'extérieur
+    window.addEventListener('click', function (event) {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+    let modalLien = document.querySelector('.openModal');
+    modalLien.addEventListener("click", async (e) => {
+        //afficher le modale
+        let modal = document.querySelector('.modal');
+        let works = await getWorks();
+        modal.style.display = "block";
+        if (modal.style.display == "block") {
+
+            let htmlModal = ' ';
+            works.forEach(workModal => {
+
+                let htmlMiniGalerie = `<figure>
+                                    <img src="${workModal.imageUrl}" >
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </figure>`;
+
+                htmlModal += htmlMiniGalerie;
+            });
+            console.log(htmlModal);
+            let containerModal = document.querySelector('.miniGallery');
+            console.log(containerModal);
+            containerModal.innerHTML = htmlModal;
+        }
+
+    })
+
+
+
+
+
+}
 
 
 
 
 function init() {
 
-    getWorks();
-    renderWorks();
-
-    getCategories();    
-    renderCategories();
-
+    boutonsByCategory();
+    modeCreation();
     filterWorks();
-   
-    pageConnexion();
-    pageAdmin();
-    
-    sessionLogin();
-    
+    //createModal();
+
 }
 
 init();
