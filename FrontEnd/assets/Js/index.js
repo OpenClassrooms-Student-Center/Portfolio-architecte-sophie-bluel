@@ -11,7 +11,6 @@ const getApi = async () => {
       throw error; 
     }
   };
-  
 
 
 
@@ -100,3 +99,39 @@ window.addEventListener("DOMContentLoaded", async function() {
 });
 
 
+// Logout 
+
+// Function to create the logout button
+function createLogoutButton() {
+    const logoutButton = document.createElement('a');
+    logoutButton.textContent = 'logout';
+    logoutButton.href = '#'; 
+
+    // Add event listener to handle logout action
+    logoutButton.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent default link behavior
+        // Clear the authentication token or any other relevant data from local storage
+        localStorage.removeItem('loginResponse');
+        // Redirect to the login page
+        window.location.href = './login.html'; // Replace 'login.html' with the correct URL of your login page
+    });
+
+    return logoutButton;
+}
+
+// Function to replace login button with logout button
+function replaceLoginWithLogout() {
+    const loginButton = document.getElementById('js-login-button');
+    const logoutButton = createLogoutButton();
+
+    // Replace login button with logout button
+    loginButton.parentNode.replaceChild(logoutButton, loginButton);
+}
+
+// Check if the user is logged in
+const isLoggedIn = localStorage.getItem('loginResponse') !== null;
+
+// If logged in, replace login button with logout button
+if (isLoggedIn) {
+    replaceLoginWithLogout();
+}

@@ -192,6 +192,11 @@ footer nav ul {
 
 /***** login page *****/
 
+.nav-menu a {
+    text-decoration: none;
+    color: inherit;
+}
+
 
 .login {
 	width: 100%;
@@ -274,3 +279,4 @@ footer nav ul {
     background: #1d6154;
     color: #ffffff;
 }
+
