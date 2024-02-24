@@ -39,20 +39,19 @@ async function validateForm() {
         if (data.token) {
             console.log(data.token);
             //redirection vers la page d'accueil en mode creation
-       
-            
-
-           
             window.sessionStorage.loged = true; 
+            window.sessionStorage.accessToken = data.token;
+           console.log(data.token);
             window.location.href='index.html';
-            console.log(window.sessionStorage.loged);        
+            console.log(window.sessionStorage.loged); 
+                   
 
         } else {
 
             message.textContent = 'Erreur dans l’identifiant ou le mot de passe';
             message.style.color = 'red';
             window.localStorage.removeItem('token');
-            // window.sessionStorage.removeItem('token');
+             window.sessionStorage.removeItem('token');
 
         }
  
