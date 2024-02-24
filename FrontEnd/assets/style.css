@@ -125,6 +125,7 @@ li:hover {
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
+	position: relative;
 }
 .gallery {
 	width: 100%;
@@ -283,8 +284,9 @@ footer nav ul {
 
 /******* modal :) *******/
 
+
 .modal-container {
-	/* display: none;  */
+	display: none; 
 	display: flex;
     position: fixed; 
     left: 0;
@@ -297,7 +299,8 @@ footer nav ul {
 }
 
 .modal-wrapper {
-	/* display: none; */
+	display: none;
+	position: absolute;
 	display: flex;
 	overflow: auto;
 	background-color: #FFF;
@@ -311,9 +314,10 @@ footer nav ul {
 
 .close-icon {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 1.5em;
+  right: 1.5em;
   cursor: pointer;
+  
 
 }
 
@@ -377,11 +381,12 @@ button:hover {
     width: 17px;
     border-radius: 2px;
     position: absolute;
-    top: 8px; 
-    right: 8px; 
+    top: 6px; 
+    right: 6px; 
     display: flex; 
     justify-content: center; 
     align-items: center;
+	cursor: pointer;
 }
 
 .modal-gallery>figure>span>i {
