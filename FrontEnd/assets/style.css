@@ -280,3 +280,111 @@ footer nav ul {
     color: #ffffff;
 }
 
+
+/******* modal :) *******/
+
+.modal-container {
+	/* display: none;  */
+	display: flex;
+    position: fixed; 
+    left: 0;
+    top: 0;
+	justify-content: center;
+	align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: #0000004D;
+}
+
+.modal-wrapper {
+	/* display: none; */
+	display: flex;
+	overflow: auto;
+	background-color: #FFF;
+	width: fit-content;
+	border-radius: 10px;
+	padding: 2em;
+	width: 40%;
+	flex-direction: column;
+	align-items: center;
+}
+
+.close-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+
+}
+
+hr {
+	color: #B3B3B3;
+	width: 100%;
+	border: 1px solid #B3B3B3;
+	position: relative;
+	margin: 10%;
+}
+
+button {
+	border: 1px #1d6154 solid;
+	border-radius: 60px;
+	color: #1d6154;
+	background: #fff;
+	height: 28px;
+	font-family: "Syne", sans-serif;
+	font-weight: 700;
+	font-size: 16px;
+	text-align: center;
+	padding: 3px 20px;
+	cursor: pointer;
+	justify-content: center;
+	align-items: center;
+}
+
+button:hover {
+	background: #1d6154;
+	color: #fff;
+}
+
+.Add-photo-btn {
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	bottom: 10px;
+}
+
+.modal-gallery {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: 10px;
+	grid-row-gap: 20px;
+	margin-bottom: 8%;
+
+}
+
+.modal-gallery>figure {
+    position: relative; /* Add relative positioning to the figure container */
+}
+
+.modal-gallery>figure>img {
+	width: 76px;
+	height: 102px;
+}
+
+.modal-gallery>figure>span {
+    background-color: #000;
+    height: 17px;
+    width: 17px;
+    border-radius: 2px;
+    position: absolute;
+    top: 8px; 
+    right: 8px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+}
+
+.modal-gallery>figure>span>i {
+    color: #FFF;
+	font-size: 10px;
+}

@@ -9,7 +9,9 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
+	<script src="https://kit.fontawesome.com/32eaca69a7.js" crossorigin="anonymous"></script>
 	<script defer src="/FrontEnd/assets/Js/index.js" ></script>
+	
 </head>
 <body>
 <header>
@@ -43,14 +45,30 @@
 
 	<section id="portfolio">
 		<div class="wrapper-title">
-			<h2>Mes Projets</h2>
+			<h2>Mes Projets</h2> 
+
+			<!-- button to open modal -->
+			<div id="modifierButton">
+				<i id="openModalIcon" class="fa-regular fa-pen-to-square"></i>
+				<a href="#" id="openModal">modifier</a>
+			  </div>
+			
        		 <div id="filters"></div>
+			 
 
-			<!-- the form -->
-			<aside id="modal-container" class="modal-container">
+			<!-- the modal -->
+			<aside id="modal-container" class="modal-container" aria-hidden="true">
 				<div class="modal-wrapper">
-
+					<i id="closeModalIcon" class="fa-solid fa-x close-icon"></i>
+					<h2>Galerie photo</h2>
+					<div class="modal-gallery" id="modalGallery">
+						
+					</div>
+					<hr>
+					<button class="Add-photo-btn">Ajouter photo</button>
 				</div>
+
+
 			</aside>
 
 
@@ -84,5 +102,6 @@
 		</ul>
 	</nav>
 </footer>
+<script src="/FrontEnd/assets/Js/modal.js"></script>
 </body>
 </html>
