@@ -125,8 +125,10 @@ li:hover {
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
-	position: relative;
+	margin-left: 0;
+	margin-right: 0;
 }
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -191,13 +193,54 @@ footer nav ul {
 	
 }
 
-/***** login page *****/
+/************************* my changes below (ง •`⎽´•)ง *************************/
+
+
 
 .nav-menu a {
     text-decoration: none;
     color: inherit;
 }
 
+/******* filters *******/
+
+
+.filter-container {
+    display: flex;
+    justify-content: center;
+	flex-direction: row;
+	gap: 10px;
+    margin: 50px 0;
+}
+
+.filter-button {
+	display: flex;
+	align-items: center;
+	border: 1px #1d6154 solid;
+	border-radius: 60px;
+	color: #1d6154;
+	background: #FFFEF8;
+	height: 37px;
+	font-family: "Syne", sans-serif;
+	font-weight: 700;
+	font-size: 16px;
+	text-align: center;
+	padding: 3px 20px;
+	cursor: pointer;
+
+}
+
+.filter-button:hover {
+    background: #1d6154;
+    color: #ffffff;
+}
+
+.filter-button:active {
+    background: #1d6154;
+    color: #ffffff;
+}
+
+/***** login page *****/
 
 .login {
 	width: 100%;
@@ -243,47 +286,54 @@ footer nav ul {
 	width: 100%;
 }
 
-/******* filters *******/
-
-
-.filter-container {
-    display: flex;
-    justify-content: center;
-	flex-direction: row;
-	gap: 10px;
-    margin: 50px 0;
-}
-
-.filter-button {
-	display: flex;
-	align-items: center;
-	border: 1px #1d6154 solid;
-	border-radius: 60px;
-	color: #1d6154;
-	background: #FFFEF8;
-	height: 37px;
-	font-family: "Syne", sans-serif;
-	font-weight: 700;
-	font-size: 16px;
-	text-align: center;
-	padding: 3px 20px;
-	cursor: pointer;
-
-}
-
-.filter-button:hover {
-    background: #1d6154;
-    color: #ffffff;
-}
-
-.filter-button:active {
-    background: #1d6154;
-    color: #ffffff;
-}
 
 
 /******* modal :) *******/
 
+.mode-edition {
+	display: flex;
+	flex-direction: row;
+	position: sticky;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	background-color: black;
+	color: #fff;
+	top: 0;
+	left: 0;
+	/* column-gap: 25px; */
+	gap: 0.5em;
+	padding: 1em;
+	width: 100%;
+	height: 2em;
+
+}
+
+.mes-projet-modifier {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.mes-projet-modifier h2 {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#modifierButton {
+	margin-top: -2em; 
+	margin-left: 2em;
+	display: none;
+  }
+
+#modifierButton a {
+	text-decoration: none;
+    color: inherit;
+}
+
+#modifierButton i {
+	margin-right: 0.5em;
+}
 
 .modal-container {
 	display: none; 
@@ -304,10 +354,9 @@ footer nav ul {
 	display: flex;
 	overflow: auto;
 	background-color: #FFF;
-	width: fit-content;
+	width: fit-content; 
 	border-radius: 10px;
-	padding: 2em;
-	width: 40%;
+	padding: 3em 6em;
 	flex-direction: column;
 	align-items: center;
 }
@@ -367,7 +416,7 @@ button:hover {
 }
 
 .modal-gallery>figure {
-    position: relative; /* Add relative positioning to the figure container */
+    position: relative; 
 }
 
 .modal-gallery>figure>img {
