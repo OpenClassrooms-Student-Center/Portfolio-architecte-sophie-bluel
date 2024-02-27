@@ -16,9 +16,18 @@ async function validateForm() {
         let email = emailUser.value;
         let password = passwordUser.value;
         //affichage console
-        console.log(email + ' ' + password);
+       
+        if (!email || !password) {
+            // Gérer l'erreur de validation, par exemple, afficher un message à l'utilisateur
+            console.log('Veuillez remplir tous les champs obligatoires.');
+            message.textContent = 'Veuillez remplir tous les champs obligatoires.';
+            return;
+        }
 
+
+        try{
        //fetch post
+
        const response = await fetch('http://localhost:5678/api/users/login', {
 
         method: 'POST',
@@ -31,6 +40,11 @@ async function validateForm() {
             password: password
         })
        })
+       if (response.status === 401) {
+        console.log(response.status, 'Unauthorized');
+        throw new Error('Non autorisé (Unauthorized). Veuillez vous connecter.', response.status);
+    }
+
        const data = await response.json();
         console.log(data);
 
@@ -54,8 +68,11 @@ async function validateForm() {
              window.sessionStorage.removeItem('token');
 
         }
- 
+    } catch (error) {
+        console.log('Error:', error.name, 'Message:', error.message);
+    }
 
+    
     })
 
 }
@@ -66,4 +83,5 @@ async function validateForm() {
         validateForm();
        
     }
+    
     init();

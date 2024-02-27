@@ -1,5 +1,5 @@
 
-
+/************************** recuperer les travaux ******************/
 async function getWorks() {
     let url = 'http://localhost:5678/api/works';
     try {
@@ -10,10 +10,7 @@ async function getWorks() {
         console.log(error);
     }
 }
-
-
-
-
+/*************************** recuperer les categories */
 async function getCategories() {
     let url = 'http://localhost:5678/api/categories';
     try {
@@ -25,7 +22,7 @@ async function getCategories() {
         console.log(error);
     }
 }
-
+/********************* boutons par category ************************/
 async function boutonsByCategory() {
 
     let categories = await getCategories();
@@ -35,7 +32,7 @@ async function boutonsByCategory() {
         let htmlSegment = `<button class="btn" id="${category.id}">${category.name}</button>`;
 
         html += htmlSegment;
-        //let idCategory = category.id;
+
 
         let btn = document.querySelector('.btn');
         btn.id = category.id;
@@ -49,7 +46,7 @@ async function boutonsByCategory() {
 
 }
 
-//filtrer les travaux par categorie
+/******************* filtrer les travaux par categorie**************/
 async function filterWorks() {
 
 
@@ -125,7 +122,7 @@ async function filterWorks() {
 
 }
 
-
+/********************************** afficher les travaux **********/
 function renderWorks(works) {
 
     let galery = document.querySelector('.gallery');
@@ -143,6 +140,9 @@ function renderWorks(works) {
 
 
 }
+
+
+/*********************************page en  mode creation **********/
 function modeCreation() {
 
     const loged = window.sessionStorage.loged;
@@ -206,10 +206,7 @@ function modeCreation() {
 }
 
 
-
-
-
-
+/********************************* creation de la modal ********* */
 async function createModal() {
 
 
@@ -241,7 +238,7 @@ async function createModal() {
     addButton.className = 'btn btn-primary';
     addButton.textContent = 'Ajouter une photo';
 
-   
+
 
 
     // Ajout des éléments à la modal
@@ -249,21 +246,21 @@ async function createModal() {
     modalContent.appendChild(closeBtn);
     modalContent.appendChild(miniGallery);
     modalContent.appendChild(addButton);
-   
+
     modalContent.appendChild(retour);
     modal.appendChild(modalContent);
 
     retour.style.display = "none";
-    
+
 
     // Ajout de la modal à la fin du body
     document.body.appendChild(modal);
-    
+
     // Event listener pour fermer la modal
     closeBtn.addEventListener('click', function () {
         modal.style.display = 'none';
-        
-        
+
+
     });
 
     // Event listener pour ouvrir la modal
@@ -271,12 +268,12 @@ async function createModal() {
 
         //formulaire d'ajout photo
 
-        retour.style.display = "block";       
+        retour.style.display = "block";
         addButton.style.display = "none";
         miniGallery.innerHTML = '';
 
         var form = document.createElement('form');
-       
+
         form.className = 'formAjout';
         miniGallery.appendChild(form);
         let formulaireAdd = ` 
@@ -308,7 +305,7 @@ async function createModal() {
             valider.style.display = "none";
             form.innerHTML = '';
             title.textContent = 'Galerie photo';
-            
+
             getModal();
 
 
@@ -324,11 +321,11 @@ async function createModal() {
             let op = `<option value="${element.id}">${element.name}</option>`;
             htmlCat += op;
 
-           
+
         });
 
         let cat = document.querySelector('#categoryInput');
-     
+
         cat.appendChild(new Option('Tous', 'all'));
         cat.innerHTML = htmlCat;
         let divForm = document.querySelector('.file-input-wrapper');
@@ -366,12 +363,14 @@ async function createModal() {
             reader.readAsDataURL(file);
 
 
-        });
-        ajoutWork(titleInput.value, inputFile.files[0],cat.value);
 
-        
-        console.log(valider);
-       
+
+        });
+
+        /************* fonction d'ajout de projet ************************** */
+
+        ajoutWork();
+
 
     });
     //
@@ -379,23 +378,24 @@ async function createModal() {
     // Event listener pour fermer la modal en cliquant à l'extérieur
     window.addEventListener('click', function (event) {
         if (event.target === modal) {
+
             modal.style.display = 'none';
             retour.style.display = "none";
-            valider.style.display = "none";
-            addButton.style.display = "block";
-            //form.innerHTML = '';
+            addButton.style.display = "block";           
             title.textContent = 'Galerie photo';
         }
     });
+    
     // Event listener pour ouvrir la modal en cliquant sur Modifier
+
     let modalLien = document.querySelector('.openModal');
     modalLien.addEventListener("click", async (e) => {
         getModal();
 
     })
 
-   
-    
+
+
 
 
 }
@@ -406,7 +406,8 @@ async function getModal() {
 
     //afficher le modale
     let modal = document.querySelector('.modal');
-
+    let btn = document.querySelector('.btn-primary');
+    btn.style.display = "block";
     let works = await getWorks();
     modal.style.display = "block";
     if (modal.style.display == "block") {
@@ -441,7 +442,8 @@ async function getModal() {
 
                 const idToDelete = e.target.dataset.id;
                 await deleteWork(idToDelete);
-                idToDelete.parentNode.remove();
+                filterWorks();
+                getModal();
                 e.preventDefault();
                 //    getModal(); // Mettez à jour la modal après la suppression
             });
@@ -451,6 +453,7 @@ async function getModal() {
 
     }
 }
+/******************* supprimer un projet ************************ */
 function deleteWork(id) {
     const loged = window.sessionStorage.loged;
     const accessToken = window.sessionStorage.accessToken;
@@ -461,7 +464,7 @@ function deleteWork(id) {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${accessToken}`
-                // Ajoutez le jeton d'accès ici si nécessaire
+
             }
         })
             .then(function (res) {
@@ -470,7 +473,7 @@ function deleteWork(id) {
                 } else if (!res.ok) {
                     throw new Error(`La suppression a échoué avec le statut ${res.status}`);
                 }
-                return res.json();
+                // return res.json();
             })
             .then(function (data) {
                 console.log('Suppression réussie', data);
@@ -485,77 +488,120 @@ function deleteWork(id) {
     }
 }
 
-function ajoutWork(title, imageUrl,categoryInput) {
-    let valider = document.querySelector('.formAjout');
-    valider.addEventListener("submit", async function (e) {
-        console.log("submit");
-        e.preventDefault();
-        // Obtenir le formulaire
-        console.log("valider");
-        var form = document.querySelector('.formAjout');
-       
-        // Créez un objet FormData pour rassembler les données du formulaire
-        var formData = {
-            title: form.titleInput.value,
-            imageUrl: form.src,
-            categoryInput: form.categoryInput.value,
+/******************* ajouter un projet ************************** */
+function ajoutWork() {
+    const loged = window.sessionStorage.loged;
+    const accessToken = window.sessionStorage.accessToken;
 
-        };
-        // Obtenez le fichier depuis l'input de fichier
+
+
+
+    let formValider = document.querySelector('.formAjout');
+
+    formValider.addEventListener("submit", async function (e) {
+
+        e.preventDefault();
+
+
+        var fileInput = document.querySelector('input[type="file"]');
+
+        var file = fileInput.files[0];
+        console.log(file);
        
+       // Vérifier le format de l'image (JPG ou PNG)
+       if (!file.type.match('image/jpeg') && !file.type.match('image/png')) {
+        alert("Veuillez sélectionner une image au format JPG ou PNG.");
+        return;
+    }
+
+    // Vérifier la taille de l'image (max 4 Mo)
+    if (file.size > 4 * 1024 * 1024) {
+        alert("La taille de l'image ne doit pas dépasser 4 Mo.");
+        return;
+    }
+
+
+        // Créez un objet FormData pour rassembler les données du formulaire
+        var formData = new FormData();
+        formData.append('title', document.getElementById('titleInput').value);
+        formData.append('image', file);
+        formData.append('category', document.getElementById('categoryInput').value);
+
+        if (!titleInput || !fileInput.files[0] || !categoryInput) {
+            alert("Veuillez remplir tous les champs du formulaire.");
+            return;
+        }
 
 
         try {
-            // Vérifiez si l'utilisateur est connecté
-            const loged = window.sessionStorage.loged;
-
-            if (!loged) {
-                throw new Error('L\'utilisateur n\'est pas connecté. Veuillez vous connecter pour ajouter une photo.');
-            }
-
-            // Si l'utilisateur est connecté, incluez le jeton d'accès dans les en-têtes
-            const accessToken = window.sessionStorage.accessToken;
-            console.log(accessToken);
-            console.log(formData);
-            // Effectuez une requête POST pour envoyer le formulaire au serveur
             const response = await fetch('http://localhost:5678/api/works', {
                 method: 'POST',
                 body: formData,
                 headers: {
-                    
-                    'Authorization': `Bearer ${accessToken}`,
 
-
+                    'Authorization': `Bearer ${accessToken}`
 
                 }
+
             });
-
-            if (!response.ok) {
-                throw new Error(`L'ajout de la photo a échoué avec le statut ${response.status}`);
+            if (response.status === 401) {
+                throw new Error('Non autorisé (Unauthorized). Veuillez vous connecter.', response.status);
             }
-
             const data = await response.json();
-            console.log('Ajout de photo réussi', data);
+            alert("Votre projet a bien été ajouté");
 
-            // Vous pouvez effectuer des actions supplémentaires après l'ajout réussi, par exemple, fermer la modal
+            filterWorks();
+            getModal();
+            e.preventDefault();
+
 
         } catch (error) {
             console.error('Erreur lors de l\'ajout de la photo :', error.message);
         }
+
     });
-   
+
 
 }
+// function ajoutWork() {
+//     let formValider = document.querySelector('.formAjout');
+//     formValider.addEventListener("submit", async function (e) {
+//         e.preventDefault();
 
+//         var fileInput = document.querySelector('input[type="file"]');
+//         var file = fileInput.files[0];
+
+//         // Vérifiez si un fichier a été sélectionné
+//         if (file) {
+//             // Obtenez l'URL de l'image à partir du fichier
+//             var imageUrl = URL.createObjectURL(file);
+
+
+//             // ... (restez inchangé)
+
+//             // Créez un objet FormData pour rassembler les données du formulaire
+//             var formData = new FormData();
+//             formData.append('title', document.getElementById('titleInput').value);
+//             formData.append('imageUrl', file);
+//             formData.append('category', document.getElementById('categoryInput').value);
+
+//             try {
+//                 // ... (restez inchangé)
+
+//             } catch (error) {
+//                 console.error('Erreur lors de l\'ajout de la photo :', error.message);
+//             }
+//         } else {
+//             console.error('Aucun fichier sélectionné.');
+//         }
+//     });
+// }
 
 function init() {
 
     boutonsByCategory();
     modeCreation();
     filterWorks();
-
-
-    //createModal();
 
 }
 

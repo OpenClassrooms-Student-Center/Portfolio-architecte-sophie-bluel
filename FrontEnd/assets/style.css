@@ -119,13 +119,7 @@ header {
 	padding: 20px;
 }
 
-footer {
-	background: #FFF;
-	padding: 2px 0px;
-	margin-top: 215px;
 
-
-}
 
 input {
 	height: 50px;
@@ -299,10 +293,13 @@ li:hover {
 #contact {
 	width: 50%;
 	margin: auto;
+
 }
+
 
 #contact>* {
 	text-align: center;
+
 
 }
 
@@ -348,6 +345,13 @@ footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em;
+}
+
+footer {
+	background: #FFF;
+	padding: 2px 0px;
+	position: relative;
+	top: 180px;
 }
 
 .btn {
@@ -491,16 +495,16 @@ footer nav ul {
 	font-size: 26px;
 	font-style: normal;
 	font-weight: 400;
-	
-	
+
+
 	margin-bottom: 30px;
 
-	
+
 
 
 }
 
-.modal-content .btn{
+.modal-content .btn {
 
 	background: #1D6154;
 	color: #FFF;
@@ -544,7 +548,7 @@ footer nav ul {
 
 	grid-template-columns: repeat(5, minmax(85px, 0.1fr));
 
-	
+
 	row-gap: 15px;
 	margin: 0;
 	padding: 0;
@@ -590,7 +594,7 @@ figure {
 }
 
 .formAjout {
-	
+
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -600,10 +604,10 @@ figure {
 
 }
 
-.file-input-wrapper{
+.file-input-wrapper {
 
 	position: relative;
-	
+
 	display: inline-block;
 	width: 100%;
 	text-align: center;
@@ -620,7 +624,7 @@ figure {
 }
 
 .file-input-wrapper input[type="file"] {
-	
+
 	opacity: 0;
 
 }
@@ -638,53 +642,59 @@ figure {
 
 }
 
-.file-input-wrapper .labelajout{
+.file-input-wrapper .labelajout {
 
 	text-align: center;
-    position: absolute;
-    left: 127px;
-    top: 86px;
-    /* width: 200%; */
-    /* margin-left: auto; */
-    color: rgba(48, 102, 133, 1);
+	position: absolute;
+	left: 127px;
+	top: 86px;
+	/* width: 200%; */
+	/* margin-left: auto; */
+	color: rgba(48, 102, 133, 1);
 	size: 14px;
 	font-weight: 600;
-	line-height :16.42px;
-    border: 2px solid #B3B3B3;
-    background: rgba(203, 214, 220, 1);
-    border-radius: 50px;
-    padding: 10px;
+	line-height: 16.42px;
+	border: 2px solid #B3B3B3;
+	background: rgba(203, 214, 220, 1);
+	border-radius: 50px;
+	padding: 10px;
 }
-.file-input-wrapper .fa-image{
 
-	
-	
+.file-input-wrapper .fa-image {
+
+
+
 	position: absolute;
-    top: -6px;
-    left: 170px;
-	
-	
-	
+	top: -6px;
+	left: 170px;
+
+
+
 
 }
-.file-input-wrapper .textdescription{
+
+.file-input-wrapper .textdescription {
 
 	Width: 100%;
-    Height: 12px;
-    Top: 924px;
-    Left: 673px;
-    size: 60px;
-    position: absolute;
-    top: 129px;
-    left: 3px;
-    margin-left: auto;
+	Height: 12px;
+	Top: 924px;
+	Left: 673px;
+	size: 60px;
+	position: absolute;
+	top: 129px;
+	left: 3px;
+	margin-left: auto;
 }
-#titleInput, #categoryInput, #descriptionInput {
+
+#titleInput,
+#categoryInput,
+#descriptionInput {
 	border: none;
 }
-.labform{
 
-	
+.labform {
+
+
 	font-family: Work Sans;
 	font-size: 14px;
 	font-weight: 600;
@@ -694,32 +704,36 @@ figure {
 
 
 }
+
 .return {
-	
-	
-	position: absolute;	
+
+
+	position: absolute;
 	top: 26px;
 	left: 30px;
 	cursor: pointer;
-	
+
 }
-.form h2{
-	
+
+.form h2 {
+
 	margin: 0;
 	color: #1D6154;
-	
+
 }
 
-select,#titleInput{
+select,
+#titleInput {
 
-	font-size: 14px;	
+	font-size: 14px;
 	padding-left: 10px;
 	Font-family: Work Sans;
 
 }
+
 /*****************************************************************/
 
-.file-input-wrapper .imgInput{
+.file-input-wrapper .imgInput {
 
 
 
@@ -729,13 +743,13 @@ select,#titleInput{
 	right: 0;
 	height: 169px;
 	width: 129px;
-	
+
 	margin-left: auto;
-	margin-right: auto;	
-	
+	margin-right: auto;
+
 }
 
-.modal-content .btn-secondary{
+.modal-content .btn-secondary {
 
 	position: absolute;
 	bottom: -110px;
