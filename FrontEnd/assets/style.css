@@ -290,10 +290,10 @@ footer nav ul {
 
 /******* modal :) *******/
 
-.mode-edition {
-	display: flex;
+.modeEdition {
 	flex-direction: row;
 	position: sticky;
+	display: flex;
 	display: none;
 	justify-content: center;
 	align-items: center;
@@ -336,7 +336,6 @@ footer nav ul {
 }
 
 .modal-container {
-	display: none; 
 	display: flex;
     position: fixed; 
     left: 0;
@@ -346,10 +345,10 @@ footer nav ul {
     width: 100%;
     height: 100%;
     background-color: #0000004D;
+	display: none; 
 }
 
 .modal-wrapper {
-	display: none;
 	position: absolute;
 	display: flex;
 	overflow: auto;
@@ -359,6 +358,7 @@ footer nav ul {
 	padding: 3em 6em;
 	flex-direction: column;
 	align-items: center;
+	display: none; 
 }
 
 .close-icon {

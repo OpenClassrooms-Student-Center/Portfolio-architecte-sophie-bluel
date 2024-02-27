@@ -1,9 +1,26 @@
 // when i login the filters will be removed and the display change from none for both mode-edition and #modifierButton
 
 
+let loged = localStorage.getItem("loginResponse");
 
 
 
+if (loged != undefined) {
+    const filters = document.getElementById('filters');
+  if (filters) {
+    filters.style.display = 'none';
+  }
+
+  const modeEdition = document.querySelector('.modeEdition');
+  if (modeEdition) {
+    modeEdition.style.display = 'flex';
+  }
+
+  const modifierButton = document.getElementById('modifierButton');
+  if (modifierButton) {
+    modifierButton.style.display = 'block';
+  }
+}
 
 
 
@@ -69,7 +86,4 @@ async function fetchDataAndDisplayImagesModal() {
     } 
 }
 
-// Call the function when the DOM content is loaded
-window.addEventListener('DOMContentLoaded', function() {
-    fetchDataAndDisplayImagesModal();
-});
+
