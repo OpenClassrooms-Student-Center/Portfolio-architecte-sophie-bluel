@@ -184,12 +184,17 @@ input[type="submit"]{
 	border-radius: 60px ;
 }
 
-footer nav ul {
+footer {
 	display: flex;
 	justify-content: flex-end;
 	background-color: WHITE;
 	height: 60px;
-	width: 100%;
+	width: 100vw; 
+	margin-left: calc(-1 * ((100vw - 100%) / 2));
+}
+footer nav ul {
+
+	margin: 1em 4em;
 	
 }
 
@@ -199,18 +204,24 @@ footer nav ul {
 
 .nav-menu a {
     text-decoration: none;
-    color: inherit;
+    color: #000;
 }
+
+.nav-menu a:hover {
+	font-weight: 800;
+}
+
 
 /******* filters *******/
 
-
 .filter-container {
     display: flex;
-    justify-content: center;
 	flex-direction: row;
+	justify-content: center;
 	gap: 10px;
-    margin: 50px 0;
+	align-items: center;
+	margin: 50px 0;
+	
 }
 
 .filter-button {
@@ -219,8 +230,8 @@ footer nav ul {
 	border: 1px #1d6154 solid;
 	border-radius: 60px;
 	color: #1d6154;
-	background: #FFFEF8;
-	height: 37px;
+	background: #fff;
+	height: 28px;
 	font-family: "Syne", sans-serif;
 	font-weight: 700;
 	font-size: 16px;
@@ -231,7 +242,7 @@ footer nav ul {
 }
 
 .filter-button:hover {
-    background: #1d6154;
+	background: #1d6154;
     color: #ffffff;
 }
 
@@ -277,6 +288,10 @@ footer nav ul {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09)
 }
+.formulaireConnexion input:hover {
+	background: #0E2F28;
+	color: #fff;
+}
 
 .footer-login {
 	position: fixed;
@@ -287,24 +302,20 @@ footer nav ul {
 }
 
 
-
 /******* modal :) *******/
 
 .modeEdition {
 	flex-direction: row;
-	position: sticky;
 	display: flex;
 	display: none;
 	justify-content: center;
 	align-items: center;
 	background-color: black;
 	color: #fff;
-	top: 0;
-	left: 0;
-	/* column-gap: 25px; */
 	gap: 0.5em;
 	padding: 1em;
-	width: 100%;
+	width: 100vw; 
+	margin-left: calc(-1 * ((100vw - 100%) / 2));
 	height: 2em;
 
 }
@@ -350,6 +361,7 @@ footer nav ul {
 	align-items: center;
 }
 
+
 .modal-wrapper {
 	position: absolute;
 	display: flex;
@@ -361,13 +373,19 @@ footer nav ul {
 	flex-direction: column;
 } 
 
+.modal-wrapper h2 {
+	color: #000;
+	font-weight: 200px;
+	font-size: 26px;
+}
+
+
 .close-icon {
   position: absolute;
-  top: 1.5em;
-  right: 1.5em;
   cursor: pointer;
-  
-
+  top: 2.2em;
+  right: 2.5em;
+  font-size: 0.9em;
 }
 
 hr {
@@ -376,27 +394,30 @@ hr {
 	border: 1px solid #B3B3B3;
 	position: relative;
 	margin: 10%;
+	margin-left: auto;
+	margin-right: auto;
+	
 }
 
 button {
 	border: 1px #1d6154 solid;
 	border-radius: 60px;
-	color: #1d6154;
-	background: #fff;
+	color: #fff;
+	background: #1d6154;
 	height: 28px;
+	width: 237px;
 	font-family: "Syne", sans-serif;
 	font-weight: 700;
 	font-size: 16px;
 	text-align: center;
 	padding: 3px 20px;
 	cursor: pointer;
-	justify-content: center;
-	align-items: center;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 button:hover {
-	background: #1d6154;
-	color: #fff;
+	background: #0E2F28;
 }
 
 .Add-photo-btn {
@@ -442,3 +463,101 @@ button:hover {
     color: #FFF;
 	font-size: 10px;
 }
+
+
+
+/* the form - to add photo to the modal */
+
+.form-add-photo {
+	display: none;
+}
+
+.form-container {
+	display: flex;
+	flex-direction: column;
+	width: fit-content; 
+	border-radius: 10px;
+	padding: 0;
+}
+
+.form-container .container-add-photo {
+	display: flex;
+	position: relative;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 200px;
+	background-color: #e8f1f6;
+	gap: 10px;
+}
+
+.form-container .container-add-photo img {
+	display: none;
+	max-width: 100%;
+	height: 100%;
+	z-index: 2;
+	position: absolute;
+}
+
+.form-container .container-add-photo #image {
+	display: none;
+	
+}
+
+.form-container .container-add-photo .fa-image {
+	font-size: 4rem;
+	color: #b9c5cc;
+}
+
+.container-add-photo .div-label-file {
+	width: 173px;
+	height: 36px;
+	background-color: #CBD6DC;
+	border-radius: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer
+
+}
+
+.container-add-photo .div-label-file .label-file {
+	color: #306685;
+	cursor: pointer
+}
+
+.titre-category {
+ 	margin-top: 2em;
+	display: flex;
+	flex-direction: column;
+}
+
+.titre-category #title {
+	border: none;
+	width: 420px;
+	height: 51px;
+	box-shadow: 0px 4px 14px 0px #00000017;
+	margin: 1em 0;
+	
+}
+
+.titre-category #categoryInput {
+	border: none;
+	width: 420px;
+	height: 51px;
+	box-shadow: 0px 4px 14px 0px #00000017;
+	margin: 1em 0;
+	
+}
+
+.form-container .fa-solid.fa-arrow-left {
+	font-size: 1.4em;
+	position: absolute;
+	top: 1.5em;
+	left: 2em;
+	cursor: pointer;
+}
+
+/* .form-container .button-add-photo { 
+	
+} */

@@ -13,11 +13,13 @@
 
 	
 </head>
+
 <body>
 	<div href="#" class="modeEdition">
-      <i class="fa-regular fa-pen-to-square"> </i>
-      <p>Mode édition</p>
-    </div>
+		<i class="fa-regular fa-pen-to-square"> </i>
+		<p>Mode édition</p>
+	</div>
+
 <header>
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav class="nav-menu">
@@ -64,19 +66,48 @@
 			 
 
 			<!-- the modal -->
-			<aside id="modalContainer" class="modal-container" aria-hidden="true">
-				
-				<div class="modal-wrapper">
+			<aside id="modalContainer" class="modal-container" aria-hidden="true">	
+				<div class="modal-wrapper"  id="modalWrapper">
 					<i id="closeModalIcon" class="fa-solid fa-x close-icon"></i>
-					<h2>Galerie photo</h2>
-					<div class="modal-gallery" id="modalGallery">
-						
+					
+					<div id="modalGalleryContainer">	
+						<h2>Galerie photo</h2>
+						<div class="modal-gallery" id="modalGallery">
+							
+						</div>
+						<hr>
+						<button class="Add-photo-btn" id="toggleContentButton">Ajouter photo</button>
 					</div>
-					<hr>
-					<button class="Add-photo-btn">Ajouter photo</button>
+
+					<div>
+						<form id="formAddPhoto" class="form-add-photo" enctype="multipart/form-data">
+							<div class="form-container">
+								<i class="fa-solid fa-arrow-left"></i>
+								<h2>Ajout photo</h2>
+								<div class="container-add-photo">
+									<i class="fa-regular fa-image"></i>
+									<div class="div-label-file">
+									<label for="image" class="label-file">+ Ajouter photo</label></div>
+									<p>jpg, png : 4mo max</p>
+									<input type="file" name="image" id="image" accept="image/jpg, image/png" required />
+								</div>
+								<div class="preview-image-div">
+									<!-- <img class="preview-image" id="previewImage" src="#" alt="Aperçu de l'image" /> -->
+								</div>
+
+								<div class="titre-category">
+								<label for="title">Titre</label>
+								<input type="text" name="title" id="title" required />
+								<label for="categoryInput">Catégorie</label>
+								<select id="categoryInput" name="category" required></select>
+								<hr>
+								<button type="submit" class="button-add-photo">Valider</button>
+								</div>
+							</div>
+						</form>
+					</div>
+
 				</div>
-
-
 			</aside>
 
 

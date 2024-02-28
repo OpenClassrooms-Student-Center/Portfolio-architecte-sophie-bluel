@@ -126,14 +126,13 @@ function replaceLoginWithLogout() {
   const loginButton = document.getElementById('js-login-button');
   const logoutButton = createLogoutButton();
 
-  // Replace login button with logout button
   loginButton.parentNode.replaceChild(logoutButton, loginButton);
 }
 
 // Check if the user is logged in
 const isLoggedIn = localStorage.getItem('loginResponse') !== null;
 
-// If logged in, replace login button with logout button
+
 if (isLoggedIn) {
   replaceLoginWithLogout();
 }
