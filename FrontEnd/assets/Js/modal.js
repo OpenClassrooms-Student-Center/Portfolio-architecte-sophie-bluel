@@ -1,4 +1,6 @@
-// when i login the filters will be removed and the display change from none for both mode-edition and #modifierButton
+// Pensez à stocker le token d'authentification pour pouvoir réaliser les envois et suppressions de travaux.
+
+
 
 
 let loggedIn = localStorage.getItem("loginResponse");
@@ -25,7 +27,7 @@ if (loggedIn != undefined) {
 
 //to openModal
 const openModal = function (e) {
-    e.preventDefault(); // Prevent the default action of the button
+    e.preventDefault(); 
     const targetId = e.target.getAttribute('href');
     const target = document.querySelector(targetId);
     if (target) {
@@ -57,49 +59,122 @@ function handleCloseIconClick() {
 
 const closeModalIcon = document.getElementById('closeModalIcon');
 closeModalIcon.addEventListener('click', handleCloseIconClick);
+
+
 // se referme lorsque l’on clique en dehors de la modale.
 
 
 
 
 
+
+
+
+
+// make a function to deletes images from API
+
+async function deleteImage(imagesId) {
+    try {
+        const detail = JSON.parse(loggedIn);
+        const response = await fetch(`http://localhost:5678/api/works/${imagesId}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${detail.token}`,
+                "Content-Type": "application/json",
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed to delete image");
+        }
+
+        console.log("Image deleted successfully");
+
+        
+    } catch (error) {
+        console.error("Error deleting image:", error);
+    }
+}
+
+
 // to generate images for the modal
-function generateImagesModal(images, containerId) {
+
+async function generateImagesModal(images, containerId) {
     const container = document.getElementById(containerId);
     images.forEach(article => {
         const imageElement = document.createElement("img");
         imageElement.src = article.imageUrl;
         imageElement.alt = article.title;
-        
+
         const figure = document.createElement("figure");
         figure.appendChild(imageElement);
-        
+
         const span = document.createElement("span");
         const trashCan = document.createElement("i");
-        trashCan.classList.add("fa-solid", "fa-trash-can"); 
-        trashCan.addEventListener("click", function() {
-            // Remove the parent figure element when the trash can icon is clicked
-            container.removeChild(figure); // it needs to be deleted from the API as well 
-        });
+        trashCan.classList.add("fa-solid", "fa-trash-can");
+        trashCan.setAttribute("data-image-id", article.id); // Set data-image-id attribute
+
         span.appendChild(trashCan);
         figure.appendChild(span);
 
         container.appendChild(figure);
+
+        
+        trashCan.addEventListener("click", async () => {
+            await deleteImage(article.id);
+            container.removeChild(figure); 
+        });
     });
 }
 
 async function fetchDataAndDisplayImagesModal() {
     try {
         const data = await getApi();
-        generateImagesModal(data, "modalGallery"); // Make sure the container ID matches the ID in your HTML
+        generateImagesModal(data, "modalGallery"); 
     } catch (error) {
         console.error("Error fetching data:", error);
     }
 }
+
 // Call the function when the DOM content is loaded
-window.addEventListener('DOMContentLoaded', function() {
+window.addEventListener('DOMContentLoaded', function () {
     fetchDataAndDisplayImagesModal();
 });
+
+
+
+
+
+
+async function restoreImage(imagesId) {
+    try {
+        const detail = JSON.parse(loggedIn);
+        const response = await fetch(`http://localhost:5678/api/works/restore/${imagesId}`, {
+            method: "PUT", // Assuming you have a PUT endpoint to restore images
+            headers: {
+                Authorization: `Bearer ${detail.token}`,
+                "Content-Type": "application/json",
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed to restore image");
+        }
+
+        console.log("Image restored successfully");
+
+        // Optionally, update the UI after restoration
+        // fetchDataAndDisplayImagesModal(); // Assuming this function fetches and displays images
+    } catch (error) {
+        console.error("Error restoring image:", error);
+    }
+}
+
+// Example of restoring an image
+restoreImage(imageId);
+
+
+
 
 
 
@@ -128,13 +203,31 @@ addPhotoButton.addEventListener('click', handleAddPhotoButtonClick);
 
 
 
-// Function to handle clicking on the arrow-left icon
-function handleArrowLeftClick() {
-    // Navigate back to the previous page in the browser history
-    window.history.back();
-}
 
-// Add event listener to the arrow-left icon
-const arrowLeftIcon = document.querySelector('.form-container .fa-solid.fa-arrow-left');
-arrowLeftIcon.addEventListener('click', handleArrowLeftClick);
 
+// Add event listener to the back arrow 
+
+
+// function leftArrow() {
+//     const modalGalleryContainer = document.getElementById('modalGalleryContainer');
+//     const formAddPhoto = document.getElementById('formAddPhoto');
+ 
+// }
+
+
+
+
+
+
+
+//   // add the categories dynamically to the form
+
+//   async function getCategory() {
+//     const reponse = await fetch("http://localhost:5678/api/categories");
+//     const data = await reponse.json();
+//     return data;
+//   }
+
+
+
+// POST the photo added photo to the API

@@ -1,23 +1,22 @@
 
-// import { generateFilters } from './index.js'
-
 
 // Eventlistener to login 
-const loginForm = document.getElementById('loginForm');
-loginForm.addEventListener('submit', function (event) {
-  event.preventDefault(); 
+document.addEventListener('DOMContentLoaded', function () {
+  const loginForm = document.getElementById('loginForm');
+  loginForm.addEventListener('submit', function (event) {
+      event.preventDefault(); 
 
-  
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
-  
-  if (email.trim() === '' || password.trim() === '') { // delete the space 
-    alert('Veuillez remplir tous les champs');
-    return;
-  }
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      
+      if (email.trim() === '' || password.trim() === '') {
+          alert('Veuillez remplir tous les champs');
+          return;
+      }
 
-  // Call the function to submit login details
-  submitLogin(email, password)
+      
+      submitLogin(email, password);
+  });
 });
 
 
@@ -43,15 +42,13 @@ async function submitLogin(email, password) {
 
       document.location.href = "index.html";
     } else if (loginResponse.status === 404) {
-      alert("Utilisateur non trouvé");
+      document.getElementById('errorMessage').textContent = "Utilisateur non trouvé";
     } else if (loginResponse.status === 401) {
-      alert("Utilisateur non autorisé");
+      document.getElementById('errorMessage').textContent = "Nom d'utilisateur ou mot de passe incorrect"; 
     } else {
-      alert("Erreur lors de la connexion: " + loginResponse.status);
+      document.getElementById('errorMessage').textContent = "Erreur lors de la connexion: " + loginResponse.status;
     }
   } catch (error) {
     console.error("Erreur lors de la connexion:", error);
   }
 }
-
-// i can create a function that makes the filters go and make the modifay appears

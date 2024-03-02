@@ -198,6 +198,7 @@ footer nav ul {
 	
 }
 
+
 /************************* my changes below (ง •`⎽´•)ง *************************/
 
 
@@ -212,7 +213,9 @@ footer nav ul {
 }
 
 
-/******* filters *******/
+
+
+/************** filters **************/
 
 .filter-container {
     display: flex;
@@ -251,7 +254,10 @@ footer nav ul {
     color: #ffffff;
 }
 
-/***** login page *****/
+
+
+
+/************** login page **************/
 
 .login {
 	width: 100%;
@@ -276,8 +282,9 @@ footer nav ul {
 	flex-direction: column;
 	height: auto;
 	justify-content: space-around;
-	width: 100%;
-	margin-right: 150px;
+	width: 400px;
+	margin-right: auto;
+	margin-left: auto;
 	gap: 10px;
 }
 
@@ -288,9 +295,12 @@ footer nav ul {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09)
 }
-.formulaireConnexion input:hover {
-	background: #0E2F28;
-	color: #fff;
+
+
+.formulaireConnexion a {
+	margin-right: auto;
+	margin-left: auto;
+	color: #000;
 }
 
 .footer-login {
@@ -301,8 +311,16 @@ footer nav ul {
 	width: 100%;
 }
 
+#errorMessage {
+	color: red; 
+	margin: 0;
+	padding: 0;
+}
 
-/******* modal :) *******/
+
+
+
+/************** modal :) **************/
 
 .modeEdition {
 	flex-direction: row;
@@ -378,7 +396,6 @@ footer nav ul {
 	font-weight: 200px;
 	font-size: 26px;
 }
-
 
 .close-icon {
   position: absolute;
@@ -464,6 +481,9 @@ button:hover {
 	font-size: 10px;
 }
 
+/* #modalGalleryContainer {
+	/* display: none; */
+
 
 
 /* the form - to add photo to the modal */
@@ -523,7 +543,7 @@ button:hover {
 
 .container-add-photo .div-label-file .label-file {
 	color: #306685;
-	cursor: pointer
+	cursor: pointer;
 }
 
 .titre-category {
@@ -557,7 +577,3 @@ button:hover {
 	left: 2em;
 	cursor: pointer;
 }
-
-/* .form-container .button-add-photo { 
-	
-} */
