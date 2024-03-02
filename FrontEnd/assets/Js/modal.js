@@ -144,40 +144,6 @@ window.addEventListener('DOMContentLoaded', function () {
 
 
 
-
-
-async function restoreImage(imagesId) {
-    try {
-        const detail = JSON.parse(loggedIn);
-        const response = await fetch(`http://localhost:5678/api/works/restore/${imagesId}`, {
-            method: "PUT", // Assuming you have a PUT endpoint to restore images
-            headers: {
-                Authorization: `Bearer ${detail.token}`,
-                "Content-Type": "application/json",
-            },
-        });
-
-        if (!response.ok) {
-            throw new Error("Failed to restore image");
-        }
-
-        console.log("Image restored successfully");
-
-        // Optionally, update the UI after restoration
-        // fetchDataAndDisplayImagesModal(); // Assuming this function fetches and displays images
-    } catch (error) {
-        console.error("Error restoring image:", error);
-    }
-}
-
-// Example of restoring an image
-restoreImage(imageId);
-
-
-
-
-
-
 // the form - Add event listener to the "Ajouter photo" button
 
 function handleAddPhotoButtonClick() {
