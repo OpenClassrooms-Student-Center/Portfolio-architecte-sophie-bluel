@@ -70,7 +70,7 @@
 				<div class="modal-wrapper"  id="modalWrapper">
 					<i id="closeModalIcon" class="fa-solid fa-x close-icon"></i>
 					
-					<div id="modalGalleryContainer">	
+					<div id="modalGalleryContainer" class="modal-section active">	
 						<h2>Galerie photo</h2>
 						<div class="modal-gallery" id="modalGallery">
 							
@@ -79,33 +79,35 @@
 						<button class="Add-photo-btn" id="toggleContentButton">Ajouter photo</button>
 					</div>
 
-					<div>
+					<div class="formContainer2 modal-section">
 						<form id="formAddPhoto" class="form-add-photo" enctype="multipart/form-data">
-							<div class="form-container">
-								<i class="fa-solid fa-arrow-left" onclick="leftArrow()"></i>
+							<div class="formContainer">
+								<i class="fa-solid fa-arrow-left"></i>
 								<h2>Ajout photo</h2>
 								<div class="container-add-photo">
 									<i class="fa-regular fa-image"></i>
 									<div class="div-label-file">
-									<label for="image" class="label-file">+ Ajouter photo</label></div>
+										<label for="image" class="label-file">+ Ajouter photo</label>
+									</div>
 									<p>jpg, png : 4mo max</p>
 									<input type="file" name="image" id="image" accept="image/jpg, image/png" required />
 								</div>
-								<div class="preview-image-div">
-									<!-- <img class="preview-image" id="previewImage" src="#" alt="Aperçu de l'image" /> -->
+								<div class="previewImageDiv">
+									<img class="preview-image" id="previewImage" src="#" alt="Aperçu de l'image" />
 								</div>
-
+					
 								<div class="titre-category">
-								<label for="title">Titre</label>
-								<input type="text" name="title" id="title" required />
-								<label for="categoryInput">Catégorie</label>
-								<select id="categoryInput" name="category" required></select>
-								<hr>
-								<button type="submit" class="button-add-photo">Valider</button>
+									<label for="title">Titre</label>
+									<input type="text" name="title" id="title" required />
+									<label for="categoryInput">Catégorie</label>
+									<select id="categoryInput" name="category" required></select>
+									<hr>
+									<button type="submit" class="button-add-photo">Valider</button>
 								</div>
 							</div>
 						</form>
 					</div>
+					
 
 				</div>
 			</aside>
