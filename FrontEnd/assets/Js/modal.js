@@ -1,4 +1,3 @@
-// Pensez à stocker le token d'authentification pour pouvoir réaliser les envois et suppressions de travaux.
 // se referme lorsque l’on clique en dehors de la modale.
 
 

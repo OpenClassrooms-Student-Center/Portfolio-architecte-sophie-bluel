@@ -220,29 +220,37 @@ footer nav ul {
 .filter-container {
     display: flex;
 	flex-direction: row;
-	justify-content: center;
+	justify-content: space-between;
 	gap: 10px;
+	width: 70%;
 	align-items: center;
-	margin: 50px 0;
-	
+	margin-top: 25px;
+	margin-bottom: 50px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .filter-button {
-	display: flex;
-	align-items: center;
+	display: flex; 
+	align-items: center; 
+	justify-content: center;
 	border: 1px #1d6154 solid;
 	border-radius: 60px;
 	color: #1d6154;
-	background: #fff;
-	height: 28px;
+	background-color: #FFFEF8;
+	height: 37px;
 	font-family: "Syne", sans-serif;
 	font-weight: 700;
 	font-size: 16px;
 	text-align: center;
-	padding: 3px 20px;
 	cursor: pointer;
-
+	width: 60%;
+	flex: 1;
 }
+
+.filter-container button:last-child {
+	flex: 1.5; 
+  }
 
 .filter-button:hover {
 	background: #1d6154;
@@ -344,7 +352,7 @@ footer nav ul {
 	justify-content: center;
 }
 
-.mes-projet-modifier h2 {
+.mes-projet-modifier h2 { 
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -395,6 +403,7 @@ footer nav ul {
 	color: #000;
 	font-weight: 200px;
 	font-size: 26px;
+	
 }
 
 .close-icon {
