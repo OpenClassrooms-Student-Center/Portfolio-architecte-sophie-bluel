@@ -286,7 +286,9 @@ li:hover {
 }
 
 .gallery img {
+
 	width: 100%;
+
 
 }
 
@@ -457,20 +459,14 @@ footer {
 	display: flex;
 	flex-direction: column;
 
-	/* justify-content: center;*/
+	
 	align-items: center;
 	position: relative;
 	top: 90px;
 	left: 0;
 	right: 0;
 
-	/* margin-left: auto;
-	margin-right: auto; */
-
-
-	/* top: 100px; */
-
-
+	
 
 
 }
@@ -495,7 +491,8 @@ footer {
 	font-size: 26px;
 	font-style: normal;
 	font-weight: 400;
-
+	position: relative;
+	top: -10px;
 
 	margin-bottom: 30px;
 
@@ -511,7 +508,7 @@ footer {
 	width: 237px;
 	height: 36px;
 	position: absolute;
-	bottom: 40px;
+	bottom: 29px;
 	left: 0;
 	right: 0;
 	margin-left: auto;
@@ -530,12 +527,35 @@ footer {
 	background-color: rgba(179, 179, 179, 1);
 	position: absolute;
 
-	top: 550px;
+	top: 571px;
 	left: 0;
 	right: 0;
 	margin-left: auto;
 	margin-right: auto;
 
+}
+
+.modal-content .erreur {
+	
+	position: absolute;
+	top: 500px;
+	padding: 0;
+	font-size: 14px;
+	font-weight: 600;
+	color: #1D6154;
+	
+	animation: hide 5s ease-in-out;	
+	
+
+}
+@keyframes hide {
+
+	0% { opacity: 0; }
+	20% { opacity: 1; }
+	80% { opacity: 1; }
+	100% { opacity: 0; }
+	
+		
 }
 
 /* gallerie modal */
@@ -553,7 +573,8 @@ footer {
 	margin: 0;
 	padding: 0;
 	justify-content: center;
-
+	position: relative;
+	top: -20px;
 }
 
 .miniGallery img {
@@ -581,17 +602,23 @@ figure {
 }
 
 
-.fa-trash-can {
+.modal .fa-trash-can {
 
 	position: absolute;
-	width: 137px;
-	height: 40px;
+	width: 20px;
+	height: 20px;
+	text-align: center;
+	line-height: 20px;
+	border-radius: 2px;
 	top: 10px;
-	right: -110px;
+	right: 14px;
+	background-color: #000;
+	color: #FFF;
 	cursor: pointer;
 
 
 }
+
 
 .formAjout {
 
@@ -600,14 +627,22 @@ figure {
 	justify-content: center;
 	width: 100%;
 	gap: 21px;
+	
 	position: relative;
 
 }
+.formAjout .message {
+	
+	color: red;
+	width: 360px;
+	animation: shake 5.5s;	
+}
+
 
 .file-input-wrapper {
 
 	position: relative;
-
+	
 	display: inline-block;
 	width: 100%;
 	text-align: center;
@@ -752,9 +787,11 @@ select,
 .modal-content .btn-secondary {
 
 	position: absolute;
-	bottom: -110px;
+	bottom: -103px;
 	left: 85px;
 	right: 0;
 	margin-left: auto;
 	margin-right: auto;
+	margin-bottom: 20px;
+	top: 480px;
 }

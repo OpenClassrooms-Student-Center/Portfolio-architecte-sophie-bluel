@@ -1,5 +1,9 @@
 
 /************************** recuperer les travaux ******************/
+/**
+ * recuperation des travaux
+ * @returns 
+ */
 async function getWorks() {
     let url = 'http://localhost:5678/api/works';
     try {
@@ -30,33 +34,23 @@ async function boutonsByCategory() {
     let htmlCat = '';
     categories.forEach(category => {
         let htmlSegment = `<button class="btn" id="${category.id}">${category.name}</button>`;
-
         html += htmlSegment;
-
-
         let btn = document.querySelector('.btn');
         btn.id = category.id;
-
-
 
     });
     let container = document.querySelector('.btn-container');
     container.innerHTML = html;
 
-
 }
 
 /******************* filtrer les travaux par categorie**************/
 async function filterWorks() {
-
-
     let html = '';
     let container = document.querySelector('.gallery');
 
     //recuperer les travaux
-
     let works = await getWorks();
-
     works.forEach(work => {
         let htmlSegment = `<figure>
                                 <img src="${work.imageUrl}" >
@@ -69,41 +63,27 @@ async function filterWorks() {
         let btnId = work.categoryId;
     });
 
-
     container.innerHTML = html;
 
-
-
     //recuperer les boutons
-
-
     const buttons = document.querySelectorAll('.btn');
 
     // //parcourir les boutons
-
     buttons.forEach(button => {
-
-
-
         //ajouter un ecouteur d'evenement pour chaque bouton
-
         button.addEventListener("click", (e) => {
 
             //recuperer la valeur du bouton clique
-
             const idCategory = e.target.id;
             console.log("je me base sur cette id " + idCategory);
-
 
             if (idCategory !== "") {
 
                 //filtrer les travaux via la fonction filter
-
                 const filteredWorks = works.filter(work => work.categoryId == idCategory);
                 console.log(" resultat " + filteredWorks);
 
                 //boucle pour afficher les travaux filtres par categorie
-
                 renderWorks(filteredWorks);
 
             }
@@ -123,6 +103,7 @@ async function filterWorks() {
 }
 
 /********************************** afficher les travaux **********/
+
 function renderWorks(works) {
 
     let galery = document.querySelector('.gallery');
@@ -144,7 +125,6 @@ function renderWorks(works) {
 
 /*********************************page en  mode creation **********/
 function modeCreation() {
-
     const loged = window.sessionStorage.loged;
     const logout = document.querySelector('.login');
     let racine = document.querySelector('body');
@@ -152,57 +132,31 @@ function modeCreation() {
     let title = document.querySelector('#portfolio h2');
     let btnsFilter = document.querySelector('.btn-container');
 
-
     if (loged) {
-
-
-
         //creer div pour le mode creation
-
-
         div.classList.add('creation');
-
         racine.appendChild(div);
         div.innerHTML = `<a href="#"><i class="fas fa-pen-to-square"></i> Mode création</a>`;
 
-
         //ajouter le lien modifier    
-
-
-
         title.innerHTML = `<h2>Mes Projets<i class="fas  fa-pen-to-square"></i><a href="#" class="openModal">modifier</a></h2>`;
 
-
-
-
         // changer login en logout
-
         logout.textContent = "logout";
-        logout.innerHTML = `<a href="login.html">logout</a>`
-
+        logout.innerHTML = `<a href="login.html">logout</a>`;
         logout.addEventListener("click", (e) => {
             console.log("tu es logout");
             // window.sessionStorage.loged = false;
             window.sessionStorage.clear();
-
-
         })
 
         createModal();
 
-
-
         // retirer les boutons de filtrages
-
-
-
         let btns = document.querySelectorAll('.btn');
         btnsFilter.style.display = "none";
         console.log(btnsFilter.innerHTML);
-
-
     }
-
 }
 
 
@@ -238,6 +192,8 @@ async function createModal() {
     addButton.className = 'btn btn-primary';
     addButton.textContent = 'Ajouter une photo';
 
+    var erreur = document.createElement('p');
+    erreur.className = 'erreur';
 
 
 
@@ -246,12 +202,13 @@ async function createModal() {
     modalContent.appendChild(closeBtn);
     modalContent.appendChild(miniGallery);
     modalContent.appendChild(addButton);
-
     modalContent.appendChild(retour);
     modal.appendChild(modalContent);
+    modalContent.appendChild(erreur);
+
 
     retour.style.display = "none";
-
+    erreur.innerHTML = '';
 
     // Ajout de la modal à la fin du body
     document.body.appendChild(modal);
@@ -259,44 +216,30 @@ async function createModal() {
     // Event listener pour fermer la modal
     closeBtn.addEventListener('click', function () {
         modal.style.display = 'none';
-
-
     });
-
     // Event listener pour ouvrir la modal
     addButton.addEventListener('click', async function () {
-
         //formulaire d'ajout photo
-
         retour.style.display = "block";
         addButton.style.display = "none";
+        erreur.innerHTML = '';
         miniGallery.innerHTML = '';
-
         var form = document.createElement('form');
-
         form.className = 'formAjout';
         miniGallery.appendChild(form);
-        let formulaireAdd = ` 
-      
-        <div class="file-input-wrapper">
-        
-                                    <input type="file" id="fileInput" accept="image/jpg, image/png" />
-                                    <label class="labelajout" for="fileInput"><i class="fa-solid fa-plus"></i> Ajouter une photo</label>        
-
-                                    <img class="fa-image" src="assets/icons/picture.svg" />
-                                    <p class="textdescription">jpg, png : 4mo max</p>
-
-                                </div>
-        
-        <label class="labform" for="titleInput"> Titre </label>
-        <input type="text" id="titleInput" />
-        <label class="labform" for="categoryInput"> Categorie </label>
-        <select id="categoryInput"></select>
-        <button type="submit" class="btn btn-secondary">Valider</button>`;
-
-
-
-
+        let formulaireAdd = `       
+            <div class="file-input-wrapper">
+                <input type="file" id="fileInput" accept="image/jpg, image/png" />
+                <label class="labelajout" for="fileInput"><i class="fa-solid fa-plus"></i> Ajouter une photo</label>
+                <img class="fa-image" src="assets/icons/picture.svg" />
+                <p class="textdescription">jpg, png : 4mo max</p>
+            </div>
+                    <p class="message"> </p>
+                    <label class="labform" for="titleInput"> Titre </label>
+                    <input type="text" id="titleInput" />
+                    <label class="labform" for="categoryInput"> Categorie </label>
+                    <select id="categoryInput"></select>
+                    <button type="submit" class="btn btn-secondary">Valider</button>`;
 
         form.innerHTML = formulaireAdd;
         retour.addEventListener('click', function () {
@@ -305,27 +248,16 @@ async function createModal() {
             valider.style.display = "none";
             form.innerHTML = '';
             title.textContent = 'Galerie photo';
-
             getModal();
-
-
-
-
         })
-
         let htmlCat = ' ';
-
         let categories = await getCategories();
         categories.forEach(element => {
-
             let op = `<option value="${element.id}">${element.name}</option>`;
             htmlCat += op;
-
-
         });
 
         let cat = document.querySelector('#categoryInput');
-
         cat.appendChild(new Option('Tous', 'all'));
         cat.innerHTML = htmlCat;
         let divForm = document.querySelector('.file-input-wrapper');
@@ -349,7 +281,6 @@ async function createModal() {
             const reader = new FileReader();
             reader.onload = function () {
                 let img = document.createElement('img');
-
                 img.src = reader.result;
                 img.className = 'imgInput';
                 miniGallery.appendChild(img);
@@ -357,53 +288,31 @@ async function createModal() {
                 textdescription.style.display = "none";
                 faImage.style.display = "none";
                 divForm.appendChild(img);
-
-
             }
             reader.readAsDataURL(file);
-
-
-
-
         });
-
         /************* fonction d'ajout de projet ************************** */
-
         ajoutWork();
-
-
     });
-    //
-
     // Event listener pour fermer la modal en cliquant à l'extérieur
     window.addEventListener('click', function (event) {
         if (event.target === modal) {
-
             modal.style.display = 'none';
             retour.style.display = "none";
-            addButton.style.display = "block";           
+            addButton.style.display = "block";
             title.textContent = 'Galerie photo';
         }
     });
-    
     // Event listener pour ouvrir la modal en cliquant sur Modifier
-
     let modalLien = document.querySelector('.openModal');
     modalLien.addEventListener("click", async (e) => {
         getModal();
+        erreur.innerHTML = '';
 
     })
-
-
-
-
-
 }
 
 async function getModal() {
-
-
-
     //afficher le modale
     let modal = document.querySelector('.modal');
     let btn = document.querySelector('.btn-primary');
@@ -411,60 +320,42 @@ async function getModal() {
     let works = await getWorks();
     modal.style.display = "block";
     if (modal.style.display == "block") {
-
         let htmlModal = ' ';
         works.forEach(workModal => {
-
             let htmlMiniGalerie = `<figure>
-                                    <img src="${workModal.imageUrl}" >
-                                    <i class="fa-solid fa-trash-can" data-id="${workModal.id}"></i>
-                                </figure>`;
-
-
+                                        <img src="${workModal.imageUrl}" >
+                                        <i class="fa-solid fa-trash-can" data-id="${workModal.id}"></i>
+                                    </figure>`;
             htmlModal += htmlMiniGalerie;
-
-
-
         });
 
         let containerModal = document.querySelector('.miniGallery');
-
         containerModal.innerHTML = htmlModal;
-
-
         // Ajouter un gestionnaire d'événements pour chaque icône de corbeille
-
-
         const trashIcons = document.querySelectorAll('.fa-trash-can');
         trashIcons.forEach(icon => {
             icon.addEventListener('click', async (e) => {
                 //console.log('coucou '+e.target.dataset.id);
-
                 const idToDelete = e.target.dataset.id;
                 await deleteWork(idToDelete);
                 filterWorks();
                 getModal();
                 e.preventDefault();
-                //    getModal(); // Mettez à jour la modal après la suppression
             });
         });
-
-
-
     }
 }
 /******************* supprimer un projet ************************ */
 function deleteWork(id) {
     const loged = window.sessionStorage.loged;
     const accessToken = window.sessionStorage.accessToken;
-
+    var erreur = document.querySelector('.modal .erreur');
     if (loged) {
         return fetch(`http://localhost:5678/api/works/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${accessToken}`
-
             }
         })
             .then(function (res) {
@@ -473,129 +364,74 @@ function deleteWork(id) {
                 } else if (!res.ok) {
                     throw new Error(`La suppression a échoué avec le statut ${res.status}`);
                 }
-                // return res.json();
             })
             .then(function (data) {
                 console.log('Suppression réussie', data);
-                // Peut-être faire quelque chose avec la réponse JSON si nécessaire
+                erreur.innerHTML = 'Suppression réussie';
+                setTimeout(function () {
+                    erreur.classList.remove('erreur');
+                    erreur.innerHTML = '';
+                }, 3000);
             })
             .catch(function (error) {
                 console.error('Erreur lors de la suppression :', error.message);
             });
     } else {
         console.error('L\'utilisateur n\'est pas connecté. La suppression n\'est pas autorisée.');
-        // Gérer le cas où l'utilisateur n'est pas connecté (peut-être rediriger vers la page de connexion)
     }
 }
 
 /******************* ajouter un projet ************************** */
 function ajoutWork() {
-    const loged = window.sessionStorage.loged;
     const accessToken = window.sessionStorage.accessToken;
-
-
-
-
+    var message = document.querySelector('.formAjout .message');
+    var titleInput = document.getElementById('titleInput');
     let formValider = document.querySelector('.formAjout');
-
     formValider.addEventListener("submit", async function (e) {
-
         e.preventDefault();
-
-
         var fileInput = document.querySelector('input[type="file"]');
-
         var file = fileInput.files[0];
-        console.log(file);
-       
-       // Vérifier le format de l'image (JPG ou PNG)
-       if (!file.type.match('image/jpeg') && !file.type.match('image/png')) {
-        alert("Veuillez sélectionner une image au format JPG ou PNG.");
-        return;
-    }
-
-    // Vérifier la taille de l'image (max 4 Mo)
-    if (file.size > 4 * 1024 * 1024) {
-        alert("La taille de l'image ne doit pas dépasser 4 Mo.");
-        return;
-    }
-
-
+        // Vérifier que tous les champs sont remplis
+        if ((titleInput.value == "") || !file || !categoryInput) {
+            message.innerHTML = "Veuillez remplir tous les champs du formulaire.";
+            return;
+        }
+        // Vérifier le format de l'image (JPG ou PNG)
+        else if (!file.type.match('image/jpeg') && !file.type.match('image/png')) {
+            message.innerHTML = "Veuillez sélectionner une image au format JPG ou PNG.";
+            return;
+        }
+        // Vérifier la taille de l'image (max 4 Mo)
+        if (file.size > 4 * 1024 * 1024) {
+            message.innerHTML = "La taille de l'image ne doit pas dépasser 4 Mo.";
+            return;
+        }
         // Créez un objet FormData pour rassembler les données du formulaire
         var formData = new FormData();
         formData.append('title', document.getElementById('titleInput').value);
         formData.append('image', file);
         formData.append('category', document.getElementById('categoryInput').value);
-
-        if (!titleInput || !fileInput.files[0] || !categoryInput) {
-            alert("Veuillez remplir tous les champs du formulaire.");
-            return;
-        }
-
-
         try {
             const response = await fetch('http://localhost:5678/api/works', {
                 method: 'POST',
                 body: formData,
                 headers: {
-
                     'Authorization': `Bearer ${accessToken}`
-
                 }
-
             });
-            if (response.status === 401) {
+            if (!response.ok) {
                 throw new Error('Non autorisé (Unauthorized). Veuillez vous connecter.', response.status);
             }
             const data = await response.json();
-            alert("Votre projet a bien été ajouté");
-
+            console.log("Votre projet a bien été ajouté");
             filterWorks();
             getModal();
             e.preventDefault();
-
-
         } catch (error) {
             console.error('Erreur lors de l\'ajout de la photo :', error.message);
         }
-
     });
-
-
 }
-// function ajoutWork() {
-//     let formValider = document.querySelector('.formAjout');
-//     formValider.addEventListener("submit", async function (e) {
-//         e.preventDefault();
-
-//         var fileInput = document.querySelector('input[type="file"]');
-//         var file = fileInput.files[0];
-
-//         // Vérifiez si un fichier a été sélectionné
-//         if (file) {
-//             // Obtenez l'URL de l'image à partir du fichier
-//             var imageUrl = URL.createObjectURL(file);
-
-
-//             // ... (restez inchangé)
-
-//             // Créez un objet FormData pour rassembler les données du formulaire
-//             var formData = new FormData();
-//             formData.append('title', document.getElementById('titleInput').value);
-//             formData.append('imageUrl', file);
-//             formData.append('category', document.getElementById('categoryInput').value);
-
-//             try {
-//                 // ... (restez inchangé)
-
-//             } catch (error) {
-//                 console.error('Erreur lors de l\'ajout de la photo :', error.message);
-//             }
-//         } else {
-//             console.error('Aucun fichier sélectionné.');
-//         }
-//     });
-// }
 
 function init() {
 
