@@ -1,5 +1,3 @@
-// se referme lorsque l’on clique en dehors de la modale.
-
 
 let loggedIn = localStorage.getItem("loginResponse");
 
@@ -32,6 +30,7 @@ const openModal = function (e) {
         target.style.display = 'flex'; 
         target.removeAttribute('aria-hidden');
         target.setAttribute('aria-modal', 'true');
+        localStorage.setItem('modalOpen', 'true'); 
     } else {
         console.error('Modal target not found:', targetId);
     }
@@ -45,72 +44,38 @@ document.querySelectorAll('.js-modal').forEach(a => {
 
 
 //to close the modal
+
 function hideModal() {
     const modalContainer = document.getElementById('modalContainer');
     modalContainer.style.display = 'none';
-} 
-
-function handleCloseIconClick() {
-    console.log("Close icon clicked"); 
-    hideModal(); 
+    localStorage.removeItem('modalOpen'); // Remove modal state from storage
 }
 
 const closeModalIcon = document.getElementById('closeModalIcon');
-closeModalIcon.addEventListener('click', handleCloseIconClick);
+closeModalIcon.addEventListener('click', hideModal);
 
-
-// se referme lorsque l’on clique en dehors de la modale.
-
-
-
-
-
-
-
-
-
-// make a function to deletes images from API
-
-async function deleteImage(imagesId) {
-    try {
-        const detail = JSON.parse(loggedIn);
-        const response = await fetch(`http://localhost:5678/api/works/${imagesId}`, {
-            method: "DELETE",
-            headers: {
-                Authorization: `Bearer ${detail.token}`,
-                "Content-Type": "application/json",
-            },
-        });
-
-        if (!response.ok) {
-            throw new Error("Failed to delete image");
-        }
-
-        console.log("Image deleted successfully");
-
-    } catch (error) {
-        console.error("Error deleting image:", error);
+// Event listener for closing modal when clicking outside
+document.addEventListener('click', function(e) {
+    const modalContainer = document.getElementById('modalContainer');
+    if (e.target === modalContainer) {
+        hideModal();
     }
+});
+
+// Check if modal state is stored in local storage
+const isModalOpen = localStorage.getItem('modalOpen');
+
+// If modal state is stored and true, open the modal
+if (isModalOpen === 'true') {
+    const modalContainer = document.getElementById('modalContainer');
+    modalContainer.style.display = 'flex'; 
+    modalContainer.removeAttribute('aria-hidden');
+    modalContainer.setAttribute('aria-modal', 'true');
 }
 
-function handleDeleteClick(event) {
 
-    event.preventDefault();
 
-    const trashCan = event.target;
-    const articleId = trashCan.getAttribute("data-image-id");
-    const figure = trashCan.closest("figure");
-
-    if (!articleId || !figure) return;
-
-    deleteImage(articleId)
-        .then(() => {
-            figure.remove();
-        })
-        .catch(error => {
-            console.error("Error deleting image:", error);
-        });
-}
+// to generate images for the modal
 
 async function generateImagesModal(images, containerId) {
     const container = document.getElementById(containerId);
@@ -125,21 +90,26 @@ async function generateImagesModal(images, containerId) {
         const span = document.createElement("span");
         const trashCan = document.createElement("i");
         trashCan.classList.add("fa-solid", "fa-trash-can");
-        trashCan.setAttribute("data-image-id", article.id); 
+        trashCan.setAttribute("data-image-id", article.id); // Set data-image-id attribute
 
         span.appendChild(trashCan);
         figure.appendChild(span);
 
         container.appendChild(figure);
-    });
 
-    container.addEventListener("click", handleDeleteClick);
+        
+        trashCan.addEventListener("click", async (event) => {
+            event.preventDefault();
+            await deleteImage(article.id);
+            container.removeChild(figure); 
+        });
+    });
 }
 
 async function fetchDataAndDisplayImagesModal() {
     try {
         const data = await getApi();
-        generateImagesModal(data, "modalGallery");
+        generateImagesModal(data, "modalGallery"); 
     } catch (error) {
         console.error("Error fetching data:", error);
     }
@@ -155,79 +125,41 @@ window.addEventListener('DOMContentLoaded', function () {
 
 
 
+// Delete image function
+async function deleteImage(imageId) {
+    try {
+        const loggedIn = JSON.parse(localStorage.getItem("loginResponse"));
+        const response = await fetch(`http://localhost:5678/api/works/${imageId}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${loggedIn.token}`,
+                "Content-Type": "application/json",
+            },
+        });
 
+        if (!response.ok) {
+            throw new Error("Failed to delete image");
+        }
 
+        console.log("Image deleted successfully");
 
-// async function deleteImage(event, imagesId) {
-//     event.preventDefault(); // Prevent default behavior
+    } catch (error) {
+        console.error("Error deleting image:", error);
+    }
+}
 
-//     try {
-//         const detail = JSON.parse(loggedIn);
-//         const response = await fetch(`http://localhost:5678/api/works/${imagesId}`, {
-//             method: "DELETE",
-//             headers: {
-//                 Authorization: `Bearer ${detail.token}`,
-//                 "Content-Type": "application/json",
-//             },
-//         });
-
-//         if (!response.ok) {
-//             throw new Error("Failed to delete image");
-//         }
-
-//         console.log("Image deleted successfully");
-
-//     } catch (error) {
-//         console.error("Error deleting image:", error);
-//     }
-// }
-
-
-
-// // to generate images for the modal
-
-// async function generateImagesModal(images, containerId) {
-//     const container = document.getElementById(containerId);
-//     images.forEach(article => {
-//         const imageElement = document.createElement("img");
-//         imageElement.src = article.imageUrl;
-//         imageElement.alt = article.title;
-
-//         const figure = document.createElement("figure");
-//         figure.appendChild(imageElement);
-
-//         const span = document.createElement("span");
-//         const trashCan = document.createElement("i");
-//         trashCan.classList.add("fa-solid", "fa-trash-can");
-//         trashCan.setAttribute("data-image-id", article.id); // Set data-image-id attribute
-
-//         span.appendChild(trashCan);
-//         figure.appendChild(span);
-
-//         container.appendChild(figure);
-
-        
-//         trashCan.addEventListener("click", async (event) => {
-//             event.preventDefault();
-//             await deleteImage(article.id);
-//             container.removeChild(figure); 
-//         });
-//     });
-// }
-
-// async function fetchDataAndDisplayImagesModal() {
-//     try {
-//         const data = await getApi();
-//         generateImagesModal(data, "modalGallery"); 
-//     } catch (error) {
-//         console.error("Error fetching data:", error);
-//     }
-// }
-
-// // Call the function when the DOM content is loaded
-// window.addEventListener('DOMContentLoaded', function () {
-//     fetchDataAndDisplayImagesModal();
-// });
+// Event listener for delete image click
+function handleDeleteClick(event) {
+    event.preventDefault();
+    const trashCan = event.target;
+    const articleId = trashCan.getAttribute("data-image-id");
+    const figure = trashCan.closest("figure");
+    if (articleId && figure) {
+        deleteImage(articleId)
+            .then(() => figure.remove())
+            .catch(error => console.error("Error deleting image:", error));
+    }
+}
 
 
 
@@ -281,6 +213,30 @@ document.addEventListener("DOMContentLoaded", function() {
   }
   displayCategoryModal();
   
+  
+
+
+// Event listener for form submission to add photo
+document.getElementById("formAddPhoto").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    try {
+        const formData = new FormData(e.target);
+        const loggedIn = JSON.parse(localStorage.getItem("loginResponse"));
+        const response = await fetch("http://localhost:5678/api/works", {
+            method: "POST",
+            body: formData,
+            headers: {
+                Authorization: `Bearer ${loggedIn.token}`
+            }
+        });
+        if (!response.ok) {
+            throw new Error("Erreur lors de l'envoi du fichier");
+        }
+        const data = await response.json();
+    } catch (error) {
+        console.error("Erreur :", error);
+    }
+});
 
 
 
@@ -307,49 +263,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-// "POST" the image and display on the page
-
-
-const formAddPhoto = document.querySelector("#formAddPhoto");
-
-formAddPhoto.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    try {
-        
-        const formData = new FormData(formAddPhoto);
-
-        
-        for (let info of formData.entries()) {
-            console.log(info[0] + "," + info[1]);
-        }
-     
-        const detail = JSON.parse(loggedIn);
-
-        
-        const response = await fetch("http://localhost:5678/api/works", {
-            method: "POST",
-            body: formData,
-            headers: {
-                Authorization: `Bearer ${detail.token}`
-            }
-        });
-       
-        if (!response.ok) {
-            throw new Error("Erreur lors de l'envoi du fichier");
-        }
-   
-        const data = await response.json();
-        
-    } catch (error) {
-        console.error("Erreur :", error);
-    }
-});
-
-
-
 // the end *◟(ﾟｰﾟ )◞* 
-
-
-
-
