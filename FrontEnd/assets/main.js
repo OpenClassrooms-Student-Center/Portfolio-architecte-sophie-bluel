@@ -26,7 +26,7 @@ async function getCategories() {
         console.log(error);
     }
 }
-/********************* boutons par category ************************/
+/********************* Afficher boutons par category ************************/
 async function boutonsByCategory() {
 
     let categories = await getCategories();
@@ -349,7 +349,8 @@ async function getModal() {
 function deleteWork(id) {
     const loged = window.sessionStorage.loged;
     const accessToken = window.sessionStorage.accessToken;
-    var erreur = document.querySelector('.modal .erreur');
+    let erreur = document.querySelector('.modal .erreur');
+    
     if (loged) {
         return fetch(`http://localhost:5678/api/works/${id}`, {
             method: 'DELETE',
@@ -358,20 +359,20 @@ function deleteWork(id) {
                 'Authorization': `Bearer ${accessToken}`
             }
         })
-            .then(function (res) {
+            .then(  function (res) {
                 if (res.status === 401) {
                     throw new Error('Non autorisé (Unauthorized). Veuillez vous connecter.');
                 } else if (!res.ok) {
                     throw new Error(`La suppression a échoué avec le statut ${res.status}`);
                 }
             })
-            .then(function (data) {
-                console.log('Suppression réussie', data);
-                erreur.innerHTML = 'Suppression réussie';
-                setTimeout(function () {
-                    erreur.classList.remove('erreur');
-                    erreur.innerHTML = '';
+            .then( function (data) {                
+                console.log('Suppression réussie', data);              
+                erreur.textContent = 'Suppression réussie';
+                setTimeout(function () {                  
+                    erreur.textContent = ' ';
                 }, 3000);
+            
             })
             .catch(function (error) {
                 console.error('Erreur lors de la suppression :', error.message);
