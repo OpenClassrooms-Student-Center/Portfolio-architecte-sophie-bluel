@@ -459,7 +459,7 @@ function validerBtn() {
     var fileInput = document.querySelector('input[type="file"]').files[0];
     let formValider = document.querySelector('.formAjout');
 
-    formValider.addEventListener("change", function (e) {
+    formValider.addEventListener("change", function () {
         if (fileInput || titleInput.value !== "" || categoryInput) {
 
             valider.disabled = false;
