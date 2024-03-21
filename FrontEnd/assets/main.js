@@ -466,10 +466,7 @@ function validerBtn() {
             valider.classList.remove("btn-disabled");
             message.innerHTML = "";
 
-        } else {
-            valider.disabled = true;
-            message.innerHTML = "Veuillez remplir tous les champs du formulaire.";
-        }
+        } 
     })
 
 }
