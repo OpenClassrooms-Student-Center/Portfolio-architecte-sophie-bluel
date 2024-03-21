@@ -445,6 +445,7 @@ footer {
 	height: 100vh;
 	background-color: rgba(0, 0, 0, 0.5);
 	border-radius: 10px;
+	
 
 }
 
@@ -455,19 +456,13 @@ footer {
 	border: 1px solid #888;
 	width: 30%;
 	height: 500px;
-
 	display: flex;
 	flex-direction: column;
-
-	
 	align-items: center;
 	position: relative;
 	top: 90px;
 	left: 0;
 	right: 0;
-
-	
-
 
 }
 
@@ -574,6 +569,7 @@ footer {
 	justify-content: center;
 	position: relative;
 	top: -20px;
+	
 }
 
 .miniGallery img {
@@ -584,7 +580,7 @@ footer {
 	height: 104.08px;
 	border: 0;
 	position: relative;
-
+	
 
 }
 
@@ -793,4 +789,9 @@ select,
 	margin-right: auto;
 	margin-bottom: 20px;
 	top: 480px;
+	
+}
+.modal-content .btn-disabled {
+	
+	background-color: gray;
 }
