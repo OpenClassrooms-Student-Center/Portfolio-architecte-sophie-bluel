@@ -405,7 +405,7 @@ footer {
 	/* margin-bottom: 2em; */
 
 	/* width: 1440px; */
-	height: 59px;
+	height: 43px;
 	flex-shrink: 0;
 	background: #000;
 	color: #FFF;
@@ -445,6 +445,7 @@ footer {
 	height: 100vh;
 	background-color: rgba(0, 0, 0, 0.5);
 	border-radius: 10px;
+	
 
 }
 
@@ -454,20 +455,14 @@ footer {
 	padding: 80px;
 	border: 1px solid #888;
 	width: 30%;
-	height: 500px;
-
+	height: 412px;
 	display: flex;
 	flex-direction: column;
-
-	
 	align-items: center;
-	position: relative;
-	top: 90px;
+	position: absolute;
+	top: 55px;
 	left: 0;
 	right: 0;
-
-	
-
 
 }
 
@@ -492,9 +487,9 @@ footer {
 	font-style: normal;
 	font-weight: 400;
 	position: relative;
-	top: -10px;
+	top: -39px;
 
-	margin-bottom: 30px;
+	/* margin-bottom: 30px; */
 
 
 
@@ -508,7 +503,7 @@ footer {
 	width: 237px;
 	height: 36px;
 	position: absolute;
-	bottom: 29px;
+	bottom: 18px;
 	left: 0;
 	right: 0;
 	margin-left: auto;
@@ -527,7 +522,7 @@ footer {
 	background-color: rgba(179, 179, 179, 1);
 	position: absolute;
 
-	top: 571px;
+	top: 490px;
 	left: 0;
 	right: 0;
 	margin-left: auto;
@@ -538,7 +533,7 @@ footer {
 .modal-content .erreur {
 	
 	position: absolute;
-	top: 500px;
+	top: 450px;
 	padding: 0;
 	font-size: 14px;
 	font-weight: 600;
@@ -551,8 +546,7 @@ footer {
 @keyframes hide {
 
 	0% { opacity: 0; }
-	20% { opacity: 1; }
-	80% { opacity: 1; }
+	20% { opacity: 1; }	
 	100% { opacity: 0; }
 	
 		
@@ -575,6 +569,7 @@ footer {
 	justify-content: center;
 	position: relative;
 	top: -20px;
+	
 }
 
 .miniGallery img {
@@ -585,7 +580,7 @@ footer {
 	height: 104.08px;
 	border: 0;
 	position: relative;
-
+	
 
 }
 
@@ -626,7 +621,7 @@ figure {
 	flex-direction: column;
 	justify-content: center;
 	width: 100%;
-	gap: 21px;
+	gap: 15px;
 	
 	position: relative;
 
@@ -644,7 +639,7 @@ figure {
 	position: relative;
 	
 	display: inline-block;
-	width: 100%;
+	
 	text-align: center;
 	width: 420px;
 	height: 169px;
@@ -787,11 +782,14 @@ select,
 .modal-content .btn-secondary {
 
 	position: absolute;
-	bottom: -103px;
+	
 	left: 85px;
-	right: 0;
-	margin-left: auto;
-	margin-right: auto;
-	margin-bottom: 20px;
-	top: 480px;
+	
+	
+	top: 435px;
+	
+}
+.modal-content .btn-disabled {
+	
+	background-color: gray;
 }

@@ -26,7 +26,7 @@ async function getCategories() {
         console.log(error);
     }
 }
-/********************* boutons par category ************************/
+/********************* Afficher boutons par category ************************/
 async function boutonsByCategory() {
 
     let categories = await getCategories();
@@ -163,7 +163,6 @@ function modeCreation() {
 /********************************* creation de la modal ********* */
 async function createModal() {
 
-
     // Création des éléments
 
     var modal = document.createElement('div');
@@ -239,9 +238,12 @@ async function createModal() {
                     <input type="text" id="titleInput" />
                     <label class="labform" for="categoryInput"> Categorie </label>
                     <select id="categoryInput"></select>
-                    <button type="submit" class="btn btn-secondary">Valider</button>`;
+                    <button type="submit" class="btn btn-secondary btn-disabled" disabled>Valider</button>`;
 
         form.innerHTML = formulaireAdd;
+
+
+
         retour.addEventListener('click', function () {
             addButton.style.display = "block";
             retour.style.display = "none";
@@ -335,12 +337,12 @@ async function getModal() {
         const trashIcons = document.querySelectorAll('.fa-trash-can');
         trashIcons.forEach(icon => {
             icon.addEventListener('click', async (e) => {
-                //console.log('coucou '+e.target.dataset.id);
+
                 const idToDelete = e.target.dataset.id;
                 await deleteWork(idToDelete);
                 filterWorks();
                 getModal();
-                e.preventDefault();
+
             });
         });
     }
@@ -349,7 +351,8 @@ async function getModal() {
 function deleteWork(id) {
     const loged = window.sessionStorage.loged;
     const accessToken = window.sessionStorage.accessToken;
-    var erreur = document.querySelector('.modal .erreur');
+    let erreur = document.querySelector('.modal .erreur');
+
     if (loged) {
         return fetch(`http://localhost:5678/api/works/${id}`, {
             method: 'DELETE',
@@ -367,11 +370,11 @@ function deleteWork(id) {
             })
             .then(function (data) {
                 console.log('Suppression réussie', data);
-                erreur.innerHTML = 'Suppression réussie';
+                erreur.textContent = 'Suppression réussie';
                 setTimeout(function () {
-                    erreur.classList.remove('erreur');
-                    erreur.innerHTML = '';
+                    erreur.textContent = ' ';
                 }, 3000);
+
             })
             .catch(function (error) {
                 console.error('Erreur lors de la suppression :', error.message);
@@ -383,19 +386,29 @@ function deleteWork(id) {
 
 /******************* ajouter un projet ************************** */
 function ajoutWork() {
+
     const accessToken = window.sessionStorage.accessToken;
     var message = document.querySelector('.formAjout .message');
     var titleInput = document.getElementById('titleInput');
     let formValider = document.querySelector('.formAjout');
+    var retour = document.querySelector('.return');
+    var valider = document.querySelector('.btn-secondary');
+    let categoryInput = document.querySelector('#categoryInput');
+    validerBtn();
+
     formValider.addEventListener("submit", async function (e) {
         e.preventDefault();
+
         var fileInput = document.querySelector('input[type="file"]');
         var file = fileInput.files[0];
+
         // Vérifier que tous les champs sont remplis
         if ((titleInput.value == "") || !file || !categoryInput) {
             message.innerHTML = "Veuillez remplir tous les champs du formulaire.";
+            valider.classList.add("btn-disabled");
             return;
         }
+
         // Vérifier le format de l'image (JPG ou PNG)
         else if (!file.type.match('image/jpeg') && !file.type.match('image/png')) {
             message.innerHTML = "Veuillez sélectionner une image au format JPG ou PNG.";
@@ -406,11 +419,13 @@ function ajoutWork() {
             message.innerHTML = "La taille de l'image ne doit pas dépasser 4 Mo.";
             return;
         }
+
         // Créez un objet FormData pour rassembler les données du formulaire
         var formData = new FormData();
-        formData.append('title', document.getElementById('titleInput').value);
+        formData.append('title', titleInput.value);
         formData.append('image', file);
-        formData.append('category', document.getElementById('categoryInput').value);
+        formData.append('category', categoryInput.value);
+
         try {
             const response = await fetch('http://localhost:5678/api/works', {
                 method: 'POST',
@@ -424,13 +439,36 @@ function ajoutWork() {
             }
             const data = await response.json();
             console.log("Votre projet a bien été ajouté");
+
             filterWorks();
             getModal();
-            e.preventDefault();
+            retour.style.display = "none";
+
         } catch (error) {
             console.error('Erreur lors de l\'ajout de la photo :', error.message);
         }
     });
+    validerBtn();
+}
+
+function validerBtn() {
+    var message = document.querySelector('.formAjout .message');
+    var titleInput = document.getElementById('titleInput').value;
+    var valider = document.querySelector('.btn-secondary');
+    let categoryInput = document.querySelector('#categoryInput').value;
+    var fileInput = document.querySelector('input[type="file"]').files[0];
+    let formValider = document.querySelector('.formAjout');
+
+    formValider.addEventListener("change", function () {
+        if (fileInput || titleInput.value !== "" || categoryInput) {
+
+            valider.disabled = false;
+            valider.classList.remove("btn-disabled");
+            message.innerHTML = "";
+
+        } 
+    })
+
 }
 
 function init() {
@@ -442,3 +480,4 @@ function init() {
 }
 
 init();
+
