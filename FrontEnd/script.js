@@ -7,7 +7,7 @@ portfolio.appendChild(gallery);
 
 
   // Récupération des données de la galerie avec l'API
-  fetch("http://localhost:5678/api/works")
+  const getData = fetch("http://localhost:5678/api/works")
     // Crée le fichier JSON avec les données reçues
     .then(response => response.json())
     // Envoie les données à la fonction createGalleryItems pour créer les éléments de la galerie
@@ -20,7 +20,7 @@ portfolio.appendChild(gallery);
       console.error("Une erreur s'est produite :", error);
     });
 
-// Fonction pour créer les éléments de la galerie
+// Fonction pour créer les éléments de la galerie à partir de data
 function createGalleryItems(data) {
   
     for (let i = 0; i < data.length; i++) {
@@ -41,10 +41,4 @@ function createGalleryItems(data) {
     return gallery;
   }
   
-
-  
-
-
-
-
 console.log("THE END");
