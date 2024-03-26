@@ -1,5 +1,3 @@
-console.log("let's go!");
-
 // Création du conteneur principal de la galerie
 const portfolio = document.getElementById("portfolio");
 let gallery = document.querySelector(".gallery");
@@ -40,5 +38,3 @@ function createGalleryItems(data) {
       // Renvoi de la galerie assemblée
     return gallery;
   }
-  
-console.log("THE END");
