@@ -37,9 +37,7 @@ function createGalleryItems(data) {
         img.alt = data[i].title;
         figcaption.textContent = data[i].title;
     }
-  
-    gallery.setAttribute("class", "gallery");
-    // Renvoi de la galerie assemblée
+      // Renvoi de la galerie assemblée
     return gallery;
   }
   
