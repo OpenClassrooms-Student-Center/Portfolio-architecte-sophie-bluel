@@ -36,7 +36,7 @@ form.addEventListener("submit", function (event) {
                 return response.json();
             } else {
                 alertError();
-                throw Error("L'e-mail ou le mot de passe est incorrect.");
+                console.log("L'e-mail ou le mot de passe est incorrect.");
             }
         })
     // Traiter les données reçues de l'API
@@ -48,10 +48,10 @@ form.addEventListener("submit", function (event) {
                 // Stocker le token dans le localStorage
                 localStorage.setItem("token", data.token);
                 // Redirection vers la page d'accueil
-                // window.location.href = "./index.html";
+                window.location.href = "./loggedin.html";
             } else {
                 // La réponse ne contient pas de token
-                throw Error("Token non reçu");
+                console.log("Token non reçu");
             }
         })
         .catch((error) => {
