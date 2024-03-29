@@ -217,15 +217,3 @@ footer nav ul {
 }
 
 
-/* Page login */
-
-.login {
-	font-weight: bold;
-}
-
-.forgottenPassword {
-	margin-top: 10px;
-	color: black;
-	font-weight: bold;
-}
-

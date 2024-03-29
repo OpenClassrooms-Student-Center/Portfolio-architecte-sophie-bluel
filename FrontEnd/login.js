@@ -1,7 +1,7 @@
 
 // Récuperer les éléments du formulaire
-const email = document.querySelector("form #email");
-const password = document.querySelector("form #password");
+const email = document.getElementById("email");
+const password = document.getElementById("password");
 const form = document.querySelector("form");
 
 
