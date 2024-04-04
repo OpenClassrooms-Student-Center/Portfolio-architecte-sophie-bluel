@@ -48,7 +48,7 @@ form.addEventListener("submit", function (event) {
                 // Stocker le token dans le localStorage
                 localStorage.setItem("token", data.token);
                 // Redirection vers la page d'accueil
-                window.location.href = "./loggedin.html";
+                window.location.href = "./index.html";
             } else {
                 // La réponse ne contient pas de token
                 console.log("Token non reçu");
@@ -74,3 +74,15 @@ function alertError() {
     inputPassword.value = "";
     inputPassword.style.border = "1px solid red";
 }
+
+// Fonction de déconnexion
+function logout() {
+let logButton = document.querySelector(".logButton");
+logButton.addEventListener("click", function() {
+    // Vidage du localStorage
+    localStorage.clear();
+    // Redirection vers la page d'accueil
+    window.location.href = "./index.html";
+});
+}
+logout();

@@ -1,3 +1,4 @@
+
 console.log("let's go!");
 
 // Création du conteneur principal de la galerie
@@ -23,6 +24,7 @@ let gallery = document.querySelector(".gallery");
   function createGalleryItems(data) {
   
     for (let i = 0; i < data.length; i++) {
+      
         // Création des éléments de la galerie
         const figure = document.createElement("figure");
         const img = document.createElement("img");
@@ -43,7 +45,7 @@ let gallery = document.querySelector(".gallery");
   // ---------------------- 2. Filtrage de la galerie ----------------------
 
 // --------------- 2.1 Filtrage avec les boutons de catégorie ---------------
-const btnFilter = document.querySelectorAll(".btn-filter");
+let btnFilter = document.querySelectorAll(".btn-filter");
 // Créer un ensemble pour stocker les catégories uniques
 const categories = new Set();
 
@@ -120,7 +122,7 @@ categories.forEach(category => {
 // --------------- 2.2 Affichage de tous les travaux ---------------
 
 // Ajout d'un écouteur d'événement sur le bouton "Tous"
-const btnAll = document.querySelector(".btn-all");
+let btnAll = document.querySelector(".btn-all");
   btnAll.addEventListener("click", function() {
     console.log("Tous les travaux sont affichés");
     
@@ -130,3 +132,42 @@ const btnAll = document.querySelector(".btn-all");
     // Recréer la galerie avec tous les éléments
     createGalleryItems(data);
 });
+
+// ---------------------- 3. Ajouter le Mode Edition ----------------------
+
+let logButton = document.querySelector(".logButton");
+// Fonction du Mode Edition
+function createEditMode () {
+
+  // Création du bandeau Mode Edition
+  const editMode = document.createElement("div");
+  editMode.classList.add("edition-band");
+  editMode.innerHTML = "<i class='fa-regular fa-pen-to-square'></i> modifier";
+  document.body.appendChild(editMode);
+
+  // Création du bouton Mode Edition
+  const editModeButton = document.createElement("p");
+  const introduction = document.querySelector(".h2-edition");
+  editModeButton.classList.add("edition-button");
+  editModeButton.innerHTML = "<i class='fa-regular fa-pen-to-square'></i> modifier";
+  introduction.appendChild(editModeButton);
+
+  // Changement de login par logout
+  logButton.innerHTML = "logout";
+
+  // Suppression des bouton de catégories
+  btnFilter = document.querySelectorAll(".btn-filter");
+  btnFilter.forEach(btn => btn.remove());
+  btnAll = document.querySelector(".btn-all");
+  btnAll.remove();
+  }
+
+  // Vérification de la présence du token dans le localStorage
+  if (localStorage.getItem("token")) {
+    createEditMode();
+  }
+
+
+
+
+
