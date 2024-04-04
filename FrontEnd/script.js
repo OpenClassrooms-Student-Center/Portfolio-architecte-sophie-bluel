@@ -42,100 +42,13 @@ let gallery = document.querySelector(".gallery");
     }
   }
 
-  // ---------------------- 2. Filtrage de la galerie ----------------------
-
-// --------------- 2.1 Filtrage avec les boutons de catégorie ---------------
-let btnFilter = document.querySelectorAll(".btn-filter");
-// Créer un ensemble pour stocker les catégories uniques
-const categories = new Set();
-
-// Ajouter les catégories des boutons à l'ensemble
-btnFilter.forEach(btn => categories.add(btn.dataset.category));
-
-// Ajouter un écouteur d'événement à chaque catégorie
-categories.forEach(category => {
-  document.querySelector(`[data-category="${category}"]`).addEventListener("click", function() {
-    // Filtrer les éléments de la galerie en fonction de la catégorie sélectionnée
-    const filteredItems = data.filter(item => item.category.id === parseInt(category));
-    console.log("Catégorie sélectionnée : ", category);
-
-    // Effacer la galerie actuelle
-    gallery.innerHTML = "";
-
-    // Recréer la galerie avec les éléments filtrés
-    createGalleryItems(filteredItems);
-  });
-});
- 
-  // // Filtrage avec les boutons de catégorie
-  
-  // // Séparation de la NodeList en tableau
-  // btnFilter.forEach(function(btn) {
-  //   // Ajout d'un écouteur d'événement sur chaque bouton
-  //   btn.addEventListener("click", function() {
-  //     // Récupération de la catégorie du bouton cliqué
-  //     const category = btn.dataset.category;
-  //     console.log("Catégorie sélectionnée : ", category);
-
-  //     if (category === "Objets") {
-  //     // Filtrer les éléments de la galerie en fonction de la catégorie Objets
-  //     const filteredItems = data.filter(function(item) {
-  //       return item.category.id === 1;
-  //     });
-
-  //     // Effacer la galerie actuelle
-  //     gallery.innerHTML = "";
-
-  //     // Recréer la galerie avec les éléments filtrés
-  //     createGalleryItems(filteredItems);
-  //     }
-
-  //     else if (category ==="Appartements"){
-  //       // Filtrer les éléments de la galerie en fonction de la catégorie Appartements
-  //       const filteredItems = data.filter(function(item) {
-  //         return item.category.id === 2;
-  //       });
-
-  //       // Effacer la galerie actuelle
-  //       gallery.innerHTML = "";
-    
-  //       // Recréer la galerie avec les éléments filtrés
-  //       createGalleryItems(filteredItems);
-  //     }
-
-  //     else if (category ==="Hôtels & Restaurants"){
-  //       // Filtrer les éléments de la galerie en fonction de la catégorie Hôtels & Restaurants
-  //       const filteredItems = data.filter(function(item) {
-  //         return item.category.id === 3;
-  //       });
-
-  //       // Effacer la galerie actuelle
-  //       gallery.innerHTML = "";
-    
-  //       // Recréer la galerie avec les éléments filtrés
-  //       createGalleryItems(filteredItems);
-  //       }
-  //   });
-  
-  // });
-
-// --------------- 2.2 Affichage de tous les travaux ---------------
-
-// Ajout d'un écouteur d'événement sur le bouton "Tous"
-let btnAll = document.querySelector(".btn-all");
-  btnAll.addEventListener("click", function() {
-    console.log("Tous les travaux sont affichés");
-    
-    // Effacer la galerie actuelle
-    gallery.innerHTML = "";
-
-    // Recréer la galerie avec tous les éléments
-    createGalleryItems(data);
-});
-
-// ---------------------- 3. Ajouter le Mode Edition ----------------------
+  // ---------------------- 3. Ajouter le Mode Edition ----------------------
 
 let logButton = document.querySelector(".logButton");
+let btnFilter = document.querySelectorAll(".btn-filter");
+let btnAll = document.querySelector(".btn-all");
+let category = document.querySelector(".category");
+
 // Fonction du Mode Edition
 function createEditMode () {
 
@@ -155,11 +68,8 @@ function createEditMode () {
   // Changement de login par logout
   logButton.innerHTML = "logout";
 
-  // Suppression des bouton de catégories
-  btnFilter = document.querySelectorAll(".btn-filter");
-  btnFilter.forEach(btn => btn.remove());
-  btnAll = document.querySelector(".btn-all");
-  btnAll.remove();
+  // Suppression des boutons de catégories
+  category.remove();
   }
 
   // Vérification de la présence du token dans le localStorage
@@ -167,7 +77,66 @@ function createEditMode () {
     createEditMode();
   }
 
+  // ---------------------- 2. Filtrage de la galerie ----------------------
+
+// Ajout des boutons de catégorie
+function getCat() {
+  fetch("http://localhost:5678/api/categories")
+    .then(response => response.json())
+    .then(responseCat => {
+      cat = responseCat;
+      createAllBtn();
+      createCatBtn(cat);
+    })
+    .catch(error => {
+      console.error("Une erreur s'est produite :", error);
+    });
+}
+
+function createAllBtn() {
+  const category = document.querySelector(".category");
+    const btnAll = document.createElement("button");
+    btnAll.classList.add("btn-all");
+    btnAll.textContent = "Tous";
+    category.appendChild(btnAll);
 
 
+    btnAll.addEventListener("click", () => {
+      console.log("Tous les travaux sont affichés");
+      gallery.innerHTML = "";
+      createGalleryItems(data);
+    });
+}
 
+function createCatBtn(cat, data) {
+  // Création des boutons de catégorie
+  for (let i = 0; i < cat.length; i++) {
+    const btn = document.createElement("button");
+    btn.classList.add("btn-filter");
+    btn.textContent = cat[i].name;
+    btn.dataset.category = cat[i].id;
+    document.querySelector(".category").appendChild(btn);
 
+    // Ajouter un écouteur d'événements à chaque bouton de catégorie individuellement
+    btn.addEventListener("click", function() {
+      // Récupération de la catégorie du bouton cliqué
+      const category = btn.dataset.category;
+      console.log("Catégorie sélectionnée : ", category);
+
+      // Filtrer les éléments de la galerie en fonction de la catégorie
+      const filteredItems = data.filter(function(item) {
+        // Vérifier si item.category est défini avant d'accéder à item.category.id
+        return item.category && item.category.id === category;
+      });
+
+      // Effacer la galerie actuelle
+      gallery.innerHTML = "";
+
+      // Recréer la galerie avec les éléments filtrés
+      createGalleryItems(filteredItems);
+    });
+  }
+}
+
+// Appel de la fonction pour récupérer les catégories et passer les données
+getCat();
