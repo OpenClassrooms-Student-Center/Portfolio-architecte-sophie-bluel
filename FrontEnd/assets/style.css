@@ -52,6 +52,7 @@ body {
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
+  background-color: #FFFEF8;
 }
 header {
 	display: flex;
@@ -60,6 +61,10 @@ header {
 }
 section {
 	margin: 50px 0
+}
+
+button {
+  cursor: pointer;
 }
 
 h1{
@@ -123,8 +128,35 @@ li:hover {
 }
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
+	margin-bottom: 45px;
 }
+
+.filters {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 45px;
+  gap: 10px;
+}
+
+.filter-btn {
+  font-family: "Syne";
+  font-weight: 700;
+  font-size: 16px;
+  color:#1D6154;
+  text-align: center;
+  background-color: #FFFEF8;
+  min-width: 100px;
+  height: 37px;
+  border-radius: 60px;
+  border: 1px solid #1D6154;
+  padding: 0 12px;
+}
+
+.filter-btn:hover {
+  background-color: #1D6154;
+  color: white;
+}
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -185,4 +217,3 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em
 }
-
