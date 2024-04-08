@@ -66,7 +66,7 @@ function displayButtons() {
 };
 
 function filterWorksByCategory(categoryId) {
-  return fetch(`http://localhost:5678/api/works`)
+  fetch(`http://localhost:5678/api/works`)
   .then(worksData => worksData.json())
   .then(worksData => {
     const filteredWorks = worksData.filter((work) => work.categoryId == categoryId);

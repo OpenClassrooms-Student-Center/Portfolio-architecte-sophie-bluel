@@ -246,7 +246,7 @@ footer nav ul {
 /** Log In page CSS **/
 
 #login {
-  margin-bottom: 100px;
+  margin-bottom: 13%;
 }
 
 #login p {
@@ -258,16 +258,4 @@ footer nav ul {
   flex-direction: column;
   justify-content: space-between;
   min-height: 100vh;
-}
-
-.login-container header {
-  height: 10%;
-}
-
-.login-container main {
-  height: 80%;
-}
-
-.login-container footer {
-  height: 10%
 }
