@@ -5,7 +5,7 @@ const logButton = document.querySelector(".logButton");
 
 
 // Fonction pour récupérer les données de l'API works
-function getWorksData() {
+export function getWorksData() {
   return fetch("http://localhost:5678/api/works")
     .then(response => response.json())
     .then(responseWorks => { // On récupère les données de l'API 
@@ -38,7 +38,7 @@ getCatData();
 
   // ---------------------- 1. Création de la galerie ----------------------
 
-  function createGalleryItems(works) {
+export function createGalleryItems(works) {
   
     for (let i = 0; i < works.length; i++) {
       

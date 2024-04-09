@@ -283,10 +283,17 @@ footer nav ul {
 }
 
 .modal-container {
+	/* display: none; */
+	visibility: hidden;
 	position: fixed;
 	top: 0;
 	width: 100vw;
 	height: 100vh;
+}
+
+.modal-container.active {
+	/* display: block; */
+	visibility: visible;
 }
 
 .overlay {
@@ -300,7 +307,7 @@ footer nav ul {
 	width: 95%;
 	max-width: 500px;
 	padding: 30px;
-	min-width: 300px;
+	min-width: 320px;
 	background: white;
 	border-radius: 5px;
 	position: absolute;
@@ -317,17 +324,29 @@ footer nav ul {
 	position: absolute;
 	top: 10px;
 	right: 10px;
-	background : red;
-	color: white;
-	cursor: pointer;
+	color: black;
 }
 
 .modal h3 {
 	margin-bottom: 10px;
+	margin-top: 20px;
 	font-size: 20px;
 	font-weight: 800;
+	text-align: center;
 }
 
 .modal p {
 	margin-bottom: 10px;
+}
+
+.modal-gallery {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: 10px;
+	grid-row-gap: 20px;
+}
+
+.modal-gallery img {
+	width: 100%;
 }
