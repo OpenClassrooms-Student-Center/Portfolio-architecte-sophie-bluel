@@ -271,3 +271,63 @@ footer nav ul {
 .h2-edition i, .edition-band i {
 	margin-right: 10px; /* Espacement entre l'icône et le texte */
 }
+
+/* La modale */
+.modal-btn {
+	padding: 10px 14px;
+	font-size: 18px;
+	margin: 100px auto;
+	min-width: 150px;
+	cursor: pointer	;
+	display: block;
+}
+
+.modal-container {
+	position: fixed;
+	top: 0;
+	width: 100vw;
+	height: 100vh;
+}
+
+.overlay {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, .8);
+}
+
+.modal {
+	width: 95%;
+	max-width: 500px;
+	padding: 30px;
+	min-width: 300px;
+	background: white;
+	border-radius: 5px;
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.close-modal {
+	padding: 8px 10px;
+	border: none;
+	border-radius: 5px;
+	font-size: 18px;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	background : red;
+	color: white;
+	cursor: pointer;
+}
+
+.modal h3 {
+	margin-bottom: 10px;
+	font-size: 20px;
+	font-weight: 800;
+}
+
+.modal p {
+	margin-bottom: 10px;
+}
