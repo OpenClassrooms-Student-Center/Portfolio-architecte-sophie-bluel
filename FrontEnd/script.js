@@ -14,7 +14,7 @@ function getWorksData() {
       console.log(works);
     }) 
     .catch(error => {
-      console.error("Erreur lors de la récupération des données de l'API works :", error);
+      console.error("Erreur à la récupération de l'API works :", error);
     });
 }
 
@@ -30,7 +30,7 @@ function getCatData() {
       createCatButtons(categories); // On crée les boutons de catégories avec les données récupérées
      }) 
     .catch(error => {
-      console.error("Erreur lors de la récupération des données de l'API categories :", error);
+      console.error("Erreur à la récupération de l'API categories :", error);
     });
 }
 
@@ -62,12 +62,13 @@ getCatData();
 
   // ---------------------- 2.1. Création du bouton "Tous" ----------------------
 function createAllBtn() {
-  const categoryContainer = document.querySelector(".category");
+  // Création du bouton "Tous"
     const btnAll = document.createElement("button");
     btnAll.classList.add("btn-all");
     btnAll.textContent = "Tous";
     categoryContainer.appendChild(btnAll);
 
+    // Ajout de l'écouteur d'événements pour afficher tous les travaux
     btnAll.addEventListener("click", () => {
       console.log("Tous les travaux sont affichés");
       gallery.innerHTML = "";
@@ -93,6 +94,7 @@ function createCatButtons(categories) {
     // Ajout de l'écouteur d'événements pour filtrer les travaux par catégorie
     btn.addEventListener("click", function() {
       const categoryId = category.id;
+      // Filtrer les travaux par catégorie en appelant la fonction
       filterWorksByCategory(categoryId);
     });
 
@@ -112,7 +114,7 @@ function filterWorksByCategory(categoryId) {
   works.forEach(work => {
     // Vérifiez si le travail appartient à la catégorie sélectionnée
     if (work.categoryId === categoryId) {
-      // Créez les éléments de la galerie uniquement pour les travaux de la catégorie sélectionnée
+      // Créez les éléments de la galerie uniquement pour les travaux de la catégorie sélectionnée à la manière de createGalleryItems
       const figure = document.createElement("figure");
       const img = document.createElement("img");
       const figcaption = document.createElement("figcaption");
@@ -127,7 +129,6 @@ function filterWorksByCategory(categoryId) {
     }
   });
 }
-
 
 
   // ---------------------- 3. Ajouter le Mode Edition ----------------------
