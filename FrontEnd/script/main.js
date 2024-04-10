@@ -1,3 +1,13 @@
+import { logButton, isLoggedIn } from "./global.js";
+
+// Vérification de si l'utilisateur est connecté au chargement de la page
+isLoggedIn();
+
+// Affichage du bouton de connexion en fonction de l'état de connexion
+const log = document.querySelector(`a[href="pages/login.html"]`);
+logButton(log);
+
+
 async function displayDefault() {
   const worksData = await fetchWorksData();
   await displayWorks(worksData);
@@ -66,7 +76,7 @@ function displayButtons() {
 };
 
 function filterWorksByCategory(categoryId) {
-  return fetch(`http://localhost:5678/api/works`)
+  fetch(`http://localhost:5678/api/works`)
   .then(worksData => worksData.json())
   .then(worksData => {
     const filteredWorks = worksData.filter((work) => work.categoryId == categoryId);
@@ -76,6 +86,15 @@ function filterWorksByCategory(categoryId) {
     !filteredWorks.length && displayDefault();
   })
   .catch(() => alert("Une erreur est survenue."));
+};
+
+// Fonction de déconnexion
+const logoutBtn = document.getElementById("logout");
+logoutBtn.addEventListener("click", logout);
+
+function logout() {
+  localStorage.removeItem("token");
+  window.location.href = "./pages/login.html";
 };
 
 // Démarrer l'affichage par défaut

@@ -9,17 +9,17 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="../assets/style.css">
-  <script type="module" src="script/main.js"></script>
+  <script src="https://kit.fontawesome.com/f1083a9e59.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <div class="login-container">
     <header>
-      <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+      <a href="../index.html"><h1>Sophie Bluel <span>Architecte d'intérieur</span></h1></a>
       <nav>
         <ul>
-          <li>projets</li>
-          <li>contact</li>
-          <li>login</li>
+          <li><a href="#">projets</a></li>
+          <li><a href="#">contact</a></li>
+          <li><a href="pages/login.html"></a></li>
           <li><img src="../assets/icons/instagram.png" alt="Instagram"></li>
         </ul>
       </nav>
@@ -27,14 +27,15 @@
     <main>
       <section id="login" class="form-section">
         <h2>Log In</h2>
-        <form action="#" method="post">
+        <form action="#" method="post" id="login-form">
           <label for="email">E-mail</label>
-          <input type="email" name="email" id="email">
+          <input type="email" name="email" id="email" required>
           <label for="password">Mot de passe</label>
           <input type="password" id="password" name="password" required>
+          <div class="errorLogin"></div>
           <input type="submit" value="Se connecter">
         </form>
-        <p>Mot de passe oublié</p>
+        <p><a href="#">Mot de passe oublié</a></p>
       </section>
     </main>
 
@@ -46,5 +47,6 @@
       </nav>
     </footer>
   </div>
+  <script type="module" src="../script/login.js"></script>
 </body>
 </html>
