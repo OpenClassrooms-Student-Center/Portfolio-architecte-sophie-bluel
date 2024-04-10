@@ -8,15 +8,31 @@ adminPage();
 
 // Fonction pour afficher la page d'accueil de l'utilisateur authentifié
 function adminPage() {
+  if (isLoggedIn()) {
+    addBanner();
+    addModifyButton();
+  };
+};
+
+// Fonction pour créer la bannière si adminPage() activée
+function addBanner() {
   const body = document.querySelector("body");
   const adminBanner = document.createElement("div");
-  if (isLoggedIn()) {
-    adminBanner.classList = "adminBanner";
-    adminBanner.innerHTML = `<a href="#">
-    <i class="fa-regular fa-pen-to-square"></i>
-    Mode édition</a>`;
-    body.insertBefore(adminBanner, body.firstChild);
-  };
+  adminBanner.classList = "adminBanner";
+  adminBanner.innerHTML = `<a href="#">
+  <i class="fa-regular fa-pen-to-square"></i>
+  Mode édition</a>`;
+  body.insertBefore(adminBanner, body.firstChild);
+};
+
+// Fonction pour créer le bouton modifier si adminPage()
+function addModifyButton() {
+  const sectionPortfolio = document.getElementById("portfolio");
+  const modifyBtn = document.createElement("a");
+  modifyBtn.classList = "modifyBtn";
+  modifyBtn.innerHTML = `<a href="#"><i class="fa-regular fa-pen-to-square"></i>
+  modifier</a>`;
+  sectionPortfolio.querySelector("h2").insertAdjacentElement("afterend", modifyBtn);
 };
 
 // Affichage du bouton de connexion en fonction de l'état de connexion

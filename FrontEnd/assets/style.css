@@ -304,3 +304,15 @@ footer nav ul li {
 .adminBanner a {
   color: white;
 }
+
+.my-projects {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+}
+
+.modifyBtn {
+  margin-bottom: 45px;
+}
