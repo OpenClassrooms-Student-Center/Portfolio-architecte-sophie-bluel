@@ -67,11 +67,16 @@ body {
   background-color: #FFFEF8;
 }
 
+header, main {
+  padding: 0 10%;
+}
+
 header {
 	display: flex;
 	justify-content: space-between;
 	margin: 50px 0;
 }
+
 header a:hover {
   font-weight: bold;
 }
@@ -255,6 +260,12 @@ footer nav ul li {
   padding: 0;
 }
 
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  background-color: white;
+}
+
 /** Log In page CSS **/
 
 #login {
@@ -280,4 +291,16 @@ footer nav ul li {
   font-size: 1.2em;
   padding-top: 20px;
   color: #b30000;
+}
+
+/** Admin page CSS **/
+
+.adminBanner {
+  background-color: black;
+  text-align: center;
+  padding: 20px;
+}
+
+.adminBanner a {
+  color: white;
 }

@@ -1,24 +1,43 @@
 import { logButton, isLoggedIn } from "./global.js";
 
-// Vérification de si l'utilisateur est connecté au chargement de la page
+// Vérification pour savoir si l'utilisateur est connecté au chargement de la page
 isLoggedIn();
+
+// Affichage de la page d'accueil de l'utilisateur authentifié
+adminPage();
+
+// Fonction pour afficher la page d'accueil de l'utilisateur authentifié
+function adminPage() {
+  const body = document.querySelector("body");
+  const adminBanner = document.createElement("div");
+  if (isLoggedIn()) {
+    adminBanner.classList = "adminBanner";
+    adminBanner.innerHTML = `<a href="#">
+    <i class="fa-regular fa-pen-to-square"></i>
+    Mode édition</a>`;
+    body.insertBefore(adminBanner, body.firstChild);
+  };
+};
 
 // Affichage du bouton de connexion en fonction de l'état de connexion
 const log = document.querySelector(`a[href="pages/login.html"]`);
 logButton(log);
 
 
+// Fonction d'affichage par défaut de la page d'accueil
 async function displayDefault() {
   const worksData = await fetchWorksData();
   await displayWorks(worksData);
 }
 
+// Fonction pour récupérer les projets disponibles via l'API
 function fetchWorksData() {
   return fetch("http://localhost:5678/api/works")
   .then(response => response.json())
   .catch(() => alert("Une erreur est survenue."));
 };
 
+// Fonction permettant d'afficher les projets récupérés
 async function displayWorks(worksData) {
   // Récupération de l'élément du DOM qui accueillera les figures
   const gallerySection = document.querySelector(".gallery");
@@ -41,6 +60,7 @@ async function displayWorks(worksData) {
   };
 };
 
+// Fonction pour afficher les boutons filtres
 function displayButtons() {
   fetch("http://localhost:5678/api/categories")
   .then(categories => categories.json())
@@ -75,6 +95,7 @@ function displayButtons() {
   .catch(() => alert("Une erreur est survenue."));
 };
 
+// Fonction permettant de filtrer les projets par catégorie
 function filterWorksByCategory(categoryId) {
   fetch(`http://localhost:5678/api/works`)
   .then(worksData => worksData.json())
