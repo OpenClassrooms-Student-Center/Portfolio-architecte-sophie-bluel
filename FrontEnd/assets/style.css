@@ -38,6 +38,11 @@ ol, ul {
 	list-style: none;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
 blockquote, q {
 	quotes: none;
 }
@@ -66,6 +71,9 @@ header {
 	display: flex;
 	justify-content: space-between;
 	margin: 50px 0;
+}
+header a:hover {
+  font-weight: bold;
 }
 
 section {
@@ -243,6 +251,10 @@ footer nav ul {
 	margin: 2em;
 }
 
+footer nav ul li {
+  padding: 0;
+}
+
 /** Log In page CSS **/
 
 #login {
@@ -253,9 +265,19 @@ footer nav ul {
   text-decoration: underline;
 }
 
+#login a {
+  text-align: center;
+}
+
 .login-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   min-height: 100vh;
+}
+
+.errorLogin {
+  font-size: 1.2em;
+  padding-top: 20px;
+  color: #b30000;
 }
