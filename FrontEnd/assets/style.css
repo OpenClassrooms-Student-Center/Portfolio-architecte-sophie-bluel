@@ -280,8 +280,8 @@ footer nav ul {
 .modal-container {
 	display: block;
 	visibility: hidden;
-	position: absolute;
-	top: 0;
+	position: fixed;
+	top: 10%;
 	left: 0;
 	bottom: 0;
 	width: 100vw;
@@ -303,12 +303,11 @@ footer nav ul {
   }
 
 .modal {
-	width: 95%;
-	max-width: 500px;
-	padding: 30px;
+	width: 630px;
+	padding: 30px 75px;
 	min-width: 320px;
 	background: white;
-	border-radius: 5px;
+	border-radius: 10px;
 	position: absolute;
 	top: 40%;
 	left: 50%;
@@ -319,19 +318,22 @@ footer nav ul {
 	padding: 8px 10px;
 	border: none;
 	border-radius: 5px;
-	font-size: 18px;
+	font-size: 12px;
+	font-weight: 700;
 	position: absolute;
 	top: 10px;
 	right: 10px;
 	color: black;
+	background: none;
+	cursor: pointer;
 }
 
 .modal h3 {
-	margin-bottom: 10px;
+	margin-bottom: 30px;
 	margin-top: 20px;
 	font-size: 20px;
-	font-weight: 800;
 	text-align: center;
+	font-weight: 550;
 }
 
 .modal p {
@@ -343,7 +345,7 @@ footer nav ul {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 	grid-column-gap: 10px;
-	grid-row-gap: 20px;
+	grid-row-gap: 30px;
 }
 
 .modal-gallery img {

@@ -2,6 +2,13 @@
 
 const modalContainer = document.querySelector(".modal-container");
 const modalTriggers = document.querySelectorAll(".modal-trigger");
+const modal = document.querySelector(".modal");
+
+modal.innerHTML = `<button class="close-modal modal-trigger">X</button>
+<h3>Galerie Photo</h3>
+<div class="modal-content">
+  
+</div>`;
 
 modalTriggers.forEach((trigger) => {
   trigger.addEventListener("click", toggleModal);
@@ -46,8 +53,7 @@ function createModalItems(worksModal) {
 
       // Ajout des éléments de la galerie à partir de l'API
       img.src = worksModal[i].imageUrl;
-      img.alt = worksModal[i].title;
-      figcaption.textContent = worksModal[i].title;
+
 
       // Rattachement des éléments enfants aux parents
       figure.appendChild(img);

@@ -63,7 +63,7 @@ form.addEventListener("submit", function (event) {
 // Afficher une alerte en cas d'erreur de saisie de l'e-mail ou du mot de passe
 function alertError() {
     // Message d'alerte
-    alert("L'e-mail ou le mot de passe est incorrect.");
+    alert("Erreur dans l’identifiant ou le mot de passe.");
 
     // Réinitialiser les champs du formulaire et les bordures
     let inputEmail = document.getElementById("email");
