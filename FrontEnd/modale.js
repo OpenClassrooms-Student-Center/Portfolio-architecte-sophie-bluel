@@ -7,7 +7,11 @@ const modal = document.querySelector(".modal");
 modal.innerHTML = `<button class="close-modal modal-trigger">X</button>
 <h3>Galerie Photo</h3>
 <div class="modal-content"></div>
-<div class="greyLine"></div>`;
+<div class="greyLine"></div>
+<button class="addWorksBtn">Ajouter une photo</button>
+`
+;
+
 
 const modalContent = document.querySelector(".modal-content");
 modalContent.classList.add("modal-gallery");

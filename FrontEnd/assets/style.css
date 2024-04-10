@@ -342,8 +342,8 @@ footer nav ul {
 	width: 100%;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-	grid-column-gap: 10px;
-	grid-row-gap: 30px;
+	grid-column-gap: 15px;
+	grid-row-gap: 35px;
 }
 
 .modal-gallery img {
@@ -353,4 +353,19 @@ footer nav ul {
 .greyLine {
 	margin: 50px 0px;
 	border-top: grey 1px solid;
+}
+
+.addWorksBtn {
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	padding: 10px 40px;
+	text-align: center;
+	border-radius: 60px ;
+	border: none;
+	position: absolute;
+	left: 50%;
+	bottom: 0;
+	transform: translate(-50%, -50%);
 }
