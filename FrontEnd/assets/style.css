@@ -304,7 +304,7 @@ footer nav ul {
 
 .modal {
 	width: 630px;
-	padding: 30px 75px;
+	padding: 30px 80px;
 	min-width: 320px;
 	background: white;
 	border-radius: 10px;
@@ -315,14 +315,12 @@ footer nav ul {
 }
 
 .close-modal {
-	padding: 8px 10px;
 	border: none;
-	border-radius: 5px;
 	font-size: 12px;
 	font-weight: 700;
 	position: absolute;
-	top: 10px;
-	right: 10px;
+	top: 20px;
+	right: 20px;
 	color: black;
 	background: none;
 	cursor: pointer;
@@ -350,4 +348,9 @@ footer nav ul {
 
 .modal-gallery img {
 	width: 100%;
+}
+
+.greyLine {
+	margin: 50px 0px;
+	border-top: grey 1px solid;
 }

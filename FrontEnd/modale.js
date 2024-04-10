@@ -6,9 +6,11 @@ const modal = document.querySelector(".modal");
 
 modal.innerHTML = `<button class="close-modal modal-trigger">X</button>
 <h3>Galerie Photo</h3>
-<div class="modal-content">
-  
-</div>`;
+<div class="modal-content"></div>
+<div class="greyLine"></div>`;
+
+const modalContent = document.querySelector(".modal-content");
+modalContent.classList.add("modal-gallery");
 
 modalTriggers.forEach((trigger) => {
   trigger.addEventListener("click", toggleModal);
@@ -17,10 +19,6 @@ modalTriggers.forEach((trigger) => {
 function toggleModal() {
     modalContainer.classList.toggle("active");
 }
-
-// Ajout des éléments de la galerie dans la modale
-const modalContent = document.querySelector(".modal-content");
-modalContent.classList.add("modal-gallery");
 
 
 // Création de la galerie dans la modale
@@ -49,15 +47,13 @@ function createModalItems(worksModal) {
       // Création des éléments de la galerie
       const figure = document.createElement("figure");
       const img = document.createElement("img");
-      const figcaption = document.createElement("figcaption");
 
-      // Ajout des éléments de la galerie à partir de l'API
+      // Ajout des images de la galerie à partir de l'API
       img.src = worksModal[i].imageUrl;
 
 
       // Rattachement des éléments enfants aux parents
       figure.appendChild(img);
-      figure.appendChild(figcaption);
       modalContent.appendChild(figure);
   }
 }
