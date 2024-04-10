@@ -283,28 +283,26 @@ footer nav ul {
 	position: fixed;
 	top: 10%;
 	left: 0;
-	bottom: 0;
 	width: 100vw;
 	height: 100vh;
 }
 
 .modal-container.active {
-	/* display: block; */
 	visibility: visible;
 }
 
-.overlay{
+.overlay {
 	position: fixed;
 	top: 0;
 	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(0,0,0,0.5); /*dim the background*/
-  }
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0,0,0,0.5); 
+}
 
 .modal {
 	width: 630px;
-	padding: 30px 80px;
+	padding: 50px 100px;
 	min-width: 320px;
 	background: white;
 	border-radius: 10px;
@@ -321,7 +319,6 @@ footer nav ul {
 	position: absolute;
 	top: 20px;
 	right: 20px;
-	color: black;
 	background: none;
 	cursor: pointer;
 }
@@ -329,7 +326,7 @@ footer nav ul {
 .modal h3 {
 	margin-bottom: 30px;
 	margin-top: 20px;
-	font-size: 20px;
+	font-size: 2em;
 	text-align: center;
 	font-weight: 550;
 }
@@ -369,3 +366,20 @@ footer nav ul {
 	bottom: 0;
 	transform: translate(-50%, -50%);
 }
+
+.modal-content figure {
+	position: relative;
+  }
+  
+  .modal-content figure i {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	color: white; /* Couleur de l'icône */
+	background: black;
+	border: black 1px solid;
+	padding: 5px;
+	cursor: pointer;
+	border-radius: 5px;
+	z-index: 1; /* Assure que l'icône est au-dessus de l'image */
+  }
