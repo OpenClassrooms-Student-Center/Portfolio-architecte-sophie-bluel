@@ -283,10 +283,12 @@ footer nav ul {
 }
 
 .modal-container {
-	/* display: none; */
+	display: block;
 	visibility: hidden;
-	position: fixed;
+	position: absolute;
 	top: 0;
+	left: 0;
+	bottom: 0;
 	width: 100vw;
 	height: 100vh;
 }
@@ -296,12 +298,14 @@ footer nav ul {
 	visibility: visible;
 }
 
-.overlay {
-	position: absolute;
+.overlay{
+	position: fixed;
+	top: 0;
+	left: 0;
 	width: 100%;
 	height: 100%;
-	background-color: rgba(0, 0, 0, .8);
-}
+	background-color: rgba(0,0,0,0.5); /*dim the background*/
+  }
 
 .modal {
 	width: 95%;
