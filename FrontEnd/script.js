@@ -147,6 +147,8 @@ function filterWorksByCategory(categoryId) {
     const editModeButton = document.createElement("p");
     const introduction = document.querySelector(".h2-edition");
     editModeButton.classList.add("edition-button");
+    editModeButton.classList.add("modal-btn");
+    editModeButton.classList.add("modal-trigger");
     editModeButton.innerHTML = "<i class='fa-regular fa-pen-to-square'></i> modifier";
     introduction.appendChild(editModeButton);
   

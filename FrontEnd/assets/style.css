@@ -274,12 +274,7 @@ footer nav ul {
 
 /* La modale */
 .modal-btn {
-	padding: 10px 14px;
-	font-size: 18px;
-	margin: 100px auto;
-	min-width: 150px;
-	cursor: pointer	;
-	display: block;
+	cursor: pointer;
 }
 
 .modal-container {

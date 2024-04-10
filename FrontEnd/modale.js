@@ -16,13 +16,9 @@ const modalContent = document.querySelector(".modal-content");
 modalContent.classList.add("modal-gallery");
 
 
-// Pour recréer la galerie dans la modale
-// On récupère les éléments de la galerie FETCH
-// On crée les éléments de la galerie dans la modale createGalleryItems
-// On ajoute les éléments de la galerie dans la modale appendGalleryItems
+// Création de la galerie dans la modale
 
-// On récupère les éléments de la galerie FETCH
-// Fonction pour récupérer les données de l'API works
+// ---------------------- 1. Récupération des données de l'API ----------------------
 function getWorksDataModal() {
   return fetch("http://localhost:5678/api/works")
     .then(response => response.json())
@@ -38,6 +34,7 @@ function getWorksDataModal() {
 
 getWorksDataModal();
 
+// ---------------------- 2. Création de la galerie dans la modale ----------------------
 function createModalItems(worksModal) {
   
   for (let i = 0; i < works.length; i++) {
