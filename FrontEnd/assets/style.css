@@ -313,13 +313,13 @@ footer nav ul {
 }
 
 .close-modal {
-	border: none;
+	border: 1px solid black;
 	font-size: 12px;
 	font-weight: 700;
 	position: absolute;
 	top: 20px;
 	right: 20px;
-	background: none;
+	background: white;
 	cursor: pointer;
 }
 
@@ -369,17 +369,17 @@ footer nav ul {
 
 .modal-content figure {
 	position: relative;
-  }
+}
   
-  .modal-content figure i {
-	position: absolute;
-	top: 10px;
-	right: 10px;
-	color: white; /* Couleur de l'icône */
-	background: black;
-	border: black 1px solid;
-	padding: 5px;
-	cursor: pointer;
-	border-radius: 5px;
-	z-index: 1; /* Assure que l'icône est au-dessus de l'image */
-  }
+.modal-content figure i {
+position: absolute;
+top: 10px;
+right: 10px;
+color: white; /* Couleur de l'icône */
+background: black;
+border: black 1px solid;
+padding: 5px;
+cursor: pointer;
+border-radius: 5px;
+z-index: 1; /* Assure que l'icône est au-dessus de l'image */
+}

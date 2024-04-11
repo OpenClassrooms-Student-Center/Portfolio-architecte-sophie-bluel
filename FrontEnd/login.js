@@ -80,9 +80,7 @@ function logout() {
 let logButton = document.querySelector(".logButton");
 logButton.addEventListener("click", function() {
     // Vidage du localStorage
-    localStorage.clear();
-    // Redirection vers la page d'accueil
-    window.location.href = "./index.html";
+    localStorage.removeItem("token");
 });
 }
 logout();

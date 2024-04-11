@@ -1,26 +1,53 @@
 // Création de la modale
 
-const modalContainer = document.querySelector(".modal-container");
-const modalTriggers = document.querySelectorAll(".modal-trigger");
-const modal = document.querySelector(".modal");
-modal.innerHTML = `<button class="close-modal modal-trigger">X</button>
-<h3>Galerie Photo</h3>
-<div class="modal-content"></div>
-<div class="greyLine"></div>
-<button class="addWorksBtn">Ajouter une photo</button>
-`;
+// Récupération des éléments HTML
+  const modalContainer = document.querySelector('.modal-container');
+  const modalTriggers = document.querySelectorAll('.modal-trigger');
+  const modal = document.querySelector('.modal');
 
+// Fermeture de la modale
+  // Création du bouton Close
+  const closeBtn = document.createElement('button');
+  closeBtn.classList.add('modal-trigger', 'close-modal');
+  closeBtn.textContent = 'X';
+  modal.appendChild(closeBtn);
+    // Ajout d'un écouteur d'événement au bouton Close
+  closeBtn.addEventListener('click', toggleModal);
 
-const modalContent = document.querySelector(".modal-content");
-modalContent.classList.add("modal-gallery");
-
-modalTriggers.forEach((trigger) => {
-  trigger.addEventListener("click", toggleModal);
+  // Ajout de l'écouteur d'événement à chaque modal-trigger
+  modalTriggers.forEach((trigger) => {
+    trigger.addEventListener('click', toggleModal);
   });
 
-function toggleModal() {
-    modalContainer.classList.toggle("active");
-}
+  // Fonction pour basculer l'état Active de la modale
+  function toggleModal() {
+    modalContainer.classList.toggle('active');
+  }
+
+
+// Titre de la modale
+const h3 = document.createElement('h3');
+h3.textContent = 'Galerie Photo';
+
+// Contenu de la modale
+let modalContent = document.createElement('div');
+modalContent.classList.add("modal-content", "modal-gallery");
+
+// Ligne grise de séparation
+const greyLine = document.createElement('div');
+greyLine.className = 'greyLine';
+
+// Bouton pour ajouter une photo
+const addWorksBtn = document.createElement('button');
+addWorksBtn.className = 'addWorksBtn';
+addWorksBtn.textContent = 'Ajouter une photo';
+
+// Ajout des éléments créés à l'intérieur de la modale
+modal.appendChild(closeBtn);
+modal.appendChild(h3);
+modal.appendChild(modalContent);
+modal.appendChild(greyLine);
+modal.appendChild(addWorksBtn);
 
 
 // Création de la galerie dans la modale

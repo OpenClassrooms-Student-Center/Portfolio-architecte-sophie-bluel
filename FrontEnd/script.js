@@ -156,8 +156,8 @@ function filterWorksByCategory(categoryId) {
     logButton.innerHTML = "logout";
   
     // Suppression des boutons de catégories
-    categoryContainer.remove();
-    }
+    categoryContainer.style.display = "none"; 
+  }
   
     // Vérification de la présence du token dans le localStorage
     if (localStorage.getItem("token")) {
