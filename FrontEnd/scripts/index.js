@@ -5,13 +5,13 @@ const log = document.querySelector(`a[href="login.html"]`);
 const logoutBtn = document.getElementById("logout");
 
 // Fonction d'affichage par défaut de la page d'accueil
-async function displayDefault() {
+export async function displayDefault() {
   const worksData = await fetchWorksData();
   await displayWorks(worksData);
 }
 
 // Fonction pour récupérer les projets disponibles via l'API
-function fetchWorksData() {
+export function fetchWorksData() {
   return fetch("http://localhost:5678/api/works")
   .then(response => response.json())
   .catch(() => alert("Une erreur est survenue."));

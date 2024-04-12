@@ -227,6 +227,7 @@ nav li img[alt="Instagram"] {
 }
 
 .form-section input {
+  cursor: pointer;
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
@@ -242,7 +243,8 @@ nav li img[alt="Instagram"] {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-input[type="submit"]{
+input[type="submit"],
+.submitBtn {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
@@ -290,10 +292,6 @@ footer nav ul li {
   min-height: 100vh;
 }
 
-.form-section input {
-  cursor: pointer;
-}
-
 .errorLogin {
   font-size: 1.2em;
   padding-top: 20px;
@@ -338,19 +336,69 @@ footer nav ul li {
   background: rgba(0, 0, 0, 0.6);
 }
 
-#modal .closeModalBtn {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
+.closeModalBtn {
+  font-size: 20px;
+  margin-left: auto;
 }
 
 .modal-wrapper {
   overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   background-color: white;
-  width: 630px;
-  height: 650px;
-/*   max-width: calc(100vw - 20px);
-  max-height: calc(100vh - 20px); */
-  padding: 20px;
+  width: 600px;
+  height: 680px;
+  padding: 25px;
   border-radius: 10px;
+}
+
+.modal-wrapper h3 {
+  font-size: 1.4em;
+  font-weight: 400;
+}
+
+.modal-wrapper hr {
+  width: 85%;
+  height: 1px;
+  border: none;
+  background-color: #B3B3B3;
+}
+
+.modal-wrapper .submitBtn {
+  width: 237px;
+  padding: 15px;
+  border: none;
+  font-size: 1.2em;
+  margin: 20px;
+}
+
+.admin-gallery {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(3, auto);
+  row-gap: 20px;
+  column-gap: 10px;
+  padding: 30px 50px 40px 50px;
+}
+
+.admin-gallery figure {
+  box-sizing: border-box;
+  position: relative;
+}
+
+.admin-gallery img {
+  width: 100%;
+  height: auto;
+  opacity: 1;
+}
+
+.admin-gallery .imageTrashIcon {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background-color: black;
+  padding: 5px;
+  border-radius: 2px;
 }
