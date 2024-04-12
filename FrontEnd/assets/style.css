@@ -85,7 +85,10 @@ section {
 	margin: 50px 0;
 }
 
-button {
+button,
+a,
+i,
+.adminBanner {
   cursor: pointer;
 }
 
@@ -287,6 +290,10 @@ footer nav ul li {
   min-height: 100vh;
 }
 
+.form-section input {
+  cursor: pointer;
+}
+
 .errorLogin {
   font-size: 1.2em;
   padding-top: 20px;
@@ -315,4 +322,35 @@ footer nav ul li {
 
 .modifyBtn {
   margin-bottom: 45px;
+}
+
+/** Modal CSS **/
+
+#modal {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+#modal .closeModalBtn {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.modal-wrapper {
+  overflow: auto;
+  background-color: white;
+  width: 630px;
+  height: 650px;
+/*   max-width: calc(100vw - 20px);
+  max-height: calc(100vh - 20px); */
+  padding: 20px;
+  border-radius: 10px;
 }

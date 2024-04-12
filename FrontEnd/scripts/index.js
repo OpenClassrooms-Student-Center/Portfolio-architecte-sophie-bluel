@@ -1,17 +1,57 @@
-import { logButton, isLoggedIn } from "./global.js";
+import { logButton, isLoggedIn } from "./adminSession.js";
 
-// Vérification pour savoir si l'utilisateur est connecté au chargement de la page
-isLoggedIn();
+let modal = null;
 
-// Affichage de la page d'accueil de l'utilisateur authentifié
-adminPage();
+// Fermer la modale en appuyant sur la touche Escape
+window.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" || event.key === "Esc") {
+    closeModal();
+  };
+});
+
+// Fonction d'ouverture de la modal
+function openModal() {
+    modal = document.getElementById("modal");
+    modal.style.display = null;
+    modal.removeAttribute("aria-hidden");
+    modal.setAttribute("aria-modal", "true");
+    modal.addEventListener("click", closeModal);
+    modal.querySelector(".closeModalBtn").addEventListener("click", closeModal);
+    modal.querySelector(".modal-stop").addEventListener("click", (event) => {
+      event.stopPropagation();
+    });
+};
+
+// Fonction de fermeture de la modal
+function closeModal() {
+  if (modal === null) return;
+  modal.style.display = "none";
+  modal.setAttribute("aria-hidden", "true");
+  modal.removeAttribute("aria-modal");
+  modal.removeEventListener("click", closeModal);
+  modal.querySelector(".closeModalBtn").removeEventListener("click", closeModal);
+  modal = null;
+};
 
 // Fonction pour afficher la page d'accueil de l'utilisateur authentifié
 function adminPage() {
   if (isLoggedIn()) {
     addBanner();
     addModifyButton();
+    document.querySelector(".openModalBtn").addEventListener("click", openModal);
+    document.querySelector(".adminBanner").addEventListener("click", openModal);
   };
+};
+
+// Fonction pour créer le bouton modifier si adminPage()
+function addModifyButton() {
+  const sectionPortfolio = document.getElementById("portfolio");
+  const modifyBtn = document.createElement("a");
+  modifyBtn.classList.add("modifyBtn", "openModalBtn");
+  modifyBtn.innerHTML = `<i class="fa-regular fa-pen-to-square"></i>
+  modifier`;
+  modifyBtn.setAttribute("href", "#modal");
+  sectionPortfolio.querySelector("h2").insertAdjacentElement("afterend", modifyBtn);
 };
 
 // Fonction pour créer la bannière si adminPage() activée
@@ -24,21 +64,6 @@ function addBanner() {
   Mode édition</a>`;
   body.insertBefore(adminBanner, body.firstChild);
 };
-
-// Fonction pour créer le bouton modifier si adminPage()
-function addModifyButton() {
-  const sectionPortfolio = document.getElementById("portfolio");
-  const modifyBtn = document.createElement("a");
-  modifyBtn.classList = "modifyBtn";
-  modifyBtn.innerHTML = `<a href="#"><i class="fa-regular fa-pen-to-square"></i>
-  modifier</a>`;
-  sectionPortfolio.querySelector("h2").insertAdjacentElement("afterend", modifyBtn);
-};
-
-// Affichage du bouton de connexion en fonction de l'état de connexion
-const log = document.querySelector(`a[href="pages/login.html"]`);
-logButton(log);
-
 
 // Fonction d'affichage par défaut de la page d'accueil
 async function displayDefault() {
@@ -125,13 +150,23 @@ function filterWorksByCategory(categoryId) {
   .catch(() => alert("Une erreur est survenue."));
 };
 
+// Vérification pour savoir si l'utilisateur est connecté au chargement de la page
+isLoggedIn();
+
+// Affichage de la page d'accueil de l'utilisateur authentifié
+adminPage();
+
+// Affichage du bouton de connexion en fonction de l'état de connexion
+const log = document.querySelector(`a[href="login.html"]`);
+logButton(log);
+
 // Fonction de déconnexion
 const logoutBtn = document.getElementById("logout");
 logoutBtn.addEventListener("click", logout);
 
 function logout() {
   localStorage.removeItem("token");
-  window.location.href = "./pages/login.html";
+  window.location.href = "login.html";
 };
 
 // Démarrer l'affichage par défaut
