@@ -1,7 +1,7 @@
 import { openModal } from "./modal.js";
 
 // Fonction permettant de vérifier si l'utilisateur est connecté
-export function isLoggedIn() {
+function isLoggedIn() {
   return localStorage.getItem("token") ? true : false;
 };
 
@@ -12,16 +12,8 @@ export function logButton(log) {
 
 // Fonction pour afficher la page d'accueil de l'utilisateur authentifié
 export function adminPage() {
-  if (isLoggedIn()) {
-    addBanner();
-    addModifyButton();
-    document.querySelector(".openModalBtn").addEventListener("click", openModal);
-    document.querySelector(".adminBanner").addEventListener("click", openModal);
-  };
-};
-
-// Fonction pour créer le bouton modifier si adminPage()
-export function addModifyButton() {
+  // Fonction pour créer le bouton modifier si adminPage() à déclarer dans admin Page pour moins de pbs de scope
+  function addModifyButton() {
   const sectionPortfolio = document.getElementById("portfolio");
   const modifyBtn = document.createElement("a");
   modifyBtn.classList.add("modifyBtn", "openModalBtn");
@@ -29,15 +21,21 @@ export function addModifyButton() {
   modifier`;
   modifyBtn.setAttribute("href", "#modal");
   sectionPortfolio.querySelector("h2").insertAdjacentElement("afterend", modifyBtn);
-};
-
-// Fonction pour créer la bannière si adminPage() activée
-export function addBanner() {
-  const body = document.querySelector("body");
-  const adminBanner = document.createElement("div");
-  adminBanner.classList = "adminBanner";
-  adminBanner.innerHTML = `<a href="#">
-  <i class="fa-regular fa-pen-to-square"></i>
-  Mode édition</a>`;
-  body.insertBefore(adminBanner, body.firstChild);
+  };
+  // Fonction pour créer la bannière si adminPage() activée, pareillement
+  function addBanner() {
+    const body = document.querySelector("body");
+    const adminBanner = document.createElement("div");
+    adminBanner.classList = "adminBanner";
+    adminBanner.innerHTML = `<a href="#">
+    <i class="fa-regular fa-pen-to-square"></i>
+    Mode édition</a>`;
+    body.insertBefore(adminBanner, body.firstChild);
+  };
+  if (isLoggedIn()) {
+    addBanner();
+    addModifyButton();
+    document.querySelector(".openModalBtn").addEventListener("click", openModal);
+    document.querySelector(".adminBanner").addEventListener("click", openModal);
+  };
 };

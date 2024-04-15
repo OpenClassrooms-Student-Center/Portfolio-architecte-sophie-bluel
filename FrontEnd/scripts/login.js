@@ -24,7 +24,7 @@ form.addEventListener("submit", (event) => {
   login(userData);
 });
 
-// Fonction pour s'authentifier
+// Fonction pour s'authentifier qu'il faut mettre dans un gestionnaire d'évènement onsubmit
 async function login(userData) {
   try {
     const response = await fetch("http://localhost:5678/api/users/login", {

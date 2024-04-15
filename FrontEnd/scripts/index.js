@@ -2,23 +2,17 @@ import { logButton, adminPage } from "./adminSession.js";
 import { escapeKeyModal } from "./modal.js";
 
 const log = document.querySelector(`a[href="login.html"]`);
-const logoutBtn = document.getElementById("logout");
 
 // Fonction d'affichage par défaut de la page d'accueil
-export async function displayDefault() {
-  const worksData = await fetchWorksData();
-  await displayWorks(worksData);
-}
-
-// Fonction pour récupérer les projets disponibles via l'API
-export function fetchWorksData() {
-  return fetch("http://localhost:5678/api/works")
-  .then(response => response.json())
-  .catch(() => alert("Une erreur est survenue."));
-};
-
-// Fonction permettant d'afficher les projets récupérés
-async function displayWorks(worksData) {
+async function displayDefault() {
+  // Fonction pour récupérer les projets disponibles via l'API
+  function fetchWorksData() {
+    return fetch("http://localhost:5678/api/works")
+    .then(response => response.json())
+    .catch(() => alert("Une erreur est survenue."));
+  };
+  // Fonction permettant d'afficher les projets récupérés, à déplacer dans display default
+  async function displayWorks(worksData) {
   // Récupération de l'élément du DOM qui accueillera les figures
   const gallerySection = document.querySelector(".gallery");
   // Effacer le contenu de la galerie précédente
@@ -38,10 +32,26 @@ async function displayWorks(worksData) {
     figureElement.appendChild(imageElement);
     figureElement.appendChild(titleElement);
   };
+  };
+  const worksData = await fetchWorksData();
+  await displayWorks(worksData);
 };
 
 // Fonction pour afficher les boutons filtres
 function displayButtons() {
+  // Fonction permettant de filtrer les projets par catégorie, à déplacer dans display btn
+  function filterWorksByCategory(categoryId) {
+  fetch(`http://localhost:5678/api/works`)
+  .then(worksData => worksData.json())
+  .then(worksData => {
+    const filteredWorks = worksData.filter((work) => work.categoryId == categoryId);
+
+    displayWorks(filteredWorks);
+
+    !filteredWorks.length && displayDefault();
+  })
+  .catch(() => alert("Une erreur est survenue."));
+  };
   fetch("http://localhost:5678/api/categories")
   .then(categories => categories.json())
   .then(categories => {
@@ -75,19 +85,7 @@ function displayButtons() {
   .catch(() => alert("Une erreur est survenue."));
 };
 
-// Fonction permettant de filtrer les projets par catégorie
-function filterWorksByCategory(categoryId) {
-  fetch(`http://localhost:5678/api/works`)
-  .then(worksData => worksData.json())
-  .then(worksData => {
-    const filteredWorks = worksData.filter((work) => work.categoryId == categoryId);
 
-    displayWorks(filteredWorks);
-
-    !filteredWorks.length && displayDefault();
-  })
-  .catch(() => alert("Une erreur est survenue."));
-};
 
 // Fonction de déconnexion
 function logout() {
@@ -102,6 +100,7 @@ logButton(log);
 displayDefault();
 displayButtons();
 
+const logoutBtn = document.getElementById("logout");
 logoutBtn.addEventListener("click", logout);
 
 adminPage();

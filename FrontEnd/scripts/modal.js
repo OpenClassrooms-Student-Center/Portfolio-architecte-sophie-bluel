@@ -1,9 +1,37 @@
-import { fetchWorksData } from "./index.js"
-
 let modal = null;
 
 // Fonction d'ouverture de la modal
 export function openModal() {
+  // Fonction pour afficher les projets dans la modal, à sdéplacer dans openmodal
+  async function displayProjectsInModal() {
+    function fetchWorksData() {
+      return fetch("http://localhost:5678/api/works")
+      .then(response => response.json())
+      .catch(() => alert("Une erreur est survenue."));
+    };
+    const worksData = await fetchWorksData();
+    const modalContent = document.querySelector(".admin-gallery");
+
+    // Effacer le contenu précédent de la modal
+    modalContent.innerHTML = "";
+
+    // Création des éléments HTML pour chaque projet et ajout à la modal
+    for (let i = 0; i < worksData.length; i++) {
+      const work = worksData[i];
+      // Création des éléments HTML pour afficher chaque projet
+      const figureElement = document.createElement("figure");
+      const imageElement = document.createElement("img");
+      imageElement.src = work.imageUrl;
+      imageElement.alt = work.title;
+      const imageTrashIcon = document.createElement("div");
+      imageTrashIcon.classList = "imageTrashIcon";
+      imageTrashIcon.innerHTML = `<i class="fa-solid fa-trash-can" style="color: #ffffff;"></i>`
+      // Ajout des éléments à la galerie
+      modalContent.appendChild(figureElement);
+      figureElement.appendChild(imageElement);
+      figureElement.appendChild(imageTrashIcon);
+    };
+  };
   modal = document.getElementById("modal");
   modal.style.display = null;
   modal.removeAttribute("aria-hidden");
@@ -17,7 +45,7 @@ export function openModal() {
 };
 
 // Fonction de fermeture de la modal
-export function closeModal() {
+function closeModal() {
   modal.style.display = "none";
   modal.setAttribute("aria-hidden", "true");
   modal.removeAttribute("aria-modal");
@@ -33,30 +61,4 @@ export function escapeKeyModal() {
       closeModal();
     };
   });
-};
-
-// Fonction pour afficher les projets dans la modal
-export async function displayProjectsInModal() {
-  const worksData = await fetchWorksData();
-  const modalContent = document.querySelector(".admin-gallery");
-
-  // Effacer le contenu précédent de la modal
-  modalContent.innerHTML = "";
-
-  // Création des éléments HTML pour chaque projet et ajout à la modal
-  for (let i = 0; i < worksData.length; i++) {
-    const work = worksData[i];
-    // Création des éléments HTML pour afficher chaque projet
-    const figureElement = document.createElement("figure");
-    const imageElement = document.createElement("img");
-    imageElement.src = work.imageUrl;
-    imageElement.alt = work.title;
-    const imageTrashIcon = document.createElement("div");
-    imageTrashIcon.classList = "imageTrashIcon";
-    imageTrashIcon.innerHTML = `<i class="fa-solid fa-trash-can" style="color: #ffffff;"></i>`
-    // Ajout des éléments à la galerie
-    modalContent.appendChild(figureElement);
-    figureElement.appendChild(imageElement);
-    figureElement.appendChild(imageTrashIcon);
-  };
 };
