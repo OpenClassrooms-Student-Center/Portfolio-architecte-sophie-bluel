@@ -24,13 +24,13 @@ async function displayWorksInModal() {
   };
 
   try {
-  const worksData = await fetchWorksData();
-  const modalContent = document.querySelector(".admin-gallery");
+    const worksData = await fetchWorksData();
+    const modalContent = document.querySelector(".admin-gallery");
 
-  // Effacer le contenu précédent de la modal
-  modalContent.innerHTML = "";
+    // Effacer le contenu précédent de la modal
+    modalContent.innerHTML = "";
 
-  // Création des éléments HTML pour chaque projet et ajout à la modal
+    // Création des éléments HTML pour chaque projet et ajout à la modal
     for (let i = 0; i < worksData.length; i++) {
       const work = worksData[i];
       // Création des éléments HTML pour afficher chaque projet
@@ -49,46 +49,48 @@ async function displayWorksInModal() {
       figureElement.appendChild(imageElement);
       figureElement.appendChild(imageTrashIcon);
 
-      console.log("imageTrashIcon", imageTrashIcon)
-      imageTrashIcon.addEventListener("click", deleteWorkHandler);
+      imageTrashIcon.addEventListener("click", (event) => {
+        event.preventDefault();
+        deleteWorkHandler(event, work.id);
+      });
     };
   } catch(err) {
     console.error("Une erreur est survenue lors de l'affichage des projets dans la modal:", err);
   };
 };
 
-async function deleteWorkHandler(event) {
-  console.log("deleteWorkHandler");
-  console.log("event", event)
-  const workId = event.target.id;
-  console.log("workId", workId);
+async function deleteWorkHandler(event, workId) {
   const confirmation = confirm("Êtes-vous sûr de vouloir supprimer ce projet ?");
   if (confirmation) {
     console.log("confirmation", confirmation)
     const success = await deleteWork(workId);
     if (success) {
-      await displayWorksInModal();
+      console.log("successed")
+      const workToRemove = document.querySelector(`div[id="${workId}]`);
+      if (workToRemove) {
+        workToRemove.remove();
+      }
     } else {
       alert("Une erreur s'est produite lors de la suppression du travail.");
     };
   };
+  event.stopPropagation();
 };
 
 async function deleteWork(workId) {
   console.log("deleteWork", workId)
   try {
     const token = localStorage.getItem("token");
-    console.log("token", token)
     const response = await fetch(`http://localhost:5678/api/works/${workId}`, {
       method: "DELETE",
       headers: {
+        "Accept": "application/json",
         Authorization: `Bearer ${token}`
       }
     });
     if (!response.ok) {
       throw new Error("Erreur lors de la suppression du travail");
     }
-    console.log("success", success);
     return true;
   } catch(error) {
     console.error("Erreur lors de la suppression du travail:", error);
@@ -98,6 +100,7 @@ async function deleteWork(workId) {
 
 // Fonction de fermeture de la modal
 function closeModal() {
+  console.log("closemodal");
   modal.style.display = "none";
   modal.setAttribute("aria-hidden", "true");
   modal.removeAttribute("aria-modal");
