@@ -4,7 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // Fonction pour créer la modale et son contenu
-  function createModal() {
+  function createModal1() {
+    const modal1 = document.querySelector('.modal1');
+    
     const modalContainer = document.createElement('div');
     modalContainer.classList.add('modal-container');
 
@@ -62,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Appel de la fonction pour créer la modale et son contenu et stockage des éléments dans des variables pour les réutiliser plus tard
-  const { modalContainer, modalContent } = createModal();
+  const { modalContainer, modalContent } = createModal1();
 
   getWorksData()
     .then(works => {
