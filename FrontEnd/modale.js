@@ -1,117 +1,128 @@
-// Création de la modale
+document.addEventListener('DOMContentLoaded', () => {
+  // Fonction pour créer la modale et son contenu
+  function createModal() {
+    // Création des éléments de la modale
+    const modalContainer = document.createElement('div');
+    modalContainer.classList.add('modal-container');
 
-// Récupération des éléments HTML
-  const modalContainer = document.querySelector('.modal-container');
-  const modalTriggers = document.querySelectorAll('.modal-trigger');
-  const modal = document.querySelector('.modal');
+    const overlay = document.createElement('div');
+    overlay.classList.add('overlay', 'modal-trigger');
 
-// Fermeture de la modale
-  // Création du bouton Close
-  const closeBtn = document.createElement('button');
-  closeBtn.classList.add('modal-trigger', 'close-modal');
-  closeBtn.textContent = 'X';
-  modal.appendChild(closeBtn);
-    // Ajout d'un écouteur d'événement au bouton Close
-  closeBtn.addEventListener('click', toggleModal);
+    const modal = document.createElement('div');
+    modal.classList.add('modal');
 
-  // Ajout de l'écouteur d'événement à chaque modal-trigger
-  modalTriggers.forEach((trigger) => {
-    trigger.addEventListener('click', toggleModal);
-  });
+    const closeButton = document.createElement('button');
+    closeButton.classList.add('modal-trigger', 'close-modal');
+    closeButton.textContent = 'X';
 
-  // Fonction pour basculer l'état Active de la modale
-  function toggleModal() {
-    modalContainer.classList.toggle('active');
+    const modalTitle = document.createElement('h3');
+    modalTitle.textContent = 'Galerie Photo';
+
+    const modalContent = document.createElement('div');
+    modalContent.classList.add('modal-content', 'modal-gallery');
+
+    const greyLine = document.createElement('div');
+    greyLine.className = 'greyLine';
+
+    const addButton = document.createElement('button');
+    addButton.className = 'addWorksBtn modal-trigger';
+    addButton.textContent = 'Ajouter une photo';
+
+    // Ajout des éléments à la modale
+    modal.appendChild(closeButton);
+    modal.appendChild(modalTitle);
+    modal.appendChild(modalContent);
+    modal.appendChild(greyLine);
+    modal.appendChild(addButton);
+
+    modalContainer.appendChild(overlay);
+    modalContainer.appendChild(modal);
+
+    // Ajout de la modale à la fin du document
+    document.body.appendChild(modalContainer);
+
+    return { modalContainer, modalContent };
   }
 
+  // Fonction pour récupérer les données de l'API works
+  function getWorksData() {
+    return fetch('http://localhost:5678/api/works')
+      .then(response => response.json())
+      .catch(error => {
+        console.error("Erreur à la récupération de l'API works :", error);
+        return [];
+      });
+  }
 
-// Titre de la modale
-const h3 = document.createElement('h3');
-h3.textContent = 'Galerie Photo';
+  // Fonction pour créer les éléments de la galerie dans la modale
+  function createModalItems(works, modalContent) {
+    modalContent.innerHTML = ''; // Effacer le contenu existant
 
-// Contenu de la modale
-let modalContent = document.createElement('div');
-modalContent.classList.add("modal-content", "modal-gallery");
+    works.forEach(work => {
+      const figure = document.createElement('figure');
+      const img = document.createElement('img');
+      const deleteIcon = document.createElement('i');
 
-// Ligne grise de séparation
-const greyLine = document.createElement('div');
-greyLine.className = 'greyLine';
+      img.src = work.imageUrl;
+      img.alt = work.title;
+      img.dataset.id = work.id;
 
-// Bouton pour ajouter une photo
-const addWorksBtn = document.createElement('button');
-addWorksBtn.className = 'addWorksBtn';
-addWorksBtn.textContent = 'Ajouter une photo';
+      deleteIcon.classList.add('fas', 'fa-trash-alt');
+      deleteIcon.addEventListener('click', () => {
+        deletePhoto(work.id, figure);
+      });
 
-// Ajout des éléments créés à l'intérieur de la modale
-modal.appendChild(closeBtn);
-modal.appendChild(h3);
-modal.appendChild(modalContent);
-modal.appendChild(greyLine);
-modal.appendChild(addWorksBtn);
-
-
-// Création de la galerie dans la modale
-
-// ---------------------- 1. Récupération des données de l'API ----------------------
-function getWorksDataModal() {
-  return fetch("http://localhost:5678/api/works")
-    .then(response => response.json())
-    .then(responseWorks => { // On récupère les données de l'API 
-      worksModal = responseWorks; // On stocke les données dans une variable
-      createModalItems(works); // On crée la galerie avec les données récupérées
-      console.log(worksModal);
-    }) 
-    .catch(error => {
-      console.error("Erreur à la récupération de l'API works :", error);
-    });
-}
-
-getWorksDataModal();
-
-// ---------------------- 2. Création de la galerie dans la modale ----------------------
-function createModalItems(worksModal) {
-  
-  for (let i = 0; i < works.length; i++) {
-    
-      // Création des éléments de la galerie
-      let figure = document.createElement("figure");
-      let img = document.createElement("img");
-
-      // Ajout des images de la galerie à partir de l'API
-      img.src = worksModal[i].imageUrl;
-
-
-      // Rattachement des éléments enfants aux parents
       figure.appendChild(img);
-      modalContent.appendChild(figure);
-
-      // Ajout des icones de suppression
-      const deleteIcon = document.createElement("i");
-      deleteIcon.classList.add("fas", "fa-trash-alt");
       figure.appendChild(deleteIcon);
-
+      modalContent.appendChild(figure);
+    });
   }
-}
 
-// ---------------------- 3. Suppression d'une image de la galerie ----------------------
-// http://localhost:5678/api/works/{id} - DELETE
-// On récupère l'id de l'image à supprimer avec addeventlistener
-// On utilise la méthode fetch avec la méthode DELETE pour supprimer l'image
-// On NE recharge PAS la page
-// On supprime l'image de la galerie
-
-
-// Fonction Fetch avec method DELETE
-
-function deleteWorks() {
-  return fetch(`http://localhost:5678/api/works/${id}`, {
-    method: "DELETE"
-  })
-    .then(() => {
-      figure.remove();
+  function deletePhoto(id, figureElement) {
+    const token = localStorage.getItem('token');
+  
+    fetch(`http://localhost:5678/api/works/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Accept': '*/*',
+        'Authorization': `Bearer ${token}` // Ajoute le jeton d'authentification dans l'en-tête
+      }
+    })
+    .then(response => {
+      if (response.ok) {
+        // Si la suppression réussit, retirer la figure de la galerie modale
+        figureElement.remove();
+        console.log(`Photo avec l'ID ${id} supprimée.`);
+      } else {
+        console.error(`Erreur lors de la suppression de la photo avec l'ID ${id}.`);
+      }
     })
     .catch(error => {
-      console.error("Erreur à la récupération de l'API works :", error);
+      console.error('Erreur lors de la suppression de la photo :', error);
     });
-}
-deleteWorks();
+  }
+
+  // Création de la modale et récupération des données de l'API au chargement du DOM
+  const { modalContainer, modalContent } = createModal();
+  getWorksData()
+    .then(works => {
+      createModalItems(works, modalContent);
+    })
+    .catch(error => {
+      console.error('Erreur lors de la récupération des données de l\'API works :', error);
+    });
+
+  // Ajouter un écouteur d'événement au bouton de fermeture de la modale
+  document.addEventListener('click', event => {
+    if (event.target.classList.contains('close-modal')) {
+      modalContainer.classList.remove('active');
+    }
+  });
+
+  // Ajouter un écouteur d'événement au bouton d'ouverture de la modale
+  document.addEventListener('click', event => {
+    if (event.target.classList.contains('modal-trigger')) {
+      modalContainer.classList.toggle('active');
+    }
+  });
+});

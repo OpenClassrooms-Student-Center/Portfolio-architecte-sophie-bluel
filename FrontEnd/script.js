@@ -11,7 +11,7 @@ function getWorksData() {
     .then(responseWorks => { // On récupère les données de l'API 
       works = responseWorks; // On stocke les données dans une variable
       createGalleryItems(works); // On crée la galerie avec les données récupérées
-      console.log(works);
+      // console.log(works);
     }) 
     .catch(error => {
       console.error("Erreur à la récupération de l'API works :", error);
