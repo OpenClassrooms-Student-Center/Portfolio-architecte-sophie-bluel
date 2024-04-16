@@ -5,8 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Fonction pour créer la modale et son contenu
   function createModal1() {
-    const modal1 = document.querySelector('.modal1');
-    
+  
     const modalContainer = document.createElement('div');
     modalContainer.classList.add('modal-container');
 

@@ -1,7 +1,9 @@
+
+// Attendre que le DOM soit chargé pour exécuter le code JavaScript
 document.addEventListener('DOMContentLoaded', () => {
   
     // Fonction pour créer une modale
-    function createModal() {
+    function createModal2() {
       const modalContainer = document.createElement('div');
       modalContainer.classList.add('modal-container');
   
@@ -24,8 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
         addImg.setAttribute('label', 'addImg');
         addImg.setAttribute('accept', 'image/png, image/jpeg, image/gif');
         addImg.setAttribute('required', 'true');
-        addImg.setAttribute('placeholder', '+ Ajouter photo');
-        addImg.classList.add('addImg');
 
       const imgTitle = document.createElement('input');
         imgTitle.setAttribute('type', 'text');
@@ -34,14 +34,12 @@ document.addEventListener('DOMContentLoaded', () => {
         imgTitle.setAttribute('label', 'imgTitle');
         imgTitle.setAttribute('required', 'true');
         imgTitle.setAttribute('placeholder', 'Titre de la photo');
-        imgTitle.classList.add('imgTitle');
 
       const selectCategory = document.createElement('select');
         selectCategory.setAttribute('id', 'selectCategory');
         selectCategory.setAttribute('name', 'selectCategory');
         selectCategory.setAttribute('label', 'selectCategory');
         selectCategory.setAttribute('required', 'true');
-        selectCategory.classList.add('selectCategory');
         
 
       const greyLine = document.createElement('div');
@@ -51,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
       closeButton.classList.add('close-modal');
       closeButton.textContent = 'X';
       closeButton.addEventListener('click', () => {
-        modalContainer.classList.remove('active'); // Cacher la modale
+        modalContainer.classList.remove('active');
       });
   
       modal.appendChild(closeButton);
@@ -71,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
     // Fonction pour créer et afficher une nouvelle modale lorsque le bouton est cliqué
     function handleModalTrigger() {
-      const modalContainer = createModal();
+      const modalContainer = createModal2();
       modalContainer.classList.add('active'); // Afficher la modale
     }
   
@@ -79,5 +77,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const addButton = document.querySelector('.addWorksBtn');
     addButton.addEventListener('click', handleModalTrigger);
   
-  });
+});
   
+
+
+
+
+// Créer de nouveaux travaux
+ 
+
+// Récupérer les données du formulaire
+const newObject = {
+  imgFile : imgFile.value,
+  imgTitle : imgTitle.value,
+  categoryId : selectCategory.value,
+}
+
+// Fonction pour envoyer les données du formulaire à l'API
+function submitNewWork() {
+    return fetch("http://localhost:5678/api/works", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newObject),
+    })
+    .then((response) => response.json())
+    .then((newObject) => {
+        console.log('Success:', newObject);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+} 
