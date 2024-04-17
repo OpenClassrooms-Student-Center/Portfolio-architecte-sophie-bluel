@@ -402,3 +402,11 @@ footer nav ul li {
   padding: 5px;
   border-radius: 2px;
 }
+
+.empty-works {
+  text-align: center;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  grid-column: 2;
+}

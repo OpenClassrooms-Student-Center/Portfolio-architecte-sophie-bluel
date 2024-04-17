@@ -3,18 +3,25 @@ import { escapeKeyModal } from "./modal.js";
 
 const log = document.querySelector(`a[href="login.html"]`);
 
+// Récupération de l'élément du DOM qui accueillera les figures
+const gallerySection = document.querySelector(".gallery");
+
 // Fonction d'affichage par défaut de la page d'accueil
 async function displayDefault() {
+
   // Fonction pour récupérer les projets disponibles via l'API
   function fetchWorksData() {
     return fetch("http://localhost:5678/api/works")
     .then(response => response.json())
     .catch(() => alert("Une erreur est survenue."));
   };
-  // Fonction permettant d'afficher les projets récupérés, à déplacer dans display default
-  async function displayWorks(worksData) {
-  // Récupération de l'élément du DOM qui accueillera les figures
-  const gallerySection = document.querySelector(".gallery");
+
+  const worksData = await fetchWorksData();
+  await displayWorks(worksData);
+};
+
+// Fonction permettant d'afficher les projets récupérés, à déplacer dans display default
+async function displayWorks(worksData) {
   // Effacer le contenu de la galerie précédente
   gallerySection.innerHTML = ""
 
@@ -32,26 +39,10 @@ async function displayDefault() {
     figureElement.appendChild(imageElement);
     figureElement.appendChild(titleElement);
   };
-  };
-  const worksData = await fetchWorksData();
-  await displayWorks(worksData);
 };
 
-// Fonction pour afficher les boutons filtres
+// Fonction pour afficher les boutons filtres et filtrer par catégorie
 function displayButtons() {
-  // Fonction permettant de filtrer les projets par catégorie, à déplacer dans display btn
-  function filterWorksByCategory(categoryId) {
-  fetch(`http://localhost:5678/api/works`)
-  .then(worksData => worksData.json())
-  .then(worksData => {
-    const filteredWorks = worksData.filter((work) => work.categoryId == categoryId);
-
-    displayWorks(filteredWorks);
-
-    !filteredWorks.length && displayDefault();
-  })
-  .catch(() => alert("Une erreur est survenue."));
-  };
   fetch("http://localhost:5678/api/categories")
   .then(categories => categories.json())
   .then(categories => {
@@ -78,14 +69,26 @@ function displayButtons() {
     filters.querySelectorAll(".filter-btn").forEach(button => {
       button.addEventListener("click", function() {
         const categoryId = button.getAttribute("data-category-id");
-        filterWorksByCategory(categoryId);
+        if (!categoryId) {
+          displayDefault();
+        } else {
+          fetch(`http://localhost:5678/api/works`)
+          .then(worksData => worksData.json())
+          .then(worksData => {
+            const filteredWorks = worksData.filter((work) => work.categoryId == categoryId);
+            if (filteredWorks.length > 0) {
+              displayWorks(filteredWorks);
+            } else {
+              gallerySection.innerHTML = `<div class="empty-works">Pas de projet actuellement disponible dans cette catégorie.</div>`;
+            };
+          })
+          .catch(() => alert("Une erreur est survenue."));
+        }
       });
     });
   })
   .catch(() => alert("Une erreur est survenue."));
 };
-
-
 
 // Fonction de déconnexion
 function logout() {

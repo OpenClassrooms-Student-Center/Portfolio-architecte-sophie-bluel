@@ -38,9 +38,9 @@ async function displayWorksInModal() {
       const imageElement = document.createElement("img");
       const imageTrashIcon = document.createElement("div");
 
+      figureElement.id = work.id;
       imageElement.src = work.imageUrl;
       imageElement.alt = work.title;
-      imageTrashIcon.id = work.id;
       imageTrashIcon.classList = "imageTrashIcon";
       imageTrashIcon.innerHTML = `<i class="fa-solid fa-trash-can" style="color: #ffffff;"></i>`
 
@@ -50,7 +50,7 @@ async function displayWorksInModal() {
       figureElement.appendChild(imageTrashIcon);
 
       imageTrashIcon.addEventListener("click", (event) => {
-        event.preventDefault();
+ /*        event.preventDefault(); */
         deleteWorkHandler(event, work.id);
       });
     };
@@ -65,9 +65,11 @@ async function deleteWorkHandler(event, workId) {
     console.log("confirmation", confirmation)
     const success = await deleteWork(workId);
     if (success) {
-      console.log("successed")
-      const workToRemove = document.querySelector(`div[id="${workId}]`);
+      console.log("successed", workId)
+      const workToRemove = document.querySelector(`figure[id="${workId}"]`);
+      console.log("workToRemove1", workToRemove)
       if (workToRemove) {
+        console.log("workToRemove", workToRemove)
         workToRemove.remove();
       }
     } else {
