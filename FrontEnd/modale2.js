@@ -2,7 +2,7 @@
 // Attendre que le DOM soit chargé pour exécuter le code JavaScript
 document.addEventListener('DOMContentLoaded', () => {
   
-    // Fonction pour créer une modale
+    // Fonction pour créer la 2e modale
     function createModal2() {
       const modalContainer = document.createElement('div');
       modalContainer.classList.add('modal-container');
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // Créer de nouveaux travaux
- 
+// Pour Select, voir getCatData()
 
 // Récupérer les données du formulaire
 const newObject = {
@@ -104,7 +104,7 @@ function submitNewWork() {
     })
     .then((response) => response.json())
     .then((newObject) => {
-        console.log('Success:', newObject);
+        console.log('Nouvel objet créé:', newObject);
     })
     .catch((error) => {
         console.error('Error:', error);
