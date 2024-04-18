@@ -70,16 +70,48 @@
 </footer>
 
 <aside id="modal" aria-hidden="true" role="dialog" aria-labelledby="modaltitle" style="display:none">
-  <div class="modal-wrapper modal-stop">
+<!--   <div class="modal-wrapper modal-stop modal-photo-gallery">
     <div class="closeModalBtn">
       <i class="fa-solid fa-xmark"></i>
     </div>
     <h3 id="modaltitle">Galerie photo</h3>
     <div class="admin-gallery">
-      <!-- TO DO -->
     </div>
     <hr>
     <button class="submitBtn">Ajouter une photo</button>
+  </div> -->
+  <div class="modal-wrapper modal-stop modal-add-photo">
+    <div class="modal-header-icons">
+      <div class="arrow-backward">
+        <i class="fa-solid fa-arrow-left"></i>
+      </div>
+      <div class="closeModalBtn">
+        <i class="fa-solid fa-xmark"></i>
+      </div>
+    </div>
+    <h3 id="modaltitle">Ajout photo</h3>
+    <form action="POST" class="add-photo-form">
+      <div class="form-group form-input-photo">
+        <i class="fa-regular fa-image" style="color: #b9c5cc;"></i>
+        <label for="photoInput">+ Ajouter photo</label>
+        <input type="file" id="photoInput" name="photo" style="display: none;">
+        <p>jpg, png : 4mo max</p>
+      </div>
+      <div class="form-group-inputs">
+      <div class="form-group">
+        <label for="titleInput">Titre</label>
+        <input type="text" id="titleInput" name="title">
+      </div>
+      <div class="form-group">
+        <label for="categorySelect">Catégorie</label>
+        <select id="categorySelect" name="category">
+          <option value="">Catégorie1</option>
+        </select>
+      </div>
+      </div>
+      <hr>
+      <button class="submitBtn">Valider</button>
+    </form>
   </div>
 </aside>
 
