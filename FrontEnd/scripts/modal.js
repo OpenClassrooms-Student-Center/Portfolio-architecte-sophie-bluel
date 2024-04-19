@@ -3,18 +3,51 @@ let modal = null;
 // Fonction d'ouverture de la modal
 export function openModal() {
   modal = document.getElementById("modal");
+  console.log("openModal :", modal)
   modal.style.display = null;
   modal.removeAttribute("aria-hidden");
   modal.setAttribute("aria-modal", "true");
+  console.log("openModal 2 après null", modal)
   modal.addEventListener("click", closeModal);
   modal.querySelector(".closeModalBtn").addEventListener("click", closeModal);
-  modal.querySelector(".modal-stop").addEventListener("click", (event) => {
+  /* modal.querySelector(".modal-stop").addEventListener("click", (event) => {
     event.stopPropagation();
-  });
+  }); */
+
   displayWorksInModal();
 };
 
-// Fonction pour afficher les projets dans la modal
+// Fonction pour afficher la modal 2
+/* function displayAddPhotoModal() {
+}; */
+const modalAddPhoto = document.querySelector(".modal-add-photo");
+const modalGallery = document.querySelector(".modal-photo-gallery");
+document.querySelector(".add-photo-btn").addEventListener("click", () => {
+  modalGallery.style.display = "none";
+  modalAddPhoto.style.display = "flex";
+  console.log("modal", modal);
+    const modals = modal.querySelectorAll(".modal-stop");
+  console.log("modals", modals);
+  for(let i =0; i<modals.length; i++) {
+  modals[0].addEventListener("click", (event) => {
+    event.stopPropagation();
+  });
+  }
+  /* modal.addEventListener("click", closeModal);
+  modal.querySelector(".closeModalBtn").addEventListener("click", closeModal);
+  modal.querySelector(".modal-stop").addEventListener("click", (event) => {
+    event.stopPropagation();
+  }); */
+});
+
+document.querySelector(".arrow-backward").addEventListener("click", (event) => {
+/*   event.stopPropagation();
+ */  modalAddPhoto.style.display = "none";
+  modalGallery.style.display = "flex";
+  displayWorksInModal();
+})
+
+// Fonction pour afficher les projets dans la modal 1
 async function displayWorksInModal() {
   // Fonction pour récupérer les données des projets
   function fetchWorksData() {
@@ -50,8 +83,8 @@ async function displayWorksInModal() {
       figureElement.appendChild(imageTrashIcon);
 
       imageTrashIcon.addEventListener("click", (event) => {
- /*        event.preventDefault(); */
-        deleteWorkHandler(event, work.id);
+/*         event.stopPropagation();
+ */        deleteWorkHandler(event, work.id);
       });
     };
   } catch(err) {
@@ -59,6 +92,7 @@ async function displayWorksInModal() {
   };
 };
 
+// Fonction permettant de gérer la suppression d'un projet
 async function deleteWorkHandler(event, workId) {
   const confirmation = confirm("Êtes-vous sûr de vouloir supprimer ce projet ?");
   if (confirmation) {
@@ -76,9 +110,10 @@ async function deleteWorkHandler(event, workId) {
       alert("Une erreur s'est produite lors de la suppression du travail.");
     };
   };
-  event.stopPropagation();
-};
+/*   event.stopPropagation();
+ */};
 
+// Fonction pour supprimer un projet
 async function deleteWork(workId) {
   console.log("deleteWork", workId)
   try {
@@ -103,19 +138,21 @@ async function deleteWork(workId) {
 // Fonction de fermeture de la modal
 function closeModal() {
   console.log("closemodal");
+  modalGallery.style.display = "flex";
+  modalAddPhoto.style.display = "none";
   modal.style.display = "none";
   modal.setAttribute("aria-hidden", "true");
   modal.removeAttribute("aria-modal");
   modal.removeEventListener("click", closeModal);
-  modal.querySelector(".closeModalBtn").removeEventListener("click", closeModal);
-  modal = null;
+/*   modal.querySelector(".closeModalBtn").removeEventListener("click", closeModal);
+ */  modal = null;
 };
 
-// Fermer la modale en appuyant sur la touche Escape
-export function escapeKeyModal() {
+// Fonction pour fermer la modale en appuyant sur la touche Escape
+/* export function escapeKeyModal() { */
   window.addEventListener("keydown", (event) => {
     if (event.key === "Escape" || event.key === "Esc") {
       closeModal();
     };
   });
-};
+/* }; */

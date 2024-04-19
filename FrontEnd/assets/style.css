@@ -255,6 +255,11 @@ input[type="submit"],
 	border-radius: 60px;
 }
 
+input[type="submit"]:hover,
+.submitBtn:hover {
+  background-color: #A7A7A7;
+}
+
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
@@ -366,7 +371,7 @@ footer nav ul li {
   background-color: #B3B3B3;
 }
 
-.modal-wrapper .submitBtn {
+.add-photo-btn {
   width: 237px;
   padding: 15px;
   border: none;
@@ -409,6 +414,10 @@ footer nav ul li {
   display: flex;
   align-items: center;
   grid-column: 2;
+}
+
+.modal-add-photo {
+  display: none;
 }
 
 .add-photo-form {
@@ -493,13 +502,16 @@ footer nav ul li {
   margin: 30px 0 10px 0;
 }
 
-.add-photo-form .submitBtn {
-  background-color: #A7A7A7;
+.validate-photo-btn {
+  background-color: #1D6154;
   margin: 10px 0 30px 0;
+  padding: 15px;
+  border: none;
+  font-size: 1.2em;
 }
 
-.add-photo-form .submitBtn:hover {
-  background-color: #1D6154;
+.validate-photo-btn:hover {
+  background-color: #A7A7A7;
 }
 
 .add-photo-form hr {

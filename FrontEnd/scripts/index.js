@@ -1,6 +1,6 @@
 import { logButton, adminPage } from "./adminSession.js";
-import { escapeKeyModal } from "./modal.js";
-
+/* import { escapeKeyModal } from "./modal.js";
+ */
 const log = document.querySelector(`a[href="login.html"]`);
 
 // Récupération de l'élément du DOM qui accueillera les figures
@@ -108,4 +108,5 @@ logoutBtn.addEventListener("click", logout);
 
 adminPage();
 
-escapeKeyModal();
+/* escapeKeyModal();
+ */
