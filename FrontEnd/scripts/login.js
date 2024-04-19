@@ -1,5 +1,3 @@
-import { logButton } from "./adminSession.js";
-
 const log = document.querySelector(`a[href="login.html"]`);
 
 // Gestion des erreurs
@@ -45,6 +43,3 @@ async function login(userData) {
     errorLogin.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> ${err.message}`;
   };
 };
-
-// Affichage du bouton login ou logout
-logButton(log);
