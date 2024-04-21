@@ -7,7 +7,7 @@ const log = document.querySelector(`a[href="login.html"]`);
 const gallerySection = document.querySelector(".gallery");
 
 // Fonction d'affichage par défaut de la page d'accueil
-async function displayDefault() {
+export async function displayDefault() {
 
   // Fonction pour récupérer les projets disponibles via l'API
   function fetchWorksData() {
