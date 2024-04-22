@@ -41,7 +41,6 @@ getCatData();
 function createGalleryItems(works) {
   
     for (let i = 0; i < works.length; i++) {
-      
         // Création des éléments de la galerie
         const figure = document.createElement("figure");
         const img = document.createElement("img");
@@ -58,6 +57,10 @@ function createGalleryItems(works) {
         gallery.appendChild(figure);
     }
   }
+
+
+
+
   // ---------------------- 2. Création des filtres ---------------------- 
 
   // ---------------------- 2.1. Création du bouton "Tous" ----------------------
