@@ -20,6 +20,17 @@ export async function openModal() {
     .addEventListener("click", (event) => {
       event.stopPropagation();
     });
+
+  // Retour à l'affichage de la modale 1 au clic sur la flèche
+  document.querySelector(".arrow-backward").addEventListener("click", () => {
+    modalAddPhoto.style.display = "none";
+    modalGallery.style.display = "flex";
+    imagePreview.remove();
+    inputPhotoInfos.style.display = "flex";
+    document.getElementById("titleInput").value = "";
+    document.getElementById("photoInput").value = "";
+    displayWorksInModal(worksData);
+  });
 };
 
 // Fonction pour récupérer les données des projets
@@ -134,20 +145,14 @@ document.querySelector(".add-photo-btn").addEventListener("click", () => {
     .addEventListener("click", closeModal);
 });
 
-// Retour à l'affichage de la modale 1 au clic sur la flèche
-document.querySelector(".arrow-backward").addEventListener("click", () => {
-  modalAddPhoto.style.display = "none";
-  modalGallery.style.display = "flex";
-  displayWorksInModal(worksData);
-});
 
 // Prévisualisation de l'image chargée dans le formulaire
 const photoInput = document.getElementById("photoInput");
 const formInputPhoto = document.querySelector(".form-input-photo");
 const inputPhotoInfos = document.querySelector(".input-photo-infos");
+const imagePreview = document.createElement("img");
 photoInput.addEventListener("change", () => {
   if (photoInput.files && photoInput.files[0]) {
-    const imagePreview = document.createElement("img");
     imagePreview.id = "imagePreview";
     imagePreview.alt = "Aperçu de l'image";
     const reader = new FileReader();
