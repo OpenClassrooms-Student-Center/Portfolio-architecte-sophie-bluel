@@ -1,3 +1,5 @@
+
+
 // Attendre que le DOM soit chargé pour exécuter le code JavaScript
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -48,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // Fonction pour récupérer les données de l'API works
-  function getWorksData() {
+  function getWorksDataModal() {
     return fetch('http://localhost:5678/api/works')
       .then(response => {
         if (!response.ok) {
@@ -65,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Appel de la fonction pour créer la modale et son contenu et stockage des éléments dans des variables pour les réutiliser plus tard
   const { modalContainer, modalContent } = createModal1();
 
-  getWorksData()
+  getWorksDataModal()
     .then(works => {
       createModalItems(works, modalContent);
     })
@@ -124,7 +126,7 @@ function deletePhoto(id, figure) {
     if (response.ok) {
       // Supprimer l'élément de la galerie
       figure.remove();
-      getWorksData()
+      getWorksDataModal()
       .then(works => {
         console.log(works);
         createGalleryItems(works);

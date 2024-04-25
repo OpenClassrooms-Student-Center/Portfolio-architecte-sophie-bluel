@@ -1,3 +1,6 @@
+
+
+
 const gallery = document.querySelector(".gallery");
 const categoryContainer = document.querySelector(".category");
 const logButton = document.querySelector(".logButton");
@@ -39,7 +42,7 @@ getCatData();
   // ---------------------- 1. Création de la galerie ----------------------
 
 function createGalleryItems(works) {
-  
+ gallery.innerHTML = ""; 
     for (let i = 0; i < works.length; i++) {
         // Création des éléments de la galerie
         const figure = document.createElement("figure");
@@ -55,6 +58,9 @@ function createGalleryItems(works) {
         figure.appendChild(img);
         figure.appendChild(figcaption);
         gallery.appendChild(figure);
+
+
+        console.log("Les travaux sont affichés");
     }
   }
 

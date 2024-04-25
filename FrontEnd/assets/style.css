@@ -383,3 +383,8 @@ cursor: pointer;
 border-radius: 5px;
 z-index: 1; /* Assure que l'icône est au-dessus de l'image */
 }
+
+.previewImage {
+	display: block;
+	width: 200px;
+}
