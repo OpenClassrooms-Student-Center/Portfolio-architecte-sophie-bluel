@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const overlay = document.createElement('div');
         overlay.classList.add('overlay');
         overlay.addEventListener('click', () => {
-            modalContainer.classList.remove('active'); // Cacher la modale
+            closeModal(modalContainer); // Fermer la modale en cliquant sur l'overlay
         });
 
         const modalId = 'modal' + modalCounter;
@@ -20,6 +20,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const modal = document.createElement('div');
         modal.classList.add('modal');
         modal.setAttribute('id', modalId);
+
+        const closeButton = document.createElement('button');
+        closeButton.classList.add('close-modal');
+        closeButton.textContent = 'X';
+        closeButton.addEventListener('click', () => {
+            closeModal(modalContainer); // Fermer la modale en cliquant sur le bouton X
+        });
 
         const modalTitle = document.createElement('h3');
         modalTitle.textContent = 'Ajout photo';
@@ -60,13 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
         submitNewWorkBtn.style.backgroundColor = "grey";
         submitNewWorkBtn.style.color = "white";
 
-        const closeButton = document.createElement('button');
-        closeButton.classList.add('close-modal');
-        closeButton.textContent = 'X';
-        closeButton.addEventListener('click', () => {
-            modalContainer.classList.remove('active');
-        });
-
         modal.appendChild(closeButton);
         modal.appendChild(modalTitle);
         modal.appendChild(addImg);
@@ -83,81 +83,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
         modalCounter++; // Incrémenter le compteur pour le prochain ID unique
 
+        // Ajouter le gestionnaire d'événements pour le bouton de soumission
+        submitNewWorkBtn.addEventListener('click', () => {
+            handleFormSubmit();
+        });
+
         return modalContainer;
     }
 
-    // Fonction pour gérer le déclenchement de la modale
-    function handleModalTrigger() {
-        const modalContainer = createModal();
-        modalContainer.classList.add('active'); // Afficher la modale
-
-        // Appeler readyToSubmit après la création de la modale
-        readyToSubmit();
+    // Fonction pour gérer la fermeture de la modale
+    function closeModal(modalContainer) {
+        modalContainer.classList.remove('active'); // Cacher la modale
     }
 
-    // Écouter le clic sur le bouton pour afficher la modale
-    const addButton = document.querySelector('.addWorksBtn');
-    addButton.addEventListener('click', handleModalTrigger);
+    // Fonction pour gérer la soumission du formulaire
+    function handleFormSubmit() {
+        const imgFile = document.getElementById('imageUrl');
+        const imgTitle = document.getElementById('imgTitle');
+        const selectCategory = document.getElementById('selectCategory');
+
+        if (imgFile && imgFile.files.length > 0 && imgTitle && imgTitle.value.trim() !== '' && selectCategory && selectCategory.value.trim() !== '') {
+            submitNewWork(); // Soumettre le formulaire si tous les champs sont remplis
+            closeModal(document.querySelector('.modal-container')); // Fermer la modale après soumission
+        } else {
+            alert('Veuillez remplir tous les champs.');
+        }
+    }
 
     // Fonction pour prévisualiser la photo sélectionnée
     function previewPhoto(event) {
-        if (event && event.target) {
-            const inputFile = event.target;
+        const inputFile = event.target;
+        const modalId = inputFile.closest('.modal').id; // Récupérer l'ID unique de la modale parente
+        const imgId = 'previewImage' + modalId.slice(5); // Construire l'ID unique de l'élément <img>
+        const previewImage = document.getElementById(imgId);
 
-            if ('files' in inputFile && inputFile.files.length > 0) {
-                const modalId = inputFile.closest('.modal').id; // Récupérer l'ID unique de la modale parente
-                const imgId = 'previewImage' + modalId.slice(5); // Construire l'ID unique de l'élément <img>
-
-                const previewImage = document.getElementById(imgId);
-
-                if (previewImage) {
-                    const reader = new FileReader();
-                    reader.onload = function(event) {
-                        previewImage.src = event.target.result;
-                    };
-
-                    reader.readAsDataURL(inputFile.files[0]);
-                }
-            }
-        } else {
-            console.error('Event or event.target is undefined.');
+        if (previewImage && inputFile.files.length > 0) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                previewImage.src = event.target.result;
+            };
+            reader.readAsDataURL(inputFile.files[0]);
         }
     }
 
-    // Fonction pour initialiser la soumission du formulaire
-    function readyToSubmit() {
-        const submitNewWorkBtn = document.getElementById("submitNewWorkBtn");
-
-        if (submitNewWorkBtn) {
-            submitNewWorkBtn.addEventListener('click', (event) => {
-                event.preventDefault();
-
-                const imgFile = document.getElementById('imageUrl');
-                const imgTitle = document.getElementById('imgTitle');
-                const selectCategory = document.getElementById('selectCategory');
-
-                if (imgFile && imgFile.files.length > 0 && imgTitle && imgTitle.value.trim() !== '' && selectCategory && selectCategory.value.trim() !== '') {
-                    submitNewWork(); // Tous les champs sont remplis, soumettre le formulaire
-                } else {
-                    alert('Veuillez remplir tous les champs.');
-                }
-            });
-        } else {
-            console.error('Le bouton de soumission est introuvable dans le DOM.');
-        }
-    }
-
-    // // Récupérer les données du formulaire
-    // function getFormData() {
-    //     const imgFile = document.getElementById('imageUrl');
-    //     const imgTitle = document.getElementById('imgTitle');
-    //     const selectCategory = document.getElementById('selectCategory');
-
-    //     return {
-    //         imgFile: imgFile.files[0],
-    //         imgTitle: imgTitle.value,
-    //         categoryId: selectCategory.value
-    //     };
-    // }
-
+    // Écouter le clic sur le bouton d'ouverture de la modale
+    const addButton = document.querySelector('.addWorksBtn');
+    addButton.addEventListener('click', () => {
+        const modalContainer = createModal();
+        modalContainer.classList.add('active'); // Afficher la modale
+    });
 });
