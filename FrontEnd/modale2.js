@@ -10,6 +10,64 @@ function getCatData() {
       });
 }
 
+// Fonction pour récupérer les données des travaux depuis l'API
+function getWorksData() {
+    return fetch("http://localhost:5678/api/works")
+        .then(response => response.json())
+        .then(works => {
+            return works; // Retourner les travaux pour les utiliser ultérieurement
+        })
+        .catch(error => {
+            console.error("Erreur lors de la récupération des travaux :", error);
+        });
+}
+
+// Fonction pour récupérer les données de l'API works pour la première modale
+function getWorksDataModal() {
+    return fetch('http://localhost:5678/api/works')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Erreur lors de la récupération des données de l'API works");
+            }
+            return response.json();
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
+
+// Fonction pour créer les éléments de la galerie dans la première modale
+function createModalItems(works, modalContent) {
+    modalContent.innerHTML = '';
+
+    // Création des éléments de la galerie
+    works.forEach(work => {
+        const figure = document.createElement('figure');
+        const img = document.createElement('img');
+        const deleteIcon = document.createElement('i');
+
+        img.src = work.imageUrl;
+        img.alt = work.title;
+        img.dataset.id = work.id;
+
+        deleteIcon.classList.add('fas', 'fa-trash-alt');
+        deleteIcon.addEventListener('click', (event) => {
+            event.preventDefault(); // Empêcher le comportement par défaut du clic (rechargement de page)
+
+            const confirmation = confirm('Voulez-vous supprimer cette entrée ?');
+            if (confirmation) {
+                deletePhoto(work.id, figure);
+
+                console.log(`L'élément ${work.id} a été supprimé de la modale.`);
+            }
+        });
+
+        figure.appendChild(img);
+        figure.appendChild(deleteIcon);
+        modalContent.appendChild(figure);
+    });
+}
+
 // Attendre que le DOM soit chargé pour exécuter le code JavaScript
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -93,6 +151,12 @@ document.addEventListener('DOMContentLoaded', () => {
       getCatData().then(categories => {
           // Effacer les options existantes du select
           selectCategory.innerHTML = '';
+          const defaultOption = document.createElement('option');
+            defaultOption.value = '';
+            defaultOption.textContent = 'Choisir une catégorie';
+            defaultOption.disabled = true;
+            defaultOption.selected = true;
+            selectCategory.appendChild(defaultOption);
 
           // Ajouter une option par catégorie
           categories.forEach(category => {
@@ -152,4 +216,81 @@ document.addEventListener('DOMContentLoaded', () => {
       const modalContainer = createModal();
       modalContainer.classList.add('active'); // Afficher la modale
   });
+
+//   fonction pour vider les champs du formulaire quand on fermes la modale
+    function clearForm() {
+        const imgFile = document.getElementById('imageUrl');
+        const imgTitle = document.getElementById('imgTitle');
+        const selectCategory = document.getElementById('selectCategory');
+        const previewImage = document.getElementById('previewImage');
+    
+        imgFile.value = '';
+        imgTitle.value = '';
+        selectCategory.value = '';
+        previewImage.src = '';
+    }
+    
+// Fonction pour soumettre le formulaire
+function submitNewWork() {
+    const imgFile = document.getElementById('imageUrl');
+    const imgTitle = document.getElementById('imgTitle');
+    const selectCategory = document.getElementById('selectCategory');
+
+    const formData = new FormData();
+    formData.append('image', imgFile.files[0]);
+    formData.append('title', imgTitle.value);
+    formData.append('category', selectCategory.value);
+
+    const token = localStorage.getItem('token');
+
+    fetch('http://localhost:5678/api/works', {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        },
+        body: formData
+    })
+        .then(response => {
+            if (response.ok) {
+                console.log('Photo ajoutée avec succès !');
+                clearForm();
+                // Mettre à jour la galerie principale
+                getWorksData()
+                    .then(works => {
+                        createGalleryItems(works);
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+                // Mettre à jour la galerie de la première modale
+                updateFirstModalGallery();
+                // Fermer la modale après l'ajout de la photo
+                closeModal(document.querySelector('.modal-container'));
+            } else {
+                throw new Error('Erreur lors de l\'ajout de la photo.');
+            }
+        })
+        .catch(error => {
+            console.error('Erreur lors de l\'ajout de la photo :', error);
+        });
+}
+
+// Fonction pour mettre à jour la galerie de la première modale
+function updateFirstModalGallery() {
+    const modalContent = document.querySelector('.modal-gallery');
+
+    // Récupérer à nouveau les données des travaux et recréer la galerie
+    getWorksDataModal()
+        .then(works => {
+            modalContent.innerHTML = ''; // Effacer la galerie actuelle
+
+            // Créer la galerie avec les nouvelles données des travaux
+            createModalItems(works, modalContent);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
+
+
 });
