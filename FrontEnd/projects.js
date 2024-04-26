@@ -24,35 +24,58 @@ function displayWorks(works) {
     sectionGallery.appendChild(figure);
     figure.appendChild(imageElement);
     figure.appendChild(textElement);
-    // Intégration des images et descriptions
+    // Intégration des images et des descriptions
     imageElement.src = works[i].imageUrl;
     textElement.innerHTML = works[i].title;
   }
 }
 
 // Gestion des boutons
+const btn = document.querySelectorAll(".btn");
 const btnAllProjects = document.getElementById("all");
 const btnObjects = document.getElementById("objects");
 const btnApartments = document.getElementById("apartments");
 const btnHotelsAndRestaurants = document.getElementById("hotels-and-restaurants");
 
+// On définit les fonctions en fonction des catégories de projets
+ 
 function allProjects() {
-  const projects = data;
+  const projects = data
+  // on attribue la classe "btn-selected" au bouton sélectionné
+  btn.forEach((button) => {
+    button.classList.remove("btn-selected");
+  });
+  btnAllProjects.classList.add("btn-selected");
   displayWorks(projects);
 }
 
 function categoryObjects() {
   const objects = data.filter((work) => work.categoryId === 1);
+  // on attribue la classe "btn-selected" au bouton sélectionné
+  btn.forEach((button) => {
+    button.classList.remove("btn-selected");
+  });
+  btnObjects.classList.add("btn-selected");
   displayWorks(objects);
 }
 
 function categoryApartments() {
   const apartments = data.filter((work) => work.categoryId === 2);
+  // on attribue la classe "btn-selected" au bouton sélectionné
+  btn.forEach((button) => {
+    button.classList.remove("btn-selected");
+  });
+  btnApartments.classList.add("btn-selected");
   displayWorks(apartments);
 }
 
 function categoryHotelsAndRestaurants() {
   const hotelsAndRestaurants = data.filter((work) => work.categoryId === 3);
+  // on attribue la classe "btn-selected" au bouton sélectionné
+  btn.forEach((button) => {
+    button.classList.remove("btn-selected");
+  });
+  btnHotelsAndRestaurants.classList.add("btn-selected");
   displayWorks(hotelsAndRestaurants);
 }
 

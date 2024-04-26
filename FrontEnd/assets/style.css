@@ -28,6 +28,10 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+a {
+	color: inherit;
+	text-decoration: none;
+}
 body {
 	line-height: 1;
 }
@@ -52,6 +56,7 @@ body {
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
+	background-color: #FFFEF8;
 }
 header {
 	display: flex;
@@ -75,7 +80,6 @@ h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
-;
 }
 
 h2{
@@ -101,6 +105,7 @@ li:hover {
 #introduction {
 	display: flex;
 	align-items: center;
+	gap: 75px;
 }
 #introduction figure {
 	flex: 1
@@ -108,7 +113,7 @@ li:hover {
 #introduction img {
 	display: block;
 	margin: auto;
-	width: 80%;
+	width: 100%;
 }
 
 #introduction article {
@@ -125,6 +130,26 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
+.btn-filter {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	margin-bottom: 40px;
+}
+.btn {
+	border-radius :60px;
+	height: 37px;
+	color: #1D6154;
+	background-color: #FFFEF8;
+	font-size: 16px;
+	font-family: syne;
+	padding: 0px 15px 0px 15px;
+}
+.btn-selected {
+	background-color: #1D6154;
+	color: #FFFEF8;
+	border: none;
+}
 .gallery {
 	width: 100%;
 	display: grid;
@@ -135,41 +160,54 @@ li:hover {
 
 .gallery img {
 	width: 100%;
-
 }
 #contact {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
-#contact > * {
+#login-form {
+	width: 379px;
+	margin: auto;
+}
+#contact > *, #login-form > * {
 	text-align: center;
 
 }
-#contact h2{
+#contact h2 {
 	margin-bottom: 20px;
 }
-#contact form {
+#contact form, #login-form form {
 	text-align: left;
-	margin-top:30px;
+	margin-top: 30px;
 	display: flex;
 	flex-direction: column;
 }
 
-#contact input {
+#contact input, #login-form input, .btn-new-photo {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#contact label {
+#contact label, #login-form label {
 	margin: 2em 0 1em 0;
 }
 #contact textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
+#login-form {
+	margin-bottom: 150px;
+}
+#login-form h2 {
+	margin-top: 100px;
+}
+#login-form a {
+	text-decoration: underline;
+	text-align: center;
+}
 
-input[type="submit"]{
+input[type="submit"], .btn-new-photo {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
@@ -179,10 +217,70 @@ input[type="submit"]{
 	text-align: center;
 	border-radius: 60px ;
 }
-
+#error-message {
+	color: red;
+}
+.modal-hidden {
+	display: none;
+}
+.modal-uncovered {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position :fixed;
+	top: 0px;
+	left: 0px;
+	height: 100%;
+	width: 100%;
+	background: rgba(0, 0, 0, 0.3);
+}
+.modal-content {
+	overflow: auto;
+	width: 630px;
+	height: 660px;
+	padding: 20px;
+	border-radius: 10px;
+	background-color: #FFF;
+	position: fixed;
+}
+.modal-content h3 {
+	padding-top: 40px;
+	font-family: "work sans";
+	font-size: 26px;
+	text-align: center;
+}
+.btn-new-photo {
+	width: 237px;
+	height: 36px;
+	position: absolute;
+	bottom: 25px;
+	left: 216px;
+}
+.line {
+	background-color: #b3b3b3;
+	width: 420px;
+	height: 1px;
+	position: absolute;
+	bottom: 139px;
+	left: 125px;
+}
+.js-modal-closed {
+	border: none;
+	background-color: #fff;
+	font-size: 20px;
+	position: absolute;
+	right: 30px;
+}
+footer {
+	width: 100%;
+	height: 60px;
+	background-color: #fff;
+}
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
-	margin: 2em
+	margin: 2em;
 }
-
+footer nav li {
+	margin: 24px 0px 20px 0px;
+}

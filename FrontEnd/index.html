@@ -5,6 +5,8 @@
 	<title>Sophie Bluel - Architecte d'intérieur</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="projects.js" defer></script>
+	<script src="login.js" defer></script>
+	<script src="modal.js" defer></script>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
@@ -18,7 +20,7 @@
 		<ul>
 			<li>projets</li>
 			<li>contact</li>
-			<li>login</li>
+			<li><a id="login" href="login.html">login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -37,11 +39,21 @@
 	</section>
 	<section id="portfolio">
 		<h2>Mes Projets</h2>
-			<div>
-				<button id="all">Tous</button>
-				<button id="objects">Objets</button>
-				<button id="apartments">Appartements</button>
-				<button id="hotels-and-restaurants">Hotels & restaurants</button></div>
+		<a class="js-modal" href="#modal1">modifier</a>
+		<aside id="modal1" class="modal-hidden" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="modal-title">
+			<div class="modal-content">
+				<button class="js-modal-closed">✖</button>
+				<h3 id="modal-title">Galerie photo</h3>
+				<div class="line"></div>
+				<button class="btn-new-photo">Ajouter une photo</button>
+			</div>
+		</aside>
+			<div class="btn-filter">
+				<button class="btn" id="all">Tous</button>
+				<button class="btn" id="objects">Objets</button>
+				<button class="btn" id="apartments">Appartements</button>
+				<button class="btn" id="hotels-and-restaurants">Hotels & restaurants</button>
+			</div>
 			<div class="gallery">
 			</div>
 	</section>
