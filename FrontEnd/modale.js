@@ -1,12 +1,8 @@
-
-
 // Attendre que le DOM soit chargé pour exécuter le code JavaScript
 document.addEventListener('DOMContentLoaded', () => {
 
-
   // Fonction pour créer la modale et son contenu
   function createModal1() {
-  
     const modalContainer = document.createElement('div');
     modalContainer.classList.add('modal-container');
 
@@ -47,8 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
     return { modalContainer, modalContent };
   }
 
-
-
   // Fonction pour récupérer les données de l'API works
   function getWorksDataModal() {
     return fetch('http://localhost:5678/api/works')
@@ -63,7 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   }
 
-
   // Appel de la fonction pour créer la modale et son contenu et stockage des éléments dans des variables pour les réutiliser plus tard
   const { modalContainer, modalContent } = createModal1();
 
@@ -75,87 +68,76 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error(error);
     });
 
-
   // Fonction pour créer la galerie dans la modale après avoir récupéré les données de l'API
   function createModalItems(works, modalContent) {
-  modalContent.innerHTML = '';
+    modalContent.innerHTML = '';
 
-  // Création des éléments de la galerie
-  works.forEach(work => {
-    const figure = document.createElement('figure');
-    const img = document.createElement('img');
-    const deleteIcon = document.createElement('i');
+    works.forEach(work => {
+      const figure = document.createElement('figure');
+      const img = document.createElement('img');
+      const deleteIcon = document.createElement('i');
 
-    img.src = work.imageUrl;
-    img.alt = work.title;
-    img.dataset.id = work.id;
+      img.src = work.imageUrl;
+      img.alt = work.title;
+      img.dataset.id = work.id;
 
-    deleteIcon.classList.add('fas', 'fa-trash-alt');
-    deleteIcon.addEventListener('click', (event) => {
-      event.preventDefault(); // Empêcher le comportement par défaut du clic (rechargement de page)
-      
-      const confirmation = confirm('Voulez-vous supprimer cette entrée ?');
-      if (confirmation) {
-        deletePhoto(work.id, figure);
-
-        console.log(`L'élément ${work.id} a été supprimé de la modale.`);
-      }
-    });
-
-    figure.appendChild(img);
-    figure.appendChild(deleteIcon);
-    modalContent.appendChild(figure);
-  });
-}
-
-
-// ---------------------------- Supprimer une photo ----------------------------
-// Fonction pour supprimer une photo
-function deletePhoto(id, figure) {
-  const token = localStorage.getItem('token');
-  
-  // Requête DELETE pour supprimer une photo
-  fetch(`http://localhost:5678/api/works/${id}`, {
-    method: 'DELETE',
-    headers: {
-      'Accept': 'application/json',
-      'Authorization': `Bearer ${token}`
-    }
-  })
-  .then(response => {
-    if (response.ok) {
-      // Supprimer l'élément de la galerie
-      figure.remove();
-      getWorksDataModal()
-      .then(works => {
-        console.log(works);
-        createGalleryItems(works);
-      })
-      .catch(error => {
-        console.error(error);
+      deleteIcon.classList.add('fas', 'fa-trash-alt');
+      deleteIcon.addEventListener('click', (event) => {
+        event.preventDefault();
+        
+        const confirmation = confirm('Voulez-vous supprimer cette entrée ?');
+        if (confirmation) {
+          deletePhoto(work.id, figure);
+          console.log(`L'élément ${work.id} a été supprimé de la modale.`);
+        }
       });
-      console.log(`Photo avec l'ID ${id} supprimée de la modale.`);
-    } else {
-      throw new Error(`Erreur lors de la suppression de la photo avec l'ID ${id} de la modale.`);
-    }
-  })
-  .catch(error => {
-    console.error(error);
-  });
-}
 
-
-
-// ---------------------------- Fermer la modale ----------------------------
-// Ajouter un écouteur d'événement au bouton de fermeture de la modale
-document.addEventListener('click', event => {
-  if (event.target.classList.contains('close-modal')) {
-    const modalContainer = document.querySelector('.modal-container');
-    modalContainer.classList.remove('active');
-    // Arrêter la propagation de l'événement pour éviter toute interférence
-    event.stopPropagation();
+      figure.appendChild(img);
+      figure.appendChild(deleteIcon);
+      modalContent.appendChild(figure);
+    });
   }
-});
+
+  // Fonction pour supprimer une photo
+  function deletePhoto(id, figure) {
+    const token = localStorage.getItem('token');
+    
+    fetch(`http://localhost:5678/api/works/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    .then(response => {
+      if (response.ok) {
+        figure.remove();
+        getWorksDataModal()
+          .then(works => {
+            createModalItems(works, modalContent);
+            createGalleryItems(works, gallery);
+          })
+          .catch(error => {
+            console.error(error);
+          });
+        console.log(`Photo avec l'ID ${id} supprimée de la modale.`);
+      } else {
+        throw new Error(`Erreur lors de la suppression de la photo avec l'ID ${id} de la modale.`);
+      }
+    })
+    .catch(error => {
+      console.error(error);
+    });
+  }
+
+  // Ajouter un écouteur d'événement au bouton de fermeture de la modale
+  document.addEventListener('click', event => {
+    if (event.target.classList.contains('close-modal')) {
+      const modalContainer = document.querySelector('.modal-container');
+      modalContainer.classList.remove('active');
+      event.stopPropagation();
+    }
+  });
 
   // Ajouter un écouteur d'événement au bouton d'ouverture/fermeture de la modale
   document.addEventListener('click', event => {
