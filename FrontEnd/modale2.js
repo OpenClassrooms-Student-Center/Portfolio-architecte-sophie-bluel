@@ -161,8 +161,8 @@ document.addEventListener('DOMContentLoaded', () => {
           // Ajouter une option par catégorie
           categories.forEach(category => {
               const option = document.createElement('option');
-              option.value = category.id; // Supposons que category a une propriété id
-              option.textContent = category.name; // Supposons que category a une propriété name
+              option.value = category.id; 
+              option.textContent = category.name; 
               selectCategory.appendChild(option);
           });
       });
@@ -179,20 +179,27 @@ document.addEventListener('DOMContentLoaded', () => {
   function closeModal(modalContainer) {
       modalContainer.classList.remove('active'); // Cacher la modale
   }
+// Fonction pour fermer toutes les modales actives
+function closeAllModals() {
+    const modalContainers = document.querySelectorAll('.modal-container.active');
+    modalContainers.forEach(modalContainer => {
+        modalContainer.classList.remove('active');
+    });
+}
 
-  // Fonction pour gérer la soumission du formulaire
-  function handleFormSubmit() {
-      const imgFile = document.getElementById('imageUrl');
-      const imgTitle = document.getElementById('imgTitle');
-      const selectCategory = document.getElementById('selectCategory');
+// Modifier la fonction handleFormSubmit pour fermer toutes les modales après la soumission du formulaire
+function handleFormSubmit() {
+    const imgFile = document.getElementById('imageUrl');
+    const imgTitle = document.getElementById('imgTitle');
+    const selectCategory = document.getElementById('selectCategory');
 
-      if (imgFile && imgFile.files.length > 0 && imgTitle && imgTitle.value.trim() !== '' && selectCategory && selectCategory.value.trim() !== '') {
-          submitNewWork(); // Soumettre le formulaire si tous les champs sont remplis
-          closeModal(document.querySelector('.modal-container')); // Fermer la modale après soumission
-      } else {
-          alert('Veuillez remplir tous les champs.');
-      }
-  }
+    if (imgFile && imgFile.files.length > 0 && imgTitle && imgTitle.value.trim() !== '' && selectCategory && selectCategory.value.trim() !== '') {
+        submitNewWork(); // Soumettre le formulaire si tous les champs sont remplis
+        closeAllModals(); // Fermer toutes les modales après soumission
+    } else {
+        alert('Veuillez remplir tous les champs.');
+    }
+}
 
   // Fonction pour prévisualiser la photo sélectionnée
   function previewPhoto(event) {
