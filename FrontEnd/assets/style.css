@@ -367,6 +367,21 @@ footer nav ul {
 	transform: translate(-50%, -50%);
 }
 
+.submitNewWorkBtn {
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: grey;
+	padding: 10px 40px;
+	text-align: center;
+	border-radius: 60px ;
+	border: none;
+	position: absolute;
+	left: 50%;
+	bottom: 0;
+	transform: translate(-50%, -50%);
+}
+
 .modal-content figure {
 	position: relative;
 }

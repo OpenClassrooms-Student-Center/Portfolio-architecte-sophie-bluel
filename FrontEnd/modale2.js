@@ -126,12 +126,11 @@ document.addEventListener('DOMContentLoaded', () => {
       greyLine.className = 'greyLine';
 
       const submitNewWorkBtn = document.createElement('button');
-      submitNewWorkBtn.setAttribute('type', 'button'); // Utiliser type="button" pour empêcher la soumission par défaut
+      submitNewWorkBtn.setAttribute('type', 'button'); 
       submitNewWorkBtn.textContent = 'Valider';
-      submitNewWorkBtn.className = "addWorksBtn";
       submitNewWorkBtn.setAttribute('id', 'submitNewWorkBtn');
-      submitNewWorkBtn.style.backgroundColor = "grey";
-      submitNewWorkBtn.style.color = "white";
+      submitNewWorkBtn.className = ('submitNewWorkBtn'); 
+
 
       modal.appendChild(closeButton);
       modal.appendChild(modalTitle);
@@ -192,10 +191,16 @@ function handleFormSubmit() {
     const imgFile = document.getElementById('imageUrl');
     const imgTitle = document.getElementById('imgTitle');
     const selectCategory = document.getElementById('selectCategory');
+    const submitNewWorkBtn = document.getElementById('submitNewWorkBtn');
+
 
     if (imgFile && imgFile.files.length > 0 && imgTitle && imgTitle.value.trim() !== '' && selectCategory && selectCategory.value.trim() !== '') {
+        submitNewWorkBtn.style.backgroundColor = 'green';
+
         submitNewWork(); // Soumettre le formulaire si tous les champs sont remplis
         closeAllModals(); // Fermer toutes les modales après soumission
+
+
     } else {
         alert('Veuillez remplir tous les champs.');
     }
@@ -204,7 +209,6 @@ function handleFormSubmit() {
   // Fonction pour prévisualiser la photo sélectionnée
   function previewPhoto(event) {
       const inputFile = event.target;
-      // const modalId = inputFile.closest('.modal').id; // Récupérer l'ID unique de la modale parente
       const imgId = 'previewImage'; // Utiliser le même ID pour toutes les modales
       const previewImage = document.getElementById(imgId);
 
