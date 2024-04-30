@@ -193,6 +193,9 @@ function handleFormSubmit() {
     const selectCategory = document.getElementById('selectCategory');
     const submitNewWorkBtn = document.getElementById('submitNewWorkBtn');
 
+    console.log('imgTitle:', imgTitle.value);
+    console.log('selectCategory:', selectCategory.value);
+
 
     if (imgFile && imgFile.files.length > 0 && imgTitle && imgTitle.value.trim() !== '' && selectCategory && selectCategory.value.trim() !== '') {
         submitNewWorkBtn.style.backgroundColor = 'green';
@@ -203,23 +206,24 @@ function handleFormSubmit() {
 
     } else {
         alert('Veuillez remplir tous les champs.');
+        console.log('imgFile :', imgFile.files.length, 'imgTitle :', imgTitle.value, 'selectCategory :', selectCategory.value.trim());
     }
 }
 
   // Fonction pour prévisualiser la photo sélectionnée
   function previewPhoto(event) {
-      const inputFile = event.target;
-      const imgId = 'previewImage'; // Utiliser le même ID pour toutes les modales
-      const previewImage = document.getElementById(imgId);
+    const inputFile = event.target;
+    const imgId = 'previewImage';
+    const previewImage = document.getElementById(imgId);
 
-      if (previewImage && inputFile.files.length > 0) {
-          const reader = new FileReader();
-          reader.onload = function(event) {
-              previewImage.src = event.target.result;
-          };
-          reader.readAsDataURL(inputFile.files[0]);
-      }
-  }
+    if (previewImage && inputFile.files.length > 0) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            previewImage.src = event.target.result;
+        };
+        reader.readAsDataURL(inputFile.files[0]);
+    }
+}
 
   // Écouter le clic sur le bouton d'ouverture de la modale
   const addButton = document.querySelector('.addWorksBtn');
@@ -229,17 +233,22 @@ function handleFormSubmit() {
   });
 
 //   fonction pour vider les champs du formulaire quand on fermes la modale
-    function clearForm() {
-        const imgFile = document.getElementById('imageUrl');
-        const imgTitle = document.getElementById('imgTitle');
-        const selectCategory = document.getElementById('selectCategory');
-        const previewImage = document.getElementById('previewImage');
-    
-        imgFile.value = '';
-        imgTitle.value = '';
-        selectCategory.value = '';
-        previewImage.src = '';
-    }
+// fonction pour réinitialiser les champs du formulaire
+function resetForm() {
+    const imgFile = document.getElementById('imageUrl');
+    const imgTitle = document.getElementById('imgTitle');
+    const selectCategory = document.getElementById('selectCategory');
+    const previewImage = document.getElementById('previewImage');
+
+    // réinitialiser l'input de type file
+    imgFile.value = '';
+    // réinitialiser le champ du titre de l'image
+    imgTitle.value = '';
+    // réinitialiser la sélection de catégorie
+    selectCategory.selectedIndex = 0;
+    // réinitialiser l'aperçu de l'image
+    previewImage.src = '';
+}
     
 // Fonction pour soumettre le formulaire
 function submitNewWork() {
@@ -251,6 +260,8 @@ function submitNewWork() {
     formData.append('image', imgFile.files[0]);
     formData.append('title', imgTitle.value);
     formData.append('category', selectCategory.value);
+
+    console.log('Données du formulaire :', imgFile.files[0], imgTitle.value, selectCategory.value);
 
     const token = localStorage.getItem('token');
 
@@ -264,7 +275,7 @@ function submitNewWork() {
         .then(response => {
             if (response.ok) {
                 console.log('Photo ajoutée avec succès !');
-                clearForm();
+                resetForm(); // Réinitialiser les champs du formulaire
                 // Mettre à jour la galerie principale
                 getWorksData()
                     .then(works => {
