@@ -99,6 +99,13 @@ nav li {
 	font-size: 1.2em;
 }
 
+#logout, #login-none {
+	display: none;
+}
+.logout {
+	margin-left: -20px;
+	cursor: pointer;
+}
 li:hover {
 	color: #B1663C;
 }
@@ -129,12 +136,16 @@ li:hover {
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
+	margin-top: 3em;;
 }
 .btn-filter {
 	display: flex;
 	justify-content: center;
 	gap: 10px;
-	margin-bottom: 40px;
+	margin-bottom: 60px;
+}
+.btn-hidden {
+	display: none;
 }
 .btn {
 	border-radius :60px;
@@ -264,12 +275,37 @@ input[type="submit"], .btn-new-photo {
 	bottom: 139px;
 	left: 125px;
 }
+
 .js-modal-closed {
 	border: none;
 	background-color: #fff;
 	font-size: 20px;
 	position: absolute;
 	right: 30px;
+}
+.js-modal {
+	display: none;
+}
+.js-modal-log {
+	display: block;
+	position: relative;
+	top: 96px;
+}
+.edit-mode-attribute {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #000;
+	height: 59px;
+	color: #fff;	
+	gap: 10px;
+}
+
+.edit-title {
+	display: flex;
+	justify-content: center;
+	gap: 30px;
+	margin-bottom: 3em;
 }
 footer {
 	width: 100%;

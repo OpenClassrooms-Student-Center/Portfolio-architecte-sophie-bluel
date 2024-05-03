@@ -38,7 +38,7 @@ const btnApartments = document.getElementById("apartments");
 const btnHotelsAndRestaurants = document.getElementById("hotels-and-restaurants");
 
 // On définit les fonctions en fonction des catégories de projets
- 
+
 function allProjects() {
   const projects = data
   // on attribue la classe "btn-selected" au bouton sélectionné
@@ -84,3 +84,4 @@ btnAllProjects.addEventListener("click", allProjects);
 btnObjects.addEventListener("click", categoryObjects);
 btnApartments.addEventListener("click", categoryApartments);
 btnHotelsAndRestaurants.addEventListener("click", categoryHotelsAndRestaurants);
+

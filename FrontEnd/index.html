@@ -14,6 +14,7 @@
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
+	<div class="edit-mode"></div>
 <header>
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
@@ -21,6 +22,7 @@
 			<li>projets</li>
 			<li>contact</li>
 			<li><a id="login" href="login.html">login</a></li>
+			<li class="logout" id="logout">logout</li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -38,8 +40,13 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
-		<a class="js-modal" href="#modal1">modifier</a>
+		<div class="edit-title">
+			<h2>Mes Projets</h2>
+			<div class="js-modal">
+				<img src="assets/icons/edit-icon.svg" alt="icône représentant un papier et un crayon">
+				<a href="#modal1">modifier</a>
+			</div>
+		</div>	
 		<aside id="modal1" class="modal-hidden" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="modal-title">
 			<div class="modal-content">
 				<button class="js-modal-closed">✖</button>
