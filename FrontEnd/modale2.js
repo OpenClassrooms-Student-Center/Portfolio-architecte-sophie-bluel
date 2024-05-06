@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Écouter le clic sur le bouton
         addImgBtn.addEventListener('click', () => {
             // Déclencher le clic de l'élément input file
-            addImg.click()
+            addImg.click();
         });
 
         // Écouter l'événement de changement sur l'élément input file
@@ -269,7 +269,6 @@ function handleFormSubmit() {
     const imgFile = document.getElementById('imageUrl');
     const imgTitle = document.getElementById('imgTitle');
     const selectCategory = document.getElementById('selectCategory');
-    const submitNewWorkBtn = document.getElementById('submitNewWorkBtn');
 
     console.log('imgTitle:', imgTitle.value);
     console.log('selectCategory:', selectCategory.value);
@@ -287,21 +286,25 @@ function handleFormSubmit() {
     }
 }
 
-  // Fonction pour prévisualiser la photo sélectionnée
-  function previewPhoto(event) {
+function previewPhoto(event) {
     const addImgContainer = event.target;
     const imgId = 'previewImage';
     const previewImage = document.getElementById(imgId);
+    const addImgBtn = document.getElementById('addImgBtn');
+    const imgSizeTxt = document.querySelector('.imgSizeTxt');
+    const iconImage = document.querySelector('.fa-image');
 
     if (previewImage && addImgContainer.files.length > 0) {
         const reader = new FileReader();
         reader.onload = function(event) {
             previewImage.src = event.target.result;
-            previewImage.style.display = 'flex';
-            addImgContainer.style.display = 'none';
+            previewImage.style.display = 'block'; 
+            addImgContainer.innerHTML =''; 
+            addImgBtn.style.display = 'none'; 
+            imgSizeTxt.style.display = 'none'; 
+            iconImage.style.display = 'none';
         };
         reader.readAsDataURL(addImgContainer.files[0]);
-
     }
 }
 
@@ -320,13 +323,9 @@ function resetForm() {
     const selectCategory = document.getElementById('selectCategory');
     const previewImage = document.getElementById('previewImage');
 
-    // réinitialiser l'input de type file
     imgFile.value = '';
-    // réinitialiser le champ du titre de l'image
     imgTitle.value = '';
-    // réinitialiser la sélection de catégorie
     selectCategory.selectedIndex = 0;
-    // réinitialiser l'aperçu de l'image
     previewImage.src = '';
 }
     
