@@ -87,6 +87,9 @@ document.addEventListener('DOMContentLoaded', () => {
       modal.classList.add('modal');
       modal.setAttribute('id', modalId);
 
+      const globalForm = document.createElement('div');
+      globalForm.classList.add('globalForm');
+
       const closeButton = document.createElement('button');
       closeButton.classList.add('close-modal');
       closeButton.textContent = 'X';
@@ -97,25 +100,63 @@ document.addEventListener('DOMContentLoaded', () => {
       const modalTitle = document.createElement('h3');
       modalTitle.textContent = 'Ajout photo';
 
-      const addImg = document.createElement('input');
+      let addImgContainer = document.createElement('div');
+        addImgContainer.classList.add('addImgContainer');
+        addImgContainer.innerHTML = '<i class="fa-regular fa-image"></i>';
+
+
+      let addImg = document.createElement('input');
       addImg.setAttribute('type', 'file');
       addImg.setAttribute('id', 'imageUrl');
       addImg.setAttribute('name', 'imageUrl');
+      addImg.setAttribute('style', 'display: none;');
       addImg.setAttribute('accept', 'image/png, image/jpeg, image/gif');
       addImg.setAttribute('required', 'true');
-      addImg.addEventListener('change', previewPhoto);
+
+    let addImgBtn = document.createElement('button');
+    addImgBtn.setAttribute('id', 'addImgBtn');
+    addImgBtn.textContent = '+ Ajouter photo';
+
+        // Écouter le clic sur le bouton
+        addImgBtn.addEventListener('click', () => {
+            // Déclencher le clic de l'élément input file
+            addImg.click()
+        });
+
+        // Écouter l'événement de changement sur l'élément input file
+        addImgContainer.addEventListener('change', () => {
+            // Mettre à jour le texte du bouton avec le nom du fichier sélectionné
+            if (addImg.files.length > 0) {
+                previewPhoto(event);
+            } else {
+                addImgBtn.textContent = '+ Ajouter photo';
+            }
+        });
+      
 
       const imgId = 'previewImage';
       const img = document.createElement('img');
       img.setAttribute('id', imgId);
       img.className = 'previewImage';
 
+      const imgSizeTxt = document.createElement('p');
+        imgSizeTxt.className = 'imgSizeTxt';
+        imgSizeTxt.innerText = 'jpg, png : 4mo max';
+
+      let imgTitleText = document.createElement('div');
+      imgTitleText.className = 'titleAndCategory';
+      imgTitleText.innerText = 'Titre';
+
       const imgTitle = document.createElement('input');
       imgTitle.setAttribute('type', 'text');
       imgTitle.setAttribute('id', 'imgTitle');
       imgTitle.setAttribute('name', 'imgTitle');
       imgTitle.setAttribute('required', 'true');
-      imgTitle.setAttribute('placeholder', 'Titre de la photo');
+
+
+      selectCategoryText = document.createElement('div');
+      selectCategoryText.className = 'titleAndCategory';
+      selectCategoryText.innerText = 'Catégorie';
 
       const selectCategory = document.createElement('select');
       selectCategory.setAttribute('id', 'selectCategory');
@@ -134,12 +175,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
       modal.appendChild(closeButton);
       modal.appendChild(modalTitle);
-      modal.appendChild(addImg);
-      modal.appendChild(img);
-      modal.appendChild(imgTitle);
-      modal.appendChild(selectCategory);
+      modal.appendChild(addImgContainer);
+      addImgContainer.appendChild(addImg);
+        addImgContainer.appendChild(img);
+        addImgContainer.appendChild(addImgBtn);
+        addImgContainer.appendChild(imgSizeTxt);
+        globalForm.appendChild(imgTitleText);
+        globalForm.appendChild(imgTitle);
+        globalForm.appendChild(selectCategoryText);
+        globalForm.appendChild(selectCategory);
+      modal.appendChild(globalForm);
       modal.appendChild(greyLine);
-      modal.appendChild(submitNewWorkBtn);
+      globalForm.appendChild(submitNewWorkBtn);
 
       modalContainer.appendChild(overlay);
       modalContainer.appendChild(modal);
@@ -152,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
           selectCategory.innerHTML = '';
           const defaultOption = document.createElement('option');
             defaultOption.value = '';
-            defaultOption.textContent = 'Choisir une catégorie';
+            defaultOption.textContent = '';
             defaultOption.disabled = true;
             defaultOption.selected = true;
             selectCategory.appendChild(defaultOption);
@@ -229,7 +276,6 @@ function handleFormSubmit() {
 
 
     if (imgFile && imgFile.files.length > 0 && imgTitle && imgTitle.value.trim() !== '' && selectCategory && selectCategory.value.trim() !== '') {
-        submitNewWorkBtn.style.backgroundColor = 'green';
 
         submitNewWork(); // Soumettre le formulaire si tous les champs sont remplis
         closeAllModals(); // Fermer toutes les modales après soumission
@@ -243,16 +289,19 @@ function handleFormSubmit() {
 
   // Fonction pour prévisualiser la photo sélectionnée
   function previewPhoto(event) {
-    const inputFile = event.target;
+    const addImgContainer = event.target;
     const imgId = 'previewImage';
     const previewImage = document.getElementById(imgId);
 
-    if (previewImage && inputFile.files.length > 0) {
+    if (previewImage && addImgContainer.files.length > 0) {
         const reader = new FileReader();
         reader.onload = function(event) {
             previewImage.src = event.target.result;
+            previewImage.style.display = 'flex';
+            addImgContainer.style.display = 'none';
         };
-        reader.readAsDataURL(inputFile.files[0]);
+        reader.readAsDataURL(addImgContainer.files[0]);
+
     }
 }
 
