@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const overlay = document.createElement('div');
       overlay.classList.add('overlay');
       overlay.addEventListener('click', () => {
-          closeModal(modalContainer); // Fermer la modale en cliquant sur l'overlay
+          closeModal(modalContainer); 
       });
 
       const modalId = 'modal';
@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
       closeButton.classList.add('close-modal');
       closeButton.textContent = 'X';
       closeButton.addEventListener('click', () => {
-          closeModal(modalContainer); // Fermer la modale en cliquant sur le bouton X
+          closeModal(modalContainer); 
       });
 
       const modalTitle = document.createElement('h3');

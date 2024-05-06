@@ -239,11 +239,11 @@ footer nav ul {
 .edition-band {
 	display: flex;
 	justify-content: center;
-    width: 100vw; /* Occupe toute la largeur de la page */
+    width: 100vw; 
     background-color: black;
     color: white;
-    padding: 10px 20px; /* Ajoutez du padding pour l'espace intérieur */
-    text-align: center; /* Centre le texte horizontalement */
+    padding: 10px 20px; 
+    text-align: center; 
 	margin: 0;
 	position: absolute;
     top: 0;
@@ -252,24 +252,24 @@ footer nav ul {
 
 .h2-edition {
     display: flex;
-    justify-content: center; /* Centrer horizontalement */
-    align-items: center; /* Centrer verticalement */
+    justify-content: center; 
+    align-items: center; 
     margin-bottom: 50px;
 }
 
 .h2-edition h2 {
-    margin-right: 30px; /* Espacement entre le titre et le paragraphe */
+    margin-right: 30px; 
 }
 
 .edition-button {
-    margin: 0; /* Supprimez la marge du paragraphe */
+    margin: 0; 
     display: flex;
-    align-items: center; /* Centrer verticalement */
+    align-items: center; 
 	padding-bottom: 25px;
 }
 
 .h2-edition i, .edition-band i {
-	margin-right: 10px; /* Espacement entre l'icône et le texte */
+	margin-right: 10px; 
 }
 
 /* La modale */
@@ -390,13 +390,13 @@ footer nav ul {
 position: absolute;
 top: 10px;
 right: 10px;
-color: white; /* Couleur de l'icône */
+color: white; 
 background: black;
 border: black 1px solid;
 padding: 5px;
 cursor: pointer;
 border-radius: 5px;
-z-index: 1; /* Assure que l'icône est au-dessus de l'image */
+z-index: 1; 
 }
 
 .previewImage {
