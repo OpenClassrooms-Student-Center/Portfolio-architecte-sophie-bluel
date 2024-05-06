@@ -186,6 +186,37 @@ function closeAllModals() {
     });
 }
 
+// Fonction pour vérifier si tous les champs du formulaire sont remplis
+function checkFormFields() {
+    const imgFile = document.getElementById('imageUrl');
+    const imgTitle = document.getElementById('imgTitle');
+    const selectCategory = document.getElementById('selectCategory');
+
+    // Vérifier si les champs ne sont pas vides et le fichier d'image est sélectionné
+    if (imgFile && imgFile.files.length > 0 && imgTitle && imgTitle.value.trim() !== '' && selectCategory && selectCategory.value.trim() !== '') {
+        return true; // Tous les champs sont remplis
+    } else {
+        return false; // Au moins un champ est vide
+    }
+}
+
+// Fonction pour mettre à jour la couleur du bouton
+function updateButtonColor() {
+    const submitNewWorkBtn = document.getElementById('submitNewWorkBtn');
+    const allFieldsFilled = checkFormFields(); // Vérifier si tous les champs sont remplis
+
+    // Changer la couleur du bouton en fonction de l'état des champs du formulaire
+    if (allFieldsFilled) {
+        submitNewWorkBtn.style.backgroundColor = '#1D6154'; // Tous les champs sont remplis, donc couleur verte
+    } else {
+        submitNewWorkBtn.style.backgroundColor = ''; // Au moins un champ est vide, réinitialiser la couleur
+    }
+}
+
+// Écouter les changements dans les champs du formulaire
+document.addEventListener('input', updateButtonColor);
+
+
 // Modifier la fonction handleFormSubmit pour fermer toutes les modales après la soumission du formulaire
 function handleFormSubmit() {
     const imgFile = document.getElementById('imageUrl');
