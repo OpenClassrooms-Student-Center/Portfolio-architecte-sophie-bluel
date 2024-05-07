@@ -379,6 +379,7 @@ footer nav ul {
 	left: 50%;
 	bottom: 0;
 	transform: translate(-50%, -50%);
+	width: 237px;
 }
 
 .modal-content figure {
@@ -462,13 +463,15 @@ z-index: 1;
 #addImgBtn {
 	font-family: 'Work Sans';
 	font-weight: 700;
+	font-size: 1.2em;
 	color: #306685;
 	background-color: #CBD6DC;
 	padding: 10px 40px;
 	text-align: center;
 	border-radius: 60px ;
 	border: none;
-	margin: 20px auto;
+	margin: 10px auto;
+
 }
 
 #addImg {
