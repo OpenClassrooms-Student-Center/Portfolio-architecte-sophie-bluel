@@ -61,8 +61,26 @@
 
 <!-- La deuxième modale -->
 <div class="modal2">
-    <div class="modal-container">
-
+    <div id="modal-container2" class="modal-container2">
+		<div id="overlay2" class="overlay modal-trigger"></div>
+		<div id="modal2" class="modal">
+			<button id="close-button2" class="close-modal">X</button>
+			<h3 id="modal-title2">Ajouter une photo</h3>
+			<div id="addImgContainer" class="addImgContainer">
+				<i class="fa-regular fa-image"></i>
+				<label for="imageUrl" class="addImgBtn">+ Ajouter photo</label>
+				<input type="file" id="imageUrl" name="imageUrl" accept="image/png, image/jpeg, image/gif" style="display: none;" required="true">
+				
+				<p class="imgSizeTxt">jpg, png : 4mo max</p>
+			</div>
+			<div id="globalForm" class="globalForm">
+				<h4 id="imgTitleText" class="titleAndCategory">Titre</h4>
+				<input type="text" id="imgTitle" name="imgTitle" required="true">
+				<h4 id="imgCategoryText" class="titleAndCategory">Catégorie</h4>
+				<select name="selectCategory" id="selectCategory" required="true"></select>
+			</div>
+			<div id="greyLine2" class="greyLine"></div>
+			<button id="submitNewWorkBtn" class="submitNewWorkBtn">Valider</button>
     </div>
 </div>
 

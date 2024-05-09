@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
         figure.remove();
         getWorksDataModal()
           .then(works => {
-            createModalItems(works, modalContent);
+            createModalItems(works, modalContent1);
             createGalleryItems(works, gallery);
           })
           .catch(error => {
