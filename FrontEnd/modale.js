@@ -4,16 +4,16 @@ document.addEventListener('DOMContentLoaded', () => {
   // Fonction pour créer la modale et son contenu
   function createModal1() {
     // Récupérer les éléments existants dans le HTML
-    const modalContainer = document.getElementById('modal-container');
-    const overlay = document.getElementById('overlay');
-    const modal = document.getElementById('modal');
-    const closeButton = document.getElementById('close-button');
-    const modalTitle = document.getElementById('modal-title');
-    const modalContent = document.getElementById('modal-content');
-    const greyLine = document.getElementById('greyLine');
-    const addButton = document.getElementById('addButton');
+    const modalContainer1 = document.getElementById('modal-container1');
+    const overlay1 = document.getElementById('overlay1');
+    const modal1 = document.getElementById('modal1');
+    const closeButton1 = document.getElementById('close-button1');
+    const modalTitle1 = document.getElementById('modal-title1');
+    const modalContent1 = document.getElementById('modal-content1');
+    const greyLine1 = document.getElementById('greyLine1');
+    const addButton1 = document.getElementById('addButton1');
   
-    return { modalContainer, modalContent };
+    return { modalContainer1, modalContent1 };
   }
 
   // Fonction pour récupérer les données de l'API works
@@ -31,19 +31,19 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Appel de la fonction pour créer la modale et son contenu et stockage des éléments dans des variables pour les réutiliser plus tard
-  const { modalContainer, modalContent } = createModal1();
+  const { modalContainer1, modalContent1 } = createModal1();
 
   getWorksDataModal()
     .then(works => {
-      createModalItems(works, modalContent);
+      createModalItems(works, modalContent1);
     })
     .catch(error => {
       console.error(error);
     });
 
   // Fonction pour créer la galerie dans la modale après avoir récupéré les données de l'API
-  function createModalItems(works, modalContent) {
-    modalContent.innerHTML = '';
+  function createModalItems(works, modalContent1) {
+    modalContent1.innerHTML = '';
 
     works.forEach(work => {
       const figure = document.createElement('figure');
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       figure.appendChild(img);
       figure.appendChild(deleteIcon);
-      modalContent.appendChild(figure);
+      modalContent1.appendChild(figure);
     });
   }
 
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Ajouter un écouteur d'événement au bouton de fermeture de la modale
 document.addEventListener('click', event => {
   if (event.target.classList.contains('close-modal')) {
-    modalContainer.classList.toggle('active');
+    modalContainer1.classList.toggle('active');
     event.stopPropagation();
   }
 });
@@ -114,7 +114,7 @@ document.addEventListener('click', event => {
   // Ajouter un écouteur d'événement au bouton d'ouverture/fermeture de la modale
   document.addEventListener('click', event => {
     if (event.target.classList.contains('modal-trigger')) {
-      modalContainer.classList.toggle('active');
+      modalContainer1.classList.toggle('active');
     }
   });
 });
