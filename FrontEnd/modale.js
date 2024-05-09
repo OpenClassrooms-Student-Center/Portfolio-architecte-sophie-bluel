@@ -3,43 +3,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Fonction pour créer la modale et son contenu
   function createModal1() {
-    const modalContainer = document.createElement('div');
-    modalContainer.classList.add('modal-container');
-
-    const overlay = document.createElement('div');
-    overlay.classList.add('overlay', 'modal-trigger');
-
-    const modal = document.createElement('div');
-    modal.classList.add('modal');
-
-    const closeButton = document.createElement('button');
-    closeButton.classList.add('modal-trigger', 'close-modal');
-    closeButton.textContent = 'X';
-
-    const modalTitle = document.createElement('h3');
-    modalTitle.textContent = 'Galerie Photo';
-
-    const modalContent = document.createElement('div');
-    modalContent.classList.add('modal-content', 'modal-gallery');
-
-    const greyLine = document.createElement('div');
-    greyLine.className = 'greyLine';
-
-    const addButton = document.createElement('button');
-    addButton.className = 'addWorksBtn modal-trigger';
-    addButton.textContent = 'Ajouter une photo';
-
-    modal.appendChild(closeButton);
-    modal.appendChild(modalTitle);
-    modal.appendChild(modalContent);
-    modal.appendChild(greyLine);
-    modal.appendChild(addButton);
-
-    modalContainer.appendChild(overlay);
-    modalContainer.appendChild(modal);
-
-    document.body.appendChild(modalContainer);
-
+    // Récupérer les éléments existants dans le HTML
+    const modalContainer = document.getElementById('modal-container');
+    const overlay = document.getElementById('overlay');
+    const modal = document.getElementById('modal');
+    const closeButton = document.getElementById('close-button');
+    const modalTitle = document.getElementById('modal-title');
+    const modalContent = document.getElementById('modal-content');
+    const greyLine = document.getElementById('greyLine');
+    const addButton = document.getElementById('addButton');
+  
     return { modalContainer, modalContent };
   }
 
@@ -130,14 +103,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Ajouter un écouteur d'événement au bouton de fermeture de la modale
-  document.addEventListener('click', event => {
-    if (event.target.classList.contains('close-modal')) {
-      const modalContainer = document.querySelector('.modal-container');
-      modalContainer.classList.remove('active');
-      event.stopPropagation();
-    }
-  });
+// Ajouter un écouteur d'événement au bouton de fermeture de la modale
+document.addEventListener('click', event => {
+  if (event.target.classList.contains('close-modal')) {
+    modalContainer.classList.toggle('active');
+    event.stopPropagation();
+  }
+});
 
   // Ajouter un écouteur d'événement au bouton d'ouverture/fermeture de la modale
   document.addEventListener('click', event => {
