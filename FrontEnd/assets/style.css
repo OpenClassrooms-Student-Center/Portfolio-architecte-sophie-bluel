@@ -99,6 +99,10 @@ nav li {
 	font-size: 1.2em;
 }
 
+button {
+	cursor: pointer;
+}
+/* Gestion de la page login */
 #logout, #login-none {
 	display: none;
 }
@@ -161,6 +165,27 @@ li:hover {
 	color: #FFFEF8;
 	border: none;
 }
+
+/* Gestion de la modale */
+.modal-gallery {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: 7px;
+	grid-row-gap: 25px;
+	margin: 60px 100px 60px 100px;	
+}
+.modal-gallery img {
+	width : 78px;
+	height: 104px;
+}
+.modal-gallery-none {
+	display : none;
+}
+
+.modal-gallery2-none {
+	display: none;
+}
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -260,12 +285,43 @@ input[type="submit"], .btn-new-photo {
 	font-size: 26px;
 	text-align: center;
 }
+
+.modal-title-hidden {
+	display: none;
+}
+.modal-title2-hidden {
+	display: none;
+}
+.modal-title2 {
+	display: block;
+	text-align: center;
+}
+
 .btn-new-photo {
 	width: 237px;
 	height: 36px;
 	position: absolute;
 	bottom: 25px;
 	left: 216px;
+}
+.btn-new-hidden {
+	display: none;
+}
+.btn-check {
+	position: absolute;
+	bottom: 60px;
+	left: 216px;
+	height: 36px;
+	border: none;
+	width: 237px;
+	background-color: #A7A7A7;
+	border-radius: 60px;
+	color: #FFF;
+	font: bold 14px "work sans";
+
+}
+.btn-check-none {
+	display: none;
 }
 .line {
 	background-color: #b3b3b3;
@@ -274,6 +330,7 @@ input[type="submit"], .btn-new-photo {
 	position: absolute;
 	bottom: 139px;
 	left: 125px;
+	
 }
 
 .js-modal-closed {
@@ -291,6 +348,52 @@ input[type="submit"], .btn-new-photo {
 	position: relative;
 	top: 96px;
 }
+.photo-modal {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 6px;
+	background-color: #E8F1F6;
+	border-radius: 3px;
+	margin: 36px 105px 30px 105px;
+	padding: 19px 0 19px 0;
+	width: 420px;
+}
+
+.form-modal input {
+	height: 51px;
+	width: 420px;
+	border: none;
+	box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);	
+}
+.form-modal form {
+	display: flex;
+	flex-direction: column;	
+}
+.form-modal #title {
+	margin-bottom: 20px;
+}
+
+.form-modal label {
+	margin-bottom: 10px;	
+}
+.modal-gallery2 {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.btn-add-photo {
+	border-radius: 50px;
+	border: none;
+	font-size: 14px;
+	color: #306685;
+	font-family: 'Work Sans';
+	font-weight: 500;
+	width: 173px;
+	height: 36px;
+	background-color: #CBD6DC;
+}
 .edit-mode-attribute {
 	display: flex;
 	justify-content: center;
@@ -299,6 +402,10 @@ input[type="submit"], .btn-new-photo {
 	height: 59px;
 	color: #fff;	
 	gap: 10px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
 }
 
 .edit-title {
