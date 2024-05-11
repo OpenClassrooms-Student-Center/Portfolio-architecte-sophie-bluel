@@ -312,9 +312,20 @@ footer nav ul {
 	transform: translate(-50%, -50%);
 }
 
+.return-modal1 {
+	border: none;
+	font-size: 1em;
+	font-weight: 700;
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	background: white;
+	cursor: pointer;
+}
+
 .close-modal {
-	border: 1px solid black;
-	font-size: 12px;
+	border: none;
+	font-size: 1em;
 	font-weight: 700;
 	position: absolute;
 	top: 20px;

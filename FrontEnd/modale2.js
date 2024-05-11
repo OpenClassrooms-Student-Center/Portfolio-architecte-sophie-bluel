@@ -67,6 +67,7 @@ function createModal2() {
     const modalContainer2 = document.getElementById('modal-container2');
     const overlay2 = document.getElementById('overlay2');
     const modal2 = document.getElementById('modal2');
+    const returnButton = document.getElementById('return-button');
     const closeButton2 = document.getElementById('close-button2');
     const modalTitle2 = document.getElementById('modal-title2');
     let addImgContainer = document.getElementById('addImgContainer');
@@ -75,6 +76,9 @@ function createModal2() {
 
     addImg.addEventListener('change', previewPhoto);
 
+    returnButton.addEventListener('click', () => {
+        returnModal1();
+    });
 
     // Écouter le clic sur le bouton de fermeture
     closeButton2.addEventListener('click', () => {
@@ -143,6 +147,21 @@ function closeModal() {
     if (modalContainer1 && overlay1 && modalContainer2 && overlay2) {
         modalContainer1.classList.remove('active');
         overlay1.classList.remove('active');
+        modalContainer2.classList.remove('active');
+        overlay2.classList.remove('active');
+    }
+}
+
+// Fonction pour fermer les modales et leurs overlays
+function returnModal1() {
+    const modalContainer1 = document.getElementById('modal-container1');
+    const overlay1 = document.getElementById('overlay1');
+    const modalContainer2 = document.getElementById('modal-container2');
+    const overlay2 = document.getElementById('overlay2');
+
+    if (modalContainer1 && overlay1 && modalContainer2 && overlay2) {
+        modalContainer1.classList.add('active');
+        overlay1.classList.add('active');
         modalContainer2.classList.remove('active');
         overlay2.classList.remove('active');
     }
