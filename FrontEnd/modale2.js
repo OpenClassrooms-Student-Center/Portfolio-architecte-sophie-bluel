@@ -73,6 +73,9 @@ function createModal2() {
     let addImg = document.getElementById('imageUrl');
     let addImgBtn = document.getElementById('addImgBtn');
 
+    addImg.addEventListener('change', previewPhoto);
+
+
     // Écouter le clic sur le bouton de fermeture
     closeButton2.addEventListener('click', () => {
         closeModal();
@@ -89,11 +92,6 @@ function createModal2() {
             closeModal();
         }
     });
-
-    const imgId = 'previewImage';
-    const img = document.createElement('img');
-    img.setAttribute('id', imgId);
-    img.className = 'previewImage';
 
     const globalForm = document.getElementById('globalForm');
     const imgSizeTxt = document.querySelector('.imgSizeTxt');
@@ -196,26 +194,22 @@ function closeModal() {
   }
   
   function previewPhoto(event) {
-      const addImgContainer = event.target;
-      const imgId = 'previewImage';
-      const previewImage = document.getElementById(imgId);
-      const addImgBtn = document.getElementById('addImgBtn');
-      const imgSizeTxt = document.querySelector('.imgSizeTxt');
-      const iconImage = document.querySelector('.fa-image');
-  
-      if (previewImage && addImgContainer.files.length > 0) {
-          const reader = new FileReader();
-          reader.onload = function(event) {
-              previewImage.src = event.target.result;
-              previewImage.style.display = 'block';
-              addImgContainer.innerHTML = '';
-              addImgBtn.style.display = 'none';
-              imgSizeTxt.style.display = 'none';
-              iconImage.style.display = 'none';
-          };
-          reader.readAsDataURL(addImgContainer.files[0]);
-      }
-  }
+    const addImgContainer = document.getElementById('addImgContainer');
+    const previewImage = document.getElementById('previewImage');
+    const addImgBtn = document.getElementById('imageUrl');
+    const imgSizeTxt = document.querySelector('.imgSizeTxt');
+    const iconImage = document.querySelector('.fa-image');
+
+    if (previewImage && addImgBtn.files.length > 0) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            previewImage.src = event.target.result;
+            previewImage.style.display = 'block';
+            addImgContainer.style.display = 'none'; // Cacher l'élément d'ajout de photo
+        };
+        reader.readAsDataURL(addImgBtn.files[0]);
+    }
+}
   
   // Écouter le clic sur le bouton d'ouverture de la modale
   let addButton1 = document.getElementById('addButton1');
@@ -229,13 +223,16 @@ function resetForm() {
     const imgFile = document.getElementById('imageUrl');
     const imgTitle = document.getElementById('imgTitle');
     const selectCategory = document.getElementById('selectCategory');
-    // const previewImage = document.getElementById('previewImage');
+    const previewImage = document.getElementById('previewImage');
+    const addImgContainer = document.getElementById('addImgContainer');
   
     if (imgFile && imgTitle && selectCategory) {
         imgFile.value = '';
         imgTitle.value = '';
         selectCategory.selectedIndex = 0;
-        // previewImage.src = '';
+        previewImage.src = '';
+        addImgContainer.style.display = 'flex'
+        previewImage.style.display = 'none';
     } else {
         console.error("Certains éléments du formulaire n'ont pas été trouvés.");
         console.log('imgFile :', imgFile, 'imgTitle :', imgTitle, 'selectCategory :', selectCategory);

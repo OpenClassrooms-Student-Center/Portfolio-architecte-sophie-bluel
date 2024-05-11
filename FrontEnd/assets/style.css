@@ -399,7 +399,7 @@ border-radius: 5px;
 z-index: 1; 
 }
 
-.previewImage {
+#previewImage {
 	display: none;
 	margin: auto;
 	height: 250px;
@@ -415,7 +415,7 @@ z-index: 1;
 	border : none;
 }
 
-.addImgContainer {
+#addImgContainer {
 	border: none;
 	display: flex;
 	flex-direction: column;
@@ -426,7 +426,7 @@ z-index: 1;
 }
 
 .fa-image {
-	display: flex;
+	display: block;
 	justify-content: center;
 	font-size: 5em;
 	margin: 20px;
