@@ -1,6 +1,6 @@
 // Récupération des travaux depuis le back-end
 
-fetch("http://localhost:5678/api/works")
+fetch("http://localhost:5678/Portfolio-architecte-sophie-bluel/api/works")
   .then(response => {
     if (!response.ok) {
       throw new Error("Erreur HTTP, statut " + response.status);
