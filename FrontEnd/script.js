@@ -1,7 +1,7 @@
 (async function() {
     let works; // Déclarez la variable works dans une portée accessible à toutes les fonctions
     
-    await fetch("http://localhost:5678/api/works")
+    await fetch("http://localhost:5678/FrontEnd/api/works")
       .then(response => {
         if (!response.ok) {
           throw new Error("Erreur HTTP, statut " + response.status);
@@ -37,7 +37,7 @@
     
     // Fonction pour créer le menu des catégories
     async function CreateMenu() {
-        await fetch("http://localhost:5678/api/categories")
+        await fetch("http://localhost:5678/FrontEnd/api/categories")
             .then(response => {
               if (!response.ok) {
                 throw new Error("Erreur HTTP, statut " + response.status);
