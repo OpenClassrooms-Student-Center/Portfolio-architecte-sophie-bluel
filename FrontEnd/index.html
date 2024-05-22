@@ -4,18 +4,22 @@
 	<meta charset="UTF-8">
 	<title>Sophie Bluel - Architecte d'intérieur</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script src="projects.js" defer></script>
+	<script type="module" src="projects.js" defer></script>
 	<script src="login.js" defer></script>
-	<script src="modal.js" defer></script>
+	<script type="module" src="modal.js" defer></script>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+	integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"/>
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
 	<div class="edit-mode"></div>
-<header>
+<header class="js-header">
+	
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
@@ -54,9 +58,24 @@
 				<h3 class="modal-title2-hidden">Ajout photo</h3>
 				<div class="modal-gallery">
 				</div>
-				<div class="modal-gallery2-none">
-					<div class="photo-modal"></div>
-					<div class="form-modal"></div>
+				<div class="modal-gallery2">
+					<div class="photo-modal">
+						<img class="logo-image" src="assets/icons/logo-image.svg" alt="icône représentant une image">						
+						<input type="file" name="image" id="file">
+						<label for="file" class="label-file">+ Ajouter photo</label>
+						<img src="#" alt="aperçu de l'image" class="image-added">
+						<p class="paragraph">jpg, png : 4mo max</p>
+					</div>
+					<div class="form-modal">
+						<form action="#" method="POST" class="form">
+							<label for="title">Titre</label>
+							<input type="text" id="title">
+							<label for="category">Catégorie</label>
+							<select name="category" id="category"></select>
+						</form>
+					</div>
+					<button class="btn-check" disabled>Valider</button>
+					<p class="error-msg"></p>
 				</div>
 				<div class="line"></div>
 				<button class="btn-new-photo">Ajouter une photo</button>

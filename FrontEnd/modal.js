@@ -1,22 +1,13 @@
+import { fetchAndStoreProjects } from "./projects.js";
+import { getProjects } from "./projects.js";
+
+// gestion de l'affichage en mode login
 const jsModal = document.querySelector(".js-modal");
-const modalHidden = document.querySelector(".modal-hidden");
-const modal = document.getElementById("modal1");
-const modalClosed = document.querySelector(".js-modal-closed");
 const btnLogin = document.getElementById("login");
 const btnLogout = document.getElementById("logout");
 const editMode = document.querySelector(".edit-mode");
-const icon = document.querySelector(".edit-img");
 const btnFilter = document.querySelector(".btn-filter");
-const modalGallery = document.querySelector(".modal-gallery");
-const sendNewWork = document.querySelector(".btn-new-photo");
-const modalTitle = document.querySelector(".modal-title");
-const modalTitleTwo = document.querySelector(".modal-title2-hidden");
-
-const modalGalleryTwo = document.querySelector(".modal-gallery2-none");
-const modalPhoto = document.querySelector(".photo-modal");
-const modalForm = document.querySelector(".form-modal");
-const modalContent = document.querySelector(".modal-content");
-
+const header = document.querySelector(".js-header");
 
 if (sessionStorage.getItem("token")) {
     // On retire les boutons filtres
@@ -27,6 +18,7 @@ if (sessionStorage.getItem("token")) {
     btnLogin.setAttribute("id", "login-none");
     // On ajoute la bannière du mode "edit"
     editMode.classList.add("edit-mode-attribute");
+    header.setAttribute("id", "header-log");
     // Ajout de l'icône 
     const icon = document.createElement("img");
     editMode.appendChild(icon);
@@ -34,7 +26,7 @@ if (sessionStorage.getItem("token")) {
     // Ajout du texte de la bannière
     const text = document.createElement("p");
     editMode.appendChild(text);
-    text.innerHTML = "Mode édition";
+    text.innerHTML = "Mode édition";    
 }
 
 // On se déconnecte au click sur le bouton logout
@@ -45,100 +37,207 @@ btnLogout.addEventListener("click", () => {
     btnLogout.setAttribute("id", "logout");
     jsModal.classList.remove("js-modal-log");
     editMode.classList.remove("edit-mode-attribute");
-    editMode.remove("p");
-    editMode.remove("img");
-})
+    header.removeAttribute("id", "header-log");
+    editMode.innerHTML = "";
+});
 
 // Gestion de la modale
+const sendNewWork = document.querySelector(".btn-new-photo");
+const modalTitle = document.querySelector(".modal-title");
+const modalTitleTwo = document.querySelector(".modal-title2-hidden");
+const modalHidden = document.querySelector(".modal-hidden");
+const modalClosed = document.querySelector(".js-modal-closed");
+const modalGallery = document.querySelector(".modal-gallery");
+const body = document.body;
+
+// On fait apparaitre la modale au click
 jsModal.addEventListener("click", () => {
     modalHidden.classList.add("modal-uncovered");
     modalHidden.removeAttribute("aria-hidden");
-    modalHidden.setAttribute("aria-modal", "true") ;
-
-    // Appel de la fonction fetch
-    fetch("http://localhost:5678/api/works")
-    .then((response) => response.json())
-    .then((projects) => {
-    displayProjects(projects);
-    })
-    .catch((error) => alert("Erreur : " + error));
-    
-    function displayProjects(projects) {
-        for (let i = 0; i < projects.length; i++) {
-            // Création des balises
-            const imageProject = document.createElement("img");         
-            // On rattache les balises a la section modale-gallery                
-            modalGallery.appendChild(imageProject);                         
-            // Intégration des images 
-            imageProject.src = projects[i].imageUrl;          
-          }
-        }       
-    
-    modalClosed.addEventListener("click", () => { 
-        // Effacer le contenu précédent de la galerie
-        modalGallery.classList.remove("modal-gallery-none");
-        modalGallery.innerHTML = "";
-        modalGalleryTwo.remove("modal-gallery2");
-        modalHidden.classList.remove("modal-uncovered");
-        modalHidden.setAttribute("aria-hidden", "true");
-        modalHidden.removeAttribute("aria-modal"); 
-        modalTitle.classList.remove("modal-title-hidden");
-        modalTitleTwo.classList.remove("modal-title2");
-        sendNewWork.classList.remove("btn-new-hidden");      
-        })
+    modalHidden.setAttribute("aria-modal", "true");
+    modalGalleryTwo.style.display = "none";  
+    modalClosed.addEventListener("click", closeModal);           
+    getProjects();
 });
 
+// On fait apparaitre les projets dans la modale
+async function displayProjects() {
+    modalGallery.innerHTML = "";
+    const projects = await getProjects()
+    for (let i = 0; i < projects.length; i++) {
+        // Création des balises
+        const imageProject = document.createElement("img");
+        const figure = document.createElement("figure");
+        const span = document.createElement("span");
+        span.classList.add("span-delete");
+        const iconDelete = document.createElement("i");  
+        iconDelete.classList.add("fa-solid", "fa-trash-can"); 
+        span.id = projects[i].id;  
+        // On rattache les balises a la section modale-gallery                
+        modalGallery.appendChild(figure);    
+        figure.appendChild(imageProject);
+        figure.appendChild(span);
+        span.appendChild(iconDelete);                  
+        // Intégration des images 
+        imageProject.src = projects[i].imageUrl;              
+    };
+    deleteImage(); 
+}   
+displayProjects();     
+        
+// Suppression des travaux
+function deleteImage() {
+    const iconDeleteAll = document.querySelectorAll(".span-delete");
+    console.log(iconDeleteAll);
+    const token = sessionStorage.getItem("token");
+    iconDeleteAll.forEach(span => {
+        span.addEventListener("click", (e) => {
+            e.preventDefault();
+            const id = span.id
+            const option = {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            }
+            fetch(`http://localhost:5678/api/works/${id}`, option)                    
+            .then((response) => {
+                    if (!response.ok) {
+                        console.log("le delete n'a pas marché !")
+                    }                   
+                })
+                   .then((data) => {
+                    console.log("Le delete a marché :", data);              
+                        displayProjects(); 
+                        fetchAndStoreProjects();                                         
+                })   
+        })
+    });
+}
 
-// Gestion du bouton ajout photo
-sendNewWork.addEventListener("click", () => {
-    modalGalleryTwo.classList.add("modal-gallery2");
+// Gestion de la fermeture de la modale
+function closeModal() {
+    // Effacer le contenu précédent de la galerie
+    modalGallery.classList.remove("modal-gallery-none");
+    modalGallery.innerHTML = "";  
+    modalHidden.classList.remove("modal-uncovered");
+    modalHidden.setAttribute("aria-hidden", "true");
+    modalHidden.removeAttribute("aria-modal"); 
+    modalTitle.classList.remove("modal-title-hidden");
+    modalTitleTwo.classList.remove("modal-title2");
+    sendNewWork.classList.remove("btn-new-hidden");            
+    displayProjects();     
+}
+
+// Fermeture au click en dehors de la modale
+body.addEventListener("click", (e) => {
+    if (e.target == modalHidden) {
+        closeModal();
+    };
+ })
+
+// Création d'une 2ème modale au click sur "ajouter photo"
+const modalGalleryTwo = document.querySelector(".modal-gallery2");
+const modalPhoto = document.querySelector(".photo-modal");
+
+
+sendNewWork.addEventListener("click", () => { 
     modalTitle.classList.add("modal-title-hidden");
     modalTitleTwo.classList.add("modal-title2");
     modalGallery.classList.add("modal-gallery-none");
-   
-    const logoImage = document.createElement("img");
-    const btnAddPhoto = document.createElement("button");
-    const paragraph = document.createElement("p");
-    const btnCheck = document.createElement("button");
-
-    const form = document.createElement("form");
-    modalForm.method = "POST";
-
-    const modalLabel = document.createElement("label");
-    modalLabel.innerText = "Titre";
-    const modalInput = document.createElement("input");
-    modalInput.type = "text";
-    modalInput.name = "title";
-    modalInput.id = "title";
-
-    const modalLabel2 = document.createElement("label");
-    modalLabel2.innerText = "Catégorie";
-    const modalInput2 = document.createElement("input");
-    modalInput2.type = "text";
-    modalInput2.name = "category";
-    modalInput2.id = "category";
-    
-    modalPhoto.appendChild(logoImage);
-    modalPhoto.appendChild(btnAddPhoto);
-    modalPhoto.appendChild(paragraph);
-
-    modalForm.appendChild(form);
-    form.appendChild(modalLabel);
-    form.appendChild(modalInput);
-    form.appendChild(modalLabel2);
-    form.appendChild(modalInput2);
-   
-    logoImage.src = "assets/icons/logo-image.svg";
-    btnAddPhoto.innerText = "+ Ajouter photo";
-    paragraph.innerText = "jpg, png : 4mo max";
     sendNewWork.classList.add("btn-new-hidden");
-    btnAddPhoto.classList.add("btn-add-photo");
-    btnCheck.innerText = "Valider";
-    btnCheck.classList.add("btn-check");
-    console.log("Contenu ajouté à modalGallery2 :", modalGalleryTwo.innerHTML);
+    modalGalleryTwo.style.display = "flex";
+   
+    // Gestion de l'input "+ ajouter photo"
+    const btnAddPhoto = document.getElementById("file");
+    const imageAdded = document.querySelector(".image-added");
+    const labelFile = document.querySelector(".label-file");
+    const paragraph = document.querySelector(".paragraph");
+    const logoImage = document.querySelector(".logo-image");
+    const modalInput2 = document.getElementById("category");
 
-    modalGalleryTwo.appendChild(btnCheck);
+    btnAddPhoto.addEventListener("change", () => {
+        const file = btnAddPhoto.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                imageAdded.src = e.target.result
+                imageAdded.style.display = "flex"
+                labelFile.style.display = "none"
+                paragraph.style.display = "none"
+                logoImage.style.display = "none"
+                modalPhoto.style.padding = 0
+            }
+            reader.readAsDataURL(file);
+        }
+    })
+
+    async function getCategories() {
+        const response = await fetch("http://localhost:5678/api/categories");
+        return await response.json();
+    }
+
+    async function displayCategoryModal() {
+        const categories = await getCategories()
+        categories.forEach(category => {
+            const option = document.createElement("option")
+            option.value = category.id  
+            option.textContent = category.name
+            modalInput2.appendChild(option)   
+        });
+    }
+    displayCategoryModal();    
+}); 
+
+// Ajout photo
+const form = document.querySelector(".form");
+const btnCheck = document.querySelector(".btn-check");
+
+btnCheck.addEventListener("click", async (e) => {
+    e.preventDefault()
+    const image = document.getElementById("file");
+    const title = document.getElementById("title").value;
+    const category = document.getElementById("category").value;
+    const formData = new FormData();
+   
+    formData.append("image", image.files[0])
+    formData.append("category", category)
+    formData.append("title", title) 
+    
+    fetch("http://localhost:5678/api/works", {
+        method : "POST",
+        headers: {
+            Authorization: `Bearer ${token}`
+        },
+        body: formData,            
+    })
+    .then(response => response.json()) 
+    .then(data => {
+        console.log(data);
+        console.log("voici l'image ajoutée", data)        
+        fetchAndStoreProjects(); 
+        displayProjects();                
+    });       
 });
-
-  
-  
+   
+// On s'assure que le formulaire est bien rempli
+function formCompleted() {
+    const btnCheck = document.querySelector(".btn-check");
+    const image = document.getElementById("file");
+    const title = document.getElementById("title");
+    const category = document.getElementById("category");
+    const errorMsg = document.querySelector(".error-msg");
+    
+    form.addEventListener("input", () => {
+        if (!title.value == "" && !category.value == "" && !image.value == "") {
+            btnCheck.setAttribute("id", "btn-check-ok");
+            btnCheck.disabled = false;  
+            errorMsg.innerHTML = "";         
+        }
+        else {
+            btnCheck.removeAttribute("id", "btn-check-ok"); 
+            errorMsg.innerHTML = "Le formulaire n'est pas correctement rempli";
+        }
+    })
+}
+formCompleted(); 
