@@ -6,45 +6,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet"/>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
+      rel="stylesheet" />
     <meta name="description" content="" />
-    <link rel="stylesheet" href="assets/style.css"/>
-   
-    
+    <link rel="stylesheet" href="assets/style.css" />
   </head>
+
   <body>
-  
     <header>
-      <h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
+      <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
       <nav class="nav-menu">
         <ul>
           <li><a href="./index.html">projets</a></li>
           <li><a href="./index.html">contact</a></li>
-          <li><a href="./login.html" id="login">login</a><a href="#logout" id="logout" style="display:none">logout</a></li>
-          <li><a href="https://www.instagram.com/"><img src="./assets/icons/instagram.png" alt="Instagram"></a></li>
+          <li>
+            <a href="./login.html" id="login">login</a
+            ><a href="#logout" id="logout" style="display: none">logout</a>
+          </li>
+          <li>
+            <a href="https://www.instagram.com/">
+              <img src="./assets/icons/instagram.png" alt="Instagram" />
+            </a>
+          </li>
         </ul>
       </nav>
     </header>
 
     <section class="login">
       <h2 class="titreLogIn">Log in</h2>
-
       <div class="formulaire">
-
         <form class="formulaireConnexion" id="loginForm">
           <label for="email">E-mail</label>
           <input type="email" name="email" id="email" required />
           <label for="password">Mot de passe</label>
-          <input type="password" name="password" id="password" autocomplete="off" required />
+          <input
+            type="password"
+            name="password"
+            id="password"
+            autocomplete="off"
+            required />
           <p class="error"></p>
           <div id="errorMessage"></div>
           <input type="submit" class="submit" value="se connecter" />
-         
           <a href="" class="password_forgotten">Mot de passe oublié ?</a>
         </form>
-
       </div>
-
     </section>
 
     <footer class="footer-login">
@@ -54,6 +61,7 @@
         </ul>
       </nav>
     </footer>
+
     <script defer src="./assets/Js/login.js"></script>
   </body>
 </html>
