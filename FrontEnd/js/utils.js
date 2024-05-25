@@ -1,3 +1,4 @@
+//Function to call fetch 
 /**
  * 
  * @param {string} path 
