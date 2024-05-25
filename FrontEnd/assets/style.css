@@ -313,3 +313,8 @@ footer nav ul {
 	background-color: rgba(29, 97, 84, 1);
 	color: white;
 }
+
+.filters button:focus {
+	background-color: rgba(29, 97, 84, 1);
+	color: white;
+}

@@ -32,7 +32,16 @@ function generateHTMLForFiltersWithEvents(categories) {
     //Select the filters tag on HTML
     const filters = document.querySelector(".filters")
 
-    //loop for each category trought the funtion that accept a category
+    //Create tous button
+    const btn = document.createElement("button");
+            btn.innerText = "Tous";
+    filters.appendChild(btn);
+    //Add event listener to the button tous
+    btn.addEventListener('click', function() {
+        generateHTMLForWorks(works)
+    })
+
+    //loop to create a button for each category
     categories.forEach(function (category){
             // generate a button with the name of the category (filter)
             const btn = document.createElement("button");
