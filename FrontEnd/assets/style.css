@@ -314,7 +314,11 @@ footer nav ul {
 	color: white;
 }
 
-.filters button:focus {
+.filters button.active {
 	background-color: rgba(29, 97, 84, 1);
 	color: white;
+}
+
+.hidden {
+	display: none;
 }
