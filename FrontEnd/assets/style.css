@@ -136,16 +136,30 @@ table {
 
 /** end reset css**/
 body {
-	max-width: 1140px;
-	margin: auto;
 	font-family: 'Work Sans';
 	font-size: 14px;
+	display: flex;
+	flex-direction: column;
+	background-color: rgba(255, 254, 248, 1);
+	min-height: 100vh;
+	color: rgb(61, 61, 61);
+}
+
+.main-container {
+	max-width: 1140px;
+	margin: auto;
+	flex-grow: 1;
 }
 
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 50px 10%;
+}
+
+header a {
+	text-decoration: none;
+	color: rgb(61, 61, 61);
 }
 
 section {
@@ -284,10 +298,16 @@ input[type="submit"] {
 	border-radius: 60px;
 }
 
+footer {
+	width: 100%;
+	background-color: white;
+}
+
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
-	margin: 2em
+	margin: 2em;
+	padding-right: 7.6em;
 }
 
 .filters {
