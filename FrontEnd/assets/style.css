@@ -3,6 +3,7 @@
    License: none (public domain)
 */
 
+/*** General ***/
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -110,7 +111,11 @@ button {
 main {
 	padding: 0 120px 0 120px;
 }
-/* Gestion de la page login */
+li:hover {
+	color: #B1663C;
+}
+
+/*** Gestion de la page login ***/
 #logout, #login-none {
 	display: none;
 }
@@ -118,9 +123,29 @@ main {
 	margin-left: -20px;
 	cursor: pointer;
 }
-li:hover {
-	color: #B1663C;
+.edit-mode-attribute {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #000;
+	height: 59px;
+	color: #fff;	
+	gap: 10px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
 }
+.edit-title {
+	display: flex;
+	justify-content: center;
+	gap: 30px;
+	margin-bottom: 3em;
+}
+.login-title {
+	margin-top: 100px;
+}
+/*** Section introduction ***/
 #introduction {
 	display: flex;
 	align-items: center;
@@ -145,6 +170,8 @@ li:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
+
+/*** Section portfolio ***/
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
@@ -174,7 +201,7 @@ li:hover {
 	border: none;
 }
 
-/* Gestion de la modale */
+/*** Gestion de la modale ***/
 .modal-gallery {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -203,80 +230,6 @@ li:hover {
 	color: #fff;
 	text-align: center;
 	padding: 0px;	
-}
-.gallery {
-	width: 100%;
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	grid-column-gap: 20px;
-	grid-row-gap: 20px;
-}
-.gallery img {
-	width: 100%;
-}
-
-#contact {
-	width: 50%;
-	margin: auto;
-}
-#login-form {
-	width: 379px;
-	margin: auto;
-}
-#contact > *, #login-form > * {
-	text-align: center;
-
-}
-#contact h2 {
-	margin-bottom: 20px;
-}
-#contact form, #login-form form {
-	text-align: left;
-	margin-top: 30px;
-	display: flex;
-	flex-direction: column;
-}
-
-#contact input, #login-form input, .btn-new-photo {
-	height: 50px;
-	font-size: 1.2em;
-	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-}
-#contact label, #login-form label {
-	margin: 2em 0 1em 0;
-}
-#contact textarea {
-	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-}
-#login-form {
-	margin-bottom: 150px;
-}
-#login-form h2 {
-	margin-top: 100px;
-}
-#login-form a {
-	text-decoration: underline;
-	text-align: center;
-}
-
-input[type="submit"], .btn-new-photo {
-	font-family: 'Syne';
-	font-weight: 700;
-	color: white;
-	background-color: #1D6154;
-	margin : 2em auto ;
-	width: 180px;
-	text-align: center;
-	border-radius: 60px ;
-}
-
-#btn-check-ok {
-	background-color: #1D6154;
-}
-#error-message {
-	color: red;
 }
 .modal-hidden {
 	display: none;
@@ -310,7 +263,6 @@ input[type="submit"], .btn-new-photo {
 	font-size: 26px;
 	text-align: center;
 }
-
 .modal-title-hidden {
 	display: none;
 }
@@ -321,32 +273,34 @@ input[type="submit"], .btn-new-photo {
 	display: block;
 	text-align: center;
 }
-
-.btn-new-photo {
-	width: 237px;
-	height: 36px;
-	position: absolute;
-	bottom: 25px;
-	left: 216px;
+#btn-check-ok {
+	background-color: #1D6154;
 }
+#error-message {
+	color: red;
+}
+
 .btn-new-hidden {
 	display: none;
 }
 .btn-check {
-	position: absolute;
-	bottom: 60px;
-	left: 216px;
 	height: 36px;
 	border: none;
 	width: 237px;
 	background-color: #A7A7A7;
 	border-radius: 60px;
 	color: #FFF;
-	font: bold 14px "work sans";
-
+	font: bold 14px "syne";
 }
-.btn-check-none {
-	display: none;
+.btn-check:disabled {
+	pointer-events: none;
+}
+.btn-check-wrapper {
+	position: absolute;
+	bottom: 60px;
+	left: 216px;
+	height: 36px;
+	width: 237px;
 }
 .line {
 	background-color: #b3b3b3;
@@ -354,8 +308,12 @@ input[type="submit"], .btn-new-photo {
 	height: 1px;
 	position: absolute;
 	bottom: 139px;
-	left: 125px;
-	
+	left: 125px;	
+}
+.image-added {
+	display: none;
+	height : 169px;
+	width: 129px;
 }
 
 .js-modal-closed {
@@ -388,6 +346,82 @@ input[type="submit"], .btn-new-photo {
 .photo-modal input {
 	display: none;
 }
+
+/*** Galerie ***/
+.gallery {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-column-gap: 20px;
+	grid-row-gap: 20px;
+}
+.gallery img {
+	width: 100%;
+}
+
+/*** Page contact et gestion des formulaires ***/
+#contact {
+	width: 50%;
+	margin: auto;
+}
+#login-form {
+	width: 379px;
+	margin: auto;
+}
+#contact > *, #login-form > * {
+	text-align: center;
+}
+#contact h2 {
+	margin-bottom: 20px;
+}
+#contact form, #login-form form {
+	text-align: left;
+	margin-top: 30px;
+	display: flex;
+	flex-direction: column;
+}
+
+#contact input, #login-form input, .btn-new-photo {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+#contact label, #login-form label {
+	margin: 2em 0 1em 0;
+}
+#contact textarea {
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+#login-form {
+	margin-bottom: 150px;
+}
+
+#login-form a {
+	text-decoration: underline;
+	text-align: center;
+}
+
+input[type="submit"], .btn-new-photo {
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin : 2em auto ;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px ;
+}
+.btn-new-photo {
+	width: 237px;
+	height: 36px;
+	position: absolute;
+	bottom: 25px;
+	left: 216px;
+	font-size: 14px;
+}
+
 .form-modal input, select {
 	height: 51px;
 	width: 420px;
@@ -430,31 +464,7 @@ input[type="submit"], .btn-new-photo {
 	cursor: pointer;
 }
 
-.image-added {
-	display: none;
-	height : 169px;
-	width: 129px;
-}
-.edit-mode-attribute {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background-color: #000;
-	height: 59px;
-	color: #fff;	
-	gap: 10px;
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-}
-
-.edit-title {
-	display: flex;
-	justify-content: center;
-	gap: 30px;
-	margin-bottom: 3em;
-}
+/*** Footer ***/
 footer {
 	width: 100%;
 	height: 60px;

@@ -88,7 +88,6 @@ displayProjects();
 // Suppression des travaux
 function deleteImage() {
     const iconDeleteAll = document.querySelectorAll(".span-delete");
-    console.log(iconDeleteAll);
     const token = sessionStorage.getItem("token");
     iconDeleteAll.forEach(span => {
         span.addEventListener("click", (e) => {
@@ -101,22 +100,17 @@ function deleteImage() {
                 }
             }
             fetch(`http://localhost:5678/api/works/${id}`, option)                    
-            .then((response) => {
-                    if (!response.ok) {
-                        console.log("le delete n'a pas marché !")
-                    }                   
-                })
-                   .then((data) => {
-                    console.log("Le delete a marché :", data);              
-                        displayProjects(); 
-                        fetchAndStoreProjects();                                         
-                })   
+            .then(() => {            
+                displayProjects(); 
+                fetchAndStoreProjects();                                         
+            })   
         })
     });
 }
 
 // Gestion de la fermeture de la modale
 function closeModal() {
+    const modalInput2 = document.getElementById("category");
     // Effacer le contenu précédent de la galerie
     modalGallery.classList.remove("modal-gallery-none");
     modalGallery.innerHTML = "";  
@@ -125,8 +119,10 @@ function closeModal() {
     modalHidden.removeAttribute("aria-modal"); 
     modalTitle.classList.remove("modal-title-hidden");
     modalTitleTwo.classList.remove("modal-title2");
-    sendNewWork.classList.remove("btn-new-hidden");            
-    displayProjects();     
+    sendNewWork.classList.remove("btn-new-hidden");  
+    modalInput2.innerHTML = "";           
+    displayProjects(); 
+    resetModalForm();
 }
 
 // Fermeture au click en dehors de la modale
@@ -139,7 +135,7 @@ body.addEventListener("click", (e) => {
 // Création d'une 2ème modale au click sur "ajouter photo"
 const modalGalleryTwo = document.querySelector(".modal-gallery2");
 const modalPhoto = document.querySelector(".photo-modal");
-
+const modalPhotoPadding = window.getComputedStyle(modalPhoto).padding;
 
 sendNewWork.addEventListener("click", () => { 
     modalTitle.classList.add("modal-title-hidden");
@@ -199,7 +195,7 @@ btnCheck.addEventListener("click", async (e) => {
     const title = document.getElementById("title").value;
     const category = document.getElementById("category").value;
     const formData = new FormData();
-   
+     
     formData.append("image", image.files[0])
     formData.append("category", category)
     formData.append("title", title) 
@@ -212,14 +208,12 @@ btnCheck.addEventListener("click", async (e) => {
         body: formData,            
     })
     .then(response => response.json()) 
-    .then(data => {
-        console.log(data);
-        console.log("voici l'image ajoutée", data)        
-        fetchAndStoreProjects(); 
-        displayProjects();                
-    });       
+    .then(() => {          
+        fetchAndStoreProjects();        
+        closeModal();             
+    }); 
 });
-   
+ 
 // On s'assure que le formulaire est bien rempli
 function formCompleted() {
     const btnCheck = document.querySelector(".btn-check");
@@ -227,7 +221,8 @@ function formCompleted() {
     const title = document.getElementById("title");
     const category = document.getElementById("category");
     const errorMsg = document.querySelector(".error-msg");
-    
+    const btnCheckWrapper = document.querySelector(".btn-check-wrapper");
+   
     form.addEventListener("input", () => {
         if (!title.value == "" && !category.value == "" && !image.value == "") {
             btnCheck.setAttribute("id", "btn-check-ok");
@@ -235,9 +230,42 @@ function formCompleted() {
             errorMsg.innerHTML = "";         
         }
         else {
-            btnCheck.removeAttribute("id", "btn-check-ok"); 
-            errorMsg.innerHTML = "Le formulaire n'est pas correctement rempli";
-        }
+            btnCheck.removeAttribute("id", "btn-check-ok");             
+        }      
     })
+    
+    btnCheckWrapper.addEventListener("click", (event) => {
+        if (btnCheck.disabled) {     
+            event.preventDefault();
+            errorMsg.innerHTML = "Le formulaire n'est pas correctement rempli";
+        }   
+    })       
 }
 formCompleted(); 
+
+// Réinitialiser la modale après la fermeture
+function resetModalForm() {
+    const btnAddPhoto = document.getElementById("file");
+    const imageAdded = document.querySelector(".image-added");
+    const labelFile = document.querySelector(".label-file");
+    const paragraph = document.querySelector(".paragraph");
+    const logoImage = document.querySelector(".logo-image");  
+    const title = document.getElementById("title");
+    
+    // Réinitialiser les champs du formulaire
+    btnAddPhoto.value = "";
+    title.value = "";
+    
+    // Réinitialiser les éléments
+    imageAdded.src = "";
+    imageAdded.style.display = "none";
+    labelFile.style.display = "flex";
+    paragraph.style.display = "block";
+    logoImage.style.display = "block";
+    modalPhoto.style.padding = modalPhotoPadding;  
+
+    // Désactiver le bouton 
+    const btnCheck = document.querySelector(".btn-check");
+    btnCheck.disabled = true;
+    btnCheck.removeAttribute("id", "btn-check-ok");
+}
