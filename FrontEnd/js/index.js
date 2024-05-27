@@ -1,5 +1,6 @@
 import utils from "./utils.js";
 
+//alert(utils.getToken())
 
 function generateHTMLForWorks(works) {
 

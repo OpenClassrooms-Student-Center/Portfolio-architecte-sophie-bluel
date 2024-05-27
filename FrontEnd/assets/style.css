@@ -193,7 +193,7 @@ nav ul {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
-
+	gap: 44px;
 }
 
 nav li {
