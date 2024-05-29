@@ -84,12 +84,12 @@ time,
 mark,
 audio,
 video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
 }
 
 /* HTML5 display-role reset for older browsers */
@@ -104,241 +104,238 @@ hgroup,
 menu,
 nav,
 section {
-	display: block;
+    display: block;
 }
 
 body {
-	line-height: 1;
+    line-height: 1;
 }
 
 ol,
 ul {
-	list-style: none;
+    list-style: none;
 }
 
 blockquote,
 q {
-	quotes: none;
+    quotes: none;
 }
 
 blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-	content: '';
-	content: none;
+    content: '';
+    content: none;
 }
 
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
 }
 
 /** end reset css**/
 body {
-	font-family: 'Work Sans';
-	font-size: 14px;
-	display: flex;
-	flex-direction: column;
-	background-color: rgba(255, 254, 248, 1);
-	min-height: 100vh;
-	color: rgb(61, 61, 61);
+    font-family: 'Work Sans';
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255, 254, 248, 1);
+    min-height: 100vh;
+    color: rgb(61, 61, 61);
 }
 
 .main-container {
-	max-width: 1140px;
-	margin: auto;
-	flex-grow: 1;
+    max-width: 1140px;
+    margin: auto;
+    flex-grow: 1;
 }
 
 header {
-	display: flex;
-	justify-content: space-between;
-	margin: 50px 10%;
+    display: flex;
+    justify-content: space-between;
+    margin: 50px 10%;
 }
 
 header a {
-	text-decoration: none;
-	color: rgb(61, 61, 61);
+    text-decoration: none;
+    color: rgb(61, 61, 61);
 }
 
 section {
-	margin: 50px 0
+    margin: 50px 0;
 }
 
 h1 {
-	display: flex;
-	flex-direction: column;
-	font-family: 'Syne';
-	font-size: 22px;
-	font-weight: 800;
-	color: #B1663C
+    display: flex;
+    flex-direction: column;
+    font-family: 'Syne';
+    font-size: 22px;
+    font-weight: 800;
+    color: #b1663c;
 }
 
-h1>span {
-	font-family: 'Work Sans';
-	font-size: 10px;
-	letter-spacing: 0.1em;
-	;
+h1 > span {
+    font-family: 'Work Sans';
+    font-size: 10px;
+    letter-spacing: 0.1em;
 }
 
 h2 {
-	font-family: 'Syne';
-	font-weight: 700;
-	font-size: 30px;
-	color: #1D6154
+    font-family: 'Syne';
+    font-weight: 700;
+    font-size: 30px;
+    color: #1d6154;
 }
 
 nav ul {
-	display: flex;
-	align-items: center;
-	list-style-type: none;
-	gap: 44px;
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    gap: 44px;
 }
 
 nav li {
-	padding: 0 10px;
-	font-size: 1.2em;
+    padding: 0 10px;
+    font-size: 1.2em;
 }
 
 li:hover {
-	color: #B1663C;
+    color: #b1663c;
 }
 
 #introduction {
-	display: flex;
-	align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 #introduction figure {
-	flex: 1
+    flex: 1;
 }
 
 #introduction img {
-	display: block;
-	margin: auto;
-	width: 80%;
+    display: block;
+    margin: auto;
+    width: 80%;
 }
 
 #introduction article {
-	flex: 1
+    flex: 1;
 }
 
 #introduction h2 {
-	margin-bottom: 1em;
+    margin-bottom: 1em;
 }
 
 #introduction p {
-	margin-bottom: 0.5em;
+    margin-bottom: 0.5em;
 }
 
 #portfolio h2 {
-	text-align: center;
-	margin-bottom: 1em;
+    text-align: center;
+    margin-bottom: 1em;
 }
 
 .gallery {
-	width: 100%;
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	grid-column-gap: 20px;
-	grid-row-gap: 20px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
 }
 
 .gallery img {
-	width: 100%;
-
+    width: 100%;
 }
 
 #contact {
-	width: 50%;
-	margin: auto;
+    width: 50%;
+    margin: auto;
 }
 
-#contact>* {
-	text-align: center;
-
+#contact > * {
+    text-align: center;
 }
 
 #contact h2 {
-	margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 #contact form {
-	text-align: left;
-	margin-top: 30px;
-	display: flex;
-	flex-direction: column;
+    text-align: left;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
 }
 
 #contact input {
-	height: 50px;
-	font-size: 1.2em;
-	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+    height: 50px;
+    font-size: 1.2em;
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
 #contact label {
-	margin: 2em 0 1em 0;
+    margin: 2em 0 1em 0;
 }
 
 #contact textarea {
-	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-input[type="submit"] {
-	font-family: 'Syne';
-	font-weight: 700;
-	color: white;
-	background-color: #1D6154;
-	margin: 2em auto;
-	width: 180px;
-	text-align: center;
-	border-radius: 60px;
+input[type='submit'] {
+    font-family: 'Syne';
+    font-weight: 700;
+    color: white;
+    background-color: #1d6154;
+    margin: 2em auto;
+    width: 180px;
+    text-align: center;
+    border-radius: 60px;
 }
 
 footer {
-	width: 100%;
-	background-color: white;
+    width: 100%;
+    background-color: white;
 }
 
 footer nav ul {
-	display: flex;
-	justify-content: flex-end;
-	margin: 2em;
-	padding-right: 7.6em;
+    display: flex;
+    justify-content: flex-end;
+    margin: 2em;
+    padding-right: 7.6em;
 }
 
 .filters {
-	display: flex;
-	justify-content: center;
-	gap: 10px;
-	margin: 51px 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 51px 0;
 }
 
 .filters button {
-	border: 1px solid rgba(29, 97, 84, 1);
-	border-radius: 60px;
-	padding: 9px 15px;
-	background: none;
-	color: rgba(29, 97, 84, 1);
-	text-align: center;
-	font: inherit;
-	font-size: 16px;
-	font-weight: 700;
+    border: 1px solid rgba(29, 97, 84, 1);
+    border-radius: 60px;
+    padding: 9px 15px;
+    background: none;
+    color: rgba(29, 97, 84, 1);
+    text-align: center;
+    font: inherit;
+    font-size: 16px;
+    font-weight: 700;
 }
 
 .filters button:hover {
-	background-color: rgba(29, 97, 84, 1);
-	color: white;
+    background-color: rgba(29, 97, 84, 1);
+    color: white;
 }
 
 .filters button.active {
-	background-color: rgba(29, 97, 84, 1);
-	color: white;
+    background-color: rgba(29, 97, 84, 1);
+    color: white;
 }
 
 .hidden {
-	display: none;
+    display: none;
 }
