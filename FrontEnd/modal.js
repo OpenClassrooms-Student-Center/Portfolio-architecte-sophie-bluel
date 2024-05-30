@@ -53,8 +53,6 @@ const body = document.body;
 // On fait apparaitre la modale au click
 jsModal.addEventListener("click", () => {
     modalHidden.classList.add("modal-uncovered");
-    modalHidden.removeAttribute("aria-hidden");
-    modalHidden.setAttribute("aria-modal", "true");
     modalGalleryTwo.style.display = "none";  
     modalClosed.addEventListener("click", closeModal);           
     getProjects();
@@ -115,8 +113,6 @@ function closeModal() {
     modalGallery.classList.remove("modal-gallery-none");
     modalGallery.innerHTML = "";  
     modalHidden.classList.remove("modal-uncovered");
-    modalHidden.setAttribute("aria-hidden", "true");
-    modalHidden.removeAttribute("aria-modal"); 
     modalTitle.classList.remove("modal-title-hidden");
     modalTitleTwo.classList.remove("modal-title2");
     sendNewWork.classList.remove("btn-new-hidden");  
