@@ -4,9 +4,9 @@
 	<meta charset="UTF-8">
 	<title>Sophie Bluel - Architecte d'intérieur</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script type="module" src="projects.js"></script>
+	<script type="module" src="projects.js" defer></script>
 	<script src="login.js" defer></script>
-	<script type="module" src="modal.js"></script>
+	<script type="module" src="modal.js" defer></script>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
@@ -51,10 +51,10 @@
 				<a href="#modal1">modifier</a>
 			</div>
 		</div>	
-		<dialog id="modal1" class="modal-hidden" >
+		<aside id="modal1" class="modal-hidden" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="modal-title">
 			<div class="modal-content">
 				<button class="js-modal-closed">✖</button>
-				<h3 class="modal-title" id="modal-title">Galerie photo</h3>
+				<h3 class="modal-title">Galerie photo</h3>
 				<h3 class="modal-title2-hidden">Ajout photo</h3>
 				<div class="modal-gallery">
 				</div>
@@ -81,7 +81,7 @@
 				<div class="line"></div>
 				<button class="btn-new-photo">Ajouter une photo</button>
 			</div>
-		</dialog>
+		</aside>
 			<div class="btn-filter">
 				<button class="btn" id="all">Tous</button>
 				<button class="btn" id="objects">Objets</button>
