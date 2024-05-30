@@ -379,8 +379,13 @@ footer nav ul {
     justify-content: center;
     align-items: center;
     gap: 10px;
-    text-decoration: none;
-    color: inherit;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.portafolio-adminmode_modifier:hover {
+    text-decoration: underline;
 }
 
 .portafolio-adminmode svg {
