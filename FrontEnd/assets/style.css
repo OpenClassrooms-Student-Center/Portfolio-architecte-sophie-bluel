@@ -278,6 +278,8 @@ li:hover {
 }
 #error-message {
 	color: red;
+	position: relative;
+	bottom: 35px;
 }
 
 .btn-new-hidden {

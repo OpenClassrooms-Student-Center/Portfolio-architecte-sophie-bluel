@@ -2,6 +2,7 @@ const errorMessage = document.getElementById("error-message");
 const loginForm = document.getElementById("login-form");
 const token = sessionStorage.getItem("token");
 const loginFormJs = document.getElementById("login-form-js");
+const loginTitle = document.querySelector(".login-title");
 
 // Gestion du login
 if (loginFormJs) {
@@ -37,9 +38,9 @@ if (loginFormJs) {
                 throw new Error("Token non trouvé dans la réponse");
             }
         })
-        .catch((error) => {
+        .catch(() => {
             errorMessage.innerHTML = "Erreur dans l'identifiant ou le mot de passe";
-            console.error("Erreur lors de la connexion :", error);
+            loginTitle.style.margin = 0;         
         });
     });
 }
