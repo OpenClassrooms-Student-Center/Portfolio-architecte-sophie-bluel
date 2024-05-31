@@ -14,8 +14,11 @@ function closeModal() {
 //     const work = await utils.fetchJSON('/works', "DELETE");
 // }
 
-const modalopen = document.querySelector('.portafolio-adminmode_modifier');
-modalopen.addEventListener('click', openModal);
+const modalOpen = document.querySelector('.portafolio-adminmode_modifier');
+modalOpen.addEventListener('click', openModal);
 
-const modalclose = document.querySelector('.modal-exit');
-modalclose.addEventListener('click', closeModal);
+const btnExit = document.querySelector('.modal-exit');
+btnExit.addEventListener('click', closeModal);
+
+const outsideExit = document.querySelector('.modal-background');
+outsideExit.addEventListener('click', closeModal);
