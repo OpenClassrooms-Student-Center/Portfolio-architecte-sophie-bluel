@@ -1,6 +1,12 @@
 .modal {
-    width: 0;
-    height: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
 .modal-background {
@@ -16,15 +22,11 @@
 .modal-wrapper {
     display: flex;
     flex-direction: column;
-    height: 688px;
+    /* height: 688px; */
     width: 630px;
     background-color: rgba(255, 255, 255, 1);
     border-radius: 10px;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
+    position: relative;
     margin: auto;
     z-index: 2;
 }

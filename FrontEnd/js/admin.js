@@ -10,6 +10,8 @@ function closeModal() {
     modal.classList.add('ishidden');
 }
 
+function OpenAddPhoto() {}
+
 const modalOpen = document.querySelector('.portafolio-adminmode_modifier');
 modalOpen.addEventListener('click', openModal);
 
@@ -18,3 +20,6 @@ btnExit.addEventListener('click', closeModal);
 
 const outsideExit = document.querySelector('.modal-background');
 outsideExit.addEventListener('click', closeModal);
+
+const addPhoto = document.querySelector('.modal-btn');
+addPhoto.addEventListener('click', OpenAddPhoto);
