@@ -130,21 +130,24 @@
 }
 
 .modal-form_img {
+    background-color: rgba(232, 241, 246, 1);
+    color: rgba(185, 197, 204, 1);
+}
+
+.modal-form_img-label {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 6px;
     height: 169px;
-    background-color: rgba(232, 241, 246, 1);
-    color: rgba(185, 197, 204, 1);
 }
 
 .modal-form_img-icon {
     font-size: 60px;
 }
 
-.modal-form_img-label {
+.modal-form_img-btn {
     border: 1px solid rgba(203, 214, 220, 1);
     border-radius: 60px;
     padding: 10px 49px;
