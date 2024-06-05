@@ -1,3 +1,7 @@
+.ishidden {
+    display: none;
+}
+
 .modal {
     display: flex;
     justify-content: center;
@@ -82,7 +86,7 @@
     display: flex;
     justify-content: center;
     padding: 38px 0;
-    margin: 67px auto 0;
+    margin: 47px auto 0;
     border-top: 1px solid rgba(179, 179, 179, 1);
     width: 420px;
 }
@@ -97,6 +101,7 @@
     font: inherit;
     font-size: 14px;
     font-weight: 700;
+    min-width: 237px;
 }
 
 .modal-exit {
@@ -108,6 +113,88 @@
     font-size: 24px;
 }
 
-.ishidden {
+.backbtn {
+    position: absolute;
+    top: 26px;
+    left: 30px;
+    border: none;
+    background-color: transparent;
+    font-size: 24px;
+}
+
+.modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin: 0 105px;
+}
+
+.modal-form_img {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 169px;
+    background-color: rgba(232, 241, 246, 1);
+    color: rgba(185, 197, 204, 1);
+}
+
+.modal-form_img-icon {
+    font-size: 60px;
+}
+
+.modal-form_img-label {
+    border: 1px solid rgba(203, 214, 220, 1);
+    border-radius: 60px;
+    padding: 10px 49px;
+    background: rgba(203, 214, 220, 1);
+    color: rgba(48, 102, 133, 1);
+    text-align: center;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.modal-form_img-input {
     display: none;
+}
+
+.modal-form_img-p {
+    color: rgba(68, 68, 68, 1);
+    font-size: 10px;
+}
+
+.modal-form_title {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.modal-form_title-input {
+    height: 51px;
+    border: none;
+    box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
+    padding-left: 16px;
+    color: rgba(68, 68, 68, 1);
+}
+
+.modal-form_category {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.modal-form_category-option {
+    height: 51px;
+    border: none;
+    background-color: white;
+    box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
+    padding-left: 16px;
+    color: rgba(68, 68, 68, 1);
+}
+
+.valider {
+    border-color: rgba(167, 167, 167, 1);
+    background-color: rgba(167, 167, 167, 1);
 }
