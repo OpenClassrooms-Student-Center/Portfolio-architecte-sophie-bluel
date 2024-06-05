@@ -77,7 +77,12 @@ function openAddPhoto() {
     <div class="modal-form_img">
         <i class="fa-regular fa-image modal-form_img-icon"></i>
         <label class="modal-form_img-label" for="fileInput"> &plus; Ajouter photo</label>
-        <input class="modal-form_img-input" type="file" id="fileInput" accept=".pgn, .jpeg, .jpg" required />
+        <input 
+            class="modal-form_img-input" 
+            type="file" 
+            id="fileInput" 
+            accept=".png, .jpeg, .jpg"
+            required />
         <p class="modal-form_img-p" >jpeg,png: 4mo max</p>
     </div>
     <div class="modal-form_title">
@@ -88,14 +93,33 @@ function openAddPhoto() {
         <label for="category">Catégorie </label>
         <select class="modal-form_category-option"name="categories" id="cotegory-select">
             <option value=""></option>
-            <option value="1">Objects</option>
-            <option value="2">Appartments</option>
-            <option value="3">Hotel & restaurants</option>
+            <option value="objects" id="1">Objects</option>
+            <option value="appartments" id="2">Appartments</option>
+            <option value="hotel-restaurants" id="2">Hotel & restaurants</option>
         </select>
     </div>
     `;
 
     modal.setContent(form);
+
+    document
+        .querySelector('#fileInput')
+        .addEventListener('change', addPhotoPreview);
+}
+
+function addPhotoPreview(event) {
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+        const formImg = document.querySelector('.modal-form_img');
+        formImg.innerHTML = `<img height="169px" src="${e.target.result}">`;
+    };
+
+    reader.readAsDataURL(event.target.files[0]);
+}
+
+function validation() {
+    //check if all 3 forms a filled
 }
 
 modal.generateModal();
