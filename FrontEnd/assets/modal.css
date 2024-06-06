@@ -104,6 +104,11 @@
     min-width: 237px;
 }
 
+.modal-btn:disabled {
+    border-color: rgba(167, 167, 167, 1);
+    background-color: rgba(167, 167, 167, 1);
+}
+
 .modal-exit {
     position: absolute;
     top: 26px;
@@ -195,9 +200,4 @@
     box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
     padding-left: 16px;
     color: rgba(68, 68, 68, 1);
-}
-
-.valider {
-    border-color: rgba(167, 167, 167, 1);
-    background-color: rgba(167, 167, 167, 1);
 }

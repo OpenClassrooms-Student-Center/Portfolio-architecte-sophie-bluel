@@ -63,12 +63,11 @@ function openAddPhoto() {
 
     const btn = document.createElement('button');
     btn.type = 'button';
-    btn.classList = 'modal-btn valider';
+    btn.classList = 'modal-btn';
+    btn.setAttribute('disabled', true);
     btn.innerText = 'Valider';
-    btn.addEventListener('click', function () {
-        //Use fetch to add work to works
-    });
     modal.setFooter(btn);
+    btn.addEventListener('click', () => console.log('hola'));
 
     const form = document.createElement('form');
     form.classList = 'modal-form';
@@ -108,6 +107,12 @@ function openAddPhoto() {
     document
         .querySelector('#fileInput')
         .addEventListener('change', addPhotoPreview);
+    document
+        .querySelector('.modal-form_title-input')
+        .addEventListener('input', validateForm);
+    document
+        .querySelector('.modal-form_category-option')
+        .addEventListener('input', validateForm);
 }
 
 function addPhotoPreview(event) {
@@ -120,10 +125,27 @@ function addPhotoPreview(event) {
     };
 
     reader.readAsDataURL(event.target.files[0]);
+
+    validateForm();
 }
 
-function validation() {
-    //check if all 3 fields are filled in
+function validateForm() {
+    const submitButton = document.querySelector('.modal-btn');
+    const imgForm = document.querySelector('.modal-form_img-input').value;
+    const titleForm = document.querySelector('.modal-form_title-input').value;
+    const categoryForm = document.querySelector(
+        '.modal-form_category-option'
+    ).value;
+
+    if (
+        imgForm.length === 0 ||
+        titleForm.length === 0 ||
+        categoryForm.length === 0
+    ) {
+        submitButton.setAttribute('disabled', true);
+    } else {
+        submitButton.removeAttribute('disabled');
+    }
 }
 
 modal.generateModal();

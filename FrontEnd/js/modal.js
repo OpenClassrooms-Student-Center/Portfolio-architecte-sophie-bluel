@@ -4,7 +4,7 @@ function setHeader(element) {
     const modalheader = document.getElementById('modal-header');
     modalheader.replaceChildren(element);
 }
-// modal.setContent(gallery);
+
 function setContent(element) {
     const modalContent = document.getElementById('modal-content');
     modalContent.replaceChildren(element);
