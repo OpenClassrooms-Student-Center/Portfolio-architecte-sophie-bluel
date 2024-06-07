@@ -166,7 +166,6 @@ function validateForm() {
 async function addWork(form) {
     const formData = new FormData(form);
     const work = await utils.callAPI('/works', 'POST', formData, {});
-
     generateHTMLForWork(
         {
             id: work.id,
