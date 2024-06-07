@@ -13,7 +13,12 @@ formLogin.addEventListener('submit', async function (event) {
         password: form.elements.password.value,
     };
 
-    const login = await utils.fetchJSON('/users/login', 'POST', userData);
+    //move to auth
+    const login = await utils.callAPI(
+        '/users/login',
+        'POST',
+        JSON.stringify(userData)
+    );
 
     if (login.error) {
         alert('Échec de la connexion');
@@ -21,6 +26,6 @@ formLogin.addEventListener('submit', async function (event) {
     }
 
     localStorage.setItem('loginToken', login.token);
-
+    //until here
     location.href = 'admin.html';
 });

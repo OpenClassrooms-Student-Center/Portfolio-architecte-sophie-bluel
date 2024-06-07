@@ -1,8 +1,10 @@
 import utils from './utils.js';
 import modal from './modal.js';
+import { generateHTMLForWork } from './generateWorks.js';
 
 async function openPhotoGallery() {
     const title = document.createElement('h2');
+    title.classList.add('modal-title');
     title.innerText = 'Galerie photo';
     modal.setHeader(title);
 
@@ -16,7 +18,7 @@ async function openPhotoGallery() {
     const gallery = document.createElement('div');
     gallery.classList = 'modal-gallery';
 
-    const works = await utils.fetchJSON('/works');
+    const works = await utils.callAPI('/works');
     works.forEach(function (work) {
         const img = document.createElement('img');
         img.src = work.imageUrl;
@@ -25,14 +27,15 @@ async function openPhotoGallery() {
         btn.innerHTML =
             '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z"/></svg>';
         btn.classList.add('modal-gallery_btn');
-
-        btn.addEventListener('click', function () {
-            deleteWork(work.id);
+        btn.type = 'button';
+        btn.addEventListener('click', async function (event) {
+            event.preventDefault();
+            await deleteWork(work.id);
         });
 
         const figure = document.createElement('figure');
         figure.classList.add('modal-gallery_fig');
-
+        figure.classList.add(`work`, `work-${work.id}`);
         figure.appendChild(btn);
         figure.appendChild(img);
 
@@ -43,7 +46,10 @@ async function openPhotoGallery() {
 }
 
 async function deleteWork(id) {
-    await utils.fetchJSON(`/works/${id}`, 'DELETE');
+    await utils.callAPI(`/works/${id}`, 'DELETE');
+    document
+        .querySelectorAll(`.work-${id}`)
+        .forEach((element) => element.remove());
 }
 
 function openAddPhoto() {
@@ -61,17 +67,9 @@ function openAddPhoto() {
     title.classList = 'modal-title';
     modal.setHeader(title);
 
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.classList = 'modal-btn';
-    btn.setAttribute('disabled', true);
-    btn.innerText = 'Valider';
-    modal.setFooter(btn);
-    btn.addEventListener('click', () => console.log('hola'));
-
     const form = document.createElement('form');
     form.classList = 'modal-form';
-    form.method = 'POST';
+    form.method = 'GET';
     form.innerHTML = `
     <div class="modal-form_img">
         <label class="modal-form_img-label"for="fileInput">  
@@ -83,6 +81,7 @@ function openAddPhoto() {
             class="modal-form_img-input" 
             type="file" 
             id="fileInput" 
+            name="image"
             accept=".png, .jpeg, .jpg"
             required 
         />     
@@ -93,14 +92,30 @@ function openAddPhoto() {
     </div>
     <div class="modal-form_category">
         <label for="category">Catégorie </label>
-        <select class="modal-form_category-option"name="categories" id="cotegory-select">
+        <select class="modal-form_category-option" name="category" id="cotegory-select">
             <option value=""></option>
-            <option value="objects" id="1">Objects</option>
-            <option value="appartments" id="2">Appartments</option>
-            <option value="hotel-restaurants" id="2">Hotel & restaurants</option>
+            <option value="1" id="1">Objects</option>
+            <option value="2" id="2">Appartments</option>
+            <option value="3" id="2">Hotel & restaurants</option>
         </select>
     </div>
     `;
+
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.classList = 'modal-btn';
+    btn.setAttribute('disabled', true);
+    btn.innerText = 'Valider';
+    modal.setFooter(btn);
+    btn.addEventListener('click', async function () {
+        if (btn.hasAttribute('disabled')) {
+            return;
+        }
+
+        await addWork(form);
+        //add work to gallery photo
+        openPhotoGallery();
+    });
 
     modal.setContent(form);
 
@@ -148,5 +163,20 @@ function validateForm() {
     }
 }
 
+async function addWork(form) {
+    const formData = new FormData(form);
+    const work = await utils.callAPI('/works', 'POST', formData, {});
+
+    generateHTMLForWork(
+        {
+            id: work.id,
+            title: work.title,
+            imageUrl: work.imageUrl,
+            category: { id: work.categoryId },
+        },
+        document.querySelector('.gallery')
+    );
+}
+
 modal.generateModal();
-openAddPhoto();
+openPhotoGallery();

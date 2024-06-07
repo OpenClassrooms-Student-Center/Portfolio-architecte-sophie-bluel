@@ -12,11 +12,11 @@ import generateHTMLForFiltersWithEvents from './generateFilters.js';
 
 //     document.querySelector('.filters').remove();
 // } else {
-const categories = await utils.fetchJSON('/categories');
+const categories = await utils.callAPI('/categories');
 generateHTMLForFiltersWithEvents(categories);
 //}
 
-const works = await utils.fetchJSON('/works');
+const works = await utils.callAPI('/works');
 generateHTMLForWorks(works);
 
 // filtersAndEventRegenerate(categories);

@@ -5,9 +5,13 @@
  * @param {"GET"|"POST"|"PUT"|"DELETE"} method
  * @param {*} body
  */
-async function fetchJSON(path, method = 'GET', body = null) {
+async function callAPI(
+    path,
+    method = 'GET',
+    body = null,
+    headers = { 'Content-Type': 'application/json' }
+) {
     const token = getToken();
-    const headers = { 'Content-Type': 'application/json' };
 
     if (token) {
         headers['authorization'] = `Bearer ${token}`;
@@ -15,20 +19,23 @@ async function fetchJSON(path, method = 'GET', body = null) {
 
     const response = await fetch(`http://localhost:5678/api${path}`, {
         method,
-        body: body ? JSON.stringify(body) : null,
+        body,
         headers,
     });
 
-    const data = await response.json();
+    try {
+        const data = await response.json();
 
-    if (!response.ok) {
-        return { error: true, status: response.status };
-    }
-    return data;
+        if (!response.ok) {
+            return { error: true, status: response.status };
+        }
+
+        return data;
+    } catch (ignore) {}
 }
 
 function getToken() {
     return localStorage.getItem('loginToken');
 }
 
-export default { fetchJSON, getToken };
+export default { callAPI, getToken };
