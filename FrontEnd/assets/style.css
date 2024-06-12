@@ -223,6 +223,12 @@ li:hover {
 	margin-bottom: 1em;
 }
 
+
+
+.containerBtnFilter {
+	text-align: center;
+}
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -290,11 +296,21 @@ button {
 	color: white;
 	background-color: #1D6154;
 	margin: 2em auto;
-	width: 98px;
-	height: 37px;
 	text-align: center;
 	border-radius: 60px;
 	padding: 9px 20px;
+}
+
+.btnFiltres {
+	font-family: 'Syne';
+	font-weight: 16px;
+	color: #1D6154;
+	background-color: transparent;
+	margin: 2em auto;
+	text-align: center;
+	border-radius: 60px;
+	padding: 9px 20px;
+
 }
 
 footer nav ul {

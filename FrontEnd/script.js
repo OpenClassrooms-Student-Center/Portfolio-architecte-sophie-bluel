@@ -4,7 +4,7 @@ async function recupFiltres() {
 
     const reponse = await fetch("http://localhost:5678/api/categories")
     const filtres = await reponse.json();
-    console.log(filtres)
+
     return filtres
 
 }
@@ -21,27 +21,48 @@ async function recupTravaux() {
 
 
 
-function integrationBtnFiltres() {
+async function integrationBtnFiltres() {
+
+    let listfiltres = await recupFiltres()
+
+
     let container = document.querySelector(".containerBtnFilter  ")
 
-    let buttonObjet = document.createElement("button")
-    let buttonAppartements = document.createElement("button")
+    for (let i = 0; i < listfiltres.length; i++) {
+        let btnTous = document.getElementById("btnTous")
+        let button = document.createElement("button")
+        button.className = "btnFiltres"
+        button.textContent = listfiltres[i].name
+        container.appendChild(button)
 
 
 
 
-    container.appendChild(buttonAppartements)
-    container.appendChild(buttonObjet)
+        button.addEventListener("click", async function () {
 
+            let travaux = await recupTravaux()
+
+            let idChoixCategories = listfiltres[i].id
+            let travauxfiltrer = travaux.filter((projet) => projet.categoryId === idChoixCategories)
+            integrationTravauxGalerie(travauxfiltrer)
+        })
+
+    }
 
 
 }
 
 
-async function integrationTravauxGalerie() {
+
+
+
+
+
+async function integrationTravauxGalerie(listTravaux) {
 
     let gallery = document.querySelector(".gallery")
-    const listTravaux = await recupTravaux()
+    gallery.innerHTML = ""
+
 
     for (let i = 0; i < listTravaux.length; i++) {
 
@@ -73,7 +94,14 @@ async function integrationTravauxGalerie() {
 }
 
 
+async function main() {
+    const allworks = await recupTravaux()
+    recupFiltres()
+    integrationTravauxGalerie(allworks)
+    integrationBtnFiltres()
 
-recupFiltres()
-integrationTravauxGalerie()
-integrationBtnFiltres()
+
+}
+
+
+main()
