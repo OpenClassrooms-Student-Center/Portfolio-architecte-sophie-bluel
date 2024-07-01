@@ -2,35 +2,88 @@ function recupDonneForm() {
 
     let formulaire = document.getElementById("formulaire")
     let btnSubmit = document.getElementById("submit")
-    console.log("a")
-    btnSubmit.addEventListener("click", function (event) {
+
+    btnSubmit.addEventListener("click", async function (event) {
         event.preventDefault()
         let inputEmail = document.getElementById("email")
         let passwordForm = document.getElementById("password")
         let email = inputEmail.value
-        let password =
+        let password = passwordForm.value
+        let resultat = await envoyerIdMdp(email, password)
+        if (resultat === null) {
+
+            let erreur = document.getElementById("error")
+            erreur.textContent = "Erreur : Email ou mot de passe incorrect.";
+
+        } else {
+            window.localStorage.setItem("connexion", "true");
+            window.location.replace("http://" + window.location.host);
 
 
-            console.log(inputEmail.value)
-        console.log(passwordForm.value)
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     })
+
+
 
 }
 
 
 
-async function recupIdMpd() {
-    const reponse = await fetch("http://localhost:5678/api/users/login")
-    const data = {
-        email: "sophie.bluel@test.tld",
-        password: "S0phie"
+
+
+async function envoyerIdMdp(email, password) {
+
+    let donnes = {
+        "email": email,
+        "password": password,
     }
-    const login = await reponse.json();
-    console.log(login)
-    return login
+
+
+    const reponse = await fetch("http://localhost:5678/api/users/login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify(donnes),
+
+
+    });
+
+
+    if (reponse.status === 200) {
+        console.log("succes")
+        //console.log(await reponse.json())
+        return await reponse.json()
+
+    } else {
+        console.log("echec")
+        return null
+
+
+    }
+
+
 
 }
 
 recupDonneForm()
-recupIdMpd()
+
+
+
+

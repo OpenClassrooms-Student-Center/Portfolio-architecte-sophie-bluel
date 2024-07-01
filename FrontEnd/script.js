@@ -26,10 +26,9 @@ async function integrationBtnFiltres() {
     let listfiltres = await recupFiltres()
 
 
-    let container = document.querySelector(".containerBtnFilter  ")
+    let container = document.querySelector(".containerBtnFilter")
 
     for (let i = 0; i < listfiltres.length; i++) {
-        let btnTous = document.getElementById("btnTous")
         let button = document.createElement("button")
         button.className = "btnFiltres"
         button.textContent = listfiltres[i].name
@@ -94,12 +93,128 @@ async function integrationTravauxGalerie(listTravaux) {
 }
 
 
+function affichageBtnTous() {
+    let btnTous = document.getElementById("btnTous")
+    btnTous.addEventListener("click", async function (event) {
+        event.preventDefault
+        const allworks = await recupTravaux()
+        integrationTravauxGalerie(allworks)
+    })
+}
+
+
+
+
+//si utilisateur connecter faire les etape suivants 
+
+function affichageBtnModifTraveau() {
+    if (localStorage.getItem("connexion") === "true") {
+
+        let filtres = document.querySelector(".containerBtnFilter ")
+        console.log(filtres)
+        filtres.innerHTML = ""
+        buttonModif = document.createElement("button")
+
+
+
+        buttonModif.textContent = "modifier"
+        buttonModif.addEventListener("click", function (event) {
+            event.preventDefault;
+            let overlay = document.querySelector(".overlay")
+            overlay.classList.remove("overlayoff")
+            creationModale();
+
+
+
+
+
+
+        })
+
+        filtres.appendChild(buttonModif)
+
+
+
+
+
+
+
+    } else {
+
+    }
+}
+
+function creationModale() {
+
+
+    let overlay = document.createElement("div")
+    overlay.classList.add("overlay")
+
+
+
+
+
+
+
+    let pictureList = document.createElement("div")
+
+    let addBtn = document.createElement("button")
+
+
+
+    const iconFermer = document.createElement('i');
+    iconFermer.classList.add("fa-x");
+    closeDiv.appendChild(iconFermer)
+
+
+
+
+    modaleContainer.appendChild(closeDiv)
+
+
+
+    overlay.appendChild(modaleContainer);
+    document.body.appendChild(overlay);
+}
+
+
+function closeModale() {
+    let closDiv = document.querySelector(".closeDiv")
+    closDiv.addEventListener("click", function (event) {
+        event.preventDefault;
+        let overlay = document.querySelector(".overlay")
+        overlay.classList.add("overlayoff")
+
+
+
+
+
+
+    })
+
+    let overlay = document.querySelector(".overlay")
+    overlay.addEventListener("click", function (event) {
+        event.preventDefault;
+        overlay.classList.add("overlayoff")
+
+    })
+}
+
+
+
+
+
+
 async function main() {
     const allworks = await recupTravaux()
     recupFiltres()
     integrationTravauxGalerie(allworks)
-    integrationBtnFiltres()
+    await integrationBtnFiltres()
+    affichageBtnTous()
+    affichageBtnModifTraveau()
 
+
+    closeModale()
 
 }
 

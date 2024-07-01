@@ -107,6 +107,8 @@ section {
 	display: block;
 }
 
+main {}
+
 body {
 	line-height: 1;
 }
@@ -293,56 +295,18 @@ li:hover {
 
 
 
-#login {
-	width: 50%;
-	margin: auto;
-}
 
-
-#login legend {
-
+.btnFiltres {
 	font-family: 'Syne';
+	font-weight: 16px;
 	color: #1D6154;
-	font-size: 30PX;
-	margin: auto;
-}
-
-
-#login>* {
+	background-color: transparent;
+	margin: 2em auto;
 	text-align: center;
+	border-radius: 60px;
+	padding: 9px 20px;
 
 }
-
-#login h2 {
-	margin-bottom: 20px;
-}
-
-#login form {
-	text-align: left;
-	margin-top: 30px;
-	display: flex;
-	flex-direction: column;
-	width: 380px;
-	margin: auto;
-}
-
-#login input {
-	height: 50px;
-	font-size: 1.2em;
-	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-
-}
-
-#login label {
-	margin: 2em 0 1em 0;
-}
-
-#login a {
-	text-align: center;
-	color: #3D3D3D;
-}
-
 
 
 
@@ -368,23 +332,11 @@ button {
 	padding: 9px 20px;
 }
 
-.btnFiltres {
-	font-family: 'Syne';
-	font-weight: 16px;
-	color: #1D6154;
-	background-color: transparent;
-	margin: 2em auto;
-	text-align: center;
-	border-radius: 60px;
-	padding: 9px 20px;
-
-}
-
-
 footer {
 	background-color: white;
 	height: 60PX;
 	align-content: center;
+	font-style: light;
 
 
 }
@@ -393,4 +345,70 @@ footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em
+}
+
+#buttonmModif {
+	color: red;
+}
+
+.modaleContainer {
+	height: 400PX;
+	width: 32%;
+	background-color: white;
+	margin: auto;
+	z-index: 100;
+	position: absolute;
+	padding: 21px;
+
+
+
+}
+
+.fa-x {
+	font-size: 11PX;
+	margin-left: auto;
+
+}
+
+.closeDiv {
+	display: flex;
+	margin-bottom: 10Px;
+}
+
+
+.titleDiv {
+	text-align: center;
+	font-size: 20px;
+	font-family: 'Work Sans';
+}
+
+.addBtn {
+	font-family: 'Syne';
+}
+
+.BtnaddDiv {
+
+	text-align: center;
+}
+
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 9;
+
+}
+
+.overlayoff {
+	display: none;
+}
+
+.buttonFermerModale {
+	background-color: red;
 }
