@@ -186,3 +186,11 @@ footer nav ul {
 	margin: 2em
 }
 
+.categories button {
+	margin: 20px;
+}
+
+#login {
+	display: block;
+	text-align: center;
+}
