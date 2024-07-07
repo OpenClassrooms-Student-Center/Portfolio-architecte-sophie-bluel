@@ -3,11 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script type="module" src="assets/js/views/login.js" defer></script> 
+    <title>Login</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+    <script type="module" src="assets/js/controllers/login.js" defer></script> 
 </head>
-<body>
+<body id="login_page">
+        
+        <main class="main_login_container container">
+            <header>
+                <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="index.html#portefolio"> projets</a>
+                        </li>
+                        <li>
+                            <a href="index.html#contact">contact</a>
+                        </li>
+                        <li>
+                            <a href="login.html#login_page">login</a>
+                        </li>
+                        <li>
+                            <a class="insta_logo_container" href="#">
+                            <img class="insta_logo" src="./assets/icons/instagram.png" alt="Instagram">
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </header>
 
- 
+            <section class="login_container">
+                <h2>Log In</h2>
+                
+                <form action="http://localhost:5678/api/users/login" method="post">
+                    <div class="email_2">
+                        <label for="email">E-mail</label>
+                        <input type="email" name="email" id="email">
+                    </div>
+                    <div class="password_2">
+                        <label for="password">Mot de passe</label>
+                        <input type="password" name="password" id="password">
+                    </div>
+                    <div class="submit_btn_container">
+                        <input id="submit_btn" type="submit" value="Se Connecter">
+                        <a href="#">Mot de passe oublié</a>
+                    </div>
+                </form>
+            </section>
+        </main>
+    <footer id="footer">
+		<nav>
+			<ul>
+				<li>Mentions Légales</li>
+			</ul>
+		</nav>
+	</footer>
 </body>
 </html>

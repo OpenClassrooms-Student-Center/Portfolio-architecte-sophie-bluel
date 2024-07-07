@@ -48,10 +48,13 @@ table {
 }
 /** end reset css**/
 body {
-	max-width: 1140px;
-	margin:auto;
+	width: 100%;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	gap: 3.7em;
 }
 header {
 	display: flex;
@@ -112,7 +115,8 @@ li:hover {
 }
 
 #introduction article {
-	flex: 1
+	flex: 1;
+	max-width: 400px;
 }
 #introduction h2 {
 	margin-bottom: 1em;
@@ -150,7 +154,7 @@ margin: auto;
 }
 #contact form {
 	text-align: left;
-	margin-top:30px;
+	margin-top: 20px;
 	display: flex;
 	flex-direction: column;
 }
@@ -160,6 +164,7 @@ margin: auto;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	box-sizing: border-box;
 }
 #contact label {
 	margin: 2em 0 1em 0;
@@ -186,3 +191,159 @@ footer nav ul {
 	margin: 2em
 }
 
+footer li {
+	font-family: 'Work Sans';
+	font-weight: 300;
+}
+
+/*index.html*/
+#footer {
+	width: 100%;
+	background-color: #FFFFFF;
+	margin: 0;
+}
+
+/* navigation */
+.insta_logo {
+	width: 50%;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: 4em;
+}
+
+/* Main block index*/
+
+.index_main {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 4em;
+	max-width: 1000px;
+	margin: auto;
+}
+
+/*filtres*/
+.filters {
+	display: flex;
+	justify-content: center;
+	gap: 1em;
+
+}
+
+.filter_btn {
+	box-sizing: border-box;
+	border-radius: 60px;
+	border-width: 1px;
+	border-color: #1D6154;	;
+	padding: .6em 1.2em;
+	color : #1D6154;
+	font-weight: 700;
+	font-family: 'Syne';
+}
+
+body, .filter_btn {
+	background-color: #FFFEF8;
+}
+
+.selected_filter_btn {
+	background-color: #1D6154;
+	color: #FFFFFF;
+}
+
+a {
+	text-decoration: none;
+}
+
+
+/*login.hmtl*/
+.main_login_container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+
+.main_login_container h2 {
+	font-family: 'Syne';
+}
+
+.login_container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 3em;
+}
+
+form, .email_2, .password_2 {
+	width: 100%;
+	max-width: 450px;
+	display: flex;
+	flex-direction: column;
+}
+
+form {
+	gap: 2em;
+	font-family: 'Work Sans';
+	font-weight: 500;
+	gap: 3em;
+}
+
+.email_2, .password_2 {
+	gap: .5em;
+	font-size: 1.2em;
+}
+
+#email, #password {
+	width: 100%;
+	box-shadow: 0px 4px 10px 0px #00000017;
+	border-color: transparent;
+	padding: 1.5em;
+	box-sizing: border-box;
+	width: 500px;
+}
+
+form .submit_btn_container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1em;
+}
+
+form #submit_btn {
+	padding: .6em 1.2em;
+	width: 180px;
+	border-color: transparent;
+}
+
+form a {
+	text-decoration: underline;
+	color: #3D3D3D;
+	font-family: 'Work Sans';
+	font-weight: 500;
+}
+
+header {
+	margin-left: 51.5px;
+	margin-right: 51.5px;
+}
+
+
+html {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#myModal {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	gap: 1em;
+	padding: 1em;
+	background: #000000;
+	color: #FFFFFF;
+	font-weight: 400;
+}
