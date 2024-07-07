@@ -3,9 +3,10 @@
 export const fetchWorks = async () =>{
     let response = await fetch(`http://localhost:5678/api/works`)
     let data = await response.json()
-
-    return data
+    
     console.log(data)
+    return data
+    
 }
 
 //create one work

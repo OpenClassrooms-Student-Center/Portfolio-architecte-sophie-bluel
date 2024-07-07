@@ -10,13 +10,13 @@ import {
 } from '../libs/works.js'
 
 
-let works = fetchWorks()
+let works = await fetchWorks()
 console.log(works)
 
 // initializing container
 let gallery = document.querySelector(".gallery")
 
-async function displayWorks() {
+function displayWorks() {
     if(works) {
         for (let i = 0; i < works.length; i++) {
         //creation of elements of DOM for gallery
@@ -36,7 +36,10 @@ async function displayWorks() {
         gallery.appendChild(figure)
     }
     console.log("Travaux récupérés avec succès")
+    console.log(works)
+
     }
 }
 displayWorks()
+console.log(works)
 

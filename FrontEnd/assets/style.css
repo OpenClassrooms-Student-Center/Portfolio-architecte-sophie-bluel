@@ -337,7 +337,9 @@ html {
 	align-items: center;
 }
 
-#myModal {
+
+/*Mode edit - après connection*/
+#edit_mode {
 	width: 100%;
 	display: flex;
 	justify-content: center;
