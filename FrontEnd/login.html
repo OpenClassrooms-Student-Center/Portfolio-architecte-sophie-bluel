@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sophie Bluel - login </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
+        rel="stylesheet">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="./assets/style.css">
+</head>
+
+<body class="login-body">
+    <header>
+        <div class="header-statut-deconnection">
+            <a href="index.html"><h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1></a>
+            <nav>
+                <ul>
+                    <a href="index.html/#contact">
+                        <li>projets</li>
+                    </a>
+                    <a href="index.html">
+                        <li>contact</li>
+                    </a>
+                    <a href="login.html" id="login">
+                        <li>login</li>
+                    </a>
+
+                    <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <form action="action_page.php" method="post">
+            <h2>Login</h2>
+
+            <div class="section-login">
+                <div class="label-champs">
+                    <label for="email" class="label-formulaire"><b>E-mail</b></label>
+                    <input type="text" name="email" required class="champs-formulaire">
+                </div>
+                <div class="formulaire-mdp">
+                    <label for="mdp" class="label-formulaire"><b>Mot de passe</b></label>
+                    <input type="password" name="mdp" required class="champs-formulaire">
+                </div>
+                <div class="connexion-oublie">
+                    <button type="submit" class="bouton-validation">Se connecter</button>
+                    <span id="lien-oublie"><a href="#">Mot de passe oublié</a></span>
+                </div>
+            </div>
+        </form>
+
+
+    </main>
+    <footer>
+
+        <footer>
+            <nav>
+                <ul>
+                    <a href="#">
+                        <li>Mentions Légales</li>
+                    </a>
+                </ul>
+            </nav>
+        </footer>
+    </footer>
+    <script src="Login.js"></script>
+</body>
+
+</html>
