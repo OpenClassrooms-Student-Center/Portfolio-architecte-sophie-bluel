@@ -126,7 +126,7 @@ function ModeEdition() {
   }
 }
 
-//Fonction du mode classique//
+//Fonction du mode de base//
 
 function ModeBase() {
   const divFiltreCategories = document.querySelector(".category-menu");
@@ -153,28 +153,28 @@ function genererWorks(ListeWorks) {
   for (let i = 0; i < ListeWorks.length; i++) {
     const figure = ListeWorks[i];
 
-    const worksElement = document.createElement('figure');
+    const ElementsTravaux = document.createElement('figure');
 
     const imageIdElement = document.createElement("p");
     imageIdElement.innerText = figure.id; 
-      worksElement.appendChild(imageIdElement);
+      ElementsTravaux.appendChild(imageIdElement);
 
     const imageElement = document.createElement('img');
     imageElement.src = figure.imageUrl;
-      worksElement.appendChild(imageElement);
+      ElementsTravaux.appendChild(imageElement);
 
     const titreElement = document.createElement('figcaption');
     titreElement.innerText = figure.title;
-      worksElement.appendChild(titreElement);
+      ElementsTravaux.appendChild(titreElement);
 
     const categorieIdElement = document.createElement("p");
     categorieIdElement.innerText = figure.categoryId;
-      worksElement.appendChild(categorieIdElement);
+      ElementsTravaux.appendChild(categorieIdElement);
 
 
-    //Ajout de l'attribut data-id avec la valeur de l'ID de l'image à "worksElement"//
+    //Ajout de l'attribut data-id avec la valeur de l'ID de l'image à "ElementsTravaux"//
 
-    worksElement.dataset.id = figure.id;
-    divGallerie.appendChild(worksElement);
+    ElementsTravaux.dataset.id = figure.id;
+    divGallerie.appendChild(ElementsTravaux);
   }
 }
