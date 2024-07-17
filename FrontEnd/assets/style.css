@@ -62,7 +62,7 @@ header {
 	margin: 50px 0
 }
 section {
-	margin: 50px 0
+	margin: 50px 0;
 }
 
 h1{
@@ -125,9 +125,15 @@ li:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
+
+#portfolio {
+	display: flex;
+    flex-direction: column;
+    gap: 4em;
+}
+
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
 }
 .gallery {
 	width: 100%;
@@ -236,7 +242,7 @@ footer li {
 .filter_btn {
 	box-sizing: border-box;
 	border-radius: 60px;
-	border-width: 1px;
+	border-width: 1.55px;
 	border-color: #1D6154;	;
 	padding: .6em 1.2em;
 	color : #1D6154;
@@ -253,10 +259,23 @@ body, .filter_btn {
 	color: #FFFFFF;
 }
 
-a {
-	text-decoration: none;
+.not_selected_btn {
+	background-color: #FFFEF8;
+	color: #1D6154;
 }
 
+a {
+	text-decoration: none;
+	color: #000000;
+}
+
+.out_category {
+	display: none;
+}
+
+.display {
+	display: block;
+}
 
 /*login.hmtl*/
 .main_login_container {
@@ -349,3 +368,30 @@ html {
 	color: #FFFFFF;
 	font-weight: 400;
 }
+
+.title {
+	display: flex;
+	gap: 2em;
+	align-items: center;
+}
+
+.title h2 {
+	padding-left: 5em;
+}
+
+.modif {
+	display: flex;
+	gap: .5em;
+}
+
+/*modales*/
+.modal_container {
+	display: none;
+	position: fixed;
+}
+
+.modal_header .fa-arrow-left {
+	display: none;
+}
+
+

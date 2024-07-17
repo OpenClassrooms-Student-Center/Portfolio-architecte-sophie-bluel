@@ -38,14 +38,15 @@
             <section class="login_container">
                 <h2>Log In</h2>
                 
-                <form action="http://localhost:5678/api/users/login" method="post">
+                <form action="http://localhost:5678/api/users/login" method="post" novalidate >
                     <div class="email_2">
                         <label for="email">E-mail</label>
-                        <input type="email" name="email" id="email">
+                        <input type="email" name="email" id="email" required>
+                        <!-- /*required => rends champs obligatoire et autofocus=> place le curseur automatiquement dans le champ au chargement de la page*/ -->
                     </div>
                     <div class="password_2">
                         <label for="password">Mot de passe</label>
-                        <input type="password" name="password" id="password">
+                        <input type="password" name="password" id="password" required>
                     </div>
                     <div class="submit_btn_container">
                         <input id="submit_btn" type="submit" value="Se Connecter">

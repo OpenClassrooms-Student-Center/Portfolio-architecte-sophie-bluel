@@ -1,6 +1,6 @@
 
 // fetch one work, returns tab of works
-export const fetchWorks = async () =>{
+export const fetchWork = async () =>{
     let response = await fetch(`http://localhost:5678/api/works`)
     let data = await response.json()
     
