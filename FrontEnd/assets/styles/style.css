@@ -1,0 +1,659 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+	display: block;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	line-height: 1;
+	background-color: #FFFEF8;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+ol,
+ul {
+	list-style: none;
+}
+
+blockquote,
+q {
+	quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+	content: "";
+	content: none;
+}
+
+.button {
+	background-color: transparent;
+	color: #1d6154;
+	font-family: "Syne";
+	font-weight: 700;
+	border: 1px solid #1d6154;
+	border-radius: 60px;
+	padding: 8px 10px;
+	min-width: 100px;
+	margin-right: 15px;
+}
+
+.button:hover {
+	background-color: #1d6154;
+	color: white;
+	transition: 0.2s;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/** end reset css**/
+body {
+	margin: auto;
+	font-family: "Work Sans";
+	font-size: 14px;
+}
+
+header {
+	max-width: 1140px;
+	display: flex;
+	justify-content: space-between;
+	margin: 50px auto;
+}
+
+section {
+	max-width: 1140px;
+	margin: 50px auto;
+}
+
+h1 {
+	display: flex;
+	flex-direction: column;
+	font-family: "Syne";
+	font-size: 22px;
+	font-weight: 800;
+	color: #b1663c;
+}
+
+h1>span {
+	font-family: "Work Sans";
+	font-size: 10px;
+	letter-spacing: 0.1em;
+}
+
+h2 {
+	font-family: "Syne";
+	font-weight: 700;
+	font-size: 30px;
+	color: #1d6154;
+}
+
+nav ul {
+	display: flex;
+	align-items: center;
+	list-style-type: none;
+}
+
+nav li {
+	padding: 0 10px;
+	font-size: 1.2em;
+}
+
+/* Pour redimensionner l'icone instagram */
+nav img {
+	height: 22px;
+}
+
+li:hover {
+	color: #b1663c;
+}
+
+li img:hover {
+	scale: 1.2;
+	transition: 0.2s ease-in-out;
+}
+
+#introduction {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	align-items: center;
+	margin: 100px auto;
+}
+
+#introduction figure {
+	flex: 1;
+
+
+}
+
+#introduction img {
+	display: block;
+	margin-left: 108px;
+	width: 80%;
+}
+
+#introduction article {
+	flex: 1;
+	margin-left: 50px;
+	margin-right: 80px;
+}
+
+#introduction h2 {
+	margin-bottom: 1em;
+}
+
+#introduction p {
+	color: #3D3D3D;
+	margin-bottom: 0.5em;
+	margin-right: 37px;
+	line-height: 1.2rem;
+}
+
+#portfolio {
+	padding-top: 40px;
+}
+
+#portfolio h2 {
+	margin: 0 auto;
+}
+
+#portfolio p {
+	display: none;
+}
+
+.category-menu {
+	text-align: center;
+	margin: 0 auto;
+	padding-top: 50px;
+}
+
+.gallery {
+	width: 81%;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-column-gap: 20px;
+	grid-row-gap: 20px;
+	margin: 50px auto 0;
+}
+
+.gallery img {
+	width: 100%;
+}
+
+.gallery figcaption {
+	color: #3D3D3D;
+	padding-top: 8px;
+}
+
+
+#contact {
+	/* Modification de la widht pour que celle ci soit équivalente à la maquette */
+	width: 33%;
+	margin: auto;
+}
+
+#contact>* {
+	text-align: center;
+}
+
+#contact form {
+	text-align: left;
+	margin-top: 30px;
+	display: flex;
+	flex-direction: column;
+}
+
+#contact input {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	outline: none;
+}
+
+#contact label {
+	margin: 2em 0 1em 0;
+}
+
+#contact textarea {
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	/* Ajout de cette propriété pour que l'utilisateur ne redimensionne pas le textarea */
+	resize: none;
+	outline: none;
+}
+
+input[type="submit"] {
+	font-family: "Syne";
+	font-weight: 700;
+	color: white;
+	background-color: #1d6154;
+	margin: 2em auto;
+	width: 180px;
+	max-height: 36px;
+	text-align: center;
+	border-radius: 60px;
+}
+
+#connexion {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 110px auto;
+}
+
+#connexion h2 {
+	text-align: center;
+	margin-bottom: 40px;
+}
+
+#connexion form {
+	display: flex;
+	flex-direction: column;
+	width: 380px;
+}
+
+#connexion p {
+	margin: 2em auto 1em;
+}
+
+#connexion input {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	outline: none;
+}
+
+#error-message {
+	color: red;
+}
+
+#connexion span {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+footer {
+	display: flex;
+	justify-content: end;
+	align-items: center;
+	background-color: white;
+	height: 60px;
+}
+
+footer nav ul {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	margin: 2em;
+	cursor: pointer;
+}
+
+/* ----- Styles pour le mode édition ----- */
+/* Partie bannière */
+.banner {
+	height: 60px;
+	background-color: black;
+	color: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 20px;
+}
+
+/* Partie mes projets 'modifier' */
+.my-project {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	gap: 15px;
+}
+
+.js-modal {
+	color: black;
+	font-family: 'Work Sans';
+	font-size: 14px;
+	font-weight: 400;
+}
+
+.js-modal i {
+	margin-right: 15px;
+}
+
+/* Partie modale */
+
+.modal {
+	position: fixed;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.7);
+}
+
+.modal-wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	position: relative;
+	overflow: auto;
+	width: 630px;
+	height: 688px;
+	max-width: calc(100vw - 20px);
+	padding: 20px;
+	max-height: calc(100vh - 20px);
+	background-color: #fff;
+	border-radius: 10px;
+}
+
+.modal-wrapper::before {
+	content: '';
+	position: absolute;
+	top: 560px;
+	left: 104px;
+	border: 1px solid #B3B3B3;
+	width: 420px;
+}
+
+.modal-header {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.js-modal-close {
+	display: flex;
+	justify-content: end;
+	background: none;
+	color: black;
+	border: none;
+	font-size: 22px;
+	padding: 0;
+	width: 100%;
+}
+
+.js-modal-back {
+	background: none;
+	color: black;
+	border: none;
+	font-size: 22px;
+	padding: 0;
+}
+
+.js-modal-close i,
+.js-modal-back i {
+	cursor: pointer;
+}
+
+.modal h2 {
+	margin: 0;
+	color: black;
+	font-family: "Work Sans";
+	font-weight: 400;
+}
+
+.btn-modal {
+	display: flex;
+	align-items: flex-end;
+	height: 100%;
+	padding: 20px;
+	width: 420px;
+	position: relative;
+}
+
+.btn-modal button {
+
+	margin: 0 auto;
+	width: 237px;
+	height: 36px;
+	border: none;
+	border-radius: 25px;
+	background-color: #1d6154;
+	color: white;
+	font-family: "Syne";
+}
+
+/* Ajoutez ce code CSS à votre fichier style.css */
+
+
+.galleryModal {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	justify-content: center;
+	align-items: center;
+	margin-top: 40px;
+	grid-row-gap: 30px;
+	grid-column-gap: 8px;
+}
+
+.modal-figure {
+	position: relative;
+}
+
+.modal-figure img {
+	width: 80px;
+	height: 103px;
+	/* Ajustez la taille des figures selon vos besoins */
+}
+
+.modal-figure figcaption {
+	display: none;
+}
+
+.modal-figure i {
+	cursor: pointer;
+	position: absolute;
+	top: 3px;
+	left: 60px;
+	width: 17px;
+	height: 17px;
+	background-color: black;
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
+.js-ajout-photo {
+	align-items: end;
+	margin-top: auto;
+	margin-bottom: 20px;
+	width: 237px;
+	height: 36px;
+	color: white;
+	background-color: #1d6154;
+	border: none;
+	border-radius: 25px;
+	cursor: pointer;
+}
+
+/* Vue modale 2 */
+
+
+.photo-container {
+	width: 420px;
+	height: 169px;
+	background-color: #E8F1F6;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-top: 40px;
+}
+
+.photo-container i {
+	color: #B9C5CC;
+	font-size: 69px;
+	margin: auto;
+}
+
+.photo-container button {
+	width: 173px;
+	height: 36px;
+	border: none;
+	border-radius: 25px;
+	color: #306685;
+	background-color: #CBD6DC;
+	position: relative;
+}
+
+form input[type="file"] {
+	position: absolute;
+	font-size: 20px;
+	left: 232px;
+	top: 215px;
+	opacity: 0;
+}
+
+.photo-container span {
+	font-size: 10px;
+	margin: auto;
+}
+
+.ajout {
+	padding-top: 30px;
+}
+
+.ajout input,
+select {
+	height: 51px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	outline: none;
+	width: 100%;
+	margin-top: 15px;
+}
+
+form input[type="submit"] {
+	margin-top: 100px;
+	margin-bottom: 30px;
+	width: 237px;
+	height: 36px;
+	display: flex;
+	border: none;
+	background-color: #A7A7A7;
+}
