@@ -14,7 +14,11 @@
 
 </head>
 <body>
-
+	<!-- banniere mode edit -->
+	<div id="edit_mode">
+		<i class="fa-regular fa-pen-to-square"></i>
+		<p>Mode édition</p>
+	</div>
 	<div class="container">
 		<header>
 			<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
@@ -51,11 +55,13 @@
 			</section>
 			<section id="portfolio">
 				<h2>Mes Projets</h2>
+				<!-- <div class="title">
+					<h2>Mes Projets</h2>
+				<div class="modif">
+					<i id="modif" class="fa-regular fa-pen-to-square"></i>
+					<p>modifier</p> -->
 				<div class="filters">
-					<!-- <button class="filter_btn all">Tous</button>
-					<button class="filter_btn objects">Objets</button>
-					<button class="filter_btn appt">Appartements</button>
-					<button class="filter_btn h_restau">Hotels & Restaurants</button> -->
+
 				</div>
 				<div class="gallery">
 					
@@ -76,6 +82,54 @@
 			</section>
 		</main>
 	</div>
+	<aside id="my_modal" class="modal_container">
+		<div class="modal_content">
+			<nav class="modal_header">
+				<i class="fa-solid fa-arrow-left"></i>
+				<i class="fa-solid fa-xmark"></i>
+			</nav>
+			<div class="delete_modal">
+				<h2>Galerie photo</h2>
+				<div class="img_container">
+					<figure class="wappred_img">
+						<img src="assets/images/appartement-paris-v.png" alt="">
+					</figure>
+					<figure class="wappred_img">
+						<img src="assets/images/appartement-paris-v.png" alt="">
+					</figure>
+					<figure class="wappred_img">
+						<img src="assets/images/appartement-paris-v.png" alt="">
+					</figure>
+					<figure class="wappred_img">
+						<img src="assets/images/appartement-paris-v.png" alt="">
+					</figure>
+					<figure class="wappred_img">
+						<img src="assets/images/appartement-paris-v.png" alt="">
+					</figure>
+					<figure class="wappred_img">
+						<img src="assets/images/appartement-paris-v.png" alt="">
+					</figure>
+					<figure class="wappred_img">
+						<img src="assets/images/appartement-paris-v.png" alt="">
+					</figure>
+					<figure class="wappred_img">
+						<img src="assets/images/appartement-paris-v.png" alt="">
+					</figure>
+					<figure class="wappred_img">
+						<img src="assets/images/appartement-paris-v.png" alt="">
+					</figure>
+					<figure class="wappred_img">
+						<img src="assets/images/appartement-paris-v.png" alt="">
+					</figure>
+					<figure class="wappred_img">
+						<img src="assets/images/appartement-paris-v.png" alt="">
+					</figure>
+				</div>
+				<button>Ajouter une photo</button>
+			</div>
+		</div>
+		<div id="add_modal"></div>
+	</aside>
 
 	<footer id="footer">
 		<nav>

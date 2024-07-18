@@ -254,14 +254,9 @@ body, .filter_btn {
 	background-color: #FFFEF8;
 }
 
-.selected_filter_btn {
+.selected {
 	background-color: #1D6154;
 	color: #FFFFFF;
-}
-
-.not_selected_btn {
-	background-color: #FFFEF8;
-	color: #1D6154;
 }
 
 a {
@@ -391,15 +386,23 @@ html {
 /*modales*/
 .modal_container {
 	/* display: none; */
-	position: fixed;
-	display: flex;
-	flex-direction: column;
-	width: 700px;
-	height: auto;
+	/* position: fixed; */
+	display: block;
+	/* flex-direction: column; */
+	max-width: 500px;
+	height: 200px;
 }
 
 .modal_header .fa-arrow-left {
 	display: none;
 }
 
+.img_container {
+	box-sizing: border-box;
+	max-width: 200px;
+}
 
+.img_container figure {
+	display: block;
+	width: 10%;
+}

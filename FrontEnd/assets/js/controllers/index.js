@@ -22,11 +22,11 @@ const gallery = document.querySelector('.gallery');
 
 
 // une fonction qui crée un élément HTML pour un travail
-function createWorkElement(work){
+function createWorkElement(work) {
     let figure = document.createElement('figure');
     figure.classList.add('work');
     let img = document.createElement('img');
-    img.src = work.image;
+    img.src = work.imageUrl;
     img.alt = work.title;
     figure.appendChild(img);
     let figcaption = document.createElement('figcaption');
@@ -37,7 +37,7 @@ function createWorkElement(work){
 }
 
 // une fonction qui affiche les travaux
-function displayWorks(works){
+function displayWorks(works) {
     gallery.innerHTML = '';
 
     works.forEach(work => {
@@ -47,7 +47,7 @@ function displayWorks(works){
 }
 
 // une fonction qui n'est appellée qu'une seule fois, au chargement de la page
-async function initWorks(){
+async function initWorks() {
     document.works = await fetchWork();
     displayWorks(document.works);
 }
@@ -63,38 +63,34 @@ const filters = document.querySelector('.filters');
 
 
 // une fonction qui crée un élément HTML pour une catégorie
-function createCategoryElement(category){
+function createCategoryElement(category) {
     let button = document.createElement('button');
     button.textContent = category.name;
     button.classList.add('filter_btn');
     button.addEventListener('click', () => {
-        // si la catégorie est 'Tout', on affiche tous les travaux
-        if(category.id === 0){
-            displayWorks(document.works);
-            button.classList.add('selected');
-            return;
-        }
-
-        // sinon, on affiche les travaux de la catégorie
-        displayWorks(
-            document.works.filter_btn(work => work.categoryId === category.id)
-        );
-
         // on retire la classe 'selected' de tous les boutons
         document.querySelectorAll('.filter_btn').forEach(button => {
             button.classList.remove('selected');
         });
-
-        
         // on ajoute la classe 'selected' au bouton cliqué
         button.classList.add('selected');
+        // si la catégorie est 'Tout', on affiche tous les travaux
+        if (category.id === 0) {
+            displayWorks(document.works);
+        } else {
+            // sinon, on affiche les travaux de la catégorie
+            displayWorks(document.works.filter(work => work.categoryId === category.id)
+            );
+        }
+
+
     });
 
     return button
 }
 
 // une fonction qui affiche les catégories
-function createCategoriesButtons(){
+function createCategoriesButtons() {
     filters.innerHTML = '';
 
     // on crée un bouton pour chaque catégorie
@@ -105,9 +101,9 @@ function createCategoriesButtons(){
 }
 
 // une fonction qui n'est appellée qu'une seule fois, au chargement de la page
-async function initCategories(){
+async function initCategories() {
     document.categories = [
-        {name: 'Tout', id: 0},
+        { name: 'Tout', id: 0 },
         ...await fetchCategories()
     ]
 
@@ -127,7 +123,7 @@ async function initCategories(){
 
 
 
-function init(){
+function init() {
     initWorks();
     initCategories();
 }
