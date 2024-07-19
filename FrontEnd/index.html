@@ -47,23 +47,22 @@
     <section id="portfolio">
 <!-- Créé en JS  -->
 
-<h2 class="my-project">Mes Projets</h2>
+<h2 class="Projets">Mes Projets</h2>
 
 <!-- Modale créée en JS -->
-
-      <aside id="modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titlemodal"
+<aside id="modal" class="modal" aria-hidden="true" aria-labelledby="titlemodal"
         style="display:none;">
-        <div class="modal-wrapper js-modal-stop">
+        <div class="modal-wrapper">
           <div class="modal-header">
             <button class="js-modal-back" style="display:none;"><i class="fa-solid fa-arrow-left"></i></button>
             <button class="js-modal-close"><i class="fa-solid fa-xmark"></i></button>
           </div>
           <h2 id="titlemodal">Galerie photo</h2>
-          <div class="js-modal-stop galleryModal modal1"></div>
+          <div class="galleryModal modal1"></div>
           <button class="js-ajout-photo">Ajouter une photo</button>
 
 
-          <div class="js-modal-stop modal2">
+          <div class="modal2">
 
 
             <form id="photoForm" enctype="multipart/form-data" method="post" name="fileInfo">
@@ -80,7 +79,6 @@
               <div class="ajout">
                 <label for="categorie" class="ajout-categorie">Catégorie</label>
                 <select name="categorie" id="categorie" class="ajout-categorie">
-                  <option value=""></option>
                   <option value="Objets">Objets</option>
                   <option value="Appartements">Appartements</option>
                   <option value="Hotels & restaurants">Hotels & restaurants</option>
@@ -93,7 +91,6 @@
           </div>
         </div>
       </aside>
-
 
       <div class="category-menu">
 <!-- Créé par JS -->
