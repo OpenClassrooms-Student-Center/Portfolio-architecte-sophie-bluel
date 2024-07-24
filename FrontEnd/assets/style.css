@@ -135,7 +135,7 @@ li:hover {
 #portfolio h2 {
 	text-align: center;
 }
-.gallery, .img_container {
+.gallery {
 	width: 100%;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
@@ -264,14 +264,6 @@ a {
 	color: #000000;
 }
 
-.out_category {
-	display: none;
-}
-
-.display {
-	display: block;
-}
-
 /*login.hmtl*/
 .main_login_container {
 	display: flex;
@@ -353,7 +345,8 @@ html {
 
 
 /*Mode edit - après connection*/
-#edit_mode {
+
+.edit_banner {
 	width: 100%;
 	display: flex;
 	justify-content: center;
@@ -362,6 +355,7 @@ html {
 	background: #000000;
 	color: #FFFFFF;
 	font-weight: 400;
+	display: none;
 }
 
 .title {
@@ -379,30 +373,227 @@ html {
 	gap: .5em;
 	cursor: pointer;
 }
- .modif:hover {
+
+.modif:hover {
 	color:#B1663C;
 }
 
 /*modales*/
 .modal_container {
-	/* display: none; */
-	/* position: fixed; */
-	display: block;
-	/* flex-direction: column; */
-	max-width: 500px;
-	height: 200px;
-}
-
-.modal_header .fa-arrow-left {
+	width: 100%;
+	height: 100%;
 	display: none;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	bottom: 28em;
+	background: #0000004D;
 }
 
-.img_container {
-	box-sizing: border-box;
-	max-width: 200px;
+.modal {
+	background: #FFFFFF;
+	padding: 2em 5em;
+	gap: 1.5em;
+}
+
+.delete_header {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	gap: 35em;
+
+}
+
+
+/*delete modal*/
+#modal1 {
+	/* display: none; */
+	display: flex;
+	/* max-width: 800px; */
+}
+
+/* #delete_modal {
+
+} */
+
+.add_header {
+	display: flex;
+	justify-content: end;
+	width: 100%;
+}
+
+.delete_content {
+	gap: 3em;
+    width: 550px;
+    height: 750px;
+	margin: 0 3em;
+}
+
+.delete_content .img_container {
+
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: start;
+	gap: 1em;
+	column-gap: 1em;
+    height: 600px;
 }
 
 .img_container figure {
-	display: block;
-	width: 10%;
+	width: 17%;
+}
+
+.img_container figure i {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 2.5em;
+    left: 5.5em;
+    color: #FFFFFF;
+    border-radius: 2px;
+    border: 1px solid #000000;
+    background: #000000;
+    padding: .3em .3em;
+    font-size: .8em;
+    width: 1em;
+}
+
+.wrapped_img {
+	width: 100%;
+}
+
+.delete_content button {
+	border-radius: 60px;
+	background: #1D6154;
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 1.2em;
+	color: #FFFFFF;
+	padding: .6em 3.3em;
+	border-color: transparent;
+}
+
+/*****add modal************/
+.delete_header i {
+	cursor: pointer;
+}
+
+.fa-arrow-left {
+	font-size: 1.7em;
+	margin-left: -2em;
+}
+
+.fa-xmark {
+	margin-right: -2em;
+	font-size: 1.5em;
+}
+
+.add_content {
+	gap: 3em;
+	margin: 2em 3em;
+}
+
+.add_content, .add_content form, .add_container, .modal, .delete_content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+}
+
+#modal2 h2, .add_container, .add_btn {
+	font-family: 'Work Sans';
+}
+
+#modal2 h2 {
+	color: #000000;
+	font-weight: 400;
+	font-size: 2em;
+}
+.add_container {
+	background: #E8F1F6;
+	padding: 2em 8em;
+	gap: .5em;
+
+}
+
+.add_container i {
+	font-size: 5em;
+	color: #B9C5CC;
+
+}
+
+.add_btn {
+	border-radius: 50px;
+	padding: .5em 2.5em;
+	cursor: pointer;
+	color: #306685;
+	background: #CBD6DC;
+	border-color: transparent;
+	text-wrap: nowrap;
+	font-weight: 500;
+	font-size: 1.1em;
+}
+
+.add_btn input {
+	position: absolute;
+	right: 55em;
+	opacity: 0;
+}
+
+.add_container p {
+	font-size: .7em;
+	font-weight: 400;
+}
+
+/******titre + catégorie********/
+.field {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 1em;
+	font-size: 1.2em;
+}
+
+.field input, .field select {
+	width: 100%;
+	box-shadow: 0px 4px 14px 0px #00000017;
+	border-color: transparent;
+	padding: 1.5em 0;
+}
+
+.line {
+	width: 100%;
+	border: 1px solid #B3B3B3;	
+}
+
+.modal2_submit_btn {
+	display: flex;
+	flex-direction: column;
+}
+
+.modal2_submit_btn button, #submit {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	color: #FFFFFF;
+	background: #A7A7A7;
+	font-family: 'Syne';
+	font-weight: 700;
+	border-radius: 60px;
+	border-color: transparent;
+	padding: .5em 7em;
+}
+
+#submit {
+	position: relative;
+	bottom: 3em;
+	opacity: 0;
+}
+
+.fa-trash-can, button, .fa-xmark {
+	cursor: pointer;
 }

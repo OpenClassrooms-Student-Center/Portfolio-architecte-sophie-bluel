@@ -15,7 +15,7 @@
 </head>
 <body>
 	<!-- banniere mode edit -->
-	<div id="edit_mode">
+	<div class="edit_banner">
 		<i class="fa-regular fa-pen-to-square"></i>
 		<p>Mode édition</p>
 	</div>
@@ -31,7 +31,7 @@
 						<a href="#contact">contact</a>
 					</li>
 					<li>
-						<a href="login.html#login_page">login</a>
+						<a class="login" href="login.html#login_page">login</a>
 					</li>
 					<li>
 						<a class="insta_logo_container" href="#">
@@ -54,12 +54,13 @@
 				</article>
 			</section>
 			<section id="portfolio">
-				<h2>Mes Projets</h2>
-				<!-- <div class="title">
+				<!-- <div class="titles"> -->
 					<h2>Mes Projets</h2>
-				<div class="modif">
-					<i id="modif" class="fa-regular fa-pen-to-square"></i>
-					<p>modifier</p> -->
+				<!-- <a class="modif">
+					<i id="modifIcon" class="fa-regular fa-pen-to-square"></i>
+					<p>modifier</p>
+				</div> -->
+				<!-- </div> -->
 				<div class="filters">
 
 				</div>
@@ -70,7 +71,7 @@
 			<section id="contact">
 				<h2>Contact</h2>
 				<p>Vous avez un projet ? Discutons-en !</p>
-				<form action="#" method="post">
+				<form action="http://localhost:5678/api/users/login" method="post">
 					<label for="name">Nom</label>
 					<input type="text" name="name" id="name">
 					<label for="email">Email</label>
@@ -82,53 +83,106 @@
 			</section>
 		</main>
 	</div>
-	<aside id="my_modal" class="modal_container">
-		<div class="modal_content">
-			<nav class="modal_header">
-				<i class="fa-solid fa-arrow-left"></i>
+	<aside id="modal1" class="modal_container">
+		<div id="delete_modal" class="modal">
+			<nav class="add_header">
 				<i class="fa-solid fa-xmark"></i>
 			</nav>
-			<div class="delete_modal">
+			<div class="delete_content">
 				<h2>Galerie photo</h2>
 				<div class="img_container">
-					<figure class="wappred_img">
-						<img src="assets/images/appartement-paris-v.png" alt="">
+					<figure>
+						<i class="fa-solid fa-trash-can"></i>
+						<img class="wrapped_img" src="assets/images/appartement-paris-v.png" alt="">
 					</figure>
-					<figure class="wappred_img">
-						<img src="assets/images/appartement-paris-v.png" alt="">
+					<figure>
+						<i class="fa-solid fa-trash-can"></i>
+						<img class="wrapped_img" src="assets/images/appartement-paris-v.png" alt="">
 					</figure>
-					<figure class="wappred_img">
-						<img src="assets/images/appartement-paris-v.png" alt="">
+					<figure>
+						<i class="fa-solid fa-trash-can"></i>
+						<img class="wrapped_img" src="assets/images/appartement-paris-v.png" alt="">
 					</figure>
-					<figure class="wappred_img">
-						<img src="assets/images/appartement-paris-v.png" alt="">
+					<figure>
+						<i class="fa-solid fa-trash-can"></i>
+						<img class="wrapped_img" src="assets/images/appartement-paris-v.png" alt="">
 					</figure>
-					<figure class="wappred_img">
-						<img src="assets/images/appartement-paris-v.png" alt="">
+					<figure>
+						<i class="fa-solid fa-trash-can"></i>
+						<img class="wrapped_img" src="assets/images/appartement-paris-v.png" alt="">
 					</figure>
-					<figure class="wappred_img">
-						<img src="assets/images/appartement-paris-v.png" alt="">
+					<figure>
+						<i class="fa-solid fa-trash-can"></i>
+						<img class="wrapped_img" src="assets/images/appartement-paris-v.png" alt="">
 					</figure>
-					<figure class="wappred_img">
-						<img src="assets/images/appartement-paris-v.png" alt="">
+					<figure>
+						<i class="fa-solid fa-trash-can"></i>
+						<img class="wrapped_img" src="assets/images/appartement-paris-v.png" alt="">
 					</figure>
-					<figure class="wappred_img">
-						<img src="assets/images/appartement-paris-v.png" alt="">
+					<figure>
+						<i class="fa-solid fa-trash-can"></i>
+						<img class="wrapped_img" src="assets/images/appartement-paris-v.png" alt="">
 					</figure>
-					<figure class="wappred_img">
-						<img src="assets/images/appartement-paris-v.png" alt="">
+					<figure>
+						<i class="fa-solid fa-trash-can"></i>
+						<img class="wrapped_img" src="assets/images/appartement-paris-v.png" alt="">
 					</figure>
-					<figure class="wappred_img">
-						<img src="assets/images/appartement-paris-v.png" alt="">
+					<figure>
+						<i class="fa-solid fa-trash-can"></i>
+						<img class="wrapped_img" src="assets/images/appartement-paris-v.png" alt="">
 					</figure>
-					<figure class="wappred_img">
-						<img src="assets/images/appartement-paris-v.png" alt="">
+					<figure>
+						<i class="fa-solid fa-trash-can"></i>
+						<img class="wrapped_img" src="assets/images/appartement-paris-v.png" alt="">
 					</figure>
 				</div>
+				<div class="line"></div>
 				<button>Ajouter une photo</button>
 			</div>
 		</div>
-		<div id="add_modal"></div>
+	</aside>
+	<aside id="modal2" class="modal_container">
+		<div id="add_modal" class="modal">
+			<nav class="delete_header">
+				<i class="fa-solid fa-arrow-left"></i>
+				<i class="fa-solid fa-xmark"></i>
+			</nav>
+			<div class="add_content">
+				<h2>Ajout photo</h2>
+				<form action="http://localhost:5678/api/works" method="post">
+					<fieldset class="add_container">
+						<i class="fa-regular fa-image"></i>
+						<button class="add_btn">
+							+ Ajouter photo
+							<input type="file" id="file" name="file" accept="image/png, image/jpeg" placeholder="+ Ajouter photo"/>
+						</button>
+						<p>jpg, png : 4mo max</p>
+					</fieldset>
+					<fieldset class="field">
+						<label for="title">Titre</label>
+						<input type="text" id="title" name="title">
+					</fieldset>
+					<fieldset class="field">
+						<label for="category">Catégorie</label>
+						<select name="category" id="category">
+							<option value="0"></option>
+							<option value="1">Objets</option>
+							<option value="2">Appartements</option>
+							<option value="3">Hotels & restaurants</option>
+						</select>
+					</fieldset>
+					<div class="line"></div>
+					<fieldset class="modal2_submit_btn">
+						<button >
+							Valider
+							
+						</button>
+						<input type="submit" name="submit" id="submit">
+					</fieldset>
+					
+				</form>
+			</div>
+		</div>
 	</aside>
 
 	<footer id="footer">
