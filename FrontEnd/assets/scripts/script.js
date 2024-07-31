@@ -62,9 +62,9 @@ function addListenerFilter(ListeWorks) {
   for (let i = 0; i < listButton.length; i++) { 
     const BoutonActuel = listButton[i];
     BoutonActuel.addEventListener('click', (event) => {
-      const categoryId = parseInt(event.target.dataset.id, 36);
-      // "ListeWorks" récupère que les œuvres ayant "categoryId" égal à l’ID de la catégorie sélectionnée.
-      const ListeWorksFilter = ListeWorks.filter(work => work.categoryId === categoryId);
+      const IDCategorie = parseInt(event.target.dataset.id, 36);
+      // "ListeWorks" récupère que les œuvres ayant "IDCategorie" égal à l’ID de la catégorie sélectionnée.
+      const ListeWorksFilter = ListeWorks.filter(work => work.IDCategorie === IDCategorie);
       genererWorks(ListeWorksFilter); // Affiche les photos filtrées
     });
   }
@@ -166,7 +166,7 @@ function genererWorks(ListeWorks) {
       ElementsTravaux.appendChild(titreElement);
 
     const categorieIdElement = document.createElement("p");
-    categorieIdElement.innerText = figure.categoryId;
+    categorieIdElement.innerText = figure.IDCategorie;
       ElementsTravaux.appendChild(categorieIdElement);
 
 
@@ -214,7 +214,6 @@ function Modal1() {
         figcaption.style.display = 'none';
       }
 
-      //Delete icon//
       const deleteIcon = document.createElement('i');
       deleteIcon.classList.add('fa', 'fa-trash', 'delete-icon');
       figure.appendChild(deleteIcon);
@@ -239,8 +238,8 @@ function Modal1() {
                 },
               });
               if (response.ok) {
+                figure.remove();
 
-                figure.innerHTML =""; 
                 // Pourquoi fonctionne pas?
                 alert('Suppression réussie !');
               } else {
@@ -250,7 +249,6 @@ function Modal1() {
             } catch (error) {
               alert('Erreur lors de la suppression du travail :', error);
             }
-            fermermodal();
           }
         }
       });
@@ -332,9 +330,9 @@ if (Validerphoto) {
     const file = fileInput.files[0]; 
     const title = titreinput.value; 
     const NomCategorie = SelectionCategorie.value; 
-    const categoryId = MappingCategorie[NomCategorie];
+    const IDCategorie = MappingCategorie[NomCategorie];
 
-    if (file && title && categoryId) {
+    if (file && title && IDCategorie) {
       Validerphoto.style.background = "#1d6154"; 
       Validerphoto.style.cursor = "pointer";
     } else {
@@ -355,10 +353,10 @@ Validerphoto.addEventListener('click', async function (event) {
   const title = document.getElementById('titre').value;
   const SelectionCategorie = document.getElementById('categorie');
   const NomCategorie = SelectionCategorie.value;
-  const categoryId = MappingCategorie[NomCategorie];
+  const IDCategorie = MappingCategorie[NomCategorie];
 
 
-  if (!file || !title || !categoryId) {
+  if (!file || !title || !IDCategorie) {
     alert("Veuillez remplir tous les champs obligatoires.");
     return;
   }
@@ -366,7 +364,7 @@ Validerphoto.addEventListener('click', async function (event) {
   const formulaire = new FormData();
   formulaire.append("image", file); 
   formulaire.append("title", title);
-  formulaire.append("category", categoryId);
+  formulaire.append("category", IDCategorie);
 
   try {
     const token = localStorage.getItem("TokenIdentification");
@@ -401,6 +399,7 @@ function fermermodal() {
   const modal = document.querySelector("#modal");
   modal.style.display = "none";
   resetModal();
+  location.reload()
 }
 
 function UtiliFermerModale(modal) {
