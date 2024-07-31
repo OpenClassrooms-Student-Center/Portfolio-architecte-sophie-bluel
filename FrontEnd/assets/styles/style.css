@@ -1,89 +1,18 @@
-/* http://meyerweb.com/eric/tools/css/reset/
-   v2.0 | 20110126
-   License: none (public domain)
-*/
+/* Template empty CSS */
 
-html,
-body,
-div,
-span,
-applet,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-b,
-u,
-i,
-center,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-embed,
-figure,
-figcaption,
-footer,
-header,
-hgroup,
-menu,
-nav,
-output,
-ruby,
-section,
-summary,
-time,
-mark,
-audio,
-video {
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -91,28 +20,37 @@ video {
 	font: inherit;
 	vertical-align: baseline;
 }
-
 /* HTML5 display-role reset for older browsers */
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* Fin template */
 
 * {
 	box-sizing: border-box;
 }
 
 body {
-	line-height: 1;
 	background-color: #FFFEF8;
 }
 
@@ -121,13 +59,11 @@ a {
 	color: inherit;
 }
 
-ol,
-ul {
+ol, ul {
 	list-style: none;
 }
 
-blockquote,
-q {
+blockquote, q {
 	quotes: none;
 }
 
@@ -162,7 +98,6 @@ table {
 	border-spacing: 0;
 }
 
-/** end reset css**/
 body {
 	margin: auto;
 	font-family: "Work Sans";
@@ -190,7 +125,7 @@ h1 {
 	color: #b1663c;
 }
 
-h1>span {
+h1 > span {
 	font-family: "Work Sans";
 	font-size: 10px;
 	letter-spacing: 0.1em;
@@ -214,7 +149,8 @@ nav li {
 	font-size: 1.2em;
 }
 
-/* Pour redimensionner l'icone instagram */
+/*Image Insta*/
+
 nav img {
 	height: 22px;
 }
@@ -237,8 +173,6 @@ li img:hover {
 
 #introduction figure {
 	flex: 1;
-
-
 }
 
 #introduction img {
@@ -270,6 +204,7 @@ li img:hover {
 
 #portfolio h2 {
 	margin: 0 auto;
+	justify-content: center;
 }
 
 #portfolio p {
@@ -302,7 +237,6 @@ li img:hover {
 
 
 #contact {
-	/* Modification de la widht pour que celle ci soit équivalente à la maquette */
 	width: 33%;
 	margin: auto;
 }
@@ -419,7 +353,7 @@ footer nav ul {
 }
 
 /* Partie mes projets 'modifier' */
-.my-project {
+.Projets {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
@@ -523,17 +457,6 @@ footer nav ul {
 	position: relative;
 }
 
-.btn-modal button {
-
-	margin: 0 auto;
-	width: 237px;
-	height: 36px;
-	border: none;
-	border-radius: 25px;
-	background-color: #1d6154;
-	color: white;
-	font-family: "Syne";
-}
 
 /* Ajoutez ce code CSS à votre fichier style.css */
 
@@ -548,21 +471,21 @@ footer nav ul {
 	grid-column-gap: 8px;
 }
 
-.modal-figure {
+.FigureModale {
 	position: relative;
 }
 
-.modal-figure img {
+.FigureModale img {
 	width: 80px;
 	height: 103px;
 	/* Ajustez la taille des figures selon vos besoins */
 }
 
-.modal-figure figcaption {
+.FigureModale figcaption {
 	display: none;
 }
 
-.modal-figure i {
+.FigureModale i {
 	cursor: pointer;
 	position: absolute;
 	top: 3px;
@@ -578,22 +501,27 @@ footer nav ul {
 
 
 .js-ajout-photo {
-	align-items: end;
-	margin-top: auto;
+	margin-top: 20px;
 	margin-bottom: 20px;
 	width: 237px;
 	height: 36px;
 	color: white;
 	background-color: #1d6154;
-	border: none;
+	border: 1px solid;
 	border-radius: 25px;
 	cursor: pointer;
+	font-family: "Syne";
+	font-weight: 700;
+	padding: 8px 10px;
+	font-family: "Syne";
+	font-weight: 700;
+	padding: 8px 10px;
 }
 
 /* Vue modale 2 */
 
 
-.photo-container {
+#conteneurphoto {
 	width: 420px;
 	height: 169px;
 	background-color: #E8F1F6;
@@ -604,13 +532,13 @@ footer nav ul {
 	margin-top: 40px;
 }
 
-.photo-container i {
+#conteneurphoto i {
 	color: #B9C5CC;
 	font-size: 69px;
 	margin: auto;
 }
 
-.photo-container button {
+#conteneurphoto button {
 	width: 173px;
 	height: 36px;
 	border: none;
@@ -628,7 +556,7 @@ form input[type="file"] {
 	opacity: 0;
 }
 
-.photo-container span {
+#conteneurphoto span {
 	font-size: 10px;
 	margin: auto;
 }
@@ -637,8 +565,7 @@ form input[type="file"] {
 	padding-top: 30px;
 }
 
-.ajout input,
-select {
+.ajout input, select {
 	height: 51px;
 	font-size: 1.2em;
 	border: none;
