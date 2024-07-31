@@ -193,7 +193,7 @@ function ModaleOuverture() {
     modal2.style.display = 'none';
   }
 
-  UtiliFemerModale(modal); // Appelle la fonction pour fermer la modal en cliquant à l'extérieur ou sur le bouton "close"
+  UtiliFermerModale(modal); // Appelle la fonction pour fermer la modal en cliquant à l'extérieur ou sur le bouton "close"
   Modal1(); // Appelle la fonction pour dupliquer la galerie dans la modal
 }
 
@@ -250,7 +250,7 @@ function Modal1() {
             } catch (error) {
               alert('Erreur lors de la suppression du travail :', error);
             }
-            closeModal();
+            fermermodal();
           }
         }
       });
@@ -273,14 +273,14 @@ function modal2() {
   const modal1 = modal.querySelector('.modal1');
   const modal2 = modal.querySelector('.modal2');
   const backButton = document.querySelector('.js-modal-back');
-  const titleModal = document.querySelector('#titlemodal');
+  const titremodal = document.querySelector('#titremodal');
   const BoutonAjoutPhoto = document.querySelector('.js-ajout-photo');
 
   modal1.style.display = "none";
   modal2.style.display = "block";
   backButton.style.display = "block";
   BoutonAjoutPhoto.style.display = "none";
-  titleModal.textContent = "Ajout photo";
+  titremodal.textContent = "Ajout photo";
 
   backButton.addEventListener('click', function () {
     resetModal(); // Appelle la fonction pour réinitialiser la modal
@@ -317,49 +317,45 @@ fileInput.addEventListener('change', function () {
 
 // Ce bout de code sert à valider un formulaire avant de permettre à l’utilisateur de soumettre ses données.
 
-const submitButton = document.querySelector('.valider-photo');
-const titleInput = document.getElementById('titre');
-const categorySelect = document.getElementById('categorie');
+const Validerphoto = document.querySelector('.valider-photo');
+const titreinput = document.getElementById('titre');
+const SelectionCategorie = document.getElementById('categorie');
 // Association des valeurs string avec l'id corespondant
-const categoriesMap = {
+const MappingCategorie = {
   "Objets": 1,
   "Appartements": 2,
-  "Hotels & restaurants": 3
+  "Hôtels & restaurants": 3
 };
 
-if (submitButton) {
-  function validateForm() { // Cette fonction est définie à l’intérieur du bloc if (submitButton), ce qui signifie qu’elle est attachée à l’événement de clic 
-    const file = fileInput.files[0]; // Récupère le fichier sélectionné
-    const title = titleInput.value; // Récupère la valeur saisie dans le champ de titre
-    const categoryName = categorySelect.value; // Récupère la valeur sélectionnée dans le sélecteur de catégorie
-    const categoryId = categoriesMap[categoryName]; // Obtient l'ID de la catégorie à partir de categoriesMap
+if (Validerphoto) {
+  function validerformulaire() { 
+    const file = fileInput.files[0]; 
+    const title = titreinput.value; 
+    const NomCategorie = SelectionCategorie.value; 
+    const categoryId = MappingCategorie[NomCategorie];
 
-    if (file && title && categoryId) { // Vérifie si tout les champs sont remplis
-      submitButton.style.background = "#1d6154"; submitButton.style.cursor = "pointer";
-       // Si tous les champs requis sont remplis, change la couleur de fond du bouton en vert
+    if (file && title && categoryId) {
+      Validerphoto.style.background = "#1d6154"; 
+      Validerphoto.style.cursor = "pointer";
     } else {
-      submitButton.style.background = ""; // Réinitialise la couleur grise du bouton si le formulaire n'est pas rempli
+      Validerphoto.style.background = "";
     }
   }
 }
 
-// Ce code gère l’ajout d’événements et la gestion de l’envoi de formulaire pour ajouter un nouveau travail via une requête POST à l'API
 
-// Ajout des écouteurs d'événements pour les champs du formulaire
-fileInput.addEventListener('change', validateForm); // Lorsque le fichier sélectionné change, appelle la fonction validateForm
-titleInput.addEventListener('input', validateForm); // À chaque modification dans le champ de titre, appelle la fonction validateForm
-categorySelect.addEventListener('change', validateForm); // Lorsque la sélection de catégorie change, appelle la fonction validateForm
+fileInput.addEventListener('change', validerformulaire);
+titreinput.addEventListener('input', validerformulaire);
+SelectionCategorie.addEventListener('change', validerformulaire);
 
-// Écouteur d'événement sur le bouton submit du formulaire
-submitButton.addEventListener('click', async function (event) {
+Validerphoto.addEventListener('click', async function (event) {
   event.preventDefault();
 
-  // Récupération des valeurs des champs du formulaire
-  const file = fileInput.files[0]; // Premier fichier sélectionné dans le champ de fichier
-  const title = document.getElementById('titre').value; // Valeur du champ de titre
-  const categorySelect = document.getElementById('categorie'); // Sélection de l'élément de catégorie
-  const categoryName = categorySelect.value; // Valeur sélectionnée dans la liste déroulante des catégories
-  const categoryId = categoriesMap[categoryName]; // ID correspondant à la catégorie sélectionnée
+  const file = fileInput.files[0];
+  const title = document.getElementById('titre').value;
+  const SelectionCategorie = document.getElementById('categorie');
+  const NomCategorie = SelectionCategorie.value;
+  const categoryId = MappingCategorie[NomCategorie];
 
 
   if (!file || !title || !categoryId) {
@@ -388,8 +384,7 @@ submitButton.addEventListener('click', async function (event) {
     });
 
     if (response.ok) {
-      figure.add(); 
-
+      
       alert('Ajout réussi avec succès !');
     } else {
       alert('Erreur lors de l\'envoi des travaux');
@@ -397,48 +392,43 @@ submitButton.addEventListener('click', async function (event) {
   } catch (error) {
     alert('Erreur lors de l\'envoi des travaux :', error);
   }
-  closeModal();
+  fermermodal();
 });
 
 
-//Reinitialisation modale//
 
-function closeModal() {
+function fermermodal() {
   const modal = document.querySelector("#modal");
   modal.style.display = "none";
   resetModal();
 }
 
-// Fonction pour fermer la modale avec le bouton close
-function UtiliFemerModale(modal) {
-  const closeButton = modal.querySelector(".js-modal-close");
-  if (closeButton) {
-    closeButton.addEventListener("click", function () {
-      closeModal();
-      resetModal();
+function UtiliFermerModale(modal) {
+  const boutonfermer = modal.querySelector(".js-modal-close");
+  if (boutonfermer) {
+    boutonfermer.addEventListener("click", function () {
+      fermermodal();
     });
   }
-  // pour fermer la modale en cliquant à l'exterieur
+
   window.addEventListener("click", function (event) {
     if (event.target === modal) {
-      closeModal();
-      resetModal();
+      fermermodal();
     }
   });
 }
 
-// Fonction qui réinitialise la modale après une fermeture
 function resetModal() {
   const modal = document.querySelector("#modal");
   const modal1 = modal.querySelector('.modal1');
   const modal2 = modal.querySelector('.modal2');
   const backButton = document.querySelector('.js-modal-back');
-  const titleModal = document.querySelector('#titlemodal');
+  const titremodal = document.querySelector('#titremodal');
   const BoutonAjoutPhoto = document.querySelector('.js-ajout-photo');
 
   modal1.style.display = 'grid';
   modal2.style.display = 'none';
-  titleModal.textContent = 'Galerie photo';
+  titremodal.textContent = 'Galerie photo';
   BoutonAjoutPhoto.style.display = 'block';
   backButton.style.display = 'none';
 }
