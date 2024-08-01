@@ -340,8 +340,6 @@ footer nav ul {
 	cursor: pointer;
 }
 
-/* ----- Styles pour le mode édition ----- */
-/* Partie bannière */
 .banner {
 	height: 60px;
 	background-color: black;
@@ -352,7 +350,10 @@ footer nav ul {
 	margin-bottom: 20px;
 }
 
-/* Partie mes projets 'modifier' */
+.modeedition {
+	margin-left: 10px;
+}
+
 .Projets {
 	display: flex;
 	flex-wrap: wrap;
