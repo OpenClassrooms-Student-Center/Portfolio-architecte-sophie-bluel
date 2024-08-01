@@ -1,9 +1,9 @@
 "use strict";
 
 const works_endpoint = "http://localhost:5678/api/works";
-//http://localhost:5678/api-docs/#/
 const portfolioSection = document.querySelector('#js-portfolio');
 const galleryDiv = document.querySelector('#js-portfolio .gallery');
+const filtersDiv = document.querySelector('#filters');
 
 // API FETCH getWorks
 async function getWorks() {
@@ -14,6 +14,7 @@ async function getWorks() {
         }
         const data = await response.json();
         displayGallery(data);
+        createFilters(data);
     } catch (error) {
         console.error(error);
     }
@@ -21,7 +22,6 @@ async function getWorks() {
 
 // DISPLAY GALLERY
 function displayGallery(data) {
-
     galleryDiv.innerHTML = "";
 
     data.forEach((item) => {
@@ -45,6 +45,39 @@ function displayGallery(data) {
 
         // Append the article element to the gallery div
         galleryDiv.appendChild(articleCard);
+    });
+}
+
+// CREATE FILTERS
+function createFilters(data) {
+    const categories = [...new Set(data.map(item => item.category.name))];
+
+    filtersDiv.innerHTML = "";
+
+    categories.forEach(category => {
+        const button = document.createElement("button");
+        button.textContent = category;
+        button.addEventListener("click", () => filterGallery(category));
+        filtersDiv.appendChild(button);
+    });
+
+    // Add an "All" button to show all items
+    const allButton = document.createElement("button");
+    allButton.textContent = "Tous";
+    allButton.addEventListener("click", () => filterGallery("Tous"));
+    filtersDiv.appendChild(allButton);
+}
+
+// FILTER GALLERY
+function filterGallery(category) {
+    const articles = galleryDiv.querySelectorAll(".articleCard");
+
+    articles.forEach(article => {
+        if (category === "Tous" || article.getAttribute("data-category") === category) {
+            article.style.display = "block";
+        } else {
+            article.style.display = "none";
+        }
     });
 }
 
