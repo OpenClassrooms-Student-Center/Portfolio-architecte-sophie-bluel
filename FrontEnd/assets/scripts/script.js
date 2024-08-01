@@ -25,14 +25,12 @@ async function fetchWorks() {
     
     genererWorks(ListeWorks);
     genererFiltre(ListeCategories, ListeWorks);
-    addListenerFilter(ListeWorks);
   } catch (error) {
     alert(error.message);
     console.error("Erreur lors de la récupération des données :", error);
   }
 }
 
-//Boutons filtres//
 
 function genererFiltre(ListeCategories, ListeWorks) {
   const FiltreCategories = document.querySelector(".category-menu");
@@ -46,8 +44,6 @@ function genererFiltre(ListeCategories, ListeWorks) {
     genererWorks(ListeWorks);
   });
 
-  // Création d'un bouton pour chaque catégorie dans "ListeCategories" pour chaques catégories "dataset.id"
-
   for (let i = 0; i < ListeCategories.length; i++) {
     const BoutonFiltre = document.createElement('button');
     BoutonFiltre.dataset.id = ListeCategories[i].id;
@@ -55,6 +51,8 @@ function genererFiltre(ListeCategories, ListeWorks) {
     BoutonFiltre.innerText = ListeCategories[i].name;
     FiltreCategories.appendChild(BoutonFiltre);
   }
+
+  addListenerFilter(ListeWorks);
 }
 
 function addListenerFilter(ListeWorks) {
@@ -62,15 +60,13 @@ function addListenerFilter(ListeWorks) {
   for (let i = 0; i < listButton.length; i++) { 
     const BoutonActuel = listButton[i];
     BoutonActuel.addEventListener('click', (event) => {
-      const IDCategorie = parseInt(event.target.dataset.id, 36);
-      // "ListeWorks" récupère que les œuvres ayant "IDCategorie" égal à l’ID de la catégorie sélectionnée.
-      const ListeWorksFilter = ListeWorks.filter(work => work.IDCategorie === IDCategorie);
-      genererWorks(ListeWorksFilter); // Affiche les photos filtrées
+      const categoryId = parseInt(event.target.dataset.id);
+      const ListeWorksFilter = ListeWorks.filter(work => work.categoryId === categoryId);
+      genererWorks(ListeWorksFilter); 
     });
   }
 }
 
-//Fonction du mode édition//
 
 function ModeEdition() {
   const divFiltreCategories = document.querySelector(".category-menu");
@@ -79,14 +75,13 @@ function ModeEdition() {
   }
   const BoutonCoDeco = document.getElementById("btn-Login");
   if (BoutonCoDeco) {
-    BoutonCoDeco.textContent = "logout"; //Modification du bouton "login" en "logout"//
+    BoutonCoDeco.textContent = "logout"; 
     BoutonCoDeco.addEventListener("click", function () {
       localStorage.removeItem("TokenIdentification"); 
       window.location.href = "login.html";
     })
   }
 
-//Ajout de la bannière Header//
 
   const BanniereModeEdition = document.createElement("div");
   BanniereModeEdition.classList.add("banner");
@@ -100,9 +95,8 @@ function ModeEdition() {
   iconText.textContent = "Mode édition";
     BanniereModeEdition.appendChild(iconText);
 
-  header.parentNode.insertBefore(BanniereModeEdition, header); // insertion de la bannière avant le header
+  header.parentNode.insertBefore(BanniereModeEdition, header); 
 
-  //Partie du futur lien pour afficher la modale (à coté de "mes Projets")//
   const myProject = document.querySelector(".Projets");
   if (!myProject.querySelector(".js-modal")) {
     const linkIcon = document.createElement("a");
@@ -110,21 +104,19 @@ function ModeEdition() {
     ModeEditionIcone.classList.add("fa-regular", "fa-pen-to-square", "edit-icon");
       linkIcon.appendChild(ModeEditionIcone);
 
-
     const iconText = document.createElement("span");
     iconText.classList.add("modifier")
     iconText.textContent = "modifier";
-    iconText.addEventListener("click", ModaleOuverture); //Voir en-dessous//
+    iconText.addEventListener("click", ModaleOuverture);
 
     linkIcon.appendChild(iconText);
 
-    linkIcon.href = "#modal"; // lien pour afficher la modale
+    linkIcon.href = "#modal"; 
     linkIcon.classList.add("js-modal");
     myProject.appendChild(linkIcon);
   }
 }
 
-//Fonction du mode de base//
 
 function ModeBase() {
   const divFiltreCategories = document.querySelector(".category-menu");
@@ -137,8 +129,6 @@ function ModeBase() {
     BoutonCoDeco.textContent = "Login";
   }
 }
-
-//Fonction qui permet l'affichage de la galerie et l'intégralité des photos (Works)//
 
 function genererWorks(ListeWorks) {
   const divGallerie = document.querySelector('.gallery');
@@ -153,9 +143,9 @@ function genererWorks(ListeWorks) {
 
     const ElementsTravaux = document.createElement('figure');
 
-    const imageIdElement = document.createElement("p");
-    imageIdElement.innerText = figure.id; 
-      ElementsTravaux.appendChild(imageIdElement);
+    const categoryIdElement = document.createElement("p");
+    categoryIdElement.innerText = figure.id; 
+      ElementsTravaux.appendChild(categoryIdElement);
 
     const imageElement = document.createElement('img');
     imageElement.src = figure.imageUrl;
@@ -166,9 +156,8 @@ function genererWorks(ListeWorks) {
       ElementsTravaux.appendChild(titreElement);
 
     const categorieIdElement = document.createElement("p");
-    categorieIdElement.innerText = figure.IDCategorie;
+    categorieIdElement.innerText = figure.categoryId;
       ElementsTravaux.appendChild(categorieIdElement);
-
 
     //Ajout de l'attribut data-id avec la valeur de l'ID de l'image à "ElementsTravaux"//
 
@@ -177,28 +166,25 @@ function genererWorks(ListeWorks) {
   }
 }
 
-//Partie modale//
 
 const BoutonModifier = document.querySelector(".modifier");
   BoutonModifier.addEventListener("click", ModaleOuverture);
 
-//Fonction pour ouvrir la modale//
 
 function ModaleOuverture() {
   const modal = document.querySelector("#modal");
   const modal2 = modal.querySelector('.modal2');
 
-  if (modal) { // Si la modale s'ouvre alors elle s'affiche au centre et la modale 2 est caché 
-    modal.style.display = null; // Pour que la modale soit centré sur la page
+  if (modal) { 
+    modal.style.display = null;
     modal2.style.display = 'none';
   }
 
-  UtiliFermerModale(modal); // Appelle la fonction pour fermer la modal en cliquant à l'extérieur ou sur le bouton "close"
-  Modal1(); // Appelle la fonction pour dupliquer la galerie dans la modal
+  UtiliFermerModale(modal);
+  Modal1(); 
 }
 
 function Modal1() {
-  // Sélectionne les éléments HTML pour la galerie principale et la galerie dans la modal
   const GalleryPrincipale = document.querySelector(".gallery");
   const GalleryModale = document.querySelector(".galleryModal");
 
@@ -229,7 +215,6 @@ function Modal1() {
                 return;
               }
 
-              //Fetch delete//
               const response = await fetch(`http://localhost:5678/api/works/${figureId}`, {
                 method: "DELETE",
                 headers: {
@@ -240,7 +225,6 @@ function Modal1() {
               if (response.ok) {
                 figure.remove();
 
-                // Pourquoi fonctionne pas?
                 alert('Suppression réussie !');
               } else {
                alert('Erreur lors de la suppression des travaux');
@@ -264,7 +248,6 @@ function Modal1() {
   }
   fetchWorks();
 }
-//modale 2//
 
 function modal2() {
   const modal = document.querySelector("#modal");
@@ -281,13 +264,9 @@ function modal2() {
   titremodal.textContent = "Ajout photo";
 
   backButton.addEventListener('click', function () {
-    resetModal(); // Appelle la fonction pour réinitialiser la modal
+    resetModal();
   });
 }
-// =============================================================
-// ======================== Partie POST ======================== 
-
-// Ce bout de code permet de prévisualiser l'image sélectionnée par l’utilisateur dans un élément de conteneur sur la page web. 
 
 const fileInput = document.querySelector('.file-input');
 const conteneurphoto = document.getElementById('conteneurphoto');
@@ -298,31 +277,25 @@ fileInput.addEventListener('change', function () {
     const reader = new FileReader();
     reader.onload = function () {
       
-      conteneurphoto.innerHTML = ''; // Efface le contenu précédent du conteneur de photos pour afficher l'image sélectionnée
+      conteneurphoto.innerHTML = '';
       const imgElement = document.createElement('img');
-      imgElement.src = reader.result; // Charge l'image sélectionnée
+      imgElement.src = reader.result;
       imgElement.style.maxWidth = '129px';
       imgElement.style.maxHeight = '169px';
 
-      conteneurphoto.appendChild(imgElement); // Affiche l'image dans le conteneur
+      conteneurphoto.appendChild(imgElement);
     };
-    reader.readAsDataURL(file); // Lit le fichier en tant qu'URL de données
+    reader.readAsDataURL(file);
   }
 });
-
-// =============================================================
-// ================= Validation du formulaire  =================
-
-// Ce bout de code sert à valider un formulaire avant de permettre à l’utilisateur de soumettre ses données.
 
 const Validerphoto = document.querySelector('.valider-photo');
 const titreinput = document.getElementById('titre');
 const SelectionCategorie = document.getElementById('categorie');
-// Association des valeurs string avec l'id corespondant
 const MappingCategorie = {
   "Objets": 1,
   "Appartements": 2,
-  "Hôtels & restaurants": 3
+  "Hotels & restaurants": 3
 };
 
 if (Validerphoto) {
@@ -330,9 +303,9 @@ if (Validerphoto) {
     const file = fileInput.files[0]; 
     const title = titreinput.value; 
     const NomCategorie = SelectionCategorie.value; 
-    const IDCategorie = MappingCategorie[NomCategorie];
+    const categoryId = MappingCategorie[NomCategorie];
 
-    if (file && title && IDCategorie) {
+    if (file && title && categoryId) {
       Validerphoto.style.background = "#1d6154"; 
       Validerphoto.style.cursor = "pointer";
     } else {
@@ -340,7 +313,6 @@ if (Validerphoto) {
     }
   }
 }
-
 
 fileInput.addEventListener('change', validerformulaire);
 titreinput.addEventListener('input', validerformulaire);
@@ -353,10 +325,10 @@ Validerphoto.addEventListener('click', async function (event) {
   const title = document.getElementById('titre').value;
   const SelectionCategorie = document.getElementById('categorie');
   const NomCategorie = SelectionCategorie.value;
-  const IDCategorie = MappingCategorie[NomCategorie];
+  const categoryId = MappingCategorie[NomCategorie];
 
 
-  if (!file || !title || !IDCategorie) {
+  if (!file || !title || !categoryId) {
     alert("Veuillez remplir tous les champs obligatoires.");
     return;
   }
@@ -364,7 +336,7 @@ Validerphoto.addEventListener('click', async function (event) {
   const formulaire = new FormData();
   formulaire.append("image", file); 
   formulaire.append("title", title);
-  formulaire.append("category", IDCategorie);
+  formulaire.append("category", categoryId);
 
   try {
     const token = localStorage.getItem("TokenIdentification");
@@ -392,8 +364,6 @@ Validerphoto.addEventListener('click', async function (event) {
   }
   fermermodal();
 });
-
-
 
 function fermermodal() {
   const modal = document.querySelector("#modal");
