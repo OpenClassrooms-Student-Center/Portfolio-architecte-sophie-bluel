@@ -140,6 +140,7 @@ body {
 	margin: auto;
 	font-family: 'Work Sans';
 	font-size: 14px;
+	background-color: #FEFDF0;
 }
 
 header {
@@ -290,8 +291,74 @@ footer nav ul {
 	margin: 2em
 }
 
+.footer-connexion {
+	background-color: white;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+/* Fomulaire de connexion */
+
 form {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	padding-top: 100px;
+}
+
+.input-connexion {
+	height: 25px;
+	width: 350px;
+	border: none;
+	font-weight: bold;
+	filter: drop-shadow(0px 3px 10px rgba(0, 0, 0, 0.1));
+	padding: 10px;
+	font-size: 17px;
+}
+
+.connexion {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.input {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+.btn-connexion {
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin: 2em auto;
+	width: 180px;
+	height: 35px;
+	text-align: center;
+	border-radius: 60px;
+	border: none;
+}
+
+.title-form {
+	margin-bottom: 40px;
+}
+
+.label-password {
+	margin-top: 20px;
+}
+
+.Mp-oublie {
+	color: black;
+}
+
+legend {
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 30px;
+	color: #1D6154
 }
