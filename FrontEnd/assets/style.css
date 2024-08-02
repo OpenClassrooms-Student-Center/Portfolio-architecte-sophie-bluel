@@ -53,6 +53,11 @@ body {
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 }
+
+.logo-container {
+	text-decoration: none;
+}
+
 header {
 	display: flex;
 	justify-content: space-between;
@@ -88,11 +93,21 @@ nav ul {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
+	cursor: pointer;
 
 }
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
+}
+
+nav li a {
+	text-decoration: none;
+	color: black;
+}
+
+nav li a:hover {
+	color: #B1663C;
 }
 
 li:hover {
