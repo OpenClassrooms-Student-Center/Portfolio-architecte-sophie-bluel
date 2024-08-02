@@ -1,6 +1,7 @@
 "use strict";
 
 const works_endpoint = "http://localhost:5678/api/works";
+//API documentation: SWAGGER UI http://localhost:5678/api-docs/#/
 const portfolioSection = document.querySelector('#js-portfolio');
 const galleryDiv = document.querySelector('#js-portfolio .gallery');
 
