@@ -54,6 +54,7 @@ function createFilters(data) {
     // Create a container for the filters
     const filtersDiv = document.createElement("div");
     filtersDiv.id = "filters";
+    filtersDiv.classList.add('filters');
 
     // Create a button for each category
     categories.forEach(category => {
