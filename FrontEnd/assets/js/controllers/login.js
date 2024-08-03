@@ -1,56 +1,8 @@
 import {
-    login
-} from '../libs/user.js'
+    login,
+    logout
+} from '../libs/user.js';
 
-
-//mode edition - loger
-function editMode() {
-    let body = document.querySelector('.body')
-    let editBanner = document.querySelector('.edit_banner')
-    editBanner.style.display = 'flex'
-
-    // //affichage de la bannière du mode édition
-    // let editBanner = document.createElement('div')
-    // editBanner.classList.add('edit_banner')
-    // let bannerIcon = document.createElement('i')
-    // bannerIcon.classList.add('fa-regular', 'fa-pen-to-square')
-    // let $p = document.createElement('p')
-    // $p.textContent = 'Mode édition'
-    
-    // editBanner.appendChild(bannerIcon)
-    // editBanner.appendChild($p)
-    // body.appendChild(editBanner)
-    
-
-    //'logout' à la place de 'login'
-    let loginText = document.querySelector('login')
-    loginText.textContent = 'logout'
-
-
-    //affichage et paramettrage du du bloc 'modifier' permettant d'afficher la modale
-
-    //ajout d'un conteneur aux titres
-    let titles = document.createElement('div')
-    let portfolio = document.getElementById('portfolio')
-    let titleMyProjects = document.querySelector('#portfolio h2')
-    titles.appendChild(titleMyProjects)
-    portfolio.appendChild(titles)
-    console.log(titleMyProjects)
-
-    //ajout de l'icône et du texte 'modifier'
-    let modifLink = document.createElement('div')
-    let modifIcon = document.createElement('i')
-    modifIcon.classList.add('fa-regular', 'fa-pen-to-square')
-    modifIcon.id = 'modifIcon'
-    let p = document.createElement('p')
-    p.textContent = 'modifier'
-    modifLink.appendChild(modifIcon)
-    modifLink.appendChild(p)
-    titles.appendChild(modifLink)
-
-    //fonction des modales
-
-}
 
 //connexion
 const form = document.querySelector('form');
@@ -63,8 +15,10 @@ function idValidator(email, password) {
     return (emailValidation.test(email) && passwordValidation.test(password))
 }
 
+const submitBtn = document.getElementById('submit_btn')
+
 // Quand on submit
-form.addEventListener("submit", (event) => {
+submitBtn.addEventListener("click", async (event) => {
     // On empêche le comportement par défaut
     event.preventDefault()
 
@@ -73,15 +27,17 @@ form.addEventListener("submit", (event) => {
     let passwordId = document.getElementById("password")
     let password = passwordId.value
     if (idValidator(email, password)) {
-        login(email, password)
-        //redirection à la page d'accueil
-        window.location.href = "index.html"
-
+        let result = await login(email, password)
+        if (result === true) {
+            //redirection à la page d'accueil
+            window.location.href = "index.html"
+        }else {
+            alert('Erreur')
+        }
     } else {
         alert("Erreur dans l’identifiant ou le mot de passe")
     }
-    //fonction mode edition
-    editMode()
-
-    //fonction modales
 })
+
+const logoutBtn = document.querySelector('.logout')
+logoutBtn.addEventListener('click', logout)

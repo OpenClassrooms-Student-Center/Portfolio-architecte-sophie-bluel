@@ -14,6 +14,10 @@ export const login = async (email, password) => {
 
         localStorage.setItem("token", data.token)
     }
-
+    return response.ok
 }
 
+export const logout = () => {
+    localStorage.removeItem("token")
+    window.location.href = "index.html"
+} 

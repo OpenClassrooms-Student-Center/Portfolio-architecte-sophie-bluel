@@ -2,11 +2,11 @@
 import {
     fetchCategories
 } from '../libs/categories.js'
+import { logout } from '../libs/user.js';
 
 import {
     createWork,
-    fetchWork,
-    deleteWork
+    fetchWork
 } from '../libs/works.js'
 
 let works = await fetchWork()
@@ -47,7 +47,7 @@ function displayWorks(works) {
 }
 
 // une fonction qui n'est appellée qu'une seule fois, au chargement de la page
-async function initWorks() {
+export async function initWorks() {
     document.works = await fetchWork();
     displayWorks(document.works);
 }
@@ -130,3 +130,36 @@ function init() {
 
 
 init();
+
+/**
+ * mode administrateur
+ */
+
+function adminMode() {
+    let token = localStorage.getItem('token')
+    if (token) {
+        //bannière mode édition
+        const editBanner = document.querySelector('.edit_banner')
+        editBanner.style.display = 'flex'
+
+        //change 'login' en 'logout'
+        const login = document.querySelector('.login')
+        login.classList.add('hidden')
+
+        const logout = document.querySelector('.logout')
+        logout.classList.remove('hidden')
+
+        //login.createTextNode("logout")
+        const ul = document.querySelector('header ul')
+        ul.appendChild(login)
+
+
+        //apparition du bouton modif + attribution de l'apparition de la modale au click
+        const btnModif = document.querySelector('.modif')
+        btnModif.style.display = 'flex'
+    }
+}
+adminMode()
+
+const logoutBtn = document.querySelector('.logout')
+logoutBtn.addEventListener('click', logout)

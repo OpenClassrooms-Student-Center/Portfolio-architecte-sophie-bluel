@@ -200,6 +200,7 @@ footer nav ul {
 footer li {
 	font-family: 'Work Sans';
 	font-weight: 300;
+	cursor: pointer;
 }
 
 /*index.html*/
@@ -264,7 +265,15 @@ a {
 	color: #000000;
 }
 
+* {
+	box-sizing: border-box;
+}
+
 /*login.hmtl*/
+.logout {
+	cursor: pointer;	
+}
+
 .main_login_container {
 	display: flex;
 	flex-direction: column;
@@ -322,6 +331,7 @@ form #submit_btn {
 	padding: .6em 1.2em;
 	width: 180px;
 	border-color: transparent;
+	cursor: pointer;
 }
 
 form a {
@@ -348,7 +358,6 @@ html {
 
 .edit_banner {
 	width: 100%;
-	display: flex;
 	justify-content: center;
 	gap: 1em;
 	padding: 1em;
@@ -358,7 +367,7 @@ html {
 	display: none;
 }
 
-.title {
+.titles {
 	display: flex;
 	gap: 2em;
 	align-items: center;
@@ -369,7 +378,7 @@ html {
 }
 
 .modif {
-	display: flex;
+	display: none;
 	gap: .5em;
 	cursor: pointer;
 }
@@ -378,16 +387,35 @@ html {
 	color:#B1663C;
 }
 
+.modif p {
+	position: relative;
+    top: .2em;
+}
+
 /*modales*/
-.modal_container {
-	width: 100%;
-	height: 100%;
+.hidden {
 	display: none;
+}
+
+/* #my_modal {
+	display: none;
+} */
+
+/*delete modal*/
+
+
+.modal_container {
+	width: 100vw;
+	height: 100vh;
 	justify-content: center;
 	align-items: center;
 	position: fixed;
+	top: 0;
+	left: 0;
 	bottom: 28em;
 	background: #0000004D;
+	overflow: auto;
+	display: none;
 }
 
 .modal {
@@ -397,30 +425,13 @@ html {
 }
 
 .delete_header {
-	width: 100%;
-	display: flex;
-	justify-content: space-between;
-	gap: 35em;
-
-}
-
-
-/*delete modal*/
-#modal1 {
-	/* display: none; */
-	display: flex;
-	/* max-width: 800px; */
-}
-
-/* #delete_modal {
-
-} */
-
-.add_header {
 	display: flex;
 	justify-content: end;
 	width: 100%;
+
+
 }
+
 
 .delete_content {
 	gap: 3em;
@@ -440,31 +451,36 @@ html {
     height: 600px;
 }
 
-.img_container figure {
+.img_container div {
 	width: 17%;
+	position: relative;
 }
 
-.img_container figure i {
-	display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    top: 2.5em;
-    left: 5.5em;
-    color: #FFFFFF;
+#trash {
+	background: #000000;
+    width: 17px;
+    height: 17px;
     border-radius: 2px;
-    border: 1px solid #000000;
-    background: #000000;
-    padding: .3em .3em;
-    font-size: .8em;
-    width: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 6px;
+    right: 5px;
+	padding: 3px;
+}
+
+.img_container div i {
+    color: #FFFFFF;
+	font-size: .7em;
 }
 
 .wrapped_img {
 	width: 100%;
+	height: 135px;
 }
 
-.delete_content button {
+.add_photo_btn {
 	border-radius: 60px;
 	background: #1D6154;
 	font-family: 'Syne';
@@ -475,9 +491,23 @@ html {
 	border-color: transparent;
 }
 
-/*****add modal************/
 .delete_header i {
 	cursor: pointer;
+}
+
+/*****add modal************/
+.modal {
+	position: absolute;
+}
+#add_modal {
+	display: none;
+}
+
+.add_header {
+	width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 35em;
 }
 
 .fa-arrow-left {
@@ -492,7 +522,7 @@ html {
 
 .add_content {
 	gap: 3em;
-	margin: 2em 3em;
+	margin: 2.1em 6.5em;
 }
 
 .add_content, .add_content form, .add_container, .modal, .delete_content {
@@ -514,7 +544,7 @@ html {
 }
 .add_container {
 	background: #E8F1F6;
-	padding: 2em 8em;
+	padding: 2em 10em;
 	gap: .5em;
 
 }
@@ -535,6 +565,14 @@ html {
 	text-wrap: nowrap;
 	font-weight: 500;
 	font-size: 1.1em;
+}
+
+#file {
+	position: relative;
+	top: 2.7em;
+	left: 5em;
+	opacity: 0;
+	cursor: pointer;
 }
 
 .add_btn input {
@@ -559,23 +597,19 @@ html {
 }
 
 .field input, .field select {
-	width: 100%;
+	color: #6C6C6C;
+	width: 480px;
 	box-shadow: 0px 4px 14px 0px #00000017;
 	border-color: transparent;
 	padding: 1.5em 0;
+	font-size: 1em;
 }
 
-.line {
-	width: 100%;
-	border: 1px solid #B3B3B3;	
+hr {
+	width: 480px;
 }
 
-.modal2_submit_btn {
-	display: flex;
-	flex-direction: column;
-}
-
-.modal2_submit_btn button, #submit {
+.modal2_submit_btn input {
 	margin: 0;
 	padding: 0;
 	width: 100%;
@@ -588,12 +622,6 @@ html {
 	padding: .5em 7em;
 }
 
-#submit {
-	position: relative;
-	bottom: 3em;
-	opacity: 0;
-}
-
-.fa-trash-can, button, .fa-xmark {
+.fa-trash-can, button, .fa-xmark, .fa-arrow-left {
 	cursor: pointer;
 }

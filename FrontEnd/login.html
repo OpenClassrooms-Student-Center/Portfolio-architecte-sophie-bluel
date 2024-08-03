@@ -23,8 +23,11 @@
                         <li>
                             <a href="index.html#contact">contact</a>
                         </li>
-                        <li>
+                        <li class="login">
                             <a href="login.html#login_page">login</a>
+                        </li>
+                        <li class="logout hidden">
+                            <div>logout</div>
                         </li>
                         <li>
                             <a class="insta_logo_container" href="#">
@@ -38,7 +41,7 @@
             <section class="login_container">
                 <h2>Log In</h2>
                 
-                <form action="http://localhost:5678/api/users/login" method="post" novalidate >
+                <form>
                     <div class="email_2">
                         <label for="email">E-mail</label>
                         <input type="email" name="email" id="email" required>
