@@ -153,7 +153,8 @@ section {
 	margin: 50px 0
 }
 
-h1 {
+h1,
+a.logo-accueil {
 	display: flex;
 	flex-direction: column;
 	font-family: 'Syne';
@@ -188,7 +189,8 @@ nav li {
 	font-size: 1.2em;
 }
 
-li:hover {
+li,
+a:hover {
 	color: #B1663C;
 }
 
@@ -265,6 +267,13 @@ li:hover {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
+#login input {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
 #contact label {
 	margin: 2em 0 1em 0;
 }
@@ -331,18 +340,6 @@ form {
 	gap: 5px;
 }
 
-.btn-connexion {
-	font-family: 'Syne';
-	font-weight: 700;
-	color: white;
-	background-color: #1D6154;
-	margin: 2em auto;
-	width: 180px;
-	height: 35px;
-	text-align: center;
-	border-radius: 60px;
-	border: none;
-}
 
 .title-form {
 	margin-bottom: 40px;
@@ -354,11 +351,4 @@ form {
 
 .Mp-oublie {
 	color: black;
-}
-
-legend {
-	font-family: 'Syne';
-	font-weight: 700;
-	font-size: 30px;
-	color: #1D6154
 }
