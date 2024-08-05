@@ -1,5 +1,18 @@
-let token = localStorage.getItem("TokenIdentification");
+// Déclaration des constantes
+const token = localStorage.getItem("TokenIdentification");
+const BoutonModifier = document.querySelector(".modifier");
+const fileInput = document.querySelector('.file-input');
+const conteneurphoto = document.getElementById('conteneurphoto');
+const Validerphoto = document.querySelector('.valider-photo');
+const titreinput = document.getElementById('titre');
+const SelectionCategorie = document.getElementById('categorie');
+const MappingCategorie = {
+  "Objets": 1,
+  "Appartements": 2,
+  "Hotels & restaurants": 3
+};
 
+// Initialisation et vérification de l'état du mode
 if (token) {
   ModeEdition();
 } else {
@@ -7,20 +20,20 @@ if (token) {
 }
 fetchWorks();
 
+// Définition des fonctions
+
 async function fetchWorks() {
   try {
     const reponseWorks = await fetch("http://localhost:5678/api/works");
     if (!reponseWorks.ok) {
       throw new Error('Erreur lors de la récupération des travaux.');
     }
-
     const ListeWorks = await reponseWorks.json();
 
     const reponseCategories = await fetch("http://localhost:5678/api/categories");
     if (!reponseCategories.ok) {
       throw new Error('Erreur lors de la récupération des catégories.');
     }
-
     const ListeCategories = await reponseCategories.json();
     
     genererWorks(ListeWorks);
@@ -30,7 +43,6 @@ async function fetchWorks() {
     console.error("Erreur lors de la récupération des données :", error);
   }
 }
-
 
 function genererFiltre(ListeCategories, ListeWorks) {
   const FiltreCategories = document.querySelector(".category-menu");
@@ -67,7 +79,6 @@ function addListenerFilter(ListeWorks) {
   }
 }
 
-
 function ModeEdition() {
   const divFiltreCategories = document.querySelector(".category-menu");
   if (divFiltreCategories) {
@@ -82,18 +93,17 @@ function ModeEdition() {
     })
   }
 
-
   const BanniereModeEdition = document.createElement("div");
   BanniereModeEdition.classList.add("banner");
   const header = document.querySelector("header");
   const ModeEditionIcone = document.createElement("i");
   ModeEditionIcone.classList.add("far", "fa-pen-to-square");
   ModeEditionIcone.style.marginRight = "10px";
-    BanniereModeEdition.appendChild(ModeEditionIcone);
+  BanniereModeEdition.appendChild(ModeEditionIcone);
 
   const iconText = document.createElement("span");
   iconText.textContent = "Mode édition";
-    BanniereModeEdition.appendChild(iconText);
+  BanniereModeEdition.appendChild(iconText);
 
   header.parentNode.insertBefore(BanniereModeEdition, header); 
 
@@ -102,7 +112,7 @@ function ModeEdition() {
     const linkIcon = document.createElement("a");
     const ModeEditionIcone = document.createElement("i");
     ModeEditionIcone.classList.add("fa-regular", "fa-pen-to-square", "edit-icon");
-      linkIcon.appendChild(ModeEditionIcone);
+    linkIcon.appendChild(ModeEditionIcone);
 
     const iconText = document.createElement("span");
     iconText.classList.add("modifier")
@@ -116,7 +126,6 @@ function ModeEdition() {
     myProject.appendChild(linkIcon);
   }
 }
-
 
 function ModeBase() {
   const divFiltreCategories = document.querySelector(".category-menu");
@@ -145,31 +154,24 @@ function genererWorks(ListeWorks) {
 
     const categoryIdElement = document.createElement("p");
     categoryIdElement.innerText = figure.id; 
-      ElementsTravaux.appendChild(categoryIdElement);
+    ElementsTravaux.appendChild(categoryIdElement);
 
     const imageElement = document.createElement('img');
     imageElement.src = figure.imageUrl;
-      ElementsTravaux.appendChild(imageElement);
+    ElementsTravaux.appendChild(imageElement);
 
     const titreElement = document.createElement('figcaption');
     titreElement.innerText = figure.title;
-      ElementsTravaux.appendChild(titreElement);
+    ElementsTravaux.appendChild(titreElement);
 
     const categorieIdElement = document.createElement("p");
     categorieIdElement.innerText = figure.categoryId;
-      ElementsTravaux.appendChild(categorieIdElement);
-
-    //Ajout de l'attribut data-id avec la valeur de l'ID de l'image à "ElementsTravaux"//
+    ElementsTravaux.appendChild(categorieIdElement);
 
     ElementsTravaux.dataset.id = figure.id;
     divGallerie.appendChild(ElementsTravaux);
   }
 }
-
-
-const BoutonModifier = document.querySelector(".modifier");
-  BoutonModifier.addEventListener("click", ModaleOuverture);
-
 
 function ModaleOuverture() {
   const modal = document.querySelector("#modal");
@@ -224,19 +226,16 @@ function Modal1() {
               });
               if (response.ok) {
                 figure.remove();
-
                 alert('Suppression réussie !');
               } else {
-               alert('Erreur lors de la suppression des travaux');
+                alert('Erreur lors de la suppression des travaux');
               }
-              
             } catch (error) {
               alert('Erreur lors de la suppression du travail :', error);
             }
           }
         }
       });
-
     });
   }
 
@@ -268,15 +267,25 @@ function modal2() {
   });
 }
 
-const fileInput = document.querySelector('.file-input');
-const conteneurphoto = document.getElementById('conteneurphoto');
+function validerformulaire() { 
+  const file = fileInput.files[0]; 
+  const title = titreinput.value; 
+  const NomCategorie = SelectionCategorie.value; 
+  const categoryId = MappingCategorie[NomCategorie];
+
+  if (file && title && categoryId) {
+    Validerphoto.style.background = "#1d6154"; 
+    Validerphoto.style.cursor = "pointer";
+  } else {
+    Validerphoto.style.background = "";
+  }
+}
 
 fileInput.addEventListener('change', function () {
   const file = fileInput.files[0];
   if (file) {
     const reader = new FileReader();
     reader.onload = function () {
-      
       conteneurphoto.innerHTML = '';
       const imgElement = document.createElement('img');
       imgElement.src = reader.result;
@@ -289,35 +298,6 @@ fileInput.addEventListener('change', function () {
   }
 });
 
-const Validerphoto = document.querySelector('.valider-photo');
-const titreinput = document.getElementById('titre');
-const SelectionCategorie = document.getElementById('categorie');
-const MappingCategorie = {
-  "Objets": 1,
-  "Appartements": 2,
-  "Hotels & restaurants": 3
-};
-
-if (Validerphoto) {
-  function validerformulaire() { 
-    const file = fileInput.files[0]; 
-    const title = titreinput.value; 
-    const NomCategorie = SelectionCategorie.value; 
-    const categoryId = MappingCategorie[NomCategorie];
-
-    if (file && title && categoryId) {
-      Validerphoto.style.background = "#1d6154"; 
-      Validerphoto.style.cursor = "pointer";
-    } else {
-      Validerphoto.style.background = "";
-    }
-  }
-}
-
-fileInput.addEventListener('change', validerformulaire);
-titreinput.addEventListener('input', validerformulaire);
-SelectionCategorie.addEventListener('change', validerformulaire);
-
 Validerphoto.addEventListener('click', async function (event) {
   event.preventDefault();
 
@@ -326,7 +306,6 @@ Validerphoto.addEventListener('click', async function (event) {
   const SelectionCategorie = document.getElementById('categorie');
   const NomCategorie = SelectionCategorie.value;
   const categoryId = MappingCategorie[NomCategorie];
-
 
   if (!file || !title || !categoryId) {
     alert("Veuillez remplir tous les champs obligatoires.");
@@ -354,7 +333,6 @@ Validerphoto.addEventListener('click', async function (event) {
     });
 
     if (response.ok) {
-      
       alert('Ajout réussi avec succès !');
     } else {
       alert('Erreur lors de l\'envoi des travaux');
@@ -369,7 +347,7 @@ function fermermodal() {
   const modal = document.querySelector("#modal");
   modal.style.display = "none";
   resetModal();
-  location.reload()
+  location.reload();
 }
 
 function UtiliFermerModale(modal) {
@@ -402,6 +380,38 @@ function resetModal() {
   backButton.style.display = 'none';
 }
 
-if ( window.history.replaceState ) {
-  window.history.replaceState( null, null, window.location.href );
+if (window.history.replaceState) {
+  window.history.replaceState(null, null, window.location.href);
 }
+
+// Ajout des écouteurs d'événements
+if (BoutonModifier) {
+  BoutonModifier.addEventListener("click", ModaleOuverture);
+}
+
+fileInput.addEventListener('change', validerformulaire);
+titreinput.addEventListener('input', validerformulaire);
+SelectionCategorie.addEventListener('change', validerformulaire);
+
+document.addEventListener('DOMContentLoaded', () => {
+  const formname = document.getElementById('formname');
+  const formemail = document.getElementById('formemail');
+  const formmessage = document.getElementById('formmessage');
+  const formenvoyer = document.getElementById('formenvoyer');
+
+  function validateForm() {
+      // Vérifie si tous les champs ont au moins un caractère
+      if (formname.value.trim() !== '' && formemail.value.trim() !== '' && formmessage.value.trim() !== '') {
+          formenvoyer.disabled = false;
+          formenvoyer.classList.add('enabled');
+      } else {
+          formenvoyer.disabled = true;
+          formenvoyer.classList.remove('enabled');
+      }
+  }
+
+  // Ajoute des écouteurs d'événements pour vérifier les champs en temps réel
+  formname.addEventListener('input', validateForm);
+  formemail.addEventListener('input', validateForm);
+  formmessage.addEventListener('input', validateForm);
+});

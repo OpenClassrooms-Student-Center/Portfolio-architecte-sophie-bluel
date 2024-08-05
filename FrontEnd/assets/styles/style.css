@@ -93,6 +93,11 @@ q:after {
 	transition: 0.2s;
 }
 
+.button:focus {
+	background-color: #1d6154;
+	color: white;
+}
+
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
@@ -283,6 +288,15 @@ input[type="submit"] {
 	text-align: center;
 	border-radius: 60px;
 }
+
+
+#formenvoyer.enabled {
+    background-color: #1d6154; /* Couleur quand activé */
+    color: white; /* Couleur du texte quand activé */
+    pointer-events: auto; /* Permet le clic quand activé */
+    cursor: pointer;
+}
+
 
 #connexion {
 	display: flex;
