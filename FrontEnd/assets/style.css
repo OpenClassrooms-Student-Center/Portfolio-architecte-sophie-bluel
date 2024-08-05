@@ -51,7 +51,7 @@ body {
 	max-width: 1140px;
 	margin:auto;
 	font-family: 'Work Sans' ;
-	font-size: 14px;
+	font-size: 1rem;
 }
 
 .logo-container {
@@ -219,10 +219,26 @@ li:hover {
     display: block;
 }
 
+/*End of login & logout screen */
+/* edit button*/
+#editBtn {
+	font-family: 'Work Sans' ;
+	font-size: 1rem;
+	text-decoration: none;
+}
 
+#editBtn a {
+	text-decoration: none;
+	margin-left: 18px;
+	color: #000000;
+	font-weight: 100;
+}
 
+#editBtn a:hover {
+	color: #B1663C;
 
-/*End of login screen css*/
+}
+/* end of edit button*/
 
 #introduction {
 	display: flex;
