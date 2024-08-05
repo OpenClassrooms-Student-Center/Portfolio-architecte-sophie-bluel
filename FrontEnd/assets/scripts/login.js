@@ -9,7 +9,6 @@ document.getElementById("connexion").addEventListener("submit",
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
     
-    
     if (email && password) { 
       btnValidate.style.backgroundColor = "#1d6154";
       btnValidate.style.color = "#FFFFFF";
@@ -18,9 +17,6 @@ document.getElementById("connexion").addEventListener("submit",
     if (!email || !password) {
       alert("Veuillez remplir tous les champs.");
     }
-    
-    
-
     try {
       const response = await fetch('http://localhost:5678/api/users/login', {
         method: "POST",
@@ -48,3 +44,22 @@ document.getElementById("connexion").addEventListener("submit",
       errorMessage.textContent = error.message;
     }
   });
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const coemail = document.getElementById('email');
+  const comdp = document.getElementById('password');
+  const cobouton = document.getElementById('btn-submit');
+
+  function validateSend() {
+      if (coemail.value.trim() !== '' && comdp.value.trim() !== '') {
+        cobouton.style.backgroundColor = "#1d6154";
+        cobouton.style.Color = "#FFFFFF";
+      } else {
+        cobouton.style.backgroundColor = "#A7A7A7";
+      }
+  }
+
+  coemail.addEventListener('input', validateSend);
+  comdp.addEventListener('input', validateSend);
+});

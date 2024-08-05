@@ -291,9 +291,9 @@ input[type="submit"] {
 
 
 #formenvoyer.enabled {
-    background-color: #1d6154; /* Couleur quand activé */
-    color: white; /* Couleur du texte quand activé */
-    pointer-events: auto; /* Permet le clic quand activé */
+    background-color: #1d6154; 
+    color: white; 
+    pointer-events: auto;
     cursor: pointer;
 }
 

@@ -384,7 +384,6 @@ if (window.history.replaceState) {
   window.history.replaceState(null, null, window.location.href);
 }
 
-// Ajout des écouteurs d'événements
 if (BoutonModifier) {
   BoutonModifier.addEventListener("click", ModaleOuverture);
 }
@@ -400,7 +399,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const formenvoyer = document.getElementById('formenvoyer');
 
   function validateForm() {
-      // Vérifie si tous les champs ont au moins un caractère
       if (formname.value.trim() !== '' && formemail.value.trim() !== '' && formmessage.value.trim() !== '') {
           formenvoyer.disabled = false;
           formenvoyer.classList.add('enabled');
@@ -410,7 +408,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
   }
 
-  // Ajoute des écouteurs d'événements pour vérifier les champs en temps réel
   formname.addEventListener('input', validateForm);
   formemail.addEventListener('input', validateForm);
   formmessage.addEventListener('input', validateForm);
