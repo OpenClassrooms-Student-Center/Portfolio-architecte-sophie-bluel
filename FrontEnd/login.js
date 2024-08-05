@@ -1,6 +1,7 @@
 const formLogin = document.getElementById('formLogin')
+const errorMessage = document.getElementById('error-message')
 
-formLogin.addEventListener("submit", (event) => {
+formLogin.addEventListener("submit", async (event) => {
     // On empêche le comportement par défaut
     event.preventDefault();
     console.log("Il n’y a pas eu de rechargement de page");
@@ -16,18 +17,55 @@ const loginData = {
  };
 
  // Création de la charge utile au format JSON
-const loginDataJson = JSON.stringify(loginData);
-    getLoginResult(loginDataJson)
+ const loginDataJson = JSON.stringify(loginData);
+
+ try {
+     const result = await fetch("http://localhost:5678/api/users/login", {
+         //Objet de configuration qui comprend 3 propriétés
+         method: "POST",
+         headers: { "Content-Type": "application/json" },
+         body: loginDataJson //charge utile
+     });
+
+     if (result.ok) {
+         const resultValue = await result.json();
+         const btnModifier = document.getElementById("openModal");
+         console.log("Login successful", resultValue);
+         // Redirigez l'utilisateur vers une autre page ou affichez un message de succès
+         errorMessage.style.display = 'none';
+        //  // Stockage des informations dans le localStorage
+        window.localStorage.setItem("token", resultValue.token);
+         // Rediriger l'utilisateur
+         window.location.href = "/FrontEnd/index.html";
+
+     } else {
+         const error = await result.json();
+         console.error("Login failed", error);
+         // Affichez un message d'erreur à l'utilisateur
+         errorMessage.textContent = "Email ou mot de passe incorrect.";
+         errorMessage.style.display = 'block';
+     }
+ } catch (error) {
+     console.error("An error occurred", error);
+     // Affichez un message d'erreur à l'utilisateur
+     errorMessage.textContent = "Une erreur est survenue. Veuillez réessayer plus tard.";
+     errorMessage.style.display = 'block';
+ }
 });
 
-async function getLoginResult(loginDataJson) {
-    const result = await fetch("http://localhost:5678/api/users/login", {
-        //Objet de configuration qui comprend 3 propriétés
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: loginDataJson //charge utile
-});
 
-const resultValue = await result
-    console.log(resultValue)
-}
+// const loginDataJson = JSON.stringify(loginData);
+//     getLoginResult(loginDataJson)
+// });
+
+// async function getLoginResult(loginDataJson) {
+//     const result = await fetch("http://localhost:5678/api/users/login", {
+//         //Objet de configuration qui comprend 3 propriétés
+//     method: "POST",
+//     headers: { "Content-Type": "application/json" },
+//     body: loginDataJson //charge utile
+// });
+
+// const resultValue = await result
+//     console.log(resultValue)
+// }

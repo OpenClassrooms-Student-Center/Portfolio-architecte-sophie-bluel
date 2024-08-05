@@ -9,16 +9,9 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-	<script type="module">
-		import {galleryDisplay} from "./gallery.js";
-		document.getElementById("Tous").addEventListener("click", (event) => {
-			galleryDisplay()
-		});
-		import {galleryDisplayCategorie} from "./gallery.js";
-		galleryDisplay();
-	</script>
 	<script type="module" src="categories.js"></script>
-
+	<script type="module" src="gallery.js"></script>
+	<script src="https://kit.fontawesome.com/e547d28caf.js" crossorigin="anonymous"></script>
 		
 </head>
 <body>
@@ -29,7 +22,7 @@
 			<li>projets</li>
 			<li>contact</li>
 			<a href="login.html">
-				<li>login</li>
+				<li id="authText">login</li>
 			</a>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
@@ -49,14 +42,51 @@
 	</section>
 
 	<section id="portfolio">
+		<div id="mes-projets-logged-in">
 		<h2>Mes Projets</h2>
+		<button id="openModal"><i class="fa-regular fa-pen-to-square"></i>Modifier</button>
+		</div>
 		<div id="categories_id" class="categories">
 			<button id="Tous">Tous</button>
 		</div>
 		<div id="gallery_id" class="gallery">
-			
 		</div>
 	</section>
+
+	<section id="myModal" class="modal">
+		<div class="modal-content">
+			<h3>Galerie photo</h3>
+			<i class="close-modal fa-solid fa-xmark"></i>
+			<div id="mini_gallery_id" class="mini_gallery">	
+			</div>
+			<hr>
+			<button id="addPhotoModalBtn" class="ajoutPhoto">Ajouter une photo</button>
+		</div>
+	</section>
+
+	<section id="addPhotoModal" class="modal">
+		<div class="modal-content">
+			<h3>Ajout d'une photo</h3>
+			<i class="close-modal fa-solid fa-xmark"></i>
+			<form enctype="multipart/form-data" action="#" method="post" id="photoPost">
+				
+				<label>Ajouter Photo</label>
+				<input type="file" name="file" required id="imageUrl"/>
+			</br>
+				<label>Titre</label>
+			</br>
+				<input type="text" name="titre" id="titrePhoto">
+			</br>
+				<label>Catégorie</label>
+			</br>
+				<input type="text" name="categorie" id="categoriePhoto">
+			</br>
+			<hr>
+			<button type="submit" id="validerModal">Valider</button>
+		</form>
+		</div>
+	</section>
+
 	<section id="contact">
 		<h2>Contact</h2>
 		<p>Vous avez un projet ? Discutons-en !</p>
