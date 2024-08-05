@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (authToken) {
         // Change the login button to logout
-        loginButton.innerHTML = '<a href="#" id="logoutBtn"><strong>logout</strong></a>';
+        loginButton.innerHTML = '<a href="#" id="logoutBtn">logout</a>';
         const logoutBtn = document.getElementById('logoutBtn');
         
         logoutBtn.addEventListener('click', (e) => {
