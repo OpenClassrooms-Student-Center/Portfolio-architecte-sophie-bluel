@@ -106,6 +106,10 @@ nav li a {
 	color: black;
 }
 
+nav li a strong {
+	font-weight: bold;
+}
+
 nav li a:hover {
 	color: #B1663C;
 }
@@ -113,6 +117,80 @@ nav li a:hover {
 li:hover {
 	color: #B1663C;
 }
+
+/*Login screen only*/
+
+#login {
+	margin: 0 auto;
+	padding: 68px 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+  }
+  
+  #login form {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	padding-top: 18px;
+	width: 33%;
+  }
+  
+  #login label {
+	margin-top: 25px;
+	font-size: 1.1rem;
+	color: #3D3D3D;
+  }
+  
+  #login input {
+	height: 45px;
+	min-width: 250px;
+	background: #ffffff;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	border: none;
+	font-size: 1.5em;
+	color: #1D6154;
+  }
+  
+  #login input:focus {
+    border: 2px solid green;
+    outline: none;
+}
+
+  #login button {
+	font-family: "Syne";
+	border: none;
+	font-size: 1.1em;
+	font-weight: 700;
+	color: white;
+	background-color: #1d6154;
+	height: 2.5em;
+	width: 50%;
+	min-width: 200px;
+	text-align: center;
+	border-radius: 60px;
+	cursor: pointer;
+	margin: 37px auto 0 auto;
+  }
+
+  #login button:hover {
+	box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.09);
+  }
+  
+  #login a {
+	color: #000000;
+	font-size: 1rem;
+  }
+  
+  .error-message {
+	text-align: center;
+	padding: 10px 0 20px 0;
+	color: #d65353;
+  }
+
+/*End of login screen css*/
+
+
 #introduction {
 	display: flex;
 	align-items: center;
