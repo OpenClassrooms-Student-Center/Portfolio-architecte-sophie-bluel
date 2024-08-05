@@ -188,6 +188,14 @@ li:hover {
 	color: #d65353;
   }
 
+  .loading-indicator {
+	text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+	font-size: 1rem;
+	color: #1d6154;
+  }
+
 /*End of login screen css*/
 
 

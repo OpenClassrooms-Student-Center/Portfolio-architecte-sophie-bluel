@@ -30,13 +30,13 @@
         <section id="login">
             <h2>Log In</h2>
             <form action="#" method="post" id="login-form">
-              <label for="email">E-mail</label>
-              <input type="text" name="email" id="email" required />
-              <label for="password">Mot de passe</label>
-              <input type="password" name="password" id="password" required />
-              <!-- <input type="submit" value="Se connecter"> -->
-              <button class="button" type="submit">Se connecter</button>
-              <span class="error-message"></span>
+                <label for="email">E-mail</label>
+                <input type="email" name="email" id="email" required />
+                <label for="password">Mot de passe</label>
+                <input type="password" name="password" id="password" required />
+                <button class="button" type="submit">Se connecter</button>
+                <div class="loading-indicator" style="display:none;">...</div>
+                <span class="error-message"></span> <!-- This line was added -->
             </form>
             <a href="">Mot de passe oublié</a>
           </section>
