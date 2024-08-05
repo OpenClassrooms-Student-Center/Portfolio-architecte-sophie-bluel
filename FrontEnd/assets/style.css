@@ -3,19 +3,87 @@
    License: none (public domain)
 */
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -23,34 +91,54 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
 	display: block;
 }
+
 body {
 	line-height: 1;
 }
-ol, ul {
+
+ol,
+ul {
 	list-style: none;
 }
-blockquote, q {
+
+blockquote,
+q {
 	quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
 	content: '';
 	content: none;
 }
+
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
 /** end reset css**/
 body {
 	max-width: 1140px;
-	margin:auto;
-	font-family: 'Work Sans' ;
+	margin: auto;
+	font-family: 'Work Sans';
 	font-size: 1rem;
 }
 
@@ -67,11 +155,12 @@ header {
 	justify-content: space-between;
 	margin: 50px 0
 }
+
 section {
 	margin: 50px 0
 }
 
-h1{
+h1 {
 	display: flex;
 	flex-direction: column;
 	font-family: 'Syne';
@@ -80,19 +169,20 @@ h1{
 	color: #B1663C
 }
 
-h1 > span {
+h1>span {
 	font-family: 'Work Sans';
-	font-size:10px;
+	font-size: 10px;
 	letter-spacing: 0.1em;
-;
+	;
 }
 
-h2{
+h2 {
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
 	color: #1D6154
 }
+
 nav ul {
 	display: flex;
 	align-items: center;
@@ -100,6 +190,7 @@ nav ul {
 	cursor: pointer;
 
 }
+
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
@@ -130,23 +221,23 @@ li:hover {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-  }
-  
-  #login form {
+}
+
+#login form {
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
 	padding-top: 18px;
 	width: 33%;
-  }
-  
-  #login label {
+}
+
+#login label {
 	margin-top: 25px;
 	font-size: 1.1rem;
 	color: #3D3D3D;
-  }
-  
-  #login input {
+}
+
+#login input {
 	height: 45px;
 	min-width: 250px;
 	background: #ffffff;
@@ -154,14 +245,14 @@ li:hover {
 	border: none;
 	font-size: 1.5em;
 	color: #1D6154;
-  }
-  
-  #login input:focus {
-    border: 2px solid green;
-    outline: none;
 }
 
-  #login button {
+#login input:focus {
+	border: 2px solid green;
+	outline: none;
+}
+
+#login button {
 	font-family: "Syne";
 	border: none;
 	font-size: 1.1em;
@@ -175,54 +266,54 @@ li:hover {
 	border-radius: 60px;
 	cursor: pointer;
 	margin: 37px auto 0 auto;
-  }
+}
 
-  #login button:hover {
+#login button:hover {
 	box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.09);
-  }
-  
-  #login a {
+}
+
+#login a {
 	color: #000000;
 	font-size: 1rem;
-  }
-  
-  .error-message {
+}
+
+.error-message {
 	text-align: center;
 	padding: 10px 0 20px 0;
 	color: #d65353;
-  }
+}
 
-  .loading-indicator {
+.loading-indicator {
 	text-align: center;
-    margin-top: 10px;
-    font-weight: bold;
+	margin-top: 10px;
+	font-weight: bold;
 	font-size: 1rem;
 	color: #1d6154;
-  }
+}
 
-  #logoutMessage {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #ffffff;
-    border: 1px solid #ccc;
+#logoutMessage {
+	position: fixed;
+	top: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	background-color: #ffffff;
+	border: 1px solid #ccc;
 	color: #B1663C;
-    padding: 10px;
-    border-radius: 60px;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-    display: none;
-    z-index: 1000;
+	padding: 10px;
+	border-radius: 60px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+	display: none;
+	z-index: 1000;
 }
 
 #logoutMessage.show {
-    display: block;
+	display: block;
 }
 
 /*End of login & logout screen */
 /* edit button*/
 #editBtn {
-	font-family: 'Work Sans' ;
+	font-family: 'Work Sans';
 	font-size: 1rem;
 	text-decoration: none;
 }
@@ -238,15 +329,65 @@ li:hover {
 	color: #B1663C;
 
 }
+
 /* end of edit button*/
+/* edit gallery modal */
+
+
+.modal-content {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.3);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+
+
+.modal-window {
+	background-color: #ffffff;
+	min-width: 600px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border-radius: 10px;
+}
+
+.close {
+	width: 100%;
+	text-align: right;
+	font-size: 1.6rem;
+	padding-top: 16px;
+	padding-right: 40px;
+}
+
+#gallery-edit-title {
+	color: #000;
+	background-color: #ffffff;
+	text-align: center;
+	font-family: "Work Sans";
+	font-size: 1.6rem;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+}
+
+/* end of edit gallery modal*/
 
 #introduction {
 	display: flex;
 	align-items: center;
 }
+
 #introduction figure {
 	flex: 1
 }
+
 #introduction img {
 	display: block;
 	margin: auto;
@@ -256,6 +397,7 @@ li:hover {
 #introduction article {
 	flex: 1
 }
+
 #introduction h2 {
 	margin-bottom: 1em;
 }
@@ -263,6 +405,7 @@ li:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
+
 section h2 {
 	text-align: center;
 	margin-bottom: 1em;
@@ -287,10 +430,10 @@ section h2 {
 	background-color: unset;
 }
 
-.filters button:hover{
+.filters button:hover {
 	background-color: #1D6154;
 	color: white;
-    transition: 0.40s;
+	transition: 0.40s;
 }
 
 .gallery {
@@ -308,18 +451,21 @@ section h2 {
 
 #contact {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
-#contact > * {
+
+#contact>* {
 	text-align: center;
 
 }
-#contact h2{
+
+#contact h2 {
 	margin-bottom: 20px;
 }
+
 #contact form {
 	text-align: left;
-	margin-top:30px;
+	margin-top: 30px;
 	display: flex;
 	flex-direction: column;
 }
@@ -330,23 +476,25 @@ margin: auto;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
+
 #contact label {
 	margin: 2em 0 1em 0;
 }
+
 #contact textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-input[type="submit"]{
+input[type="submit"] {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
 	background-color: #1D6154;
-	margin : 2em auto ;
+	margin: 2em auto;
 	width: 180px;
 	text-align: center;
-	border-radius: 60px ;
+	border-radius: 60px;
 }
 
 footer nav ul {
@@ -354,4 +502,3 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em
 }
-
