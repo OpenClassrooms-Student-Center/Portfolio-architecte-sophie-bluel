@@ -58,6 +58,10 @@ body {
 	text-decoration: none;
 }
 
+#title-link {
+	text-decoration: none;
+}
+
 header {
 	display: flex;
 	justify-content: space-between;
@@ -196,8 +200,29 @@ li:hover {
 	color: #1d6154;
   }
 
-/*End of login screen css*/
+  #logoutMessage {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+	color: #B1663C;
+    padding: 10px;
+    border-radius: 60px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    display: none;
+    z-index: 1000;
+}
 
+#logoutMessage.show {
+    display: block;
+}
+
+
+
+
+/*End of login screen css*/
 
 #introduction {
 	display: flex;
