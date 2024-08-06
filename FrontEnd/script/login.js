@@ -1,10 +1,15 @@
-// script/login.js
-const api_login = "http://localhost:5678/api/users/login";
-
 document.addEventListener('DOMContentLoaded', () => {
+    // Inject the loading indicator
+    const loadingIndicator = document.createElement('div');
+    loadingIndicator.classList.add('loading-indicator');
+    loadingIndicator.style.display = 'none';
+    loadingIndicator.textContent = 'Connexion...';
+    document.querySelector('main').insertAdjacentElement('afterend', loadingIndicator);
+
+    // Rest of your login.js code
+    const api_login = "http://localhost:5678/api/users/login";
     const loginForm = document.getElementById('login-form');
     const errorMessage = document.querySelector('.error-message');
-    const loadingIndicator = document.querySelector('.loading-indicator');
 
     // Retrieve the authToken from session storage
     const authToken = sessionStorage.getItem('authToken');

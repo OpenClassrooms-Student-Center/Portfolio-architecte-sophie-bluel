@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <title>Sophie Bluel - Architecte d'intérieur</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
+        rel="stylesheet">
     <meta name="description" content="">
     <link rel="stylesheet" href="./assets/style.css">
     <script src="./script/login.js" defer></script>
     <script src="./script/logout.js" defer></script>
 </head>
+
 <body>
     <header>
-        <a href="index.html" class="logo-container"><h1>Sophie Bluel <span>Architecte d'intérieur</span></h1></a>
+        <a href="index.html" class="logo-container">
+            <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+        </a>
         <nav>
             <ul>
                 <li>projets</li>
@@ -25,6 +30,7 @@
         </nav>
     </header>
     <main>
+        <!--LOGIN INDICATOR-->
         <section id="login">
             <h2>Log In</h2>
             <form action="#" method="post" id="login-form">
@@ -34,7 +40,6 @@
                 <input type="password" name="password" id="password" required />
                 <button class="button" type="submit">Se connecter</button>
                 <span class="error-message"></span>
-                <div class="loading-indicator" style="display:none;">Chargement...</div>
             </form>
             <a href="">Mot de passe oublié</a>
         </section>
@@ -47,4 +52,5 @@
         </nav>
     </footer>
 </body>
+
 </html>
