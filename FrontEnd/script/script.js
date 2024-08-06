@@ -136,8 +136,10 @@ function injectEditElements() {
     `;
         document.body.appendChild(editModal);
 
-        // Show the modal
+        // Show the modal with fade-in effect
         const modal = document.getElementById('edit-modal');
+        const modalWindow = modal.querySelector('.modal-window');
+        modalWindow.classList.add('fade-in');
         modal.classList.add('show');
 
         // Initialize miniGallery element
@@ -151,26 +153,35 @@ function injectEditElements() {
         // Close modal on clicking the close button
         const closeModalBtn = modal.querySelector('.close');
         closeModalBtn.addEventListener('click', () => {
-            modal.classList.remove('show');
-            document.body.removeChild(modal);
+            closeModalWithFade(modal);
         });
 
         // Close modal on clicking outside the modal content
         modal.querySelector('.modal-background').addEventListener('click', (e) => {
             if (e.target === modal.querySelector('.modal-background')) {
-                modal.classList.remove('show');
-                document.body.removeChild(modal);
+                closeModalWithFade(modal);
             }
         });
 
-        //Close modal on click key echap
+        // Close modal on pressing the escape key
         window.addEventListener('keydown', function (e) {
             if (e.key === "Escape" || e.key === "Esc") {
-                modal.classList.remove('show');
-                document.body.removeChild(modal);
+                closeModalWithFade(modal);
             }
-        })
+        });
     });
+}
+
+// Close modal with fade-out effect
+function closeModalWithFade(modal) {
+    const modalWindow = modal.querySelector('.modal-window');
+    modalWindow.classList.remove('fade-in');
+    modalWindow.classList.add('fade-out');
+    modalWindow.addEventListener('animationend', () => {
+        modal.classList.remove('show');
+        modalWindow.classList.remove('fade-out');
+        document.body.removeChild(modal);
+    }, { once: true });
 }
 
 // Admin Gallery Function
