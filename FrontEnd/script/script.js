@@ -162,6 +162,14 @@ function injectEditElements() {
                 document.body.removeChild(modal);
             }
         });
+
+        //Close modal on click key echap
+        window.addEventListener('keydown', function (e) {
+            if (e.key === "Escape" || e.key === "Esc") {
+                modal.classList.remove('show');
+                document.body.removeChild(modal);
+            }
+        })
     });
 }
 
