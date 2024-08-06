@@ -50,29 +50,32 @@ function displayGallery(data) {
 
 // CREATE FILTERS
 function createFilters(data) {
-    const categories = [...new Set(data.map(item => item.category.name))];
+    const authToken = sessionStorage.getItem('authToken');
+    if (!authToken) {
+        const categories = [...new Set(data.map(item => item.category.name))];
 
-    // Create a container for the filters
-    const filtersDiv = document.createElement("div");
-    filtersDiv.id = "filters";
-    filtersDiv.classList.add('filters');
+        // Create a container for the filters
+        const filtersDiv = document.createElement("div");
+        filtersDiv.id = "filters";
+        filtersDiv.classList.add('filters');
 
-    // Create a button for each category
-    categories.forEach(category => {
-        const button = document.createElement("button");
-        button.textContent = category;
-        button.addEventListener("click", () => filterGallery(category));
-        filtersDiv.appendChild(button);
-    });
+        // Create a button for each category
+        categories.forEach(category => {
+            const button = document.createElement("button");
+            button.textContent = category;
+            button.addEventListener("click", () => filterGallery(category));
+            filtersDiv.appendChild(button);
+        });
 
-    // Add an "All" button to show all items
-    const allButton = document.createElement("button");
-    allButton.textContent = "Tous";
-    allButton.addEventListener("click", () => filterGallery("Tous"));
-    filtersDiv.appendChild(allButton);
+        // Add an "All" button to show all items
+        const allButton = document.createElement("button");
+        allButton.textContent = "Tous";
+        allButton.addEventListener("click", () => filterGallery("Tous"));
+        filtersDiv.appendChild(allButton);
 
-    // Insert the filters container before the gallery
-    portfolioSection.insertBefore(filtersDiv, galleryDiv);
+        // Insert the filters container before the gallery
+        portfolioSection.insertBefore(filtersDiv, galleryDiv);
+    }
 }
 
 // FILTER GALLERY
@@ -90,3 +93,55 @@ function filterGallery(category) {
 
 // Call the function to get and display works
 getWorks();
+
+// Check if the user is logged in
+function checkAuthToken() {
+    const authToken = sessionStorage.getItem('authToken');
+    if (authToken) {
+        injectEditElements();
+    }
+}
+
+// Inject edit elements if the user is logged in
+function injectEditElements() {
+    // Inject the edit button
+    const editBtn = document.createElement('span');
+    editBtn.id = 'editBtn';
+    editBtn.innerHTML = '<a href="#"><i class="fa-regular fa-pen-to-square"></i>modifier</a>';
+    const portfolioTitle = document.querySelector('#js-portfolio h2');
+    portfolioTitle.appendChild(editBtn);
+
+    // Inject the edit modal
+    const editModal = document.createElement('aside');
+    editModal.id = 'edit-modal';
+    editModal.classList.add('hidden');
+    editModal.innerHTML = `
+        <div class="modal-background">
+            <div class="modal-window">
+                <header class="modal-header"><button class="close">&times;</button></header>
+                <h1 id="gallery-edit-title">Gallerie photo</h1>
+                <section class="camera-roll"><div class="gallery-roll"></div></section>
+                <button id="add-picture-btn">Ajouter une photo</button>
+            </div>
+        </div>
+    `;
+    /* PART TO FIX FOR DISPLAYING MODAL
+    document.body.appendChild(editModal);
+
+    // Add event listener to the edit button to show the modal
+    editBtn.querySelector('a').addEventListener('click', (e) => {
+        e.preventDefault();
+        editModal.classList.remove('hidden');
+        editModal.classList.add('show');
+    });
+
+    // Add event listener to the close button to hide the modal
+    editModal.querySelector('.close').addEventListener('click', () => {
+        editModal.classList.remove('show');
+        editModal.classList.add('hidden');
+    });
+    */
+}
+
+// Check for auth token on page load
+document.addEventListener('DOMContentLoaded', checkAuthToken);

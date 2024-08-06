@@ -327,14 +327,29 @@ li:hover {
 
 #editBtn a:hover {
 	color: #B1663C;
-
 }
 
 /* end of edit button*/
 /* edit gallery modal */
+#edit-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+#edit-modal.show {
+    display: flex;
+}
 
 
-.modal-content {
+.modal-background {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -345,8 +360,6 @@ li:hover {
 	align-items: center;
 	justify-content: center;
 }
-
-
 
 .modal-window {
 	background-color: #ffffff;
@@ -359,11 +372,19 @@ li:hover {
 }
 
 .close {
+	position: relative;
+	left: 250px;
 	width: 100%;
 	text-align: right;
 	font-size: 1.6rem;
-	padding-top: 16px;
-	padding-right: 40px;
+	transition: transform 0.3s ease;
+    transform-origin: center;
+	background-color: #ffffff;
+	border: none;
+}
+
+.close:hover {
+	transform: rotate(90deg);
 }
 
 #gallery-edit-title {
@@ -375,6 +396,38 @@ li:hover {
 	font-style: normal;
 	font-weight: 400;
 	line-height: normal;
+	margin-bottom: 16px;
+}
+
+#add-picture-btn {
+	font-family: "Syne";
+	border: none;
+	font-size: 0.9em;
+	font-weight: 700;
+	color: white;
+	background-color: #1d6154;
+	height: 2.5em;
+	text-align: center;
+	border-radius: 60px;
+	cursor: pointer;
+	margin: 40px auto 32px auto;
+	padding: 0px 8px 0px 8px;
+}
+
+#add-picture-btn:hover {
+	box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.09);
+}
+
+.camera-roll {
+	border: 3px blue dashed;
+	width: 80%;
+	min-height: 100px;
+}
+
+/* Utility classes */
+
+.hidden {
+    display: none;
 }
 
 /* end of edit gallery modal*/

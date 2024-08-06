@@ -6,9 +6,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const errorMessage = document.querySelector('.error-message');
     const loadingIndicator = document.querySelector('.loading-indicator');
 
+    // Retrieve the authToken from session storage
+    const authToken = sessionStorage.getItem('authToken');
+
+    if (authToken) {
+        window.location.href = 'index.html';
+    }
+
     loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
+
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
 
