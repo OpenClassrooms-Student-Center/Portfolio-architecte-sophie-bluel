@@ -111,36 +111,48 @@ function injectEditElements() {
     const portfolioTitle = document.querySelector('#js-portfolio h2');
     portfolioTitle.appendChild(editBtn);
 
-    // Inject the edit modal
-    const editModal = document.createElement('aside');
-    editModal.id = 'edit-modal';
-    editModal.classList.add('hidden');
-    editModal.innerHTML = `
+    // Add event listener to the edit button to show the modal
+    editBtn.querySelector('a').addEventListener('click', (e) => {
+        e.preventDefault();
+
+        // Inject the edit modal
+        const editModal = document.createElement('aside');
+        editModal.id = 'edit-modal';
+        editModal.innerHTML = `
         <div class="modal-background">
             <div class="modal-window">
-                <header class="modal-header"><button class="close">&times;</button></header>
+                <header class="modal-header">
+                    <button class="close">&times;</button>
+                </header>
                 <h1 id="gallery-edit-title">Gallerie photo</h1>
-                <section class="camera-roll"><div class="gallery-roll"></div></section>
+                <section class="camera-roll">
+                    <div class="gallery-roll"></div>
+                </section>
                 <button id="add-picture-btn">Ajouter une photo</button>
             </div>
         </div>
     `;
-    /* PART TO FIX FOR DISPLAYING MODAL
-    document.body.appendChild(editModal);
+        document.body.appendChild(editModal);
 
-    // Add event listener to the edit button to show the modal
-    editBtn.querySelector('a').addEventListener('click', (e) => {
-        e.preventDefault();
-        editModal.classList.remove('hidden');
-        editModal.classList.add('show');
-    });
+        // Show the modal
+        const modal = document.getElementById('edit-modal');
+        modal.classList.add('show');
 
-    // Add event listener to the close button to hide the modal
-    editModal.querySelector('.close').addEventListener('click', () => {
-        editModal.classList.remove('show');
-        editModal.classList.add('hidden');
+        // Close modal on clicking the close button
+        const closeModalBtn = modal.querySelector('.close');
+        closeModalBtn.addEventListener('click', () => {
+            modal.classList.remove('show');
+            document.body.removeChild(modal);
+        });
+
+        // Close modal on clicking outside the modal content
+        modal.querySelector('.modal-background').addEventListener('click', (e) => {
+            if (e.target === modal.querySelector('.modal-background')) {
+                modal.classList.remove('show');
+                document.body.removeChild(modal);
+            }
+        });
     });
-    */
 }
 
 // Check for auth token on page load
