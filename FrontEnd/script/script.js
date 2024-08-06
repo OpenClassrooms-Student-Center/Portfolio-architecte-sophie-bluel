@@ -124,13 +124,13 @@ function injectEditElements() {
             <div class="modal-window">
                 <header class="modal-header">
                     <div class="modal-flex-space"></div>
-                    <button class="close" title="fermer">&times;</button>
+                    <button class="close" title="Fermer">&times;</button>
                 </header>
                 <h1 id="gallery-edit-title">Gallerie photo</h1>
                 <section class="camera-roll">
                     <div class="gallery-roll"></div>
                 </section>
-                <button id="add-picture-btn"> Ajouter une photo </button>
+                <button id="add-picture-btn" title="Ajouter une photo"> Ajouter une photo </button>
             </div>
         </div>
     `;
@@ -167,11 +167,11 @@ function injectEditElements() {
 
 // Admin Gallery Function
 function adminGallery(data) {
-    const miniGallery = document.querySelector('.camera-roll');
+    const miniGallery = document.querySelector('.camera-roll .gallery-roll');
     miniGallery.innerHTML = "";
 
     data.forEach((item) => {
-        //create admin img container
+        // Create admin img container
         const articleAdmin = document.createElement("article");
         articleAdmin.classList.add("article-admin");
         articleAdmin.setAttribute("data-category", item.category.name);
@@ -181,12 +181,18 @@ function adminGallery(data) {
         adminImg.src = item.imageUrl;
         adminImg.alt = item.title;
 
-        // Append the image and title elements to the article element
+        // Create a delete icon element
+        const deleteIcon = document.createElement("i");
+        deleteIcon.classList.add("fa-solid", "fa-trash", "delete-icon");
+        deleteIcon.title = "Supprimer"; // Set the title attribute
+
+        // Append the image and delete icon to the article element
         articleAdmin.appendChild(adminImg);
+        articleAdmin.appendChild(deleteIcon);
 
         // Append the article element to the gallery div
         miniGallery.appendChild(articleAdmin);
-    })
+    });
 }
 
 // Check for auth token on page load

@@ -398,7 +398,7 @@ li:hover {
 	background-color: #ffffff;
 	text-align: center;
 	font-family: "Work Sans";
-	font-size: 1.6rem;
+	font-size: 1.8rem;
 	font-style: normal;
 	font-weight: 400;
 	line-height: normal;
@@ -419,17 +419,39 @@ li:hover {
 
 .camera-roll {
 	border-bottom: 1px rgb(199, 199, 199) solid;
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-	grid-column-gap: 12px;
-	grid-row-gap: 24px;
 	margin: 16px 0px 0px 0px;
 	padding: 0px 0px 0px 0px;
 	width: 80%;
 }
 
-.article-admin {
+.gallery-roll {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: 12px;
+	grid-row-gap: 24px;
+	margin: 16px 0px 32px 0px;
+	padding: 0px 0px 0px 0px;
 	width: 100%;
+}
+
+.article-admin {
+    position: relative;
+    display: inline-block;
+}
+
+.delete-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    border-radius: 50%;
+    padding: 5px;
+    font-size: 16px;
+}
+
+.delete-icon:hover {
+	box-shadow: 1px 1px 1px rgba(252, 252, 252);
 }
 
 .article-admin  img {
@@ -454,7 +476,7 @@ li:hover {
 }
 
 #add-picture-btn:hover {
-	box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.09);
+	box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
 }
 /* Utility classes */
 
