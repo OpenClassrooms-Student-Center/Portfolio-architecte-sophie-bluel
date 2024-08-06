@@ -368,21 +368,20 @@ li:hover {
 	justify-content: center;
 }
 
-.modal-window {
-	background-color: #ffffff;
-	min-width: 600px;
+.modal-header {
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	border-radius: 10px;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 90%;
+	margin: 18px 12px 0px 0px;
+}
+
+.modal-flex-space {
+	width: 90%;
 }
 
 .close {
-	position: relative;
-	left: 250px;
-	width: 100%;
-	text-align: right;
+	width: 5px;
 	font-size: 1.6rem;
 	transition: transform 0.3s ease;
     transform-origin: center;
@@ -406,6 +405,38 @@ li:hover {
 	margin-bottom: 16px;
 }
 
+.modal-window {
+	background-color: #ffffff;
+	min-width: 320px;
+	max-width: 850px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border-radius: 10px;
+	box-sizing: border-box;
+}
+
+.camera-roll {
+	border-bottom: 1px rgb(199, 199, 199) solid;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: 12px;
+	grid-row-gap: 24px;
+	margin: 16px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+	width: 80%;
+}
+
+.article-admin {
+	width: 100%;
+}
+
+.article-admin  img {
+	width: 100%;
+
+}
+
 #add-picture-btn {
 	font-family: "Syne";
 	border: none;
@@ -419,18 +450,12 @@ li:hover {
 	cursor: pointer;
 	margin: 40px auto 32px auto;
 	padding: 0px 8px 0px 8px;
+	min-width: 14rem;
 }
 
 #add-picture-btn:hover {
 	box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.09);
 }
-
-.camera-roll {
-	border: 3px blue dashed;
-	width: 80%;
-	min-height: 100px;
-}
-
 /* Utility classes */
 
 .hidden {

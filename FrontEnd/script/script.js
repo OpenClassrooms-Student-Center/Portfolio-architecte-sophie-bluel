@@ -15,6 +15,7 @@ async function getWorks() {
         const data = await response.json();
         displayGallery(data);
         createFilters(data);
+        adminGallery(data); //EDIT GALLERY DATA
     } catch (error) {
         console.error(error);
     }
@@ -122,13 +123,14 @@ function injectEditElements() {
         <div class="modal-background">
             <div class="modal-window">
                 <header class="modal-header">
-                    <button class="close">&times;</button>
+                    <div class="modal-flex-space"></div>
+                    <button class="close" title="fermer">&times;</button>
                 </header>
                 <h1 id="gallery-edit-title">Gallerie photo</h1>
                 <section class="camera-roll">
                     <div class="gallery-roll"></div>
                 </section>
-                <button id="add-picture-btn">Ajouter une photo</button>
+                <button id="add-picture-btn"> Ajouter une photo </button>
             </div>
         </div>
     `;
@@ -137,6 +139,14 @@ function injectEditElements() {
         // Show the modal
         const modal = document.getElementById('edit-modal');
         modal.classList.add('show');
+
+        // Initialize miniGallery element
+        const miniGallery = document.querySelector('.camera-roll .gallery-roll');
+
+        // Call adminGallery to populate the mini gallery
+        getWorks().then(() => {
+            adminGallery(data);
+        });
 
         // Close modal on clicking the close button
         const closeModalBtn = modal.querySelector('.close');
@@ -153,6 +163,30 @@ function injectEditElements() {
             }
         });
     });
+}
+
+// Admin Gallery Function
+function adminGallery(data) {
+    const miniGallery = document.querySelector('.camera-roll');
+    miniGallery.innerHTML = "";
+
+    data.forEach((item) => {
+        //create admin img container
+        const articleAdmin = document.createElement("article");
+        articleAdmin.classList.add("article-admin");
+        articleAdmin.setAttribute("data-category", item.category.name);
+
+        // Create an image element for the card
+        const adminImg = document.createElement("img");
+        adminImg.src = item.imageUrl;
+        adminImg.alt = item.title;
+
+        // Append the image and title elements to the article element
+        articleAdmin.appendChild(adminImg);
+
+        // Append the article element to the gallery div
+        miniGallery.appendChild(articleAdmin);
+    })
 }
 
 // Check for auth token on page load

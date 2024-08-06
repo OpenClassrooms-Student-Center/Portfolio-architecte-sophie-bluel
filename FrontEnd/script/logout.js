@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 logoutMessage.classList.remove('show');
                 window.location.href = 'index.html';
-            }, 650);
+            }, 350);
         });
     }
 });
