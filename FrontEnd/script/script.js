@@ -153,8 +153,7 @@ function injectEditElements() {
 
             <div class="add-photo-form" style="display: none;">
                 <div class="add-photo-content">
-                    <div class="upload-box"><i class="fa-regular fa-image" id="iconImg"></i><button title="Téléchargez une photo" id="upload-btn"> + Ajouter photo</button></div>
-                    <p>jpg, png : 4 mo max</p>
+                    <div class="upload-box"><i class="fa-regular fa-image" id="iconImg"></i><button title="Téléchargez une photo" id="upload-btn"> + Ajouter photo</button><p>jpg, png : 4 mo max</p></div>
                     <form id="photoForm">
                         <div class="form-group">
                             <label for="photoTitle">Titre de la photo</label>
