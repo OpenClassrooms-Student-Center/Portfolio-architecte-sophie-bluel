@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Redirect to the homepage
                 window.location.href = 'index.html';
             } else {
-                errorMessage.textContent = data.message || 'Email ou mot de passe incorrect';
+                errorMessage.textContent = 'Email ou mot de passe incorrect';
             }
         } catch (error) {
             console.error('Erreur:', error);

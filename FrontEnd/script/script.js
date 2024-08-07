@@ -60,6 +60,12 @@ function createFilters(data) {
         filtersDiv.id = "filters";
         filtersDiv.classList.add('filters');
 
+        // Add an "All" button to show all items
+        const allButton = document.createElement("button");
+        allButton.textContent = "Tous";
+        allButton.addEventListener("click", () => filterGallery("Tous"));
+        filtersDiv.appendChild(allButton);
+
         // Create a button for each category
         categories.forEach(category => {
             const button = document.createElement("button");
@@ -67,12 +73,6 @@ function createFilters(data) {
             button.addEventListener("click", () => filterGallery(category));
             filtersDiv.appendChild(button);
         });
-
-        // Add an "All" button to show all items
-        const allButton = document.createElement("button");
-        allButton.textContent = "Tous";
-        allButton.addEventListener("click", () => filterGallery("Tous"));
-        filtersDiv.appendChild(allButton);
 
         // Insert the filters container before the gallery
         portfolioSection.insertBefore(filtersDiv, galleryDiv);
