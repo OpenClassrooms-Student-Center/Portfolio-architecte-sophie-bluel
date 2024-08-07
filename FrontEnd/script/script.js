@@ -153,10 +153,10 @@ function injectEditElements() {
 
             <div class="add-photo-form" style="display: none;">
                 <div class="add-photo-content">
-                    <div class="upload-box"><i class="fa-regular fa-image" id="iconImg"></i><button title="Téléchargez une photo" id="upload-btn"> + Ajouter photo</button><p>jpg, png : 4 mo max</p></div>
+                    <div class="upload-box"><i class="fa-regular fa-image" id="iconImg"></i><button title="Téléchargez une photo" id="upload-btn"> + Ajouter photo</button><p id="file-upload-note">jpg, png : 4mo max</p></div>
                     <form id="photoForm">
                         <div class="form-group">
-                            <label for="photoTitle">Titre de la photo</label>
+                            <label for="photoTitle">Titre</label>
                             <input type="text" id="photoTitle" name="photoTitle" maxlength="60" required>
                         </div>
                         <div class="form-group">
@@ -167,7 +167,8 @@ function injectEditElements() {
                                 <option value="Hotels & restaurants">Hotels & restaurants</option>
                             </select>
                         </div>
-                        <button type="submit" id="submit-btn">Valider</button>
+                        <div class="border-bottom"></div>
+                        <button type="submit" id="submit-btn" title="Valider">Valider</button>
                     </form>
                 </div>
             </div>
