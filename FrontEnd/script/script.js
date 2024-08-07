@@ -1,7 +1,7 @@
 "use strict";
 
 const works_endpoint = "http://localhost:5678/api/works";
-//API documentation: SWAGGER UI http://localhost:5678/api-docs/#/
+// API documentation: SWAGGER UI http://localhost:5678/api-docs/#/
 const portfolioSection = document.querySelector('#js-portfolio');
 const galleryDiv = document.querySelector('#js-portfolio .gallery');
 
@@ -15,7 +15,7 @@ async function getWorks() {
         const data = await response.json();
         displayGallery(data);
         createFilters(data);
-        adminGallery(data); //EDIT GALLERY DATA
+        adminGallery(data); // EDIT GALLERY DATA
     } catch (error) {
         console.error(error);
     }
@@ -116,31 +116,70 @@ function injectEditElements() {
     editBtn.querySelector('a').addEventListener('click', (e) => {
         e.preventDefault();
 
+        // Fonction pour afficher la modale avec un effet de fade-in
+        function showModal(modal) {
+            modal.querySelector('.modal-window').style.opacity = '0';
+            modal.classList.add('show');
+            setTimeout(() => {
+                modal.querySelector('.modal-window').style.opacity = '1';
+            }, 10); // Attendre un peu pour que le navigateur prenne en compte le changement de classe
+        }
+
+        // Fonction pour fermer la modale avec un effet de fade-out
+        function closeModal(modal) {
+            modal.querySelector('.modal-window').style.opacity = '0';
+            setTimeout(() => {
+                modal.classList.remove('show');
+                document.body.removeChild(modal);
+            }, 500); // Attendre la durée de la transition pour enlever l'élément du DOM
+        }
+
         // Inject the edit modal
         const editModal = document.createElement('aside');
         editModal.id = 'edit-modal';
         editModal.innerHTML = `
-        <div class="modal-background">
-            <div class="modal-window">
-                <header class="modal-header">
-                    <div class="modal-flex-space"></div>
-                    <button class="close" title="Fermer">&times;</button>
-                </header>
-                <h1 id="gallery-edit-title">Gallerie photo</h1>
-                <section class="camera-roll">
-                    <div class="gallery-roll"></div>
-                </section>
+    <div class="modal-background">
+        <div class="modal-window">
+            <header class="modal-header">
+                <button class="back" title="Retour" style="display: none;"><i class="fa-solid fa-arrow-left" id="modal-return"></i></button>
+                <div class="modal-flex-space"></div>
+                <button class="close" title="Fermer">&times;</button>
+            </header>
+            <h1 id="gallery-edit-title">Gallerie photo</h1>
+            <section class="camera-roll">
+                <div class="gallery-roll"></div>
                 <button id="add-picture-btn" title="Ajouter une photo"> Ajouter une photo </button>
+            </section>
+
+            <div class="add-photo-form" style="display: none;">
+                <div class="add-photo-content">
+                    <div class="upload-box"><i class="fa-regular fa-image" id="iconImg"></i><button title="Téléchargez une photo" id="upload-btn"> + Ajouter photo</button></div>
+                    <p>jpg, png : 4 mo max</p>
+                    <form id="photoForm">
+                        <div class="form-group">
+                            <label for="photoTitle">Titre de la photo</label>
+                            <input type="text" id="photoTitle" name="photoTitle" maxlength="60" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="photoCategory">Catégorie</label>
+                            <select id="photoCategory" name="photoCategory" required>
+                                <option value="Objets">Objets</option>
+                                <option value="Appartements">Appartements</option>
+                                <option value="Hotels & restaurants">Hotels & restaurants</option>
+                            </select>
+                        </div>
+                        <button type="submit" id="submit-btn">Valider</button>
+                    </form>
+                </div>
             </div>
         </div>
-    `;
+    </div>
+`;
         document.body.appendChild(editModal);
 
         // Show the modal with fade-in effect
         const modal = document.getElementById('edit-modal');
-        const modalWindow = modal.querySelector('.modal-window');
-        modalWindow.classList.add('fade-in');
-        modal.classList.add('show');
+        showModal(modal);
 
         // Initialize miniGallery element
         const miniGallery = document.querySelector('.camera-roll .gallery-roll');
@@ -150,38 +189,55 @@ function injectEditElements() {
             adminGallery(data);
         });
 
-        // Close modal on clicking the close button
+        // Close modal on clicking the close button with fade-out effect
         const closeModalBtn = modal.querySelector('.close');
         closeModalBtn.addEventListener('click', () => {
-            closeModalWithFade(modal);
+            closeModal(modal);
         });
 
-        // Close modal on clicking outside the modal content
+        // Close modal on clicking outside the modal content with fade-out effect
         modal.querySelector('.modal-background').addEventListener('click', (e) => {
             if (e.target === modal.querySelector('.modal-background')) {
-                closeModalWithFade(modal);
+                closeModal(modal);
             }
         });
 
-        // Close modal on pressing the escape key
+        // Close modal on clicking the Escape key with fade-out effect
         window.addEventListener('keydown', function (e) {
             if (e.key === "Escape" || e.key === "Esc") {
-                closeModalWithFade(modal);
+                closeModal(modal);
             }
         });
+
+        // Show the add photo form on clicking the add photo button
+        const addPhotoBtn = document.getElementById('add-picture-btn');
+        addPhotoBtn.addEventListener('click', () => {
+            document.querySelector('.camera-roll').style.display = 'none';
+            document.querySelector('.add-photo-form').style.display = 'block';
+            document.querySelector('.modal-header .back').style.display = 'block';
+            document.getElementById('gallery-edit-title').textContent = 'Ajout photo';
+            document.querySelector('.add-picture-btn').style.display = 'none';
+        });
+
+        // Return to gallery on clicking the back button
+        const backBtn = document.querySelector('.modal-header .back');
+        backBtn.addEventListener('click', () => {
+            document.querySelector('.camera-roll').style.display = 'block';
+            document.querySelector('.add-photo-form').style.display = 'none';
+            document.querySelector('.modal-header .back').style.display = 'none';
+            document.getElementById('gallery-edit-title').textContent = 'Gallerie photo';
+        });
+
+
     });
 }
 
-// Close modal with fade-out effect
-function closeModalWithFade(modal) {
-    const modalWindow = modal.querySelector('.modal-window');
-    modalWindow.classList.remove('fade-in');
-    modalWindow.classList.add('fade-out');
-    modalWindow.addEventListener('animationend', () => {
-        modal.classList.remove('show');
-        modalWindow.classList.remove('fade-out');
+// Close modal function
+function closeModal(modal) {
+    modal.classList.remove('show');
+    setTimeout(() => {
         document.body.removeChild(modal);
-    }, { once: true });
+    }, 300); // Match this duration with your CSS transition duration
 }
 
 // Admin Gallery Function
