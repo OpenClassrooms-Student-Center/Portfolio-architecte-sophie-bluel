@@ -1,3 +1,5 @@
+"use strict"
+
 document.addEventListener('DOMContentLoaded', () => {
     // Inject the loading indicator
     const loadingIndicator = document.createElement('div');
@@ -10,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const api_login = "http://localhost:5678/api/users/login";
     const loginForm = document.getElementById('login-form');
     const errorMessage = document.querySelector('.error-message');
+    let store = sessionStorage;
 
     // Retrieve the authToken from session storage
     const authToken = sessionStorage.getItem('authToken');

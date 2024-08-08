@@ -7,12 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
     <meta name="description" content="">
     <link rel="stylesheet" href="./assets/style.css">
-    <script src="./script/login.js" defer></script>
-    <script src="./script/logout.js" defer></script>
+    <script src="./script/security.js" defer></script>
 </head>
 
 <body>
@@ -30,14 +28,13 @@
         </nav>
     </header>
     <main>
-        <!--LOGIN INDICATOR-->
         <section id="login">
             <h2>Log In</h2>
             <form action="#" method="post" id="login-form">
                 <label for="email">E-mail</label>
-                <input type="text" name="email" id="email" required />
+                <input type="text" name="email" id="email" />
                 <label for="password">Mot de passe</label>
-                <input type="password" name="password" id="password" required />
+                <input type="password" name="password" id="password" />
                 <button class="button" type="submit">Se connecter</button>
                 <span class="error-message"></span>
             </form>

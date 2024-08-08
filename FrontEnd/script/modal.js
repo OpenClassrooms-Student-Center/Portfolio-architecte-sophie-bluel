@@ -438,7 +438,7 @@ function imagePreview() {
     });
 };
 
-/**
+/*
  * Display the upload modal for upload an image of a new work
  */
 function displayUploadModal() {

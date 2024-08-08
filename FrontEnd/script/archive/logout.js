@@ -1,14 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Inject the logout message
     const logoutMessage = document.createElement('div');
+    const authToken = sessionStorage.getItem('authToken');
+    const loginButton = document.getElementById('loginBtn');
+    
     logoutMessage.id = 'logoutMessage';
     logoutMessage.classList.add('hidden');
     logoutMessage.textContent = 'Déconnexion...';
     document.querySelector('main').insertAdjacentElement('afterend', logoutMessage);
 
-    // Rest of your logout.js code
-    const authToken = sessionStorage.getItem('authToken');
-    const loginButton = document.getElementById('loginBtn');
 
     if (authToken) {
         // Change the login button to logout
