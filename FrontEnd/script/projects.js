@@ -1,55 +1,97 @@
-const works = [];
+"use strict";
 
-// Function to reset the gallery
-function resetGallery() {
-    const galleryNode = document.querySelector('#js-portfolio .gallery');
-    if (galleryNode) {
-        galleryNode.innerHTML = '';
+const works_endpoint = "http://localhost:5678/api/works";
+// API documentation: SWAGGER UI http://localhost:5678/api-docs/#/
+const portfolioSection = document.querySelector('#js-portfolio');
+const galleryDiv = document.querySelector('#js-portfolio .gallery');
+let galleryData = []; // Store the gallery data globally
+
+// API FETCH getWorks
+async function getWorks() {
+    try {
+        const response = await fetch(works_endpoint);
+        if (!response.ok) {
+            throw new Error("Sorry, I can't retrieve the works");
+        }
+        const data = await response.json();
+        galleryData = data; // Store the data globally
+        displayGallery(data);
+        createFilters(data);
+    } catch (error) {
+        console.error(error);
     }
 }
 
-// Function to filter and display the gallery based on category
+// DISPLAY GALLERY
+function displayGallery(data) {
+    galleryDiv.innerHTML = "";
+
+    data.forEach((item) => {
+        // Create article card
+        const articleCard = document.createElement("article");
+        articleCard.classList.add("articleCard");
+        articleCard.setAttribute("data-category", item.category.name);
+
+        // Create an image element for the card
+        const cardImg = document.createElement("img");
+        cardImg.src = item.imageUrl;
+        cardImg.alt = item.title;
+
+        // Create a figcaption element for the title of the work
+        const cardTitle = document.createElement("figcaption");
+        cardTitle.textContent = item.title;
+
+        // Append the image and title elements to the article element
+        articleCard.appendChild(cardImg);
+        articleCard.appendChild(cardTitle);
+
+        // Append the article element to the gallery div
+        galleryDiv.appendChild(articleCard);
+    });
+}
+
+// CREATE FILTERS
+function createFilters(data) {
+    const authToken = sessionStorage.getItem('authToken');
+    if (!authToken) {
+        const categories = [...new Set(data.map(item => item.category.name))];
+
+        // Create a container for the filters
+        const filtersDiv = document.createElement("div");
+        filtersDiv.id = "filters";
+        filtersDiv.classList.add('filters');
+
+        // Add an "All" button to show all items
+        const allButton = document.createElement("button");
+        allButton.textContent = "Tous";
+        allButton.addEventListener("click", () => filterGallery("Tous"));
+        filtersDiv.appendChild(allButton);
+
+        // Create a button for each category
+        categories.forEach(category => {
+            const button = document.createElement("button");
+            button.textContent = category;
+            button.addEventListener("click", () => filterGallery(category));
+            filtersDiv.appendChild(button);
+        });
+
+        // Insert the filters container before the gallery
+        portfolioSection.insertBefore(filtersDiv, galleryDiv);
+    }
+}
+
+// FILTER GALLERY
 function filterGallery(category) {
-    resetGallery();
+    const articles = galleryDiv.querySelectorAll(".articleCard");
 
-    if (category === 0) {
-        works.forEach(work => {
-            // Display all works
-            displayWork(work);
-        });
-    } else {
-        works.forEach(work => {
-            if (work.category_id === category) {
-                // Display filtered works
-                displayWork(work);
-            }
-        });
-    }
+    articles.forEach(article => {
+        if (category === "Tous" || article.getAttribute("data-category") === category) {
+            article.style.display = "block";
+        } else {
+            article.style.display = "none";
+        }
+    });
 }
 
-// Function to display a work item
-function displayWork(work) {
-    const galleryNode = document.querySelector('#js-portfolio .gallery');
-    if (!galleryNode) return;
-
-    // Create article card
-    const articleCard = document.createElement("article");
-    articleCard.classList.add("articleCard");
-    articleCard.setAttribute("data-category", work.category.name);
-
-    // Create an image element for the card
-    const cardImg = document.createElement("img");
-    cardImg.src = work.imageUrl;
-    cardImg.alt = work.title;
-
-    // Create a figcaption element for the title of the work
-    const cardTitle = document.createElement("figcaption");
-    cardTitle.textContent = work.title;
-
-    // Append the image and title elements to the article element
-    articleCard.appendChild(cardImg);
-    articleCard.appendChild(cardTitle);
-
-    // Append the article element to the gallery div
-    galleryNode.appendChild(articleCard);
-}
+// Call the function to get and display works
+getWorks();

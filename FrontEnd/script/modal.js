@@ -1,457 +1,136 @@
-/**
- * 
- * Create a modal
- * 
- * @param Object header 
- * @param Object content 
- * @param Object footer 
- */
-function createModal(header = null, content = null, footer = null) {
-    let body = document.querySelector('body');
+"use strict";
 
-    let modalCloseBtn = document.createElement('button');
-        modalCloseBtn.setAttribute('type', 'button');
-        modalCloseBtn.classList.add('close-btn');
-        modalCloseBtn.textContent = 'X'
+// Function to show the modal
+window.showModal = function(data) {
+    const editModal = document.createElement('aside');
+    editModal.id = 'edit-modal';
+    editModal.innerHTML = `
+        <div class="modal-background">
+            <div class="modal-window">
+                <header class="modal-header">
+                    <button class="back" title="Retour" style="display: none;"><i class="fa-solid fa-arrow-left" id="modal-return"></i></button>
+                    <div class="modal-flex-space"></div>
+                    <button class="close" title="Fermer">&times;</button>
+                </header>
+                <h1 id="gallery-edit-title">Gallerie photo</h1>
+                <section class="camera-roll">
+                    <div class="gallery-roll"></div>
+                    <button id="add-picture-btn" title="Ajouter une photo"> Ajouter une photo </button>
+                </section>
+                <div class="add-photo-form" style="display: none;">
+                    <div class="add-photo-content">
+                        <div class="upload-box"><i class="fa-regular fa-image" id="iconImg"></i><button title="Téléchargez une photo" id="upload-btn"> + Ajouter photo</button><p id="file-upload-note">jpg, png : 4mo max</p></div>
+                        <form id="photoForm">
+                            <div class="form-group">
+                                <label for="photoTitle">Titre</label>
+                                <input type="text" id="photoTitle" name="photoTitle" maxlength="60" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="photoCategory">Catégorie</label>
+                                <select id="photoCategory" name="photoCategory" required>
+                                    <option value="Objets">Objets</option>
+                                    <option value="Appartements">Appartements</option>
+                                    <option value="Hotels & restaurants">Hotels & restaurants</option>
+                                </select>
+                            </div>
+                            <div class="border-bottom"></div>
+                            <button type="submit" id="submit-btn" title="Valider">Valider</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(editModal);
 
-    let modalHeader = document.createElement('div');
-        modalHeader.classList.add('modal-title');
-        modalHeader.append(header);
+    // Show the modal with fade-in effect
+    const modal = document.getElementById('edit-modal');
+    modal.classList.add('show');
+    setTimeout(() => {
+        modal.querySelector('.modal-window').style.opacity = '1';
+    }, 10);
 
-    let modalContent = document.createElement('div');
-        modalContent.classList.add('modal-content');
-        modalContent.append(content);
-
-    let modalFooter = document.createElement('div');
-        modalFooter.classList.add('modal-footer');
-        modalFooter.append(footer);
-
-    let container = document.createElement('div');
-        container.classList.add('modal');
-        container.append(modalCloseBtn);
-
-    if (header) {
-        container.append(modalHeader);
+    // Close modal function
+    function closeModal(modal) {
+        modal.querySelector('.modal-window').style.opacity = '0';
+        setTimeout(() => {
+            modal.classList.remove('show');
+            document.body.removeChild(modal);
+        }, 500); // Match this duration with your CSS transition duration
     }
 
-    if (content) {
-        container.append(modalContent);
-    };
-
-    if (footer) {
-        container.append(modalFooter);
-    }
-
-    let modal = document.createElement('div');
-    modal.classList.add('modal-backdrop');
-
-    body.append(modal);
-    body.append(container);
-
-    closeModal();
-};
-/**
- * Create the modal with a preview of each work
- */
-function modalPreviewContent() {
-    let header = document.createElement('h2');
-        header.textContent = 'Gallery Photo';
-
-    let content = fillPreviewGallery();
-
-
-    let footer = document.createElement('button');
-        footer.classList.add('add-btn');
-        footer.textContent = 'Ajouter photo';
-        footer.addEventListener('click', event => {
-            event.preventDefault();
-            displayUploadModal();
-        });
-
-    createModal(header, content, footer);
-};
-
-/**
- * 
- * Close the modal window
- * 
- */
-function closeModal() {
-    const modalBackdrop = document.querySelector('.modal-backdrop');
-    const modal = document.querySelector('.modal');
-    const body = document.querySelector('body');
-    const closeBtn = document.querySelector('.close-btn');
-        
-    modalBackdrop.addEventListener('click', event => {
-        event.stopImmediatePropagation();
-
-        body.removeChild(modalBackdrop);
-        body.removeChild(modal)
-
+    // Close modal on clicking the close button with fade-out effect
+    const closeModalBtn = modal.querySelector('.close');
+    closeModalBtn.addEventListener('click', () => {
+        closeModal(modal);
     });
 
-    closeBtn.addEventListener('click', event => {
-        event.stopImmediatePropagation();
+    // Close modal on clicking outside the modal content with fade-out effect
+    modal.querySelector('.modal-background').addEventListener('click', (e) => {
+        if (e.target === modal.querySelector('.modal-background')) {
+            closeModal(modal);
+        }
+    });
 
-        body.removeChild(modalBackdrop);
-        body.removeChild(modal)
-    })
-};
+    // Close modal on clicking the Escape key with fade-out effect
+    window.addEventListener('keydown', function (e) {
+        if (e.key === "Escape" || e.key === "Esc") {
+            closeModal(modal);
+        }
+    });
 
-/**
- * Create the modal with a upload form
- */
-function modalPreviewUpload() {
+    // Show the add photo form on clicking the add photo button
+    const addPhotoBtn = document.getElementById('add-picture-btn');
+    addPhotoBtn.addEventListener('click', () => {
+        document.querySelector('.camera-roll').style.display = 'none';
+        document.querySelector('.add-photo-form').style.display = 'block';
+        document.querySelector('.modal-header .back').style.display = 'block';
+        document.getElementById('gallery-edit-title').textContent = 'Ajout photo';
+        document.querySelector('.add-picture-btn').style.display = 'none';
+    });
 
-    let header = document.createElement('h2');
-        header.textContent = 'Ajout Photo';
+    // Return to gallery on clicking the back button
+    const backBtn = document.querySelector('.modal-header .back');
+    backBtn.addEventListener('click', () => {
+        document.querySelector('.camera-roll').style.display = 'block';
+        document.querySelector('.add-photo-form').style.display = 'none';
+        document.querySelector('.modal-header .back').style.display = 'none';
+        document.getElementById('gallery-edit-title').textContent = 'Gallerie photo';
+    });
 
-    let content = document.createElement('div');
-        content.classList.add('content');
-    let form = formUpload();
-        content.append(form);
-
-    let footer = document.createElement('button');
-        footer.classList.add('valid-btn');
-        footer.classList.add('no-active');
-        footer.textContent = 'Valider';
-
-    createModal(header, content, footer);
-
+    // Populate the admin gallery
+    adminGallery(data);
 }
 
-/**
- * Create a arrow for the upload modal to back to the preview gallery
- */
-function arrowBack() {
-    const modalBackdrop = document.querySelector('.modal-backdrop');
-    const modal = document.querySelector('.modal');
-    const body = document.querySelector('body')
+// Admin Gallery Function
+window.adminGallery = function(data) {
+    const miniGallery = document.querySelector('.camera-roll .gallery-roll');
+    miniGallery.innerHTML = "";
 
-    let arrowBack = document.createElement('span');
-        arrowBack.classList.add('material-symbols-outlined');
-        arrowBack.classList.add('arrow-back');
-        arrowBack.textContent = 'arrow_back';
+    data.forEach((item) => {
+        // Create admin img container
+        const articleAdmin = document.createElement("article");
+        articleAdmin.classList.add("article-admin");
+        articleAdmin.setAttribute("data-category", item.category.name);
 
-    modal.append(arrowBack);
+        // Create an image element for the card
+        const adminImg = document.createElement("img");
+        adminImg.src = item.imageUrl;
+        adminImg.alt = item.title;
 
-    arrowBack.addEventListener('click', event => {
+        // Create a delete icon element
+        const deleteIcon = document.createElement("i");
+        deleteIcon.classList.add("fa-solid", "fa-trash", "delete-icon");
+        deleteIcon.title = "Supprimer"; // Set the title attribute
 
-        body.removeChild(modalBackdrop);
-        body.removeChild(modal)
+        // Append the image and delete icon to the article element
+        articleAdmin.appendChild(adminImg);
+        articleAdmin.appendChild(deleteIcon);
 
-        modalPreviewContent();
-    })
-};
-/**
- * 
- * Create an HTML element <input>
- * 
- * @param String className, sets the value of the class attribute
- * @param String type, the type of form control
- * @param String name, the name associated with the control
- * 
- * @returns <input> HTML element
- */
-function createInput(className, type, name) {
-    let input = document.createElement('input');
-        input.className = className;
-        input.type = type;
-        input.name = name;
-
-        return input;
-};
-
-/**
- * 
- * @param String attribute  
- * @param String text
- *  
- * @returns <label> HTML element
- */
-function createLabel(attribute, text) {
-    let label = document.createElement('label');
-        label.setAttribute('for', attribute);
-        label.textContent = text;
-
-    return label;
-};
-
-/**
- * 
- * @param String className 
- * @param String name 
- * @param Array neededOptions
- * 
- * @returns <select> HTML element
- */
-function createSelect(className, name, neededOptions) {
-    let select = document.createElement('select');
-        select.className = className;
-        select.setAttribute('name', name);
-
-    neededOptions.forEach((neededOption) => {
-        let option = document.createElement('option');
-            option.value = neededOption;
-            option.textContent = neededOption;
-
-        select.append(option);
-        });
-        
-        return select;
-};
-
-/**
- * 
- * Create a form to submit a new work
- * 
- */
-function formUpload() {
-    // Menu options for the HTML element <select>
-    let neededOptions = ['', 'objets', 'Appartement', 'Hôtels & restaurants']
-    
-    let spanIcon = document.createElement('span');
-        spanIcon.classList.add('material-symbols-outlined');
-        spanIcon.classList.add('images-mode');
-        spanIcon.textContent = 'imagesmode';
-    
-    let input = createInput('input-file', 'file', 'file');
-    
-    let spanAdd = document.createElement('span');
-        spanAdd.textContent = "+ Ajouter photo";
-
-    let FileUpload = document.createElement('div');
-        FileUpload.classList.add('file-upload');
-    
-    let spanExtensionSize = document.createElement('span');
-        spanExtensionSize.classList.add('pic-extension-size');
-        spanExtensionSize.textContent = "jpg, png : 4mo max";
-
-    let divUpload = document.createElement('div');
-        divUpload.classList.add('image-upload');
-
-    let labelTitle = createLabel('name', 'Titre')
-
-    let inputImageTitle = createInput('image-title', 'text', 'title');     
-
-    let divImagePropertyTitle = document.createElement('div');
-        divImagePropertyTitle.classList.add('image-property--title');
-
-        divImagePropertyTitle.appendChild(labelTitle);
-        divImagePropertyTitle.appendChild(inputImageTitle);
-
-    let divPicSpecs = document.createElement('div');
-        divPicSpecs.classList.add('pic-specs');
-
-    let divImagePropertyCategory = document.createElement('div');
-        divImagePropertyCategory.classList.add('image-property--category');
-
-    let labelCategory = createLabel('name', 'Catégorie');
-    
-    let select = createSelect('image-category', 'category', neededOptions);
-
-    let form = document.createElement('form');
-        form.classList.add('form-upload');
-
-    FileUpload.appendChild(input);
-    FileUpload.appendChild(spanAdd);
-
-    divUpload.appendChild(spanIcon);
-    divUpload.appendChild(FileUpload);
-    divUpload.appendChild(spanExtensionSize);
-
-    divImagePropertyCategory.appendChild(labelCategory);
-    divImagePropertyCategory.appendChild(select);
-
-    divPicSpecs.appendChild(divImagePropertyTitle);
-    divPicSpecs.appendChild(divImagePropertyCategory);
-
-    form.append(divUpload);
-    form.append(divPicSpecs);
-    form.append(divImagePropertyCategory);
-
-    return form;
-};
-
-/**
- * 
- * Reset the upload form
- * 
- * @param HTML node element body 
- * @param HTML node element modalBackdrop 
- * @param HTML node element modal 
- */
-function resetUploadForm(body, modalBackdrop, modal) {
-    body.removeChild(modalBackdrop);
-    body.removeChild(modal);
-        
-    // Create the upload modal
-    modalPreviewUpload();
-    
-    // Create a display zone for an image preview 
-    imagePreview()
-    
-    // Create the modal back arrow
-    arrowBack();
-};
-
-/**
- * 
- * Check for valid image parameters
- * 
- * @param Things, event 
- * @param HTML element node, uploadZone 
- * 
- * @returns Boolean value
- */
-function controlImage(event, uploadZone) {
-    
-    let nodeImage = event.target.files;
-
-    if (
-        nodeImage.length > 0 
-        &&
-        (nodeImage[0].type === 'image/png' || nodeImage[0].type === 'image/jpeg' || nodeImage[0].type === 'image/jpg')
-        &&
-        nodeImage[0].size <= '32000000') {
-
-        //fileUpload.classList.add('active');
-        let img = document.createElement('img');
-        img.src = URL.createObjectURL(nodeImage[0]);
-        img.classList.add('upload-img');
-        uploadZone.innerHTML = '';
-        uploadZone.appendChild(img);
-            
-        return true;
-    };
-    let buttonOk = document.createElement('button');
-        buttonOk.textContent = 'Ok';
-    modalAlertMessage('Image non valide !', null, buttonOk);
-
-    return false;
-};
-
-/**
- * 
- * Check the form for valid image parameters
- * 
- * @param HTML node element, from the input type file for an image
- * @param HTML node element, from the input type text for a title
- * @param HTML node element, from the select for a category
- * @param HTML node element, from the submit button
- * 
- * @returns Boolean value
- */
-function controlForm(inputFile, inputTitle, inputCategory, submitButton, nodeImageOk) {
-
-    if (nodeImageOk &&
-        inputFile.value != '' &&
-        inputTitle.value != '' &&
-        inputCategory.selectedIndex != 0) {
-
-        submitButton.classList.remove('no-active');
-        
-        return true;
-
-    };
-
-    submitButton.classList.add('no-active');
-    return false;
-};
-
-/**
- * Display the image preview
- */
-function imagePreview() {
-    const inputFile = document.querySelector('.input-file');
-    const inputTitle = document.querySelector('.image-title');
-    const inputCategory = document.querySelector('.image-category');
-    const submitButton = document.querySelector('.valid-btn');
-    const modal = document.querySelector('.modal');
-    const uploadZone = document.querySelector('.image-upload');
-
-    let formIsOk = false;
-    let nodeImageOk = false;
-    
-    // Add an image's work
-    inputFile.addEventListener('change', event => {
-        
-        nodeImageOk = controlImage(event, uploadZone);
-        
+        // Append the article element to the gallery div
+        miniGallery.appendChild(articleAdmin);
     });
+}
 
-    // Add a title to an image of a work
-    inputTitle.addEventListener('change', event => {
-        
-        let nodeTitle = event.target;
-        
-        if (nodeTitle.value == 0) {
-           // Create an alert message
-            let buttonOk = document.createElement('button');
-                buttonOk.textContent = 'Ok';
-            modalAlertMessage('Veuillez entrer un titre valide !', null, buttonOk);
-            
-            return false;
-        };
-    });
-
-    // Add a category to an image of a work
-    inputCategory.addEventListener('change', event => {
-        let nodeCategory = event.target;
-        
-        if (nodeCategory.selectedIndex == 0) {
-            // Create an alert message
-            let buttonOk = document.createElement('button');
-                buttonOk.textContent = 'Ok';
-            modalAlertMessage('Veuillez choisir une catégorie !', null, buttonOk);
-            
-            return false;
-        };
-    });
-
-    // Event change
-    modal.addEventListener('change', event => {
-        
-        formIsOk = controlForm(inputFile, inputTitle, inputCategory, submitButton, nodeImageOk);
-        
-    });
-
-    // Submit image to upload it
-    submitButton.addEventListener('click', event => {
-
-        if (formIsOk) {
-            // create a form data to upload
-            const formData = new FormData();
-            formData.set('image', inputFile.files[0]);
-            formData.set('title', inputTitle.value);
-            formData.set('category', inputCategory.selectedIndex);
-
-            uploadNewWork(formData);
-        }
-        
-        else {
-            // Create an alert message
-            let buttonOk = document.createElement('button');
-                buttonOk.textContent = 'Ok';
-            modalAlertMessage('Veuillez compléter le formulaire !', null, buttonOk);
-        };
-    });
-};
-
-/*
- * Display the upload modal for upload an image of a new work
- */
-function displayUploadModal() {
-    
-    const body = document.querySelector('body');
-    const modalBackdrop = document.querySelector('.modal-backdrop');
-    const modal = document.querySelector('.modal');
-
-    resetUploadForm(body, modalBackdrop, modal)
-    
-    // Create the upload form
-    formUpload();
-    
-    // Create the cross for close the modal
-    closeModal();
-};
+// Check for auth token on page load
+document.addEventListener('DOMContentLoaded', checkAuthToken);

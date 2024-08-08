@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 document.addEventListener('DOMContentLoaded', () => {
     const url_login = "http://localhost:5678/api/users/login";
@@ -8,12 +8,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const errorMessageSpan = document.querySelector('.error-message');
     let store = sessionStorage;
 
-    // Retrieve the authToken from session storage
-    const authToken = sessionStorage.getItem('authToken');
-
     // Inject the loading and logout indicators
     const loadingIndicator = document.createElement('div');
     const logoutMessage = document.createElement('div');
+
     // Configure loading indicator
     loadingIndicator.classList.add('loading-indicator');
     loadingIndicator.style.display = 'none';
@@ -24,6 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
     logoutMessage.classList.add('hidden');
     logoutMessage.textContent = 'Déconnexion...'; // Logout message
     mainElement.insertAdjacentElement('afterend', logoutMessage);
+
+    // Retrieve the authToken from session storage
+    const authToken = sessionStorage.getItem('authToken');
 
     // Redirect if the user is already authenticated and on the login page
     if (authToken && window.location.pathname.includes('login.html')) {
@@ -42,7 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Check if both fields are filled
             if (!email || !password) {
-                console.log("All fields must be filled"); // Add logs for debugging
                 displayErrorMessage("Veuillez saisir tous les champs du formulaire"); // Error message for empty fields
                 return;
             }
@@ -102,9 +102,32 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Function to check auth token and inject edit elements
+    function checkAuthToken() {
+        const authToken = sessionStorage.getItem('authToken');
+        if (authToken) {
+            injectEditElements();
+        }
+    }
+
+    // Function to inject edit elements if the user is logged in
+    function injectEditElements() {
+        // Inject the edit button
+        const editBtn = document.createElement('span');
+        editBtn.id = 'editBtn';
+        editBtn.innerHTML = '<a href="#"><i class="fa-regular fa-pen-to-square"></i>modifier</a>';
+        const portfolioTitle = document.querySelector('#js-portfolio h2');
+        portfolioTitle.appendChild(editBtn);
+
+        // Add event listener to the edit button to show the modal
+        editBtn.querySelector('a').addEventListener('click', (e) => {
+            e.preventDefault();
+            showModal(window.galleryData); // Pass the gallery data to the showModal function
+        });
+    }
+
     // Function to display error message in the span element
     function displayErrorMessage(message) {
-        console.log("Displaying error message: " + message); // Add logs for debugging
         errorMessageSpan.textContent = message;
         errorMessageSpan.style.display = 'block';
     }
@@ -119,4 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         return await response.json();
     }
+
+    // Check for auth token on page load
+    checkAuthToken();
 });
