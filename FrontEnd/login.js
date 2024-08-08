@@ -1,5 +1,6 @@
-const formLogin = document.getElementById('formLogin')
-const errorMessage = document.getElementById('error-message')
+const formLogin = document.getElementById('formLogin');
+const errorMessage = document.getElementById('error-message');
+
 
 formLogin.addEventListener("submit", async (event) => {
     // On empêche le comportement par défaut
@@ -13,7 +14,7 @@ formLogin.addEventListener("submit", async (event) => {
     // Création de l’objet des infos du formulaire.
 const loginData = {
     email: document.getElementById("email").value,
-    password: document.getElementById("password").value,
+    password: document.getElementById("password").value
  };
 
  // Création de la charge utile au format JSON
@@ -37,6 +38,7 @@ const loginData = {
         window.localStorage.setItem("token", resultValue.token);
          // Rediriger l'utilisateur
          window.location.href = "/FrontEnd/index.html";
+         
 
      } else {
          const error = await result.json();
