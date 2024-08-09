@@ -9,8 +9,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-	<script type="module" src="categories.js"></script>
-	<script type="module" src="gallery.js"></script>
+	<script type="module" src="index.js"></script>
 	<script src="https://kit.fontawesome.com/e547d28caf.js" crossorigin="anonymous"></script>
 		
 </head>
@@ -21,7 +20,7 @@
 		<ul>
 			<li>projets</li>
 			<li>contact</li>
-			<a href="login.html">
+			<a>
 				<li id="authText">login</li>
 			</a>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
@@ -53,36 +52,56 @@
 		</div>
 	</section>
 
-	<section id="myModal" class="modal">
+	<section id="firstModal" class="modal">
 		<div class="modal-content">
-			<h3 id="titre-galerie-photo">Galerie photo</h3>
 			<i class="close-modal fa-solid fa-xmark"></i>
-			<div id="mini_gallery_id" class="mini_gallery">	
+			<h3 class="titre-modal">Galerie photo</h3>
+				<div id="mini_gallery_id" class="mini_gallery">
+				</div>
+			</br>
+			<hr style="border: 0; border-top: 1px solid #888;">
+			<div id="addPhotoModal-btn-zone">
+				<button id="addPhotoModalBtn" class="ajoutPhoto">Ajouter une photo</button>	
 			</div>
-			<hr>
-			<button id="addPhotoModalBtn" class="ajoutPhoto">Ajouter une photo</button>
 		</div>
 	</section>
 
 	<section id="addPhotoModal" class="modal">
 		<div class="modal-content">
-			<h3>Ajout d'une photo</h3>
+			<button class="return-button"><i class="fa-solid fa-arrow-left"></i></button>
 			<i class="close-modal fa-solid fa-xmark"></i>
+			<h3 class="titre-modal">Ajout d'une photo</h3>
 			<form enctype="multipart/form-data" action="#" method="post" id="photoPost">
-				
-				<label>Ajouter Photo</label>
-				<input type="file" name="file" required id="imageUrl"/>
+			
+		<div id="grey-input-zone">
+			<i id="photo-icon" class="fa-regular fa-image"></i>
+			<div id="input-file-div">
+				<label for="imageUrl" id="button-add-photo">
+					<p id="text-add-photo">+ Ajouter Photo</p>
+					<input type="file" name="file" id="imageUrl" required/>
+				</label>
 			</br>
+		</div>
+		<p id="subtext-add-photo">jpg, png : 4mo max</p>
+		</div>
 				<label>Titre</label>
 			</br>
-				<input type="text" name="titre" id="titrePhoto">
+				<input type="text" name="titre" id="titrePhoto" required>
 			</br>
 				<label>Catégorie</label>
 			</br>
-				<input type="text" name="categorie" id="categoriePhoto">
+				<select type="number" name="categorie" id="categoriePhoto" required>
+				<option value="0">Sélectionnez une catégorie</option>
+				<option value="1">1 = Objets</option>
+				<option value="2">2 = Appartements</option>
+				<option value="3">3 = Hotels & restaurants</option>
+				</select>
+				<div id="champIncomplet">Merci de choisir la catégorie.</div>
 			</br>
-			<hr>
+			<hr style="border: 0; border-top: 1px solid #888;">
+			<div id="validerModal-zone">
 			<button type="submit" id="validerModal">Valider</button>
+		</div>
 		</form>
 		</div>
 	</section>
@@ -112,3 +131,9 @@
 
 </body>
 </html>
+
+<p>
+	Vous souhaitez
+	Retrouvez <a onclick="launchSite()" link="http://openclassrooms.com"><span>Openclassrooms</span></a> et commencez à apprendre
+
+</p>
