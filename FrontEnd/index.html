@@ -41,6 +41,39 @@
 					décorateur(trice)</p>
 			</article>
 		</section>
+
+		<a href="#modal"> Modifier </a>
+
+		<aside id="modal" class="modale">
+			<div class="modale-wrapper">
+				<div class="modalHeader"><i class="fa-solid fa-xmark"></i></div>
+				<h3> Galerie Photo </h3>
+				<div class="gallery-contain">
+				</div>
+				<button id="addPictureBtn">Ajouter une photo</button>
+			</div>
+			<div class="modale-wrapper">
+				<div class="modalHeader"><i class="fa-solid fa-xmark"></i></div>
+				<h3> Ajout Photo </h3>
+				<div class="">
+					<form id="PictureForm" name="PictureForm">
+						<div id="labelPhoto">
+							<i class="hgi-stroke hgi-image-01" style="color: #c5c6c9;"></i>
+							<label for="image" id="label-image">+ Ajouter une photo</label>
+							<input type="file" name="image" id="image" style="display: none;">
+							<p>jpg,png : 4mo max</p>
+						</div>
+						<label for="title">Titre</label>
+						<input type="text" id="title-input" name="title" required>
+						<label for="selectCategory">Catégorie</label>
+						<select id="selectCategory" name="selectCategory"></select>
+					</form>
+
+
+
+
+
+		</aside>
 		<section id="portfolio">
 			<h2>Mes Projets</h2>
 			<div class="gallery">
