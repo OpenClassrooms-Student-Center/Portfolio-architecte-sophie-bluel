@@ -31,7 +31,7 @@
 				<img src="./assets/images/sophie-bluel.png" alt="">
 			</figure>
 			<article>
-				<h2>Designer d'espace</h2>
+				<h2 class="principalTitle">Designer d'espace</h2>
 				<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison
 					finale du chantier.</p>
 				<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les
@@ -47,19 +47,21 @@
 		<aside id="modal" class="modale">
 			<div class="modale-wrapper">
 				<div class="modalHeader"><i class="fa-solid fa-xmark"></i></div>
-				<h3> Galerie Photo </h3>
+				<h2 class="titleModal"> Galerie Photo </h2>
 				<div class="gallery-contain">
 				</div>
 				<button id="addPictureBtn">Ajouter une photo</button>
+
 			</div>
 			<div class="modale-wrapper">
 				<div class="modalHeader"><i class="fa-solid fa-xmark"></i></div>
-				<h3> Ajout Photo </h3>
+				<h2 class="titleModal"> Ajout Photo </h2>
 				<div class="">
 					<form id="PictureForm" name="PictureForm">
+						<button id="modal-return"><i class="fa-solid fa-arrow-left"></i></button>
 						<div id="labelPhoto">
-							<i class="hgi-stroke hgi-image-01" style="color: #c5c6c9;"></i>
-							<label for="image" id="label-image">+ Ajouter une photo</label>
+							<i class="fa-regular fa-image" style="color: #aaaaaa;"></i>
+							<label for="image" id="label-image"> + Ajouter une photo</label>
 							<input type="file" name="image" id="image" style="display: none;">
 							<p>jpg,png : 4mo max</p>
 						</div>
@@ -67,12 +69,10 @@
 						<input type="text" id="title-input" name="title" required>
 						<label for="selectCategory">Catégorie</label>
 						<select id="selectCategory" name="selectCategory"></select>
+						<input type="submit" value="Valider" id="modal-valider">
 					</form>
-
-
-
-
-
+				</div>
+			</div>
 		</aside>
 		<section id="portfolio">
 			<h2>Mes Projets</h2>
