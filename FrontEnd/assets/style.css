@@ -359,3 +359,80 @@ form {
 .Mp-oublie {
 	color: black;
 }
+
+/* Modale */
+
+.modal {
+	display: none;
+	align-items: center;
+	justify-content: center;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background: rgba(0, 0, 0, 0.3);
+	z-index: 1;
+}
+
+.modale-wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	max-width: calc(100vw - 20px);
+	max-height: calc(100vh - 50px);
+	width: 630px;
+	padding: 30px;
+	border-radius: 10px;
+	background-color: #FFFFFF;
+	margin: auto;
+	overflow: auto;
+	z-index: 2;
+
+}
+
+.modalHeader {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+}
+
+#labelPhoto {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 100px;
+	background-color: #E8F1F6;
+	border-radius: 3px;
+	margin-bottom: 30px;
+	text-align: center;
+	width: 200%;
+	padding-top: 25px;
+	position: relative;
+	box-sizing: border-box;
+}
+
+#labelPhoto p {
+	font-size: 10px;
+	font-weight: 400;
+}
+
+#label-image {
+	padding: 13px 30px 13px 30px;
+	background-color: #cbd6dc;
+	border-radius: 25px;
+	color: #376b89;
+	margin-top: 17px;
+	cursor: pointer;
+}
+
+
+#selectCategory,
+#title-input {
+	width: 100%;
+	height: 37px;
+	box-shadow: 0px 0px 15px rgb(233, 233, 228);
+	border-width: 0px;
+	margin-top: 10px;
+	padding-left: 13px;
+}
