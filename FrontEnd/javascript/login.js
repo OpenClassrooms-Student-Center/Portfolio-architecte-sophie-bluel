@@ -3,8 +3,8 @@
 // element submit //
 
 let form = document.querySelector("Form")
-form.addEventListener("submit", async (event) => {
-    event.preventDefault()
+form.addEventListener("submit", async (e) => {
+    e.preventDefault()
 
     let baliseEmail = document.getElementById("email")
     let email = baliseEmail.value
