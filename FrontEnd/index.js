@@ -73,6 +73,7 @@ addPhotoModalBtn.addEventListener("click", (event) => {
 });
 
 validerPhotoBtn.addEventListener("click", (event) => {
+    event.preventDefault();
     saveNewPhoto();
 });
 
@@ -158,19 +159,21 @@ function openAddPhotoModal() {
 //Sauvegarde de l'ajout d'une photo dans la 2eme modale
 async function saveNewPhoto() {
 
+    const form = document.getElementById("photoPost");
     // Ajout de l'eventListener au bouton validerModal
 
          let url = "http://localhost:5678/api/works/"
-         const formData = new FormData()
+         const formData = new FormData();
          formData.append("title", document.getElementById("titrePhoto").value)
          formData.append("category", document.getElementById("categoriePhoto").value)
          formData.append("image", document.getElementById("imageUrl").files[0])
          const result = await fetch(url, {
                 //Objet de configuration qui comprend 2 propriétés
                 method: "POST",
-                headers: {'Content-Type': 'multipart/form-data', 'Authorization': 'Bearer ' + window.localStorage.getItem("token"), 'accept': 'application/json'},
-                body: formData
-            })
+                headers: {'Authorization': 'Bearer ' + window.localStorage.getItem("token")},
+                body: formData,
+            });
+            console.log(await result.json());
         }
 
 function showButtonIfLogedin() {
@@ -217,13 +220,13 @@ function galleryDisplayCategorie(categorie) {
     gallery.innerHTML = gallery_contents;
 }
 
-    // Recuperer les categories du backend.
+    
+// Recuperer les categories du backend.
+async function addCategoriesButtons() {
+    const categories_element = document.getElementById("categories_id");
 
-    async function addCategoriesButtons() {
-        const categories_element = document.getElementById("categories_id");
-
-        // Les boutons des differents travaux classes par categories
-        for (var i=0; i < categories.length; i++) { 
+    // Les boutons des differents travaux classes par categories
+    for (var i=0; i < categories.length; i++) { 
         const cat = document.createElement("button");
         cat.innerText = categories[i].name;
         cat.id = categories[i].name;
@@ -237,7 +240,7 @@ function galleryDisplayCategorie(categorie) {
 
         categories_element.appendChild(cat);
     }
-    }
+}
 
     // Deuxieme modale Ajout Photo: AddEventListeners pour valider les champs
 
@@ -255,36 +258,36 @@ function galleryDisplayCategorie(categorie) {
     
     // document.getElementById("photoPost").addEventListener("submit", validerCategorie);
 
-    document.addEventListener("DOMContentLoaded", function() {
-        let fileInput = document.getElementById("imageUrl");
-        let textInput = document.getElementById("titrePhoto");
-        let selectInput = document.getElementById("categoriePhoto");
-        let submitButton = document.getElementById("validerModal");
+    // document.addEventListener("DOMContentLoaded", function() {
+    //     let fileInput = document.getElementById("imageUrl");
+    //     let textInput = document.getElementById("titrePhoto");
+    //     let selectInput = document.getElementById("categoriePhoto");
+    //     let submitButton = document.getElementById("validerModal");
     
-        function checkInputs() {
-            // Vérifie que tous les champs sont remplis correctement
-            if (fileInput.files.length > 0 && textInput.value.trim() !== "" && selectInput.value !== "0") {
-                submitButton.disabled = false;
-                submitButton.classList.add("enabled");
-                console.log('Button enabled');
-            } else {
-                submitButton.disabled = true;
-                submitButton.classList.remove("enabled");
-            }
-        }
+    //     function checkInputs() {
+    //         // Vérifie que tous les champs sont remplis correctement
+    //         if (fileInput.files.length > 0 && textInput.value.trim() !== "" && selectInput.value !== "0") {
+    //             submitButton.disabled = false;
+    //             submitButton.classList.add("enabled");
+    //             console.log('Button enabled');
+    //         } else {
+    //             submitButton.disabled = true;
+    //             submitButton.classList.remove("enabled");
+    //         }
+    //     }
 
-        // Empêcher la soumission du formulaire si le bouton est désactivé
-        photoPost.addEventListener("submit", function(event) {
-        if (submitButton.disabled) {
-            event.preventDefault(); // Bloque la soumission si le bouton est désactivé
-        }
-        });
+    //     // Empêcher la soumission du formulaire si le bouton est désactivé
+    //     photoPost.addEventListener("submit", function(event) {
+    //     if (submitButton.disabled) {
+    //         event.preventDefault(); // Bloque la soumission si le bouton est désactivé
+    //     }
+    //     });
 
-        // Ajouter des event listeners à chaque champ requis
-        fileInput.addEventListener("change", checkInputs);
-        textInput.addEventListener("input", checkInputs);
-        selectInput.addEventListener("change", checkInputs);
+    //     // Ajouter des event listeners à chaque champ requis
+    //     fileInput.addEventListener("change", checkInputs);
+    //     textInput.addEventListener("input", checkInputs);
+    //     selectInput.addEventListener("change", checkInputs);
     
-        // Initialement désactive le bouton de soumission
-        checkInputs();
-    });
+    //     // Initialement désactive le bouton de soumission
+    //     checkInputs();
+    // });
