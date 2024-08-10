@@ -34,7 +34,7 @@
 					<a href="#contact">contact</a>
 				</li>
 				<li class="login">
-					<a  href="login.html#login_page">login</a>
+					<a href="login.html#login_page">login</a>
 				</li>
 				<li class="logout hidden">
 					<div>logout</div>
@@ -93,10 +93,10 @@
 			</form>
 		</section>
 		</div>
-		<aside id="my_modal" class="modal_container" aria-labelledby="modal1_h2">
+		<aside id="my_modal" class="modal_container">
 			<div id="delete_modal" class="modal">
 				<nav class="delete_header">
-					<i class="fa-solid fa-xmark"></i>
+					<i class="fa-solid fa-xmark x1"></i>
 				</nav>
 				<div class="delete_content">
 					<h2 id="modal1_h2">Galerie photo</h2>
@@ -115,23 +115,26 @@
 			<div id="add_modal" class="modal">
 				<nav class="add_header">
 					<i class="fa-solid fa-arrow-left"></i>
-					<i class="fa-solid fa-xmark"></i>
+					<i class="fa-solid fa-xmark x2"></i>
 				</nav>
 				<div class="add_content">
 					<h2 id="modal2_h2">Ajout photo</h2>
-					<form action="http://localhost:5678/api/works" method="post">
+					<form>
 						<fieldset class="add_container">
-							<i class="fa-regular fa-image"></i>
-							<input type="file" id="file" name="file" accept="image/png, image/jpeg" required/>
-							<label class="add_btn">+ Ajouter photo</label>
-							<p>jpg, png : 4mo max</p>
+							<div class="img_downloader">
+								<i class="fa-regular fa-image"></i>
+								<input type="file" id="file" name="file" accept="image/png, image/jpeg" required />
+								<label class="add_btn">+ Ajouter photo</label>
+								<p>jpg, png : 4mo max</p>
+							</div>
+							</div>
 						</fieldset>
 						<fieldset class="field">
-							<label for="title">Titre</label>
+							<label class="first" for="title">Titre</label>
 							<input type="text" id="title" name="title" required>
 						</fieldset>
 						<fieldset class="field">
-							<label for="category">Catégorie</label>
+							<label class="second" for="category">Catégorie</label>
 							<select name="category" id="category" required>
 								<option value="0"></option>
 								<option value="1">Objets</option>

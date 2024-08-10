@@ -3,10 +3,6 @@ import {
     logout
 } from '../libs/user.js';
 
-
-//connexion
-const form = document.querySelector('form');
-
 function idValidator(email, password) {
     //validation complexe avec expression régulière pour l'email 'sophie.bluel@test.tld' + MDP entre 6 et 12 carctères
     let emailValidation = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/

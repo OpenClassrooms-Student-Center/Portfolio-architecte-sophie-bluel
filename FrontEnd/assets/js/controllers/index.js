@@ -2,10 +2,11 @@
 import {
     fetchCategories
 } from '../libs/categories.js'
-import { logout } from '../libs/user.js';
+import { 
+    logout 
+} from '../libs/user.js';
 
 import {
-    createWork,
     fetchWork
 } from '../libs/works.js'
 
@@ -22,7 +23,7 @@ const gallery = document.querySelector('.gallery');
 
 
 // une fonction qui crée un élément HTML pour un travail
-function createWorkElement(work) {
+export function createWorkElement(work) {
     let figure = document.createElement('figure');
     figure.classList.add('work');
     let img = document.createElement('img');
