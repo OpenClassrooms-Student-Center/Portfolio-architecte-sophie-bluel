@@ -83,6 +83,7 @@ function createFilters(data) {
 // FILTER GALLERY
 function filterGallery(category) {
     const articles = galleryDiv.querySelectorAll(".articleCard");
+    const buttons = document.querySelectorAll('.filters button');
 
     articles.forEach(article => {
         if (category === "Tous" || article.getAttribute("data-category") === category) {
@@ -91,6 +92,17 @@ function filterGallery(category) {
             article.style.display = "none";
         }
     });
+
+    // Retirer la classe active de tous les boutons
+    buttons.forEach(button => {
+        button.classList.remove('active');
+    });
+
+    // Ajouter la classe active au bouton cliqué
+    const activeButton = Array.from(buttons).find(button => button.textContent === category || (category === "Tous" && button.textContent === "Tous"));
+    if (activeButton) {
+        activeButton.classList.add('active');
+    }
 }
 
 // Call the function to get and display works

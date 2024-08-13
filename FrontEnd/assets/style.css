@@ -135,6 +135,7 @@ table {
 }
 
 /** end reset css**/
+
 body {
 	max-width: 1140px;
 	margin: auto;
@@ -376,6 +377,7 @@ li:hover {
     justify-content: center;
     align-items: center;
     z-index: 9999;
+	box-sizing: border-box;
 }
 
 
@@ -389,7 +391,8 @@ li:hover {
 	justify-content: space-between;
 	align-items: center;
 	width: 90%;
-	margin: 8px 16px 0px 0px;
+	margin: 40px 16px 0px 0px;
+	padding: 0px 16px 0px 0px;
 }
 
 .back {
@@ -677,6 +680,11 @@ section h2 {
 	background-color: #1D6154;
 	color: white;
 	transition: 0.40s;
+}
+
+.filters button.active {
+    background-color: #1D6154;
+    color: white;
 }
 
 .gallery {
