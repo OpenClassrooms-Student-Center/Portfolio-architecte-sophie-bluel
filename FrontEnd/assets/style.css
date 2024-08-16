@@ -146,7 +146,11 @@ body {
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 50px 0;
+	flex-direction: column;
+	margin-left: auto;
+	margin-right: auto;
+	width: auto;
 }
 
 section {
@@ -224,7 +228,6 @@ a:hover {
 
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
 }
 
 .gallery {
@@ -308,6 +311,60 @@ footer nav ul {
 a {
 	text-decoration: none;
 	color: black;
+}
+
+/* Black Bainer */
+
+#header-top {
+	display: flex;
+	justify-content: space-between;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+	width: 1140px;
+}
+
+#bainerBlack {
+	display: flex;
+	justify-content: center;
+	padding: 20px 0;
+	margin-top: 0;
+	background-color: black;
+	color: white;
+}
+
+.edit {
+	display: flex;
+	flex-direction: row;
+	gap: 12px;
+}
+
+
+/* Btn Edition */
+
+.title-edit {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 31px;
+	margin-top: 100px;
+	margin-bottom: 30px;
+}
+
+#edit-works {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	cursor: pointer;
+}
+
+#edit-works span {
+	color: black;
+	font-size: 14px;
+	font-family: "Work Sans";
+	font-weight: 400;
 }
 
 /* Fomulaire de connexion */
@@ -456,4 +513,39 @@ form {
 	font-weight: 400;
 	font-family: 'Work Sans';
 	color: black;
+}
+
+
+/* Filtres */
+
+.filtre {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 30px;
+}
+
+.bouton-filtre {
+	font-family: 'Syne';
+	font-size: 0.9em;
+	color: #1D6154;
+	background-color: #FEFDF0;
+	border-color: #1D6154;
+	border-width: 1px;
+	text-align: center;
+	border-radius: 60px;
+	padding: 7px 20px 7px 20px;
+	margin-top: 30px;
+	margin-right: 10px;
+	margin-bottom: 25px;
+}
+
+.bouton-filtre:focus,
+.bouton-filtre.selected {
+	background-color: #1D6154;
+	color: white;
+	border-width: 0px;
+}
+
+button[autofocus] {
+	outline: none;
 }
