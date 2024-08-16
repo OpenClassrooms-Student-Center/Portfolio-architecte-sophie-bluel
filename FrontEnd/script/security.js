@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Add event listener to the edit button to show the modal
         editBtn.querySelector('a').addEventListener('click', (e) => {
             e.preventDefault();
-            showModal(window.galleryData); // Pass the gallery data to the showModal function
+            showModal(works); // INFO: WAS "window.galleryData" Pass the gallery data to the showModal function
         });
     }
 
@@ -130,17 +130,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function displayErrorMessage(message) {
         errorMessageSpan.textContent = message;
         errorMessageSpan.style.display = 'block';
-    }
-
-    // Function to perform HTTP POST request and return JSON response
-    async function httpPostJson(url, body, headers) {
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: headers,
-            body: JSON.stringify(body)
-        });
-
-        return await response.json();
     }
 
     // Check for auth token on page load

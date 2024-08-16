@@ -1,7 +1,7 @@
 "use strict";
 
 // Function to show the modal
-window.showModal = function(data) {
+window.showModal = function (data) {
     const editModal = document.createElement('aside');
     editModal.id = 'edit-modal';
     editModal.innerHTML = `
@@ -99,12 +99,17 @@ window.showModal = function(data) {
     });
 
     // Populate the admin gallery
+    console.log(data);
     adminGallery(data);
 }
 
 // Admin Gallery Function
-window.adminGallery = function(data) {
+window.adminGallery = function (data) {
     const miniGallery = document.querySelector('.camera-roll .gallery-roll');
+    if (!miniGallery) {
+        console.error("Gallery container not found.");
+    }
+
     miniGallery.innerHTML = "";
 
     data.forEach((item) => {
@@ -129,8 +134,10 @@ window.adminGallery = function(data) {
 
         // Append the article element to the gallery div
         miniGallery.appendChild(articleAdmin);
+        console.log("Added:", articleAdmin);
+
     });
 }
 
 // Check for auth token on page load
-document.addEventListener('DOMContentLoaded', checkAuthToken);
+//document.addEventListener('DOMContentLoaded', checkAuthToken);
