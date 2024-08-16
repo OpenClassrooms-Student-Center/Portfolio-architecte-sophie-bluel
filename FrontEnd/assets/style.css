@@ -313,6 +313,10 @@ a {
 	color: black;
 }
 
+.hidden {
+	display: none;
+}
+
 /* Black Bainer */
 
 #header-top {
@@ -518,13 +522,13 @@ form {
 
 /* Filtres */
 
-.filtre {
+.filters {
 	display: flex;
 	justify-content: center;
 	margin-bottom: 30px;
 }
 
-.bouton-filtre {
+.btns-filters {
 	font-family: 'Syne';
 	font-size: 0.9em;
 	color: #1D6154;
@@ -539,8 +543,8 @@ form {
 	margin-bottom: 25px;
 }
 
-.bouton-filtre:focus,
-.bouton-filtre.selected {
+.btns-filters:focus,
+.btns-filters.selected {
 	background-color: #1D6154;
 	color: white;
 	border-width: 0px;
