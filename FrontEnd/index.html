@@ -11,19 +11,27 @@
 		rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
+	<script src="./javascript/accueil.js" defer></script>
 </head>
 
 <body>
 	<header>
-		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
-		<nav>
-			<ul>
-				<li><a href="index.html#portfolio">projets</a></li>
-				<li><a href="index.html#contact">contact</a></li>
-				<li> <a href="page-connexion.html"> Login </a></li>
-				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
-			</ul>
-		</nav>
+		<div id="bainerBlack">
+			<div class="edit"><i class="fa-regular fa-pen-to-square"></i>
+				<p>Mode édition</p>
+			</div>
+		</div>
+		<div id="header-top">
+			<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+			<nav>
+				<ul>
+					<li><a href="index.html#portfolio">projets</a></li>
+					<li><a href="index.html#contact">contact</a></li>
+					<li> <a id="logBtn" href="page-connexion.html"> Login </a></li>
+					<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+				</ul>
+			</nav>
+		</div>
 	</header>
 	<main>
 		<section id="introduction">
@@ -42,40 +50,15 @@
 			</article>
 		</section>
 
-		<a href="#modal"> Modifier </a>
 
-		<aside id="modal" class="modale">
-			<div class="modale-wrapper">
-				<div class="modalHeader"><i class="fa-solid fa-xmark"></i></div>
-				<h2 class="titleModal"> Galerie Photo </h2>
-				<div class="gallery-contain">
-				</div>
-				<button id="addPictureBtn">Ajouter une photo</button>
-
-			</div>
-			<div class="modale-wrapper">
-				<div class="modalHeader"><i class="fa-solid fa-xmark"></i></div>
-				<h2 class="titleModal"> Ajout Photo </h2>
-				<div class="">
-					<form id="PictureForm" name="PictureForm">
-						<button id="modal-return"><i class="fa-solid fa-arrow-left"></i></button>
-						<div id="labelPhoto">
-							<i class="fa-regular fa-image" style="color: #aaaaaa;"></i>
-							<label for="image" id="label-image"> + Ajouter une photo</label>
-							<input type="file" name="image" id="image" style="display: none;">
-							<p>jpg,png : 4mo max</p>
-						</div>
-						<label for="title">Titre</label>
-						<input type="text" id="title-input" name="title" required>
-						<label for="selectCategory">Catégorie</label>
-						<select id="selectCategory" name="selectCategory"></select>
-						<input type="submit" value="Valider" id="modal-valider">
-					</form>
-				</div>
-			</div>
-		</aside>
 		<section id="portfolio">
-			<h2>Mes Projets</h2>
+			<div class="title-edit">
+				<h2>Mes projets</h2>
+
+			</div>
+			<div class="btn-filter-container">
+			</div>
+
 			<div class="gallery">
 				<figure>
 					<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
