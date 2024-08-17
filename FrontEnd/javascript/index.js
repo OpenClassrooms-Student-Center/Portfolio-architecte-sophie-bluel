@@ -4,13 +4,10 @@ function isConnected() {
     return localStorage.getItem("token") !== null;
 }
 
-// Si utilisateur est connecté maquer les filtres, login = logout, afficher btn modifier et supprimer le token 
+// Si utilisateur est connecté login = logout + supprimer le token 
 const logBtn = document.querySelector("#logBtn");
 if (isConnected()) {
     logBtn.innerText = "logout";
-    const bainerBlack = document.getElementById("bainerBlack");
-    const editWorks = document.getElementById("edit-works");
-    const filters = document.getElementById("filters");
     logBtn.addEventListener("click", () => {
         localStorage.removeItem("token");
         window.location.href = "./index.html"; // Redirige vers l'accueil après déconnexion
@@ -22,7 +19,8 @@ if (isConnected()) {
     });
 }
 
-// Ajuste l'affichage de certains éléments du DOM en fonction de l'état de connexion
+// Ajuste l'affichage de certains éléments du DOM en fonction de l'état de connexion 
+
 function adminDisplay() {
     const log = isConnected();
     const bainerBlack = document.getElementById("bainerBlack");
@@ -40,13 +38,17 @@ function adminDisplay() {
 }
 
 // Initialisation de la fonction liée à la connexion et l'affichage lors du chargement de la page
+
 document.addEventListener("DOMContentLoaded", async () => {
     adminDisplay();
     const categories = await getCategories();
     categories.unshift({ id: 0, name: "Tous" });
     createCategoriesButtons(categories);
+    const works = await getWorks();
+    createCardsWorks(works);
 });
 
+// Création des boutons de filtrage des catégories 
 
 function createCategoriesButtons(categories) {
     const filters = document.getElementById("filters");
@@ -77,8 +79,41 @@ async function getCategories() {
 // Appel de l'API pour récupérer les Works
 
 async function getWorks() {
-    const response = await fetch("http://localhost:5678/api/works");
-    const works = await response.json();
-    console.log(works);
-    return works;
+    try {
+        const response = await fetch("http://localhost:5678/api/works");
+        const works = await response.json();
+        return works;
+    } catch (err) {
+        console.error(err);
+        return [];
+    }
 };
+
+// Création des cartes pour afficher les travaux 
+
+function createCardsWorks(works) {
+    for (let i = 0; i < works.length; i++) {
+        const project = works[i];
+
+        // Récupération de l'élément du DOM qui accueillera les travaux
+        const galleryWorks = document.querySelector('.gallery');
+
+        // Création d'une balise dédiée à un projet
+        const workFigure = document.createElement("figure");
+
+        // Création des balises
+        const workImage = document.createElement("img");
+        workImage.src = project.imageUrl;
+        workImage.alt = project.title;
+        workImage.crossOrigin = "anonymous";
+
+        const workTitle = document.createElement("figcaption");
+        workTitle.innerText = project.title;
+
+        // Rattacher balise figure à la gallerie de projets
+        galleryWorks.appendChild(workFigure);
+        workFigure.appendChild(workImage);
+        workFigure.appendChild(workTitle);
+    }
+
+}
