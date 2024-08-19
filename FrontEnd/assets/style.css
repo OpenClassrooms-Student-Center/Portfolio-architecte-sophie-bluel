@@ -391,7 +391,7 @@ li:hover {
 	justify-content: space-between;
 	align-items: center;
 	width: 90%;
-	margin: 40px 16px 0px 0px;
+	margin: 0px 16px 0px 0px;
 	padding: 0px 16px 0px 0px;
 	box-sizing: border-box;
 }
@@ -432,7 +432,7 @@ li:hover {
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    margin: 16px 0px 16px 0px;
+    margin: 8px 0px 8px 0px;
     padding: 10px; /* Ajoute du padding pour que le texte ait plus d'espace autour */
     box-sizing: border-box; /* Assure que le padding n'affecte pas la taille du conteneur */
 }
@@ -542,7 +542,7 @@ li:hover {
 	text-align: center;
 	border-radius: 60px;
 	cursor: pointer;
-	margin: 40px auto 32px auto;
+	margin: 22px auto 22px auto;
 	padding: 0px 8px 0px 8px;
 	min-width: 14rem;
 	display: flex;
