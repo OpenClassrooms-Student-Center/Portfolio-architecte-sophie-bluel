@@ -1,143 +1,299 @@
 "use strict";
 
-// Function to show the modal
-window.showModal = function (data) {
-    const editModal = document.createElement('aside');
-    editModal.id = 'edit-modal';
-    editModal.innerHTML = `
-        <div class="modal-background">
-            <div class="modal-window">
-                <header class="modal-header">
-                    <button class="back" title="Retour" style="display: none;"><i class="fa-solid fa-arrow-left" id="modal-return"></i></button>
-                    <div class="modal-flex-space"></div>
-                    <button class="close" title="Fermer">&times;</button>
-                </header>
-                <h1 id="gallery-edit-title">Gallerie photo</h1>
-                <section class="camera-roll">
-                    <div class="gallery-roll"></div>
-                    <button id="add-picture-btn" title="Ajouter une photo"> Ajouter une photo </button>
-                </section>
-                <div class="add-photo-form" style="display: none;">
-                    <div class="add-photo-content">
-                        <div class="upload-box"><i class="fa-regular fa-image" id="iconImg"></i><button title="Téléchargez une photo" id="upload-btn"> + Ajouter photo</button><p id="file-upload-note">jpg, png : 4mo max</p></div>
-                        <form id="photoForm">
-                            <div class="form-group">
-                                <label for="photoTitle">Titre</label>
-                                <input type="text" id="photoTitle" name="photoTitle" maxlength="60" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="photoCategory">Catégorie</label>
-                                <select id="photoCategory" name="photoCategory" required>
-                                    <option value="Objets">Objets</option>
-                                    <option value="Appartements">Appartements</option>
-                                    <option value="Hotels & restaurants">Hotels & restaurants</option>
-                                </select>
-                            </div>
-                            <div class="border-bottom"></div>
-                            <button type="submit" id="submit-btn" title="Valider">Valider</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
-    document.body.appendChild(editModal);
+// Function to create a modal with given header, content, and footer
+function createModal(header = null, content = null, footer = null) {
+    let body = document.querySelector('body');
 
-    // Show the modal with fade-in effect
-    const modal = document.getElementById('edit-modal');
-    modal.classList.add('show');
-    setTimeout(() => {
-        modal.querySelector('.modal-window').style.opacity = '1';
-    }, 10);
-
-    // Close modal function
-    function closeModal(modal) {
-        modal.querySelector('.modal-window').style.opacity = '0';
-        setTimeout(() => {
-            modal.classList.remove('show');
-            document.body.removeChild(modal);
-        }, 500); // Match this duration with your CSS transition duration
+    // Remove existing modal if present
+    const existingModal = document.querySelector('#edit-modal');
+    if (existingModal) {
+        body.removeChild(existingModal);
     }
 
-    // Close modal on clicking the close button with fade-out effect
-    const closeModalBtn = modal.querySelector('.close');
-    closeModalBtn.addEventListener('click', () => {
-        closeModal(modal);
-    });
+    // Create the modal container (which replaces the aside)
+    let editModal = document.createElement('aside');
+    editModal.id = 'edit-modal';
 
-    // Close modal on clicking outside the modal content with fade-out effect
-    modal.querySelector('.modal-background').addEventListener('click', (e) => {
-        if (e.target === modal.querySelector('.modal-background')) {
-            closeModal(modal);
+    // Create the modal background
+    let modalBackground = document.createElement('div');
+    modalBackground.classList.add('modal-background');
+
+    // Create the modal window
+    let modalWindow = document.createElement('div');
+    modalWindow.classList.add('modal-window');
+
+    // Create the modal header
+    let modalHeader = document.createElement('header');
+    modalHeader.classList.add('modal-header');
+
+    // Add the back button and close button to the header
+    const backButton = document.createElement('button');
+    backButton.classList.add('back');
+    backButton.title = 'Retour';
+    backButton.style.display = 'none';
+    backButton.innerHTML = '<i class="fa-solid fa-arrow-left" id="modal-return"></i>';
+
+    const flexSpace = document.createElement('div');
+    flexSpace.classList.add('modal-flex-space');
+
+    const closeButton = document.createElement('button');
+    closeButton.classList.add('close');
+    closeButton.title = 'Fermer';
+    closeButton.innerHTML = '&times;';
+
+    modalHeader.appendChild(backButton);
+    modalHeader.appendChild(flexSpace);
+    modalHeader.appendChild(closeButton);
+
+    // Create the modal content (section)
+    let modalContent = document.createElement('section');
+    modalContent.classList.add('camera-roll');
+
+    // Add the gallery title and gallery roll to the content
+    const galleryTitle = document.createElement('h1');
+    galleryTitle.id = 'gallery-edit-title';
+    galleryTitle.textContent = 'Gallerie photo';
+
+    const galleryRoll = document.createElement('div');
+    galleryRoll.classList.add('gallery-roll');
+
+    // Append the gallery title and gallery roll to the modal content
+    modalContent.appendChild(galleryTitle);
+    modalContent.appendChild(galleryRoll);
+
+    // Create the add photo button in the footer
+    const addPictureButton = document.createElement('button');
+    addPictureButton.id = 'add-picture-btn';
+    addPictureButton.textContent = 'Ajouter une photo';
+    addPictureButton.title = 'Ajouter une photo';
+
+    // Append the modal window elements
+    modalWindow.appendChild(modalHeader);
+    modalWindow.appendChild(modalContent);
+    modalWindow.appendChild(addPictureButton);
+
+    // Append the modal window to the background
+    modalBackground.appendChild(modalWindow);
+
+    // Assemble the complete modal
+    editModal.appendChild(modalBackground);
+
+    // Append the modal to the body
+    body.appendChild(editModal);
+
+    // Show the modal with fade-in effect
+    setTimeout(() => {
+        modalWindow.style.opacity = '1';
+    }, 10);
+
+    // Event listener to close the modal on click outside the modal window
+    modalBackground.addEventListener('click', (e) => {
+        if (e.target === modalBackground) {
+            closeModal(editModal);
         }
     });
 
-    // Close modal on clicking the Escape key with fade-out effect
-    window.addEventListener('keydown', function (e) {
+    // Event listener to close the modal on pressing the Escape key
+    window.addEventListener('keydown', (e) => {
         if (e.key === "Escape" || e.key === "Esc") {
-            closeModal(modal);
+            closeModal(editModal);
         }
     });
 
-    // Show the add photo form on clicking the add photo button
-    const addPhotoBtn = document.getElementById('add-picture-btn');
-    addPhotoBtn.addEventListener('click', () => {
-        document.querySelector('.camera-roll').style.display = 'none';
-        document.querySelector('.add-photo-form').style.display = 'block';
-        document.querySelector('.modal-header .back').style.display = 'block';
-        document.getElementById('gallery-edit-title').textContent = 'Ajout photo';
-        document.querySelector('.add-picture-btn').style.display = 'none';
+    // Event listener to close the modal on clicking the close button
+    closeButton.addEventListener('click', () => {
+        closeModal(editModal);
     });
 
-    // Return to gallery on clicking the back button
-    const backBtn = document.querySelector('.modal-header .back');
-    backBtn.addEventListener('click', () => {
-        document.querySelector('.camera-roll').style.display = 'block';
-        document.querySelector('.add-photo-form').style.display = 'none';
-        document.querySelector('.modal-header .back').style.display = 'none';
-        document.getElementById('gallery-edit-title').textContent = 'Gallerie photo';
-    });
-
-    // Populate the admin gallery
-    console.log(data);
-    adminGallery(data);
+    // Return references to modal and backdrop for further manipulation
+    return { modal: editModal, backdrop: modalBackground, content: galleryRoll, addPictureButton, backButton };
 }
 
-// Admin Gallery Function
-window.adminGallery = function (data) {
-    const miniGallery = document.querySelector('.camera-roll .gallery-roll');
+// Function to close the modal
+function closeModal(modal) {
+    modal.querySelector('.modal-window').style.opacity = '0';
+    setTimeout(() => {
+        modal.classList.remove('show');
+        document.body.removeChild(modal);
+    }, 500);
+}
+
+// Function to create and show the form for adding a photo
+function displayUploadForm() {
+    // Récupérer les éléments du DOM
+    const galleryTitle = document.getElementById('gallery-edit-title');
+    const galleryRoll = document.querySelector('.gallery-roll');
+    const addPictureButton = document.getElementById('add-picture-btn');
+    const backButton = document.querySelector('.modal-header .back');
+
+    // Remplacer le titre par "Ajout photo"
+    if (galleryTitle) {
+        galleryTitle.textContent = 'Ajout photo';
+    }
+
+    // Vider le contenu de la galerie
+    if (galleryRoll) {
+        galleryRoll.innerHTML = '';
+    }
+
+    // Afficher le bouton retour
+    if (backButton) {
+        backButton.style.display = 'inline';
+    }
+
+    // Créer la structure du formulaire d'ajout de photo
+    const addPhotoContent = document.createElement('div');
+    addPhotoContent.classList.add('add-photo-content');
+
+    const uploadBox = document.createElement('div');
+    uploadBox.classList.add('upload-box');
+
+    const iconImg = document.createElement('i');
+    iconImg.classList.add('fa-regular', 'fa-image');
+    iconImg.id = 'iconImg';
+
+    const uploadBtn = document.createElement('button');
+    uploadBtn.id = 'upload-btn';
+    uploadBtn.title = 'Téléchargez une photo';
+    uploadBtn.innerHTML = '+ Ajouter photo';
+
+    const fileUploadNote = document.createElement('p');
+    fileUploadNote.id = 'file-upload-note';
+    fileUploadNote.textContent = 'jpg, png : 4mo max';
+
+    uploadBox.appendChild(iconImg);
+    uploadBox.appendChild(uploadBtn);
+    uploadBox.appendChild(fileUploadNote);
+
+    const form = document.createElement('form');
+    form.id = 'photoForm';
+
+    const formGroup1 = document.createElement('div');
+    formGroup1.classList.add('form-group');
+
+    const labelTitle = document.createElement('label');
+    labelTitle.setAttribute('for', 'photoTitle');
+    labelTitle.textContent = 'Titre';
+
+    const inputTitle = document.createElement('input');
+    inputTitle.type = 'text';
+    inputTitle.id = 'photoTitle';
+    inputTitle.name = 'photoTitle';
+    inputTitle.maxLength = 60;
+    inputTitle.required = true;
+
+    formGroup1.appendChild(labelTitle);
+    formGroup1.appendChild(inputTitle);
+
+    const formGroup2 = document.createElement('div');
+    formGroup2.classList.add('form-group');
+
+    const labelCategory = document.createElement('label');
+    labelCategory.setAttribute('for', 'photoCategory');
+    labelCategory.textContent = 'Catégorie';
+
+    const selectCategory = document.createElement('select');
+    selectCategory.id = 'photoCategory';
+    selectCategory.name = 'photoCategory';
+    selectCategory.required = true;
+
+    const option1 = document.createElement('option');
+    option1.value = 'Objets';
+    option1.textContent = 'Objets';
+
+    const option2 = document.createElement('option');
+    option2.value = 'Appartements';
+    option2.textContent = 'Appartements';
+
+    const option3 = document.createElement('option');
+    option3.value = 'Hotels & restaurants';
+    option3.textContent = 'Hotels & restaurants';
+
+    selectCategory.appendChild(option1);
+    selectCategory.appendChild(option2);
+    selectCategory.appendChild(option3);
+
+    formGroup2.appendChild(labelCategory);
+    formGroup2.appendChild(selectCategory);
+
+    const borderBottom = document.createElement('div');
+    borderBottom.classList.add('border-bottom');
+
+    const submitButton = document.createElement('button');
+    submitButton.type = 'submit';
+    submitButton.id = 'submit-btn';
+    submitButton.title = 'Valider';
+    submitButton.textContent = 'Valider';
+
+    form.appendChild(formGroup1);
+    form.appendChild(formGroup2);
+    form.appendChild(borderBottom);
+    form.appendChild(submitButton);
+
+    addPhotoContent.appendChild(uploadBox);
+    addPhotoContent.appendChild(form);
+
+    // Ajouter le formulaire dans la galerie
+    galleryRoll.appendChild(addPhotoContent);
+
+    // Supprimer le bouton "Ajouter une photo"
+    if (addPictureButton) {
+        addPictureButton.style.display = 'none';
+    }
+
+    // Ajouter un événement de soumission du formulaire
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Photo ajoutée ! (fonctionnalité à implémenter)');
+        closeModal(document.getElementById('edit-modal')); // Fermer la modale après la soumission
+    });
+
+    // Ajouter l'événement pour le bouton de retour
+    backButton.addEventListener('click', () => {
+        showEditModal(works); // Retour à la galerie
+    });
+}
+
+// Function to display the edit modal with the existing structure and populate the gallery
+window.showEditModal = function (data) {
+    const { modal, backdrop, content: miniGallery, addPictureButton, backButton } = createModal();
+
     if (!miniGallery) {
         console.error("Gallery container not found.");
+        return;
     }
 
     miniGallery.innerHTML = "";
 
     data.forEach((item) => {
-        // Create admin img container
         const articleAdmin = document.createElement("article");
         articleAdmin.classList.add("article-admin");
         articleAdmin.setAttribute("data-category", item.category.name);
 
-        // Create an image element for the card
         const adminImg = document.createElement("img");
         adminImg.src = item.imageUrl;
         adminImg.alt = item.title;
 
-        // Create a delete icon element
-        const deleteIcon = document.createElement("i");
-        deleteIcon.classList.add("fa-solid", "fa-trash", "delete-icon");
-        deleteIcon.title = "Supprimer"; // Set the title attribute
+        const deleteIcon = document.createElement('i');
+        deleteIcon.classList.add('fa-solid', 'fa-trash', 'delete-icon');
+        deleteIcon.title = 'Supprimer';
 
-        // Append the image and delete icon to the article element
         articleAdmin.appendChild(adminImg);
         articleAdmin.appendChild(deleteIcon);
 
-        // Append the article element to the gallery div
         miniGallery.appendChild(articleAdmin);
         console.log("Added:", articleAdmin);
-
     });
-}
 
-// Check for auth token on page load
-//document.addEventListener('DOMContentLoaded', checkAuthToken);
+    if (addPictureButton) {
+        addPictureButton.addEventListener('click', displayUploadForm);
+    }
+};
+
+// Call the function to display the modal on click
+document.getElementById('editBtn').addEventListener('click', async () => {
+    if (!works || works.length === 0) {
+        await getWorks(); // Assure que works est bien rempli
+    }
+    showEditModal(works);
+});

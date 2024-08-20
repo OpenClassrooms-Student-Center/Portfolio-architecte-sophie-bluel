@@ -376,8 +376,8 @@ li:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9999;
-	box-sizing: border-box;
+    z-index: 9998;
+    box-sizing: border-box;
 }
 
 
@@ -438,6 +438,7 @@ li:hover {
 }
 
 .modal-window {
+	position: relative;
     background-color: #ffffff;
     border-radius: 8px;
     width: 100%;
@@ -446,7 +447,6 @@ li:hover {
     overflow-y: auto; /* Enable scrolling for overflowing content */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     padding: 16px; /* Augmente le padding ici pour donner plus d'espace autour du contenu */
-    position: relative;
     box-sizing: border-box;
     transition: opacity 0.5s ease-in-out;
     opacity: 0;
@@ -454,6 +454,7 @@ li:hover {
     flex-direction: column;
     justify-content: flex-start; /* Alignement en haut pour que le titre soit bien positionné */
     align-items: center;
+	z-index: 9999;
 }
 
 .modal.show .modal-window {

@@ -103,9 +103,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Function to check auth token and inject edit elements
-    function checkAuthToken() {
+    async function checkAuthToken() {
         const authToken = sessionStorage.getItem('authToken');
         if (authToken) {
+            await getWorks(); // Assure-toi que getWorks est une fonction asynchrone qui récupère et définit 'works'
             injectEditElements();
         }
     }
@@ -120,11 +121,14 @@ document.addEventListener('DOMContentLoaded', () => {
         portfolioTitle.appendChild(editBtn);
 
         // Add event listener to the edit button to show the modal
-        editBtn.querySelector('a').addEventListener('click', (e) => {
-            e.preventDefault();
-            showModal(works); // INFO: WAS "window.galleryData" Pass the gallery data to the showModal function
+        document.getElementById('editBtn').addEventListener('click', async () => {
+            if (!works || works.length === 0) {
+                await getWorks(); // Attendre que les données soient récupérées
+            }
+            showEditModal(works); // Afficher la modale une fois que les données sont disponibles
         });
     }
+
 
     // Function to display error message in the span element
     function displayErrorMessage(message) {
