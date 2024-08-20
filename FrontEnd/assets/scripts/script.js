@@ -1,4 +1,3 @@
-// Déclaration des constantes
 const token = localStorage.getItem("TokenIdentification");
 const BoutonModifier = document.querySelector(".modifier");
 const fileInput = document.querySelector('.file-input');
@@ -12,7 +11,6 @@ const MappingCategorie = {
   "Hotels & restaurants": 3
 };
 
-// Initialisation et vérification de l'état du mode
 if (token) {
   ModeEdition();
 } else {
@@ -20,7 +18,6 @@ if (token) {
 }
 fetchWorks();
 
-// Définition des fonctions
 
 async function fetchWorks() {
   try {
