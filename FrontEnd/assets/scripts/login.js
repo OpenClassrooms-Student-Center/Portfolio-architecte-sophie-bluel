@@ -1,22 +1,22 @@
-
-
 document.getElementById("connexion").addEventListener("submit",
   async function (event) {
     event.preventDefault();
 
     const btnValidate = document.getElementById('btn-submit');
-
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
-    
-    if (email && password) { 
-      btnValidate.style.backgroundColor = "#1d6154";
-      btnValidate.style.color = "#FFFFFF";
-    }
-    
+    const errorMessage = document.getElementById('error-message'); // Récupère l'élément pour afficher les erreurs
+
+    errorMessage.textContent = ''; // Réinitialise le message d'erreur
+
     if (!email || !password) {
       alert("Veuillez remplir tous les champs.");
+      return; // Stoppe l'exécution si les champs ne sont pas remplis
     }
+    
+    btnValidate.style.backgroundColor = "#1d6154";
+    btnValidate.style.color = "#FFFFFF";
+
     try {
       const response = await fetch('http://localhost:5678/api/users/login', {
         method: "POST",
@@ -35,16 +35,15 @@ document.getElementById("connexion").addEventListener("submit",
         }
       } else {
         const data = await response.json();
-        const token = data.token
+        const token = data.token;
         localStorage.setItem("TokenIdentification", token);
 
         window.location.href = "./index.html";
       }
     } catch (error) {
-      errorMessage.textContent = error.message;
+      errorMessage.textContent = error.message; // Affiche le message d'erreur
     }
   });
-
 
 document.addEventListener('DOMContentLoaded', () => {
   const coemail = document.getElementById('email');
@@ -52,12 +51,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const cobouton = document.getElementById('btn-submit');
 
   function validateSend() {
-      if (coemail.value.trim() !== '' && comdp.value.trim() !== '') {
-        cobouton.style.backgroundColor = "#1d6154";
-        cobouton.style.Color = "#FFFFFF";
-      } else {
-        cobouton.style.backgroundColor = "#A7A7A7";
-      }
+    if (coemail.value.trim() !== '' && comdp.value.trim() !== '') {
+      cobouton.style.backgroundColor = "#1d6154";
+      cobouton.style.color = "#FFFFFF"; // Correction de la propriété 'color'
+    } else {
+      cobouton.style.backgroundColor = "#A7A7A7";
+      cobouton.style.color = "#000000"; // Rétablit la couleur du texte à noir lorsque désactivé
+    }
   }
 
   coemail.addEventListener('input', validateSend);
