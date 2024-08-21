@@ -86,6 +86,7 @@ function createModal(header = null, content = null, footer = null) {
         modalWindow.style.opacity = '1';
     }, 10);
 
+    //CLOSING THE MODAL
     // Event listener to close the modal on click outside the modal window
     modalBackground.addEventListener('click', (e) => {
         if (e.target === modalBackground) {
@@ -120,28 +121,28 @@ function closeModal(modal) {
 
 // Function to create and show the form for adding a photo
 function displayUploadForm() {
-    // Récupérer les éléments du DOM
+    // Gather DOM elements
     const galleryTitle = document.getElementById('gallery-edit-title');
     const galleryRoll = document.querySelector('.gallery-roll');
     const addPictureButton = document.getElementById('add-picture-btn');
     const backButton = document.querySelector('.modal-header .back');
 
-    // Remplacer le titre par "Ajout photo"
+    // Replace modal title
     if (galleryTitle) {
         galleryTitle.textContent = 'Ajout photo';
     }
 
-    // Vider le contenu de la galerie
+    // Empty gallery
     if (galleryRoll) {
         galleryRoll.innerHTML = '';
     }
 
-    // Afficher le bouton retour
+    // Display back button
     if (backButton) {
         backButton.style.display = 'inline';
     }
 
-    // Créer la structure du formulaire d'ajout de photo
+    // Create form
     const addPhotoContent = document.createElement('div');
     addPhotoContent.classList.add('add-photo-content');
 
@@ -219,40 +220,35 @@ function displayUploadForm() {
     const borderBottom = document.createElement('div');
     borderBottom.classList.add('border-bottom');
 
-    const submitButton = document.createElement('button');
-    submitButton.type = 'submit';
-    submitButton.id = 'submit-btn';
-    submitButton.title = 'Valider';
-    submitButton.textContent = 'Valider';
-
     form.appendChild(formGroup1);
     form.appendChild(formGroup2);
     form.appendChild(borderBottom);
-    form.appendChild(submitButton);
 
     addPhotoContent.appendChild(uploadBox);
     addPhotoContent.appendChild(form);
 
-    // Ajouter le formulaire dans la galerie
+    // Add the form to the gallery
     galleryRoll.appendChild(addPhotoContent);
 
-    // Supprimer le bouton "Ajouter une photo"
+    // Replace the text of the "Ajouter une photo" button with "Valider"
     if (addPictureButton) {
-        addPictureButton.style.display = 'none';
+        addPictureButton.textContent = 'Valider';
     }
 
-    // Ajouter un événement de soumission du formulaire
+    // Add event listener for form submission (placeholder functionality)
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         alert('Photo ajoutée ! (fonctionnalité à implémenter)');
-        closeModal(document.getElementById('edit-modal')); // Fermer la modale après la soumission
+        closeModal(document.getElementById('edit-modal')); // Close the modal after submission
     });
 
-    // Ajouter l'événement pour le bouton de retour
+    // Add event listener for the back button
     backButton.addEventListener('click', () => {
-        showEditModal(works); // Retour à la galerie
+        showEditModal(works); // Return to gallery
     });
 }
+
+
 
 // Function to display the edit modal with the existing structure and populate the gallery
 window.showEditModal = function (data) {

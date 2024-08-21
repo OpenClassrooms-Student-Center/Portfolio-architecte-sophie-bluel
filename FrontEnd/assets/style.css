@@ -513,12 +513,13 @@ li:hover {
 
 /* Ensure modal content fits within the modal window */
 .add-photo-form {
-	width: 75%;
+	width: 100%;
 }
 
 .add-photo-content {
     display: flex;
     flex-direction: column;
+	justify-content: center;
     align-items: center;
     padding: 16px 0px 0px 0px;
 	width: 100%;
