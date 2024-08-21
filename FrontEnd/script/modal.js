@@ -133,8 +133,10 @@ function displayUploadForm() {
     }
 
     // Empty gallery
+    // Change layout to block for the "Ajout photo" view
     if (galleryRoll) {
         galleryRoll.innerHTML = '';
+        galleryRoll.style.display = 'block';
     }
 
     // Display back button

@@ -106,7 +106,6 @@ document.addEventListener('DOMContentLoaded', () => {
     async function checkAuthToken() {
         const authToken = sessionStorage.getItem('authToken');
         if (authToken) {
-            await getWorks(); // Assure-toi que getWorks est une fonction asynchrone qui récupère et définit 'works'
             injectEditElements();
         }
     }
