@@ -132,8 +132,7 @@ function displayUploadForm() {
         galleryTitle.textContent = 'Ajout photo';
     }
 
-    // Empty gallery
-    // Change layout to block for the "Ajout photo" view
+    // Empty gallery & Change layout to block for the "Ajout photo" view
     if (galleryRoll) {
         galleryRoll.innerHTML = '';
         galleryRoll.style.display = 'block';
@@ -232,10 +231,15 @@ function displayUploadForm() {
     // Add the form to the gallery
     galleryRoll.appendChild(addPhotoContent);
 
-    // Replace the text of the "Ajouter une photo" button with "Valider"
+    // Replace "Add picture" by "Validate"
     if (addPictureButton) {
         addPictureButton.textContent = 'Valider';
     }
+
+    // Add event listener for the back button
+    backButton.addEventListener('click', () => {
+        showEditModal(works); // Return to gallery
+    });
 
     // Add event listener for form submission (placeholder functionality)
     form.addEventListener('submit', (e) => {
@@ -244,15 +248,9 @@ function displayUploadForm() {
         closeModal(document.getElementById('edit-modal')); // Close the modal after submission
     });
 
-    // Add event listener for the back button
-    backButton.addEventListener('click', () => {
-        showEditModal(works); // Return to gallery
-    });
 }
 
-
-
-// Function to display the edit modal with the existing structure and populate the gallery
+// Populate adminGallery (miniGallery)
 window.showEditModal = function (data) {
     const { modal, backdrop, content: miniGallery, addPictureButton, backButton } = createModal();
 
@@ -288,7 +286,7 @@ window.showEditModal = function (data) {
     }
 };
 
-// Call the function to display the modal on click
+// Display the modal when clicking on editBtn
 document.getElementById('editBtn').addEventListener('click', async () => {
     if (!works || works.length === 0) {
         await getWorks(); // Assure que works est bien rempli

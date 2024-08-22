@@ -1,14 +1,15 @@
 "use strict";
-
+// API documentation: SWAGGER UI http://localhost:5678/api-docs/#/
 const base = "http://localhost:5678/api/"
 
-// API documentation: SWAGGER UI http://localhost:5678/api-docs/#/
 const works_endpoint = `${base}works`;
+let works = []; // Store the gallery data globally
 const portfolioSection = document.querySelector('#js-portfolio');
 const galleryDiv = document.querySelector('#js-portfolio .gallery');
-let works = []; // Store the gallery data globally
 
+//OLD getWorks to check before discarding
 // API FETCH getWorks
+/*
 async function getWorks() {
     try {
         const response = await fetch(works_endpoint);
@@ -22,6 +23,29 @@ async function getWorks() {
     } catch (error) {
         console.error(error);
     }
+}
+*/
+
+/**
+ * HTTP GET
+ * 
+ * @param String url 
+ * @returns Array
+ */
+async function httpGet(url) {
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+//GET WORKS
+async function getWorks() {
+    works = await httpGet(works_endpoint);
+    displayGallery(works);
+    createFilters(works);
 }
 
 // DISPLAY GALLERY

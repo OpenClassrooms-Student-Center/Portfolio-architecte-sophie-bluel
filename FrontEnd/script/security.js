@@ -8,16 +8,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const errorMessageSpan = document.querySelector('.error-message');
     let store = sessionStorage;
 
-    // Inject the loading and logout indicators
+    // User messages
     const loadingIndicator = document.createElement('div');
     const logoutMessage = document.createElement('div');
 
-    // Configure loading indicator
+    // Message: login
     loadingIndicator.classList.add('loading-indicator');
     loadingIndicator.style.display = 'none';
     loadingIndicator.textContent = 'Connexion...'; // Loading message
     mainElement.insertAdjacentElement('afterend', loadingIndicator);
-    // Configure logout message
+    // Message: logout
     logoutMessage.id = 'logoutMessage';
     logoutMessage.classList.add('hidden');
     logoutMessage.textContent = 'Déconnexion...'; // Logout message
@@ -83,7 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Handle logout only if the user is authenticated
     if (authToken) {
-        // Change the login button to logout
         loginButton.innerHTML = '<a href="#" id="logoutBtn">logout</a>';
         const logoutBtn = document.getElementById('logoutBtn');
 
@@ -91,13 +90,12 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             sessionStorage.clear();
 
-            // Show logout message
             logoutMessage.classList.add('show');
 
             // Hide the message after 2 seconds and redirect to login page
             setTimeout(() => {
                 logoutMessage.classList.remove('show');
-                window.location.href = 'login.html';
+                window.location.href = 'index.html';
             }, 350);
         });
     }

@@ -1,39 +1,6 @@
 "use strict"
 // API documentation: SWAGGER UI http://localhost:5678/api-docs/#/
-//API ADDRESS
 const base = "http://localhost:5678/api/"
-
-/**
- * Make a HTTP GET Request and return an array
- * 
- * @param String url 
- * @returns Array
- */
-async function httpGet(url) {
-    try {
-        const response = await fetch(url);
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-//GET WORKS
-const works_endpoint = `${base}works`;
-let works = [];
-
-async function getWorks() {
-    console.log(works);
-
-    works = await httpGet(works_endpoint);
-    console.log(works);
-
-    works = works.slice(1, 5);
-
-    works.push({ hello: "There" });
-}
-
 
 
 export const works_endpoint = "http://localhost:5678/api/works";
