@@ -289,6 +289,7 @@ fileInput.addEventListener('change', function () {
       imgElement.style.maxWidth = '129px';
       imgElement.style.maxHeight = '169px';
 
+
       conteneurphoto.appendChild(imgElement);
     };
     reader.readAsDataURL(file);
@@ -303,6 +304,11 @@ Validerphoto.addEventListener('click', async function (event) {
   const SelectionCategorie = document.getElementById('categorie');
   const NomCategorie = SelectionCategorie.value;
   const categoryId = MappingCategorie[NomCategorie];
+
+  if (file.size > 4 * 1024 * 1024) {
+    alert("Votre fichier est trop volumineux, veuillez choisir une image pesant moins de 4Mo.");
+    return;
+  }
 
   if (!file || !title || !categoryId) {
     alert("Veuillez remplir tous les champs obligatoires.");
