@@ -143,10 +143,6 @@ body {
 	background-color: #FEFDF0;
 }
 
-.hidden {
-	display: none;
-}
-
 header {
 	display: flex;
 	justify-content: space-between;
@@ -329,6 +325,7 @@ a {
 	width: 1140px;
 }
 
+
 #bainerBlack {
 	display: flex;
 	justify-content: center;
@@ -356,7 +353,7 @@ a {
 	margin-bottom: 30px;
 }
 
-#edit-works {
+.editbtn {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -553,4 +550,8 @@ form {
 
 button[autofocus] {
 	outline: none;
+}
+
+.hidden {
+	display: none;
 }

@@ -98,7 +98,7 @@ function filterCategory(categoryName, works) {
 
 function addFilterEvents(works) {
     document.querySelectorAll(".btns-filters")
-        .forEach(btn => btn.addEventListener("click", evt => filterCategory(evt.target.textcontent, works)));
+        .forEach(btn => btn.addEventListener("click", evt => filterCategory(evt.target.textContent, works)));
 }
 
 // Initialisation de la fonction liée à la connexion et l'affichage lors du chargement de la page
