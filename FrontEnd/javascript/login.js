@@ -10,7 +10,7 @@ form.addEventListener("submit", async (e) => {
     let email = baliseEmail.value
     let balisePassword = document.getElementById("password")
     let password = balisePassword.value
-    if (email.length == 0 || password.length == 0) {
+    if (email.trim().length == 0 || password.length == 0) {
         alert("Veuillez remplir tous les champs");
     } else {
         try {
