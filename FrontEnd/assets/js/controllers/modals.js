@@ -67,20 +67,20 @@ const addModal = document.getElementById('add_modal')
 //         await createWork(image, title, category)
 
 //         const formData = new FormData();
-//         formData.append('image', selectedImage);
+//         formData.append('image', selectedImg);
 //         formData.append('title', titleContent)
 //         formData.append('category', selectedCategory)
 //         console.log(formData)
 
-//         // if (selectedImage === image && titleContent === title && selectedCategory === category) {
-//         if (selectedImage && titleContent && selectedCategory) {
+//         // if (selectedImg === image && titleContent === title && selectedCategory === category) {
+//         if (selectedImg && titleContent && selectedCategory) {
 //             //on récup la galerie
 //             const gallery = document.querySelector('.gallery')
 //             //on reconstruit la structure d'accueil d'un travail
 //             let figure = document.createElement('figure');
 //             figure.classList.add('work');
 //             let img = document.createElement('img');
-//             img.src = selectedImage;
+//             img.src = selectedImg;
 //             img.alt = titleContent;
 //             figure.appendChild(img);
 //             let figcaption = document.createElement('figcaption');
@@ -185,66 +185,97 @@ imageInput.addEventListener('change', function (event) {
         //ajout d'une croix pour annuler le téléchargement
         const abordFile = document.createElement('i')
         abordFile.classList.add('fa-solid', 'fa-xmark')
-        //abordFile.addEventListener('click', () {
-        //const addForm = document.querySelector('.add_content form')
-        //addForm.reset()
-        //})
     }
 })
 
-// validLoginForm()
+  //récup du btn d'ajout de téléchargement de photo
+  const addWorkBtn = document.getElementById('submit_photo_btn')
+  //récup des champs de saisie/selection du formulaire
+  const titleInput = document.getElementById('title')
+  const categoryInput = document.getElementById('category')
 
 function validModalForm() {
-    //récup du btn d'ajout de téléchargement de photo
-    const addWorkBtn = document.getElementById('submit_photo_btn')
-    //récup des champs de saisie/selection du formulaire
-    const imageInput = document.getElementById('file');
-    const selectedImage = imageInput.files[0]
 
-    const titleInput = document.getElementById('title')
     const titleContent = titleInput.value
 
-    const categoryInput = document.getElementById('category')
-    const selectedCategory = categoryInput.value
+    const selectedCategory = Number(categoryInput.value)
+    console.log('imageInput.files', imageInput.files)
+    console.log('titleContent.length', titleContent.length)
+    console.log('selectedCategory', selectedCategory)
 
-    //récup du formulaire
-    const addForm = document.querySelector('.add_content form')
-
-    if (selectedImage === 0 || titleContent === 0 || selectedCategory === 0) {
-        addWorkBtn.disabled = true
-        addWorkBtn.style.background = "#A7A7A7"
-        alert("Veuillez remplir tous les champs du formulaire d'ajout")
-        addForm.reset()
+    if (imageInput.files.length === 0 || titleContent.length === 0 || selectedCategory === 0) {
         return false
-    } else {
-        addWorkBtn.style.background = "#1D6154"
+    }else {
         return true
     }
 }
 
-
 function initModalForm() {
+    const titleContent = titleInput.value
+    titleInput.addEventListener('change', () => {
+        if (imageInput.files.length === 0 || titleContent.length === 0 || selectedCategory === 0) {
+            addWorkBtn.classList.remove('btn-disabled')
+
+        }else {
+            addWorkBtn.classList.add('btn-disabled')
+        }
+    })
+    
     //formulaire d'ajout de nouvelle photo
     const addWorkBtn = document.getElementById('submit_photo_btn')
+
 
     addWorkBtn.addEventListener('click', async (event) => {
         event.preventDefault()
 
         //image sélectionnée
-        const selectedImage = imageInput.files[0]
+        const selectedImg = imageInput.files[0]
         //pareil mais pour le titre
         const titleInput = document.getElementById('title')
         const titleContent = titleInput.value
         //pareil mais pour la catégorie
         const categoryInput = document.getElementById('category')
         const selectedCategory = categoryInput.value
-        console.log(titleContent, selectedImage, selectedCategory)
+        console.log(titleContent, selectedImg, selectedCategory)
 
-        let result = await createWork(selectedImage, titleContent, selectedCategory)
-        const addForm = document.querySelector('.add_content form')
-        addForm.reset()
+        if(validModalForm()) {
+            console.log('envoie')
+            let result = await createWork(selectedImg, titleContent, selectedCategory)
+        }else {
+            alert('Veuillez remplir tous les champs !')
+        }
     })
-    validModalForm()
 }
 
-initModal()
+
+// function validModalForm() {
+//     //récup du btn d'ajout de téléchargement de photo
+//     const addWorkBtn = document.getElementById('submit_photo_btn')
+//     //récup des champs de saisie/selection du formulaire
+//     const imageInput = document.getElementById('file');
+//     const selectedImg = imageInput.files[0]
+
+//     const titleInput = document.getElementById('title')
+//     const titleContent = titleInput.value
+
+//     const categoryInput = document.getElementById('category')
+//     const selectedCategory = categoryInput.value
+
+//     //récup du formulaire
+//     const addForm = document.querySelector('.add_content form')
+//     try {
+//         if (imageInput.files.length === 0 && titleContent.length === 0 && selectedCategory !== 0) {
+//             // alert("Veuillez remplir tous les champs du formulaire d'ajout")
+//             addForm.reset()
+//             return false
+
+//         }
+//     }catch {
+//         error('erreur au niveau du code')
+//         addWorkBtn.disabled = false
+//             addWorkBtn.style.background = "#1D6154"
+//             return true
+//     }
+// }
+
+initModal() 
