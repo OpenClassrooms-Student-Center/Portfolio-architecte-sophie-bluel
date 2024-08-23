@@ -21,7 +21,6 @@ function adminConnect() {
 }
 
 // Ajuste l'affichage de certains éléments du DOM en fonction de l'état de connexion 
-
 function adminDisplay() {
     const log = isConnected();
     const bainerBlack = document.getElementById("bainerBlack");
@@ -95,7 +94,7 @@ function filterCategory(categoryName, works) {
         filteredWorks = works.filter((element) => element.category.name === categoryName);
     }
     createCardsWorks(filteredWorks);
-};
+}
 
 function addFilterEvents(works) {
     document.querySelectorAll(".btns-filters")
@@ -103,9 +102,7 @@ function addFilterEvents(works) {
 }
 
 // Initialisation de la fonction liée à la connexion et l'affichage lors du chargement de la page
-
 document.addEventListener("DOMContentLoaded", main);
-
 async function main() {
     adminConnect();
     adminDisplay();
@@ -115,5 +112,4 @@ async function main() {
     createCategoriesButtons(categories);
     createCardsWorks(works);
     addFilterEvents(works);
-
-}
+};
