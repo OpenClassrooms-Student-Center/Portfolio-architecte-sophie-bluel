@@ -9,6 +9,9 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
 		rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+		integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+		crossorigin="anonymous" referrerpolicy="no-referrer">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 	<script src="./javascript/index.js" defer></script>
@@ -16,7 +19,7 @@
 
 <body>
 	<header>
-		<div id="bainerBlack" class="hidden">
+		<div id="bainerBlack">
 			<div class="edit"><i class="fa-regular fa-pen-to-square"></i>
 				<p>Mode édition</p>
 			</div>
@@ -28,6 +31,7 @@
 					<li><a href="index.html#portfolio">projets</a></li>
 					<li><a href="index.html#contact">contact</a></li>
 					<li> <a id="logBtn" href="connection.html"> Login </a></li>
+					<li> <a class="hidden" id="logout" href="index.html"> Logout </a></li>
 					<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 				</ul>
 			</nav>
@@ -54,11 +58,11 @@
 		<section id="portfolio">
 			<div class="title-edit">
 				<h2>Mes projets</h2>
-				<div id="edit-works" class="hidden">
+				<div id="edit-works">
 					<i class="fa-regular fa-pen-to-square"></i><span>modifier</span>
 				</div>
 			</div>
-			<div id="filters" class="filters" class="hidden">
+			<div id="filters" class="filters">
 			</div>
 
 			<div class="gallery">

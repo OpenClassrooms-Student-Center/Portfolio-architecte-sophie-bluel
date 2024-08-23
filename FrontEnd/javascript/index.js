@@ -46,6 +46,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     createCategoriesButtons(categories);
     const works = await getWorks();
     createCardsWorks(works);
+
 });
 
 // Création des boutons de filtrage des catégories 
@@ -117,3 +118,82 @@ function createCardsWorks(works) {
     }
 
 }
+
+// Création d'une fonction pour rendre les filtres dynamiques
+
+const filteredWorks = async (categoryName) => {
+    try {
+        const filteredWorks = await getWorks();
+        const result = filteredWorks.filter((element) => element.category.name === categoryName);
+        createCardsWorks(works);
+    } catch (err) {
+        console.log(err);
+    }
+};
+function filtreObjet() {
+    //Display Objects//
+    const elements = document.querySelector('.gallery');
+    elements.forEach((element) => {
+        const categoryId = element.getAttribute('category-id');
+        if (categoryId === '1') {
+            element.style.display = 'block';
+        } else {
+            element.style.display = 'none';
+        }
+    });
+}
+var bouton = document.getElementById('btnObjet');
+bouton.addEventListener('click', filtreObjet);
+
+
+//Filter Hotel & restaurants//
+
+function filtreHotelsRestaurants() {
+    //Display Hotels & restaurants//
+    const elements = document.querySelectorAll('div.gallery figure');
+    elements.forEach((element) => {
+        const categoryId = element.getAttribute('category-id');
+        if (categoryId === '3') {
+            element.style.display = 'block';
+        } else {
+            element.style.display = 'none';
+        }
+    });
+}
+
+var bouton = document.getElementById('btnHotelRestaurant');
+bouton.addEventListener('click', filtreHotelsRestaurants);
+
+
+//Filter Appartements//
+
+function filtreAppartements() {
+
+    //Display Appartements//
+    const elements = document.querySelectorAll('div.gallery figure');
+    elements.forEach((element) => {
+        const categoryId = element.getAttribute('category-id');
+        if (categoryId === '2') {
+            element.style.display = 'block';
+        } else {
+            element.style.display = 'none';
+        }
+    });
+}
+
+var bouton = document.getElementById('btnAppartement');
+bouton.addEventListener('click', filtreAppartements);
+
+//Filter all categories//
+
+function filtreTous() {
+
+    //Display all categories of works//
+    const elements = document.querySelectorAll('div.gallery figure');
+    elements.forEach((element) => {
+        element.style.display = 'block';
+    });
+}
+
+var bouton = document.getElementById('btnTous');
+bouton.addEventListener('click', filtreTous);
