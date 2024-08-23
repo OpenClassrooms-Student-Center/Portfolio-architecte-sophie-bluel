@@ -78,7 +78,6 @@
 		<div class="gallery">
 
 		</div>
-		</section>
 		<section id="contact">
 			<h2>Contact</h2>
 			<p>Vous avez un projet ? Discutons-en !</p>
@@ -92,7 +91,6 @@
 				<input type="submit" value="Envoyer">
 			</form>
 		</section>
-		</div>
 		<aside id="my_modal" class="modal_container">
 			<div id="delete_modal" class="modal">
 				<nav class="delete_header">
@@ -123,31 +121,30 @@
 						<fieldset class="add_container">
 							<div class="img_downloader">
 								<i class="fa-regular fa-image"></i>
-								<input type="file" id="file" name="file" accept="image/png, image/jpeg" />
+								<input type="file" id="file" name="file" accept="image/png, image/jpeg">
 								<label class="add_btn">+ Ajouter photo</label>
 								<p>jpg, png : 4mo max</p>
 							</div>
-							</div>
-						</fieldset>
-						<fieldset class="field">
-							<label class="first" for="title">Titre</label>
-							<input type="text" id="title" name="title" >
-						</fieldset>
-						<fieldset class="field">
-							<label class="second" for="category">Catégorie</label>
-							<select name="category" id="category" >
-								<option value="0"></option>
-								<option value="1">Objets</option>
-								<option value="2">Appartements</option>
-								<option value="3">Hotels & restaurants</option>
-							</select>
-						</fieldset>
-						<hr>
-						<fieldset class="modal2_submit_btn">
-							<input type="submit" name="submit" value="Valider" id="submit_photo_btn" class="btn-disabled">
-						</fieldset>
-					</form>
-				</div>
+				</fieldset>
+				<fieldset class="field">
+					<label class="first" for="title">Titre</label>
+					<input type="text" id="title" name="title">
+				</fieldset>
+				<fieldset class="field">
+					<label class="second" for="category">Catégorie</label>
+					<select name="category" id="category">
+						<option value="0">...</option>
+						<option value="1">Objets</option>
+						<option value="2">Appartements</option>
+						<option value="3">Hotels & restaurants</option>
+					</select>
+				</fieldset>
+				<hr>
+				<fieldset class="modal2_submit_btn">
+					<input type="submit" name="submit" value="Valider" id="submit_photo_btn" class="btn-disabled">
+				</fieldset>
+				</form>
+			</div>
 			</div>
 		</aside>
 	</main>
