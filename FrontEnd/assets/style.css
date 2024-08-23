@@ -143,6 +143,10 @@ body {
 	background-color: #FEFDF0;
 }
 
+.hidden {
+	display: none;
+}
+
 header {
 	display: flex;
 	justify-content: space-between;
@@ -313,9 +317,6 @@ a {
 	color: black;
 }
 
-.hidden {
-	display: none;
-}
 
 /* Black Bainer */
 
