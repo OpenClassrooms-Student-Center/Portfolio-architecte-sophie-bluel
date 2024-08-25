@@ -13,6 +13,9 @@ const categoriesReponse = await fetch("http://localhost:5678/api/categories");
 const categories = await categoriesReponse.json();
 // Formulaires
 const photoPost = document.getElementById("photoPost")
+// Recuperer les donnees du backend.
+const worksReponse =await fetch("http://localhost:5678/api/works");
+const works = await worksReponse.json();
 
 // Changer le mot login en log out
     function setLoginLogoutlink() {
@@ -59,9 +62,6 @@ function filtresLoggedIn() {
         }
 }
 
-// Recuperer les donnees du backend.
-const worksReponse =await fetch("http://localhost:5678/api/works");
-const works = await worksReponse.json();
 
 tousBtn.addEventListener("click", (event) => {
     galleryDisplay();
@@ -178,7 +178,6 @@ function openAddPhotoModal() {
 
     };
 }
-
 
 
 //Sauvegarde de l'ajout d'une photo dans la 2eme modale

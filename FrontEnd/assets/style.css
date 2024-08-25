@@ -48,12 +48,17 @@ table {
 }
 
 	/** end reset css**/
+
 body {
+	background-color: #FFFEF8;
+}
+
+
+main {
 	max-width: 1140px;
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
-	background-color: #FFFEF8;
 }
 
 section {
@@ -99,7 +104,11 @@ nav ul {
 }
 nav li {
 	padding: 0 10px;
-	font-size: 1.2em;
+}
+
+nav img {
+	width: 50%;
+	font-weight: 500;
 }
 
 li:hover {
@@ -109,7 +118,7 @@ li:hover {
 a {text-decoration: none; }
 
 #bandeau-edition{
-    font-size: 16px;
+	font-family: 'Work Sans' ;
     color: white;
     background-color: black;
     text-align: center;
@@ -121,7 +130,10 @@ a {text-decoration: none; }
 #title-and-nav{
     display: flex;
     justify-content: space-between;
+	margin:auto;
 	margin-top: 50px;
+	max-width: 1140px;
+	font-family: 'Work Sans';
 }
 
 #introduction {
@@ -469,7 +481,12 @@ input[type="submit"]{
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
-	margin: 2em
+	margin: 2em;
+	max-width: 1140px;
+	margin:auto;
+	font-family: 'Work Sans' ;
+	font-size: 14px;
+	background-color: #FFFEF8;
 }
 
 .categories button {
