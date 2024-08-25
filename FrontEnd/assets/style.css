@@ -55,11 +55,7 @@ body {
 	font-size: 14px;
 	background-color: #FFFEF8;
 }
-header {
-	display: flex;
-	justify-content: space-between;
-	margin: 50px 0
-}
+
 section {
 	margin: 50px 0
 }
@@ -108,6 +104,24 @@ nav li {
 
 li:hover {
 	color: #B1663C;
+}
+
+a {text-decoration: none; }
+
+#bandeau-edition{
+    font-size: 16px;
+    color: white;
+    background-color: black;
+    text-align: center;
+    padding-block: 20px;
+    display: none;
+    margin: none;
+}
+
+#title-and-nav{
+    display: flex;
+    justify-content: space-between;
+	margin-top: 50px;
 }
 
 #introduction {

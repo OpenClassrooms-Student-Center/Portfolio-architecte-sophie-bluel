@@ -46,13 +46,16 @@ function loginLogoutLinkHandler() {
     })
 }
 
-// Cacher les boutons filtres lorsque logged in 
+// Modifier la page une fois connecté 
 
 function filtresLoggedIn() {
+    const bandeau = document.getElementById("bandeau-edition")
         if (window.localStorage.getItem("token") != null) {
              // Cacher les boutons filtres travaux
              const categoriesTravaux = document.querySelectorAll('.categoriesTravaux');
              categoriesTravaux.forEach(c=>c.style.display='none')
+             // Ajouter le bandeau edition
+             bandeau.style.display="block"
         }
 }
 
