@@ -58,6 +58,7 @@ function renderModalWork(work) {
     return article
 }
 
+//Partie de l'ajout d'un nouveau travail
 const addModal = document.getElementById('add_modal')
 
 // function addWork(image, title, category) {
@@ -99,7 +100,7 @@ const addModal = document.getElementById('add_modal')
 //     }
 // }
 
-//supprimer une img
+
 function handleRemove(workId) {
     return async function () {
         try {
@@ -119,6 +120,7 @@ function handleRemove(workId) {
     }
 }
 
+//fonctionnement de certains éléments de la modale
 function initModal() {
     //ouverture de modale au click du btn modif
     const modifBtn = document.querySelector('.modif')
@@ -137,7 +139,6 @@ function initModal() {
         deleteModal.style.display = 'flex'
     })
 
-
     //bouton qui mène au formulaire d'ajout de photo
     document.querySelector('.add_photo_btn').addEventListener('click', (event) => {
         const deleteModal = document.getElementById('delete_modal')
@@ -147,14 +148,12 @@ function initModal() {
     initModalForm()
 }
 
-
 //fonction qui affiche l'image téléchargée
 function togglePreview() {
     document.querySelector('.img_downloader').classList.add('toggle_hide')
     document.querySelector('.img_preview').classList.add('toggle_show')
 }
 
-//vérification du respect de la taille de l'image (à svaoir 4Mo)
 const imageInput = document.getElementById('file');
 
 //écouteur d'événement qui change la valeur de l'input
@@ -174,7 +173,8 @@ imageInput.addEventListener('change', function (event) {
         //permet d'obtenir l'URL de l'image sous forme de chaîne encodée (en base64)
         imgPreview.src = reader.result;
     })
-    //verification de la taille
+
+    //verification de la taille de l'image (à savoir 4Mo max)
     if (file.size > 4 * 1024 * 1024) {
         alert('La taille maximale autorisée pour l\'image est de 4 Mo')
         imageInput.value = ''
@@ -182,17 +182,12 @@ imageInput.addEventListener('change', function (event) {
         //démarre la lecture du fichier avec la méthode suivante + affiche l'img 
         reader.readAsDataURL(file)
         togglePreview()
-        //ajout d'une croix pour annuler le téléchargement
-        const abordFile = document.createElement('i')
-        abordFile.classList.add('fa-solid', 'fa-xmark')
     }
 })
 
-  //récup du btn d'ajout de téléchargement de photo
-  const addWorkBtn = document.getElementById('submit_photo_btn')
-  //récup des champs de saisie/selection du formulaire
-  const titleInput = document.getElementById('title')
-  const categoryInput = document.getElementById('category')
+//récup des champs de saisie/selection du formulaire
+const titleInput = document.getElementById('title')
+const categoryInput = document.getElementById('category')
 
 function validModalForm() {
 
@@ -205,23 +200,24 @@ function validModalForm() {
 
     if (imageInput.files.length === 0 || titleContent.length === 0 || selectedCategory === 0) {
         return false
-    }else {
+    } else {
         return true
     }
 }
 
+//validation du formulaire
 function initModalForm() {
     const titleContent = titleInput.value
     titleInput.addEventListener('change', () => {
         if (imageInput.files.length === 0 || titleContent.length === 0 || selectedCategory === 0) {
             addWorkBtn.classList.remove('btn-disabled')
 
-        }else {
+        } else {
             addWorkBtn.classList.add('btn-disabled')
         }
     })
-    
-    //formulaire d'ajout de nouvelle photo
+
+    //récup du bouton d'ajout de nouvelle photo du formulaire d'ajout
     const addWorkBtn = document.getElementById('submit_photo_btn')
 
 
@@ -238,44 +234,13 @@ function initModalForm() {
         const selectedCategory = categoryInput.value
         console.log(titleContent, selectedImg, selectedCategory)
 
-        if(validModalForm()) {
+        if (validModalForm()) {
             console.log('envoie')
             let result = await createWork(selectedImg, titleContent, selectedCategory)
-        }else {
+        } else {
             alert('Veuillez remplir tous les champs !')
         }
     })
 }
-
-
-// function validModalForm() {
-//     //récup du btn d'ajout de téléchargement de photo
-//     const addWorkBtn = document.getElementById('submit_photo_btn')
-//     //récup des champs de saisie/selection du formulaire
-//     const imageInput = document.getElementById('file');
-//     const selectedImg = imageInput.files[0]
-
-//     const titleInput = document.getElementById('title')
-//     const titleContent = titleInput.value
-
-//     const categoryInput = document.getElementById('category')
-//     const selectedCategory = categoryInput.value
-
-//     //récup du formulaire
-//     const addForm = document.querySelector('.add_content form')
-//     try {
-//         if (imageInput.files.length === 0 && titleContent.length === 0 && selectedCategory !== 0) {
-//             // alert("Veuillez remplir tous les champs du formulaire d'ajout")
-//             addForm.reset()
-//             return false
-
-//         }
-//     }catch {
-//         error('erreur au niveau du code')
-//         addWorkBtn.disabled = false
-//             addWorkBtn.style.background = "#1D6154"
-//             return true
-//     }
-// }
 
 initModal() 

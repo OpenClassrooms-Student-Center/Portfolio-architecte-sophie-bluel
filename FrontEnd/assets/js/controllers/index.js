@@ -155,7 +155,7 @@ function adminMode() {
         ul.appendChild(login)
 
 
-        //apparition du bouton modif + attribution de l'apparition de la modale au click
+        //apparition du bouton modif
         const btnModif = document.querySelector('.modif')
         btnModif.style.display = 'flex'
     }

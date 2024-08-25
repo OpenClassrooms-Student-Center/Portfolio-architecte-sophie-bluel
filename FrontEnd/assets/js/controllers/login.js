@@ -4,9 +4,11 @@ import {
 } from '../libs/user.js';
 
 function idValidator(email, password) {
-    //validation complexe avec expression régulière pour l'email 'sophie.bluel@test.tld' + MDP entre 6 et 12 carctères
+    //variable avec expression régulière pour valider le format de l'email 'sophie.bluel@test.tld'
     let emailValidation = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
+    //Pareil mais pour valider la longueur du MDP entre 6 et 12 caractères
     let passwordValidation = /^.{6,12}$/
+    //on teste les expressions et on vérifie si les id respectent les critères de validation
     console.log(emailValidation.test(email), passwordValidation.test(password))
     return (emailValidation.test(email) && passwordValidation.test(password))
 }
@@ -34,6 +36,3 @@ submitBtn.addEventListener("click", async (event) => {
         alert("Erreur dans l’identifiant ou le mot de passe")
     }
 })
-
-const logoutBtn = document.querySelector('.logout')
-logoutBtn.addEventListener('click', logout)
