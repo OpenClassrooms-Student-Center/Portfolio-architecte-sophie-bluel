@@ -43,7 +43,7 @@
 	<section id="portfolio">
 		<div id="mes-projets-logged-in">
 		<h2>Mes Projets</h2>
-		<button id="openModal"><i class="fa-regular fa-pen-to-square"></i>Modifier</button>
+		<button id="openModal"><i class="fa-regular fa-pen-to-square"></i> modifier</button>
 		</div>
 		<div id="categories_id" class="categories">
 			<button id="Tous">Tous</button>
@@ -75,6 +75,9 @@
 			
 		<div id="grey-input-zone">
 			<i id="photo-icon" class="fa-regular fa-image"></i>
+			<div id="imagePreviewContainer">
+				<img id="imagePreview" style="display: none;" alt="Image Preview" />
+			</div>
 			<div id="input-file-div">
 				<label for="imageUrl" id="button-add-photo">
 					<p id="text-add-photo">+ Ajouter Photo</p>
@@ -96,11 +99,16 @@
 				<option value="2">2 = Appartements</option>
 				<option value="3">3 = Hotels & restaurants</option>
 				</select>
-				<div id="champIncomplet">Merci de choisir la catégorie.</div>
+				<div id="champsRequis" class="champsRequis">
+					Merci de compléter les champs requis
+				</div>
+				<div id="success-message" class="success-message">
+					La photo a bien été ajoutée à la galerie
+				</div>
 			</br>
 			<hr style="border: 0; border-top: 1px solid #888;">
 			<div id="validerModal-zone">
-			<button type="submit" id="validerModal">Valider</button>
+			<button type="submit" class="disabled" id="validerModal">Valider</button>
 		</div>
 		</form>
 		</div>

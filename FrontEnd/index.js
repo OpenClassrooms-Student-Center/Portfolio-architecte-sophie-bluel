@@ -60,12 +60,12 @@ function filtresLoggedIn() {
 const worksReponse =await fetch("http://localhost:5678/api/works");
 const works = await worksReponse.json();
 
-document.getElementById("Tous").addEventListener("click", (event) => {
+tousBtn.addEventListener("click", (event) => {
     galleryDisplay();
 });
 
 openModalBtn.addEventListener("click", (event) => {
-    openingModal();
+    openingModal(true);
 });
 
 addPhotoModalBtn.addEventListener("click", (event) => {
@@ -79,7 +79,7 @@ validerPhotoBtn.addEventListener("click", (event) => {
 
 galleryDisplay();
 
-showButtonIfLogedin();
+showButtonIfLoggedin();
 
 setLoginLogoutlink();
 
@@ -91,8 +91,14 @@ filtresLoggedIn();
 
 closingModals();
 
+addEventListenersToModalInputs();
+
+
+
 // L'element, du DOM, dont id est gallery_id.
-export function galleryDisplay() { 
+async function galleryDisplay() { 
+    const worksReponse =await fetch("http://localhost:5678/api/works");
+    const works = await worksReponse.json();
     const gallery = document.getElementById("gallery_id");
 
     let gallery_contents = "";
@@ -109,8 +115,13 @@ export function galleryDisplay() {
 
 
 //Ouverture de la modale
-function openingModal() {
-    firstModal.style.display="flex";
+async function openingModal(displayFirstModal) {
+    const worksReponse =await fetch("http://localhost:5678/api/works");
+    const works = await worksReponse.json();
+    if (displayFirstModal == true) {
+        firstModal.style.display="flex"
+    };
+
 
     // Affichage de la mini galerie.
     const gallery = document.getElementById("mini_gallery_id");
@@ -129,16 +140,25 @@ function openingModal() {
     const deleteButtons=document.getElementsByClassName("close-mini-gallery");
     for (let i =0; i < deleteButtons.length; i++) { 
         deleteButtons[i].addEventListener("click", async (event) => {
+            event.preventDefault();
             let url = "http://localhost:5678/api/works/" + deleteButtons[i].getAttribute("workid")
             const result = await fetch(url, {
                 //Objet de configuration qui comprend 2 propriétés
                 method: "DELETE",
                 headers: {"Content-Type": "application/json", Authorization: 'Bearer ' + window.localStorage.getItem("token")}
             })
+            if (result.status === 204) {
+                openingModal(true);
+                galleryDisplay();
+                return { success: true };
+            }
+            else {
+                
+            }
          });
-        }
-
+        }       
 }
+
 
 // Ouverture de la modale Add Photo
 function openAddPhotoModal() {
@@ -152,15 +172,14 @@ function openAddPhotoModal() {
         // Hide the Add Photo Modal and show the First Modal
         addPhotoModal.style.display = "none";
         firstModal.style.display = "flex";
+
     };
 }
 
 
+
 //Sauvegarde de l'ajout d'une photo dans la 2eme modale
 async function saveNewPhoto() {
-
-    const form = document.getElementById("photoPost");
-    // Ajout de l'eventListener au bouton validerModal
 
          let url = "http://localhost:5678/api/works/"
          const formData = new FormData();
@@ -171,12 +190,58 @@ async function saveNewPhoto() {
                 //Objet de configuration qui comprend 2 propriétés
                 method: "POST",
                 headers: {'Authorization': 'Bearer ' + window.localStorage.getItem("token")},
-                body: formData,
+                body: formData
             });
             console.log(await result.json());
-        }
 
-function showButtonIfLogedin() {
+        const worksReponse =await fetch("http://localhost:5678/api/works");
+        const works = await worksReponse.json();
+        galleryDisplay();
+        openingModal(false);
+        firstModal.style.display="none";
+        resetForm(); // Réinitialiser le formulaire et l'aperçu du fichier téléchargé
+}
+
+function resetForm() {
+    let successMessage = document.getElementById("success-message");
+    const photoPost = document.getElementById("photoPost");
+     const imagePreview = document.getElementById("imagePreview");
+     const photoIcon = document.getElementById("photo-icon");
+     const buttonAddPhoto = document.getElementById("button-add-photo");
+     const subTextAddPhoto = document.getElementById("subtext-add-photo");
+     const inputZone = document.getElementById("grey-input-zone");
+
+    photoPost.reset(); // Réinitialiser le formulaire
+    successMessage.style.display = "block";
+    setTimeout(() => {
+        successMessage.style.display = "none";
+    }, 3000); // Masquer le message après 3 secondes  
+
+     // Reset the file input manually (photoPost.reset() doesn't reset file inputs)
+     const fileInput = document.getElementById("imageUrl");
+     fileInput.value = "";  // Clear the file input
+ 
+     // Reset the image preview and related elements
+     imagePreview.src = "";
+     imagePreview.style.display = "none";
+     photoIcon.style.display = "block";
+     buttonAddPhoto.style.display = "block";
+     subTextAddPhoto.style.display = "block";
+     inputZone.style.flexDirection = "column"; // Reset the input zone style
+ 
+     // Reset the submit button state
+     const submitButton = document.getElementById("validerModal");
+     submitButton.disabled = true;
+     submitButton.classList.add("disabled");
+     submitButton.classList.remove("enabled");
+ 
+     // Hide any error messages
+     const errorMessage = document.getElementById("champsRequis");
+     errorMessage.style.display = "none";
+ }
+
+
+function showButtonIfLoggedin() {
     if (window.localStorage.getItem("token") != null) {
         const openModal = document.getElementById("openModal");
         // Afficher le bouton modifier
@@ -184,23 +249,30 @@ function showButtonIfLogedin() {
     }
 }
 
-// When the user clicks on <i> (x), close the modal
-
+// Fermeture des modales: When the user clicks on <i> (x), close the modal
 function closingModals() {
+
+    let modals = document.getElementsByClassName("modal")
+
     for (var i=0; i < closeBtns.length; i++) {
         closeBtns[i].addEventListener("click", () => {
             firstModal.style.display = "none";
             addPhotoModal.style.display = "none"
         });
-    }
+    
+    // When the user clicks anywhere outside of the modal, close it
+        window.addEventListener("click", (event) => {
+        for (let i = 0; i < modals.length; i++) {
+            if (event.target == modals[i]) {
+                modals[i].style.display = "none";
+            }
+        } 
+    });
+    } 
+
+    galleryDisplay();
 } 
-// When the user clicks anywhere outside of the modal, close it
-// window.addEventListener("click", (event) => {
-//     if (event.target == modal) {
-//         firstModal.style.display = "none";
-//         addPhotoModal.style.display = "none"
-//     }
-// });
+ 
 
 //Affichage des projets pour une catégorie
 function galleryDisplayCategorie(categorie) {
@@ -238,56 +310,82 @@ async function addCategoriesButtons() {
         
         });
 
+        // Ajout des categories au DOM
         categories_element.appendChild(cat);
     }
 }
 
-    // Deuxieme modale Ajout Photo: AddEventListeners pour valider les champs
+// Gérer la complétion des champs dans AddPhotoModal
+function addEventListenersToModalInputs() {
+    let fileInput = document.getElementById("imageUrl");
+    let textInput = document.getElementById("titrePhoto");
+    let selectInput = document.getElementById("categoriePhoto");
 
-    // function validerCategorie(event) {
-    //     var selectElement = document.getElementById("categoriePhoto");
-    //     var champIncomplet = document.getElementById("champIncomplet");
-    
-    //     if (selectElement.value == "0") {
-    //         event.preventDefault(); // Empêche la soumission du formulaire
-    //         champIncomplet.style.display = "block"; // Affiche le message d'erreur
-    //     } else {
-    //         champIncomplet.style.display = "none"; // Masque le message d'erreur si la sélection est correcte
-    //     }
-    // }
-    
-    // document.getElementById("photoPost").addEventListener("submit", validerCategorie);
+    fileInput.addEventListener("change", handleFileInput);
+    textInput.addEventListener("input", checkInputs);
+    selectInput.addEventListener("change", checkInputs);
 
-    // document.addEventListener("DOMContentLoaded", function() {
-    //     let fileInput = document.getElementById("imageUrl");
-    //     let textInput = document.getElementById("titrePhoto");
-    //     let selectInput = document.getElementById("categoriePhoto");
-    //     let submitButton = document.getElementById("validerModal");
-    
-    //     function checkInputs() {
-    //         // Vérifie que tous les champs sont remplis correctement
-    //         if (fileInput.files.length > 0 && textInput.value.trim() !== "" && selectInput.value !== "0") {
-    //             submitButton.disabled = false;
-    //             submitButton.classList.add("enabled");
-    //             console.log('Button enabled');
+    // // Ajoute l'événement de clic au bouton "Valider" ici une seule fois
+    // let submitButton = document.getElementById("validerModal");
+    // submitButton.addEventListener("click", (event) => {
+    //         if (submitButton.disabled) {
+    //             event.preventDefault(); // Empêche l'action par défaut du bouton si désactivé
+    //             displayErrorMessage(true); // Affiche le message d'erreur
     //         } else {
-    //             submitButton.disabled = true;
-    //             submitButton.classList.remove("enabled");
+    //             displayErrorMessage(false); // Cache le message d'erreur si tout est correct
     //         }
-    //     }
-
-    //     // Empêcher la soumission du formulaire si le bouton est désactivé
-    //     photoPost.addEventListener("submit", function(event) {
-    //     if (submitButton.disabled) {
-    //         event.preventDefault(); // Bloque la soumission si le bouton est désactivé
-    //     }
     //     });
+}
 
-    //     // Ajouter des event listeners à chaque champ requis
-    //     fileInput.addEventListener("change", checkInputs);
-    //     textInput.addEventListener("input", checkInputs);
-    //     selectInput.addEventListener("change", checkInputs);
-    
-    //     // Initialement désactive le bouton de soumission
-    //     checkInputs();
-    // });
+function handleFileInput() {
+    let fileInput = document.getElementById("imageUrl");
+    let imagePreview = document.getElementById("imagePreview");
+    let photoIcon = document.getElementById("photo-icon");
+    let buttonAddPhoto = document.getElementById("button-add-photo");
+    let subTextAddPhoto = document.getElementById("subtext-add-photo");
+    let inputZone = document.getElementById("grey-input-zone");
+
+    if (fileInput.files.length > 0) {
+        let reader = new FileReader();
+        reader.onload = function(e) {
+            imagePreview.src = e.target.result;
+            imagePreview.style.display = "block"; // Affiche l'image
+        };
+        reader.readAsDataURL(fileInput.files[0]); // Charge l'image sélectionnée
+        photoIcon.style.display = "none"; // Cache l'icone photo
+        buttonAddPhoto.style.display = "none"; // Cache le bouton d'ajout photo
+        subTextAddPhoto.style.display = "none"; // Cache le subtext
+        inputZone.style.flexDirection = "row"; // Supprime le padding-bottom
+    } else {
+        imagePreview.style.display = "none";
+        imagePreview.src = ""; // Réinitialise l'image
+    }
+
+    // Appeler checkInputs pour vérifier les autres conditions après l'affichage de l'image
+    checkInputs();
+}
+
+function checkInputs() {
+    let fileInput = document.getElementById("imageUrl");
+    let textInput = document.getElementById("titrePhoto");
+    let selectInput = document.getElementById("categoriePhoto");
+    let submitButton = document.getElementById("validerModal");
+    let errorMessage = document.getElementById("champsRequis");
+
+    if (fileInput.files.length > 0 && textInput.value.trim() !== "" && selectInput.value !== "0") {
+        submitButton.disabled = false;
+        submitButton.classList.add("enabled");
+        submitButton.classList.remove("disabled");
+        errorMessage.style.display = "none";
+        console.log('Button enabled');
+            // Optionnel : Rafraîchir la galerie
+            galleryDisplay();
+    } else {
+        errorMessage.style.display = "block";
+        submitButton.disabled = true;
+        submitButton.classList.add("disabled");
+        submitButton.classList.remove("enabled");
+    }
+}
+
+

@@ -56,18 +56,3 @@ const loginData = {
 });
 
 
-// const loginDataJson = JSON.stringify(loginData);
-//     getLoginResult(loginDataJson)
-// });
-
-// async function getLoginResult(loginDataJson) {
-//     const result = await fetch("http://localhost:5678/api/users/login", {
-//         //Objet de configuration qui comprend 3 propriétés
-//     method: "POST",
-//     headers: { "Content-Type": "application/json" },
-//     body: loginDataJson //charge utile
-// });
-
-// const resultValue = await result
-//     console.log(resultValue)
-// }
