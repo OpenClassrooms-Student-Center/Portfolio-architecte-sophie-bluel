@@ -1,7 +1,33 @@
 import { httpDelete } from './utils.js'; // Import module
-
 "use strict";
+/**
+ * Show a notification message on the screen.
+ * 
+ * @param {String} message - The message to display.
+ * @param {Boolean} isSuccess - Determines the type of notification (success or error).
+ */
+function showNotification(message, isSuccess) {
+    const notification = document.createElement('div');
+    notification.classList.add('loading-indicator');
 
+    // Add success or error class based on the result
+    if (isSuccess) {
+        notification.classList.add('success');
+    } else {
+        notification.classList.add('error');
+    }
+
+    // Set the message
+    notification.textContent = message;
+
+    // Append the notification to the body
+    document.body.appendChild(notification);
+
+    // Automatically remove the notification after 3 seconds
+    setTimeout(() => {
+        notification.remove();
+    }, 3000);
+}
 // Function to create a modal with given header, content, and footer
 function createModal(header = null, content = null, footer = null) {
     let body = document.querySelector('body');
@@ -276,15 +302,17 @@ window.showEditModal = function (data) {
         deleteIcon.classList.add('fa-solid', 'fa-trash', 'delete-icon');
         deleteIcon.title = 'Supprimer';
 
+
+        // Add event listener for deleting the item
         deleteIcon.addEventListener('click', async () => {
             const authToken = sessionStorage.getItem('authToken'); // Assuming authToken is stored in sessionStorage
             const result = await httpDelete(works_endpoint, item.id, authToken);
             if (result) {
-                alert('Photo supprimée avec succès');
+                showNotification('Photo supprimée avec succès', true);
                 // Remove the deleted item from the DOM
                 articleAdmin.remove();
             } else {
-                alert('Erreur lors de la suppression de la photo');
+                showNotification('Erreur lors de la suppression de la photo', false);
             }
         });
 
@@ -301,11 +329,10 @@ window.showEditModal = function (data) {
 };
 
 // Display the modal when clicking on editBtn
-document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('editBtn').addEventListener('click', async () => {
-        if (!works || works.length === 0) {
-            await getWorks(); // Assure que works est bien rempli
-        }
-        showEditModal(works);
-    });
+document.getElementById('editBtn').addEventListener('click', async () => {
+    if (!works || works.length === 0) {
+        await getWorks();
+    }
+    showEditModal(works);
 });
+
