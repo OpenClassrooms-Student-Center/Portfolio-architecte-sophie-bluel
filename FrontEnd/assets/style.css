@@ -326,7 +326,7 @@ a {
 }
 
 
-#bainerBlack {
+.banner {
 	display: flex;
 	justify-content: center;
 	padding: 20px 0;
@@ -362,7 +362,7 @@ a {
 	cursor: pointer;
 }
 
-#edit-works span {
+.editWorks span {
 	color: black;
 	font-size: 14px;
 	font-family: "Work Sans";

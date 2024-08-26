@@ -23,17 +23,12 @@ function adminConnect() {
 // Ajuste l'affichage de certains éléments du DOM en fonction de l'état de connexion 
 function adminDisplay() {
     const log = isConnected();
-    const bainerBlack = document.getElementById("bainerBlack");
-    const editWorks = document.getElementById("edit-works");
-    const filters = document.getElementById("filters");
     if (log) {
-        bainerBlack.style.display = 'flex';
-        editWorks.style.display = 'flex';
-        filters.style.display = 'none';
+        document.querySelectorAll(".admin").forEach(elt => elt.classList.remove("hidden"));
+        document.querySelectorAll(".noAdmin").forEach(elt => elt.classList.add("hidden"));
     } else {
-        bainerBlack.style.display = 'none';
-        editWorks.style.display = 'none';
-        filters.style.display = 'flex';
+        document.querySelectorAll(".admin").forEach(elt => elt.classList.add("hidden"));
+        document.querySelectorAll(".noAdmin").forEach(elt => elt.classList.remove("hidden"));
     }
 }
 
