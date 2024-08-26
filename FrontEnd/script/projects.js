@@ -7,25 +7,6 @@ let works = []; // Store the gallery data globally
 const portfolioSection = document.querySelector('#js-portfolio');
 const galleryDiv = document.querySelector('#js-portfolio .gallery');
 
-//OLD getWorks to check before discarding
-// API FETCH getWorks
-/*
-async function getWorks() {
-    try {
-        const response = await fetch(works_endpoint);
-        if (!response.ok) {
-            throw new Error("Sorry, I can't retrieve the works");
-        }
-        const data = await response.json();
-        works = data; // Store the data globally
-        displayGallery(data);
-        createFilters(data);
-    } catch (error) {
-        console.error(error);
-    }
-}
-*/
-
 /**
  * HTTP GET
  * 

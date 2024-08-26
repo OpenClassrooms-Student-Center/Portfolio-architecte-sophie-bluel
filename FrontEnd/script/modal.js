@@ -1,3 +1,5 @@
+import { httpDelete } from './utils.js'; // Import module
+
 "use strict";
 
 // Function to create a modal with given header, content, and footer
@@ -274,6 +276,19 @@ window.showEditModal = function (data) {
         deleteIcon.classList.add('fa-solid', 'fa-trash', 'delete-icon');
         deleteIcon.title = 'Supprimer';
 
+        // Add event listener for deleting the item
+        deleteIcon.addEventListener('click', async () => {
+            const authToken = sessionStorage.getItem('authToken'); // Assuming authToken is stored in sessionStorage
+            const result = await httpDelete(works_endpoint, item.id, authToken);
+            if (result) {
+                alert('Photo supprimée avec succès');
+                // Remove the deleted item from the DOM
+                articleAdmin.remove();
+            } else {
+                alert('Erreur lors de la suppression de la photo');
+            }
+        });
+
         articleAdmin.appendChild(adminImg);
         articleAdmin.appendChild(deleteIcon);
 
@@ -287,9 +302,11 @@ window.showEditModal = function (data) {
 };
 
 // Display the modal when clicking on editBtn
-document.getElementById('editBtn').addEventListener('click', async () => {
-    if (!works || works.length === 0) {
-        await getWorks(); // Assure que works est bien rempli
-    }
-    showEditModal(works);
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('editBtn').addEventListener('click', async () => {
+        if (!works || works.length === 0) {
+            await getWorks(); // Assure que works est bien rempli
+        }
+        showEditModal(works);
+    });
 });
