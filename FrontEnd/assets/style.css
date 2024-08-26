@@ -384,22 +384,16 @@ html {
 	align-items: center;
 }
 
-.modif:hover {
+header a:hover {
 	color:#B1663C;
 }
 
-/* .modif p {
- 
-} */
+
 
 /*modales*/
 .hidden {
 	display: none;
 }
-
-/* #my_modal {
-	display: none;
-} */
 
 /*delete modal*/
 

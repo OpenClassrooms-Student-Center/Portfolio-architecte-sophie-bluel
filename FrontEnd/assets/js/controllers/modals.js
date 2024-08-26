@@ -189,6 +189,7 @@ imageInput.addEventListener('change', function (event) {
 const titleInput = document.getElementById('title')
 const categoryInput = document.getElementById('category')
 
+//validation des champs de saisie du formulaire
 function validModalForm() {
 
     const titleContent = titleInput.value
@@ -205,13 +206,13 @@ function validModalForm() {
     }
 }
 
-//validation du formulaire
+//validation du formulaire + ajout d'un nouveau travail
 function initModalForm() {
     const titleContent = titleInput.value
+    //actiivation du btn si un des champs remplis
     titleInput.addEventListener('change', () => {
         if (imageInput.files.length === 0 || titleContent.length === 0 || selectedCategory === 0) {
             addWorkBtn.classList.remove('btn-disabled')
-
         } else {
             addWorkBtn.classList.add('btn-disabled')
         }
@@ -235,7 +236,8 @@ function initModalForm() {
         console.log(titleContent, selectedImg, selectedCategory)
 
         if (validModalForm()) {
-            console.log('envoie')
+            console.log('envoi')
+            //envoi de la requête pour l'ajout d'un nouveau travail + récup du résultat
             let result = await createWork(selectedImg, titleContent, selectedCategory)
         } else {
             alert('Veuillez remplir tous les champs !')

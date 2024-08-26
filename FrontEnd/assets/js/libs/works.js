@@ -11,7 +11,7 @@ export const fetchWork = async () => {
 
 //create one work
 export const createWork = async (image, title, category) => {
-    //création une instance formData et on crée des données manipulables
+    //création d'une instance formData et de données manipulables
     const formData = new FormData();
     formData.append('title', title)
     formData.append('image', image)
