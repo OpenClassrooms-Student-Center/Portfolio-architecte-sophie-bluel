@@ -276,7 +276,6 @@ window.showEditModal = function (data) {
         deleteIcon.classList.add('fa-solid', 'fa-trash', 'delete-icon');
         deleteIcon.title = 'Supprimer';
 
-        // Add event listener for deleting the item
         deleteIcon.addEventListener('click', async () => {
             const authToken = sessionStorage.getItem('authToken'); // Assuming authToken is stored in sessionStorage
             const result = await httpDelete(works_endpoint, item.id, authToken);
