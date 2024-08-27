@@ -28,7 +28,7 @@ function openModal() {
 //faire apparaitre la galerie
 function displayModalGallery() {
     const imgContainer = document.querySelector('.img_container')
-    //evite liste infinie des works
+    //évite liste infinie des works
     imgContainer.innerHTML = ''
     let articles = document.works.map(renderModalWork)
     console.log('articles', articles)
