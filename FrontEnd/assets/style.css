@@ -148,8 +148,12 @@ li:hover {
 
 }
 #contact {
-	width: 50%;
-margin: auto;
+    width: 50%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 #contact > * {
 	text-align: center;
