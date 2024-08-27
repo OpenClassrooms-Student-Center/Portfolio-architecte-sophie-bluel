@@ -160,7 +160,7 @@ const imageInput = document.getElementById('file');
 imageInput.addEventListener('change', function (event) {
     //récup du conteneur
     const addContainer = document.querySelector('.add_container')
-    //je crée l'élémént destiné à accueillir l'affichage de l'img téléchargée et lui donne une classe
+    //je crée l'élément destiné à accueillir l'affichage de l'img téléchargée et lui donne une classe
     const imgPreview = document.createElement('img')
     imgPreview.classList.add('img_preview')
     addContainer.appendChild(imgPreview)
