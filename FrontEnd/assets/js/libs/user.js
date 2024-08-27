@@ -1,5 +1,5 @@
 
-
+//requêtte API pour connexion + enregistrement du token
 export const login = async (email, password) => {
     let response = await fetch('http://localhost:5678/api/users/login', {
         method: 'POST',
@@ -17,6 +17,7 @@ export const login = async (email, password) => {
     return response.ok
 }
 
+//suppression du token pour déconnexion
 export const logout = () => {
     localStorage.removeItem("token")
     window.location.href = "index.html"
