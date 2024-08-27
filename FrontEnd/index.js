@@ -38,13 +38,13 @@ function loginLogoutLinkHandler() {
     loginLink.addEventListener("click", (event) => {
         if (window.localStorage.getItem("token") == null) {
              // Rediriger l'utilisateur
-         window.location.href = "/FrontEnd/login.html";
+         window.location.href = "login.html";
         }
         else {
             // Eliminer le token
         window.localStorage.removeItem("token");
         // Rediriger l'utilisateur
-        window.location.href = "/FrontEnd/index.html";
+        window.location.href = "index.html";
         }
     })
 }

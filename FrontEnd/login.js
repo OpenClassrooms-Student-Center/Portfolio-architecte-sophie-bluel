@@ -37,7 +37,7 @@ const loginData = {
         //  // Stockage des informations dans le localStorage
         window.localStorage.setItem("token", resultValue.token);
          // Rediriger l'utilisateur
-         window.location.href = "/FrontEnd/index.html";
+         window.location.href = "index.html";
          
 
      } else {
