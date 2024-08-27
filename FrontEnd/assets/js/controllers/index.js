@@ -40,7 +40,7 @@ export function createWorkElement(work) {
 // une fonction qui affiche les travaux
 function displayWorks(works) {
     gallery.innerHTML = '';
-
+    //on itère les éléments du tableau
     works.forEach(work => {
         let workElement = createWorkElement(work);
         gallery.appendChild(workElement);
