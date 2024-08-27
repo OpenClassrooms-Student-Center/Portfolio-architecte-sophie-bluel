@@ -1,5 +1,7 @@
 import { httpDelete } from './utils.js'; // Import module
+import { httpPost } from './utils.js';
 "use strict";
+
 /**
  * Show a notification message on the screen.
  * 
@@ -20,6 +22,10 @@ function showNotification(message, isSuccess) {
     // Set the message
     notification.textContent = message;
 
+    // Ensure the notification is visible and above all other elements
+    notification.style.display = 'block';
+    notification.style.zIndex = '9999'; // Make sure it's above everything else
+
     // Append the notification to the body
     document.body.appendChild(notification);
 
@@ -28,6 +34,7 @@ function showNotification(message, isSuccess) {
         notification.remove();
     }, 3000);
 }
+
 // Function to create a modal with given header, content, and footer
 function createModal(header = null, content = null, footer = null) {
     let body = document.querySelector('body');
