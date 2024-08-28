@@ -159,6 +159,11 @@ a {text-decoration: none; }
 #introduction p {
 	margin-bottom: 0.5em;
 }
+
+#authText {
+	cursor: pointer;
+}
+
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
@@ -176,6 +181,7 @@ a {text-decoration: none; }
 	height: 12px;
 	background-color: transparent;
 	margin: 0px 0px 30px;
+	cursor: pointer;
 }
 
 #categories_id {

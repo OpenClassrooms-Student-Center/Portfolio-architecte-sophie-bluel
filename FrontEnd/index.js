@@ -17,51 +17,6 @@ const photoPost = document.getElementById("photoPost")
 const worksReponse =await fetch("http://localhost:5678/api/works");
 const works = await worksReponse.json();
 
-// Changer le mot login en log out
-    function setLoginLogoutlink() {
-        if (window.localStorage.getItem("token") == null) {
-
-    const authText = document.getElementById('authText');
-    authText.innerText = 'login';
-    }
-    else {
-    authText.innerText = 'logout';
-    openModalBtn.style.display = 'block'; // Show the openModal button
-    tousBtn.style.display = 'none'; // Hide the Tous button
-    }
-}
-
-// Rediriger vers la page login ou page d'accueil
-
-function loginLogoutLinkHandler() {
-    const loginLink= document.getElementById("authText")
-    loginLink.addEventListener("click", (event) => {
-        if (window.localStorage.getItem("token") == null) {
-             // Rediriger l'utilisateur
-         window.location.href = "login.html";
-        }
-        else {
-            // Eliminer le token
-        window.localStorage.removeItem("token");
-        // Rediriger l'utilisateur
-        window.location.href = "index.html";
-        }
-    })
-}
-
-// Modifier la page une fois connecté 
-
-function filtresLoggedIn() {
-    const bandeau = document.getElementById("bandeau-edition")
-        if (window.localStorage.getItem("token") != null) {
-             // Cacher les boutons filtres travaux
-             const categoriesTravaux = document.querySelectorAll('.categoriesTravaux');
-             categoriesTravaux.forEach(c=>c.style.display='none')
-             // Ajouter le bandeau edition
-             bandeau.style.display="block"
-        }
-}
-
 
 tousBtn.addEventListener("click", (event) => {
     galleryDisplay();
@@ -116,6 +71,98 @@ async function galleryDisplay() {
 
 }
 
+// Recuperer les categories du backend.
+async function addCategoriesButtons() {
+    const categories_element = document.getElementById("categories_id");
+
+    // Les boutons des differents travaux classes par categories
+    for (var i=0; i < categories.length; i++) { 
+        const cat = document.createElement("button");
+        cat.innerText = categories[i].name;
+        cat.id = categories[i].name;
+
+        cat.classList.add('categoriesTravaux')
+        cat.addEventListener("click", (event) => {
+        galleryDisplayCategorie(event.currentTarget.id);
+        console.log(event.currentTarget.id);
+        
+        });
+
+        // Ajout des categories au DOM
+        categories_element.appendChild(cat);
+    }
+}
+
+//Affichage des projets pour une catégorie
+function galleryDisplayCategorie(categorie) {
+
+    const gallery = document.getElementById("gallery_id");
+
+    let gallery_contents = "";
+    
+    // On itere sur la liste de 'works' qu'on a reçu du backend, puis on construit le contenu.
+    for(let i =0; i < works.length; i++) { 
+        if (works[i].category.name === categorie) { 
+            gallery_contents += `<figure categorie= ${works[i].category.name} > <img src=' ${works[i].imageUrl} '  alt=' ${works[i].title}  '> <figcaption> ${works[i].title } </figcaption> </figure>`;
+        }
+    }
+    
+    // Injection du nouveau contenu dans le DOM existant.
+    gallery.innerHTML = gallery_contents;
+}
+
+// Changer le mot login en log out
+function setLoginLogoutlink() {
+    if (window.localStorage.getItem("token") == null) {
+
+const authText = document.getElementById('authText');
+authText.innerText = 'login';
+}
+else {
+authText.innerText = 'logout';
+openModalBtn.style.display = 'block'; // Show the openModal button
+tousBtn.style.display = 'none'; // Hide the Tous button
+}
+}
+
+// Rediriger vers la page login ou page d'accueil
+
+function loginLogoutLinkHandler() {
+const loginLink= document.getElementById("authText")
+loginLink.addEventListener("click", (event) => {
+    if (window.localStorage.getItem("token") == null) {
+         // Rediriger l'utilisateur
+     window.location.href = "login.html";
+    }
+    else {
+        // Eliminer le token
+    window.localStorage.removeItem("token");
+    // Rediriger l'utilisateur
+    window.location.href = "index.html";
+    }
+})
+}
+
+// Modifier la page une fois connecté 
+function filtresLoggedIn() {
+const bandeau = document.getElementById("bandeau-edition")
+    if (window.localStorage.getItem("token") != null) {
+         // Cacher les boutons filtres travaux
+         const categoriesTravaux = document.querySelectorAll('.categoriesTravaux');
+         categoriesTravaux.forEach(c=>c.style.display='none')
+         // Ajouter le bandeau edition
+         bandeau.style.display="block"
+    }
+}
+
+// Accéder au bouton modifier des projets une fois connecté
+function showButtonIfLoggedin() {
+    if (window.localStorage.getItem("token") != null) {
+        const openModal = document.getElementById("openModal");
+        // Afficher le bouton modifier
+        openModal.style.display = "block";
+    }
+}
 
 //Ouverture de la modale
 async function openingModal(displayFirstModal) {
@@ -243,14 +290,6 @@ function resetForm() {
  }
 
 
-function showButtonIfLoggedin() {
-    if (window.localStorage.getItem("token") != null) {
-        const openModal = document.getElementById("openModal");
-        // Afficher le bouton modifier
-        openModal.style.display = "block";
-    }
-}
-
 // Fermeture des modales: When the user clicks on <i> (x), close the modal
 function closingModals() {
 
@@ -274,48 +313,8 @@ function closingModals() {
 
     galleryDisplay();
 } 
- 
 
-//Affichage des projets pour une catégorie
-function galleryDisplayCategorie(categorie) {
 
-    const gallery = document.getElementById("gallery_id");
-
-    let gallery_contents = "";
-    
-    // On itere sur la liste de 'works' qu'on a reçu du backend, puis on construit le contenu.
-    for(let i =0; i < works.length; i++) { 
-        if (works[i].category.name === categorie) { 
-            gallery_contents += `<figure categorie= ${works[i].category.name} > <img src=' ${works[i].imageUrl} '  alt=' ${works[i].title}  '> <figcaption> ${works[i].title } </figcaption> </figure>`;
-        }
-    }
-    
-    // Injection du nouveau contenu dans le DOM existant.
-    gallery.innerHTML = gallery_contents;
-}
-
-    
-// Recuperer les categories du backend.
-async function addCategoriesButtons() {
-    const categories_element = document.getElementById("categories_id");
-
-    // Les boutons des differents travaux classes par categories
-    for (var i=0; i < categories.length; i++) { 
-        const cat = document.createElement("button");
-        cat.innerText = categories[i].name;
-        cat.id = categories[i].name;
-
-        cat.classList.add('categoriesTravaux')
-        cat.addEventListener("click", (event) => {
-        galleryDisplayCategorie(event.currentTarget.id);
-        console.log(event.currentTarget.id);
-        
-        });
-
-        // Ajout des categories au DOM
-        categories_element.appendChild(cat);
-    }
-}
 
 // Gérer la complétion des champs dans AddPhotoModal
 function addEventListenersToModalInputs() {
@@ -326,17 +325,6 @@ function addEventListenersToModalInputs() {
     fileInput.addEventListener("change", handleFileInput);
     textInput.addEventListener("input", checkInputs);
     selectInput.addEventListener("change", checkInputs);
-
-    // // Ajoute l'événement de clic au bouton "Valider" ici une seule fois
-    // let submitButton = document.getElementById("validerModal");
-    // submitButton.addEventListener("click", (event) => {
-    //         if (submitButton.disabled) {
-    //             event.preventDefault(); // Empêche l'action par défaut du bouton si désactivé
-    //             displayErrorMessage(true); // Affiche le message d'erreur
-    //         } else {
-    //             displayErrorMessage(false); // Cache le message d'erreur si tout est correct
-    //         }
-    //     });
 }
 
 function handleFileInput() {
