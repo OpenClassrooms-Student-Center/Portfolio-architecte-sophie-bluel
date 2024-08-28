@@ -32,7 +32,7 @@ function adminDisplay() {
     }
 }
 
-// Appel de l'API pour récupérer les catégories  
+// Appel de l'API pour récupérer les catégories et les travaux 
 async function getData(url) {
     try {
         const response = await fetch(url);
@@ -96,6 +96,28 @@ function addFilterEvents(works) {
         .forEach(btn => btn.addEventListener("click", evt => filterCategory(evt.target.textContent, works)));
 }
 
+// Fonction pour faire apparaître ou disparaitre la modale 
+function displayModal() {
+    if (isConnected()) {
+        const openModal = document.querySelector(".btnEdit");
+        openModal.addEventListener("click", (event) => {
+            event.preventDefault();
+            const modal = document.getElementById("#modal");
+            modal.classList.remove("hidden");
+        });
+
+    } else {
+        return false;
+    }
+}
+// fonction pour ajouter les travaux dans la modale 
+let modalOpen = true
+
+function addWorkModal(works) {
+    const modalWorks = document.getElementById('#modal');
+    createCardsWorks(works);
+}
+
 // Initialisation de la fonction liée à la connexion et l'affichage lors du chargement de la page
 document.addEventListener("DOMContentLoaded", main);
 async function main() {
@@ -107,6 +129,8 @@ async function main() {
     createCategoriesButtons(categories);
     createCardsWorks(works);
     addFilterEvents(works);
+    displayModal();
+    addWorkModal(works);
 };
 
 // Modale 

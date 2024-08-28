@@ -53,11 +53,46 @@
 					décorateur(trice)</p>
 			</article>
 		</section>
+		<aside id="modal" class="admin hidden">
+			<div class="modale-wrapper">
+				<div class="modalHeader">
+					<button class="modal-close"><i class="fa-solid fa-xmark"></i></button>
+				</div>
+				<h2 class="titleModal"> Galerie Photo </h2>
+				<div class="gallery-contain">
+				</div>
+				<button id="addPictureBtn">Ajouter une photo</button>
+			</div>
+		</aside>
+		<aside id="modal" class="modale">
+			<div class="modale-wrapper">
+				<div class="modalHeader">
+					<button class="modal-return"><i class="fa-solid fa-arrow-left"></i></button>
+					<button class="modal-close"><i class="fa-solid fa-xmark"></i></button>
+				</div>
+				<h2 class="titleModal"> Ajout Photo </h2>
+				<div class="">
+					<form class="pictureForm" name="pictureForm">
+						<div id="labelPhoto">
+							<i class="fa-regular fa-image pictureAdd" style="color: #aaaaaa;"></i>
+							<label for="image" id="label-image"> + Ajouter une photo</label>
+							<input type="file" name="image" id="image" style="display: none;">
+							<p>jpg,png : 4mo max</p>
+						</div>
+						<label for="title">Titre</label>
+						<input type="text" id="title-input" name="title" required>
+						<label class="selectCategory" for="selectCategory">Catégorie</label>
+						<select id="selectCategory" name="selectCategory"></select>
+						<input type="submit" value="Valider" id="modal-valider">
+					</form>
+				</div>
+			</div>
+		</aside>
 		<section id="portfolio">
 			<div class="title-edit">
 				<h2>Mes projets</h2>
 				<div class="admin editWorks hidden">
-					<i class="fa-regular fa-pen-to-square"></i><span>modifier</span>
+					<i class="fa-regular fa-pen-to-square"></i><button class="btnEdit">modifier</button>
 				</div>
 			</div>
 			<div id="filters" class="noAdmin filters">
