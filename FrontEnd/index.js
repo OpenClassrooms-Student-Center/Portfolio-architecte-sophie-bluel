@@ -83,9 +83,9 @@ async function addCategoriesButtons() {
 
         cat.classList.add('categoriesTravaux')
         cat.addEventListener("click", (event) => {
-        galleryDisplayCategorie(event.currentTarget.id);
-        console.log(event.currentTarget.id);
-        
+            galleryDisplayCategorie(event.currentTarget.id);
+            console.log(event.currentTarget.id);
+            
         });
 
         // Ajout des categories au DOM
