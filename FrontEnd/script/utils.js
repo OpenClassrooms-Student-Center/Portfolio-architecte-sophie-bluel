@@ -1,4 +1,5 @@
 "use strict";
+
 /**
  * HTTP DELETE
  * 
@@ -27,6 +28,7 @@ export async function httpDelete(endpoint, id, authToken) {
         return false; // Return false on failure
     }
 }
+
 /**
  * HTTP POST
  * 
@@ -58,50 +60,33 @@ export async function httpPost(endpoint, data, authToken) {
     }
 }
 
-
-/*
-"use strict"
-// API documentation: SWAGGER UI http://localhost:5678/api-docs/#/
-const base = "http://localhost:5678/api/"
-
-export const url_categories = "http://localhost:5678/api/categories";
-export const url_deleteWork = "http://localhost:5678/api/works/";
-
-
-httpPost('http://site.com', {
-    email: email,
-    password: password
-});
-*/
 /**
- * Execute a HTTP request (POST) and return response data
- * @param string url
- * @param object body
- * @param object headers
- * @returns
+ * HTTP POST with FormData (for uploading images)
+ * 
+ * @param {String} endpoint - The endpoint URL to send the POST request to
+ * @param {FormData} formData - The form data containing the image, title, and category
+ * @param {String} authToken - The authentication token (if needed)
+ * @returns {Object} - Returns the JSON response from the API if successful, or false if the request failed
  */
-/*
-async function httpPost(url, body = {}, headers = {}) {
+export async function httpPostFormData(endpoint, formData, authToken) {
     try {
-        if (typeof body != 'object') {
-            throw new Error('xxx');
-        }
-
-        headers = Object.assign({
-            'Content-Type': 'application/json'
-        }, headers);
-
-        const response = await fetch(url, {
+        const response = await fetch(endpoint, {
             method: 'POST',
-            headers: headers,
-            body: JSON.stringify(body)
+            headers: {
+                'Authorization': `Bearer ${authToken}`,
+                // No 'Content-Type' header, it will be set automatically by the browser
+            },
+            body: formData
         });
 
-        const data = await response.json();
-        return data;
-    } catch (e) {
-        console.warn(e);
-        return false;
+        if (!response.ok) {
+            throw new Error('Failed to send the POST request');
+        }
+
+        const responseData = await response.json();
+        return responseData; // Return the JSON response from the API
+    } catch (error) {
+        console.error(error);
+        return false; // Return false on failure
     }
 }
-*/

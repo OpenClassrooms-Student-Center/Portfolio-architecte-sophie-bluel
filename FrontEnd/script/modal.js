@@ -1,7 +1,7 @@
-import { httpDelete } from './utils.js'; // Import module
-import { httpPost } from './utils.js';
+import { httpDelete, httpPost, httpPostFormData } from './utils.js';
 "use strict";
 
+const authToken = sessionStorage.getItem('authToken');
 /**
  * Show a notification message on the screen.
  * 
@@ -189,17 +189,18 @@ function displayUploadForm() {
     iconImg.classList.add('fa-regular', 'fa-image');
     iconImg.id = 'iconImg';
 
-    const uploadBtn = document.createElement('button');
-    uploadBtn.id = 'upload-btn';
-    uploadBtn.title = 'Téléchargez une photo';
-    uploadBtn.innerHTML = '+ Ajouter photo';
+    const uploadInput = document.createElement('input');
+    uploadInput.type = 'file';
+    uploadInput.id = 'upload-input';
+    uploadInput.accept = '.jpg, .png';
+    uploadInput.required = true;
 
     const fileUploadNote = document.createElement('p');
     fileUploadNote.id = 'file-upload-note';
     fileUploadNote.textContent = 'jpg, png : 4mo max';
 
     uploadBox.appendChild(iconImg);
-    uploadBox.appendChild(uploadBtn);
+    uploadBox.appendChild(uploadInput);
     uploadBox.appendChild(fileUploadNote);
 
     const form = document.createElement('form');
@@ -263,6 +264,12 @@ function displayUploadForm() {
     addPhotoContent.appendChild(uploadBox);
     addPhotoContent.appendChild(form);
 
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        console.log("Form submission prevented");
+        handleFormSubmission(e);
+    });
+
     // Add the form to the gallery
     galleryRoll.appendChild(addPhotoContent);
 
@@ -276,14 +283,53 @@ function displayUploadForm() {
         showEditModal(works); // Return to gallery
     });
 
-    // Add event listener for form submission (placeholder functionality)
-    form.addEventListener('submit', (e) => {
+    // Add event listener for form submission to handle file upload
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        alert('Photo ajoutée ! (fonctionnalité à implémenter)');
-        closeModal(document.getElementById('edit-modal')); // Close the modal after submission
-    });
 
+        const title = document.getElementById('photoTitle').value.trim();
+        const category = document.getElementById('photoCategory').value;
+        const imageFile = document.getElementById('upload-input').files[0];
+
+        if (!title || !category || !imageFile) {
+            showNotification('Tous les champs doivent être remplis', false);
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('title', title);
+        formData.append('category', parseInt(category));  // Ensure category is sent as an integer
+        formData.append('image', imageFile);
+
+        const authToken = sessionStorage.getItem('authToken'); // Get the auth token
+
+        try {
+            const response = await fetch('http://localhost:5678/api/works', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${authToken}`,
+                },
+                body: formData
+            });
+
+            const result = await response.json();
+
+            console.log(result); // Log the API response in the console
+
+            if (response.ok) {
+                showNotification('Photo ajoutée avec succès', true);
+                closeModal(document.getElementById('edit-modal'));
+                getWorks(); // Refresh the gallery to include the new item
+            } else {
+                showNotification('Erreur lors de l\'ajout de la photo', false);
+            }
+        } catch (error) {
+            console.error('Upload failed:', error);
+            showNotification('Erreur lors de l\'ajout de la photo', false);
+        }
+    });
 }
+
 
 // Populate adminGallery (miniGallery)
 window.showEditModal = function (data) {
@@ -312,7 +358,6 @@ window.showEditModal = function (data) {
 
         // Add event listener for deleting the item
         deleteIcon.addEventListener('click', async () => {
-            const authToken = sessionStorage.getItem('authToken'); // Assuming authToken is stored in sessionStorage
             const result = await httpDelete(works_endpoint, item.id, authToken);
             if (result) {
                 showNotification('Photo supprimée avec succès', true);
@@ -343,3 +388,53 @@ document.getElementById('editBtn').addEventListener('click', async () => {
     showEditModal(works);
 });
 
+async function handleFormSubmission(event) {
+    event.preventDefault();
+
+    console.log("Form submission triggered");
+
+    const title = document.getElementById('photoTitle').value.trim();
+    const category = document.getElementById('photoCategory').value;
+    const imageFile = document.getElementById('upload-input').files[0]; // Corrected input ID for file
+
+    console.log("Title:", title);
+    console.log("Category:", category);
+    console.log("Image file:", imageFile);
+
+    if (!title || !category || !imageFile) {
+        showNotification('Tous les champs doivent être remplis', false);
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('category', parseInt(category));  // Ensure category is sent as an integer
+    formData.append('image', imageFile);
+
+    const authToken = sessionStorage.getItem('authToken'); // Get the auth token
+
+    try {
+        const response = await fetch('http://localhost:5678/api/works', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${authToken}`,
+            },
+            body: formData
+        });
+
+        const result = await response.json();
+
+        console.log("API Response:", result); // Log the API response in the console
+
+        if (response.ok) {
+            showNotification('Photo ajoutée avec succès', true);
+            closeModal(document.getElementById('edit-modal'));
+            getWorks(); // Refresh the gallery to include the new item
+        } else {
+            showNotification('Erreur lors de l\'ajout de la photo', false);
+        }
+    } catch (error) {
+        console.error('Upload failed:', error);
+        showNotification('Erreur lors de l\'ajout de la photo', false);
+    }
+}
