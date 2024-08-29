@@ -6,9 +6,10 @@ function isConnected() {
 
 function adminConnect() {
     const logBtn = document.querySelector("#logBtn");
+    const logout = document.querySelector("#logout");
     if (isConnected()) {
-        logBtn.innerText = "logout";
-        logBtn.addEventListener("click", () => {
+        logout.innerText = "logout";
+        logout.addEventListener("click", () => {
             localStorage.removeItem("token");
             window.location.href = "./index.html"; // Redirige vers l'accueil après déconnexion
         });
@@ -96,25 +97,76 @@ function addFilterEvents(works) {
         .forEach(btn => btn.addEventListener("click", evt => filterCategory(evt.target.textContent, works)));
 }
 
-// Fonction pour faire apparaître ou disparaitre la modale 
+//MODAL
+
+// Fonction pour faire apparaître la première modale 
+
 function displayModal() {
     if (isConnected()) {
         const openModal = document.querySelector(".btnEdit");
         openModal.addEventListener("click", (event) => {
             event.preventDefault();
-            const modal = document.getElementById("#modal");
-            modal.classList.remove("hidden");
+            document.querySelectorAll(".modale").forEach(elt => elt.classList.remove("hidden"));
         });
-
     } else {
         return false;
     }
 }
+
+// Fonction pour faire apparaître la deuxième modale 
+
+function displayModal2() {
+    if (isConnected()) {
+        const openModal2 = document.querySelector(".addPicture");
+        openModal2.addEventListener("click", (event) => {
+            event.preventDefault();
+            document.querySelectorAll(".modale2").forEach(elt => elt.classList.remove("hidden"));
+            document.querySelectorAll(".modale").forEach(elt => elt.classList.add("hidden"));
+        });
+    } else {
+        return false;
+    }
+}
+
+// Fonction pour revenir à la première modale 
+
+function returnModal() {
+    if (isConnected()) {
+        const returnModal = document.querySelector(".modal-return");
+        returnModal.addEventListener("click", (event) => {
+            event.preventDefault();
+            document.querySelectorAll(".modale").forEach(elt => elt.classList.remove("hidden"));
+            document.querySelectorAll(".modale2").forEach(elt => elt.classList.add("hidden"));
+        });
+    } else {
+        return false;
+    }
+}
+
+// Fonction pour fermer la modale 
+
+function noDisplayAllModal() {
+    const closeModal = document.querySelector(".modal-close");
+    closeModal.addEventListener("click", (event) => {
+        event.preventDefault();
+        document.querySelectorAll(".modale").forEach(elt => elt.classList.add("hidden"));
+        document.querySelectorAll(".modale2").forEach(elt => elt.classList.add("hidden"));
+    })
+
+}
+
 // fonction pour ajouter les travaux dans la modale 
-let modalOpen = true
+
+async function addWorksModal() {
+    // Appelle la fonction getData pour obtenir les travaux depuis l'API ou le cache
+    const works = await getData("http://localhost:5678/api/works");
+    const modalWorks = document.querySelector('.gallery-contain');
+    createCardsWorks(works);
+
+}
 
 function addWorkModal(works) {
-    const modalWorks = document.getElementById('#modal');
+    const modalWorks = document.getElementById('.gallery-contain');
     createCardsWorks(works);
 }
 
@@ -130,7 +182,8 @@ async function main() {
     createCardsWorks(works);
     addFilterEvents(works);
     displayModal();
-    addWorkModal(works);
+    displayModal2();
+    noDisplayAllModal();
+    returnModal();
+    addWorksModal(works);
 };
-
-// Modale 

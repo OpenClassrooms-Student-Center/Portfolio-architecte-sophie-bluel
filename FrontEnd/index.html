@@ -30,7 +30,7 @@
 				<ul>
 					<li><a href="index.html#portfolio">projets</a></li>
 					<li><a href="index.html#contact">contact</a></li>
-					<li> <a id="logBtn" class="" href="connection.html"> Login </a></li>
+					<li> <a id="logBtn" class="hidden noAdmin" href="connection.html"> Login </a></li>
 					<li> <a id="logout" class="admin hidden" href="index.html"> logout </a></li>
 					<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 				</ul>
@@ -53,7 +53,7 @@
 					décorateur(trice)</p>
 			</article>
 		</section>
-		<aside id="modal" class="admin hidden">
+		<aside id="modal" class="modale hidden">
 			<div class="modale-wrapper">
 				<div class="modalHeader">
 					<button class="modal-close"><i class="fa-solid fa-xmark"></i></button>
@@ -61,10 +61,10 @@
 				<h2 class="titleModal"> Galerie Photo </h2>
 				<div class="gallery-contain">
 				</div>
-				<button id="addPictureBtn">Ajouter une photo</button>
+				<button id="addPictureBtn" class="addPicture">Ajouter une photo</button>
 			</div>
 		</aside>
-		<aside id="modal" class="modale">
+		<aside id="modal" class="modale2 hidden">
 			<div class="modale-wrapper">
 				<div class="modalHeader">
 					<button class="modal-return"><i class="fa-solid fa-arrow-left"></i></button>
