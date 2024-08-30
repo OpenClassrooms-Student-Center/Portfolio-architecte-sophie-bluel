@@ -55,15 +55,15 @@ addEventListenersToModalInputs();
 
 // L'element, du DOM, dont id est gallery_id.
 async function galleryDisplay() { 
-    const worksReponse =await fetch("http://localhost:5678/api/works");
-    const works = await worksReponse.json();
+    // const worksReponse =await fetch("http://localhost:5678/api/works");
+    // const works = await worksReponse.json();
     const gallery = document.getElementById("gallery_id");
 
     let gallery_contents = "";
     
     // On itere sur la liste de 'works' qu'on a reçu du backend, puis on construit le contenu.
     for(let i =0; i < works.length; i++) { 
-        gallery_contents += `<figure categorie= ${works[i].category.name} > <img src=' ${works[i].imageUrl} '  alt=' ${works[i].title}  '> <figcaption> ${works[i].title} </figcaption> </figure>`;
+        gallery_contents += `<figure id= ${works[i].id} categorie= ${works[i].category.name} > <img src=' ${works[i].imageUrl} '  alt=' ${works[i].title}  '> <figcaption> ${works[i].title} </figcaption> </figure>`;
     }
     
     // Injection du nouveau contenu dans le DOM existant.
@@ -166,8 +166,8 @@ function showButtonIfLoggedin() {
 
 //Ouverture de la modale
 async function openingModal(displayFirstModal) {
-    const worksReponse =await fetch("http://localhost:5678/api/works");
-    const works = await worksReponse.json();
+     const worksReponse =await fetch("http://localhost:5678/api/works");
+     const works = await worksReponse.json();
     if (displayFirstModal == true) {
         firstModal.style.display="flex"
     };
@@ -180,7 +180,7 @@ async function openingModal(displayFirstModal) {
     
     // On itere sur la liste de 'works' qu'on a reçu du backend, puis on construit le contenu.
     for(let i =0; i < works.length; i++) { 
-        gallery_contents += `<figure categorie= ${works[i].category.name}> <img src=' ${works[i].imageUrl} '><i workid=' ${works[i].id} ' class='close close-mini-gallery fa-solid fa-trash-can'></i></figure>`; 
+        gallery_contents += `<figure categorie= ${works[i].category.name}> <img src=' ${works[i].imageUrl} '><i workid='${works[i].id}' class='close close-mini-gallery fa-solid fa-trash-can'></i></figure>`; 
     }
     
     // Injection du nouveau contenu dans le DOM existant.
@@ -199,7 +199,16 @@ async function openingModal(displayFirstModal) {
             })
             if (result.status === 204) {
                 openingModal(true);
-                galleryDisplay();
+                // galleryDisplay();
+                // Parcourir le contenu de la galerie principale pour trouver le travail supprimé et l'enlever du DOM
+                const gallery = document.getElementById("gallery_id");
+                let childNodes = gallery.childNodes;
+                for(let j =0; j < childNodes.length; j++) {
+                    if (childNodes[j].id == deleteButtons[i].getAttribute("workid")) {
+                        gallery.removeChild(childNodes[j]);
+                        return;
+                    }
+                }
                 return { success: true };
             }
             else {
@@ -241,15 +250,16 @@ async function saveNewPhoto() {
                 headers: {'Authorization': 'Bearer ' + window.localStorage.getItem("token")},
                 body: formData
             });
-            console.log(await result.json());
+            let resultPhoto = await result.json();
 
-        const worksReponse =await fetch("http://localhost:5678/api/works");
-        const works = await worksReponse.json();
-        galleryDisplay();
+        // galleryDisplay();
+        const gallery = document.getElementById("gallery_id")
+        gallery.innerHTML += `<figure id= ${resultPhoto.id} categorie= ${resultPhoto.categoryId} > <img src=' ${resultPhoto.imageUrl} '  alt=' ${resultPhoto.title}  '> <figcaption> ${resultPhoto.title} </figcaption> </figure>`;
         openingModal(false);
         firstModal.style.display="none";
         resetForm(); // Réinitialiser le formulaire et l'aperçu du fichier téléchargé
 }
+
 
 function resetForm() {
     let successMessage = document.getElementById("success-message");
@@ -368,8 +378,7 @@ function checkInputs() {
         submitButton.classList.remove("disabled");
         errorMessage.style.display = "none";
         console.log('Button enabled');
-            // Optionnel : Rafraîchir la galerie
-            galleryDisplay();
+
     } else {
         errorMessage.style.display = "block";
         submitButton.disabled = true;
