@@ -74,7 +74,8 @@ function createCardsWorks(works, isModal = false) {
         workImage.src = project.imageUrl;
         workImage.alt = project.title;
         workImage.crossOrigin = "anonymous";
-        const workTitle = document.createElement("figcaption");
+        let workTitle;
+        workTitle = document.createElement("figcaption");
         workTitle.innerText = project.title;
         // Rattacher balise figure à la gallerie de projets
         galleryWorks.appendChild(workFigure);
@@ -99,16 +100,18 @@ function addFilterEvents(works) {
         .forEach(btn => btn.addEventListener("click", evt => filterCategory(evt.target.textContent, works)));
 }
 
+
 //MODAL
 
 // Fonction pour faire apparaître la première modale 
 
 function displayModal() {
+    document.querySelectorAll("div[data-name]")
     if (isConnected()) {
         const openModal = document.querySelector(".btnEdit");
         openModal.addEventListener("click", (event) => {
             event.preventDefault();
-            document.querySelectorAll(".modale").forEach(elt => elt.classList.remove("hidden"));
+            document.querySelectorAll(".modal").forEach(elt => elt.classList.remove("hidden"));
         });
     } else {
         return false;
@@ -116,7 +119,6 @@ function displayModal() {
 }
 
 // Fonction pour faire apparaître la deuxième modale 
-
 function displayModal2() {
     if (isConnected()) {
         const openModal2 = document.querySelector(".addPicture");
@@ -173,7 +175,6 @@ async function main() {
     createCardsWorks(works);
     addFilterEvents(works);
     displayModal();
-    displayModal2();
     noDisplayAllModal();
     returnModal();
     const modalWorks = addWorkModal(works, true);

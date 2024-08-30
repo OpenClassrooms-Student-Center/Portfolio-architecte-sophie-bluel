@@ -450,6 +450,10 @@ button[autofocus] {
 
 /* Modale */
 
+#modal {
+	display: fixed;
+}
+
 .modal {
 	display: none;
 	align-items: center;
@@ -479,7 +483,7 @@ button[autofocus] {
 
 }
 
-.modalHeader {
+.modalTop {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
@@ -614,15 +618,4 @@ button[autofocus] {
 
 .modal-gallery img {
 	height: 104px;
-}
-
-.image-container {
-	position: relative;
-	display: inline-block;
-}
-
-.image-container img {
-	display: block;
-	width: 100%;
-	height: auto;
 }
