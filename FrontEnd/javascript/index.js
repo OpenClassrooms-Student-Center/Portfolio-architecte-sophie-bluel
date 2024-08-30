@@ -155,19 +155,41 @@ function noDisplayAllModal() {
 
 }
 
-// fonction pour ajouter les travaux dans la modale 
-
-async function addWorksModal() {
-    // Appelle la fonction getData pour obtenir les travaux depuis l'API ou le cache
-    const works = await getData("http://localhost:5678/api/works");
-    const modalWorks = document.querySelector('.gallery-contain');
-    createCardsWorks(works);
-
+// Fonction pour afficher les photos dans la modale
+function workModal(works) {
+    const photo_modal = createCardsWorks(works);
+    document
+        .querySelector(".gallery-contain")
+        .insertAdjacentHTML("beforeend", photo_modal);
 }
 
-function addWorkModal(works) {
-    const modalWorks = document.getElementById('.gallery-contain');
-    createCardsWorks(works);
+// fonction pour ajouter les travaux dans la modale 
+async function addWorkModal() {
+    try {
+        const response = await getData("http://localhost:5678/api/works");
+        const adminWorks = document.querySelector(".gallery-contain");
+        adminWorks.innerHTML = "";
+        createCardsWorks(works);
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+async function addWorkModa() {
+    try {
+        const response = await fetch("http://localhost:5678/api/works");
+        const adminWorks = document.querySelector(".gallery-contain");
+        if (!response.ok) {
+            throw new Error("Erreur lors de la récupération des données");
+        }
+        const data = await response.json();
+        adminWorks.innerHTML = "";
+        createCardsWorks(works);
+
+    }
+    catch (error) {
+        console.error("Erreur lors de la récupération des projets : ", error);
+    }
 }
 
 // Initialisation de la fonction liée à la connexion et l'affichage lors du chargement de la page
@@ -185,5 +207,6 @@ async function main() {
     displayModal2();
     noDisplayAllModal();
     returnModal();
-    addWorksModal(works);
+    const modalWorks = await addWorkModal(works);
+    workModal(works);
 };
