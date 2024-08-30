@@ -58,10 +58,12 @@ function createCategorieButton(category) {
     return button;
 }
 
-// Création des cartes pour afficher les travaux 
-function createCardsWorks(works) {
+// Création des cartes pour afficher les travaux dans la gallerie et dans la modale
+function createCardsWorks(works, isModal = false) {
     // Récupération de l'élément du DOM qui accueillera les travaux
-    const galleryWorks = document.querySelector('.gallery');
+    let galleryWorks;
+    if (isModal) galleryWorks = document.querySelector('.modal-gallery');
+    else galleryWorks = document.querySelector('.gallery');
     galleryWorks.textContent = "";
     for (let i = 0; i < works.length; i++) {
         const project = works[i];
@@ -150,47 +152,14 @@ function noDisplayAllModal() {
     closeModal.addEventListener("click", (event) => {
         event.preventDefault();
         document.querySelectorAll(".modale").forEach(elt => elt.classList.add("hidden"));
-        document.querySelectorAll(".modale2").forEach(elt => elt.classList.add("hidden"));
     })
 
 }
 
-// Fonction pour afficher les photos dans la modale
-function workModal(works) {
-    const photo_modal = createCardsWorks(works);
-    document
-        .querySelector(".gallery-contain")
-        .insertAdjacentHTML("beforeend", photo_modal);
-}
-
 // fonction pour ajouter les travaux dans la modale 
-async function addWorkModal() {
-    try {
-        const response = await getData("http://localhost:5678/api/works");
-        const adminWorks = document.querySelector(".gallery-contain");
-        adminWorks.innerHTML = "";
-        createCardsWorks(works);
-    } catch (err) {
-        console.log(err);
-    }
+function addWorkModal(works) {
+    createCardsWorks(works, true);
 };
-
-async function addWorkModa() {
-    try {
-        const response = await fetch("http://localhost:5678/api/works");
-        const adminWorks = document.querySelector(".gallery-contain");
-        if (!response.ok) {
-            throw new Error("Erreur lors de la récupération des données");
-        }
-        const data = await response.json();
-        adminWorks.innerHTML = "";
-        createCardsWorks(works);
-
-    }
-    catch (error) {
-        console.error("Erreur lors de la récupération des projets : ", error);
-    }
-}
 
 // Initialisation de la fonction liée à la connexion et l'affichage lors du chargement de la page
 document.addEventListener("DOMContentLoaded", main);
@@ -207,6 +176,5 @@ async function main() {
     displayModal2();
     noDisplayAllModal();
     returnModal();
-    const modalWorks = await addWorkModal(works);
-    workModal(works);
+    const modalWorks = addWorkModal(works, true);
 };

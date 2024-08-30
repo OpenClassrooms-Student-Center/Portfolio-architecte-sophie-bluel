@@ -1,7 +1,6 @@
 let contact = document.querySelector("contact")
 form.addEventListener("submit", async (e) => {
     e.preventDefault()
-
     let baliseNom = document.getElementById("nom")
     let nom = baliseNom.value
     let baliseEmail = document.getElementById("email")

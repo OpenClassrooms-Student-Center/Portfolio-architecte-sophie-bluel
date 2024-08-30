@@ -599,3 +599,30 @@ button[autofocus] {
 	text-align: left;
 
 }
+
+/*** Taille des travaux dans modal***/
+
+.modal-gallery {
+	display: grid;
+	justify-content: center;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: 6px;
+	grid-row-gap: 25px;
+	width: 419px;
+	margin-bottom: 30px;
+}
+
+.modal-gallery img {
+	height: 104px;
+}
+
+.image-container {
+	position: relative;
+	display: inline-block;
+}
+
+.image-container img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
