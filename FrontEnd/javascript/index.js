@@ -84,6 +84,10 @@ function createCardsWorks(works, isModal = false) {
             workTitle.innerText = project.title;
             workFigure.appendChild(trashIcon);
             workTitle.classList.add("hidden");
+            trashIcon.addEventListener("click", function (event) {
+                event.preventDefault(); // Empêche le rechargement de la page
+                deleteWork(works.id); // Supprime le travail lors du clic
+            });
         } else {
             workTitle.innerText = project.title;
         }
@@ -189,6 +193,26 @@ function addWorkModal(works) {
     createCardsWorks(works, true);
 };
 
+// fonction pour supprimer les travaux 
+
+async function deleteWork(workId) {
+    try {
+        const response = await fetch(`http://localhost:5678/api/works/{id}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${sessionStorage.getItem("token")}`, // Utilise le token stocké pour l'authentification
+            },
+        });
+        if (response.ok) {
+            alert("Projet correctement supprimé.")
+        } else {
+            throw new Error("Failed to delete work"); // Gère les réponses non réussies
+        }
+    } catch (error) {
+        console.error("Erreur lors de la suppression:", error); // Log en cas d'erreur
+    }
+}
+
 // Initialisation de la fonction liée à la connexion et l'affichage lors du chargement de la page
 document.addEventListener("DOMContentLoaded", main);
 async function main() {
@@ -203,4 +227,5 @@ async function main() {
     displayModal();
     testCloseModal();
     const modalWorks = addWorkModal(works, true);
+    const deleteWorkModal = deleteWork(workId);
 };
