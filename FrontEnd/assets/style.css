@@ -450,15 +450,11 @@ button[autofocus] {
 
 /* Modale */
 
-#modal {
-	display: fixed;
-}
 
 .modal {
 	display: none;
 	align-items: center;
 	justify-content: center;
-	position: fixed;
 	width: 100%;
 	height: 100%;
 	top: 0;

@@ -103,7 +103,7 @@ function addFilterEvents(works) {
 
 //MODAL
 
-// Fonction pour faire apparaître la première modale 
+// Fonction pour faire apparaître la première et deuxième modale et retour en arrière
 
 function displayModal() {
     document.querySelectorAll("div[data-name]")
@@ -111,36 +111,20 @@ function displayModal() {
         const openModal = document.querySelector(".btnEdit");
         openModal.addEventListener("click", (event) => {
             event.preventDefault();
-            document.querySelectorAll(".modal").forEach(elt => elt.classList.remove("hidden"));
+            event.stopPropagation();
+            document.querySelector("div[data-name = modalGallery]").classList.remove("hidden");
         });
-    } else {
-        return false;
-    }
-}
-
-// Fonction pour faire apparaître la deuxième modale 
-function displayModal2() {
-    if (isConnected()) {
-        const openModal2 = document.querySelector(".addPicture");
-        openModal2.addEventListener("click", (event) => {
+        const openForm = document.querySelector(".addPicture");
+        openForm.addEventListener("click", (event) => {
             event.preventDefault();
-            document.querySelectorAll(".modale2").forEach(elt => elt.classList.remove("hidden"));
-            document.querySelectorAll(".modale").forEach(elt => elt.classList.add("hidden"));
+            document.querySelector("div[data-name = modalForm]").classList.remove("hidden");
+            document.querySelector("div[data-name = modalGallery]").classList.add("hidden");
         });
-    } else {
-        return false;
-    }
-}
-
-// Fonction pour revenir à la première modale 
-
-function returnModal() {
-    if (isConnected()) {
         const returnModal = document.querySelector(".modal-return");
         returnModal.addEventListener("click", (event) => {
             event.preventDefault();
-            document.querySelectorAll(".modale").forEach(elt => elt.classList.remove("hidden"));
-            document.querySelectorAll(".modale2").forEach(elt => elt.classList.add("hidden"));
+            document.querySelector("div[data-name = modalGallery]").classList.remove("hidden");
+            document.querySelector("div[data-name = modalForm]").classList.add("hidden");
         });
     } else {
         return false;
@@ -150,10 +134,15 @@ function returnModal() {
 // Fonction pour fermer la modale 
 
 function noDisplayAllModal() {
+    window.addEventListener("click", (event) => {
+        event.preventDefault();
+        document.querySelectorAll("div[data-name").forEach(elt => elt.classList.add("hidden"));
+    })
     const closeModal = document.querySelector(".modal-close");
     closeModal.addEventListener("click", (event) => {
         event.preventDefault();
-        document.querySelectorAll(".modale").forEach(elt => elt.classList.add("hidden"));
+
+        document.querySelectorAll(".allModal").forEach(elt => elt.classList.add("hidden"));
     })
 
 }
@@ -176,6 +165,5 @@ async function main() {
     addFilterEvents(works);
     displayModal();
     noDisplayAllModal();
-    returnModal();
     const modalWorks = addWorkModal(works, true);
 };

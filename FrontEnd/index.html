@@ -53,36 +53,40 @@
 					décorateur(trice)</p>
 			</article>
 		</section>
-		<div id="modal" class="modal hidden">
-			<div class="modale-wrapper" data-name="modalGallery">
-				<div class="modalTop">
-					<button class="modal-close"><i class="fa-solid fa-xmark"></i></button>
+		<div id="modal">
+			<div class="allModal hidden" data-name="modalGallery">
+				<div class="modale-wrapper ">
+					<div class="modalTop">
+						<button class="modal-close"><i class="fa-solid fa-xmark"></i></button>
+					</div>
+					<h2 class="titleModal"> Galerie Photo </h2>
+					<div class="modal-gallery">
+					</div>
+					<button id="addPictureBtn" class="addPicture">Ajouter une photo</button>
 				</div>
-				<h2 class="titleModal"> Galerie Photo </h2>
-				<div class="modal-gallery">
-				</div>
-				<button id="addPictureBtn" class="addPicture">Ajouter une photo</button>
 			</div>
-			<div class="modale-wrapper" data-name="moddal-form">
-				<div class="modalHeader">
-					<button class="modal-return"><i class="fa-solid fa-arrow-left"></i></button>
-					<button class="modal-close"><i class="fa-solid fa-xmark"></i></button>
-				</div>
-				<h2 class="titleModal"> Ajout Photo </h2>
-				<div class="">
-					<form class="pictureForm" name="pictureForm">
-						<div id="labelPhoto">
-							<i class="fa-regular fa-image pictureAdd" style="color: #aaaaaa;"></i>
-							<label for="image" id="label-image"> + Ajouter une photo</label>
-							<input type="file" name="image" id="image" style="display: none;">
-							<p>jpg,png : 4mo max</p>
-						</div>
-						<label for="title">Titre</label>
-						<input type="text" id="title-input" name="title" required>
-						<label class="selectCategory" for="selectCategory">Catégorie</label>
-						<select id="selectCategory" name="selectCategory"></select>
-						<input type="submit" value="Valider" id="modal-valider">
-					</form>
+			<div class="allModal hidden" data-name="modalForm">
+				<div class="modale-wrapper">
+					<div class="modalHeader">
+						<button class="modal-return"><i class="fa-solid fa-arrow-left"></i></button>
+						<button class="modal-close"><i class="fa-solid fa-xmark"></i></button>
+					</div>
+					<h2 class="titleModal"> Ajout Photo </h2>
+					<div class="">
+						<form class="pictureForm" name="pictureForm">
+							<div id="labelPhoto">
+								<i class="fa-regular fa-image pictureAdd" style="color: #aaaaaa;"></i>
+								<label for="image" id="label-image"> + Ajouter une photo</label>
+								<input type="file" name="image" id="image" style="display: none;">
+								<p>jpg,png : 4mo max</p>
+							</div>
+							<label for="title">Titre</label>
+							<input type="text" id="title-input" name="title" required>
+							<label class="selectCategory" for="selectCategory">Catégorie</label>
+							<select id="selectCategory" name="selectCategory"></select>
+							<input type="submit" value="Valider" id="modal-valider">
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
