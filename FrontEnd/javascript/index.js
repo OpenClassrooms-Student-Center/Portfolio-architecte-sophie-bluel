@@ -48,10 +48,10 @@ async function getData(url) {
 // Création des boutons de filtrage des catégories 
 function createCategoriesButtons(categories) {
     const filters = document.getElementById("filters");
-    categories.forEach(cat => filters.append(createCategorieButton(cat)));
+    categories.forEach(cat => filters.append(createCategoryButton(cat)));
 }
 
-function createCategorieButton(category) {
+function createCategoryButton(category) {
     const button = document.createElement("button");
     button.textContent = category.name;
     button.classList.add("btns-filters");
@@ -59,6 +59,7 @@ function createCategorieButton(category) {
 }
 
 // Création des cartes pour afficher les travaux dans la gallerie et dans la modale
+
 function createCardsWorks(works, isModal = false) {
     // Récupération de l'élément du DOM qui accueillera les travaux
     let galleryWorks;
@@ -74,13 +75,19 @@ function createCardsWorks(works, isModal = false) {
         workImage.src = project.imageUrl;
         workImage.alt = project.title;
         workImage.crossOrigin = "anonymous";
-        let workTitle;
-        workTitle = document.createElement("figcaption");
-        workTitle.innerText = project.title;
+        if (isModal) {
+            let trashIcon = document.createElement('i');
+            trashIcon.classList.add("fa-solid fa-trash");
+        } else {
+            let workTitle;
+            workTitle = document.createElement("figcaption");
+            workTitle.innerText = project.title;
+        }
         // Rattacher balise figure à la gallerie de projets
         galleryWorks.appendChild(workFigure);
         workFigure.appendChild(workImage);
         workFigure.appendChild(workTitle);
+        workFigure.appendChild(trashCan);
     }
 }
 
@@ -111,7 +118,6 @@ function displayModal() {
         const openModal = document.querySelector(".btnEdit");
         openModal.addEventListener("click", (event) => {
             event.preventDefault();
-            event.stopPropagation();
             document.querySelector("div[data-name = modalGallery]").classList.remove("hidden");
         });
         const openForm = document.querySelector(".addPicture");
@@ -138,14 +144,42 @@ function noDisplayAllModal() {
         event.preventDefault();
         document.querySelectorAll("div[data-name").forEach(elt => elt.classList.add("hidden"));
     })
-    const closeModal = document.querySelector(".modal-close");
+    const closeModal = document.querySelectorAll(".modal-close");
     closeModal.addEventListener("click", (event) => {
         event.preventDefault();
-
         document.querySelectorAll(".allModal").forEach(elt => elt.classList.add("hidden"));
     })
+    const noCloseInsideModal = document.getElementById("modal");
+    noCloseInsideModal.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+    });
+}
+
+// création du fonction test pour fermer la modal en attendant de réussir à mettre le event.stopPropagation pour essayer d'avancer dans le projet...
+const body = document.body;
+const modalBackground = document.getElementById("modal");
+const btnCloseModal = document.querySelectorAll(".modal-close")
+
+function testCloseModal() {
+    for (let button of btnCloseModal) {
+        button.addEventListener("click", (event) => {
+            modalBackground.classList.remove("flex");
+            body.classList.remove("no-scroll");
+            event.preventDefault();
+            event.stopPropagation();
+        });
+    }
+
+    window.addEventListener("click", (event) => {
+        if (event.target == modalBackground) {
+            modalBackground.classList.remove("flex");
+            body.classList.remove("no-scroll");
+        }
+    });
 
 }
+
 
 // fonction pour ajouter les travaux dans la modale 
 function addWorkModal(works) {
@@ -164,6 +198,6 @@ async function main() {
     createCardsWorks(works);
     addFilterEvents(works);
     displayModal();
-    noDisplayAllModal();
+    testCloseModal();
     const modalWorks = addWorkModal(works, true);
 };
