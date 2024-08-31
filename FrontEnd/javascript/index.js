@@ -75,19 +75,22 @@ function createCardsWorks(works, isModal = false) {
         workImage.src = project.imageUrl;
         workImage.alt = project.title;
         workImage.crossOrigin = "anonymous";
+        let trashIcon;
+        trashIcon = document.createElement('i');
+        let workTitle;
+        workTitle = document.createElement("figcaption");
         if (isModal) {
-            let trashIcon = document.createElement('i');
-            trashIcon.classList.add("fa-solid fa-trash");
+            trashIcon.classList.add("fa-solid", "fa-trash-can");
+            workTitle.innerText = project.title;
+            workFigure.appendChild(trashIcon);
+            workTitle.classList.add("hidden");
         } else {
-            let workTitle;
-            workTitle = document.createElement("figcaption");
             workTitle.innerText = project.title;
         }
         // Rattacher balise figure à la gallerie de projets
         galleryWorks.appendChild(workFigure);
         workFigure.appendChild(workImage);
         workFigure.appendChild(workTitle);
-        workFigure.appendChild(trashCan);
     }
 }
 
