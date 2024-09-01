@@ -1,5 +1,4 @@
 // Gestion du Login page de connexion //
-// element submit //
 
 let form = document.querySelector("Form")
 form.addEventListener("submit", async (e) => {

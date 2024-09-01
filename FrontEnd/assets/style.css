@@ -616,7 +616,7 @@ button[autofocus] {
 	height: 104px;
 }
 
-
+/*** Btn Poubelle ***/
 .fa-trash-can {
 	color: white;
 	background-color: black;

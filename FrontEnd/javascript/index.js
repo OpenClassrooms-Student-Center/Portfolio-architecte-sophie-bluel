@@ -75,6 +75,7 @@ function createCardsWorks(works, isModal = false) {
         workImage.src = project.imageUrl;
         workImage.alt = project.title;
         workImage.crossOrigin = "anonymous";
+        workFigure.setAttribute('data-id', project.id);
         let trashIcon;
         trashIcon = document.createElement('i');
         let workTitle;
@@ -84,10 +85,10 @@ function createCardsWorks(works, isModal = false) {
             workTitle.innerText = project.title;
             workFigure.appendChild(trashIcon);
             workTitle.classList.add("hidden");
-            trashIcon.addEventListener("click", function (event) {
-                event.preventDefault(); // Empêche le rechargement de la page
-                deleteWork(works.id); // Supprime le travail lors du clic
+            trashIcon.addEventListener("click", () => {
+                deleteWork(project.id, workFigure)
             });
+
         } else {
             workTitle.innerText = project.title;
         }
@@ -167,7 +168,6 @@ function noDisplayAllModal() {
 const body = document.body;
 const modalBackground = document.getElementById("modal");
 const btnCloseModal = document.querySelectorAll(".modal-close")
-
 function testCloseModal() {
     for (let button of btnCloseModal) {
         button.addEventListener("click", (event) => {
@@ -177,7 +177,6 @@ function testCloseModal() {
             event.stopPropagation();
         });
     }
-
     window.addEventListener("click", (event) => {
         if (event.target == modalBackground) {
             modalBackground.classList.remove("flex");
@@ -187,7 +186,6 @@ function testCloseModal() {
 
 }
 
-
 // fonction pour ajouter les travaux dans la modale 
 function addWorkModal(works) {
     createCardsWorks(works, true);
@@ -195,7 +193,7 @@ function addWorkModal(works) {
 
 // fonction pour supprimer les travaux 
 
-async function deleteWork(workId) {
+async function deleteWork(id) {
     try {
         const response = await fetch(`http://localhost:5678/api/works/{id}`, {
             method: "DELETE",
@@ -204,6 +202,7 @@ async function deleteWork(workId) {
             },
         });
         if (response.ok) {
+            document.querySelectorAll('workFigure[data-id="{id}"]').forEach(e => e.remove(e));
             alert("Projet correctement supprimé.")
         } else {
             throw new Error("Failed to delete work"); // Gère les réponses non réussies
@@ -227,5 +226,5 @@ async function main() {
     displayModal();
     testCloseModal();
     const modalWorks = addWorkModal(works, true);
-    const deleteWorkModal = deleteWork(workId);
+    const deleteWorkModal = await deleteWork(id);
 };

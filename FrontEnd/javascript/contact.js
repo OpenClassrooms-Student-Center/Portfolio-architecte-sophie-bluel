@@ -1,3 +1,5 @@
+/** gestion formulaire de contact **/
+
 let contact = document.querySelector("contact")
 form.addEventListener("submit", async (e) => {
     e.preventDefault()
