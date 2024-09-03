@@ -1,4 +1,13 @@
-import { getCategories, getWorks, fillGallery } from "./works.js";
+import{buildHeader} from "./modules/header.js";
+import { buildFooter } from "./modules/footer.js";
+import { getCategories, fillGallery } from "./modules/works.js";
+
+
+// Building the site header
+buildHeader();
+
+// Building the site footer
+buildFooter();
 
 // Getting the div "gallery"
 const galleryDiv = document.querySelector(".gallery");

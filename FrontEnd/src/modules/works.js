@@ -1,15 +1,34 @@
+/**
+ 
+ * Sends a request to the api to get all the works.
+
+ * @returns {Array} - A javascript array that contains all the works.
+ 
+ */
 export async function getWorks() {
   return await fetch("http://localhost:5678/api/works").then((response) =>
     response.json()
   );
 }
 
+/**
+ 
+ * Sends a request to the api to get all the categories.
+
+ * @returns {Array} - A javascript array that contains all the categories.
+ 
+ */
 export async function getCategories() {
   return await fetch("http://localhost:5678/api/categories").then((response) =>
     response.json()
   );
 }
 
+/**
+ 
+ * Fills up the gallery div with figure elements that contain an image and a caption.
+ 
+ */
 export async function fillGallery() {
   const galleryDiv = document.querySelector(".gallery");
   const works = await getWorks();
