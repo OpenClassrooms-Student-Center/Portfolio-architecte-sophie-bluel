@@ -34,32 +34,16 @@ const categoriesButtons = document.querySelectorAll(".categoriesFilter button");
 // Adding an eventListener on each button
 for (let k = 0; k < categoriesButtons.length; k++) {
   categoriesButtons[k].addEventListener("click", async () => {
-    
-    // Getting the works
-    const works = await getWorks();
+    const figures = galleryDiv.children;
 
-    // Emptying the gallery
-    galleryDiv.innerHTML = "";
-    
-    if (categoriesButtons[k].innerText === "Tous") {
-      fillGallery();
-    } else {
-      for (let l = 0; l < works.length; l++) {
-        if (works[l].category.name === categoriesButtons[k].innerText) {
-          // Creating the elements in the div
-          let figureElement = document.createElement("figure");
-          let imgElement = document.createElement("img");
-          let figcaptionElememnt = document.createElement("figcaption");
+    for (let l = 0; l < figures.length; l++) {
+      figures[l].classList.add("hidden");
 
-          // Filling the elements
-          imgElement.src = works[l].imageUrl;
-          figcaptionElememnt.innerText = works[l].title;
-          figureElement.appendChild(imgElement);
-          figureElement.appendChild(figcaptionElememnt);
-
-          // Appending figureElement to the div "gallery"
-          galleryDiv.appendChild(figureElement);
-        }
+      const figure_category_name = figures[l].getAttribute("category_name");
+      if (categoriesButtons[k].innerText === "Tous") {
+        figures[l].classList.remove("hidden");
+      } else if (figure_category_name === categoriesButtons[k].innerText) {
+        figures[l].classList.remove("hidden");
       }
     }
   });

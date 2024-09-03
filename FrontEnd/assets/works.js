@@ -18,13 +18,16 @@ export async function fillGallery() {
     // Creating the elements in the div
     let figureElement = document.createElement("figure");
     let imgElement = document.createElement("img");
-    let figcaptionElememnt = document.createElement("figcaption");
+    let figcaptionElement = document.createElement("figcaption");
 
     // Filling the elements
     imgElement.src = works[i].imageUrl;
-    figcaptionElememnt.innerText = works[i].title;
+    figcaptionElement.innerText = works[i].title;
     figureElement.appendChild(imgElement);
-    figureElement.appendChild(figcaptionElememnt);
+    figureElement.appendChild(figcaptionElement);
+
+    // Giving a category_name to the figure
+    figureElement.setAttribute("category_name", works[i].category.name)
 
     // Append figureElement to the div "gallery"
     galleryDiv.appendChild(figureElement);
