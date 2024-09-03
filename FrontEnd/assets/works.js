@@ -33,17 +33,3 @@ export async function fillGallery() {
     galleryDiv.appendChild(figureElement);
   }
 }
-
-// export async function getWorkByCategory() {
-//     // Getting all works
-//     const works = await getWorks();
-//     const categories = [];
-
-//     for (let i = 0; i < works.length; i++) {
-//         categories.push(works[i].category);
-//         // console.log(works[i].category);
-//     }
-
-//     console.log(categories);
-//     return categories;
-// }

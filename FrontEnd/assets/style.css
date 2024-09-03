@@ -59,7 +59,7 @@ header {
 	margin: 50px 0
 }
 section {
-	margin: 50px 0
+	margin: 8.687rem 0; /*139px*/
 }
 
 h1{
@@ -123,8 +123,37 @@ li:hover {
 }
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
+	margin-bottom: 3.125rem; /*50px*/
 }
+
+.categoriesFilter {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 3.125rem; /*50px*/
+}
+
+.categoriesFilter button {
+	color: #1D6154;
+	font-family: 'Syne';
+	font-size: 1rem; /*16px*/
+	font-weight: bold;
+	border: 1px solid #1D6154;
+	border-radius: 60px;
+	background-color: #FFFEF8;
+	padding: 9px 15px 9px 15px;
+	margin-right: 10px;
+}
+
+.categoriesFilter button:focus {
+	color: #FFFFFF;
+	background-color: #1D6154;
+}
+
+.categoriesFilter button:hover {
+	color: #FFFFFF;
+	background-color: #1D6154;
+}
+
 .gallery {
 	width: 100%;
 	display: grid;
