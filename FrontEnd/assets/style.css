@@ -133,6 +133,7 @@ li:hover {
 }
 
 .categoriesFilter button {
+	cursor: pointer;
 	color: #1D6154;
 	font-family: 'Syne';
 	font-size: 1rem; /*16px*/
