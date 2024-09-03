@@ -6,8 +6,14 @@ const galleryDiv = document.querySelector(".gallery");
 // Getting the div "categoriesFilter"
 const categoriesFilterDiv = document.querySelector(".categoriesFilter");
 
-// Get the categories
+// Getting the categories
 const categories = await getCategories();
+// Building a category "Tous"
+const categoryAll = {};
+categoryAll.id = 0;
+categoryAll.name = "Tous";
+// Adding the category "Tous" in the array
+categories.unshift(categoryAll);
 
 // Putting the works in the gallery
 fillGallery();
