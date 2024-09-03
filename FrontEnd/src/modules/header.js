@@ -12,7 +12,9 @@ export function buildHeader() {
 		<ul>
 			<li>projets</li>
 			<li>contact</li>
-			<li>login</li>
+			<li>
+			 <a href="./login.html">login</a>
+			</li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>`;
