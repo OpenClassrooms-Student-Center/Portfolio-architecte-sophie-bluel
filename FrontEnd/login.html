@@ -1,24 +1,33 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sophie Bluel - Auhtentification</title>
-    <link rel="stylesheet" href="./assets/style.css">
+    <link rel="stylesheet" href="./assets/style.css" />
     <script type="module" src="./src/pages/login.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <!-- the logo and a nav (see header.js) -->
+      <!-- the logo and a nav (see header.js) -->
     </header>
     <main>
-      <h2>Log In</h2>
-      <form action="post">
-        
-      </form>
+      <section id="login_form">
+        <h2>Log In</h2>
+        <form method="post">
+          <label for="email">E-mail</label>
+          <input id="email" name="email" type="text" />
+          <label for="pwd">Mot de passe</label>
+          <input id="pwd" name="pwd" type="text" />
+          <div class="submit">
+            <button type="submit">Se connecter</button>
+            <a href="">Mot de passe oublié</a>
+          </div>
+        </form>
+      </section>
     </main>
     <footer>
-        <!-- a nav (see footer.js)-->
+      <!-- a nav (see footer.js)-->
     </footer>
-</body>
+  </body>
 </html>

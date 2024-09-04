@@ -47,8 +47,13 @@ table {
 	border-spacing: 0;
 }
 /** end reset css**/
+
+/* On all pages */
 body {
 	max-width: 1140px;
+	/* min-height: 100vh; */
+	display: flex;
+    flex-direction: column;
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
@@ -58,6 +63,35 @@ header {
 	justify-content: space-between;
 	margin: 50px 0
 }
+
+nav ul {
+	display: flex;
+	align-items: center;
+	list-style-type: none;
+
+}
+nav li {
+	padding: 0 1.375rem; /*22px*/
+	font-size: 1.2em;
+}
+
+nav a:link {
+	text-decoration: none;
+}
+
+nav a:visited {
+	color: black;
+	text-decoration: none;
+}
+
+nav a:hover {
+	color: #B1663C;
+}
+
+nav .selected {
+	font-weight: 600;
+}
+
 section {
 	margin: 8.687rem 0; /*139px*/
 }
@@ -84,20 +118,18 @@ h2{
 	font-size: 30px;
 	color: #1D6154
 }
-nav ul {
+
+footer {
+	margin-top: auto;
+}
+
+footer nav ul {
 	display: flex;
-	align-items: center;
-	list-style-type: none;
-
-}
-nav li {
-	padding: 0 10px;
-	font-size: 1.2em;
+	justify-content: flex-end;
+	margin: 2em
 }
 
-li:hover {
-	color: #B1663C;
-}
+/* Home page */
 #introduction {
 	display: flex;
 	align-items: center;
@@ -214,9 +246,58 @@ input[type="submit"]{
 	border-radius: 60px ;
 }
 
-footer nav ul {
+/* Login page */
+#login_form {
 	display: flex;
-	justify-content: flex-end;
-	margin: 2em
+	flex-direction: column;
+	flex-wrap: wrap;
+	align-content: center;
+}
+
+#login_form h2 {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 2.312rem; /*37px*/
+}
+
+#login_form form {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 11.75rem; /*188px*/
+}
+
+#login_form label {
+	margin-bottom: 0.437rem; /*7px*/
+	display: flex;
+	align-items: flex-start;
+}
+
+#login_form input {
+	margin-bottom: 1.875rem; /*30px*/
+	width: 23.687rem; /*379px*/
+	height: 3.187rem; /*51px*/
+	border: none;
+	box-shadow: 4px 0px 14px 0px rgba(0,0,0,0.09);
+}
+
+#login_form .submit {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#login_form button {
+	margin: 0.437rem 0 1.75rem; /*7px 0 28px*/
+	width: 11.187rem; /*179px*/
+	height: 2.25rem; /*36px*/
+	border: none;
+	border-radius: 60px;
+	color: #FFFFFF;
+	background-color: #1D6154;
+	cursor: pointer;
+}
+
+#login_form a {
+	color: #3D3D3D;
 }
 
