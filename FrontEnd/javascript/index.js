@@ -83,12 +83,16 @@ function createCardsWorks(works, isModal = false) {
         if (isModal) {
             trashIcon.classList.add("fa-solid", "fa-trash-can");
             workTitle.innerText = project.title;
-            workFigure.appendChild(trashIcon);
-            workTitle.classList.add("hidden");
-            trashIcon.addEventListener("click", () => {
-                deleteWork(project.id, workFigure)
+            trashIcon.addEventListener("click", async (e) => {
+                e.preventDefault();
+                const button = e.currentTarget; // Obtient le bouton cliqué
+                const delteWorkFigure = button.closest("figure"); // Trouve l'élément figure à supprimer
+                const photoId = delteWorkFigure.dataset.id;
+                await deleteWork(photoId, workFigure); // Appelle la fonction pour supprimer la photo
             });
 
+            workFigure.appendChild(trashIcon);
+            workTitle.classList.add("hidden");
         } else {
             workTitle.innerText = project.title;
         }
@@ -126,64 +130,62 @@ function displayModal() {
         const openModal = document.querySelector(".btnEdit");
         openModal.addEventListener("click", (event) => {
             event.preventDefault();
+            event.stopPropagation();
             document.querySelector("div[data-name = modalGallery]").classList.remove("hidden");
         });
         const openForm = document.querySelector(".addPicture");
         openForm.addEventListener("click", (event) => {
             event.preventDefault();
+            event.stopPropagation();
             document.querySelector("div[data-name = modalForm]").classList.remove("hidden");
             document.querySelector("div[data-name = modalGallery]").classList.add("hidden");
-        });
-        const returnModal = document.querySelector(".modal-return");
-        returnModal.addEventListener("click", (event) => {
-            event.preventDefault();
-            document.querySelector("div[data-name = modalGallery]").classList.remove("hidden");
-            document.querySelector("div[data-name = modalForm]").classList.add("hidden");
         });
     } else {
         return false;
     }
 }
 
-// Fonction pour fermer la modale 
+// Fonction poour retour en arrière deuxième 
 
-function noDisplayAllModal() {
-    window.addEventListener("click", (event) => {
+function returnModal() {
+    const returnModal = document.querySelector(".modal-return");
+    returnModal.addEventListener("click", (event) => {
         event.preventDefault();
-        document.querySelectorAll("div[data-name").forEach(elt => elt.classList.add("hidden"));
-    })
-    const closeModal = document.querySelectorAll(".modal-close");
-    closeModal.addEventListener("click", (event) => {
-        event.preventDefault();
-        document.querySelectorAll(".allModal").forEach(elt => elt.classList.add("hidden"));
-    })
-    const noCloseInsideModal = document.getElementById("modal");
-    noCloseInsideModal.addEventListener("click", (event) => {
-        event.preventDefault();
-        event.stopPropagation();
+        document.querySelector("div[data-name = modalGallery]").classList.remove("hidden");
+        document.querySelector("div[data-name = modalForm]").classList.add("hidden");
     });
 }
 
-// création du fonction test pour fermer la modal en attendant de réussir à mettre le event.stopPropagation pour essayer d'avancer dans le projet...
-const body = document.body;
-const modalBackground = document.getElementById("modal");
-const btnCloseModal = document.querySelectorAll(".modal-close")
-function testCloseModal() {
-    for (let button of btnCloseModal) {
-        button.addEventListener("click", (event) => {
-            modalBackground.classList.remove("flex");
-            body.classList.remove("no-scroll");
-            event.preventDefault();
-            event.stopPropagation();
-        });
-    }
+// Fonction pour fermer la modale 
+
+function noDisplayAllModal() {
+    // Ferme toutes les modales lorsqu'on clique en dehors de celles-ci
     window.addEventListener("click", (event) => {
-        if (event.target == modalBackground) {
-            modalBackground.classList.remove("flex");
-            body.classList.remove("no-scroll");
+        event.preventDefault();
+
+        // Vérifie si le clic est en dehors de la modale
+        const modal = document.getElementById("modal");
+        if (!modal.contains(event.target)) {
+            // Ferme toutes les modales
+            document.querySelectorAll("div[data-name]").forEach((elt) => elt.classList.add("hidden"));
         }
     });
 
+    // Ajoute un écouteur pour chaque bouton de fermeture de la modale
+    const closeModalButtons = document.querySelectorAll(".modal-close");
+    closeModalButtons.forEach((closeButton) => {
+        closeButton.addEventListener("click", (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            document.querySelectorAll(".allModal").forEach((elt) => elt.classList.add("hidden"));
+        });
+    });
+
+    // Empêche la fermeture de la modale lorsqu'on clique à l'intérieur
+    const modalContent = document.getElementById("modal");
+    modalContent.addEventListener("click", (event) => {
+        event.stopPropagation(); // Arrête la propagation pour éviter la fermeture de la modale
+    });
 }
 
 // fonction pour ajouter les travaux dans la modale 
@@ -193,16 +195,16 @@ function addWorkModal(works) {
 
 // fonction pour supprimer les travaux 
 
-async function deleteWork(id) {
+async function deleteWork(photoId, workFigure) {
     try {
-        const response = await fetch(`http://localhost:5678/api/works/{id}`, {
+        const response = await fetch(`http://localhost:5678/api/works/${photoId}`, {
             method: "DELETE",
             headers: {
                 Authorization: `Bearer ${sessionStorage.getItem("token")}`, // Utilise le token stocké pour l'authentification
             },
         });
         if (response.ok) {
-            document.querySelectorAll('workFigure[data-id="{id}"]').forEach(e => e.remove(e));
+            workFigure.remove();
             alert("Projet correctement supprimé.")
         } else {
             throw new Error("Failed to delete work"); // Gère les réponses non réussies
@@ -224,7 +226,9 @@ async function main() {
     createCardsWorks(works);
     addFilterEvents(works);
     displayModal();
-    testCloseModal();
+    returnModal();
+    noDisplayAllModal();
     const modalWorks = addWorkModal(works, true);
-    const deleteWorkModal = await deleteWork(id);
+    const deleteWorkModal = await deleteWork(photoId, workFigure);
+
 };
