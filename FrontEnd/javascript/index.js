@@ -61,46 +61,32 @@ function createCategoryButton(category) {
 // Création des cartes pour afficher les travaux dans la gallerie et dans la modale
 
 function createCardsWorks(works, isModal = false) {
-    // Récupération de l'élément du DOM qui accueillera les travaux
-    let galleryWorks;
-    if (isModal) galleryWorks = document.querySelector('.modal-gallery');
-    else galleryWorks = document.querySelector('.gallery');
-    galleryWorks.textContent = "";
-    for (let i = 0; i < works.length; i++) {
-        const project = works[i];
-        // Création d'une balise dédiée à un projet
+    let galleryWorks = isModal ? document.querySelector('.modal-gallery') : document.querySelector('.gallery');
+    galleryWorks.textContent = ""; // Nettoyage de la galerie
+    works.forEach(project => {
         const workFigure = document.createElement("figure");
-        // Création des balises
         const workImage = document.createElement("img");
         workImage.src = project.imageUrl;
         workImage.alt = project.title;
         workImage.crossOrigin = "anonymous";
         workFigure.setAttribute('data-id', project.id);
-        let trashIcon;
-        trashIcon = document.createElement('i');
-        let workTitle;
-        workTitle = document.createElement("figcaption");
+        let workTitle = document.createElement("figcaption");
+        workTitle.innerText = project.title;
         if (isModal) {
+            let trashIcon = document.createElement('i');
             trashIcon.classList.add("fa-solid", "fa-trash-can");
-            workTitle.innerText = project.title;
             trashIcon.addEventListener("click", async (e) => {
                 e.preventDefault();
-                const button = e.currentTarget; // Obtient le bouton cliqué
-                const delteWorkFigure = button.closest("figure"); // Trouve l'élément figure à supprimer
-                const photoId = delteWorkFigure.dataset.id;
-                await deleteWork(photoId, workFigure); // Appelle la fonction pour supprimer la photo
+                const photoId = workFigure.getAttribute('data-id');
+                await deleteWork(photoId, workFigure);
             });
-
             workFigure.appendChild(trashIcon);
             workTitle.classList.add("hidden");
-        } else {
-            workTitle.innerText = project.title;
         }
-        // Rattacher balise figure à la gallerie de projets
-        galleryWorks.appendChild(workFigure);
         workFigure.appendChild(workImage);
         workFigure.appendChild(workTitle);
-    }
+        galleryWorks.appendChild(workFigure);
+    });
 }
 
 // Création d'une fonction pour rendre les filtres dynamiques
@@ -159,33 +145,25 @@ function returnModal() {
 // Fonction pour fermer la modale 
 
 function noDisplayAllModal() {
-    // Ferme toutes les modales lorsqu'on clique en dehors de celles-ci
     window.addEventListener("click", (event) => {
-        event.preventDefault();
-
-        // Vérifie si le clic est en dehors de la modale
-        const modal = document.getElementById("modal");
-        if (!modal.contains(event.target)) {
-            // Ferme toutes les modales
-            document.querySelectorAll("div[data-name]").forEach((elt) => elt.classList.add("hidden"));
+        const modal = document.querySelector(".allModal:not(.hidden)");
+        if (modal && !modal.contains(event.target)) {
+            closeModal();
         }
     });
 
-    // Ajoute un écouteur pour chaque bouton de fermeture de la modale
-    const closeModalButtons = document.querySelectorAll(".modal-close");
-    closeModalButtons.forEach((closeButton) => {
-        closeButton.addEventListener("click", (event) => {
-            event.preventDefault();
-            event.stopPropagation();
-            document.querySelectorAll(".allModal").forEach((elt) => elt.classList.add("hidden"));
-        });
+    document.querySelectorAll(".modal-close").forEach(closeButton => {
+        closeButton.addEventListener("click", closeModal);
     });
 
-    // Empêche la fermeture de la modale lorsqu'on clique à l'intérieur
     const modalContent = document.getElementById("modal");
     modalContent.addEventListener("click", (event) => {
-        event.stopPropagation(); // Arrête la propagation pour éviter la fermeture de la modale
+        event.stopPropagation();
     });
+}
+
+function closeModal() {
+    document.querySelectorAll(".allModal").forEach(modal => modal.classList.add("hidden"));
 }
 
 // fonction pour ajouter les travaux dans la modale 
@@ -200,7 +178,7 @@ async function deleteWork(photoId, workFigure) {
         const response = await fetch(`http://localhost:5678/api/works/${photoId}`, {
             method: "DELETE",
             headers: {
-                Authorization: `Bearer ${sessionStorage.getItem("token")}`, // Utilise le token stocké pour l'authentification
+                Authorization: `Bearer ${sessionStorage.getItem("token")}`, // Utilisation correcte des backticks pour une chaîne de modèle
             },
         });
         if (response.ok) {
@@ -214,11 +192,79 @@ async function deleteWork(photoId, workFigure) {
     }
 }
 
+// Récupération des catégories pour l'input 
+
+async function allCategorySelect() {
+    const categories = await getData("http://localhost:5678/api/categories");
+    const selectCategory = document.getElementById("selectCategory");
+
+    categories.forEach(category => {
+        const option = document.createElement("option");
+        option.value = category.id;
+        option.textContent = category.name;
+        selectCategory.appendChild(option);
+    });
+}
+
+// Gérer l'ajout d'une photo 
+
+async function handleFormSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const title = formData.get("title");
+    const category = formData.get("selectCategory");
+    const image = formData.get("image");
+
+    try {
+        const response = await fetch("http://localhost:5678/api/works", {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`, // Utilise le token stocké pour l'authentification
+            },
+            body: formData, // Envoie le FormData contenant les informations du formulaire
+        });
+
+        if (response.ok) {
+            const newWork = await response.json();
+            alert("Photo ajoutée avec succès");
+            // Met à jour les galeries
+            const works = await getData("http://localhost:5678/api/works");
+            createCardsWorks(works);
+            addWorkModal(works);
+        } else {
+            throw new Error("Échec de l'ajout de la photo");
+        }
+    } catch (error) {
+        console.error("Erreur lors de l'ajout de la photo:", error);
+    }
+}
+
+// fonction pour prévisualiser la photo avant de l'ajouter 
+
+function handleImagePreview(event) {
+    const file = event.target.files[0];
+    const imagePreviewContainer = document.getElementById("imagePreviewContainer");
+    const imagePreview = document.getElementById("imagePreview");
+
+    if (file) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            imagePreview.src = e.target.result;
+            imagePreviewContainer.style.display = "block"; // Affiche l'image preview
+        };
+
+        reader.readAsDataURL(file);
+    } else {
+        imagePreviewContainer.style.display = "none"; // Cache l'image preview si aucun fichier n'est sélectionné
+    }
+}
 // Initialisation de la fonction liée à la connexion et l'affichage lors du chargement de la page
 document.addEventListener("DOMContentLoaded", main);
 async function main() {
     adminConnect();
     adminDisplay();
+    await allCategorySelect();
     const categories = await getData("http://localhost:5678/api/categories");
     const works = await getData("http://localhost:5678/api/works");
     categories.unshift({ id: 0, name: "Tous" });
@@ -229,6 +275,12 @@ async function main() {
     returnModal();
     noDisplayAllModal();
     const modalWorks = addWorkModal(works, true);
-    const deleteWorkModal = await deleteWork(photoId, workFigure);
+    await deleteWork(photoId, workFigure);
+
+
+    const pictureForm = document.querySelector(".pictureForm");
+    pictureForm.addEventListener("submit", handleFormSubmit);
+    const imageInput = document.getElementById("image");
+    imageInput.addEventListener("change", handleImagePreview);
 
 };
