@@ -463,6 +463,11 @@ button[autofocus] {
 	z-index: 1;
 }
 
+#modal {
+	position: absolute;
+
+}
+
 .modale-wrapper {
 	display: flex;
 	flex-direction: column;
@@ -568,6 +573,7 @@ button[autofocus] {
 	border-width: 0px;
 	margin-top: 10px;
 	text-align: left;
+
 }
 
 .selectCategory {

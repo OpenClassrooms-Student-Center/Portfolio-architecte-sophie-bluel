@@ -77,8 +77,7 @@ function createCardsWorks(works, isModal = false) {
             trashIcon.classList.add("fa-solid", "fa-trash-can");
             trashIcon.addEventListener("click", async (e) => {
                 e.preventDefault();
-                const photoId = workFigure.getAttribute('data-id');
-                await deleteWork(photoId, workFigure);
+                await deleteWork(works, project);
             });
             workFigure.appendChild(trashIcon);
             workTitle.classList.add("hidden");
@@ -173,23 +172,31 @@ function addWorkModal(works) {
 
 // fonction pour supprimer les travaux 
 
-async function deleteWork(photoId, workFigure) {
+async function deleteWork(works, work) {
     try {
-        const response = await fetch(`http://localhost:5678/api/works/${photoId}`, {
+        const response = await fetch(`http://localhost:5678/api/works/${work.id}`, {
             method: "DELETE",
             headers: {
-                Authorization: `Bearer ${sessionStorage.getItem("token")}`, // Utilisation correcte des backticks pour une chaîne de modèle
+                Authorization: `Bearer ${localStorage.getItem("token")}`, // Utilisation correcte des backticks pour une chaîne de modèle
             },
         });
         if (response.ok) {
-            workFigure.remove();
-            alert("Projet correctement supprimé.")
+            works = works.filter(w => w !== work);
+            allGalleries();
         } else {
             throw new Error("Failed to delete work"); // Gère les réponses non réussies
         }
     } catch (error) {
         console.error("Erreur lors de la suppression:", error); // Log en cas d'erreur
     }
+}
+
+
+// fonction pour réafficher les deux galleries (modal et gallerie )
+
+function allGalleries() {
+    createCardsWorks(works);
+    createCardsWorks(works, true);
 }
 
 // Récupération des catégories pour l'input 
@@ -210,27 +217,66 @@ async function allCategorySelect() {
 
 async function handleFormSubmit(event) {
     event.preventDefault();
-    const formData = new FormData(event.target);
-    const title = formData.get("title");
-    const category = formData.get("selectCategory");
-    const image = formData.get("image");
 
+    // Récupérer les éléments du formulaire
+    const form = event.target;
+    const imageInput = form.querySelector("#image");
+    const titleInput = form.querySelector("#title-input");
+    const categorySelect = form.querySelector("#selectCategory");
+
+    const image = imageInput.files[0]; // Récupérer le fichier image
+
+    // Vérifier que l'image est présente et qu'elle est de type .jpg ou .png
+    if (!image || !["image/jpeg", "image/png"].includes(image.type)) {
+        alert("Veuillez sélectionner une image au format .jpg ou .png.");
+        return;
+    }
+
+    // Vérifier que la taille de l'image ne dépasse pas 4 Mo
+    if (image.size > 4 * 1024 * 1024) {
+        alert("La taille de l'image ne doit pas dépasser 4 Mo.");
+        return;
+    }
+
+    // Vérifier que le titre est renseigné
+    const title = titleInput.value.trim();
+    if (!title) {
+        alert("Veuillez entrer un titre.");
+        return;
+    }
+
+    // Vérifier qu'une catégorie est sélectionnée
+    const category = categorySelect.value;
+    if (!category) {
+        alert("Veuillez sélectionner une catégorie.");
+        return;
+    }
+
+    // Créer l'objet FormData à envoyer
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("category", category);
+    formData.append("image", image);
+
+    // Envoyer l'objet FormData à l'API
     try {
         const response = await fetch("http://localhost:5678/api/works", {
             method: "POST",
             headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`, // Utilise le token stocké pour l'authentification
+                Authorization: `Bearer ${localStorage.getItem("token")}`, // Utilisation du token stocké pour l'authentification
             },
-            body: formData, // Envoie le FormData contenant les informations du formulaire
+            body: formData, // Envoi du FormData contenant les informations du formulaire
         });
 
         if (response.ok) {
             const newWork = await response.json();
             alert("Photo ajoutée avec succès");
-            // Met à jour les galeries
+
+            // Mettre à jour le tableau works avec le nouvel élément
             const works = await getData("http://localhost:5678/api/works");
-            createCardsWorks(works);
-            addWorkModal(works);
+
+            // Réafficher les galeries
+            allGalleries();
         } else {
             throw new Error("Échec de l'ajout de la photo");
         }
@@ -238,6 +284,7 @@ async function handleFormSubmit(event) {
         console.error("Erreur lors de l'ajout de la photo:", error);
     }
 }
+
 
 // fonction pour prévisualiser la photo avant de l'ajouter 
 
@@ -252,6 +299,8 @@ function handleImagePreview(event) {
         reader.onload = function (e) {
             imagePreview.src = e.target.result;
             imagePreviewContainer.style.display = "block"; // Affiche l'image preview
+            const blockAjoutPhoto = document.getElementById('labelPhoto');
+            blockAjoutPhoto.style.display = "none";
         };
 
         reader.readAsDataURL(file);
@@ -275,7 +324,6 @@ async function main() {
     returnModal();
     noDisplayAllModal();
     const modalWorks = addWorkModal(works, true);
-    await deleteWork(photoId, workFigure);
 
 
     const pictureForm = document.querySelector(".pictureForm");
