@@ -182,7 +182,7 @@ async function deleteWork(works, work) {
         });
         if (response.ok) {
             works = works.filter(w => w !== work);
-            allGalleries();
+            allGalleries(works);
         } else {
             throw new Error("Failed to delete work"); // Gère les réponses non réussies
         }
@@ -194,7 +194,7 @@ async function deleteWork(works, work) {
 
 // fonction pour réafficher les deux galleries (modal et gallerie )
 
-function allGalleries() {
+function allGalleries(works) {
     createCardsWorks(works);
     createCardsWorks(works, true);
 }
@@ -225,6 +225,7 @@ async function handleFormSubmit(event) {
     const categorySelect = form.querySelector("#selectCategory");
 
     const image = imageInput.files[0]; // Récupérer le fichier image
+    const btnValider = document.getElementById("modal-valider");
 
     // Vérifier que l'image est présente et qu'elle est de type .jpg ou .png
     if (!image || !["image/jpeg", "image/png"].includes(image.type)) {
@@ -276,7 +277,12 @@ async function handleFormSubmit(event) {
             const works = await getData("http://localhost:5678/api/works");
 
             // Réafficher les galeries
-            allGalleries();
+            allGalleries(works);
+            // Réinitialiser le formulaire
+            form.reset();
+            document.getElementById("imagePreviewContainer").style.display = "none"; // Cacher l'image de prévisualisation
+            document.getElementById('labelPhoto').style.display = "flex"; // Réafficher le bloc ajout photo
+            btnValider.classList.remove("active");
         } else {
             throw new Error("Échec de l'ajout de la photo");
         }
@@ -292,6 +298,8 @@ function handleImagePreview(event) {
     const file = event.target.files[0];
     const imagePreviewContainer = document.getElementById("imagePreviewContainer");
     const imagePreview = document.getElementById("imagePreview");
+    const fileInput = document.querySelector(".file-input");
+    const btnValider = document.getElementById("modal-valider");
 
     if (file) {
         const reader = new FileReader();
@@ -301,12 +309,16 @@ function handleImagePreview(event) {
             imagePreviewContainer.style.display = "block"; // Affiche l'image preview
             const blockAjoutPhoto = document.getElementById('labelPhoto');
             blockAjoutPhoto.style.display = "none";
+            btnValider.classList.add("active");
         };
 
         reader.readAsDataURL(file);
+
     } else {
         imagePreviewContainer.style.display = "none"; // Cache l'image preview si aucun fichier n'est sélectionné
+        btnValider.classList.remove("active");
     }
+
 }
 // Initialisation de la fonction liée à la connexion et l'affichage lors du chargement de la page
 document.addEventListener("DOMContentLoaded", main);

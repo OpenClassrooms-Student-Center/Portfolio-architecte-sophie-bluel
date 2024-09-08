@@ -465,6 +465,7 @@ button[autofocus] {
 
 #modal {
 	position: absolute;
+	margin-left: 13%;
 
 }
 
@@ -511,7 +512,11 @@ button[autofocus] {
 	font-size: 1.5rem;
 	color: #333;
 	cursor: pointer;
+	margin-right: 550px;
 }
+
+
+/* Modale Formulaire */
 
 .pictureForm form {
 	padding-top: 10px;
@@ -530,6 +535,7 @@ button[autofocus] {
 	border-radius: 60px;
 	width: 237px;
 	height: 36px;
+	margin-top: 25px;
 	margin-bottom: 25px;
 	cursor: pointer;
 }
@@ -543,7 +549,6 @@ button[autofocus] {
 	border-radius: 3px;
 	margin-bottom: 30px;
 	text-align: center;
-	width: 350px;
 	padding-top: 25px;
 	position: relative;
 	box-sizing: border-box;
@@ -576,6 +581,10 @@ button[autofocus] {
 
 }
 
+#selectCategory {
+	margin-bottom: 25px;
+}
+
 .selectCategory {
 	margin-top: 10px;
 }
@@ -594,6 +603,13 @@ button[autofocus] {
 	cursor: pointer;
 }
 
+#modal-valider.active {
+	background-color: #1d6154;
+	/* Couleur de fond du bouton "Ajouter une photo" */
+	color: #ffffff;
+	/* Couleur du texte, si besoin */
+}
+
 .titleModal {
 	font-size: 30px;
 	font-weight: 400;
@@ -603,7 +619,11 @@ button[autofocus] {
 
 .labelModal {
 	text-align: left;
+}
 
+.modal-separator {
+	border: 1px solid #B3B3B3;
+	width: 420px;
 }
 
 /*** Taille des travaux dans modal***/
@@ -637,4 +657,28 @@ button[autofocus] {
 	align-items: center;
 	top: 25px;
 	left: 53px;
+}
+
+#imagePreviewContainer {
+	width: 100%;
+	height: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #f0f0f0;
+	/* Couleur de fond claire */
+	padding: 20px;
+	margin-bottom: 20px;
+	border-radius: 10px;
+	/* Arrondir les coins */
+}
+
+#imagePreview {
+	max-width: 100%;
+	max-height: 300px;
+	/* Taille maximale de l'image */
+	object-fit: cover;
+	/* Pour conserver le ratio d'aspect et ne pas déformer l'image */
+	border-radius: 5px;
+	/* Arrondir légèrement les coins de l'image */
 }
