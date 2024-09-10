@@ -138,6 +138,7 @@ function returnModal() {
         event.preventDefault();
         document.querySelector("div[data-name = modalGallery]").classList.remove("hidden");
         document.querySelector("div[data-name = modalForm]").classList.add("hidden");
+        resetPreviewForm();
     });
 }
 
@@ -205,6 +206,12 @@ async function allCategorySelect() {
     const categories = await getData("http://localhost:5678/api/categories");
     const selectCategory = document.getElementById("selectCategory");
 
+    // Ajouter une option vide au début
+    const emptyOption = document.createElement("option");
+    emptyOption.value = "";  // valeur vide
+    emptyOption.textContent = "Choisissez une catégorie";  // texte indicatif
+    selectCategory.appendChild(emptyOption);
+
     categories.forEach(category => {
         const option = document.createElement("option");
         option.value = category.id;
@@ -225,7 +232,7 @@ async function handleFormSubmit(event) {
     const categorySelect = form.querySelector("#selectCategory");
 
     const image = imageInput.files[0]; // Récupérer le fichier image
-    const btnValider = document.getElementById("modal-valider");
+
 
     // Vérifier que l'image est présente et qu'elle est de type .jpg ou .png
     if (!image || !["image/jpeg", "image/png"].includes(image.type)) {
@@ -279,10 +286,8 @@ async function handleFormSubmit(event) {
             // Réafficher les galeries
             allGalleries(works);
             // Réinitialiser le formulaire
-            form.reset();
-            document.getElementById("imagePreviewContainer").style.display = "none"; // Cacher l'image de prévisualisation
-            document.getElementById('labelPhoto').style.display = "flex"; // Réafficher le bloc ajout photo
-            btnValider.classList.remove("active");
+            resetPreviewForm();
+
         } else {
             throw new Error("Échec de l'ajout de la photo");
         }
@@ -290,7 +295,6 @@ async function handleFormSubmit(event) {
         console.error("Erreur lors de l'ajout de la photo:", error);
     }
 }
-
 
 // fonction pour prévisualiser la photo avant de l'ajouter 
 
@@ -320,6 +324,23 @@ function handleImagePreview(event) {
     }
 
 }
+
+// Fonction pour réinitialiser le formulaire de prévisualisation
+function resetPreviewForm() {
+    const btnValider = document.getElementById("modal-valider");
+    const form = document.querySelector(".pictureForm");
+    form.reset(); // Réinitialiser le formulaire
+
+    const imagePreviewContainer = document.getElementById("imagePreviewContainer");
+    const imagePreview = document.getElementById("imagePreview");
+    const blockAjoutPhoto = document.getElementById('labelPhoto');
+    // Cacher la prévisualisation de l'image et réafficher le bloc d'ajout de photo
+    imagePreviewContainer.style.display = "none"; // Cache l'image preview
+    imagePreview.src = ""; // Réinitialiser la source de l'image de prévisualisation
+    blockAjoutPhoto.style.display = "flex"; // Réaffiche le bloc de téléchargement de photo
+    btnValider.classList.remove("active");
+}
+
 // Initialisation de la fonction liée à la connexion et l'affichage lors du chargement de la page
 document.addEventListener("DOMContentLoaded", main);
 async function main() {
@@ -336,11 +357,8 @@ async function main() {
     returnModal();
     noDisplayAllModal();
     const modalWorks = addWorkModal(works, true);
-
-
     const pictureForm = document.querySelector(".pictureForm");
     pictureForm.addEventListener("submit", handleFormSubmit);
-    const imageInput = document.getElementById("image");
-    imageInput.addEventListener("change", handleImagePreview);
+
 
 };
