@@ -105,6 +105,7 @@ menu,
 nav,
 section {
 	display: block;
+	position: relative;
 }
 
 body {
@@ -464,8 +465,11 @@ button[autofocus] {
 }
 
 #modal {
-	position: absolute;
-	margin-left: 13%;
+	position: fixed;
+	z-index: 2;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 
 }
 
@@ -552,6 +556,7 @@ button[autofocus] {
 	padding-top: 25px;
 	position: relative;
 	box-sizing: border-box;
+
 }
 
 #labelPhoto p {
@@ -615,6 +620,7 @@ button[autofocus] {
 	font-weight: 400;
 	font-family: 'Work Sans';
 	color: black;
+	margin-bottom: 58px;
 }
 
 .labelModal {
@@ -640,6 +646,8 @@ button[autofocus] {
 
 .modal-gallery img {
 	height: 104px;
+	width: 78px;
+	object-fit: cover;
 }
 
 /*** Btn Poubelle ***/
@@ -648,26 +656,25 @@ button[autofocus] {
 	background-color: black;
 	padding: 2px;
 	border-radius: 20%;
-	position: relative;
+	position: absolute;
 	border-radius: 2px;
 	width: 17px;
 	height: 17px;
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
-	top: 25px;
-	left: 53px;
+	top: 2px;
+	left: 55px;
 }
 
 #imagePreviewContainer {
-	width: 100%;
 	height: auto;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: #f0f0f0;
+	background-color: #E8F1F6;
+	text-align: center;
 	/* Couleur de fond claire */
-	padding: 20px;
 	margin-bottom: 20px;
 	border-radius: 10px;
 	/* Arrondir les coins */

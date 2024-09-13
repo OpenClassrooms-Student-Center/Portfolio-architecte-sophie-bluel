@@ -243,6 +243,7 @@ async function handleFormSubmit(event) {
     // Vérifier que la taille de l'image ne dépasse pas 4 Mo
     if (image.size > 4 * 1024 * 1024) {
         alert("La taille de l'image ne doit pas dépasser 4 Mo.");
+        resetPreviewForm();
         return;
     }
 
