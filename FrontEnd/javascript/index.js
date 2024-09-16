@@ -1,6 +1,6 @@
 // Vérifie si l'utilisateur est connecté
 function isConnected() {
-    // Retourne vrai si le token existe dans le sessionStorage, faux sinon
+    // Retourne vrai si le token existe dans le localStorage, faux sinon
     return localStorage.getItem("token") !== null;
 }
 
@@ -104,7 +104,6 @@ function addFilterEvents(works) {
         .forEach(btn => btn.addEventListener("click", evt => filterCategory(evt.target.textContent, works)));
 }
 
-
 //MODAL
 
 // Fonction pour faire apparaître la première et deuxième modale et retour en arrière
@@ -192,7 +191,6 @@ async function deleteWork(works, work) {
     }
 }
 
-
 // fonction pour réafficher les deux galleries (modal et gallerie )
 
 function allGalleries(works) {
@@ -220,23 +218,25 @@ async function allCategorySelect() {
     });
 }
 
+
 // Gérer l'ajout d'une photo 
 
 async function handleFormSubmit(event) {
     event.preventDefault();
+    event.stopPropagation();
 
     // Récupérer les éléments du formulaire
     const form = event.target;
     const imageInput = form.querySelector("#image");
     const titleInput = form.querySelector("#title-input");
     const categorySelect = form.querySelector("#selectCategory");
-
     const image = imageInput.files[0]; // Récupérer le fichier image
 
 
     // Vérifier que l'image est présente et qu'elle est de type .jpg ou .png
     if (!image || !["image/jpeg", "image/png"].includes(image.type)) {
         alert("Veuillez sélectionner une image au format .jpg ou .png.");
+        resetPreviewForm();
         return;
     }
 
@@ -297,6 +297,7 @@ async function handleFormSubmit(event) {
     }
 }
 
+
 // fonction pour prévisualiser la photo avant de l'ajouter 
 
 function handleImagePreview(event) {
@@ -305,6 +306,9 @@ function handleImagePreview(event) {
     const imagePreview = document.getElementById("imagePreview");
     const fileInput = document.querySelector(".file-input");
     const btnValider = document.getElementById("modal-valider");
+    const preview = document.querySelector('#imagePreview');
+    const imageInput = document.getElementById("image");
+
 
     if (file) {
         const reader = new FileReader();
@@ -360,6 +364,4 @@ async function main() {
     const modalWorks = addWorkModal(works, true);
     const pictureForm = document.querySelector(".pictureForm");
     pictureForm.addEventListener("submit", handleFormSubmit);
-
-
 };
