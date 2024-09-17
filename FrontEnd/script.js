@@ -10,42 +10,45 @@ async function fetchCategories() { // récupération des données catégories
     return categories
 }
 
-function afficherTravaux(travaux){ // fonction d'affichage des travaux sous forme de tableau
-    console.table(travaux)
-}
-
-function afficherCategories(categories){ //fonction d'affichage des catégories sous forme de tableau
-    console.table(categories)
-}
-
-async function affichercategoriesettravaux() { //fonction pour appeler les fonctions d'affichage des catégories et des travaux l'un après l'autre une fois que les promesses sont résolues grâce au await
-    const categories = await fetchCategories()
+async function affichergallery(){ //fonction async pour avoir travaux après promesse résolue
     const travaux = await fetchTravaux()
-    afficherCategories(categories)
-    afficherTravaux(travaux)
+    const gallery = document.querySelector(".gallery");
+
+    for (let i = 0; i < travaux.length ; i++){
+    gallery.innerHTML += `
+        <figure> 
+            <img src="${travaux[i].imageUrl}" alt="${travaux[i].title}">
+            <figcaption>${travaux[i].title}</figcaption>
+        </figure> `   
+    }
 }
 
-affichercategoriesettravaux()
+affichergallery()
 
 
 
 
-// fetchCategories().then((categories) => {
-//     afficherCategories(categories) 
+
+
+
+
+
+
+
+
+
+// fetchTravaux().then((travaux)=> {
+
 // })
 
-// fetchTravaux().then((travaux) => {
-//     afficherTravaux(travaux)
-// })
 
-// debugger
-    // const imagetravaux = document.createElement("img");
-    // imagetravaux.src=imageUrl;
-    // const nomtravaux = document.createElement("figcaption");
-    // nomtravaux.innertext=title;
     
-    // const gallery=document.querySelector(".gallery");
-    // gallery.appendChild(imagetravaux);
-    // gallery.appendChild(nomtravaux);
     
-    // console.log(articles)
+    
+    
+
+
+
+
+
+
