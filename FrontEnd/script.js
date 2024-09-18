@@ -23,32 +23,18 @@ async function affichergallery(){ //fonction async pour avoir travaux après pro
     }
 }
 
+async function afficherfiltres(){ //chercher solution pour créer le p autrement que dans le html direct - menu de filtres
+    const categories = await fetchCategories()
+    const filtres = document.querySelector(".filtres");
+
+    for (let i = 0; i < categories.length ; i++){
+    filtres.innerHTML += `
+        <button>${categories[i].name}</button>` 
+    }
+}
+
+
+//Script à exécuter
+afficherfiltres()
 affichergallery()
-
-
-
-
-
-
-
-
-
-
-
-
-
-// fetchTravaux().then((travaux)=> {
-
-// })
-
-
-    
-    
-    
-    
-
-
-
-
-
 
