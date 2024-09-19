@@ -24,8 +24,19 @@ async function affichergallery(travaux) {
 }
 
 async function afficherfiltres() {
+    
     const categories = await fetchCategories();
-    const filtres = document.querySelector(".filtres");
+    const filtres = document.querySelector("#filtres");
+    
+    const buttonreset = document.createElement('button');
+    buttonreset.textContent = "Tous";
+    filtres.appendChild(buttonreset);
+
+    buttonreset.addEventListener("click", async () => {
+        const travaux = await fetchTravaux();
+        affichergallery(travaux);
+
+    })
     
     for (let i = 0; i < categories.length; i++) {
         const button = document.createElement('button');
@@ -41,19 +52,7 @@ async function afficherfiltres() {
         });
     }
 
-    const buttonreset = document.createElement('button');
-    buttonreset.textContent = "Supprimer les filtres";
-    filtres.appendChild(buttonreset);
-
-    buttonreset.addEventListener("click", async () => {
-        const travaux = await fetchTravaux();
-        affichergallery(travaux);
-
-    })
 }
-
-
-
 
 
 afficherfiltres();

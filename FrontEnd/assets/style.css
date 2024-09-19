@@ -139,9 +139,9 @@ li:hover {
 }
 #contact {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
-#contact > * {
+#filtres, #contact > * {
 	text-align: center;
 
 }
@@ -186,3 +186,19 @@ footer nav ul {
 	margin: 2em
 }
 
+button {
+	margin : 0em 0.5em 2em 0.5em;
+	padding : 0.5em 1em;
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size:100%;
+	color : rgba(29, 97, 84, 1);
+	border-radius: 60px;
+	border-color: rgba(29, 97, 84, 1);
+	background-color: transparent;
+}
+
+button:hover{
+	color : rgba(255, 255, 255, 1);
+	background-color: rgba(29, 97, 84, 1);
+}
