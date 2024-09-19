@@ -26,7 +26,7 @@ async function affichergallery(travaux) {
 async function afficherfiltres() {
     const categories = await fetchCategories();
     const filtres = document.querySelector(".filtres");
-
+    
     for (let i = 0; i < categories.length; i++) {
         const button = document.createElement('button');
         const idcatfromcat = categories[i].id;
@@ -40,7 +40,21 @@ async function afficherfiltres() {
             affichergallery(travauxfiltres);
         });
     }
+
+    const buttonreset = document.createElement('button');
+    buttonreset.textContent = "Supprimer les filtres";
+    filtres.appendChild(buttonreset);
+
+    buttonreset.addEventListener("click", async () => {
+        const travaux = await fetchTravaux();
+        affichergallery(travaux);
+
+    })
 }
+
+
+
+
 
 afficherfiltres();
 fetchTravaux().then(travaux => affichergallery(travaux));
