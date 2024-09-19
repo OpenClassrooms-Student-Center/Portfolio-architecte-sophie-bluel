@@ -54,6 +54,5 @@ async function afficherfiltres() {
 
 }
 
-
 afficherfiltres();
 fetchTravaux().then(travaux => affichergallery(travaux));
