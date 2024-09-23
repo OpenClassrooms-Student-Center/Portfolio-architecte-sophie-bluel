@@ -137,31 +137,31 @@ li:hover {
 	width: 100%;
 
 }
-#contact {
+#contact, #login {
 	width: 50%;
 	margin: auto;
 }
-#filtres, #contact > * {
+#filtres, #login, #contact > * {
 	text-align: center;
 
 }
-#contact h2{
+#login h2, #contact h2{
 	margin-bottom: 20px;
 }
-#contact form {
+#login form, #contact form {
 	text-align: left;
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
 }
 
-#contact input {
+#login input, #contact input {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#contact label {
+#login label, #contact label {
 	margin: 2em 0 1em 0;
 }
 #contact textarea {
@@ -201,4 +201,10 @@ button {
 button:hover{
 	color : rgba(255, 255, 255, 1);
 	background-color: rgba(29, 97, 84, 1);
+}
+#mdpoublie{
+	text-decoration: underline;
+}
+ul li span {
+	font-weight: 600;
 }
