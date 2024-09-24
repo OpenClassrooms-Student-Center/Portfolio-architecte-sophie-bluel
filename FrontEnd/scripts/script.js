@@ -12,6 +12,7 @@ async function fetchCategories() {
 
 async function affichergallery(travaux) { 
     const gallery = document.querySelector(".gallery");
+    gallery.innerHTML = "";
 
     for (let travail in travaux) {
         gallery.innerHTML += `
@@ -34,20 +35,28 @@ async function afficherfiltres() {
     buttonreset.addEventListener("click", async () => {
         const travaux = await fetchTravaux();
         affichergallery(travaux);
-
     })
     
     for (let i = 0; i < categories.length; i++) {
         const button = document.createElement('button');
         const idcatfromcat = categories[i].id;
         button.textContent = categories[i].name;
-        button.id = 'bouton-' + idcatfromcat;
+        button.dataset.category = categories[i].name;
         filtres.appendChild(button);
 
-        button.addEventListener("click", async () => {
-            const travaux = await fetchTravaux();
-            const travauxfiltres = travaux.filter(travail => travail.category.id === idcatfromcat);
-            affichergallery(travauxfiltres);
+        button.addEventListener("click", () => {
+            const catbuttons = button.getAttribute('data-category');
+            const figures = document.querySelectorAll(".gallery figure");
+            
+            figures.forEach(figure => {
+                if (figure.getAttribute('data-category') !== catbuttons) {
+                    figure.style.display = 'none';
+                }
+                else {
+                    figure.style.display = 'block';
+                }
+            }
+            )
         });
     }
     return(categories)
