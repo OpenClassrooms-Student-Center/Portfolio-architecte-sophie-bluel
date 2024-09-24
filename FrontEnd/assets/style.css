@@ -77,7 +77,10 @@ h1 > span {
 	letter-spacing: 0.1em;
 ;
 }
-
+a {
+	text-decoration: none;
+	color: black;
+}
 h2{
 	font-family: 'Syne';
 	font-weight: 700;

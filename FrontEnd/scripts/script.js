@@ -12,13 +12,12 @@ async function fetchCategories() {
 
 async function affichergallery(travaux) { 
     const gallery = document.querySelector(".gallery");
-    gallery.innerHTML = '';
 
-    for (let i = 0; i < travaux.length ; i++){
-    gallery.innerHTML += `
-        <figure> 
-            <img src="${travaux[i].imageUrl}" alt="${travaux[i].title}">
-            <figcaption>${travaux[i].title}</figcaption>
+    for (let travail in travaux) {
+        gallery.innerHTML += `
+        <figure data-category="${travaux[travail].category.name}"> 
+            <img src="${travaux[travail].imageUrl}" alt="${travaux[travail].title}">
+            <figcaption>${travaux[travail].title}</figcaption>
         </figure> `;
     }
 }
@@ -51,8 +50,8 @@ async function afficherfiltres() {
             affichergallery(travauxfiltres);
         });
     }
-
+    return(categories)
 }
 
-afficherfiltres();
+const categories = afficherfiltres()
 fetchTravaux().then(travaux => affichergallery(travaux));
