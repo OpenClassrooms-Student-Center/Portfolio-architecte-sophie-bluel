@@ -15,6 +15,8 @@ BoutonSubmit.addEventListener("click", async(event) => {
            body: JSON.stringify(user)
         });
     
+    let MessageErreur = document.getElementById("MessageErreur")
+
     if (response.ok) {
         let data = await response.json();
         let token = data.token;
@@ -24,7 +26,7 @@ BoutonSubmit.addEventListener("click", async(event) => {
         location.href= "file:///C:/Users/heloi/Documents/Projets/Projet_3/Portfolio-architecte-sophie-bluel/FrontEnd/index.html"
     }
     else {
-        alert("Utilisateur inconnu")
+        MessageErreur.innerText = "Utilisateur ou mot de passe incorrect"
     }
 
 }) 
