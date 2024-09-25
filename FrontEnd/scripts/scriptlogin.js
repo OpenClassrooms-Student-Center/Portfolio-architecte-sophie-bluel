@@ -2,6 +2,7 @@ let BoutonSubmit = document.getElementById("BoutonSubmit");
 
 BoutonSubmit.addEventListener("click", async(event) => {
     event.preventDefault();
+
     let user = {
         "email": document.getElementById("username").value,
         "password": document.getElementById("password").value,
@@ -13,17 +14,20 @@ BoutonSubmit.addEventListener("click", async(event) => {
             },
            body: JSON.stringify(user)
         });
+    
     if (response.ok) {
-        location = "file:///C:/Users/heloi/Documents/Projets/Projet_3/Portfolio-architecte-sophie-bluel/FrontEnd/index.html"
+        let data = await response.json();
+        let token = data.token;
+
+        localStorage.setItem('token', token);
+
+        location.href= "file:///C:/Users/heloi/Documents/Projets/Projet_3/Portfolio-architecte-sophie-bluel/FrontEnd/index.html"
     }
     else {
         alert("Utilisateur inconnu")
     }
 
-    console.log(response)
-
 }) 
-
 
 
 
