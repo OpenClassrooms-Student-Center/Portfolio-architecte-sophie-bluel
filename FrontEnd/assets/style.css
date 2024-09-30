@@ -13,7 +13,7 @@ dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
+figure, figcaption, footer, #header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
 	margin: 0;
@@ -25,7 +25,7 @@ time, mark, audio, video {
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+footer, #header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
@@ -53,7 +53,7 @@ body {
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 }
-header {
+#header {
 	display: flex;
 	justify-content: space-between;
 	margin: 50px 0
@@ -86,6 +86,11 @@ h2{
 	font-weight: 700;
 	font-size: 30px;
 	color: #1D6154
+}
+h3{
+	font-family: 'Work Sans' ;
+	font-weight: 400;
+	font-size: 26px;
 }
 nav ul {
 	display: flex;
@@ -135,8 +140,18 @@ li:hover {
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
 }
-
-.gallery img {
+#gallerymodale {
+	width: 80%;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: 5px;
+	grid-row-gap: 10px;
+	position:relative;
+}
+figure p i {
+	position: absolute;
+}
+#gallerymodale img, .gallery img, #barreinfoconnexion {
 	width: 100%;
 
 }
@@ -214,4 +229,37 @@ ul li span {
 #MessageErreur {
 	color : red;
 	text-align: center;
+}
+#barreinfoconnexion {
+	gap:1em;
+	justify-content: center;
+	background-color: black;
+	color: white;
+	padding : 1.5em;
+}
+#rubtitres {
+	display:flex;
+	justify-content: center;
+}
+.modal {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position:fixed;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background : rgba(0, 0, 0, 0.8) ;
+}
+.modal-wrapper {
+	width: 45%;
+	background-color: white;
+	border-radius: 10px;
+	padding: 1em;
+	margin: 1em;
+}
+#form-upload-photo {
+	display: flex;
+	flex-direction: column;
 }

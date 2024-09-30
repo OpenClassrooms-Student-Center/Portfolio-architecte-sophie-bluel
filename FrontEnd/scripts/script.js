@@ -14,17 +14,16 @@ async function affichergallery(travaux) {
     const gallery = document.querySelector(".gallery");
     gallery.innerHTML = "";
 
-    for (let travail in travaux) {
+    for (let travail of travaux) { 
         gallery.innerHTML += `
-        <figure data-category="${travaux[travail].category.name}"> 
-            <img src="${travaux[travail].imageUrl}" alt="${travaux[travail].title}">
-            <figcaption>${travaux[travail].title}</figcaption>
+        <figure data-category="${travail.category.name}"> 
+            <img src="${travail.imageUrl}" alt="${travail.title}">
+            <figcaption>${travail.title}</figcaption>
         </figure> `;
     }
 }
 
 async function afficherfiltres() {
-    
     const categories = await fetchCategories();
     const filtres = document.querySelector("#filtres");
     
@@ -33,30 +32,32 @@ async function afficherfiltres() {
     filtres.appendChild(buttonreset);
 
     buttonreset.addEventListener("click", async () => {
-        const travaux = await fetchTravaux();
-        affichergallery(travaux);
-    })
+        const figures = document.querySelectorAll(".gallery figure");
+            
+        figures.forEach(figure => {
+            figure.style.display = 'block';
+        });
+    });
     
-    for (let i = 0; i < categories.length; i++) {
+    for (category of categories) {
         const button = document.createElement('button');
-        const idcatfromcat = categories[i].id;
-        button.textContent = categories[i].name;
-        button.dataset.category = categories[i].name;
+        const idcatfromcat = category.id;
+        button.textContent = category.name;
+        button.dataset.category = category.name;
         filtres.appendChild(button);
 
         button.addEventListener("click", () => {
-            const catbuttons = button.getAttribute('data-category');
+            const category = button.getAttribute('data-category');
             const figures = document.querySelectorAll(".gallery figure");
             
             figures.forEach(figure => {
-                if (figure.getAttribute('data-category') !== catbuttons) {
-                    figure.style.display = 'none';
-                }
-                else {
+                if (figure.getAttribute('data-category') === category) {
                     figure.style.display = 'block';
                 }
-            }
-            )
+                else {
+                    figure.style.display = 'none';
+                }
+            });
         });
     }
     return(categories)
@@ -64,3 +65,15 @@ async function afficherfiltres() {
 
 const categories = afficherfiltres()
 fetchTravaux().then(travaux => affichergallery(travaux));
+
+document.addEventListener("DOMContentLoaded", () => {
+    let token = localStorage.getItem('token');
+
+    if (token) {
+        loginmenu.style = "display: none";
+        filtres.style = "display: none";
+        logoutmenu.style = "display: block";
+        boutonmodifier.style = "display: block";
+        barreinfoconnexion.style = "display: flex";
+    }
+});

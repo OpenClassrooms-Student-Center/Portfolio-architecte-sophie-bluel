@@ -26,10 +26,10 @@ BoutonSubmit.addEventListener("click", async(event) => {
         location.href= "file:///C:/Users/heloi/Documents/Projets/Projet_3/Portfolio-architecte-sophie-bluel/FrontEnd/index.html"
     }
     else {
-        MessageErreur.innerText = "Utilisateur ou mot de passe incorrect"
+        MessageErreur.innerText = "Utilisateur ou mot de passe incorrect";
     }
-
 }) 
+
 
 
 
