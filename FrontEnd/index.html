@@ -68,32 +68,32 @@
 	</section>
 	<aside id="modalemodif" class = "modal closemodal" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="titlemodale" style ="display: none;">
 		<div class="modal-wrapper" id="modal-wrapper">
-			<p id="flecheretour"><i class="fa-solid fa-arrow-left-long"></i></p>
+			<p id="flecheretour" style = "display: none"><i class="fa-solid fa-arrow-left-long"></i></p>
 			<p id="closemodal"><i class="fa-solid fa-xmark" style="color: black;"></i></p>
-			<div id = "modale1">
+			<div id = "modale1" style="display:none">
 				<h3 id="titlemodale">Galerie photo</h3>
 				<div id="gallerymodale"></div>
-				<button>Ajouter une photo</button>
+				<button id="BoutonAjouterPhoto">Ajouter une photo</button>
 			</div>	
-			<div id = "modale2">
+			<div id = "modale2" style="display:none">
 				<h3>Ajout photo</h3>
 				<form id="form-upload-photo">
-					<div id="upload-zone"><i class="fa-regular fa-image"></i>
+					<div id="upload-zone">
+						<i class="fa-regular fa-image"></i>
+						<div id="preview-zone"></div>
 						<input id="file-upload" type="file" name="fileUpload" accept="image/*" />
 						<label for="file-upload">jpg, png : 4mo max</label>
+						<div id="MessageErreurtailleouformatimg"></div>
 					</div>
 					<div id="infosphoto-zone">
 						<label for="title">Titre</label>
 						<input type="text" name="title" id="title">
 						<label for="category">Catégorie</label>
-						<select id="listcategory">
-						</select>
-					<div id="divsubmit">
-						<input type="submit" value="Valider">
+						<select id="listcategory"></select>
+						<div id="divsubmit">
+							<inputtype="submit" value="Valider">
+						</div>
 					</div>
-					</div>
-					  </form>
-					
 				</form>
 			</div>
 		</div>	
