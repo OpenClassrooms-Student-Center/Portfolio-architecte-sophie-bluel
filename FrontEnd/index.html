@@ -73,6 +73,13 @@
 			<div id = "modale1" style="display:none">
 				<h3 id="titlemodale">Galerie photo</h3>
 				<div id="gallerymodale"></div>
+				<div id="confirmation-modal" style="display:none;">
+					<div id="confirmation-modal-content">
+						<p>Êtes-vous sûr de vouloir supprimer ce travail ?</p>
+						<button id="confirm-delete">Oui</button>
+						<button id="cancel-delete">Annuler</button>
+					</div>
+				</div>
 				<button id="BoutonAjouterPhoto">Ajouter une photo</button>
 			</div>	
 			<div id = "modale2" style="display:none">
@@ -81,7 +88,7 @@
 					<div id="upload-zone">
 						<i class="fa-regular fa-image"></i>
 						<div id="preview-zone"></div>
-						<input id="file-upload" type="file" name="fileUpload" accept="image/*" />
+						<input id="file-upload" type="file" name="image" accept="image/*" />
 						<label for="file-upload">jpg, png : 4mo max</label>
 						<div id="MessageErreurtailleouformatimg"></div>
 					</div>
@@ -89,9 +96,9 @@
 						<label for="title">Titre</label>
 						<input type="text" name="title" id="title">
 						<label for="category">Catégorie</label>
-						<select id="listcategory"></select>
+						<select id="listcategory" name="category"></select>
 						<div id="divsubmit">
-							<inputtype="submit" value="Valider">
+							<input type="submit" value="Valider">
 						</div>
 					</div>
 				</form>
@@ -99,7 +106,6 @@
 		</div>	
 	</aside>
 </main>
-
 <footer>
 	<nav>
 		<ul>

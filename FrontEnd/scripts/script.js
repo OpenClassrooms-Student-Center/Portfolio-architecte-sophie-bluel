@@ -63,8 +63,12 @@ async function afficherfiltres() {
     return(categories)
 }
 
+function initpage() {
 const categories = afficherfiltres()
 fetchTravaux().then(travaux => affichergallery(travaux));
+}
+
+initpage()
 
 document.addEventListener("DOMContentLoaded", () => {
     let token = localStorage.getItem('token');

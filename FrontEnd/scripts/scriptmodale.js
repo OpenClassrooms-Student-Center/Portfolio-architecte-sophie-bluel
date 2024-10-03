@@ -3,19 +3,49 @@ async function affichertravauxmodale(travaux) {
     gallery.innerHTML = "";
 
     for (let travail of travaux) {
-        gallery.innerHTML += `
-        <figure> 
-            <p><i class="fa-solid fa-trash" style="color:black"></i></p>
+        const figure = document.createElement('figure');
+        figure.innerHTML = `
+            <p><i class="fa-solid fa-trash iconesuppr" style="color:black" data-id="${travail.id}"></i></p>
             <img src="${travail.imageUrl}" alt="${travail.title}">
-        </figure> `;
+        `;
+        gallery.appendChild(figure);
+
+        const icone = figure.querySelector('.iconesuppr');
+        icone.addEventListener('click', () => {
+            const travailId = icone.getAttribute('data-id');
+            showConfirmationModal(travailId, figure);
+        });
     }
+}
+
+function showConfirmationModal(travailId, figure) {
+    const confirmationModal = document.getElementById('confirmation-modal');
+    confirmationModal.style.display = 'flex';
+
+    const confirmDeleteButton = document.getElementById('confirm-delete');
+    const cancelDeleteButton = document.getElementById('cancel-delete');
+
+    const handleConfirmDelete = async () => {
+        await supprimerTravail(travailId, figure);
+        confirmationModal.style.display = 'none';
+        confirmDeleteButton.removeEventListener('click', handleConfirmDelete);
+    };
+
+    const handleCancelDelete = () => {
+        confirmationModal.style.display = 'none';
+        confirmDeleteButton.removeEventListener('click', handleConfirmDelete);
+        cancelDeleteButton.removeEventListener('click', handleCancelDelete);
+    };
+
+    confirmDeleteButton.addEventListener('click', handleConfirmDelete);
+    cancelDeleteButton.addEventListener('click', handleCancelDelete);
 }
 
 async function affichercategoriesliste(categories) {
     const listecat = document.getElementById("listcategory");
     listecat.innerHTML = '<option value="none"></option>';
     for (let category of categories) {
-        listecat.innerHTML += `<option value="${category.name}">${category.name}</option>`
+        listecat.innerHTML += `<option value="${category.id}">${category.name}</option>`
     }
 }
 
@@ -26,12 +56,15 @@ function resetForm() {
     document.getElementById("listcategory").value = "";
     document.getElementById("file-upload").value = "";
 }
-
+function majtravaux() {
+    fetchTravaux().then(travaux => affichertravauxmodale(travaux));
+}
 function ouverturemodale() {
     modalemodif.style.display= "flex";
     modale1.style.display = "flex";
     modale2.style.display = "none";
     flecheretour.style.display = "none";
+    majtravaux()
 }
 
 function fermeturemodale() {
@@ -39,7 +72,7 @@ function fermeturemodale() {
     resetForm();
 }
 
-fetchTravaux().then(travaux => affichertravauxmodale(travaux));
+majtravaux()
 fetchCategories().then(category => affichercategoriesliste(category));
 
 const boutonmodifier = document.getElementById("boutonmodifier");
@@ -86,10 +119,6 @@ document.addEventListener("DOMContentLoaded", () => {
     fileInput.addEventListener("change", (event) => {
         const file = event.target.files[0];
 
-        // Réinitialiser les messages et la prévisualisation
-        errorMessage.textContent = "";
-        previewZone.innerHTML = "";
-
         if (file) {
             // Vérifier le type de fichier
             const fileType = file.type;
@@ -109,6 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // Prévisualiser l'image
             const reader = new FileReader();
             reader.onload = function(e) {
+                previewZone.innerHTML = '';
                 const img = document.createElement("img");
                 img.src = e.target.result;
                 img.style.maxWidth = "100%";
@@ -118,16 +148,59 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    formUploadPhoto.addEventListener("submit", (event) => {
-        event.preventDefault();
-        
-        //SCRIPT POUR UPLOADER IMAGE VERS SWAGGER
+formUploadPhoto.addEventListener("submit", async(event) => {
+    event.preventDefault();
 
+        const formData = new FormData(formUploadPhoto);
+        let token = localStorage.getItem("token");
+        console.log(token)
 
-
-        console.log("Formulaire soumis");
+        try {
+            const response = await fetch('http://localhost:5678/api/works', {
+                method: "POST",
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                body: formData,
+            });
+            if (response.ok) {
+                document.getElementById("MessageErreurtailleouformatimg").innerText = "Fichier uploadé avec succès";
+                fermeturemodale()
+                initpage()
+            } else {
+                document.getElementById("MessageErreurtailleouformatimg").innerText = "Une erreur est survenue";
+            }
+        } catch (error) {
+            document.getElementById("MessageErreurtailleouformatimg").innerText = "Une erreur s'est produite : " + error.message;
+        }
     });
 });
+
+
+// SCRIPT POUR SUPPRIMER UN TRAVAIL
+
+async function supprimerTravail(id, figure) {
+    let token = localStorage.getItem("token");
+    try {
+        const response = await fetch(`http://localhost:5678/api/works/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        if (response.ok) {
+            figure.remove();
+            console.log("Travail supprimé avec succès");
+            majtravaux()
+            initpage()
+        } else {
+            console.error("Erreur lors de la suppression du travail");
+        }
+    } catch (error) {
+        console.error("Une erreur s'est produite : " + error.message);
+    }
+
+}
 
 
 
