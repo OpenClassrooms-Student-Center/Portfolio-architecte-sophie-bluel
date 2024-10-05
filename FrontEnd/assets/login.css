@@ -1,0 +1,115 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #fffef8;
+}
+
+header nav ul li:nth-child(3) {
+  font-weight: 600;
+}
+
+header nav ul li img {
+  height: 22px;
+}
+
+nav li {
+  cursor: pointer;
+}
+
+li a {
+  text-decoration: none;
+  color: #000;
+}
+
+li a:hover {
+  color: #b1663c;
+}
+
+.login__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 150px;
+}
+
+.login__title {
+  margin-bottom: 37px;
+}
+
+.login__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login__label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #3d3d3d;
+  margin-bottom: 7px;
+}
+
+.login__input {
+  width: 379px;
+  height: 51px;
+  padding: 10px;
+  font-size: 1rem;
+  border: none;
+  background-color: #fff;
+  box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.1);
+}
+
+.login__form #email {
+  margin-bottom: 30px;
+}
+
+.login__form #password {
+  margin-bottom: 37px;
+}
+
+.login__btn__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login__btn {
+  font-size: 14px;
+  font-weight: 700;
+  max-width: 180px;
+  padding: 10px 40px;
+  border: none;
+  cursor: pointer;
+}
+
+.login__btn:hover {
+  background-color: #0e2f28;
+}
+
+.login__btn__container > a {
+  text-decoration: none;
+  color: #3d3d3d;
+  font-size: 14px;
+}
+
+.login__btn__container > a:hover {
+  color: #b1663c;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff;
+}
+
+footer nav ul li {
+  font-size: 14px;
+  font-weight: 300;
+  color: black;
+}
