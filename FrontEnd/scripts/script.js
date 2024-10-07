@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (token) {
         loginmenu.style = "display: none";
-        filtres.style = "display: none";
+        filtres.style= "visibility: hidden";
         logoutmenu.style = "display: block";
         boutonmodifier.style = "display: block";
         barreinfoconnexion.style = "display: flex";

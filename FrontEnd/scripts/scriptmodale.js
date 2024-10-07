@@ -5,7 +5,7 @@ async function affichertravauxmodale(travaux) {
     for (let travail of travaux) {
         const figure = document.createElement('figure');
         figure.innerHTML = `
-            <p><i class="fa-solid fa-trash iconesuppr" style="color:black" data-id="${travail.id}"></i></p>
+            <p class="p-iconesuppr"><i class="fa-solid fa-trash-can iconesuppr" style="color:white" data-id="${travail.id}"></i></p>
             <img src="${travail.imageUrl}" alt="${travail.title}">
         `;
         gallery.appendChild(figure);
@@ -50,11 +50,13 @@ async function affichercategoriesliste(categories) {
 }
 
 function resetForm() {
-    document.getElementById("preview-zone").textContent = "";
     document.getElementById("MessageErreurtailleouformatimg").innerHTML = "";
     document.getElementById("title").value = "";
     document.getElementById("listcategory").value = "";
     document.getElementById("file-upload").value = "";
+    document.getElementById("upload-zone").classList.remove('image-uploaded')
+    document.getElementById('preview-zone-image').src = '';
+    
 }
 function majtravaux() {
     fetchTravaux().then(travaux => affichertravauxmodale(travaux));
@@ -63,7 +65,7 @@ function ouverturemodale() {
     modalemodif.style.display= "flex";
     modale1.style.display = "flex";
     modale2.style.display = "none";
-    flecheretour.style.display = "none";
+    flecheretour.style = "visibility : hidden";
     majtravaux()
 }
 
@@ -93,12 +95,16 @@ boutonmodifier.addEventListener("click", ouverturemodale)
 boutonAjouterPhoto.addEventListener("click", () => {
     modale2.style.display = "flex";
     modale1.style.display = "none";
-    flecheretour.style.display = "block";
+    flecheretour.style = "visibility : visible";
 })
 
 // RETOUR VERS PREMIERE MODALE AVEC FLECHE RETOUR 
 
-flecheretour.addEventListener("click", ouverturemodale);
+flecheretour.addEventListener("click", () => {
+    ouverturemodale();
+    resetForm();
+});
+
 
 // FERMETURE DE LA MODALE
 
@@ -112,7 +118,7 @@ modalewrapper.addEventListener("click", (event) => {
 
 document.addEventListener("DOMContentLoaded", () => {
     const fileInput = document.getElementById("file-upload");
-    const previewZone = document.getElementById("preview-zone");
+    const uploadZone = document.getElementById("upload-zone");
     const errorMessage = document.getElementById("MessageErreurtailleouformatimg");
     const formUploadPhoto = document.getElementById("form-upload-photo");
 
@@ -138,11 +144,9 @@ document.addEventListener("DOMContentLoaded", () => {
             // Prévisualiser l'image
             const reader = new FileReader();
             reader.onload = function(e) {
-                previewZone.innerHTML = '';
-                const img = document.createElement("img");
+                const img = document.getElementById('preview-zone-image');
                 img.src = e.target.result;
-                img.style.maxWidth = "100%";
-                previewZone.appendChild(img);
+                uploadZone.classList.add('image-uploaded')
             };
             reader.readAsDataURL(file);
         }
@@ -199,7 +203,6 @@ async function supprimerTravail(id, figure) {
     } catch (error) {
         console.error("Une erreur s'est produite : " + error.message);
     }
-
 }
 
 
