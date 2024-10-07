@@ -8,19 +8,29 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
+	<script src="https://kit.fontawesome.com/73f071f21b.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="./assets/style.css">
+	<script src="./scripts/script.js" defer></script>
+	<script src="./scripts/scriptlogout.js" defer></script>
+	<script src="./scripts/scriptmodale.js" defer></script>
 </head>
 <body>
 <header>
-	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
-	<nav>
-		<ul>
-			<li>projets</li>
-			<li>contact</li>
-			<li>login</li>
-			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
-		</ul>
-	</nav>
+	<div id="barreinfoconnexion" style="display: none">
+		<i class="fa-regular fa-pen-to-square" style="color: white;"></i>	
+		<p>Mode édition</p>
+	</div>
+	<div id="header"><h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+		<nav>
+			<ul>
+				<li><a href=#portfolio>projets</a></li>
+				<li><a href=#contact>contact</a></li>
+				<li id="loginmenu"><a href="./login.html">login</a></li>
+				<li id="logoutmenu" style="display: none">logout</li>
+				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+			</ul>
+		</nav>
+	</div>
 </header>
 <main>
 	<section id="introduction">
@@ -35,52 +45,12 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+		<div id="rubtitres">
+			<h2>Mes Projets</h2>
+			<p id="boutonmodifier" style="display:none"><a href=#modalemodif><i class="fa-regular fa-pen-to-square" style="color: black;"></i> modifier</a></p>
+		</div>
+		<p id="filtres" style="visibility: visible;"></p>
 		<div class="gallery">
-			<figure>
-				<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
-				<figcaption>Abajour Tahina</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-v.png" alt="Appartement Paris V">
-				<figcaption>Appartement Paris V</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/restaurant-sushisen-londres.png" alt="Restaurant Sushisen - Londres">
-				<figcaption>Restaurant Sushisen - Londres</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/la-balisiere.png" alt="Villa “La Balisiere” - Port Louis">
-				<figcaption>Villa “La Balisiere” - Port Louis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/structures-thermopolis.png" alt="Structures Thermopolis">
-				<figcaption>Structures Thermopolis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-x.png" alt="Appartement Paris X">
-				<figcaption>Appartement Paris X</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/le-coteau-cassis.png" alt="Pavillon “Le coteau” - Cassis">
-				<figcaption>Pavillon “Le coteau” - Cassis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/villa-ferneze.png" alt="Villa Ferneze - Isola d’Elba">
-				<figcaption>Villa Ferneze - Isola d’Elba</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-xviii.png" alt="Appartement Paris XVIII">
-				<figcaption>Appartement Paris XVIII</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/bar-lullaby-paris.png" alt="Bar “Lullaby” - Paris">
-				<figcaption>Bar “Lullaby” - Paris</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/hotel-first-arte-new-delhi.png" alt="Hotel First Arte - New Delhi">
-				<figcaption>Hotel First Arte - New Delhi</figcaption>
-			</figure>
 		</div>
 	</section>
 	<section id="contact">
@@ -93,11 +63,59 @@
 			<input type="email" name="email" id="email">
 			<label for="message">Message</label>
 			<textarea name="message" id="message" cols="30" rows="10"></textarea>
-			<input type="submit" value="Envoyer">
+			<input id="Envoyerformcontact" type="submit" value="Envoyer">
 		</form>
 	</section>
+	<aside id="modalemodif" class = "modal closemodal" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="titlemodale" style ="display: none;">
+		<div class="modal-wrapper" id="modal-wrapper">
+			<div id="retouretclose">
+				<p id="flecheretour"><i class="fa-solid fa-arrow-left-long"></i></p>
+				<p id="closemodal"><i class="fa-solid fa-xmark" style="color: black;"></i></p>
+			</div>
+			<div id = "modale1" style="display:none">
+				<h3 id="titlemodale">Galerie photo</h3>
+				<div id="gallerymodale"></div>
+				<div id="confirmation-modal" style="display:none;">
+					<div id="confirmation-modal-content">
+						<p>Êtes-vous sûr de vouloir supprimer ce travail ?</p>
+						<button id="confirm-delete">Oui</button>
+						<button id="cancel-delete">Annuler</button>
+					</div>
+				</div>
+				<div class="encartbutton">
+					<button id="BoutonAjouterPhoto">Ajouter une photo</button>
+				</div>	
+			</div>	
+			<div id = "modale2" style="display:none">
+				<h3>Ajout photo</h3>
+				<form id="form-upload-photo">
+					<div id="upload-zone">
+						<div id="input-zone" class="upload-zone-block">
+							<input id="file-upload" type="file" name="image" accept="image/*" style="display:none"/>
+							<i id="iconeimg" class="fa-regular fa-image"></i>
+							<label for="file-upload" id="file-upload-label" class="upload-button">+ Ajouter Photo</label>
+							<p id="msgformattaille">jpg, png : 4mo max</p>
+							<div id="MessageErreurtailleouformatimg"></div>
+						</div>
+						<div id="preview-zone" class="upload-zone-block">
+							<img src="" id="preview-zone-image" />
+						</div>
+					</div>
+					<div id="infosphoto-zone">
+						<label for="title">Titre</label>
+						<input type="text" name="title" id="title">
+						<label for="category">Catégorie</label>
+						<select id="listcategory" name="category"></select>
+					</div>
+					<div class="encartbutton">
+							<input id="boutonvalider" type="submit" value="Valider">
+					</div>
+					
+				</form>
+			</div>
+		</div>	
+	</aside>
 </main>
-
 <footer>
 	<nav>
 		<ul>

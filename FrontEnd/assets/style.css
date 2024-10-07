@@ -13,7 +13,7 @@ dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
+figure, figcaption, footer, #header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
 	margin: 0;
@@ -25,7 +25,7 @@ time, mark, audio, video {
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+footer, #header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
@@ -49,140 +49,307 @@ table {
 /** end reset css**/
 body {
 	max-width: 1140px;
-	margin:auto;
+}
+body, h1 > span , h3, #infosphoto-zone input, #infosphoto-zone select{
 	font-family: 'Work Sans' ;
+}
+body, #introduction img, #contact, #login{
+	margin:auto;
+}
+body, #boutonvalider,#file-upload-label, #infosphoto-zone label {
 	font-size: 14px;
 }
-header {
+#header, h1, nav ul, #introduction, .p-iconesuppr, #login form, #contact form, footer nav ul, #rubtitres, .modal, #retouretclose, #infosphoto-zone, #file-upload-label, #upload-zone, #confirmation-modal, #preview-zone {
 	display: flex;
+} 
+#header, #retouretclose{
 	justify-content: space-between;
-	margin: 50px 0
 }
-section {
-	margin: 50px 0
+section, #header{
+	margin: 50px 0;
 }
-
-h1{
-	display: flex;
+h1, #modale1, #modale2, #login form, #contact form, #infosphoto-zone, #upload-zone, #preview-zone {
 	flex-direction: column;
+}
+h1, h2, input[type="submit"], button {
 	font-family: 'Syne';
+}
+h1{
 	font-size: 22px;
 	font-weight: 800;
 	color: #B1663C
 }
-
 h1 > span {
-	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
-;
 }
-
+a {
+	text-decoration: none;
+	color: black;
+}
 h2{
-	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
 	color: #1D6154
 }
-nav ul {
-	display: flex;
+h3{
+	font-weight: 400;
+	font-size: 26px;
+}
+nav ul,#introduction, #modale1, #modale2, .p-iconesuppr, #rubtitres, .modal, #file-upload-label, #upload-zone, #confirmation-modal {
 	align-items: center;
+}
+nav ul {
 	list-style-type: none;
-
 }
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
 }
-
 li:hover {
 	color: #B1663C;
 }
-#introduction {
-	display: flex;
-	align-items: center;
-}
-#introduction figure {
-	flex: 1
+#introduction figure, #introduction article {
+	flex: 1;
 }
 #introduction img {
 	display: block;
-	margin: auto;
-	width: 80%;
 }
-
-#introduction article {
-	flex: 1
+#introduction img, #gallerymodale, #form-upload-photo, #modale1 .encartbutton {
+	width: 80%;
 }
 #introduction h2 {
 	margin-bottom: 1em;
 }
-
 #introduction p {
 	margin-bottom: 0.5em;
 }
-#portfolio h2 {
+#portfolio h2, #filtres, #login, #contact > * , .encartbutton, input[type="submit"], #MessageErreur, #preview-zone, #confirmation-modal-content {
 	text-align: center;
-	margin-bottom: 1em;
+}
+.gallery, #gallerymodale img, .gallery img, .modal, #confirmation-modal {
+	width: 100%;
 }
 .gallery {
-	width: 100%;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
 }
-
-.gallery img {
-	width: 100%;
-
+#gallerymodale {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: 10px;
+	grid-row-gap: 25px;
 }
-#contact {
+#gallerymodale figure{
+	position: relative;
+}
+.iconesuppr {
+	font-size:11px;
+}
+#modale1, #modale2 {
+	gap:3em;
+}
+.p-iconesuppr, #barreinfoconnexion, #rubtitres, .modal, #file-upload-label, #confirmation-modal {
+	justify-content: center;
+}
+.p-iconesuppr {
+	padding:5px;
+	width:12%;
+	height:10%;
+	background-color: black;
+	position:absolute;
+	right:5px;
+	top:5px;
+	border-radius: 2px;
+}
+#barreinfoconnexion {
+	width: calc(100% - 3em);
+}
+#contact, #login {
 	width: 50%;
-margin: auto;
 }
-#contact > * {
-	text-align: center;
-
+.encartbutton {
+	border-top:solid 1px rgba(179,179,179,1);
 }
-#contact h2{
+#boutonmodifier {
+	position:absolute;
+	right:23em;
+}
+#login h2, #contact h2{
 	margin-bottom: 20px;
 }
-#contact form {
+#login form, #contact form {
 	text-align: left;
 	margin-top:30px;
-	display: flex;
-	flex-direction: column;
 }
-
-#contact input {
+#login input, #contact input {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#contact label {
+#login label, #contact label, #MessageErreur {
 	margin: 2em 0 1em 0;
 }
 #contact textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-
 input[type="submit"]{
-	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
 	background-color: #1D6154;
 	margin : 2em auto ;
 	width: 180px;
-	text-align: center;
 	border-radius: 60px ;
 }
-
 footer nav ul {
-	display: flex;
 	justify-content: flex-end;
 	margin: 2em
 }
+button {
+	margin : 2em 0.5em 2em 0.5em;
+	padding : 0.5em 1em;
+	font-weight: 700;
+	font-size:100%;
+	color : rgba(29, 97, 84, 1);
+	border-radius: 60px;
+	border-color: rgba(29, 97, 84, 1);
+	background-color: transparent;
+}
+#boutonvalider {
+	height: 36px;
+	font-weight: 700;
+}
+button:hover{
+	color : rgba(255, 255, 255, 1);
+	background-color: rgba(29, 97, 84, 1);
+}
+#mdpoublie{
+	text-decoration: underline;
+}
+ul li span {
+	font-weight: 600;
+}
+#MessageErreur {
+	color : red;
+}
+#barreinfoconnexion {
+	gap:1em;
+	background-color: black;
+	color: white;
+	padding : 1.5em;
+}
+#rubtitres {
+	position: relative;
+}
+.modal {
+	position:fixed;
+	top:0;
+	left:0;
+	height:100%;
+	background : rgba(0, 0, 0, 0.8) ;
+}
+#confirmation-modal-content p, #confirm-delete, #cancel-delete {
+	margin: 1em 0.5em 0.5em 0.5em;
+}
+.p-iconesuppr, #closemodal, #BoutonAjouterPhoto, #flecheretour, #file-upload-label, #boutonvalider, li, #Envoyerformcontact, #filtres button, #BoutonSubmit, #mdpoublie {
+	cursor: pointer;
+}
+.modal-wrapper {
+	width: 45%;
+	background-color: white;
+	border-radius: 10px;
+	padding: 1em;
+	margin: 1em;
+}
+#infosphoto-zone {
+	padding-bottom: 2em;
+}
+.upload-zone-block {
+	height:100%;
+	justify-content: space-around;
+	text-align: center;
+	flex-direction: column;
+	display: flex;
+}
+.upload-zone-block img{
+	max-height:169px;
+	max-width: 100%;
+}
 
+#upload-zone #input-zone {
+	display: flex;	
+}
+
+#upload-zone.image-uploaded #input-zone {
+	display: none;	
+}
+
+#upload-zone #preview-zone {
+	display: none;	
+}
+
+#upload-zone.image-uploaded #preview-zone {
+	display: flex;
+}
+
+
+#file-upload-label {
+	width: 173px;
+	height: 36px;
+	border-radius:50px;
+	background-color: rgba(203, 214, 220, 1);
+	color:rgba(48, 102, 133, 1);
+	font-weight: 500;
+}
+#infosphoto-zone input, #infosphoto-zone select {
+	height:2.5em;
+	box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
+	border-color:rgba(255, 255, 255, 1);
+	border:1px solid transparent;
+}
+#infosphoto-zone label {
+	font-weight: 500;
+	padding-top: 1.5em;
+	padding-bottom: 0.5em;
+}
+#msgformattaille {
+	font-size:10px;
+}
+#upload-zone {
+	height:169px;
+	gap: 1em;
+	background-color: rgba(232, 241, 246, 1);
+}
+#iconeimg {
+	font-size:68px;
+	color:rgba(185, 197, 204, 1);
+}
+#confirmation-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+#confirmation-modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+}
+#messagesuccespopup {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4caf50;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1000;
+}
