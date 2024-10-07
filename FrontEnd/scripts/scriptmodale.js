@@ -5,7 +5,7 @@ async function affichertravauxmodale(travaux) {
     for (let travail of travaux) {
         const figure = document.createElement('figure');
         figure.innerHTML = `
-            <p class="p-iconesuppr"><i class="fa-solid fa-trash-can iconesuppr" style="color:white" data-id="${travail.id}"></i></p>
+            <p class="p-iconesuppr flexRow cursorPointer AlignItemsCenter"><i class="fa-solid fa-trash-can iconesuppr" style="color:white" data-id="${travail.id}"></i></p>
             <img src="${travail.imageUrl}" alt="${travail.title}">
         `;
         gallery.appendChild(figure);
@@ -21,6 +21,7 @@ async function affichertravauxmodale(travaux) {
 function showConfirmationModal(travailId, figure) {
     const confirmationModal = document.getElementById('confirmation-modal');
     confirmationModal.style.display = 'flex';
+    confirmationModal.classList = "AlignItemsCenter"
 
     const confirmDeleteButton = document.getElementById('confirm-delete');
     const cancelDeleteButton = document.getElementById('cancel-delete');
@@ -28,6 +29,7 @@ function showConfirmationModal(travailId, figure) {
     const handleConfirmDelete = async () => {
         await supprimerTravail(travailId, figure);
         confirmationModal.style.display = 'none';
+
         confirmDeleteButton.removeEventListener('click', handleConfirmDelete);
     };
 
@@ -64,6 +66,7 @@ function majtravaux() {
 function ouverturemodale() {
     modalemodif.style.display= "flex";
     modale1.style.display = "flex";
+    modale1.classList += "flexColumn AlignItemsCenter"
     modale2.style.display = "none";
     flecheretour.style = "visibility : hidden";
     majtravaux()
@@ -79,7 +82,7 @@ fetchCategories().then(category => affichercategoriesliste(category));
 
 const boutonmodifier = document.getElementById("boutonmodifier");
 const modalemodif= document.getElementById("modalemodif");
-const modalewrapper = document.getElementById("modal-wrapper");
+const modalewrapper = document.querySelector(".modal-wrapper");
 const boutonquitter=document.getElementById("closemodal");
 const modale1 = document.getElementById("modale1");
 const modale2 = document.getElementById("modale2");
@@ -94,6 +97,7 @@ boutonmodifier.addEventListener("click", ouverturemodale)
 
 boutonAjouterPhoto.addEventListener("click", () => {
     modale2.style.display = "flex";
+    modale2.classList += "flexColumn AlignItemsCenter"
     modale1.style.display = "none";
     flecheretour.style = "visibility : visible";
 })
@@ -155,28 +159,42 @@ document.addEventListener("DOMContentLoaded", () => {
 formUploadPhoto.addEventListener("submit", async(event) => {
     event.preventDefault();
 
-        const formData = new FormData(formUploadPhoto);
-        let token = localStorage.getItem("token");
-        console.log(token)
+    const title = document.getElementById("title").value.trim();
+    const listcategory = document.getElementById("listcategory").value;
 
-        try {
-            const response = await fetch('http://localhost:5678/api/works', {
-                method: "POST",
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                },
-                body: formData,
-            });
-            if (response.ok) {
-                document.getElementById("MessageErreurtailleouformatimg").innerText = "Fichier uploadé avec succès";
-                fermeturemodale()
-                initpage()
-            } else {
-                document.getElementById("MessageErreurtailleouformatimg").innerText = "Une erreur est survenue";
-            }
-        } catch (error) {
-            document.getElementById("MessageErreurtailleouformatimg").innerText = "Une erreur s'est produite : " + error.message;
+    if (title === "" || listcategory === "none") {
+        alert("Veuillez remplir tous les champs obligatoires.");
+        return;
+    }
+
+    const messagefinupload = document.getElementById("messagefinupload")
+    const formData = new FormData(formUploadPhoto);
+    let token = localStorage.getItem("token");
+    
+    try {
+        const response = await fetch('http://localhost:5678/api/works', {
+            method: "POST",
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+            body: formData,
+        });
+        if (response.ok) {
+
+            messagefinupload.classList.add("open");
+
+            setTimeout(() => {
+                messagefinupload.classList.remove("open");
+            }, 2000);
+
+            fermeturemodale()
+            initpage()
+        } else {
+            document.getElementById("MessageErreurtailleouformatimg").innerText = "Une erreur est survenue";
         }
+    } catch (error) {
+        document.getElementById("MessageErreurtailleouformatimg").innerText = "Une erreur s'est produite : " + error.message;
+    }
     });
 });
 

@@ -11,11 +11,11 @@
 	<link rel="stylesheet" href="./assets/style.css">
 	<script src="./scripts/scriptlogin.js" defer></script>
 </head>
-<body>
-    <header id="header">
-        <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+<body class="fontWorkSans font14">
+    <header class="barreheader flexRow">
+        <h1 class="fontSyne flexColumn">Sophie Bluel <span class="fontWorkSans">Architecte d'intérieur</span></h1>
         <nav>
-            <ul>
+            <ul class="flexRow" >
                 <li><a href="./index.html#portfolio">projets</a></li>
                 <li><a href="./index.html#contact">contact</a></li>
                 <li><span>login</span></li>
@@ -24,23 +24,23 @@
         </nav>
     </header>
     <main>
-        <section id="login">
-            <h2>Log In</h2>
-            <form id="loginForm" action="#" method="post">
+        <section class="textAlignCenter" id="login">
+            <h2 class="fontSyne">Log In</h2>
+            <form class = "flexColumn" id="loginForm" action="#" method="post">
                 <label for="username">Email</label>
                 <input id="username" type="email" name="email">
                 <label for="password">Mot de passe</label>
                 <input id="password" type="password" name="password"></textarea>
                 <div id="MessageErreur"></div>
-                <input id="BoutonSubmit" type="submit" value="Se connecter">
+                <input class="fontSyne textAlignCenter cursorPointer" id="BoutonSubmit" type="submit" value="Se connecter">
             </form>
-            <p id="mdpoublie">Mot de passe oublié</p>
+            <p id="mdpoublie" class="cursorPointer">Mot de passe oublié</p>
         </section>
     </main>
     
     <footer>
         <nav>
-            <ul>
+            <ul class="flexRow">
                 <li>Mentions Légales</li>
             </ul>
         </nav>

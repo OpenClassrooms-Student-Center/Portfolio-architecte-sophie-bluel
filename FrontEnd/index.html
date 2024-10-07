@@ -14,15 +14,16 @@
 	<script src="./scripts/scriptlogout.js" defer></script>
 	<script src="./scripts/scriptmodale.js" defer></script>
 </head>
-<body>
+<body class="fontWorkSans font14">
 <header>
 	<div id="barreinfoconnexion" style="display: none">
 		<i class="fa-regular fa-pen-to-square" style="color: white;"></i>	
 		<p>Mode édition</p>
 	</div>
-	<div id="header"><h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+	<div class="barreheader flexRow" >
+		<h1 class="fontSyne flexColumn">Sophie Bluel <span class="fontWorkSans">Architecte d'intérieur</span></h1>
 		<nav>
-			<ul>
+			<ul class="flexRow">
 				<li><a href=#portfolio>projets</a></li>
 				<li><a href=#contact>contact</a></li>
 				<li id="loginmenu"><a href="./login.html">login</a></li>
@@ -33,92 +34,96 @@
 	</div>
 </header>
 <main>
-	<section id="introduction">
+	<section class="flexRow AlignItemsCenter" id="introduction">
 		<figure>
 			<img src="./assets/images/sophie-bluel.png" alt="">
 		</figure>
 		<article>
-			<h2>Designer d'espace</h2>
+			<h2 class="fontSyne">Designer d'espace</h2>
 			<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
 			<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
 			<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
 		</article>
 	</section>
-	<section id="portfolio">
-		<div id="rubtitres">
-			<h2>Mes Projets</h2>
-			<p id="boutonmodifier" style="display:none"><a href=#modalemodif><i class="fa-regular fa-pen-to-square" style="color: black;"></i> modifier</a></p>
+	<section>
+		<div id="rubtitres" class="flexRow AlignItemsCenter">
+			<h2 class="fontSyne textAlignCenter">Mes Projets</h2>
+			<p id="boutonmodifier" style="display:none">
+				<a href=#modalemodif><i class="fa-regular fa-pen-to-square" style="color: black;"></i> modifier</a>
+			</p>
 		</div>
-		<p id="filtres" style="visibility: visible;"></p>
+		<p id="filtres" class="textAlignCenter" style="visibility: visible;"></p>
 		<div class="gallery">
 		</div>
 	</section>
 	<section id="contact">
-		<h2>Contact</h2>
-		<p>Vous avez un projet ? Discutons-en !</p>
-		<form action="#" method="post">
+		<h2 class="fontSyne textAlignCenter">Contact</h2>
+		<p class="textAlignCenter">Vous avez un projet ? Discutons-en !</p>
+		<form class="flexColumn textAlignCenter" action="#" method="post">
 			<label for="name">Nom</label>
 			<input type="text" name="name" id="name">
 			<label for="email">Email</label>
 			<input type="email" name="email" id="email">
 			<label for="message">Message</label>
 			<textarea name="message" id="message" cols="30" rows="10"></textarea>
-			<input id="Envoyerformcontact" type="submit" value="Envoyer">
+			<input class="fontSyne textAlignCenter cursorPointer" type="submit" value="Envoyer">
 		</form>
 	</section>
-	<aside id="modalemodif" class = "modal closemodal" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="titlemodale" style ="display: none;">
-		<div class="modal-wrapper" id="modal-wrapper">
-			<div id="retouretclose">
-				<p id="flecheretour"><i class="fa-solid fa-arrow-left-long"></i></p>
-				<p id="closemodal"><i class="fa-solid fa-xmark" style="color: black;"></i></p>
+	<aside id="modalemodif" class = "modal closemodal flexRow AlignItemsCenter" role="dialog" style ="display: none;">
+		<div class="modal-wrapper">
+			<div class="flexRow" id="retouretclose">
+				<p id="flecheretour"><i class="fa-solid fa-arrow-left-long cursorPointer"></i></p>
+				<p id="closemodal"><i class="fa-solid fa-xmark cursorPointer" style="color: black;"></i></p>
 			</div>
 			<div id = "modale1" style="display:none">
-				<h3 id="titlemodale">Galerie photo</h3>
+				<h3 class="fontWorkSans" id="titlemodale">Galerie photo</h3>
 				<div id="gallerymodale"></div>
 				<div id="confirmation-modal" style="display:none;">
-					<div id="confirmation-modal-content">
+					<div id="confirmation-modal-content" class="textAlignCenter">
 						<p>Êtes-vous sûr de vouloir supprimer ce travail ?</p>
-						<button id="confirm-delete">Oui</button>
-						<button id="cancel-delete">Annuler</button>
+						<button class="fontSyne" id="confirm-delete">Oui</button>
+						<button class="fontSyne"id="cancel-delete">Annuler</button>
 					</div>
 				</div>
-				<div class="encartbutton">
-					<button id="BoutonAjouterPhoto">Ajouter une photo</button>
+				<div class="encartbutton textAlignCenter">
+					<button class="fontSyne" id="BoutonAjouterPhoto">Ajouter une photo</button>
 				</div>	
 			</div>	
 			<div id = "modale2" style="display:none">
-				<h3>Ajout photo</h3>
+				<h3 class="fontWorkSans">Ajout photo</h3>
 				<form id="form-upload-photo">
-					<div id="upload-zone">
-						<div id="input-zone" class="upload-zone-block">
+					<div class="flexColumn AlignItemsCenter" id="upload-zone">
+						<div id="input-zone" class="upload-zone-block flexRow">
 							<input id="file-upload" type="file" name="image" accept="image/*" style="display:none"/>
 							<i id="iconeimg" class="fa-regular fa-image"></i>
-							<label for="file-upload" id="file-upload-label" class="upload-button">+ Ajouter Photo</label>
+							<label for="file-upload" id="file-upload-label" class="upload-button flexRow font14 cursorPointer AlignItemsCenter">+ Ajouter Photo</label>
 							<p id="msgformattaille">jpg, png : 4mo max</p>
-							<div id="MessageErreurtailleouformatimg"></div>
+							<div id="MessageErreurtailleouformatimg" class="textAlignCenter"></div>
 						</div>
-						<div id="preview-zone" class="upload-zone-block">
+						<div id="preview-zone" class="upload-zone-block flexColumn textAlignCenter">
 							<img src="" id="preview-zone-image" />
 						</div>
 					</div>
-					<div id="infosphoto-zone">
-						<label for="title">Titre</label>
+					<div class="flexColumn" id="infosphoto-zone">
+						<label class="fontWorkSans font14" for="title">Titre</label>
 						<input type="text" name="title" id="title">
-						<label for="category">Catégorie</label>
-						<select id="listcategory" name="category"></select>
+						<label for="category" class="font14">Catégorie</label>
+						<select class="fontWorkSans" id="listcategory" name="category"></select>
 					</div>
-					<div class="encartbutton">
-							<input id="boutonvalider" type="submit" value="Valider">
+					<div class="encartbutton textAlignCenter">
+						<input class="fontSyne textAlignCenter font14 cursorPointer" id="boutonvalider" type="submit" value="Valider">
 					</div>
-					
 				</form>
 			</div>
 		</div>	
 	</aside>
+	<div id="messagefinupload" class="textAlignCenter">
+		<p>Téléchargement terminé</p>
+	</div>
 </main>
 <footer>
 	<nav>
-		<ul>
+		<ul class="flexRow" >
 			<li>Mentions Légales</li>
 		</ul>
 	</nav>

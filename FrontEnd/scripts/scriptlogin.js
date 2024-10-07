@@ -23,7 +23,7 @@ BoutonSubmit.addEventListener("click", async(event) => {
 
         localStorage.setItem('token', token);
 
-        location.href= "file:///C:/Users/heloi/Documents/Projets/Projet_3/Portfolio-architecte-sophie-bluel/FrontEnd/index.html"
+        location.href= "file://C:/Users/heloi/Documents/Projets/Projet_3/Portfolio-architecte-sophie-bluel/FrontEnd/index.html"
     }
     else {
         MessageErreur.innerText = "Utilisateur ou mot de passe incorrect";

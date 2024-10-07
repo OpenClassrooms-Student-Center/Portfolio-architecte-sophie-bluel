@@ -1,16 +1,16 @@
-async function fetchTravaux() {
+async function fetchTravaux() { //Récupération des travaux dans l'API - retourne la variable travaux
     const reponse = await fetch('http://localhost:5678/api/works'); 
     const travaux = await reponse.json(); 
     return travaux
 } 
 
-async function fetchCategories() { 
+async function fetchCategories() { //Récupération des catégories dans l'API - retourne la variable travaux
     const reponse = await fetch ('http://localhost:5678/api/categories');
     const categories = await reponse.json()
     return categories
 }
 
-async function affichergallery(travaux) { 
+async function affichergallery(travaux) { //Pour chaque travail récupéré, on crée un élément figure comprenant infos et img provenant de l'API
     const gallery = document.querySelector(".gallery");
     gallery.innerHTML = "";
 
@@ -23,12 +23,14 @@ async function affichergallery(travaux) {
     }
 }
 
-async function afficherfiltres() {
+async function afficherfiltres() { //Création bouton Tous et un bouton par catégorie récupéré dans l'API
     const categories = await fetchCategories();
     const filtres = document.querySelector("#filtres");
+    filtres.innerHTML ="";
     
     const buttonreset = document.createElement('button');
     buttonreset.textContent = "Tous";
+    buttonreset.className += "fontSyne cursorPointer"
     filtres.appendChild(buttonreset);
 
     buttonreset.addEventListener("click", async () => {
@@ -42,6 +44,7 @@ async function afficherfiltres() {
     for (category of categories) {
         const button = document.createElement('button');
         const idcatfromcat = category.id;
+        button.className += "fontSyne cursorPointer"
         button.textContent = category.name;
         button.dataset.category = category.name;
         filtres.appendChild(button);
@@ -63,7 +66,7 @@ async function afficherfiltres() {
     return(categories)
 }
 
-function initpage() {
+function initpage() { 
 const categories = afficherfiltres()
 fetchTravaux().then(travaux => affichergallery(travaux));
 }
