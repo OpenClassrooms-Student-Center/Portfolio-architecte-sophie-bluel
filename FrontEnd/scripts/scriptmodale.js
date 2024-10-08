@@ -148,8 +148,8 @@ document.addEventListener("DOMContentLoaded", () => {
             // Prévisualiser l'image
             const reader = new FileReader();
             reader.onload = function(e) {
-                const img = document.getElementById('preview-zone-image');
-                img.src = e.target.result;
+                const zoneimg = document.getElementById('preview-zone');
+                zoneimg.innerHTML=`<img src=${e.target.result} id="preview-zone-image" alt="preview-image">`
                 uploadZone.classList.add('image-uploaded')
             };
             reader.readAsDataURL(file);

@@ -69,7 +69,7 @@
 			<input class="fontSyne textAlignCenter cursorPointer" type="submit" value="Envoyer">
 		</form>
 	</section>
-	<aside id="modalemodif" class = "modal closemodal flexRow AlignItemsCenter" role="dialog" style ="display: none;">
+	<aside id="modalemodif" class = "modal closemodal flexRow AlignItemsCenter" style ="display: none;">
 		<div class="modal-wrapper">
 			<div class="flexRow" id="retouretclose">
 				<p id="flecheretour"><i class="fa-solid fa-arrow-left-long cursorPointer"></i></p>
@@ -82,7 +82,7 @@
 					<div id="confirmation-modal-content" class="textAlignCenter">
 						<p>Êtes-vous sûr de vouloir supprimer ce travail ?</p>
 						<button class="fontSyne" id="confirm-delete">Oui</button>
-						<button class="fontSyne"id="cancel-delete">Annuler</button>
+						<button class="fontSyne" id="cancel-delete">Annuler</button>
 					</div>
 				</div>
 				<div class="encartbutton textAlignCenter">
@@ -94,21 +94,19 @@
 				<form id="form-upload-photo">
 					<div class="flexColumn AlignItemsCenter" id="upload-zone">
 						<div id="input-zone" class="upload-zone-block flexRow">
-							<input id="file-upload" type="file" name="image" accept="image/*" style="display:none"/>
+							<input id="file-upload" type="file" name="image" accept="image/*" style="display:none">
 							<i id="iconeimg" class="fa-regular fa-image"></i>
 							<label for="file-upload" id="file-upload-label" class="upload-button flexRow font14 cursorPointer AlignItemsCenter">+ Ajouter Photo</label>
 							<p id="msgformattaille">jpg, png : 4mo max</p>
 							<div id="MessageErreurtailleouformatimg" class="textAlignCenter"></div>
 						</div>
-						<div id="preview-zone" class="upload-zone-block flexColumn textAlignCenter">
-							<img src="" id="preview-zone-image" />
-						</div>
+						<div id="preview-zone" class="upload-zone-block flexColumn textAlignCenter"></div>
 					</div>
 					<div class="flexColumn" id="infosphoto-zone">
 						<label class="fontWorkSans font14" for="title">Titre</label>
 						<input type="text" name="title" id="title">
 						<label for="category" class="font14">Catégorie</label>
-						<select class="fontWorkSans" id="listcategory" name="category"></select>
+						<select class="fontWorkSans" id="category" name="category"></select>
 					</div>
 					<div class="encartbutton textAlignCenter">
 						<input class="fontSyne textAlignCenter font14 cursorPointer" id="boutonvalider" type="submit" value="Valider">
