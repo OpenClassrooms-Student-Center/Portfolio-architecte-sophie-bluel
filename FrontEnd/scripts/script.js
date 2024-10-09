@@ -65,13 +65,9 @@ async function afficherfiltres() { //Création bouton Tous et un bouton par cat�
     }
     return(categories)
 }
-
-function initpage() { 
+ 
 const categories = afficherfiltres()
-fetchTravaux().then(travaux => affichergallery(travaux));
-}
-
-initpage()
+fetchTravaux().then(travaux => affichergallery(travaux)); // Initialisation ou réinitialisation de la page
 
 document.addEventListener("DOMContentLoaded", () => {
     let token = localStorage.getItem('token');

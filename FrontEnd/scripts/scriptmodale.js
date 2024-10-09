@@ -17,7 +17,6 @@ async function affichertravauxmodale(travaux) {
         });
     }
 }
-
 function showConfirmationModal(travailId, figure) {
     const confirmationModal = document.getElementById('confirmation-modal');
     confirmationModal.style.display = 'flex';
@@ -44,7 +43,7 @@ function showConfirmationModal(travailId, figure) {
 }
 
 async function affichercategoriesliste(categories) {
-    const listecat = document.getElementById("listcategory");
+    const listecat = document.getElementById("category");
     listecat.innerHTML = '<option value="none"></option>';
     for (let category of categories) {
         listecat.innerHTML += `<option value="${category.id}">${category.name}</option>`
@@ -54,14 +53,11 @@ async function affichercategoriesliste(categories) {
 function resetForm() {
     document.getElementById("MessageErreurtailleouformatimg").innerHTML = "";
     document.getElementById("title").value = "";
-    document.getElementById("listcategory").value = "";
+    document.getElementById("category").value = "";
     document.getElementById("file-upload").value = "";
     document.getElementById("upload-zone").classList.remove('image-uploaded')
     document.getElementById('preview-zone-image').src = '';
     
-}
-function majtravaux() {
-    fetchTravaux().then(travaux => affichertravauxmodale(travaux));
 }
 function ouverturemodale() {
     modalemodif.style.display= "flex";
@@ -69,15 +65,11 @@ function ouverturemodale() {
     modale1.classList += "flexColumn AlignItemsCenter"
     modale2.style.display = "none";
     flecheretour.style = "visibility : hidden";
-    majtravaux()
+    fetchTravaux().then(travaux => affichertravauxmodale(travaux)); //Mise à jour des travaux
 }
 
-function fermeturemodale() {
-    modalemodif.style.display= 'none';
-    resetForm();
-}
 
-majtravaux()
+fetchTravaux().then(travaux => affichertravauxmodale(travaux));
 fetchCategories().then(category => affichercategoriesliste(category));
 
 const boutonmodifier = document.getElementById("boutonmodifier");
@@ -112,8 +104,14 @@ flecheretour.addEventListener("click", () => {
 
 // FERMETURE DE LA MODALE
 
-boutonquitter.addEventListener("click", fermeturemodale);
-modalemodif.addEventListener("click", fermeturemodale);
+boutonquitter.addEventListener("click", () => {
+    modalemodif.style.display= 'none';
+    resetForm(); // fermeture modale
+});
+modalemodif.addEventListener("click", () => {
+    modalemodif.style.display= 'none';
+    resetForm(); // fermeture modale
+});
 modalewrapper.addEventListener("click", (event) => {
     event.stopPropagation();
 })
@@ -160,7 +158,7 @@ formUploadPhoto.addEventListener("submit", async(event) => {
     event.preventDefault();
 
     const title = document.getElementById("title").value.trim();
-    const listcategory = document.getElementById("listcategory").value;
+    const listcategory = document.getElementById("category").value;
 
     if (title === "" || listcategory === "none") {
         alert("Veuillez remplir tous les champs obligatoires.");
@@ -187,8 +185,12 @@ formUploadPhoto.addEventListener("submit", async(event) => {
                 messagefinupload.classList.remove("open");
             }, 2000);
 
-            fermeturemodale()
-            initpage()
+            modalemodif.style.display= 'none'; //fermeture modale
+            resetForm();
+
+            const categories = afficherfiltres()
+            fetchTravaux().then(travaux => affichergallery(travaux)); //Réinitialisation de la page
+
         } else {
             document.getElementById("MessageErreurtailleouformatimg").innerText = "Une erreur est survenue";
         }
@@ -212,9 +214,9 @@ async function supprimerTravail(id, figure) {
         });
         if (response.ok) {
             figure.remove();
-            console.log("Travail supprimé avec succès");
-            majtravaux()
-            initpage()
+            fetchTravaux().then(travaux => affichertravauxmodale(travaux)); //Mise à jour des travaux
+            const categories = afficherfiltres()
+            fetchTravaux().then(travaux => affichergallery(travaux)); // réinitialisation de la page
         } else {
             console.error("Erreur lors de la suppression du travail");
         }
