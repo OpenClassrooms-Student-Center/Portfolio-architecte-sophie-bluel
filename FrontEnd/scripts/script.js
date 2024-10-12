@@ -1,21 +1,25 @@
-async function fetchTravaux() { //Récupération des travaux dans l'API - retourne la variable travaux
+//-- Fonctions de récupération travaux et catégories -- 
+
+async function fetchTravaux() { // Récupération des travaux
     const reponse = await fetch('http://localhost:5678/api/works'); 
     const travaux = await reponse.json(); 
     return travaux
 } 
 
-async function fetchCategories() { //Récupération des catégories dans l'API - retourne la variable travaux
+async function fetchCategories() { //Récupération des catégories
     const reponse = await fetch ('http://localhost:5678/api/categories');
     const categories = await reponse.json()
     return categories
 }
 
-async function affichergallery(travaux) { //Pour chaque travail récupéré, on crée un élément figure comprenant infos et img provenant de l'API
-    const gallery = document.querySelector(".gallery");
-    gallery.innerHTML = "";
+// -- Fonction pour afficher la galerie -- 
+
+function affichergalerie(travaux) { 
+    const galerie = document.querySelector(".galerie");
+    galerie.innerHTML = "";
 
     for (let travail of travaux) { 
-        gallery.innerHTML += `
+        galerie.innerHTML += `
         <figure data-category="${travail.category.name}"> 
             <img src="${travail.imageUrl}" alt="${travail.title}">
             <figcaption>${travail.title}</figcaption>
@@ -23,25 +27,26 @@ async function affichergallery(travaux) { //Pour chaque travail récupéré, on 
     }
 }
 
-async function afficherfiltres() { //Création bouton Tous et un bouton par catégorie récupéré dans l'API
-    const categories = await fetchCategories();
+// Fonction pour afficher les filtres --
+
+function afficherfiltres(categories) { //Création boutons filtre
     const filtres = document.querySelector("#filtres");
     filtres.innerHTML ="";
     
-    const buttonreset = document.createElement('button');
-    buttonreset.textContent = "Tous";
-    buttonreset.className += "fontSyne cursorPointer"
-    filtres.appendChild(buttonreset);
+    const boutontous = document.createElement('button'); // bouton tous = tous les travaux sont en display:block
+    boutontous.textContent = "Tous";
+    boutontous.className += "fontSyne cursorPointer"
+    filtres.appendChild(boutontous);
 
-    buttonreset.addEventListener("click", async () => {
-        const figures = document.querySelectorAll(".gallery figure");
-            
+    boutontous.addEventListener("click", () => {
+        const figures = document.querySelectorAll(".galerie figure");
+
         figures.forEach(figure => {
             figure.style.display = 'block';
         });
     });
     
-    for (category of categories) {
+    for (let category of categories) { // pour chaque catégorie, on crée un bouton avec un id + nom. Avec écouteur évènement click, on compare les cat des boutons aux catégories des travaux, et on affiche ou non 
         const button = document.createElement('button');
         const idcatfromcat = category.id;
         button.className += "fontSyne cursorPointer"
@@ -51,7 +56,7 @@ async function afficherfiltres() { //Création bouton Tous et un bouton par cat�
 
         button.addEventListener("click", () => {
             const category = button.getAttribute('data-category');
-            const figures = document.querySelectorAll(".gallery figure");
+            const figures = document.querySelectorAll(".galerie figure");
             
             figures.forEach(figure => {
                 if (figure.getAttribute('data-category') === category) {
@@ -63,13 +68,17 @@ async function afficherfiltres() { //Création bouton Tous et un bouton par cat�
             });
         });
     }
-    return(categories)
 }
- 
-const categories = afficherfiltres()
-fetchTravaux().then(travaux => affichergallery(travaux)); // Initialisation ou réinitialisation de la page
 
-document.addEventListener("DOMContentLoaded", () => {
+// -- Appel des fonctions --
+
+fetchCategories().then(categories => afficherfiltres(categories)); 
+fetchTravaux().then(travaux => affichergalerie(travaux)); 
+
+
+// -- Affichage de la page en mode édition --
+
+document.addEventListener("DOMContentLoaded", () => { 
     let token = localStorage.getItem('token');
 
     if (token) {

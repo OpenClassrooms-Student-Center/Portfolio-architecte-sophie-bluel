@@ -74,13 +74,13 @@ body, #introduction img, #contact, #login {
 .flexRow {
 	display: flex;
 }
-.AlignItemsCenter, nav ul, #upload-zone, #confirmation-modal {
+.AlignItemsCenter, nav ul, #upload-zone, #confirmation-modale {
 	align-items: center;
 }
 #file-upload-label{
 	align-self: center;
 }
-.barreheader, #retouretclose{
+.barreheader, #retouretquitter{
 	justify-content: space-between;
 }
 section, .barreheader{
@@ -125,7 +125,7 @@ li:hover {
 #introduction img {
 	display: block;
 }
-#introduction img, #gallerymodale, #form-upload-photo, #modale1 .encartbutton {
+#introduction img, #galeriemodale, #form-upload-photo, #modale1 .encartBouton {
 	width: 80%;
 }
 #introduction h2 {
@@ -134,22 +134,22 @@ li:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
-.gallery, #gallerymodale img, .gallery img, .modal, #confirmation-modal {
+.galerie, #galeriemodale img, .galerie img, #modalemodif, #confirmation-modale {
 	width: 100%;
 }
-.gallery {
+.galerie {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
 }
-#gallerymodale {
+#galeriemodale {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 	grid-column-gap: 10px;
 	grid-row-gap: 25px;
 }
-#gallerymodale figure{
+#galeriemodale figure{
 	position: relative;
 }
 .iconesuppr {
@@ -158,7 +158,7 @@ li:hover {
 #modale1, #modale2 {
 	gap:3em;
 }
-.p-iconesuppr, #barreinfoconnexion, #rubtitres, .modal, #file-upload-label, #confirmation-modal {
+.p-iconesuppr, #barreinfoconnexion, #rubtitres, #modalemodif, #file-upload-label, #confirmation-modale {
 	justify-content: center;
 }
 .p-iconesuppr {
@@ -177,7 +177,7 @@ li:hover {
 #contact, #login {
 	width: 50%;
 }
-.encartbutton {
+.encartBouton {
 	border-top:solid 1px rgba(179,179,179,1);
 }
 #boutonmodifier {
@@ -249,17 +249,17 @@ ul li span {
 	color: white;
 	padding : 1.5em;
 }
-.modal {
+#modalemodif {
 	position:fixed;
 	top:0;
 	left:0;
 	height:100%;
 	background : rgba(0, 0, 0, 0.8) ;
 }
-#confirmation-modal-content p, #confirm-delete, #cancel-delete {
+#confirmation-modale-content p, #confirm-delete, #cancel-delete {
 	margin: 1em 0.5em 0.5em 0.5em;
 }
-.modal-wrapper {
+.modale-wrapper {
 	width: 45%;
 	background-color: white;
 	border-radius: 10px;
@@ -320,7 +320,7 @@ ul li span {
 	font-size:68px;
 	color:rgba(185, 197, 204, 1);
 }
-#confirmation-modal {
+#confirmation-modale {
     position: fixed;
     top: 0;
     left: 0;
@@ -328,7 +328,7 @@ ul li span {
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1000;
 }
-#confirmation-modal-content {
+#confirmation-modale-content {
     background-color: white;
     padding: 20px;
     border-radius: 5px;
