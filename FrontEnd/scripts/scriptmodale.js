@@ -36,21 +36,21 @@ function affichertravauxmodale(travaux) {  // Même fonctionnement que l'afficha
 
 function afficherConfirmationModale(travailId, figure) {
     const confirmationModale = document.getElementById('confirmation-modale');
-    confirmationModal.style.display = 'flex';
-    confirmationModal.classList = "AlignItemsCenter"
+    confirmationModale.style.display = 'flex';
+    confirmationModale.classList = "AlignItemsCenter"
 
     const confirmDeleteButton = document.getElementById('confirm-delete');
     const cancelDeleteButton = document.getElementById('cancel-delete');
 
     const handleConfirmDelete = async () => {
         await supprimerTravail(travailId, figure);
-        confirmationModal.style.display = 'none';
+        confirmationModale.style.display = 'none';
 
         confirmDeleteButton.removeEventListener('click', handleConfirmDelete);
     };
 
     const handleCancelDelete = () => {
-        confirmationModal.style.display = 'none';
+        confirmationModale.style.display = 'none';
         confirmDeleteButton.removeEventListener('click', handleConfirmDelete);
         cancelDeleteButton.removeEventListener('click', handleCancelDelete);
     };
@@ -143,7 +143,7 @@ async function supprimerTravail(id, figure) {
         if (response.ok) {
             figure.remove();
             fetchTravaux().then(travaux => affichertravauxmodale(travaux)); //Mise à jour des travaux
-            const categories = afficherfiltres()
+            fetchCategories().then(categories => afficherfiltres(categories))
             fetchTravaux().then(travaux => affichergalerie(travaux)); // réinitialisation de la page
         } else {
             console.error("Erreur lors de la suppression du travail");
@@ -154,7 +154,6 @@ async function supprimerTravail(id, figure) {
 }
 
 // Script pour vérifier le format et la taille du fichier sélectionné pour l'upload et prévisualisation de l'image
-
 const fileInput = document.getElementById("file-upload");
 const uploadZone = document.getElementById("upload-zone");
 const messageErreur = document.getElementById("MessageErreurtailleouformatimg");
@@ -183,7 +182,7 @@ fileInput.addEventListener("change", (event) => {
             zoneimg.innerHTML=`<img src=${e.target.result} id="preview-zone-image" alt="preview-image">`
             uploadZone.classList.add('image-uploaded')
         };
-        reader.readAsDataURL(file);
+        reader.readAsDataURL(fichier);
     }
 
 // Script téléchargement de l'image
