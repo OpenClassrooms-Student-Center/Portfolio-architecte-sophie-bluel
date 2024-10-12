@@ -42,21 +42,14 @@ function afficherConfirmationModale(travailId, figure) {
     const confirmDeleteButton = document.getElementById('confirm-delete');
     const cancelDeleteButton = document.getElementById('cancel-delete');
 
-    const handleConfirmDelete = async () => {
+    confirmDeleteButton.addEventListener('click', async () => {
         await supprimerTravail(travailId, figure);
-        confirmationModale.style.display = 'none';
+        confirmationModale.style.display = 'none';;
+    });
 
-        confirmDeleteButton.removeEventListener('click', handleConfirmDelete);
-    };
-
-    const handleCancelDelete = () => {
-        confirmationModale.style.display = 'none';
-        confirmDeleteButton.removeEventListener('click', handleConfirmDelete);
-        cancelDeleteButton.removeEventListener('click', handleCancelDelete);
-    };
-
-    confirmDeleteButton.addEventListener('click', handleConfirmDelete);
-    cancelDeleteButton.addEventListener('click', handleCancelDelete);
+    cancelDeleteButton.addEventListener('click', () => {
+        confirmationModale.style.display = 'none';;
+    }); 
 }
 
 //MODALE 2
