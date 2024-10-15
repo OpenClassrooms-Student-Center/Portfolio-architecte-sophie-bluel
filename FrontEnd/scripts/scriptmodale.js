@@ -3,7 +3,7 @@
 function ouverturemodale() {
     modalemodif.style.display= "flex";
     modale1.style.display = "flex";
-    modale1.classList += "flexColumn AlignItemsCenter"
+    modale1.classList += "flexColumn AlignItemsCenter";
     modale2.style.display = "none";
     flecheretour.style = "visibility : hidden";
     fetchTravaux().then(travaux => affichertravauxmodale(travaux)); //Mise à jour des travaux
@@ -44,11 +44,11 @@ function afficherConfirmationModale(travailId, figure) {
 
     confirmDeleteButton.addEventListener('click', async () => {
         await supprimerTravail(travailId, figure);
-        confirmationModale.style.display = 'none';;
+        confirmationModale.style.display = 'none';
     });
 
     cancelDeleteButton.addEventListener('click', () => {
-        confirmationModale.style.display = 'none';;
+        confirmationModale.style.display = 'none';
     }); 
 }
 
@@ -170,6 +170,7 @@ fileInput.addEventListener("change", (event) => {
         }
 
         const reader = new FileReader(); // Prévisualiser l'image
+
         reader.onload = function(e) {
             const zoneimg = document.getElementById('preview-zone');
             zoneimg.innerHTML=`<img src=${e.target.result} id="preview-zone-image" alt="preview-image">`
@@ -177,10 +178,12 @@ fileInput.addEventListener("change", (event) => {
         };
         reader.readAsDataURL(fichier);
     }
+});
 
 // Script téléchargement de l'image
 
-formUploadPhoto.addEventListener("submit", async(event) => {
+formUploadPhoto.addEventListener("submit", 
+    async(event) => {
     event.preventDefault();
 
     const title = document.getElementById("title").value.trim();
@@ -214,8 +217,8 @@ formUploadPhoto.addEventListener("submit", async(event) => {
             modalemodif.style.display= 'none'; //fermeture modale
             resetForm();
 
-            const categories = afficherfiltres()
-            fetchTravaux().then(travaux => affichergalerie(travaux)); //Réinitialisation de la page
+            fetchCategories().then(categories => afficherfiltres(categories))
+            fetchTravaux().then(travaux => affichergalerie(travaux)); // réinitialisation de la page
 
         } else {
             document.getElementById("MessageErreurtailleouformatimg").innerText = "Une erreur est survenue";
@@ -223,5 +226,4 @@ formUploadPhoto.addEventListener("submit", async(event) => {
     } catch (error) {
         document.getElementById("MessageErreurtailleouformatimg").innerText = "Une erreur s'est produite : " + error.message;
     }
-    });
 });
