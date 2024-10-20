@@ -12,7 +12,7 @@ dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed,
-figure, figcaption, footer, .barreheader, hgroup,
+figure, figcaption, footer, .headerBar, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
 	margin: 0;
@@ -30,6 +30,12 @@ footer, header, hgroup, menu, nav, section {
 body {
 	line-height: 1;
 }
+.marginAuto {
+	margin: auto;
+}
+.maxWidth1140 {
+	max-width: 1140px;
+}
 ol, ul {
 	list-style: none;
 }
@@ -46,9 +52,6 @@ table {
 	border-spacing: 0;
 }
 /** end reset css**/
-body {
-	max-width: 1140px;
-}
 .fontWorkSans {
 	font-family: 'Work Sans' ;
 }
@@ -64,7 +67,7 @@ body {
 .cursorPointer, li, button {
 	cursor: pointer;
 }
-body, #introduction img, #contact, #login {
+#introduction img, #contact, #login {
 	margin:auto;
 }
 .flexColumn {
@@ -74,16 +77,19 @@ body, #introduction img, #contact, #login {
 .flexRow {
 	display: flex;
 }
-.AlignItemsCenter, nav ul, #upload-zone, #confirmation-modale {
+.alignItemsCenter, nav ul, #upload-zone, #confirmation-modal {
 	align-items: center;
 }
 #file-upload-label{
 	align-self: center;
 }
-.barreheader, #retouretquitter{
+.headerBar, #back-close-block{
 	justify-content: space-between;
 }
-section, .barreheader{
+.headerBar{
+	margin: 50px auto;
+}
+section{
 	margin: 50px 0;
 }
 h1{
@@ -125,7 +131,7 @@ li:hover {
 #introduction img {
 	display: block;
 }
-#introduction img, #galeriemodale, #form-upload-photo, #modale1 .encartBouton {
+#introduction img, #gallery-modal, #form-upload-photo, #work-modal .encartBouton {
 	width: 80%;
 }
 #introduction h2 {
@@ -134,34 +140,34 @@ li:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
-.galerie, #galeriemodale img, .galerie img, #modalemodif, #confirmation-modale {
+.gallery, #gallery-modal img, .gallery img, #edit-modal, #confirmation-modal {
 	width: 100%;
 }
-.galerie {
+.gallery {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
 }
-#galeriemodale {
+#gallery-modal {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 	grid-column-gap: 10px;
 	grid-row-gap: 25px;
 }
-#galeriemodale figure{
+#gallery-modal figure{
 	position: relative;
 }
-.iconesuppr {
+.deleteIcon {
 	font-size:11px;
 }
-#modale1, #modale2 {
+#work-modal, #form-modal {
 	gap:3em;
 }
-.p-iconesuppr, #barreinfoconnexion, #rubtitres, #modalemodif, #file-upload-label, #confirmation-modale {
+.pDeleteIcon, #black-bar-edit, #title-block, #edit-modal, #file-upload-label, #confirmation-modal {
 	justify-content: center;
 }
-.p-iconesuppr {
+.pDeleteIcon {
 	padding:5px;
 	width:12%;
 	height:10%;
@@ -171,8 +177,8 @@ li:hover {
 	top:5px;
 	border-radius: 2px;
 }
-#barreinfoconnexion {
-	width: calc(100% - 3em);
+#black-bar-edit {
+	width: 100%;
 }
 #contact, #login {
 	width: 50%;
@@ -180,7 +186,7 @@ li:hover {
 .encartBouton {
 	border-top:solid 1px rgba(179,179,179,1);
 }
-#boutonmodifier {
+#edit-button {
 	position:absolute;
 	left:70%;
 }
@@ -197,7 +203,7 @@ li:hover {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#login label, #contact label, #MessageErreur {
+#login label, #contact label, #login-error-message {
 	margin: 2em 0 1em 0;
 }
 #contact textarea {
@@ -226,57 +232,62 @@ button {
 	border-color: rgba(29, 97, 84, 1);
 	background-color: transparent;
 }
-#boutonvalider {
+#submit-button {
 	height: 36px;
 	font-weight: 700;
 }
-button:hover{
+#submit-button:disabled {
+	background-color: rgba(167, 167, 167, 1);
+	border:none;
+	pointer-events:none;
+}
+button:hover {
 	color : rgba(255, 255, 255, 1);
 	background-color: rgba(29, 97, 84, 1);
 }
-#mdpoublie{
+#forget-password{
 	text-decoration: underline;
 }
 ul li span {
 	font-weight: 600;
 }
-#MessageErreur {
+#login-error-message {
 	color : red;
 }
-#barreinfoconnexion {
+#black-bar-edit {
 	gap:1em;
 	background-color: black;
 	color: white;
-	padding : 1.5em;
+	padding : 1.5em 0;
 }
-#modalemodif {
+#edit-modal {
 	position:fixed;
 	top:0;
 	left:0;
 	height:100%;
 	background : rgba(0, 0, 0, 0.8) ;
 }
-#confirmation-modale-content p, #confirm-delete, #cancel-delete {
+#confirmation-modal-content p, #confirm-delete, #cancel-delete {
 	margin: 1em 0.5em 0.5em 0.5em;
 }
-.modale-wrapper {
+.modalWrapper {
 	width: 45%;
 	background-color: white;
 	border-radius: 10px;
 	padding: 1em;
 	margin: 1em;
 }
-#infosphoto-zone {
+#photo-information-fields {
 	padding-bottom: 2em;
 }
-.upload-zone-block {
+.uploadZone {
 	height:100%;
 	justify-content: space-around;
 	text-align: center;
 	flex-direction: column;
 	display: flex;
 }
-.upload-zone-block img{
+.uploadZone img{
 	max-height:169px;
 	max-width: 100%;
 }
@@ -297,18 +308,18 @@ ul li span {
 	color:rgba(48, 102, 133, 1);
 	font-weight: 500;
 }
-#infosphoto-zone input, #infosphoto-zone select {
+#photo-information-fields input, #photo-information-fields select {
 	height:2.5em;
 	box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
 	border-color:rgba(255, 255, 255, 1);
 	border:1px solid transparent;
 }
-#infosphoto-zone label {
+#photo-information-fields label {
 	font-weight: 500;
 	padding-top: 1.5em;
 	padding-bottom: 0.5em;
 }
-#msgformattaille {
+#file-format-information {
 	font-size:10px;
 }
 #upload-zone {
@@ -316,11 +327,11 @@ ul li span {
 	gap: 1em;
 	background-color: rgba(232, 241, 246, 1);
 }
-#iconeimg {
+#img-icon {
 	font-size:68px;
 	color:rgba(185, 197, 204, 1);
 }
-#confirmation-modale {
+#confirmation-modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -328,15 +339,15 @@ ul li span {
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1000;
 }
-#confirmation-modale-content {
+#confirmation-modal-content {
     background-color: white;
     padding: 20px;
     border-radius: 5px;
 }
-#messagefinupload {
+#upload-success-message {
 	display:none;
 }
-#messagefinupload.open {
+#upload-success-message.open {
 	display:flex;
 	justify-content: center;
 	align-items: center;

@@ -1,50 +1,51 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-	<meta charset="UTF-8">
-	<title>Sophie Bluel - Architecte d'intérieur</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
-	<meta name="description" content="">
-	<link rel="stylesheet" href="./assets/style.css">
-	<script src="./scripts/scriptlogin.js" defer></script>
-</head>
-<body class="fontWorkSans font14">
-    <header class="barreheader flexRow">
-        <h1 class="fontSyne flexColumn">Sophie Bluel <span class="fontWorkSans">Architecte d'intérieur</span></h1>
-        <nav>
-            <ul class="flexRow" >
-                <li><a href="./index.html#portfolio">projets</a></li>
-                <li><a href="./index.html#contact">contact</a></li>
-                <li><span>login</span></li>
-                <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <section class="textAlignCenter" id="login">
-            <h2 class="fontSyne">Log In</h2>
-            <form class = "flexColumn" id="loginForm" action="#" method="post">
-                <label for="username">Email</label>
-                <input id="username" type="email" name="email">
-                <label for="password">Mot de passe</label>
-                <input id="password" type="password" name="password">
-                <div id="MessageErreur"></div>
-                <input class="fontSyne textAlignCenter cursorPointer" id="BoutonConnexion" type="submit" value="Se connecter">
-            </form>
-            <p id="mdpoublie" class="cursorPointer">Mot de passe oublié</p>
-        </section>
-    </main>
-    
-    <footer>
-        <nav>
-            <ul class="flexRow">
-                <li>Mentions Légales</li>
-            </ul>
-        </nav>
-    </footer>
+    <head>
+        <meta charset="UTF-8">
+        <title>Sophie Bluel - Architecte d'intérieur</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
+            rel="stylesheet">
+        <meta name="description" content="">
+        <link rel="stylesheet" href="./assets/style.css">
+    </head>
+
+    <body class="fontWorkSans font14">
+        <header class="headerBar flexRow">
+            <h1 class="fontSyne flexColumn">Sophie Bluel <span class="fontWorkSans">Architecte d'intérieur</span></h1>
+            <nav>
+                <ul class="flexRow">
+                    <li><a href="./index.html#portfolio">projets</a></li>
+                    <li><a href="./index.html#contact">contact</a></li>
+                    <li><span>login</span></li>
+                    <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <section class="textAlignCenter" id="login">
+                <h2 class="fontSyne">Log In</h2>
+                <form class="flexColumn" action="#" method="post">
+                    <label for="username">Email</label>
+                    <input id="username" type="email" name="email">
+                    <label for="password">Mot de passe</label>
+                    <input id="password" type="password" name="password">
+                    <div id="login-error-message"></div>
+                    <input class="fontSyne textAlignCenter cursorPointer" id="login-button" type="submit" value="Se connecter">
+                </form>
+                <p id="forget-password" class="cursorPointer">Mot de passe oublié</p>
+            </section>
+        </main>
+
+        <footer>
+            <nav>
+                <ul class="flexRow">
+                    <li>Mentions Légales</li>
+                </ul>
+            </nav>
+        </footer>
+        <script src="./scripts/scriptlogin.js" defer></script>
     </body>
-    </html>
-    
+</html>

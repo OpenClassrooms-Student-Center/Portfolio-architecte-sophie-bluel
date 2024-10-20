@@ -1,9 +1,9 @@
-let Logout = document.getElementById("logoutmenu");
+let Logout = document.getElementById("logout-menu");
 
 Logout.addEventListener("click", () => {
         localStorage.removeItem('token');
         
-        location.href= "file:///C:/Users/heloi/Documents/Projets/Projet_3/Portfolio-architecte-sophie-bluel/FrontEnd/index.html"
+        location.reload();
 }) 
 
 

@@ -1,6 +1,6 @@
-let BoutonConnexion = document.getElementById("BoutonConnexion");
+let loginButton = document.getElementById("login-button");
 
-BoutonConnexion.addEventListener("click", async(event) => {
+loginButton.addEventListener("click", async(event) => {
     event.preventDefault(); // pour éviter rechargement de la page
 
     let username = document.getElementById("username").value;
@@ -29,12 +29,11 @@ BoutonConnexion.addEventListener("click", async(event) => {
 
         localStorage.setItem('token', token);
 
-        location.href= "file://C:/Users/heloi/Documents/Projets/Projet_3/Portfolio-architecte-sophie-bluel/FrontEnd/index.html" // redirection vers page d'accueil
+        location.href= "index.html" // redirection vers page d'accueil
     }
     else { // si la response est une erreur 401 (unathorized), on fait apparaître un message
-        let MessageErreur = document.getElementById("MessageErreur")
-
-        MessageErreur.innerText = "Utilisateur ou mot de passe incorrect";
+        let messageErreur = document.getElementById("login-error-message")
+        messageErreur.innerText = "Utilisateur ou mot de passe incorrect";
     }
 }) 
 
