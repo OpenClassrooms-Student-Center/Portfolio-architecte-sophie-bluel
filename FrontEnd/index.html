@@ -9,16 +9,29 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-	<script src="user.js" defer></script>
+	<script src="index.js" defer></script>
+	<script src="https://kit.fontawesome.com/b27756132e.js" crossorigin="anonymous"></script>
+	
 </head>
 <body>
+	<div class="containerModal">
+		<div class="modalWindow">
+			<div class="modalHeader"><i class="fa-solid fa-xmark"></i></div>
+			<h3 class="modalTitle">Galerie photo</h3>
+			<div class="modalContent">
+			</div>
+			<button id="addPictureBtn">Ajouter une photo</button>
+		
+		</div>
+	</div>	
+	
 <header>
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
-			<li>projets</li>
-			<li>contact</li>
-			<li>login</li>
+			<li><a href="index.html#gallery">projets</a></li>
+			<li><a href="index.html#contact">contact</a></li>
+			<li><a href="login.html" id = "logoutButton">login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -37,12 +50,12 @@
 	</section>
 	<section id="portfolio">
 		<h2>Mes projets</h2>
+		<div class="modifier" id="edit">
+
+		</div>
 		<div class="filters">
-			<button id="0" class="filter">Tous</button>
-			<button id="1" class="filter">Objets</button>
-			<button id="2" class="filter">Appartements</button>
-			<button id="3" class="filter">Hotels & restaurents</button>
-        </div>
+			<button id="0">Tous</button>
+			 </div>
 		<div class="gallery">
 		</div>
 	</section>
@@ -59,6 +72,7 @@
 			<input type="submit" value="Envoyer">
 		</form>
 	</section>
+	
 </main>
 
 <footer>
