@@ -1,0 +1,113 @@
+body,
+html {
+    height: 100%;
+
+}
+
+
+main {
+    flex: 1;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+
+}
+
+#login {
+    width: 50%;
+    margin: auto;
+}
+
+
+#login legend {
+
+    font-family: 'Syne';
+    color: #1D6154;
+    font-size: 30PX;
+    margin: auto;
+}
+
+
+#login>* {
+    text-align: center;
+
+}
+
+#login h2 {
+    margin-bottom: 20px;
+}
+
+#login form {
+    text-align: left;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    width: 380px;
+    margin: auto;
+}
+
+#login input {
+    height: 50px;
+    font-size: 1.2em;
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+
+}
+
+#login label {
+    margin: 2em 0 1em 0;
+}
+
+#login a {
+    text-align: center;
+    color: #3D3D3D;
+
+}
+
+
+
+
+input[type="submit"] {
+    font-family: 'Syne';
+    font-weight: 700;
+    color: white;
+    background-color: #1D6154;
+    margin: 2em auto;
+    width: 180px;
+    text-align: center;
+    border-radius: 60px;
+}
+
+button {
+    font-family: 'Syne';
+    font-weight: 16px;
+    color: white;
+    background-color: #1D6154;
+    margin: 2em auto;
+    text-align: center;
+    border-radius: 60px;
+    padding: 9px 20px;
+}
+
+footer {
+    background-color: white;
+    height: 60PX;
+    align-content: center;
+
+
+}
+
+footer nav ul {
+    display: flex;
+    justify-content: flex-end;
+    margin: 2em
+}
+
+.erreur {
+    color: red;
+    margin: 20px;
+    align-self: center;
+
+}
