@@ -1,3 +1,5 @@
+/****** Étape 1.1 récupérer les travaux du backend ******/
+/****** code principal ******/
 let travauxStockageLocalVariable = window.localStorage.getItem("travauxStockageLocal");
 let travauxPromesse;
 
@@ -25,6 +27,17 @@ viderElement(galleryDiv);
 
 remplirDynamiquementGallerie(travauxPromesse);
 
+/****** Étape 1.2 créer le menu des catégories ******/
+/****** code principal ******/
+let categories = new Set();
+recupererCategories(travauxPromesse);
+console.log(categories);
+let sectionParentMenu = document.getElementById("portfolio");
+console.log(sectionParentMenu);
+sectionParentMenu.prepend(genererMenuCategories(categories));
+console.log(sectionParentMenu);
+
+/****** Étape 1.1 récupérer les travaux du backend ******/
 /**
  * Cette fonction fetche les données et remplit le localStorage pour plus de rapidité et moins de bande passante réseau
  * lors des futurs rechargements de page.
@@ -85,4 +98,49 @@ function remplirDynamiquementGallerie(travaux) {
     } catch(erreur) {
         console.error("Erreur au remplissage des figures dans la gallerie: %o", erreur);
     }
+}
+
+/****** Étape 1.2 créer le menu des catégories ******/
+/**
+ * Cette fonction stocke dans une variable toutes les catégories des travaux issus de l'API.
+ * @param {Promise<any>} travaux : voir ci-dessus remplirDynamiquementGallerie les travaux incluent la catégorie.
+ */
+function recupererCategories(travaux) {
+    try{
+        travaux.then(resultat => {
+            resultat.forEach(travail => {
+                console.log("entree dans forEach travail");
+                const categ = travail.category.name;
+                console.log(categ);
+                if(categories.size === 0 || !categories.has(categ)) {
+                    categories.add(categ);
+                }
+            });
+        });
+        console.log(categories);
+        const allCategs = "tous les travaux";
+        if(!categories.has(allCategs)) {
+            categories.add(allCategs);
+        }
+    } catch(erreur) {
+        console.error("Erreur au parcours des travaux ou remplissage de la variable catégories: %o", erreur);
+    }
+}
+
+/**
+ * Cette fonction crée les éléments du DOM pour filtrer par catégorie: le menu déroulant et ses options possibles.
+ * @param {Set} categories : les catégories, y compris un choix pour afficher le choix par défaut toutes les catégories.
+ * @returns : le menu déroulant des catégories
+ */
+function genererMenuCategories(categories) {
+    let menuCategories = document.createElement("select");
+    console.log(menuCategories);
+    categories.forEach(categorie => {
+        let optionCategorie = document.createElement("option");
+        optionCategorie.innerText = categorie;
+        console.log(optionCategorie);
+        menuCategories.appendChild(optionCategorie);
+    });
+    console.log(menuCategories);
+    return menuCategories;
 }
