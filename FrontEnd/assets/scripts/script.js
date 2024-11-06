@@ -30,12 +30,14 @@ remplirDynamiquementGallerie(travauxPromesse);
 /****** Étape 1.2 créer le menu des catégories ******/
 /****** code principal ******/
 let categories = new Set();
-recupererCategories(travauxPromesse);
-console.log(categories);
 let sectionParentMenu = document.getElementById("portfolio");
-console.log(sectionParentMenu);
-sectionParentMenu.prepend(genererMenuCategories(categories));
-console.log(sectionParentMenu);
+categories = recupererCategories(travauxPromesse, categories).then(categories => {
+    sectionParentMenu.prepend(genererMenuCategories(categories));
+    let labelMenuCategories = document.createElement("label");
+    labelMenuCategories.for = "category-select";
+    labelMenuCategories.innerText = "Filtre par catégorie: ";
+    sectionParentMenu.prepend(labelMenuCategories);
+});
 
 /****** Étape 1.1 récupérer les travaux du backend ******/
 /**
@@ -104,24 +106,22 @@ function remplirDynamiquementGallerie(travaux) {
 /**
  * Cette fonction stocke dans une variable toutes les catégories des travaux issus de l'API.
  * @param {Promise<any>} travaux : voir ci-dessus remplirDynamiquementGallerie les travaux incluent la catégorie.
+ * @returns: categories le set de catégories uniques complet.
  */
-function recupererCategories(travaux) {
+async function recupererCategories(travaux, categories) {
     try{
-        travaux.then(resultat => {
-            resultat.forEach(travail => {
-                console.log("entree dans forEach travail");
-                const categ = travail.category.name;
-                console.log(categ);
-                if(categories.size === 0 || !categories.has(categ)) {
-                    categories.add(categ);
-                }
-            });
+        const resultat = await travaux;
+        resultat.forEach(travail => {
+            const categ = travail.category.name;
+            if(categories.size === 0 || !categories.has(categ)) {
+                categories.add(categ);
+            }
         });
-        console.log(categories);
         const allCategs = "tous les travaux";
         if(!categories.has(allCategs)) {
             categories.add(allCategs);
         }
+        return categories;
     } catch(erreur) {
         console.error("Erreur au parcours des travaux ou remplissage de la variable catégories: %o", erreur);
     }
@@ -134,13 +134,13 @@ function recupererCategories(travaux) {
  */
 function genererMenuCategories(categories) {
     let menuCategories = document.createElement("select");
-    console.log(menuCategories);
+    menuCategories.name = "categories";
+    menuCategories.id = "category-select";
     categories.forEach(categorie => {
         let optionCategorie = document.createElement("option");
         optionCategorie.innerText = categorie;
-        console.log(optionCategorie);
+        optionCategorie.value = categorie;
         menuCategories.appendChild(optionCategorie);
     });
-    console.log(menuCategories);
     return menuCategories;
 }
