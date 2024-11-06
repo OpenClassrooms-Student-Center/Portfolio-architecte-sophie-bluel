@@ -22,8 +22,8 @@ if (travauxStockageLocalVariable) {
     travauxPromesse = fetcherEtStockerLesTravaux();
 }
 
-let galleryDiv = document.querySelector(".gallery");
-viderElement(galleryDiv);
+let gallerieDiv = document.querySelector(".gallery");
+viderElement(gallerieDiv);
 
 remplirDynamiquementGallerie(travauxPromesse);
 
@@ -38,6 +38,13 @@ categories = recupererCategories(travauxPromesse, categories).then(categories =>
     labelMenuCategories.innerText = "Filtre par catégorie: ";
     sectionParentMenu.prepend(labelMenuCategories);
 });
+let option = document.querySelectorAll("option");
+console.log(option);
+option.addEventListener("click", () => {
+    const gallerieFiltreeCategorie = gallerieDiv.filter( (gallerieFiltreeCategorie) => {
+        gallerieFiltreeCategorie.class === option.value;
+    })
+})
 
 /****** Étape 1.1 récupérer les travaux du backend ******/
 /**
@@ -92,9 +99,14 @@ function remplirDynamiquementGallerie(travaux) {
                 let figcaptionFromAPI = document.createElement("figcaption");
                 figcaptionFromAPI.innerText = titleFromAPI;
                 let figureFromAPI = document.createElement("figure");
+                let categ = travail.category.name;
+                if(categ.includes(" ")) {
+                    categ = categ.replaceAll(" ", "_");
+                }
+                figureFromAPI.classList.add(categ);
                 figureFromAPI.appendChild(imgFromAPI);
                 figureFromAPI.appendChild(figcaptionFromAPI);
-                galleryDiv.appendChild(figureFromAPI);
+                gallerieDiv.appendChild(figureFromAPI);
             });
         });
     } catch(erreur) {
@@ -140,6 +152,9 @@ function genererMenuCategories(categories) {
         let optionCategorie = document.createElement("option");
         optionCategorie.innerText = categorie;
         optionCategorie.value = categorie;
+        if(categorie === "tous les travaux") {
+            optionCategorie.className += "selected";
+        }
         menuCategories.appendChild(optionCategorie);
     });
     return menuCategories;
