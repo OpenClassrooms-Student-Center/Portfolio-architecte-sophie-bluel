@@ -22,29 +22,29 @@ if (travauxStockageLocalVariable) {
     travauxPromesse = fetcherEtStockerLesTravaux();
 }
 
-let gallerieDiv = document.querySelector(".gallery");
-viderElement(gallerieDiv);
+let galerieDiv = document.querySelector(".gallery");
+viderElement(galerieDiv);
 
-remplirDynamiquementGallerie(travauxPromesse);
+remplirDynamiquementGalerie(travauxPromesse);
 
 /****** Étape 1.2 créer le menu des catégories ******/
 /****** code principal ******/
 let categories = new Set();
 let sectionParentMenu = document.getElementById("portfolio");
+let options;
 categories = recupererCategories(travauxPromesse, categories).then(categories => {
     sectionParentMenu.prepend(genererMenuCategories(categories));
     let labelMenuCategories = document.createElement("label");
     labelMenuCategories.for = "category-select";
     labelMenuCategories.innerText = "Filtre par catégorie: ";
     sectionParentMenu.prepend(labelMenuCategories);
+    options = document.querySelectorAll("option");
+    options.forEach(option => {
+        option.addEventListener("click", () => {
+            filtrerGalerie(option);
+        });
+    });
 });
-let option = document.querySelectorAll("option");
-console.log(option);
-option.addEventListener("click", () => {
-    const gallerieFiltreeCategorie = gallerieDiv.filter( (gallerieFiltreeCategorie) => {
-        gallerieFiltreeCategorie.class === option.value;
-    })
-})
 
 /****** Étape 1.1 récupérer les travaux du backend ******/
 /**
@@ -80,7 +80,7 @@ function viderElement(element) {
             element.removeChild(element.firstChild);
         }
     } catch(erreur) {
-        console.error("Erreur au vidage des figures statiques dans la gallerie: %o", erreur);
+        console.error("Erreur au vidage des figures statiques dans la galerie: %o", erreur);
     }
 }
 
@@ -88,7 +88,7 @@ function viderElement(element) {
  * Cette fonction crée les travaux dans la <div class="gallery"> du DOM à partir des travaux obtenus en réponse de l'API.
  *  @param {Promise<any>} travaux : la requête à l'API est une promesse dont le résultat attendu est les travaux en JSON.
  */
-function remplirDynamiquementGallerie(travaux) {
+function remplirDynamiquementGalerie(travaux) {
     try{
         travaux.then(resultat => {
             resultat.forEach(travail => {
@@ -106,18 +106,18 @@ function remplirDynamiquementGallerie(travaux) {
                 figureFromAPI.classList.add(categ);
                 figureFromAPI.appendChild(imgFromAPI);
                 figureFromAPI.appendChild(figcaptionFromAPI);
-                gallerieDiv.appendChild(figureFromAPI);
+                galerieDiv.appendChild(figureFromAPI);
             });
         });
     } catch(erreur) {
-        console.error("Erreur au remplissage des figures dans la gallerie: %o", erreur);
+        console.error("Erreur au remplissage des figures dans la galerie: %o", erreur);
     }
 }
 
 /****** Étape 1.2 créer le menu des catégories ******/
 /**
  * Cette fonction stocke dans une variable toutes les catégories des travaux issus de l'API.
- * @param {Promise<any>} travaux : voir ci-dessus remplirDynamiquementGallerie les travaux incluent la catégorie.
+ * @param {Promise<any>} travaux : voir ci-dessus remplirDynamiquementGalerie les travaux incluent la catégorie.
  * @returns: categories le set de catégories uniques complet.
  */
 async function recupererCategories(travaux, categories) {
@@ -159,3 +159,37 @@ function genererMenuCategories(categories) {
     });
     return menuCategories;
 }
+
+/**
+ * Cette fonction masque la galerie.
+ */
+function masquerGalerie() {
+    let figures = document.querySelectorAll("figure");
+    figures.forEach(figure => {
+        figure.style.display = "none";
+    });
+}
+
+/**
+ * Cette fonction affiche les figures de la galerie filtrées selon leur catégorie.
+ * @param {NodeListOf<HTMLElement>} figures : les figures filtrées par catégorie
+ */
+function afficherFigures(figures) {
+    figures.forEach(figure => {
+        figure.style.display = "block";
+    })
+}
+
+/**
+ * Cette fonction filtre la galerie par catégorie et affiche les figures de la catégorie choisie.
+ * @param {HTMLOptionElement} option : chaque catégorie filtrable dans le menu déroulant
+ */
+function filtrerGalerie(option) {
+    let figures = document.querySelectorAll("figure");
+    let figuresFiltrees = figures.filter(figure => {
+        figure.class === option.value;
+    });
+    masquerGalerie();
+    afficherFigures(figuresFiltrees);
+}
+
