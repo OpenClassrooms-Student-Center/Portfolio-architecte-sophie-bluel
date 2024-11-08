@@ -100,9 +100,7 @@ function remplirDynamiquementGalerie(travaux) {
                 figcaptionFromAPI.innerText = titleFromAPI;
                 let figureFromAPI = document.createElement("figure");
                 let categ = travail.category.name;
-                if(categ.includes(" ")) {
-                    categ = categ.replaceAll(" ", "_");
-                }
+                categ = remplacerEspaceParUnderscore(categ);
                 figureFromAPI.classList.add(categ);
                 figureFromAPI.appendChild(imgFromAPI);
                 figureFromAPI.appendChild(figcaptionFromAPI);
@@ -111,6 +109,16 @@ function remplirDynamiquementGalerie(travaux) {
         });
     } catch(erreur) {
         console.error("Erreur au remplissage des figures dans la galerie: %o", erreur);
+    }
+}
+
+/**
+ * Cette fonction remplace les espaces dans une chaîne de caractères par des underscores ("_").
+ * @param {string} name : le nom de  class incluant un ou des espace (" ")
+ */
+function remplacerEspaceParUnderscore(name) {
+    if(name.includes(" ")) {
+        name = name.replaceAll(" ", "_");
     }
 }
 
@@ -185,11 +193,15 @@ function afficherFigures(figures) {
  * @param {HTMLOptionElement} option : chaque catégorie filtrable dans le menu déroulant
  */
 function filtrerGalerie(option) {
+    let val = option.value;
+        if(val.includes(" ")) {
+            val = remplacerEspaceParUnderscore(val);
+        }
     let figures = document.querySelectorAll("figure");
     let figuresFiltrees = figures.filter(figure => {
-        figure.class === option.value;
+        figure.class === val;
     });
     masquerGalerie();
-    afficherFigures(figuresFiltrees);
+    //afficherFigures(figuresFiltrees);
 }
 
