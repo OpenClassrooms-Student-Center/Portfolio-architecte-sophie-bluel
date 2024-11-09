@@ -21,31 +21,27 @@ if (travauxStockageLocalVariable) {
 } else {
     travauxPromesse = fetcherEtStockerLesTravaux();
 }
-
 let galerieDiv = document.querySelector(".gallery");
 viderElement(galerieDiv);
-
+let figuresGalerieRemplie;
 remplirDynamiquementGalerie(travauxPromesse);
-
 /****** Étape 1.2 créer le menu des catégories ******/
 /****** code principal ******/
 let categories = new Set();
 let sectionParentMenu = document.getElementById("portfolio");
 let options;
 categories = recupererCategories(travauxPromesse, categories).then(categories => {
-    sectionParentMenu.prepend(genererMenuCategories(categories));
+    let menuCategories = genererMenuCategories(categories);
+    sectionParentMenu.prepend(menuCategories);
     let labelMenuCategories = document.createElement("label");
     labelMenuCategories.for = "category-select";
     labelMenuCategories.innerText = "Filtre par catégorie: ";
     sectionParentMenu.prepend(labelMenuCategories);
-    options = document.querySelectorAll("option");
-    options.forEach(option => {
-        option.addEventListener("click", () => {
-            filtrerGalerie(option);
-        });
+    menuCategories.addEventListener("change", (event) => {
+        const selectedOption = event.target.value;
+        filtrerGalerie(selectedOption);
     });
 });
-
 /****** Étape 1.1 récupérer les travaux du backend ******/
 /**
  * Cette fonction fetche les données et remplit le localStorage pour plus de rapidité et moins de bande passante réseau
@@ -106,6 +102,8 @@ function remplirDynamiquementGalerie(travaux) {
                 figureFromAPI.appendChild(figcaptionFromAPI);
                 galerieDiv.appendChild(figureFromAPI);
             });
+        }).then(() => {
+            figuresGalerieRemplie = Array.from(document.querySelectorAll(".gallery figure"));
         });
     } catch(erreur) {
         console.error("Erreur au remplissage des figures dans la galerie: %o", erreur);
@@ -115,11 +113,14 @@ function remplirDynamiquementGalerie(travaux) {
 /**
  * Cette fonction remplace les espaces dans une chaîne de caractères par des underscores ("_").
  * @param {string} name : le nom de  class incluant un ou des espace (" ")
+ * @returns la chaîne de caractères avec substitution des " " par des "_"
  */
 function remplacerEspaceParUnderscore(name) {
+    let underscored = name;
     if(name.includes(" ")) {
-        name = name.replaceAll(" ", "_");
+        underscored = name.replaceAll(" ", "_");
     }
+    return underscored;
 }
 
 /****** Étape 1.2 créer le menu des catégories ******/
@@ -153,39 +154,57 @@ async function recupererCategories(travaux, categories) {
  * @returns : le menu déroulant des catégories
  */
 function genererMenuCategories(categories) {
-    let menuCategories = document.createElement("select");
-    menuCategories.name = "categories";
-    menuCategories.id = "category-select";
-    categories.forEach(categorie => {
-        let optionCategorie = document.createElement("option");
-        optionCategorie.innerText = categorie;
-        optionCategorie.value = categorie;
-        if(categorie === "tous les travaux") {
-            optionCategorie.className += "selected";
-        }
-        menuCategories.appendChild(optionCategorie);
-    });
-    return menuCategories;
+    try {
+        let menuCategories = document.createElement("select");
+        menuCategories.name = "categories";
+        menuCategories.id = "category-select";
+        menuCategories.alt = "choix de catégorie pour filtrage de la galerie";
+        categories.forEach(categorie => {
+            let optionCategorie = document.createElement("option");
+            optionCategorie.innerText = categorie;
+            optionCategorie.value = categorie;
+            if(categorie === "tous les travaux") {
+                optionCategorie.selected = true;
+            }
+            menuCategories.appendChild(optionCategorie);
+        });
+        return menuCategories;
+    } catch(erreur) {
+        console.error("Erreur à la génération du menu des catégories: %o", erreur);
+    }
 }
 
 /**
  * Cette fonction masque la galerie.
  */
 function masquerGalerie() {
-    let figures = document.querySelectorAll("figure");
-    figures.forEach(figure => {
-        figure.style.display = "none";
-    });
+    try {
+        let figures = document.querySelectorAll(".gallery figure");
+        figures.forEach(figure => {
+            figure.style.display = "none";
+        });
+    } catch(erreur) {
+        console.error("Erreur au masquage de la galerie: %o", erreur);
+    }
 }
 
 /**
- * Cette fonction affiche les figures de la galerie filtrées selon leur catégorie.
- * @param {NodeListOf<HTMLElement>} figures : les figures filtrées par catégorie
+ * Cette fonction modifie le paramétrage d'affichage des figures de la galerie filtrées selon leur catégorie.
+ * @param {HTMLElement[]} figuresFiltrees : les figures filtrées par catégorie
+ * @param {HTMLElement[]} figuresArray : la galerie
+ * @returns la galerie sous forme de tableau de figures avec modification d'affichage selon la catégorie filtrée
  */
-function afficherFigures(figures) {
-    figures.forEach(figure => {
-        figure.style.display = "block";
-    })
+function modifierAffichageFigures(figuresFiltrees, figuresArray) {
+    try {
+        figuresArray.forEach(figure => {
+            if (figuresFiltrees.includes(figure)) {
+                figure.style.display = "block";
+            }
+        });
+        return figuresArray;
+    } catch(erreur) {
+        console.error("Erreur à la modification d'affichage de la galerie filtrée: %o", erreur);
+    }
 }
 
 /**
@@ -193,15 +212,38 @@ function afficherFigures(figures) {
  * @param {HTMLOptionElement} option : chaque catégorie filtrable dans le menu déroulant
  */
 function filtrerGalerie(option) {
-    let val = option.value;
-        if(val.includes(" ")) {
+    try {
+        let val = option;
+        if(val.includes(" ") && val !== "tous les travaux") {
             val = remplacerEspaceParUnderscore(val);
         }
-    let figures = document.querySelectorAll("figure");
-    let figuresFiltrees = figures.filter(figure => {
-        figure.class === val;
-    });
-    masquerGalerie();
-    //afficherFigures(figuresFiltrees);
+        let figures = document.querySelectorAll(".gallery figure");
+        let figuresArray = Array.from(figures);
+        let figuresFiltrees;
+        if(val != "tous les travaux"){
+            figuresFiltrees = figuresArray.filter(function(figure) {
+                return figure.className === val;
+            });
+        } else {
+            figuresFiltrees = figuresGalerieRemplie;
+        }
+        masquerGalerie();
+        figuresArray = modifierAffichageFigures(figuresFiltrees, figuresArray);
+        remplacerGalerie(figuresArray);
+    } catch(erreur) {
+        console.error("Erreur au filtrage de la galerie: %o", erreur);
+    }
 }
 
+/**
+ * Cette fonction remplace la galerie. Premièrement la galerie est vidée. 
+ * Ensuite le filtrage a paramétré l'affichage des figures filtrées seulement. 
+ * C'est cette liste de figures avec affichége conditionné par la catégorie qui remplace la précédente.
+ * @param {HTMLElement[]} figuresArray : la galerie mise à jour pour n'afficher que les figures filtrées
+ */
+function remplacerGalerie(figuresArray) {
+    galerieDiv.innerHTML = "";
+    figuresArray.forEach(figure => {
+        galerieDiv.appendChild(figure);
+    });
+}
