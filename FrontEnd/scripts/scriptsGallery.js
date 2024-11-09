@@ -1,51 +1,72 @@
-const {response } = require("express");
-//recupération des travaux depuis l'api swagger
-async function getWorks() {
-    const apiUrl = "http://localhost:5678/api/works";  //je stocke la valeur d l url de l api dans une variable apiUrl
-    const response = await fetch(apiUrl); //je fais un fetch de l'url de l'api et je stocke la réponse dans une variable response
-    console.log(response);                   //je log la réponse, pour voir si elle est correcte
+
+// // //récupération des travaux de l'API
+
+//const { response } = require("express");
+
+//  async function getWorks() {
+//      const apiUrlWorks = 'http://localhost:5678/api/works'; //url de l'API
+//     
+//      const response = await fetch(apiUrlWorks, {        //
+//          headers: {                                  //on envoie des headers
+//              'Accept': 'application/json'            //on accepte du json
+//          }
+//      });
+//      console.log(response);
+//      const works = await response.json();        //on attend la réponse de la requête et on la met dans la variable works
+//      console.log(works);                        //on affiche les travaux dans la console
     
-    const works = await response.json(); //je stocke les travaux dans une variable works, la méthode json() permet de convertir la réponse en json
-    console.log(works);                   //je log les travaux pour voir si ils sont corrects
-}
-getWorks();                     //j'appelle la fonction getWorks
-
-
-// //autre solution avec try catch et les réponses de l'api 
-// async function getWorks() {
-//     const apiUrlWorks = "http://localhost:5678/api/works"; //je stocke l'url de l'api dans une variable apiUrlWorks
-
-//     // try {
-//     //     const response = await fetch(apiUrlWorks); //je fais un fetch de l'url de l'api et je stocke la réponse dans une variable response
-//     //     console.log(response); //je log la réponse, pour voir si elle est correcte
-
-//     //     if (response.ok) { //si la réponse est ok
-//     //         const works = await response.json(); //je stocke les travaux dans une variable works, la méthode json() permet de convertir la réponse en json
-//     //         console.log(works); //je log les travaux pour voir si ils sont corrects
-//     //     } else { //sinon
-//     //         console.error("Retour du serveur : ", response.status); //je log une erreur
-//     //     }
-//     // }
-//     // catch (error) { //si il y a une erreur
-//     //   console.error("Erreur lors de la récupération des travaux : ", error) //je log l'erreur
-//     // }
-
-//     //autre idée plutot que celle de l' autocomplétion
-//     try {
-//         const response = await fatch("http://localhost:5678/api/works");
-//         console.log("réponse reçue: ", response);
-        
-
-//         // vérificatio du status
-//         if (!response.ok) {
-//             throw new Error(`Erreur HTTP! Staus : ${response.status}`);
-//         }
-//         const works = await response.json();
-//         console.log("Travaux récupérés : ", works);
-//     return works;
-//     } catch {
-//         console.error("Erreur lors de la récupération des travaux : ", error);
-//         return []
-//     }
 // }
-// getWorks(); //j'appelle la fonction getWorks
+
+// getWorks();
+
+//autre solution avec try... catch et les réponses de l'api
+const apiUrlWorks = "http://localhost:5678/api/works"; 
+console.log(apiUrlWorks)
+
+async function getWorks() {
+    try {
+        const response = await fetch(apiUrlWorks);
+        console.log("réponse reçue: ", response);
+    
+        // vérification du status
+        if (!response.ok) {
+            throw new Error(`Erreur HTTP! Status : ${response.status}`);
+        }
+        const works = await response.json();
+        console.log("Travaux récupérés : ", works);
+    return works;
+    } catch (error){
+        console.error("Erreur lors de la récupération des travaux : ", error);
+        return []
+    }
+}
+ getWorks(); 
+
+
+ //ajout des travaux dans la galerie 
+ async function addWorksGAllery () {
+    const works = await getWorks();
+    console.log("Travaux ajouter à la gallerie : ", works);
+
+    const WorksContainer = document.querySelector(".gallery");
+    WorksContainer.innerHTML = '';
+
+    for (const work of works) {
+        const workElement = document.createElement('figure');
+        workElement.className = 'work';
+        workElement.innerHTML =`
+        <img src="${work.imageUrl}" alt="${work.title}"/>
+        <figcaption>${work.title}</figcaption>
+        `;
+
+        WorksContainer.appendChild(workElement);
+    }
+    console.log("Tous les travaux ont été ajouté : ", WorksContainer);
+    
+ }
+ 
+    addWorksGAllery();
+
+console.log('Scriptexecuté jusqu\' la fin');
+
+ 
