@@ -10,7 +10,7 @@ import {
     filtrerGalerie
 } from "./choisirCategorie.js";
 import {
-
+    genererBoutonsFiltreCategorie
 } from "./creerBoutonsChoixCategorie.js";
 
 let travauxStockageLocalVariable = window.localStorage.getItem("travauxStockageLocal");
@@ -43,13 +43,15 @@ remplirDynamiquementGalerie(travauxPromesse, galerieDiv, figuresGalerieRemplie);
 let categories = new Set();
 let sectionParentMenu = document.getElementById("portfolio");
 categories = recupererCategories(travauxPromesse, categories).then(categories => {
+    genererBoutonsFiltreCategorie(categories, galerieDiv);
+
     let menuCategories = genererMenuCategories(categories);
     sectionParentMenu.prepend(menuCategories);
     let labelMenuCategories = document.createElement("label");
     labelMenuCategories.for = "category-select";
     labelMenuCategories.innerText = "Filtre par catégorie: ";
     sectionParentMenu.prepend(labelMenuCategories);
-    menuCategories.addEventListener("change", (event) => {
+    menuCategories.addEventListener("change", event => {
         const selectedOption = event.target.value;
         filtrerGalerie(selectedOption, galerieDiv);
     });

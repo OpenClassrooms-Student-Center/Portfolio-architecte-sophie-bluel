@@ -94,6 +94,8 @@ function modifierAffichageFigures(figuresFiltrees, figuresArray) {
 export function filtrerGalerie(option, galerieDiv) {
     try {
         let val = option;
+        console.log("val: "+ val);
+        console.log(option);
         if(val.includes(" ") && val !== "tous les travaux") {
             val = remplacerEspaceParUnderscore(val);
         }
