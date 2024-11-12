@@ -28,32 +28,6 @@ export async function recupererCategories(travaux, categories) {
 }
 
 /**
- * Cette fonction crée les éléments du DOM pour filtrer par catégorie: le menu déroulant et ses options possibles.
- * @param {Set} categories : les catégories, y compris un choix pour afficher le choix par défaut toutes les catégories.
- * @returns : le menu déroulant des catégories
- */
-export function genererMenuCategories(categories) {
-    try{
-        let menuCategories = document.createElement("select");
-        menuCategories.name = "categories";
-        menuCategories.id = "category-select";
-        menuCategories.alt = "choix de catégorie pour filtrage de la galerie";
-        categories.forEach(categorie => {
-            let optionCategorie = document.createElement("option");
-            optionCategorie.innerText = categorie;
-            optionCategorie.value = categorie;
-            if(categorie === "tous les travaux") {
-                optionCategorie.selected = true;
-            }
-            menuCategories.appendChild(optionCategorie);
-        });
-        return menuCategories;
-    } catch(erreur) {
-        console.error("Erreur à la génération du menu des catégories: %o", erreur);
-    }
-}
-
-/**
  * Cette fonction masque la galerie.
  */
 function masquerGalerie() {

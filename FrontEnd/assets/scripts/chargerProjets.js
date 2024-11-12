@@ -23,26 +23,6 @@ export function fetcherEtStockerLesTravaux() {
 }
 
 /**
- * Cette fonction supprime les travaux statiques avant ajout dynamique des travaux depuis l'API. 
- * @param {Element} element : en l'occurrence la <div class="gallery"> contenant les <figure> à supprimer puis remplacer dynamiquement
- */
-export function viderElement(element) {
-    try{
-        console.log("Element del");
-        console.log("part" + element.part);
-        console.log("class name" + element.className);
-        console.log("innerHTML" + element.innerHTML);
-        while(element.firstChild && 
-            element.innerHTML.trim().startsWith("<figure")) {
-            element.removeChild(element.firstChild);
-            console.log("removing" + element);
-        }
-    } catch(erreur) {
-        console.error("Erreur au vidage des figures statiques dans la galerie: %o", erreur);
-    }
-}
-
-/**
  * Cette fonction crée les travaux dans la <div class="gallery"> du DOM à partir des travaux obtenus en réponse de l'API.
  * @param {Promise<any>} travaux : la requête à l'API est une promesse dont le résultat attendu est les travaux en JSON
  * @param {Element} galerieDiv : la <div class="gallery"> contenant les figures
@@ -73,8 +53,6 @@ export async function remplirDynamiquementGalerie(travaux, galerieDiv, figuresGa
             galerieDiv.appendChild(figure);
         });
         figuresGalerieRemplie = Array.from(document.querySelectorAll(".gallery figure"));
-        console.log("remplir dyn. galerie");
-        console.log(figuresGalerieRemplie);
         return figuresGalerieRemplie;
     } catch(erreur) {
         console.error("Erreur au remplissage des figures dans la galerie: %o", erreur);
