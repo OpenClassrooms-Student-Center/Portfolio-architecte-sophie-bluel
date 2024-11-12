@@ -6,10 +6,12 @@ import {
 /**
  * Cette fonction stocke dans une variable toutes les catégories des travaux issus de l'API.
  * @param {Promise<any>} travaux : voir ci-dessus remplirDynamiquementGalerie les travaux incluent la catégorie.
+ * @param {Set} categories : les catégories uniques de travaux récupérés de l'API
  * @returns: categories le set de catégories uniques complet.
  */
 export async function recupererCategories(travaux, categories) {
     try{
+        categories.add("Tous");
         const resultat = await travaux;
         resultat.forEach(travail => {
             const categ = travail.category.name;
@@ -17,10 +19,6 @@ export async function recupererCategories(travaux, categories) {
                 categories.add(categ);
             }
         });
-        const allCategs = "tous les travaux";
-        if(!categories.has(allCategs)) {
-            categories.add(allCategs);
-        }
         return categories;
     } catch(erreur) {
         console.error("Erreur au parcours des travaux ou remplissage de la variable catégories: %o", erreur);
