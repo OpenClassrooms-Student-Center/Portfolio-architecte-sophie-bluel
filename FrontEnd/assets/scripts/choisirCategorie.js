@@ -33,7 +33,7 @@ export async function recupererCategories(travaux, categories) {
  * @returns : le menu déroulant des catégories
  */
 export function genererMenuCategories(categories) {
-    try {
+    try{
         let menuCategories = document.createElement("select");
         menuCategories.name = "categories";
         menuCategories.id = "category-select";
@@ -57,13 +57,13 @@ export function genererMenuCategories(categories) {
  * Cette fonction masque la galerie.
  */
 function masquerGalerie() {
-    try {
+    try{
         let figures = document.querySelectorAll(".gallery figure");
         figures.forEach(figure => {
             figure.style.display = "none";
-        });
+        });//to do ne masquer que les figures classées, supprimer ou faire remonter leur suppression.
     } catch(erreur) {
-        console.error("Erreur au masquage de la galerie: %o", erreur);
+        console.error("Erreur au masquage des figures de la galerie: %o", erreur);
     }
 }
 
@@ -74,7 +74,7 @@ function masquerGalerie() {
  * @returns la galerie sous forme de tableau de figures avec modification d'affichage selon la catégorie filtrée
  */
 function modifierAffichageFigures(figuresFiltrees, figuresArray) {
-    try {
+    try{
         figuresArray.forEach(figure => {
             if (figuresFiltrees.includes(figure)) {
                 figure.style.display = "block";
@@ -90,12 +90,11 @@ function modifierAffichageFigures(figuresFiltrees, figuresArray) {
  * Cette fonction filtre la galerie par catégorie et affiche les figures de la catégorie choisie.
  * @param {HTMLOptionElement} option : chaque catégorie filtrable dans le menu déroulant
  * @param {Element} galerieDiv : la <div class="gallery"> contenant les figures
+ * @param {HTMLElement[]} figuresGalerieRemplie : les figures initialement chargées de l'API
  */
-export function filtrerGalerie(option, galerieDiv) {
-    try {
+export function filtrerGalerie(option, galerieDiv, figuresGalerieRemplie) {
+    try{
         let val = option;
-        console.log("val: "+ val);
-        console.log(option);
         if(val.includes(" ") && val !== "tous les travaux") {
             val = remplacerEspaceParUnderscore(val);
         }

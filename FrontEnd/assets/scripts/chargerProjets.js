@@ -28,8 +28,14 @@ export function fetcherEtStockerLesTravaux() {
  */
 export function viderElement(element) {
     try{
-        while(element.firstChild) {
+        console.log("Element del");
+        console.log("part" + element.part);
+        console.log("class name" + element.className);
+        console.log("innerHTML" + element.innerHTML);
+        while(element.firstChild && 
+            element.innerHTML.trim().startsWith("<figure")) {
             element.removeChild(element.firstChild);
+            console.log("removing" + element);
         }
     } catch(erreur) {
         console.error("Erreur au vidage des figures statiques dans la galerie: %o", erreur);
@@ -38,31 +44,38 @@ export function viderElement(element) {
 
 /**
  * Cette fonction crée les travaux dans la <div class="gallery"> du DOM à partir des travaux obtenus en réponse de l'API.
- *  @param {Promise<any>} travaux : la requête à l'API est une promesse dont le résultat attendu est les travaux en JSON
+ * @param {Promise<any>} travaux : la requête à l'API est une promesse dont le résultat attendu est les travaux en JSON
  * @param {Element} galerieDiv : la <div class="gallery"> contenant les figures
- * @param {HTMLElement[]} figuresGalerieRemplie : une copie immutable de la galerie récupérée initialement de l'API
- */
-export function remplirDynamiquementGalerie(travaux, galerieDiv, figuresGalerieRemplie) {
+ * @param {HTMLElement[]} figuresGalerieRemplie : une copie telle quelle de la galerie récupérée initialement de l'API
+ * @returns : le tableau des figures initialement construit
+*/
+export async function remplirDynamiquementGalerie(travaux, galerieDiv, figuresGalerieRemplie) {
     try{
-        travaux.then(resultat => {
-            resultat.forEach(travail => {
-                let imgFromAPI = document.createElement("img");
-                const titleFromAPI = travail.title;
-                imgFromAPI.src = travail.imageUrl;
-                imgFromAPI.alt = titleFromAPI;
-                let figcaptionFromAPI = document.createElement("figcaption");
-                figcaptionFromAPI.innerText = titleFromAPI;
-                let figureFromAPI = document.createElement("figure");
-                let categ = travail.category.name;
-                categ = remplacerEspaceParUnderscore(categ);
-                figureFromAPI.classList.add(categ);
-                figureFromAPI.appendChild(imgFromAPI);
-                figureFromAPI.appendChild(figcaptionFromAPI);
-                galerieDiv.appendChild(figureFromAPI);
-            });
-        }).then(() => {
-            figuresGalerieRemplie = Array.from(document.querySelectorAll(".gallery figure"));
+        const resultat = await travaux;
+        const figures = [];
+        resultat.forEach(travail => {
+            let imgFromAPI = document.createElement("img");
+            const titleFromAPI = travail.title;
+            imgFromAPI.src = travail.imageUrl;
+            imgFromAPI.alt = titleFromAPI;
+            let figcaptionFromAPI = document.createElement("figcaption");
+            figcaptionFromAPI.innerText = titleFromAPI;
+            let figureFromAPI = document.createElement("figure");
+            let categ = travail.category.name;
+            categ = remplacerEspaceParUnderscore(categ);
+            figureFromAPI.classList.add(categ);
+            figureFromAPI.appendChild(imgFromAPI);
+            figureFromAPI.appendChild(figcaptionFromAPI);
+            figures.push(figureFromAPI);
         });
+        galerieDiv.innerHTML = "";
+        figures.forEach(figure => {
+            galerieDiv.appendChild(figure);
+        });
+        figuresGalerieRemplie = Array.from(document.querySelectorAll(".gallery figure"));
+        console.log("remplir dyn. galerie");
+        console.log(figuresGalerieRemplie);
+        return figuresGalerieRemplie;
     } catch(erreur) {
         console.error("Erreur au remplissage des figures dans la galerie: %o", erreur);
     }
