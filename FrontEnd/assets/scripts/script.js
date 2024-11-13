@@ -1,37 +1,46 @@
-const works = fetch("http://localhost:5678/api/works").then(works => works.json());
+/****** Étape 1.1 récupérer les travaux du backend ******/
+import {
+    fetcherEtStockerLesTravaux,
+    remplirDynamiquementGalerie
+} from "./chargerProjets.js";
+import {
+    recupererCategories,
+    filtrerGalerie
+} from "./choisirCategorie.js";
+import {
+    genererBoutonsFiltreCategorie
+} from "./creerBoutonsChoixCategorie.js";
 
-let galleryDiv = document.querySelector(".gallery");
-viderGallerie(galleryDiv);
+let travauxStockageLocalVariable = window.localStorage.getItem("travauxStockageLocal");
+let travauxPromesse;
 
-remplirDynamiquementGallerie(works);
-
-/**
- * Cette fonction supprime les travaux statiques avant ajout dynamique des travaux depuis l'API. 
- * @param {Element} gallerie : la <div class="gallery"> contenant les <figure> à supprimer puis remplacer dynamiquement
- */
-function viderGallerie(gallerie) {
-    while(gallerie.firstChild) {
-        gallerie.removeChild(gallerie.firstChild);
+if (travauxStockageLocalVariable) {
+    try{
+        let travauxAnalyses = JSON.parse(travauxStockageLocalVariable);
+        if (Array.isArray(travauxAnalyses)) {
+            travauxPromesse = Promise.resolve(travauxAnalyses);
+        } else {
+            console.warn("Les travaux %o stockés localement ne sont pas un tableau: vidage et rafraîchissement du stockage local.", travauxAnalyses);
+            window.localStorage.removeItem("travauxStockageLocal");
+            travauxPromesse = fetcherEtStockerLesTravaux();
+        }
+    } catch (erreur) {
+        console.error("Erreur %o à l'analyse des travaux stockés localement: vidage et rafraîchissement du stockage local.", erreur);
+        window.localStorage.removeItem("travauxStockageLocal");
+        travauxPromesse = fetcherEtStockerLesTravaux();
     }
+} else {
+    travauxPromesse = fetcherEtStockerLesTravaux();
 }
-
-/**
- * Cette fonction crée les travaux dans la <div class="gallery"> du DOM à partir des travaux obtenus en réponse de l'API.
- *  @param {Promise} travaux : la requête à l'API est une promesse dont le résultat attendu est les travaux en JSON.
- */
-function remplirDynamiquementGallerie(travaux) {
-    travaux.then(resultat => {
-        resultat.forEach(travail => {
-            let imgFromAPI = document.createElement("img");
-            const titleFromAPI = travail.title;
-            imgFromAPI.src = travail.imageUrl;
-            imgFromAPI.alt = titleFromAPI;
-            let figcaptionFromAPI = document.createElement("figcaption");
-            figcaptionFromAPI.innerText = titleFromAPI;
-            let figureFromAPI = document.createElement("figure");
-            figureFromAPI.appendChild(imgFromAPI);
-            figureFromAPI.appendChild(figcaptionFromAPI);
-            galleryDiv.appendChild(figureFromAPI);
-        });
-    });
+let galerieDiv = document.querySelector(".gallery");
+let figuresGalerieRemplie;
+async function initGalerie() {
+    figuresGalerieRemplie = await remplirDynamiquementGalerie(travauxPromesse, galerieDiv, figuresGalerieRemplie);
 }
+initGalerie();
+/****** Étape 1.2 créer le menu des catégories ******/
+/****** code principal ******/
+let categories = new Set();
+categories = recupererCategories(travauxPromesse, categories).then(categories => {
+    genererBoutonsFiltreCategorie(categories, galerieDiv, figuresGalerieRemplie);
+});
