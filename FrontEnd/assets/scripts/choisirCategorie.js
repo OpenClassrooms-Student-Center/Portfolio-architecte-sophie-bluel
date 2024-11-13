@@ -67,13 +67,13 @@ function modifierAffichageFigures(figuresFiltrees, figuresArray) {
 export function filtrerGalerie(option, galerieDiv, figuresGalerieRemplie) {
     try{
         let val = option;
-        if(val.includes(" ") && val !== "tous les travaux") {
+        if(val.includes(" ") && val !== "Tous") {
             val = remplacerEspaceParUnderscore(val);
         }
         let figures = document.querySelectorAll(".gallery figure");
         let figuresArray = Array.from(figures);
         let figuresFiltrees;
-        if(val != "tous les travaux"){
+        if(val != "Tous"){
             figuresFiltrees = figuresArray.filter(function(figure) {
                 return figure.className === val;
             });

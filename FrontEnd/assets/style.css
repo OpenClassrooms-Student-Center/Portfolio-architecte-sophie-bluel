@@ -131,29 +131,43 @@ li:hover {
 }
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
+	margin-top: 4.75em;
+}
+
+#filter {
+	display: flex;
+	justify-content: center;
 }
 
 .buttons {
+	width: 62%;
+	margin: 1.5em 0;
 	display: flex;
 }
 
 .button {
 	font-family: var(--button-font-family);
 	font-weight: var(--button-font-weight);
-	background-color: var(--button-color);
 	font-size: var(--button-font-size);
 	text-align: center;
 	border-radius: 60px;
-	color: white;
+	border: 1px solid var(--button-color);
 	margin : 2em auto ;
-	height: 50px;
-	border: none;
+	height: 37px;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
+.selected {
+	background-color: var(--button-color);
+	color: white;
+}
+
+.unselected {
+	color: var(--button-color);
+}
+
 .filter {
-	padding: 10px 15px;
+	padding: 1% 4.25%;
 }
 
 .gallery {
@@ -204,3 +218,6 @@ footer nav ul {
 	margin: 2em
 }
 
+footer li {
+	font-weight: 300;
+}
