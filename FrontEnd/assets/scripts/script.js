@@ -4,8 +4,7 @@ import {
     remplirDynamiquementGalerie
 } from "./chargerProjets.js";
 import {
-    recupererCategories,
-    filtrerGalerie
+    recupererCategories
 } from "./choisirCategorie.js";
 import {
     genererBoutonsFiltreCategorie
