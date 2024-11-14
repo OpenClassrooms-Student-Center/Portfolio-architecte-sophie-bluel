@@ -50,15 +50,17 @@ table {
 /** variables **/
 :root {
 	--button-color: #1D6154;
+	--h1-li-hover-color: #B1663C;
 	--button-font-size: 1.2em;
 	--button-font-family: 'Syne';
+	--text-font-family: 'Work Sans';
 	--button-font-weight: 700;
 }
 /** end variables **/
 body {
 	max-width: 1140px;
 	margin:auto;
-	font-family: 'Work Sans' ;
+	font-family: var(--text-font-family);
 	font-size: 14px;
 }
 header {
@@ -76,12 +78,12 @@ h1{
 	font-family: 'Syne';
 	font-size: 22px;
 	font-weight: 800;
-	color: #B1663C
+	color: var(--h1-li-hover-color);
 }
 
 h1 > span {
-	font-family: 'Work Sans';
-	font-size:10px;
+	font-family: var(--text-font-family);
+	font-size: 10px;
 	letter-spacing: 0.1em;
 ;
 }
@@ -90,7 +92,7 @@ h2{
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
-	color: #1D6154
+	color: var(--button-color);
 }
 nav ul {
 	display: flex;
@@ -104,7 +106,7 @@ nav li {
 }
 
 li:hover {
-	color: #B1663C;
+	color: var(--h1-li-hover-color);
 }
 #introduction {
 	display: flex;
@@ -183,8 +185,9 @@ li:hover {
 
 }
 #contact {
-	width: 50%;
+	width: 33.75%;
 	margin: auto;
+	gap: 2% 0;
 }
 #contact > * {
 	text-align: center;
@@ -195,17 +198,27 @@ li:hover {
 }
 #contact form {
 	text-align: left;
-	margin-top:30px;
+	margin-top: 15px;
 	display: flex;
 	flex-direction: column;
+}
+#contact p {
+	font-family: var(--text-font-family);
+	font-size: 16px;
 }
 
 #contact label {
 	margin: 2em 0 1em 0;
 }
-#contact textarea {
+
+#contact textarea, #name, #email {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	margin-bottom: 2%;
+}
+
+#contact #name, #email {
+	height: 51px;
 }
 
 input[type="submit"]{
