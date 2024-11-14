@@ -47,6 +47,7 @@ table {
 	border-spacing: 0;
 }
 /** end reset css**/
+
 body {
 	max-width: 1140px;
 	margin:auto;
@@ -121,10 +122,20 @@ li:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
+
+/*****portefolio*****/
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
 }
+.btn-filter {
+	display: flex;
+	justify-content: center;
+	margin: 2em 0;
+}
+
+
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -137,6 +148,9 @@ li:hover {
 	width: 100%;
 
 }
+
+
+/*********formulaire contact*********/
 #contact {
 	width: 50%;
 margin: auto;
@@ -179,7 +193,7 @@ input[type="submit"]{
 	text-align: center;
 	border-radius: 60px ;
 }
-
+/*********footer*********/
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
