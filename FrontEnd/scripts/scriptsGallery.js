@@ -66,7 +66,7 @@ async function getWorks() {
     }
     console.log("Tous les travaux ont été ajouté : ", WorksContainer);  
  }
-// addWorksGallery()
+
 
  // extrait les catégories des travaux, je veux ensuite les afficher en fonction du bouton surlequel on click
 function extractCategories(works) {               
@@ -75,8 +75,9 @@ function extractCategories(works) {
         return categories;
 }
 
-// fonctions qui filtre les travaux par catégorie,(création du container des bouttons, ) création des buttons, ajout de ceux-ci dans leur container, et ajout de l'écouteur d'événement sur chaque bouton pour filtrer les travaux par catégorie 
+// fonctions qui filtrent les travaux par catégorie,(création du container des bouttons, création des buttons, ajout de ceux-ci dans leur container, et ajout de l'écouteur d'événement sur chaque bouton pour filtrer les travaux par catégorie 
 
+//filtre les travaux par catégorie
 // function filterWorksByCategory(category, works) {
 //     if (category === 'Appartements') {
 //         return works.filter(work => work.category.name === 'Appartements');
@@ -89,7 +90,9 @@ function extractCategories(works) {
 //     }                                    
 // console.log('Travaux filtrés par catégorie : ', works);
 
-//
+//}
+
+
 function filterWorksByCategory(works, category) {
     if (category === 'Tous') {
         return works;
@@ -97,41 +100,28 @@ function filterWorksByCategory(works, category) {
 return works.filter(work => work.category.name === category);
 }
 
-function createFilterButton(category, works) {  // fonction qui crée les boutons de filtre
+//création des boutons de filtre
+function createFilterButton(category, works) {  
     const button = document.createElement('button'); 
      button.textContent = category.name;
      button.className = 'btnFilter';
-     button.id = `btn-${category.id}`;
+     button.id = `btn-${category.id}`; 
 
-    button.addEventListener('click', () => {  // j'ajoute un écouteur d'événement sur chaque bouton pour filtrer les travaux par catégorie quand le bouton est cliqué les travaux correspondant s'affichent dans la gallerie 
-      console.log(`Bouton ${category.name} cliqué`);  // j'affiche dans la console le bouton cliqué
-      const filteredWorks = filterWorksByCategory(works, category.name);   // je crée une variable filteredWorks qui contient les travaux filtrés par catégorie en utilisant la fonction filterWorksByCategories et en lui passant en paramètre les travaux et la catégorie qui sont récupérés dans le tableau works   category.name 
-      addWorksGallery(filteredWorks);  // j'ajoute les travaux filtrés à la gallerie en utilisant la fonction addWorksGallery et en lui passant en paramètre les travaux filtrés ce qui permet de les afficher dans la gallerie 
+    button.addEventListener('click', () => {                                // j'ajoute un écouteur d'événement sur chaque bouton pour filtrer les travaux par catégorie quand le bouton est cliqué les travaux correspondant s'affichent dans la gallerie 
+      console.log(`Bouton ${category.name} cliqué`);                        // j'affiche dans la console le bouton cliqué
+      const filteredWorks = filterWorksByCategory(works, category.name);    // je crée une variable filteredWorks qui contient les travaux filtrés par catégorie en utilisant la fonction filterWorksByCategories et en lui passant en paramètre les travaux et la catégorie qui sont récupérés dans le tableau works   category.name 
+      addWorksGallery(filteredWorks);                                       // j'ajoute les travaux filtrés à la gallerie en utilisant la fonction addWorksGallery et en lui passant en paramètre les travaux filtrés ce qui permet de les afficher dans la gallerie 
     });
-  console.log('bouton créé : ', button);  // affiche dans la console le bouton créé
-  styleFilterButton(button);  // j'ajoute le style sur les boutons de filtre en utilisant la fonction styleFilterButton et en lui passant en paramètre le bouton  (!!!ne pas oublier d'appeler les fonctions si tu veux qu'elles fonctionent!!!)
+  console.log('bouton créé : ', button);                                    // affiche dans la console le bouton créé
+  styleFilterButton(button);                                                 // j'ajoute le style sur les boutons de filtre en utilisant la fonction styleFilterButton et en lui passant en paramètre le bouton  (!!!ne pas oublier d'appeler les fonctions si tu veux qu'elles fonctionent!!!)
 
-  return button; 
- } // je retourne le bouton créé }
-//ajout du style sur les buttons de filtre  (voir, s'il y a un moyen moins repétitif d'ajouter le style avec js ou peut être le mettre directement en css (dder a jean baptiste))
+  return button;                                                             // je retourne le bouton créé 
+ } 
+
+//function pour ajout du style sur les buttons de filtre  (voir, s'il y a un moyen moins repétitif d'ajouter le style avec js ou peut être le mettre directement en css (dder a jean baptiste))
 function styleFilterButton(button) {
-    button.style.display = 'inline-block';
-    button.style.width = '100px';
-    button.style.height = '37px';
-    button.style.border = '1px solid #1D6164';
-    button.style.borderRadius = '60px';
-    button.style.margin = '50px auto';
-    button.style.padding = '9px, 30px';
-    button.style.bacgroundColor = '#fff';
-    button.style.fontFamily = 'Syne';
-    button.style.weight = '700';
-    button.style.fontSize = '16px';
-    button.style.textAlign = 'center';
-    button.style.color = '#1D6164';
-    button.style.cursor = 'pointer';
-    button.style.transition = 'all 0.3s ease';
 
-    button.addEventListener('mouseover', () => {
+    button.addEventListener('mouseover', () => {                                 //écouteurs d'événements sur le hover des boutons pour le chgt de style
         button.style.backgroundColor = '#1D6164';
         button.style.color = '#fff';
     });
@@ -142,34 +132,37 @@ function styleFilterButton(button) {
    return button;
 }
 
-async function initGallery() {
-        console.log('Initialisation de la gallerie');
-    const works = await getWorks();
-    const categories = extractCategories(works);  // je crée une variable categories qui contient les catégories extraites des travaux en utilisant la fonction extractCategories 
-       console.log('Catégories extraites : ', categories);
 
-    const portefolioSection = document.getElementById('portfolio')  // ensuite je récupère les éléments depuis le dom et je ajoute le container et les btn-filter, et je les ajoute dans le dom 
+//fonction qui initialise la gallerie et qui va appeler les fonctions précédentes pour créer les boutons de filtre, les travaux et les catégories 
+
+async function initGallery() {
+        //console.log('Initialisation de la gallerie');
+    const works = await getWorks();
+    const categories = extractCategories(works);                      // je crée une variable categories qui contient les catégories extraites des travaux en utilisant la fonction extractCategories et works en paramètre et qui me permet de récupérer les catégories des travaux 
+       console.log('Catégories extraites : ', categories);              // vérification des catégories extraites dans la console
+
+    const portefolioSection = document.getElementById('portfolio')      // ensuite je récupère les éléments depuis le DOM et j' ajoute le container et les btn-filter, et je les ajoute dans le DOM 
     const h2Portefolio = document.querySelector('#portfolio h2');
     const galleryDiv = document.querySelector('.gallery');
     console.log('Eléments récupérés : ', portefolioSection, h2Portefolio);
 
     const buttonsFiltersContainer  = document.createElement('div');
-    buttonsFiltersContainer.classList.add('btn-filter'); // comme sa classe est déjà dans le css je lui ajoute la class existante btn-filter (avec classLsit.add)
+    buttonsFiltersContainer.classList.add('btn-filter');                // comme sa classe est déjà dans le css je lui ajoute la class existante btn-filter (avec classLsit.add)
            
-    //ensuite donc j'ajoute les boutons entre le h2 de portefolio et l'élement div qui a la classe gallery donc
+                                                                        //ensuite donc j'ajoute les boutons entre le h2 de portefolio et l'élement div qui a la classe gallery donc
       portefolioSection.insertBefore(buttonsFiltersContainer, galleryDiv);
         console.log('Container des boutons de filtre créé et inséré dans le DOM : ', buttonsFiltersContainer);
           
 
-        // et donc ici je crée une boucle qui va parcourir le tableau des catégories et pour chaque catégorie je crée un bouton de filtre en utilisant la fonction createFliterButton et en lui passant en paramètre le nom de la catégorie, la catégorie et les travaux donc 
+                                                                         // et donc ici je crée une boucle qui va parcourir le tableau des catégories et pour chaque catégorie je crée un bouton de filtre en utilisant la fonction createFliterButton et en lui passant en paramètre le nom de la catégorie, la catégorie et les travaux donc 
      for ( let i = 0; i < categories.length; i++) {
-            const category = { name: categories[i]};  // je crée un objet category qui contient le nom de la catégorie (categories[i] repésentant chaque catégorie du tableau categories)
+            const category = { name: categories[i]};                    // je crée un objet category qui contient le nom de la catégorie (categories[i] repésentant chaque catégorie du tableau categories)
             console.log('Catégorie actuelle : ', category);
 
-            const btnCategory = createFilterButton(category, works); // je crée un bouton de filtre en utilisant la fonction createFilterButton et en lui passant en paramètre la catégorie et les travaux 
-            buttonsFiltersContainer.appendChild(btnCategory); // j'ajoute le bouton de filtre à son parent filtersContainer
+            const btnCategory = createFilterButton(category, works);   // je crée un bouton de filtre en utilisant la fonction createFilterButton et en lui passant en paramètre la catégorie et les travaux 
+            buttonsFiltersContainer.appendChild(btnCategory);          // j'ajoute le bouton de filtre à son parent filtersContainer
 
-         console.log(`Bouton ${category.name} crée et ajouté.`); // si le bouton est créé je l'affiche dans la console
+         console.log(`Bouton ${category.name} crée et ajouté.`);       // si le bouton est créé je l'affiche dans la console
         
         }
 
@@ -177,9 +170,9 @@ async function initGallery() {
  }  
  
 
-document.addEventListener('DOMContentLoaded', initGallery);  // j'ajoute un écouteur d'événement sur le document pour attendre que le contenu html soit chargé avant d'exécuter la fonction initGallery qui initialise la gallerie, 
+document.addEventListener('DOMContentLoaded', initGallery);           // j'ajoute un écouteur d'événement sur le document pour attendre que le contenu html soit chargé avant d'exécuter la fonction initGallery qui initialise la gallerie, 
 
-console.log('Script executé jusqu\'au bout');  // j'affiche dans la console que le script a été exécuté jusqu'à la fin (et visiblement c'est la cas mais il y a un souci...)
+console.log('Script executé jusqu\'au bout');                         // j'affiche dans la console que le script a été exécuté jusqu'à la fin
 
 
 

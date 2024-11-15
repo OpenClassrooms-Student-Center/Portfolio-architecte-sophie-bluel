@@ -94,6 +94,7 @@ nav ul {
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
+	cursor: pointer;
 }
 
 li:hover {
@@ -128,11 +129,39 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
+
+/***filter****/
 .btn-filter {
 	display: flex;
 	justify-content: center;
+	align-content: center;
 	margin: 2em 0;
+	gap: 10px;
+	margin: 50px auto;
+	
 }
+.btnFilter {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #1D6154;
+	background: white;
+	margin: 0;
+	padding: 10px 20px;
+	border-radius: 60px;
+	box-sizing: border-box;
+	font-family: 'Syne', sans-serif;
+	font-weight: 700;
+	font-size: 16px;
+	text-align: center;
+	height: 37px;
+	width: 180px;
+	border: 1px solid #1D6154;
+	border-radius: 60px;
+	cursor: pointer;
+	transition: 0.3s ease-in-out;
+}
+
 
 
 
@@ -140,8 +169,8 @@ li:hover {
 	width: 100%;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
-	grid-column-gap: 20px;
-	grid-row-gap: 20px;
+	column-gap: 20px;
+	row-gap: 20px;
 }
 
 .gallery img {
