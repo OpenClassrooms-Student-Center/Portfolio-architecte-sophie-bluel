@@ -66,7 +66,8 @@ body {
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 50px 0;
+	margin-right: -1.5%;
 }
 section {
 	margin: 50px 0
@@ -85,7 +86,6 @@ h1 > span {
 	font-family: var(--text-font-family);
 	font-size: 10px;
 	letter-spacing: 0.1em;
-;
 }
 
 h2{
@@ -96,13 +96,21 @@ h2{
 }
 nav ul {
 	display: flex;
+	justify-content: flex-end;
 	align-items: center;
 	list-style-type: none;
-
 }
 nav li {
-	padding: 0 10px;
-	font-size: 1.2em;
+	padding: 0 10%;
+	font-size: 1.14286em;
+}
+
+nav ul .contact-login {
+	padding-right: 20%;
+}
+
+nav li img {
+	width: 22px;
 }
 
 li:hover {
@@ -233,4 +241,5 @@ footer nav ul {
 
 footer li {
 	font-weight: 300;
+	font-size: 14px;
 }
