@@ -8,21 +8,24 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
-	<link rel="stylesheet" href="./assets/style.css">
+	<link rel="stylesheet" href="./assets/styles/style.css">
 </head>
 <body>
+	<div class="wrapper">
+<!------------Header------------------->
 <header>
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
-			<li>projets</li>
-			<li>contact</li>
-			<li>login</li>
+			<li><a href="#portfolio">projets</a></li>
+			<li><a href="#contact">contact</a></li>
+			<li><a href=login.html>Login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
 </header>
 <main>
+	<!------------Introduction------------------>
 	<section id="introduction">
 		<figure>
 			<img src="./assets/images/sophie-bluel.png" alt="">
@@ -34,33 +37,38 @@
 			<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
 		</article>
 	</section>
+	 <!-------------Portfolio------------------>
 	<section id="portfolio">
 		<h2>Mes Projets</h2>
 		<div class="gallery">
 		</div>
 	</section>
-	<section id="contact">
+	 <!-------------Formulaire de contact------------------>
+	<section id="contact" class="formCommon">
 		<h2>Contact</h2>
 		<p>Vous avez un projet ? Discutons-en !</p>
-		<form action="#" method="post">
+		<form class="formLogin"  action="#" method="post">
 			<label for="name">Nom</label>
 			<input type="text" name="name" id="name">
 			<label for="email">Email</label>
 			<input type="email" name="email" id="email">
 			<label for="message">Message</label>
 			<textarea name="message" id="message" cols="30" rows="10"></textarea>
-			<input type="submit" value="Envoyer">
+			<input type="submit" value="Envoyer" class="btn-submit">
 		</form>
 	</section>
 </main>
-
+</div>
+ <!-----------Footer-------------------->
 <footer>
 	<nav>
 		<ul>
-			<li>Mentions Légales</li>
+			<li><a href ="">Mentions Légales</a></li>
 		</ul>
 	</nav>
 </footer>
-<script src="./scripts/scriptsGallery.js"></script>
-</body>
-</html>
+<!--------------Scripts Js----------------->
+   <script src="./scripts/scriptsGallery.js"></script>
+
+  </body>
+ </html>

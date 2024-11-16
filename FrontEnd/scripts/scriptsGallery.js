@@ -52,7 +52,7 @@ async function getWorks() {
 
     for (let i = 0; i < works.length; i++) { 
         const work = works[i]; 
-        console.log('travail actuel : ', work);
+       //console.log('travail actuel : ', work);
         
         const workElement = document.createElement('figure');
         workElement.className = 'work';
@@ -60,7 +60,7 @@ async function getWorks() {
         <img src="${work.imageUrl}" alt="${work.title}"/>
         <figcaption>${work.title}</figcaption>
         `;
-         console.log('élément crée : ', workElement);
+         //console.log('élément crée : ', workElement);
          
         WorksContainer.appendChild(workElement);  // ajout de workElement a son parent worksContainer
     }
@@ -68,9 +68,9 @@ async function getWorks() {
  }
 
 
- // extrait les catégories des travaux, je veux ensuite les afficher en fonction du bouton surlequel on click
+ // extrait les catégories des travaux, 
 function extractCategories(works) {               
-    const categories = ["Tous", ...new Set(works.map(work =>work.category.name))];  // la méthode map() permet de parcourir le tableau works et de récupérer les catégories de chaque travail, la méthode Set() permet de créer un objet Set qui permet de stocker des valeurs uniques, et la méthode new Set() permet de créer un nouvel objet Set, et la méthode ... permet de déstructurer l'objet Set pour le transformer en tableau. donc ici je crée un tableau de catégories uniques en utilisant la méthode Set() et la méthode map() pour parcourir le tableau works et récupérer les catégories de chaque travail
+    const categories = ["Tous", ...new Set(works.map(work =>work.category.name))];  // ici, je crée un tableau categories qui contient les catégories des travaux en utilisant la méthode map() qui permet de parcourir le tableau works et de récupérer les catégories de chaque travail et la méthode Set() qui permet de créer un objet Set qui va contenir les catégories sans doublons et la méthode new qui permet de créer un nouvel objet Set et la méthode ... qui permet de déstructurer l'objet Set pour le transformer en tableau et la méthode .map() qui permet de parcourir le tableau works et de récupérer les catégories de chaque travail et la méthode .category.name qui permet de récupérer le nom de la catégorie de chaque travail et la méthode new qui permet de créer un nouvel objet Set et la méthode ... qui permet de déstructurer l'objet Set pour le transformer en tableau et la méthode .map() qui permet de parcourir le tableau works et de récupérer les catégories de chaque travail et la méthode .category.name qui permet de récupérer le nom de la catégorie de chaque travail
         console.log("categories extraites fn : ", categories);
         return categories;
 }
@@ -89,15 +89,13 @@ function extractCategories(works) {
 //         return works
 //     }                                    
 // console.log('Travaux filtrés par catégorie : ', works);
-
 //}
-
 
 function filterWorksByCategory(works, category) {
     if (category === 'Tous') {
         return works;
     }
-return works.filter(work => work.category.name === category);
+return works.filter(work => work.category.name === category); 
 }
 
 //création des boutons de filtre
@@ -114,14 +112,13 @@ function createFilterButton(category, works) {
     });
   console.log('bouton créé : ', button);                                    // affiche dans la console le bouton créé
   styleFilterButton(button);                                                 // j'ajoute le style sur les boutons de filtre en utilisant la fonction styleFilterButton et en lui passant en paramètre le bouton  (!!!ne pas oublier d'appeler les fonctions si tu veux qu'elles fonctionent!!!)
-
   return button;                                                             // je retourne le bouton créé 
  } 
 
-//function pour ajout du style sur les buttons de filtre  (voir, s'il y a un moyen moins repétitif d'ajouter le style avec js ou peut être le mettre directement en css (dder a jean baptiste))
+//function pour ajouter un hover aux boutons de filtre
 function styleFilterButton(button) {
 
-    button.addEventListener('mouseover', () => {                                 //écouteurs d'événements sur le hover des boutons pour le chgt de style
+    button.addEventListener('mouseover', () => {                            
         button.style.backgroundColor = '#1D6164';
         button.style.color = '#fff';
     });
@@ -168,9 +165,11 @@ async function initGallery() {
 
         addWorksGallery(works);
  }  
- 
+ initGallery();                                                         // j'appelle la fonction initGallery pour initialiser la gallerie et afficher les travaux dans le DOM
 
-document.addEventListener('DOMContentLoaded', initGallery);           // j'ajoute un écouteur d'événement sur le document pour attendre que le contenu html soit chargé avant d'exécuter la fonction initGallery qui initialise la gallerie, 
+//document.addEventListener('DOMContentLoaded', initGallery);           // j'ajoute un écouteur d'événement sur le document pour attendre que le contenu html soit chargé avant d'exécuter la fonction initGallery qui initialise la gallerie, 
+
+
 
 console.log('Script executé jusqu\'au bout');                         // j'affiche dans la console que le script a été exécuté jusqu'à la fin
 
