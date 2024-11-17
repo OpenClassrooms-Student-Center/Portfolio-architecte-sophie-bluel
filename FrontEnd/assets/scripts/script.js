@@ -1,7 +1,7 @@
-/****** Étape 1.1 récupérer les travaux du backend ******/
+/****** Step 1.1 fetch works from backend ******/
 import {
-    fetcherEtStockerLesTravaux,
-    remplirDynamiquementGalerie
+    fetchAndStoreWorks,
+    fillGallery
 } from "./chargerProjets.js";
 import {
     recupererCategories
@@ -13,36 +13,35 @@ import {
     ajouterListenerConnexion
 } from "./connexion.js";
 
-let travauxStockageLocalVariable = window.localStorage.getItem("travauxStockageLocal");
-let travauxPromesse;
+let worksInLocalStorageVar = window.localStorage.getItem("works");
+let worksPromise;
 
-if (travauxStockageLocalVariable) {
+if (worksInLocalStorageVar) {
     try{
-        let travauxAnalyses = JSON.parse(travauxStockageLocalVariable);
-        if (Array.isArray(travauxAnalyses)) {
-            travauxPromesse = Promise.resolve(travauxAnalyses);
+        let worksParsed = JSON.parse(worksInLocalStorageVar);
+        if (Array.isArray(worksParsed)) {
+            worksPromise = Promise.resolve(worksParsed);
         } else {
-            console.warn("Les travaux %o stockés localement ne sont pas un tableau: vidage et rafraîchissement du stockage local.", travauxAnalyses);
-            window.localStorage.removeItem("travauxStockageLocal");
-            travauxPromesse = fetcherEtStockerLesTravaux();
+            console.warn("Works %o locally stored are'nt an array: Local storage is deleted and loaded again.", worksParsed);
+            window.localStorage.removeItem("works");
+            worksPromise = fetchAndStoreWorks();
         }
     } catch (erreur) {
-        console.error("Erreur %o à l'analyse des travaux stockés localement: vidage et rafraîchissement du stockage local.", erreur);
-        window.localStorage.removeItem("travauxStockageLocal");
-        travauxPromesse = fetcherEtStockerLesTravaux();
+        console.error("Error %o at locally stored works parsing: Local storage is deleted and loaded again", erreur);
+        window.localStorage.removeItem("works");
+        worksPromise = fetchAndStoreWorks();
     }
 } else {
-    travauxPromesse = fetcherEtStockerLesTravaux();
+    worksPromise = fetchAndStoreWorks();
 }
-let galerieDiv = document.querySelector(".gallery");
-let figuresGalerieRemplie;
+let galleryDiv = document.querySelector(".gallery");
+let initialFetchedGallery;
 async function initGalerie() {
-    figuresGalerieRemplie = await remplirDynamiquementGalerie(travauxPromesse, galerieDiv, figuresGalerieRemplie);
+    initialFetchedGallery = await fillGallery(worksPromise, galleryDiv, initialFetchedGallery);
 }
 initGalerie();
-/****** Étape 1.2 créer le menu des catégories ******/
-/****** code principal ******/
+/****** Step 1.2 create category filter******/
 let categories = new Set();
-categories = recupererCategories(travauxPromesse, categories).then(categories => {
-    genererBoutonsFiltreCategorie(categories, galerieDiv, figuresGalerieRemplie);
+categories = recupererCategories(worksPromise, categories).then(categories => {
+    genererBoutonsFiltreCategorie(categories, galleryDiv, initialFetchedGallery);
 });

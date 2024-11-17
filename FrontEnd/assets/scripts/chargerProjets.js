@@ -1,70 +1,69 @@
-/****** Étape 1.1 récupérer les travaux du backend ******/
+/****** Step 1.1 get works from backend ******/
 /**
- * Cette fonction fetche les données et remplit le localStorage pour plus de rapidité et moins de bande passante réseau
- * lors des futurs rechargements de page.
- * @returns : le tableau JSON fetché est retourné.
+ * This function fetches data and fills the localStorage for speed and less network use during next page reloads.
+ * @returns : an array of fetched works in JSON format is returned.
  */
-export function fetcherEtStockerLesTravaux() {
+export function fetchAndStoreWorks() {
     fetch("http://localhost:5678/api/works")
         .then(reponse => reponse.json())
-        .then(travauxAPI => {
-            if (Array.isArray(travauxAPI)) {
-                window.localStorage.setItem("travauxStockageLocal", JSON.stringify(travauxAPI));
-                return travauxAPI;
+        .then(worksFromAPI => {
+            if (Array.isArray(worksFromAPI)) {
+                window.localStorage.setItem("works", JSON.stringify(worksFromAPI));
+                return worksFromAPI;
             } else {
-                console.error("Les travaux %o ne sont pas un tableau.", travauxAPI);
+                console.error("Works %o aren't an array.", worksFromAPI);
                 return [];
             }
         })
-        .catch(erreur => {
-            console.error("Erreur au fetch des travaux depuis l'API: %o", erreur);
+        .catch(error => {
+            console.error("Error at works fetch from API: %o", error);
             return [];
         });
 }
 
 /**
- * Cette fonction crée les travaux dans la <div class="gallery"> du DOM à partir des travaux obtenus en réponse de l'API.
- * @param {Promise<any>} travaux : la requête à l'API est une promesse dont le résultat attendu est les travaux en JSON
- * @param {Element} galerieDiv : la <div class="gallery"> contenant les figures
- * @param {HTMLElement[]} figuresGalerieRemplie : une copie telle quelle de la galerie récupérée initialement de l'API
+ * This function creates HTML elements in <div class="gallery"> based on works from the API.
+ * @param {Promise<any>} works : works in JSON format is expected from the API at promise resolution
+ * @param {Element} galleryDiv : the <div class="gallery"> including figures
+ * @param {HTMLElement[]} initialFetchedGallery : a copy of the gallery initially fetched from the API
  * @returns : le tableau des figures initialement construit
 */
-export async function remplirDynamiquementGalerie(travaux, galerieDiv, figuresGalerieRemplie) {
+export async function fillGallery(works, galleryDiv, initialFetchedGallery) {
     try{
-        const resultat = await travaux;
+        const result = await works;
         const figures = [];
-        resultat.forEach(travail => {
+        result.forEach(work => {
             let imgFromAPI = document.createElement("img");
-            const titleFromAPI = travail.title;
-            imgFromAPI.src = travail.imageUrl;
+            const titleFromAPI = work.title;
+            imgFromAPI.src = work.imageUrl;
             imgFromAPI.alt = titleFromAPI;
             let figcaptionFromAPI = document.createElement("figcaption");
             figcaptionFromAPI.innerText = titleFromAPI;
             let figureFromAPI = document.createElement("figure");
-            let categ = travail.category.name;
+            let categ = work.category.name;
             categ = remplacerEspaceParUnderscore(categ);
             figureFromAPI.classList.add(categ);
             figureFromAPI.appendChild(imgFromAPI);
             figureFromAPI.appendChild(figcaptionFromAPI);
             figures.push(figureFromAPI);
         });
-        galerieDiv.innerHTML = "";
+        galleryDiv.innerHTML = "";
         figures.forEach(figure => {
-            galerieDiv.appendChild(figure);
+            galleryDiv.appendChild(figure);
         });
-        figuresGalerieRemplie = Array.from(document.querySelectorAll(".gallery figure"));
-        return figuresGalerieRemplie;
-    } catch(erreur) {
-        console.error("Erreur au remplissage des figures dans la galerie: %o", erreur);
+        initialFetchedGallery = Array.from(document.querySelectorAll(".gallery figure"));
+        return initialFetchedGallery;
+    } catch(error) {
+        console.error("Error at filling of the gallery: %o", error);
     }
 }
 
 /**
- * Cette fonction remplace les espaces dans une chaîne de caractères par des underscores ("_").
- * @param {string} name : le nom de  class incluant un ou des espace (" ")
- * @returns la chaîne de caractères avec substitution des " " par des "_"
+ * This function replaces spaces by underscores ("_").
+ * @param {string} name : the class name including one or more spaces (" ")
+ * @returns the string substitution with "_" inbstead of " "
  */
-export function remplacerEspaceParUnderscore(name) {
+export function replaceSpaceByUnderscore(name) {
     let underscored = name;
     if(name.includes(" ")) {
         underscored = name.replaceAll(" ", "_");
