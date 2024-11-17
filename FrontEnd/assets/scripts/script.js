@@ -9,6 +9,9 @@ import {
 import {
     genererBoutonsFiltreCategorie
 } from "./creerBoutonsChoixCategorie.js";
+import {
+    ajouterListenerConnexion
+} from "./connexion.js";
 
 let travauxStockageLocalVariable = window.localStorage.getItem("travauxStockageLocal");
 let travauxPromesse;
