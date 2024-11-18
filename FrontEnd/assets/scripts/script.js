@@ -10,7 +10,10 @@ import {
     createCategoryFilterButtons
 } from "./createCategoryFilterButtons.js";
 import {
-    addConnectionListener
+    addConnectionListener,
+    addConnectedModeBanner,
+    addWorksModificationLink,
+    updateNavbarToLogout
 } from "./connection.js";
 
 let worksInLocalStorageVar = window.localStorage.getItem("works");
@@ -44,3 +47,5 @@ initGalerie();
 getCategories(worksPromise).then(categories => {
     createCategoryFilterButtons(categories, galleryDiv, initialFetchedGallery);
 });
+/****** Step 2.2 update landing page to connected mode ******/
+addConnectedModeBanner();

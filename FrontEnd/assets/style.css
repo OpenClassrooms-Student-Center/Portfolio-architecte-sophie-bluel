@@ -66,6 +66,18 @@ body {
 }
 header {
 	display: flex;
+	flex-direction: column;
+}
+#connected {
+	height: 100px;
+	background-color: var(--button-color);
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#loggedOutModeHeader {
+	display: flex;
 	justify-content: space-between;
 	margin: 50px 0;
 	margin-right: -1.5%;

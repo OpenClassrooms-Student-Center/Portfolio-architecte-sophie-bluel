@@ -8,3 +8,30 @@ export function addConnectionListener() {
         event.preventDefault();
     });
 }
+
+/**
+ * This function adds a connected mode banner to the header.
+ */
+export function addConnectedModeBanner() {
+    const header = document.querySelector("header");
+    const headerH1 = document.querySelector("header h1");
+    const headerNav = document.querySelector("header nav");
+    const connectedModeBanner = document.createElement("div");
+    connectedModeBanner.id = "connected";
+    connectedModeBanner.innerText = "Mode édition";
+    const divVerticalFlex = document.createElement("div");
+    divVerticalFlex.id = "loggedOutModeHeader";
+    header.innerHTML = "";
+    divVerticalFlex.appendChild(headerH1);
+    divVerticalFlex.appendChild(headerNav);
+    header.appendChild(connectedModeBanner);
+    header.appendChild(divVerticalFlex);
+}
+
+export function addWorksModificationLink() {
+
+}
+
+export function updateNavbarToLogout() {
+
+}
