@@ -2,16 +2,16 @@
 import {
     fetchAndStoreWorks,
     fillGallery
-} from "./chargerProjets.js";
+} from "./getWorks.js";
 import {
-    recupererCategories
-} from "./choisirCategorie.js";
+    getCategories
+} from "./filterByCategory.js";
 import {
-    genererBoutonsFiltreCategorie
-} from "./creerBoutonsChoixCategorie.js";
+    createCategoryFilterButtons
+} from "./createCategoryFilterButtons.js";
 import {
-    ajouterListenerConnexion
-} from "./connexion.js";
+    addConnectionListener
+} from "./connection.js";
 
 let worksInLocalStorageVar = window.localStorage.getItem("works");
 let worksPromise;
@@ -40,8 +40,7 @@ async function initGalerie() {
     initialFetchedGallery = await fillGallery(worksPromise, galleryDiv, initialFetchedGallery);
 }
 initGalerie();
-/****** Step 1.2 create category filter******/
-let categories = new Set();
-categories = recupererCategories(worksPromise, categories).then(categories => {
-    genererBoutonsFiltreCategorie(categories, galleryDiv, initialFetchedGallery);
+/****** Step 1.2 create category filter ******/
+getCategories(worksPromise).then(categories => {
+    createCategoryFilterButtons(categories, galleryDiv, initialFetchedGallery);
 });

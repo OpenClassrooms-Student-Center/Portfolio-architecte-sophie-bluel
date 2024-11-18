@@ -26,7 +26,7 @@ export function fetchAndStoreWorks() {
  * @param {Promise<any>} works : works in JSON format is expected from the API at promise resolution
  * @param {Element} galleryDiv : the <div class="gallery"> including figures
  * @param {HTMLElement[]} initialFetchedGallery : a copy of the gallery initially fetched from the API
- * @returns : le tableau des figures initialement construit
+ * @returns : the array of figures initially fetched from the API
 */
 export async function fillGallery(works, galleryDiv, initialFetchedGallery) {
     try{
@@ -41,7 +41,7 @@ export async function fillGallery(works, galleryDiv, initialFetchedGallery) {
             figcaptionFromAPI.innerText = titleFromAPI;
             let figureFromAPI = document.createElement("figure");
             let categ = work.category.name;
-            categ = remplacerEspaceParUnderscore(categ);
+            categ = replaceSpaceByUnderscore(categ);
             figureFromAPI.classList.add(categ);
             figureFromAPI.appendChild(imgFromAPI);
             figureFromAPI.appendChild(figcaptionFromAPI);
@@ -61,7 +61,7 @@ export async function fillGallery(works, galleryDiv, initialFetchedGallery) {
 /**
  * This function replaces spaces by underscores ("_").
  * @param {string} name : the class name including one or more spaces (" ")
- * @returns the string substitution with "_" inbstead of " "
+ * @returns the string substitution with "_" instead of " "
  */
 export function replaceSpaceByUnderscore(name) {
     let underscored = name;
