@@ -12,6 +12,7 @@ import {
 import {
     addConnectionListener,
     addConnectedModeBanner,
+    hideCategoryFilterButtons,
     addWorksModificationLink,
     updateNavbarToLogout
 } from "./connection.js";
@@ -39,13 +40,14 @@ if (worksInLocalStorageVar) {
 }
 let galleryDiv = document.querySelector(".gallery");
 let initialFetchedGallery;
-async function initGalerie() {
+async function initGallery() {
     initialFetchedGallery = await fillGallery(worksPromise, galleryDiv, initialFetchedGallery);
 }
-initGalerie();
+initGallery();
 /****** Step 1.2 create category filter ******/
 getCategories(worksPromise).then(categories => {
     createCategoryFilterButtons(categories, galleryDiv, initialFetchedGallery);
 });
 /****** Step 2.2 update landing page to connected mode ******/
 addConnectedModeBanner();
+//hideCategoryFilterButtons();
