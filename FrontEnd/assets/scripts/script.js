@@ -45,9 +45,8 @@ async function initGallery() {
 }
 initGallery();
 /****** Step 1.2 create category filter ******/
-getCategories(worksPromise).then(categories => {
-    createCategoryFilterButtons(categories, galleryDiv, initialFetchedGallery);
-});
+const categories = await getCategories(worksPromise);
+await createCategoryFilterButtons(categories, galleryDiv, initialFetchedGallery);
 /****** Step 2.2 update landing page to connected mode ******/
 addConnectedModeBanner();
-//hideCategoryFilterButtons();
+hideCategoryFilterButtons();

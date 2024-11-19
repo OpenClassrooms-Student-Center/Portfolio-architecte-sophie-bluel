@@ -35,7 +35,8 @@ export function addConnectedModeBanner() {
  * This functions hides the category filter buttons.
  */
 export function hideCategoryFilterButtons() {
-    
+    const buttons = document.getElementById("filter");
+    buttons.style.display = "none";
 }
 
 /**

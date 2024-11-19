@@ -6,7 +6,7 @@ import { filterGallery } from "./filterByCategory.js";
  * @param {Element} galleryDiv see filterByCategory.js filterGallery the div containing the figures
  * @param {HTMLElement[]} initialGallery see filterByCategory.js filterGallery initial API figures fetch
  */
-export function createCategoryFilterButtons(categories, galleryDiv, initialGallery) {
+export async function createCategoryFilterButtons(categories, galleryDiv, initialGallery) {
     try{
         let filterDiv = document.createElement("div");
         filterDiv.id = "filter";
