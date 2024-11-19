@@ -50,21 +50,37 @@ table {
 /** variables **/
 :root {
 	--button-color: #1D6154;
+	--h1-li-hover-color: #B1663C;
+	--a-color: #3D3D3D;
 	--button-font-size: 1.2em;
 	--button-font-family: 'Syne';
+	--text-font-family: 'Work Sans';
 	--button-font-weight: 700;
 }
 /** end variables **/
 body {
 	max-width: 1140px;
 	margin:auto;
-	font-family: 'Work Sans' ;
+	font-family: var(--text-font-family);
 	font-size: 14px;
 }
 header {
 	display: flex;
+	flex-direction: column;
+}
+#connected {
+	height: 100px;
+	background-color: var(--button-color);
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#loggedOutModeHeader {
+	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 50px 0;
+	margin-right: -1.5%;
 }
 section {
 	margin: 50px 0
@@ -76,35 +92,46 @@ h1{
 	font-family: 'Syne';
 	font-size: 22px;
 	font-weight: 800;
-	color: #B1663C
+	color: var(--h1-li-hover-color);
 }
 
 h1 > span {
-	font-family: 'Work Sans';
-	font-size:10px;
+	font-family: var(--text-font-family);
+	font-size: 10px;
 	letter-spacing: 0.1em;
-;
 }
 
 h2{
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
-	color: #1D6154
+	color: var(--button-color);
 }
 nav ul {
 	display: flex;
+	justify-content: flex-end;
 	align-items: center;
 	list-style-type: none;
-
 }
 nav li {
-	padding: 0 10px;
-	font-size: 1.2em;
+	padding: 0 10%;
+	font-size: 1.14286em;
+}
+
+nav ul .contact-login {
+	padding-right: 20%;
+}
+
+nav ul #login-bold {
+	font-weight: 600;
+}
+
+nav li img {
+	width: 22px;
 }
 
 li:hover {
-	color: #B1663C;
+	color: var(--h1-li-hover-color);
 }
 #introduction {
 	display: flex;
@@ -182,42 +209,68 @@ li:hover {
 	width: 100%;
 
 }
-#contact {
-	width: 50%;
+#contact, #connexion {
+	width: 33.75%;
 	margin: auto;
+	gap: 2% 0;
 }
-#contact > * {
+
+#connexion {
+	padding-top: 10%;
+}
+#contact, #connexion > * {
 	text-align: center;
 
 }
-#contact h2{
+#contact h2 {
 	margin-bottom: 20px;
 }
-#contact form {
+#connexion h2 {
+	margin-bottom: 15px;
+}
+#contact form, #connexion form{
 	text-align: left;
-	margin-top:30px;
+	margin-top: 15px;
 	display: flex;
 	flex-direction: column;
 }
+#contact p {
+	font-family: var(--text-font-family);
+	font-size: 16px;
+}
 
-#contact label {
+#contact label, #connexion label {
 	margin: 2em 0 1em 0;
 }
-#contact textarea {
+
+#contact textarea, #name, #email, #passe {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	margin-bottom: 1%;
+}
+
+#contact #name, #email, #passe {
+	height: 51px;
 }
 
 input[type="submit"]{
 	width: 180px;
 }
 
+#connexion a {
+	text-align: center;
+	color: var(--a-color);
+	margin-bottom: 90%;
+}
+
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
-	margin: 2em
+	margin: 2em;
+	margin-right: -17.5%;
 }
 
 footer li {
 	font-weight: 300;
+	font-size: 14px;
 }
