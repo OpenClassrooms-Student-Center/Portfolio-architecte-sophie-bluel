@@ -53,7 +53,7 @@ table {
 /** end reset css**/
 /****************Base**************************/
 body {
-	max-width: 1140px;
+	/* width: 1140px; */
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 	background: #FFFEFB;
@@ -216,12 +216,15 @@ nav a:hover {
 	width: 80%;
     margin: auto;
 }
+.login {
+	max-width: 379px;
+}
 #contact > *, .formLogin > * {
 	text-align: center;
 
 }
 #contact h2, .formLogin h2 {
-	margin-bottom: o auto 20px;
+	margin-bottom: auto 20px;
 }
 
 #contact form, .formLogin form {
@@ -253,13 +256,40 @@ input[type="submit"]{
 	margin : 2em auto ;
 	width: 180px;
 	text-align: center;
-	border-radius: 60px ;
+	border-radius: 60px;
 }
+
+
 .btn-submit:hover {
 background: #0e2f28;
 }
+
+#messageError{
+	color: red;
+	text-align: center;
+	width: 100;
+	height: auto;
+	font-weight: 900;
+	font-size: 1.5em;
+	padding: 20px 0 20px;
+	margin-bottom: 20px;
+	display: none;
+	/* background: #0e2f28;
+	border: 2px solid red;
+	border-radius: 50px; */
+
+}
+
+#forgetMp {
+	color: black;
+	text-decoration: underline;
+	cursor: pointer;
+	margin: 20px;
+	padding: 20px;
+}
+
 /*********footer*********/
-footer nav ul {
+footer nav ul  {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em 107px 0;

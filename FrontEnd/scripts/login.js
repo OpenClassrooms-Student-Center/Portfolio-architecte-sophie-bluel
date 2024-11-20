@@ -1,5 +1,5 @@
-document.getElementById("login").addEventListener("submit", async function(event) {   // on écoute l'événement submit sur le formulaire d'identifiant login
-    event.preventDefault();                                                 // permt d'éviter le comportement par default de rechagement de la page
+document.querySelector(".login").addEventListener("submit", async function(event) {   // on écoute l'événement submit sur le formulaire d'identifiant login
+    event.preventDefault();                                                 // permet d'éviter le comportement par default de rechargement de la page
 
     const email = document.getElementById('email').value;                  //je récupère les valeurs d'entrées de l'utilisateur, email, password
     const password = document.getElementById('password').value;
@@ -11,7 +11,7 @@ document.getElementById("login").addEventListener("submit", async function(event
             headers: {                                                         //je précise les headers de la requête ce qui me permet de préciser le type de contenu de la requête
                 'Content-Type': 'application/json'                            //je précise le type de contenu de la requête
             },
-            body: JSON.stringify({email, password})                         //je précise le corps de la requête, je transforme les données en JSON, pour les envoyer au serveur     
+            body: JSON.stringify({email, password})                         //je précise le corps de la requête, je transforme les données en JSON, pour les envoyer au serveur    
         });
 
         if (!response.ok) {
