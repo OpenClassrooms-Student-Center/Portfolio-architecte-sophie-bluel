@@ -197,6 +197,15 @@ li:hover {
 	padding: 1% 4.25%;
 }
 
+#editDiv {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 3% 0;
+	color: var(--button-color);
+	gap: 0 1.5%;
+}
+
 .gallery {
 	width: 100%;
 	display: grid;

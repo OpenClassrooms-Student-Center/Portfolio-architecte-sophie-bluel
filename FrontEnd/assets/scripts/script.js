@@ -14,7 +14,7 @@ import {
     addConnectedModeBanner,
     hideCategoryFilterButtons,
     addWorksModificationLink,
-    updateNavbarToLogout
+    toggleNavbarLogin
 } from "./connection.js";
 
 let worksInLocalStorageVar = window.localStorage.getItem("works");
@@ -50,3 +50,5 @@ await createCategoryFilterButtons(categories, galleryDiv, initialFetchedGallery)
 /****** Step 2.2 update landing page to connected mode ******/
 addConnectedModeBanner();
 hideCategoryFilterButtons();
+toggleNavbarLogin();
+addWorksModificationLink();

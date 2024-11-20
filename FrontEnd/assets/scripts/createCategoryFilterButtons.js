@@ -32,10 +32,18 @@ export async function createCategoryFilterButtons(categories, galleryDiv, initia
             categoryButtons.appendChild(categoryButton);
         });
         filterDiv.appendChild(categoryButtons);
-        let portfolio = document.getElementById("portfolio");
-        let title = portfolio.querySelector("h2");
-        portfolio.insertBefore(filterDiv, title.nextSibling);
+        insertAfterPortfolioTitle(filterDiv);
     } catch(error) {
         console.error("Error at category filter buttons generation: %o", error);
     }
+}
+
+/**
+ * This function inserts a HTML element after "Mes Projets"
+ * @param {Element} element : the category filter buttons or modification link after login
+ */
+export function insertAfterPortfolioTitle(element) {
+    let portfolio = document.getElementById("portfolio");
+    const title = portfolio.querySelector("h2");
+    portfolio.insertBefore(element, title.nextSibling);
 }
