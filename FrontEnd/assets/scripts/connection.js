@@ -1,15 +1,26 @@
 /****** Step 2.2 user's authentication ******/
 import {
     insertAfterPortfolioTitle
-} from "./createCategoryFilterButtons.js"
+} from "./createCategoryFilterButtons.js";
+console.log(new Date().toLocaleTimeString(), "connection page script begins");
+await addConnectionListener();
 /**
- * This function "listenes" the click on the login page form connect button.
+ * This function listens the click on the login page form connect button.
  */
-export function addConnectionListener() {
+async function addConnectionListener() {
     try{
-        const connectionForm = document.getElementById("connectionForm");
-        connectionForm.addEventListener("submit", function(event) {
-            event.preventDefault();
+        document.addEventListener("DOMContentLoaded", async () => {
+            console.log(new Date().toLocaleTimeString(), "add event listener");
+            const connectionForm = document.querySelector("#connectionForm");
+            connectionForm.addEventListener("submit", (event) => {
+                console.log(new Date().toLocaleTimeString(), "connect submit");
+                event.preventDefault();
+                console.log("prev");
+                localStorage.setItem("connected", "true");
+                console.log("stored");
+                window.location.href = "../index.html";
+                console.log("redir done");
+            });
         });
     } catch(error) {
         console.error("Error at connection listener adding: %o", error);
@@ -23,7 +34,7 @@ export function addConnectedModeBanner() {
     try{
         const header = document.querySelector("header");
         const connectedModeBanner = document.createElement("div");
-        connectedModeBanner.id = "connected";
+        connectedModeBanner.id = "connection";
         connectedModeBanner.innerText = "Mode édition";
         const divVerticalFlex = document.getElementById("loggedOutModeHeader");
         header.innerHTML = "";
@@ -65,5 +76,5 @@ export function addWorksModificationLink() {
  */
 export function toggleNavbarLogin() {
     const login = document.getElementById("login");
-    login.innerText == "login" ? "logout" : "login";
+    login.innerText === "login" ? login.innerText = "logout" : login.innerText = "login";
 }

@@ -73,7 +73,7 @@ export function filterGallery(option, galleryDiv, initialGallery) {
         let figuresArray = Array.from(figures);
         let filteredFigures;
         if(val != "Tous"){
-            filteredFigures = figuresArray.filter(function(figure) {
+            filteredFigures = figuresArray.filter((figure) => {
                 return figure.className === val;
             });
         } else {

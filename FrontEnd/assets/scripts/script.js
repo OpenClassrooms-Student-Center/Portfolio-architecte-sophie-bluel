@@ -10,45 +10,50 @@ import {
     createCategoryFilterButtons
 } from "./createCategoryFilterButtons.js";
 import {
-    addConnectionListener,
     addConnectedModeBanner,
+    toggleNavbarLogin,
     hideCategoryFilterButtons,
-    addWorksModificationLink,
-    toggleNavbarLogin
+    addWorksModificationLink
 } from "./connection.js";
 
-let worksInLocalStorageVar = window.localStorage.getItem("works");
-let worksPromise;
+document.addEventListener("DOMContentLoaded", async () => {
+    let worksInLocalStorageVar = window.localStorage.getItem("works");
+    let worksPromise;
 
-if (worksInLocalStorageVar) {
-    try{
-        let worksParsed = JSON.parse(worksInLocalStorageVar);
-        if (Array.isArray(worksParsed)) {
-            worksPromise = Promise.resolve(worksParsed);
-        } else {
-            console.warn("Works %o locally stored are'nt an array: Local storage is deleted and loaded again.", worksParsed);
+    if (worksInLocalStorageVar) {
+        try{
+            let worksParsed = JSON.parse(worksInLocalStorageVar);
+            if (Array.isArray(worksParsed)) {
+                worksPromise = Promise.resolve(worksParsed);
+            } else {
+                console.warn("Works %o locally stored isn't an array: local storage is deleted and loaded again.", worksParsed);
+                window.localStorage.removeItem("works");
+                worksPromise = fetchAndStoreWorks();
+            }
+        } catch (erreur) {
+            console.error("Error %o at locally stored works parsing: local storage is deleted and loaded again", erreur);
             window.localStorage.removeItem("works");
             worksPromise = fetchAndStoreWorks();
         }
-    } catch (erreur) {
-        console.error("Error %o at locally stored works parsing: Local storage is deleted and loaded again", erreur);
-        window.localStorage.removeItem("works");
+    } else {
         worksPromise = fetchAndStoreWorks();
     }
-} else {
-    worksPromise = fetchAndStoreWorks();
-}
-let galleryDiv = document.querySelector(".gallery");
-let initialFetchedGallery;
-async function initGallery() {
-    initialFetchedGallery = await fillGallery(worksPromise, galleryDiv, initialFetchedGallery);
-}
-initGallery();
-/****** Step 1.2 create category filter ******/
-const categories = await getCategories(worksPromise);
-await createCategoryFilterButtons(categories, galleryDiv, initialFetchedGallery);
-/****** Step 2.2 update landing page to connected mode ******/
-addConnectedModeBanner();
-hideCategoryFilterButtons();
-toggleNavbarLogin();
-addWorksModificationLink();
+    let galleryDiv = document.querySelector(".gallery");
+    let initialFetchedGallery;
+    async function initGallery() {
+        initialFetchedGallery = await fillGallery(worksPromise, galleryDiv, initialFetchedGallery);
+    }
+    await initGallery();
+    /****** Step 1.2 create category filter ******/
+    const categories = await getCategories(worksPromise);
+    await createCategoryFilterButtons(categories, galleryDiv, initialFetchedGallery);
+    /****** Step 2.2 update landing page to connected mode ******/
+    const isConnected = localStorage.getItem("connected") === true;
+    console.log(new Date().toLocaleTimeString(), "is connected");
+    if(isConnected) {
+        addConnectedModeBanner();
+        toggleNavbarLogin();
+        hideCategoryFilterButtons();
+        addWorksModificationLink();
+    }
+});

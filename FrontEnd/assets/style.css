@@ -50,6 +50,7 @@ table {
 /** variables **/
 :root {
 	--button-color: #1D6154;
+	--button-color-hover: #0F2F28;
 	--h1-li-hover-color: #B1663C;
 	--a-color: #3D3D3D;
 	--button-font-size: 1.2em;
@@ -189,6 +190,10 @@ li:hover {
 	color: white;
 }
 
+.selected:hover {
+	background-color: var(--button-color-hover);
+}
+
 .unselected {
 	color: var(--button-color);
 }
@@ -218,26 +223,26 @@ li:hover {
 	width: 100%;
 
 }
-#contact, #connexion {
+#contact, #connection {
 	width: 33.75%;
 	margin: auto;
 	gap: 2% 0;
 }
 
-#connexion {
+#connection {
 	padding-top: 10%;
 }
-#contact, #connexion > * {
+#contact, #connection > * {
 	text-align: center;
 
 }
 #contact h2 {
 	margin-bottom: 20px;
 }
-#connexion h2 {
+#connection h2 {
 	margin-bottom: 15px;
 }
-#contact form, #connexion form{
+#contact form, #connection form{
 	text-align: left;
 	margin-top: 15px;
 	display: flex;
@@ -248,7 +253,7 @@ li:hover {
 	font-size: 16px;
 }
 
-#contact label, #connexion label {
+#contact label, #connection label {
 	margin: 2em 0 1em 0;
 }
 
@@ -266,7 +271,7 @@ input[type="submit"]{
 	width: 180px;
 }
 
-#connexion a {
+#connection a {
 	text-align: center;
 	color: var(--a-color);
 	margin-bottom: 90%;
