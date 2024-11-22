@@ -70,7 +70,7 @@ async function getWorks() {
 
  // extrait les catégories des travaux, 
 function extractCategories(works) {               
-    const categories = ["Tous", ...new Set(works.map(work =>work.category.name))];  // ici, je crée un tableau categories qui contient les catégories des travaux en utilisant la méthode map() qui permet de parcourir le tableau works et de récupérer les catégories de chaque travail et la méthode Set() qui permet de créer un objet Set qui va contenir les catégories sans doublons et la méthode new qui permet de créer un nouvel objet Set et la méthode ... qui permet de déstructurer l'objet Set pour le transformer en tableau et la méthode .map() qui permet de parcourir le tableau works et de récupérer les catégories de chaque travail et la méthode .category.name qui permet de récupérer le nom de la catégorie de chaque travail et la méthode new qui permet de créer un nouvel objet Set et la méthode ... qui permet de déstructurer l'objet Set pour le transformer en tableau et la méthode .map() qui permet de parcourir le tableau works et de récupérer les catégories de chaque travail et la méthode .category.name qui permet de récupérer le nom de la catégorie de chaque travail
+    const categories = ["Tous", ...new Set(works.map(work =>work.category.name))];  // ici, je crée un tableau categories qui contient les catégories des travaux en utilisant la méthode map() qui permet de parcourir le tableau works et de récupérer les catégories de chaque travail et la méthode Set() qui permet de créer un objet Set qui va contenir les catégories sans doublons et new devant Set qui permet de créer un nouvel objet Set et la méthode ... qui permet de déstructurer l'objet Set pour le transformer en tableau avec la méthode .map() qui permet de parcourir le tableau works et de récupérer les catégories de chaque travail et .category.name qui permet de récupérer le nom de la catégorie de chaque travail(map, crée un nouveau tableau ce qui permet de ne pas modifier les données du premier tableau works)
         console.log("categories extraites fn : ", categories);
         return categories;
 }
@@ -95,7 +95,7 @@ function filterWorksByCategory(works, category) {
     if (category === 'Tous') {
         return works;
     }
-return works.filter(work => work.category.name === category); 
+return works.filter(work => work.category.name === category); // filter va filtré les category par nom de category 
 }
 
 //création des boutons de filtre
@@ -107,15 +107,15 @@ function createFilterButton(category, works) {
 
     button.addEventListener('click', () => {                                // j'ajoute un écouteur d'événement sur chaque bouton pour filtrer les travaux par catégorie quand le bouton est cliqué les travaux correspondant s'affichent dans la gallerie 
       console.log(`Bouton ${category.name} cliqué`);                        // j'affiche dans la console le bouton cliqué
-      const filteredWorks = filterWorksByCategory(works, category.name);    // je crée une variable filteredWorks qui contient les travaux filtrés par catégorie en utilisant la fonction filterWorksByCategories et en lui passant en paramètre les travaux et la catégorie qui sont récupérés dans le tableau works   category.name 
+      const filteredWorks = filterWorksByCategory(works, category.name);    // je crée une variable filteredWorks qui contient les travaux filtrés par catégorie en utilisant la fonction filterWorksByCategories et en lui passant en paramètre les travaux (tableau works) et le nom de la catégorie qui sont récupérés dans le tableau works   category.name 
       addWorksGallery(filteredWorks);                                       // j'ajoute les travaux filtrés à la gallerie en utilisant la fonction addWorksGallery et en lui passant en paramètre les travaux filtrés ce qui permet de les afficher dans la gallerie 
     });
   console.log('bouton créé : ', button);                                    // affiche dans la console le bouton créé
-  styleFilterButton(button);                                                 // j'ajoute le style sur les boutons de filtre en utilisant la fonction styleFilterButton et en lui passant en paramètre le bouton  (!!!ne pas oublier d'appeler les fonctions si tu veux qu'elles fonctionent!!!)
-  return button;                                                             // je retourne le bouton créé 
+  styleFilterButton(button);  // j'ajoute le style sur les boutons de filtre en utilisant la fonction styleFilterButton et en lui passant en paramètre le bouton (ENLEVER LE STYLE DES BOUTONS DANS LA JAVASCRIPT J AI MIS LE STYLE DES BUTTONS EN CSS)
+  return button;                                                             // et la fonction retourne donc le bouton créé 
  } 
 
-//function pour ajouter un hover aux boutons de filtre
+//function pour ajouter un hover aux boutons de filtre LA SUPPRINMER LE STYLE DU HOVER EST DANS LE CSS
 function styleFilterButton(button) {
 
     button.addEventListener('mouseover', () => {                            
@@ -144,10 +144,10 @@ async function initGallery() {
     console.log('Eléments récupérés : ', portefolioSection, h2Portefolio);
 
     const buttonsFiltersContainer  = document.createElement('div');
-    buttonsFiltersContainer.classList.add('btn-filter');                // comme sa classe est déjà dans le css je lui ajoute la class existante btn-filter (avec classLsit.add)
+    buttonsFiltersContainer.classList.add('btn-filter');                // comme sa classe est déjà dans le css je lui ajoute la class existante btn-filter (avec classList.add)
            
                                                                         //ensuite donc j'ajoute les boutons entre le h2 de portefolio et l'élement div qui a la classe gallery donc
-      portefolioSection.insertBefore(buttonsFiltersContainer, galleryDiv);
+      portefolioSection.insertBefore(buttonsFiltersContainer, galleryDiv); //j'insère un noeud avant le noeud de référence (portefolio) en tant qu'enfant du noeud parent spécifié (let insertNode = parentNode.insertBefore(newnode, referenceNode)
         console.log('Container des boutons de filtre créé et inséré dans le DOM : ', buttonsFiltersContainer);
           
 
@@ -156,18 +156,41 @@ async function initGallery() {
             const category = { name: categories[i]};                    // je crée un objet category qui contient le nom de la catégorie (categories[i] repésentant chaque catégorie du tableau categories)
             console.log('Catégorie actuelle : ', category);
 
-            const btnCategory = createFilterButton(category, works);   // je crée un bouton de filtre en utilisant la fonction createFilterButton et en lui passant en paramètre la catégorie et les travaux 
+            const btnCategory = createFilterButton(category, works);   // je crée un bouton de filtre en utilisant la fonction createFilterButton et en lui passant en paramètre la catégorie et les travaux (qui correspondront donc a ce bouton et idem pour chacun)
             buttonsFiltersContainer.appendChild(btnCategory);          // j'ajoute le bouton de filtre à son parent filtersContainer
 
          console.log(`Bouton ${category.name} crée et ajouté.`);       // si le bouton est créé je l'affiche dans la console
         
         }
 
-        addWorksGallery(works);
+        addWorksGallery(works);                                         //j'appel la fonction qui ajoute les works a la gallery et lui passe en parmètre le tableau de works
  }  
  initGallery();                                                         // j'appelle la fonction initGallery pour initialiser la gallerie et afficher les travaux dans le DOM
 
-//document.addEventListener('DOMContentLoaded', initGallery);           // j'ajoute un écouteur d'événement sur le document pour attendre que le contenu html soit chargé avant d'exécuter la fonction initGallery qui initialise la gallerie, 
+//document.addEventListener('DOMContentLoaded', initGallery);  // j'ajoute un écouteur d'événement sur le document pour attendre que le contenu html soit chargé avant d'exécuter la fonction initGallery qui initialise la gallerie,(REVOIR CECI et vérifier le comportement en fonction de si le script est dans le head du html avec defer, si le comportement est différent demander a jean baptiste ce qui est le mieux, suivant les situations) 
+
+
+//fonction pour afficher le mode edition
+function displayAdminMode() {
+    console.log('display ok');
+    const editBanner = document.createElement("div");  //création de la bannière en mode edition, vérifier si je dois tout effacer ou non avec innerHTML, mais je pense plutôt qu'il sera utile plutôt pour les différente page des popup, ici on ajoute juste une bannière donc peut être n'est-ce pas uile de tout effacer pour ttout réafficher dder a jean baptiste
+    editBanner.className = 'edit';
+    editBanner.innerHTML = 
+    `<p><a href="#modale" class="modale">
+    <i class="fa-regular fa-pen-to-square">
+    </i>Mode édition</a></p>
+    ` 
+    document.body.prepend(editBanner);  //vérifier si prepend est la methode la plus adaptée pour cette situation
+    console.log(editBanner);
+    
+}
+displayAdminMode();
+
+//fonction pour la popup(voir fichier popup)
+
+
+
+
 
 
 

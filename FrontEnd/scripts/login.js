@@ -26,3 +26,8 @@ document.querySelector(".login").addEventListener("submit", async function(event
         messageError.textContent = 'Email ou mot de passe incorrect';   //je renvoie un message d'erreur si l'utilisateur n'a pas pu se connecter, précisant que l'email ou le mot de passe est incorrect
     }
 });
+
+
+
+
+

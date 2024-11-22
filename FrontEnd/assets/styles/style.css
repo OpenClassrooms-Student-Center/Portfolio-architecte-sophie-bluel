@@ -53,7 +53,8 @@ table {
 /** end reset css**/
 /****************Base**************************/
 body {
-	/* width: 1140px; */
+	max-width: 1140px;
+	margin: auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 	background: #FFFEFB;
@@ -63,6 +64,33 @@ body {
 	margin: 50px auto 0;
 	
 }
+/************************Modale*****************************/
+/* .modale {
+	position: fixed;
+	display: flex;
+	align-items: center;
+	justify-content: center; */
+	/*************A modifier en fonction de la maquette, mettre au centre de la page et adapter les dimensions *********************/
+	/* top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.3);
+}
+
+.modale-wrapper {
+	overflow: auto;
+	width: 630px;
+	max-width: calc(100vw - 20px);
+	max-height: calc(100vh - 20px);
+	height: 688px;
+	padding: 20px; */
+	/* margin: 405px; */
+	/* background: #fff;
+
+} */
+
+
 
 /**************************Header***************************/
 header {
@@ -194,6 +222,24 @@ nav a:hover {
 	background: #1D6154;
 	color: white;
 }
+
+/********************Mode edit*******************/
+.edit {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #fff;
+	background: black;
+	height: 59px;
+	font-family: 'Work Sans', 'Segoe UI', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	
+
+}
+
+
+
 /******************Gallery***********************/
 
 .gallery {
