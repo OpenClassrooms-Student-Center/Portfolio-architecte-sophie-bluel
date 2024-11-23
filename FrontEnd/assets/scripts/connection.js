@@ -3,7 +3,73 @@ import {
     insertAfterPortfolioTitle
 } from "./createCategoryFilterButtons.js";
 console.log(new Date().toLocaleTimeString(), "connection page script begins");
-await addConnectionListener();
+//await addConnectionListener();
+await waitOnForm();
+await storeInputInVars();
+
+/**
+ * SMART 0
+ */
+function waitOnForm() {
+    try {
+        addEventListener("DOMContentLoaded", () => {
+            const form = document.querySelector("#connection");
+            console.log(new Date().toLocaleTimeString(), "form: "+form);
+        });
+    } catch(error) {
+        console.error(new Date.toLocaleTimeString(), "Error getting connection.html DOM: %o", error);
+    }
+}
+
+/**
+ * SMART 1
+ * loginSubmit
+ */
+function storeInputInVars() {
+    try {
+        const email = document.querySelector("#email").value;
+        console.log(new Date().toLocaleTimeString(), "email :"+email);
+        const pwd = document.querySelector("#pwd").value;
+        console.log(new Date().toLocaleTimeString(), "pwd :" + pwd);
+    } catch (error) {
+        console.error(new Date().toLocaleTimeString(), "Error querying form fields");
+    }
+}
+
+/**
+ * SMART 1
+ * loginSubmit
+ * make JSON obj
+ *  @returns {JSON} data
+ */
+function prepareReqJSONobj() {
+    try {
+
+    } catch(error) {
+        console.error(new Date().toLocaleTimeString(), "Error storing req JSON obj: %o", error);
+    }
+}
+
+/**
+ * SMART 2 ...
+ * make req POST header
+ */
+
+/**
+ * SMART 3 ...
+ * send req
+ * POST HTTP 200
+ */
+function sendReq() {
+    const sent = fetch("URL");
+}
+
+/**
+ * SMART 4
+ * fetch /API/user/login === user input
+ * connected true stored in localStorage
+ */
+
 /**
  * This function listens the click on the login page form connect button.
  */
@@ -15,11 +81,19 @@ async function addConnectionListener() {
             connectionForm.addEventListener("submit", (event) => {
                 console.log(new Date().toLocaleTimeString(), "connect submit");
                 event.preventDefault();
-                console.log("prev");
-                localStorage.setItem("connected", "true");
-                console.log("stored");
+                console.log(new Date().toLocaleTimeString(), "prev");
+                const userInputEmail = document.querySelector("#email").value;
+                const userInputPwd = document.querySelector("#pwd").value;
+                //alert(userInputEmail);// alert(userInputPwd);
+                console.log(new Date().toLocaleTimeString(), "em" + userInputEmail);
+                // 1 recup par id ou obj json
+                // 2 json(), stringify etc => localStorage
+                // 3 jwt.io
+                // 
+                /*localStorage.setItem("connected", "true");
+                console.log(new Date().toLocaleTimeString(), "stored");
                 window.location.href = "../index.html";
-                console.log("redir done");
+                console.log(new Date().toLocaleTimeString(), "redir done");*/
             });
         });
     } catch(error) {

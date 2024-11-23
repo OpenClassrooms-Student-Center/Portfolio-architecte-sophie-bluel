@@ -48,12 +48,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     const categories = await getCategories(worksPromise);
     await createCategoryFilterButtons(categories, galleryDiv, initialFetchedGallery);
     /****** Step 2.2 update landing page to connected mode ******/
-    const isConnected = localStorage.getItem("connected") === true;
+    /*const isConnected = localStorage.getItem("connected") === true;
     console.log(new Date().toLocaleTimeString(), "is connected");
     if(isConnected) {
         addConnectedModeBanner();
         toggleNavbarLogin();
         hideCategoryFilterButtons();
         addWorksModificationLink();
-    }
+    }*/
 });
