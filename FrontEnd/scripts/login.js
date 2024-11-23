@@ -1,33 +1,108 @@
-document.querySelector(".login").addEventListener("submit", async function(event) {   // on écoute l'événement submit sur le formulaire d'identifiant login
-    event.preventDefault();                                                 // permet d'éviter le comportement par default de rechargement de la page
+// Attendre que le DOM soit chargé
+document.addEventListener("DOMContentLoaded", function() {
+    console.log("DOM chargé, initialisation du formulaire de login");
+    const loginForm = document.querySelector(".login form");
+    
+    loginForm.addEventListener("submit", async function(event) {
+        event.preventDefault();
+        console.log("Formulaire soumis");
+        
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        await handlelogin(email, password);
+    });
+});
 
-    const email = document.getElementById('email').value;                  //je récupère les valeurs d'entrées de l'utilisateur, email, password
-    const password = document.getElementById('password').value;
-    const messageError = document.getElementById('messageError');           //je récupère l'élément messageError
-
+// Fonction pour gérer la connexion
+async function handlelogin(email, password) {
     try {
-        const response = await fetch('http://localhost:5678/api/users/login', { //je fais une requête POST à l'adresse de l'API, pour me connecter
-            method: 'POST',                                                        //je précise la méthode POST
-            headers: {                                                         //je précise les headers de la requête ce qui me permet de préciser le type de contenu de la requête
-                'Content-Type': 'application/json'                            //je précise le type de contenu de la requête
+        console.log("Tentative de connexion...");
+        const response = await fetch("http://localhost:5678/api/users/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
             },
-            body: JSON.stringify({email, password})                         //je précise le corps de la requête, je transforme les données en JSON, pour les envoyer au serveur    
+            body: JSON.stringify({email, password})
         });
 
         if (!response.ok) {
-            throw new Error('Erreur lors de la connexion')                //je vérifie si la réponse est ok, sinon renvoie une erreur
+            throw new Error("Erreur dans l'identifiant ou le mot de passe");
+        }
+        
+        const data = await response.json();
+        console.log("Connexion réussie");
+
+        localStorage.setItem("token", data.token);
+        console.log("Token stocké dans le localStorage");
+
+        window.location.href = "index.html";
+    } catch (error) {
+        console.error("Erreur lors de la connexion:", error);
+        const messageError = document.getElementById("messageError");
+        messageError.textContent = "Email ou mot de passe incorrect";
+    }
+}
+
+function createEditBar() {
+    const editBar = document.createElement("div");
+    editBar.className = "edit-bar";
+    editBar.innerHTML = `
+        <i class="fa-regular fa-pen-to-square"></i>
+        <span>Mode édition</span>
+    `;
+    document.body.insertBefore(editBar, document.body.firstChild);
+}
+
+function checkIfAdmin() {
+    const token = localStorage.getItem("token");
+    const filterButtons = document.querySelector(".filter-buttons");
+    const loginLink = document.querySelector('nav ul li:nth-child(3) a');
+    
+    // Supprimer d'abord tous les éléments d'édition
+    const editBar = document.querySelector(".edit-bar");
+    if (editBar) {
+        editBar.remove();
+    }
+    
+    const editButton = document.querySelector(".edit-button");
+    if (editButton) {
+        editButton.remove();
+    }
+    
+    document.body.classList.remove("admin-mode");
+    
+    // Seulement si un token est présent, ajouter les éléments d'édition
+    if (token) {
+        document.body.classList.add("admin-mode");
+        createEditBar();
+
+        const portfolioTitle = document.querySelector("#portfolio h2");
+        if (portfolioTitle && !portfolioTitle.nextElementSibling?.classList.contains("edit-button")) {
+            const editButton = document.createElement("a");
+            editButton.href = "#";
+            editButton.className = "edit-button";
+            editButton.innerHTML = '<i class="fa-regular fa-pen-to-square"></i>modifier';
+            portfolioTitle.insertAdjacentElement('afterend', editButton);
         }
 
-        const data = await response.json();                              //je récupère les données de la réponse, je les transforme en JSON
-        localStorage.setItem('token', data.token);                       //je stocke le token dans le localstorage
-        window.location.href = 'index.html';                             //je redirige l'utilisateur vers la page index.html
-
-    } catch (error) {
-        messageError.textContent = 'Email ou mot de passe incorrect';   //je renvoie un message d'erreur si l'utilisateur n'a pas pu se connecter, précisant que l'email ou le mot de passe est incorrect
+        // Changer le lien Login en Logout
+        if (loginLink) {
+            loginLink.textContent = 'Logout';
+            loginLink.href = '#';
+            loginLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                localStorage.removeItem('token');
+                location.reload();
+            });
+        }
+    } else {
+        // Remettre le lien Login
+        if (loginLink) {
+            loginLink.textContent = 'Login';
+            loginLink.href = 'login.html';
+        }
     }
-});
+}
 
-
-
-
-
+// Vérifie le mode admin au chargement de la page
+document.addEventListener('DOMContentLoaded', checkIfAdmin);
