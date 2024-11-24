@@ -22,10 +22,53 @@
 </head>
 <body>
 <!------------------Modal(popup)--------------------->
-<!-- <a href="#modale">Ouvrir la boite modale</a>
-<aside id="modale1" class="modale" aria-hidden="true" role="dialog" aria-labelledby="titleModale">
-<div class="modale-wrapper"></div>
-</aside> -->
+<!-- <a href="#modale">Ouvrir la boite modale</a>-->
+<aside id="modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titlemodal" style="display: none;">
+    <div class="modale-wrapper">
+        <!-- Vue 1 : Galerie photo -->
+        <div class="modal-view" id="gallery-view">
+            <h3 id="titlemodal">Galerie photo</h3>
+            <button class="close-modal" aria-label="Fermer"><i class="fa-solid fa-xmark"></i></button>
+            <div class="gallery-container">
+                <!-- La galerie sera ajoutée ici dynamiquement -->
+            </div>
+            <div class="modal-footer">
+                <hr>
+                <button class="add-photo-btn">Ajouter une photo</button>
+            </div>
+        </div>
+
+        <!-- Vue 2 : Ajout photo -->
+        <div class="modal-view" id="add-photo-view" style="display: none;">
+            <button class="back-button"><i class="fa-solid fa-arrow-left"></i></button>
+            <button class="close-modal" aria-label="Fermer"><i class="fa-solid fa-xmark"></i></button>
+            <h3>Ajout photo</h3>
+            <form class="add-photo-form">
+                <div class="image-upload-container">
+                    <i class="fa-regular fa-image"></i>
+                    <label for="image-upload" class="custom-file-upload">+ Ajouter photo</label>
+                    <input type="file" id="image-upload" name="image" accept="image/*" required>
+                    <img id="image-preview" src="#" alt="Aperçu" style="display: none;">
+                    <p class="upload-info">jpg, png : 4mo max</p>
+                </div>
+                <div class="form-group">
+                    <label for="title">Titre</label>
+                    <input type="text" name="title" id="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="category">Catégorie</label>
+                    <select name="category" id="category" required>
+                        <!-- Les catégories seront ajoutées dynamiquement -->
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <hr>
+                    <button type="submit" class="submit-btn" disabled>Valider</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</aside> 
 <!------------Header------------------->
 <header>
     <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
@@ -53,7 +96,13 @@
     </section>
      <!-------------Portfolio------------------>
     <section id="portfolio">
-        <h2>Mes Projets</h2>
+        <div class="title-container">
+            <h2>Mes Projets</h2>
+            <button class="edit-btn" style="display: none;">
+                <i class="fas fa-edit"></i>
+                Modifier
+            </button>
+        </div>
         <div class="gallery">
         </div>
     </section>
@@ -82,7 +131,9 @@
     </nav>
 </footer>
 <!--------------Scripts Js----------------->
+   <script src="./scripts/api.js"></script>  <!--defini les fonctions des appels api-->
+   <script src="./scripts/scriptsGallery.js"></script> <!--utilise mes fonctions-->
+   <script src="./scripts/modal.js"></script>
    <script src="./scripts/login.js"></script>
-   <script src="./scripts/scriptsGallery.js"></script>
   </body>
  </html>

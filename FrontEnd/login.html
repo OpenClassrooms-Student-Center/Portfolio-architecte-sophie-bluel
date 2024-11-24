@@ -10,50 +10,49 @@
     <meta name="description" content="">
     <link rel="stylesheet" href="./assets/styles/style.css">
     <link rel="stylesheet" href="./assets/styles/login.css">
-
-    <body>
-        <div class="wrapper">
-<!------------Header------------------->   
+</head>
+<body>
+    <div class="wrapper">
+        <!------------Header------------------->   
         <header>
             <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
             <nav>
                 <ul>
                     <li><a href="index.html#portfolio">projets</a></li>
                     <li><a href="index.html#contact">contact</a></li>
-                    <li><a href="#">log In</a></li>
+                    <li><a href="#">login</a></li>
                     <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
-                   
                 </ul>
             </nav>
         </header>
- <!-----------Main-------------------->
+        <!-----------Main-------------------->
         <main>
-            
- <!-----------Form-------------------->
+            <!-----------Form-------------------->
             <section class="login formLogin">
                 <h2>Log In</h2>
                 <form action="#" method="post">
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="email" autocomplete="email" value ="user@example.com" required>
+                    <input type="email" name="email" id="email" autocomplete="email" value="sophie.bluel@test.tld" required>
                     <label for="password">Mot de passe</label>
                     <input type="password" name="password" id="password" autocomplete="current-password" required>
-                     <input type="submit" value="Se connecter" class="btn-submit">
+                    <input type="submit" value="Se connecter" class="btn-submit">
                     <p id="messageError"></p>
                 </form>
                 <p id="forgetMp"><a href="#">Mot de passe oublié</a></p>
             </section>
         </main>
-        </div>
-<!-----------Footer-------------------->
-        <footer id="footerLogIn">
-            <nav>
-                <ul>
-                    <li><a href="#">Mentions Légales</a></li>
-                </ul>
-            </nav>
-        </footer>
+    </div>
+    <!-----------Footer-------------------->
+    <footer id="footerLogIn">
+        <nav>
+            <ul>
+                <li><a href="#">Mentions Légales</a></li>
+            </ul>
+        </nav>
+    </footer>
       
- <!----------JS--------------------->
-<script src="./scripts/login.js"></script>
-    </body>
+    <!----------JS--------------------->
+    <script src="./scripts/api.js"></script>
+    <script src="./scripts/login.js"></script>
+</body>
 </html>

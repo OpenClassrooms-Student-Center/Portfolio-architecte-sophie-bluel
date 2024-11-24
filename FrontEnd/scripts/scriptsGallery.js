@@ -1,24 +1,5 @@
-//Récupération des travaux de l'api,
-const apiUrlWorks = "http://localhost:5678/api/works";
-console.log(apiUrlWorks);
-
-async function getWorks() {
-  try {
-    const response = await fetch(apiUrlWorks);
-    console.log("réponse reçue: ", response);
-
-    if (!response.ok) {
-      throw new Error(`Erreur HTTP! Status : ${response.status}`);
-    }
-    const works = await response.json(); // la méthode json() de l'objet response permet de transformer les données reçues en json et await permet d'attendre la fin de la transformation avant de continuer le code de la fonction
-    console.log("Travaux récupérés : ", works);
-    return works;
-  } catch (error){
-    console.error("Erreur lors de la récupération des travaux : ", error);
-    return [];
-  }
-}
-//getWorks();
+//Récupération des travaux depuis api.js
+console.log("Initialisation de la galerie...");
 
 // Gestion des boutons de filtre
 function handleFilterClick(button, category, works) {
@@ -46,7 +27,7 @@ function addWorksGallery (works) {
 
   for (let i = 0; i < works.length; i++) {
     const work = works[i];
-    //console.log('travail actuel : ', work);
+    console.log('travail actuel : ', work);
 
     const workElement = document.createElement("figure");
     workElement.className = "work";
@@ -54,7 +35,7 @@ function addWorksGallery (works) {
         <img src="${work.imageUrl}" alt="${work.title}"/>
         <figcaption>${work.title}</figcaption>
         `;
-    //console.log('élément crée : ', workElement);
+    console.log('élément crée : ', workElement);
 
     WorksContainer.appendChild(workElement); // ajout de workElement a son parent worksContainer
   }
@@ -123,7 +104,7 @@ function styleFilterButton(button) {
 
 async function initGallery() {
   //console.log('Initialisation de la gallerie');
-  const works = await getWorks();
+  const works = await getWorksFromApi(); // j'appelle la fonction getWorksFromApi qui est dans api.js pour récupérer les travaux
   const categories = extractCategories(works); // je crée une variable categories qui contient les catégories extraites des travaux en utilisant la fonction extractCategories et works en paramètre et qui me permet de récupérer les catégories des travaux
   console.log("Catégories extraites : ", categories); // vérification des catégories extraites dans la console
 
