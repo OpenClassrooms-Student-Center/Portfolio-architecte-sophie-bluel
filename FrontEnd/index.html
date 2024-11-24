@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./assets/styles/style.css">
+    <link rel="stylesheet" href="./assets/styles/modal.css">
     <link rel="stylesheet" href="./assets/styles/admin.css">
     <meta name="description" content="">
     <link rel="stylesheet" href="./assets/styles/style.css">
@@ -22,7 +23,7 @@
 </head>
 <body>
 <!------------------Modal(popup)--------------------->
-<!-- <a href="#modale">Ouvrir la boite modale</a>-->
+<!-- <a href="#modale">Ouvrir la boite modale</a>,-->
 <aside id="modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titlemodal" style="display: none;">
     <div class="modale-wrapper">
         <!-- Vue 1 : Galerie photo -->
@@ -40,7 +41,7 @@
 
         <!-- Vue 2 : Ajout photo -->
         <div class="modal-view" id="add-photo-view" style="display: none;">
-            <button class="back-button"><i class="fa-solid fa-arrow-left"></i></button>
+            <button class="back-button" aria-label="Retour"><i class="fa-solid fa-arrow-left"></i></button>
             <button class="close-modal" aria-label="Fermer"><i class="fa-solid fa-xmark"></i></button>
             <h3>Ajout photo</h3>
             <form class="add-photo-form">
@@ -48,22 +49,25 @@
                     <i class="fa-regular fa-image"></i>
                     <label for="image-upload" class="custom-file-upload">+ Ajouter photo</label>
                     <input type="file" id="image-upload" name="image" accept="image/*" required>
-                    <img id="image-preview" src="#" alt="Aperçu" style="display: none;">
-                    <p class="upload-info">jpg, png : 4mo max</p>
+                    <p class="file-info">jpg, png : 4mo max</p>
                 </div>
+                
                 <div class="form-group">
                     <label for="title">Titre</label>
-                    <input type="text" name="title" id="title" required>
+                    <input type="text" id="title" name="title" required>
                 </div>
+                
                 <div class="form-group">
                     <label for="category">Catégorie</label>
-                    <select name="category" id="category" required>
+                    <select id="category" name="category" required>
+                        <option value="">Sélectionner une catégorie</option>
                         <!-- Les catégories seront ajoutées dynamiquement -->
                     </select>
                 </div>
-                <div class="modal-footer">
+                
+                <div class="form-validation">
                     <hr>
-                    <button type="submit" class="submit-btn" disabled>Valider</button>
+                    <button type="submit" class="validate-btn" disabled>Valider</button>
                 </div>
             </form>
         </div>
@@ -131,7 +135,7 @@
     </nav>
 </footer>
 <!--------------Scripts Js----------------->
-   <script src="./scripts/api.js"></script>  <!--defini les fonctions des appels api-->
+   <script src="./scripts/api.js"></script>  <!--defini les fonctions des appels api, en fait (Commentaire en enlever plus tard, mais juste pour me rappeler), je n'ai pas besoin de import ou export pour utiliser mes fonctions entre les différents fichier, parce qu'ici les script sont placé dans le bon orde (c'est entre autre pour cela que la première fois que j'avais voulu faire plusieurs fichiers descript ça n'avait pas fonctionné apparememtn ils n'etaient pas dans le bon ordre) et donc comme le fichier qui contient les appels api est le dernier fichier appelé, j'ai pu utiliser directement mes fonctions. (il y a d'autres solutions donc a revoir plus précisément)-->
    <script src="./scripts/scriptsGallery.js"></script> <!--utilise mes fonctions-->
    <script src="./scripts/modal.js"></script>
    <script src="./scripts/login.js"></script>

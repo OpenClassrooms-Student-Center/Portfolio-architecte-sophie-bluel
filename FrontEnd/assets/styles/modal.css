@@ -1,0 +1,275 @@
+/* Styles pour la modale */
+
+/* Overlay de la modale */
+.modal {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* Container principal de la modale */
+.modale-wrapper {
+    background-color: #fff;
+    width: 630px;
+    padding: 30px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* Titre de la modale */
+#titlemodal {
+    font-family: 'Work Sans';
+    font-weight: 400;
+    font-size: 26px;
+    text-align: center;
+    color: black;
+    margin-bottom: 30px;
+}
+
+/* Je style le conteneur de la galerie */
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    padding: 20px;
+    margin-bottom: 67.3px;
+}
+
+/* Je style chaque projet dans la modale */
+.modal-work {
+    position: relative;
+}
+
+/* Je style le conteneur de l'image */
+.work-image-container {
+    position: relative;
+}
+
+/* Je style l'image */
+.modal-work img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+}
+
+/* Je style le bouton de suppression */
+.delete-work {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: black;
+    color: white;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+}
+
+/* Je style la légende */
+.modal-work figcaption {
+    text-align: center;
+    margin-top: 5px;
+}
+
+/* Bouton supprimer (poubelle) */
+.delete-btn {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background: black;
+    border: none;
+    border-radius: 2px;
+    width: 17px;
+    height: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.delete-btn i {
+    color: white;
+    font-size: 11px;
+}
+
+/* Footer de la modale */
+.modal-footer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Ligne de séparation */
+.modal-footer hr {
+    width: 100%;
+    border: none;
+    height: 1px;
+    background-color: #B3B3B3;
+    margin-bottom: 38px;
+}
+
+/* Bouton Ajouter photo */
+.add-photo-btn {
+    background-color: #1D6154;
+    color: white;
+    font-family: 'Syne';
+    font-weight: 700;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 60px;
+    cursor: pointer;
+    margin: 0 auto;
+    width: fit-content;
+}
+
+/* Bouton fermer (croix) */
+.close-modal {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+}
+
+.close-modal i {
+    font-size: 24px;
+    color: black;
+}
+
+/* Style pour la vue d'ajout de photo */
+#add-photo-view h3 {
+    margin-top: 60px;
+    text-align: center;
+}
+
+.back-button {
+    position: absolute;
+    left: 30px;
+    top: 30px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.image-upload-container {
+    width: 420px;
+    height: 160px;
+    background: #E8F1F6;
+    margin: 36px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-upload-container i {
+    font-size: 76px;
+    color: #B9C5CC;
+    margin-bottom: 15px;
+}
+
+.custom-file-upload {
+    background: #CBD6DC;
+    color: #306685;
+    padding: 10px 20px;
+    font-family: 'Work Sans';
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+#image-upload {
+    display: none;
+}
+
+.form-group {
+    width: 420px;
+    margin: 30px auto;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    color: #3D3D3D;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    height: 50px;
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+.validate-btn {
+    background: #A7A7A7;
+    color: white;
+    width: 237px;
+    height: 36px;
+    border: none;
+    margin-top: 20px;
+    cursor: not-allowed;
+}
+
+.validate-btn.active {
+    background: #1D6154;
+    cursor: pointer;
+}
+
+/* Style pour la vue de confirmation */
+.photo-preview-container {
+    width: 420px;
+    height: 160px;
+    background: #E8F1F6;
+    margin: 36px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#photo-preview {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+#confirm-photo-view .form-group input {
+    background: #E8F1F6;
+    color: #444;
+    cursor: not-allowed;
+}
+
+#confirm-photo-view .validate-btn {
+    background: #1D6154;
+    cursor: pointer;
+}
+
+/* Media queries pour la responsivité */
+@media (max-width: 700px) {
+    .modale-wrapper {
+        width: 95%;
+        margin: 20px;
+    }
+
+    .gallery-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .modal-work img {
+        width: 100%;
+        height: auto;
+    }
+}

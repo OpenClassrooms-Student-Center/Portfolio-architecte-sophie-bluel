@@ -17,21 +17,9 @@ document.addEventListener("DOMContentLoaded", function() {
 async function handlelogin(email, password) {
     try {
         console.log("Tentative de connexion...");
-        const response = await fetch("http://localhost:5678/api/users/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({email, password})
-        });
-
-        if (!response.ok) {
-            throw new Error("Erreur dans l'identifiant ou le mot de passe");
-        }
+        // Utiliser la fonction loginUser de api.js
+        const data = await loginUser(email, password);
         
-        const data = await response.json();
-        console.log("Connexion réussie");
-
         localStorage.setItem("token", data.token);
         console.log("Token stocké dans le localStorage");
 
@@ -47,16 +35,18 @@ function createEditBar() {
     const editBar = document.createElement("div");
     editBar.className = "edit-bar";
     editBar.innerHTML = `
-        <i class="fa-regular fa-pen-to-square"></i>
-        <span>Mode édition</span>
+        <a href="#" class="edit-link">
+            <i class="fa-regular fa-pen-to-square"></i>
+            <span>Mode édition</span>
+        </a>
     `;
     document.body.insertBefore(editBar, document.body.firstChild);
 }
 
 function checkIfAdmin() {
     const token = localStorage.getItem("token");
-    const filterButtons = document.querySelector(".filter-buttons");
     const loginLink = document.querySelector('nav ul li:nth-child(3) a');
+    const filterButtonsContainer = document.querySelector(".filter-buttons");
     
     // Supprimer d'abord tous les éléments d'édition
     const editBar = document.querySelector(".edit-bar");
@@ -64,7 +54,7 @@ function checkIfAdmin() {
         editBar.remove();
     }
     
-    const editButton = document.querySelector(".edit-button");
+    const editButton = document.querySelector(".portfolio-edit-link");
     if (editButton) {
         editButton.remove();
     }
@@ -76,13 +66,19 @@ function checkIfAdmin() {
         document.body.classList.add("admin-mode");
         createEditBar();
 
-        const portfolioTitle = document.querySelector("#portfolio h2");
-        if (portfolioTitle && !portfolioTitle.nextElementSibling?.classList.contains("edit-button")) {
-            const editButton = document.createElement("a");
-            editButton.href = "#";
-            editButton.className = "edit-button";
-            editButton.innerHTML = '<i class="fa-regular fa-pen-to-square"></i>modifier';
-            portfolioTitle.insertAdjacentElement('afterend', editButton);
+        // Masquer les boutons de filtrage en mode édition
+        if (filterButtonsContainer) {
+            filterButtonsContainer.style.display = 'none';
+        }
+
+        const portfolioTitle = document.querySelector("#portfolio .title-container");
+        if (portfolioTitle) {
+            const editLink = document.createElement("a");
+            editLink.href = "#";
+            editLink.className = "portfolio-edit-link";
+            editLink.innerHTML = '<i class="fa-regular fa-pen-to-square"></i>modifier';
+            editLink.addEventListener('click', openModal); // Ajout de l'événement pour ouvrir la modale
+            portfolioTitle.appendChild(editLink);
         }
 
         // Changer le lien Login en Logout
@@ -96,6 +92,11 @@ function checkIfAdmin() {
             });
         }
     } else {
+        // Afficher les boutons de filtrage en mode visiteur
+        if (filterButtonsContainer) {
+            filterButtonsContainer.style.display = '';
+        }
+        
         // Remettre le lien Login
         if (loginLink) {
             loginLink.textContent = 'Login';

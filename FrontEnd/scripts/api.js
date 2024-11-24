@@ -1,8 +1,8 @@
 // Fichier qui centralise le code pour les appels API
 const apiUrl = "http://localhost:5678/api";
 
-// Fonction pour récupérer les travaux (renommée pour correspondre à votre code)
-async function getWorksFromApi() {
+// Fonction pour récupérer les travaux
+async function getWorksFromAPI() {
     console.log("Début récupération des travaux");
     try {
         const response = await fetch(`${apiUrl}/works`);
