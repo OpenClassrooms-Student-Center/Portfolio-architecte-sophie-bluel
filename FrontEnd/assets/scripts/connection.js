@@ -6,9 +6,10 @@ console.log(new Date().toLocaleTimeString(), "connection page script begins");
 //await addConnectionListener();
 await waitOnForm();
 await storeInputInVars();
-
+prepareReqJSONobj();
 /**
  * SMART 0
+ * This function checks step by step the form element usability.
  */
 function waitOnForm() {
     try {
@@ -24,13 +25,15 @@ function waitOnForm() {
 /**
  * SMART 1
  * loginSubmit
+ * This function checks the login form variables storage.
  */
 function storeInputInVars() {
     try {
         const email = document.querySelector("#email").value;
         console.log(new Date().toLocaleTimeString(), "email :"+email);
-        const pwd = document.querySelector("#pwd").value;
-        console.log(new Date().toLocaleTimeString(), "pwd :" + pwd);
+        const pwd = document.querySelector("#pwd");
+        //console.log(new Date().toLocaleTimeString(), "pwd :" + pwd);
+        localStorage.setItem("email", email); //localStorage.add(pwd);
     } catch (error) {
         console.error(new Date().toLocaleTimeString(), "Error querying form fields");
     }
@@ -39,20 +42,21 @@ function storeInputInVars() {
 /**
  * SMART 1
  * loginSubmit
- * make JSON obj
+ * This function checks the makeability of a JSON object creation and temporary storage.
  *  @returns {JSON} data
  */
 function prepareReqJSONobj() {
     try {
-
+        console.log(localStorage.getItem("email"));
     } catch(error) {
         console.error(new Date().toLocaleTimeString(), "Error storing req JSON obj: %o", error);
     }
 }
 
 /**
- * SMART 2 ...
- * make req POST header
+ * SMART 2 
+ * This target and next are to draw in a diagram first.
+ * This function makes a req POST header.
  */
 
 /**
@@ -61,7 +65,7 @@ function prepareReqJSONobj() {
  * POST HTTP 200
  */
 function sendReq() {
-    const sent = fetch("URL");
+    //const sent = fetch("URL");
 }
 
 /**
