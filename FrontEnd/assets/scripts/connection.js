@@ -4,9 +4,19 @@ import {
 } from "./createCategoryFilterButtons.js";
 console.log(new Date().toLocaleTimeString(), "connection page script begins");
 //await addConnectionListener();
-await waitOnForm();
-await storeInputInVars();
-prepareReqJSONobj();
+const storedVar = storeInputInVar();
+console.log(new Date().toLocaleTimeString(), "store test: " + storedVar);
+const storedLocal = storeVariableInLocalStorage(storedVar);
+console.log(new Date().toLocaleTimeString(), "local stored: " + storedLocal);
+const submitData = prepareReqJSONdataPayload();
+const submitHeader = prepareReqJSONheader();
+console.log(new Date().toLocaleTimeString(), "submit header: " + submitHeader);
+console.log(new Date().toLocaleTimeString(), "header alg: " + submitHeader.alg);
+console.log(new Date().toLocaleTimeString(), "header type: " + submitHeader.typ);
+console.log(new Date().toLocaleTimeString(), "submit data: " + submitData);
+console.log(new Date().toLocaleTimeString(), "submit data test hard: " + submitData.testH);
+console.log(new Date().toLocaleTimeString(), "submit data test soft: " + submitData.testS);
+
 /**
  * SMART 0
  * This function checks step by step the form element usability.
@@ -15,25 +25,32 @@ function waitOnForm() {
     try {
         addEventListener("DOMContentLoaded", () => {
             const form = document.querySelector("#connection");
-            console.log(new Date().toLocaleTimeString(), "form: "+form);
+            console.log(new Date().toLocaleTimeString(), "form: " + form);
+            console.log("HTML element autofocus: " + form.autofocus);
+            console.log("HTML element innerHTML: " + form.autofocus);
+            console.log("HTML element dataset: " + form.dataset);
+            console.log("HTML element dataset: " + form.dataset);
+            console.log("HTML element anchorelement: " + form.anchorElement);
+            
         });
     } catch(error) {
         console.error(new Date.toLocaleTimeString(), "Error getting connection.html DOM: %o", error);
     }
 }
-
 /**
  * SMART 1
  * loginSubmit
- * This function checks the login form variables storage.
+ * This function checks the login form variable storage.
+ * @returns a stored variable.
  */
-function storeInputInVars() {
+function storeInputInVar() {
     try {
         const email = document.querySelector("#email").value;
-        console.log(new Date().toLocaleTimeString(), "email :"+email);
-        const pwd = document.querySelector("#pwd");
+        console.log(new Date().toLocaleTimeString(), "email: " + email);
+        //const pwd = document.querySelector("#pwd");
         //console.log(new Date().toLocaleTimeString(), "pwd :" + pwd);
-        localStorage.setItem("email", email); //localStorage.add(pwd);
+        //return email;
+        return "testVal";
     } catch (error) {
         console.error(new Date().toLocaleTimeString(), "Error querying form fields");
     }
@@ -41,22 +58,56 @@ function storeInputInVars() {
 
 /**
  * SMART 1
+ * This function stores input var in local storage.
+ * @param {string} an input var
+ * @returns the stored data.
+ */
+function storeVariableInLocalStorage(variable) {
+    localStorage.setItem("email", variable); //localStorage.add(pwd);
+    localStorage.setItem("test", "test");
+    const storedTest = localStorage.getItem("test");
+    return storedTest;
+}
+
+/**
+ * SMART 1
  * loginSubmit
- * This function checks the makeability of a JSON object creation and temporary storage.
+ * This objective checks the makeability of a JSON object creation and temporary storage.
+ * This function prepares the JWT data payload.
  *  @returns {JSON} data
  */
-function prepareReqJSONobj() {
+function prepareReqJSONdataPayload() {
     try {
-        console.log(localStorage.getItem("email"));
+        const submit = {
+            //"email": email,
+            "testH": "test",
+            "testS": storeVariableInLocalStorage(storeInputInVar())
+            /*"pwd": pwd*/
+        }
+        return submit;
     } catch(error) {
         console.error(new Date().toLocaleTimeString(), "Error storing req JSON obj: %o", error);
     }
 }
 
 /**
+ * SMART 1
+ * This function returns the token header
+ * @returns an alg. and type obj.
+ */
+function prepareReqJSONheader() {
+    return { 
+        "alg": "HS256",
+        "typ": "JWT"
+    }
+}
+
+/**
  * SMART 2 
  * This target and next are to draw in a diagram first.
- * This function makes a req POST header.
+ * Diag1: local function to application/json
+ * Diag2: jwt.io API ack.
+ * This function makes a post req header.
  */
 
 /**
