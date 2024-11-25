@@ -19,6 +19,7 @@ try {
         console.log(new Date().toLocaleTimeString(), "submit data: " + submitData);
         console.log(new Date().toLocaleTimeString(), "data test hard: " + submitData.testH);
         console.log(new Date().toLocaleTimeString(), "data test soft: " + submitData.testS);
+        //const token = sendReq();
         //addConnectionListener();
     });
 } catch(error) {
@@ -54,7 +55,7 @@ async function waitOnForm() {
 function storeInputInVar(selector) {
     try {
         const el = document.querySelector(selector);
-        if(el.value !== null) {
+        if(el.value !== null && el.value !== undefined && el.value !== "") {
             return el.value;
         } else if(el !== null) {
             return el;
@@ -79,9 +80,9 @@ function storeVariableInLocalStorageAndReturnIt(key, val) {
 }
 
 /**
- * SMART 1
+ * SMART 2
  * loginSubmit
- * This objective checks the makeability of a JSON object creation and temporary storage.
+ * This objective checks a JSON object creation and temporary storage.
  * This function prepares the JWT data payload.
  *  @returns {JSON} data
  */
@@ -100,32 +101,35 @@ function prepareReqJSONdataPayload() {
 }
 
 /**
- * SMART 1
+ * SMART 2
  * This function returns the token header
  * @returns an alg. and type obj.
  */
 function prepareReqJSONheader() {
     return { 
+        "Content-Type": "application/json",
         "alg": "HS256",
         "typ": "JWT"
     }
 }
 
 /**
- * SMART 2 
- * This target and next are to draw in a diagram first.
- * Diag1: local function to application/json
- * Diag2: jwt.io API ack.
- * This function makes a post req header.
- */
-
-/**
+ * SMART 3
+ * local function to application/json
+ * jwt.io API ack.
  * SMART 3 ...
  * send req
  * POST HTTP 200
  */
-function sendReq() {
-    //const sent = fetch("URL");
+async function sendReq() {
+    const sent = fetch(
+        "https://jwt.io", { 
+            method: "POST",
+            mode: "no-cors",
+            headers: prepareReqJSONheader(),
+            body: JSON.stringify(prepareReqJSONdataPayload())
+        }
+    );
 }
 
 /**
