@@ -4,33 +4,40 @@ import {
 } from "./createCategoryFilterButtons.js";
 console.log(new Date().toLocaleTimeString(), "connection page script begins");
 //await addConnectionListener();
-const storedVar = storeInputInVar();
-console.log(new Date().toLocaleTimeString(), "store test: " + storedVar);
-const storedLocal = storeVariableInLocalStorage(storedVar);
-console.log(new Date().toLocaleTimeString(), "local stored: " + storedLocal);
-const submitData = prepareReqJSONdataPayload();
-const submitHeader = prepareReqJSONheader();
-console.log(new Date().toLocaleTimeString(), "submit header: " + submitHeader);
-console.log(new Date().toLocaleTimeString(), "header alg: " + submitHeader.alg);
-console.log(new Date().toLocaleTimeString(), "header type: " + submitHeader.typ);
-console.log(new Date().toLocaleTimeString(), "submit data: " + submitData);
-console.log(new Date().toLocaleTimeString(), "submit data test hard: " + submitData.testH);
-console.log(new Date().toLocaleTimeString(), "submit data test soft: " + submitData.testS);
+//await waitOnForm();
+try {
+    addEventListener("DOMContentLoaded", () => {
+        const storedVar = storeInputInVar("#email");
+        console.log(new Date().toLocaleTimeString(), "var store test email: " + storedVar);
+        const storedLocal = storeVariableInLocalStorageAndReturnIt("test", "test");
+        console.log(new Date().toLocaleTimeString(), "local stored: " + storedLocal);
+        const submitData = prepareReqJSONdataPayload();
+        const submitHeader = prepareReqJSONheader();
+        console.log(new Date().toLocaleTimeString(), "submit header: " + submitHeader);
+        console.log(new Date().toLocaleTimeString(), "header alg: " + submitHeader.alg);
+        console.log(new Date().toLocaleTimeString(), "header type: " + submitHeader.typ);
+        console.log(new Date().toLocaleTimeString(), "submit data: " + submitData);
+        console.log(new Date().toLocaleTimeString(), "data test hard: " + submitData.testH);
+        console.log(new Date().toLocaleTimeString(), "data test soft: " + submitData.testS);
+        //addConnectionListener();
+    });
+} catch(error) {
+    console.error(new Date.toLocaleTimeString(), "Error getting connection.html DOM: %o", error);
+};
 
 /**
  * SMART 0
  * This function checks step by step the form element usability.
  */
-function waitOnForm() {
+async function waitOnForm() {
     try {
         addEventListener("DOMContentLoaded", () => {
             const form = document.querySelector("#connection");
             console.log(new Date().toLocaleTimeString(), "form: " + form);
-            console.log("HTML element autofocus: " + form.autofocus);
-            console.log("HTML element innerHTML: " + form.autofocus);
-            console.log("HTML element dataset: " + form.dataset);
-            console.log("HTML element dataset: " + form.dataset);
-            console.log("HTML element anchorelement: " + form.anchorElement);
+            console.log("HTML element autofocus: " + form?.autofocus);
+            console.log("HTML element innerHTML: " + form?.innerHTML);
+            console.log("HTML element dataset: " + form?.dataset);
+            console.log("HTML element anchorelement: " + form?.anchorElement);
             
         });
     } catch(error) {
@@ -41,16 +48,19 @@ function waitOnForm() {
  * SMART 1
  * loginSubmit
  * This function checks the login form variable storage.
+ * @param {string} selector : the HTML element's CSS selector
  * @returns a stored variable.
  */
-function storeInputInVar() {
+function storeInputInVar(selector) {
     try {
-        const email = document.querySelector("#email").value;
-        console.log(new Date().toLocaleTimeString(), "email: " + email);
-        //const pwd = document.querySelector("#pwd");
-        //console.log(new Date().toLocaleTimeString(), "pwd :" + pwd);
-        //return email;
-        return "testVal";
+        const el = document.querySelector(selector);
+        if(el.value !== null) {
+            return el.value;
+        } else if(el !== null) {
+            return el;
+        } else {
+            return "test";
+        }
     } catch (error) {
         console.error(new Date().toLocaleTimeString(), "Error querying form fields");
     }
@@ -58,15 +68,14 @@ function storeInputInVar() {
 
 /**
  * SMART 1
- * This function stores input var in local storage.
- * @param {string} an input var
+ * This function stores an input var in local storage.
+ * @param {string} key input var
+ * @param {string} val
  * @returns the stored data.
  */
-function storeVariableInLocalStorage(variable) {
-    localStorage.setItem("email", variable); //localStorage.add(pwd);
-    localStorage.setItem("test", "test");
-    const storedTest = localStorage.getItem("test");
-    return storedTest;
+function storeVariableInLocalStorageAndReturnIt(key, val) {
+    localStorage.setItem(key, val);
+    return localStorage.getItem(key);
 }
 
 /**
@@ -81,7 +90,7 @@ function prepareReqJSONdataPayload() {
         const submit = {
             //"email": email,
             "testH": "test",
-            "testS": storeVariableInLocalStorage(storeInputInVar())
+            "testS": storeVariableInLocalStorageAndReturnIt(storeInputInVar("#email"))
             /*"pwd": pwd*/
         }
         return submit;
@@ -130,26 +139,12 @@ function sendReq() {
  */
 async function addConnectionListener() {
     try{
-        document.addEventListener("DOMContentLoaded", async () => {
-            console.log(new Date().toLocaleTimeString(), "add event listener");
-            const connectionForm = document.querySelector("#connectionForm");
-            connectionForm.addEventListener("submit", (event) => {
-                console.log(new Date().toLocaleTimeString(), "connect submit");
-                event.preventDefault();
-                console.log(new Date().toLocaleTimeString(), "prev");
-                const userInputEmail = document.querySelector("#email").value;
-                const userInputPwd = document.querySelector("#pwd").value;
-                //alert(userInputEmail);// alert(userInputPwd);
-                console.log(new Date().toLocaleTimeString(), "em" + userInputEmail);
-                // 1 recup par id ou obj json
-                // 2 json(), stringify etc => localStorage
-                // 3 jwt.io
-                // 
-                /*localStorage.setItem("connected", "true");
-                console.log(new Date().toLocaleTimeString(), "stored");
-                window.location.href = "../index.html";
-                console.log(new Date().toLocaleTimeString(), "redir done");*/
-            });
+        console.log(new Date().toLocaleTimeString(), "add event listener");
+        const connectionForm = document.querySelector("#connectionForm");
+        connectionForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+            localStorage.setItem("connected", "true");
+            window.location.href = "../index.html";
         });
     } catch(error) {
         console.error("Error at connection listener adding: %o", error);
