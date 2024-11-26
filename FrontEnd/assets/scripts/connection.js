@@ -2,6 +2,7 @@
 import {
     insertAfterPortfolioTitle
 } from "./createCategoryFilterButtons.js";
+import jwtSign from "./node_modules/jsonwebtoken/sign.js";
 console.log(new Date().toLocaleTimeString(), "connection page script begins");
 //await addConnectionListener();
 //await waitOnForm();
@@ -12,14 +13,11 @@ try {
         const storedLocal = storeVariableInLocalStorageAndReturnIt("test", "test");
         console.log(new Date().toLocaleTimeString(), "local stored: " + storedLocal);
         const submitData = prepareReqJSONdataPayload();
-        const submitHeader = prepareReqJSONheader();
         console.log(new Date().toLocaleTimeString(), "submit header: " + submitHeader);
-        console.log(new Date().toLocaleTimeString(), "header alg: " + submitHeader.alg);
-        console.log(new Date().toLocaleTimeString(), "header type: " + submitHeader.typ);
         console.log(new Date().toLocaleTimeString(), "submit data: " + submitData);
         console.log(new Date().toLocaleTimeString(), "data test hard: " + submitData.testH);
         console.log(new Date().toLocaleTimeString(), "data test soft: " + submitData.testS);
-        //const token = sendReq();
+        console.log(new Date().toLocaleTimeString(), "sent req fetched data response: " + sendReqAndReturnDataResponse());
         //addConnectionListener();
     });
 } catch(error) {
@@ -60,7 +58,7 @@ function storeInputInVar(selector) {
         } else if(el !== null) {
             return el;
         } else {
-            return "test";
+            return "test store in var.";
         }
     } catch (error) {
         console.error(new Date().toLocaleTimeString(), "Error querying form fields");
@@ -88,48 +86,46 @@ function storeVariableInLocalStorageAndReturnIt(key, val) {
  */
 function prepareReqJSONdataPayload() {
     try {
-        const submit = {
-            //"email": email,
+        const payload = {
+            "userId": 1,
+            "userName": "ef@m",
             "testH": "test",
-            "testS": storeVariableInLocalStorageAndReturnIt(storeInputInVar("#email"))
-            /*"pwd": pwd*/
+            "testS": storeVariableInLocalStorageAndReturnIt(storeInputInVar("#email")),
+            exp: Math.floor(Date.now() / 1000) + (24 * 60 * 60)
         }
-        return submit;
+        const signedToken = jwtSign.sign(payload, { algorithm: "HS256" /*, expiresIn: "1h" */});
+        return signedToken;
     } catch(error) {
         console.error(new Date().toLocaleTimeString(), "Error storing req JSON obj: %o", error);
     }
 }
 
 /**
- * SMART 2
- * This function returns the token header
- * @returns an alg. and type obj.
- */
-function prepareReqJSONheader() {
-    return { 
-        "Content-Type": "application/json",
-        "alg": "HS256",
-        "typ": "JWT"
-    }
-}
-
-/**
  * SMART 3
- * local function to application/json
- * jwt.io API ack.
- * SMART 3 ...
+ * jwt.io API ack. => 
+ *     1) generate token locally in mode no CORS 
+ *     2) then check backend for usage as is as possible
  * send req
  * POST HTTP 200
  */
-async function sendReq() {
-    const sent = fetch(
-        "https://jwt.io", { 
-            method: "POST",
-            mode: "no-cors",
-            headers: prepareReqJSONheader(),
-            body: JSON.stringify(prepareReqJSONdataPayload())
-        }
-    );
+async function sendReqAndReturnDataResponse() {
+    try {
+        const token = prepareReqJSONdataPayload();
+        const response = fetch(
+            "http://127.0.0.1:5678/api/endpoint", { 
+                method: "POST",
+                mode: "no-cors",
+                headers: { 
+                    alg: "HS256",
+                    aut: `Bearer ${token}`
+                },
+                body: JSON.stringify({ testH: "testH" })
+            }
+        );
+        const data = await response.json();
+    } catch(error) {
+        console.error("Error sending login req: %o", error);
+    }
 }
 
 /**
