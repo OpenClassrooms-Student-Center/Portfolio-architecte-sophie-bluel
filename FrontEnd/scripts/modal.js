@@ -1,7 +1,8 @@
-// Je stocke la modale ouverte dans une variable globale
+// Je stocke la modale ouverte dans une variable globale, ce qui me permet de suivre l'etat de ma modale et de savoir si une odlae est ouverte ou non (REVOIR TOUTE la logique de ce fichier)
+//*******************RééCRIRE cette fonctionnalité de zéro, revoir tout ce que j'ai fait à partir de checkif admin revoir la façon de gérer le mode édition, le mode admin et les modale, revoir la suppression des photos dans la première modale et pourquoi quand je supprime une photo je ne reste pas dans la modale, comme cela le faisias avnt que je poursuive sur la création de la seconde modlae, ******************** */
 let currentModal = null;
 
-// 1. OUVERTURE DE LA MODALE
+// OUVERTURE DE LA MODALE
 function openModal(e) {
     e.preventDefault();
     
@@ -54,12 +55,12 @@ function stopPropagation(e) {
 
 // 4. CHARGEMENT DES PROJETS DANS LA MODALE
 async function loadWorksInModal() {
-    console.log("Je commence à charger les projets dans la modale");
+    console.log('Je commence à charger les projets dans la modale');
     
     // Je récupère le conteneur avec la bonne classe
-    const modalGallery = document.querySelector(".gallery-container");
+    const modalGallery = document.querySelector('.gallery-container');
     if (!modalGallery) {
-        console.log("Je ne trouve pas le conteneur .gallery-container");
+        console.log('Je ne trouve pas le conteneur .gallery-container');
         return;
     }
     
@@ -75,7 +76,7 @@ async function loadWorksInModal() {
         for(let i = 0; i < works.length; i++) {
             const work = works[i];
             
-            // Je crée une figure pour chaque projet
+            // Je crée un élément figure pour chaque projet
             const figure = document.createElement("figure");
             figure.className = "modal-work";
             
@@ -90,14 +91,16 @@ async function loadWorksInModal() {
                 <figcaption>éditer</figcaption>
             `;
             
-            // J'ajoute la figure à mon conteneur
+            // J'ajoute lélément figure à mon conteneur (.gallery-container)
             modalGallery.appendChild(figure);
+            const deleteButton = figure.querySelector('.delete-work');
+            deleteButton.addEventListener('click', handleDeleteWork);
         }
         
         console.log("J'ai fini de charger la galerie dans la modale");
         
     } catch(error) {
-        console.log("Oups, j'ai une erreur:", error);
+        console.log("j'ai une erreur:", error);
         modalGallery.innerHTML = "Désolé, je n'arrive pas à charger les projets";
     }
 }
@@ -107,16 +110,16 @@ async function handleDeleteWork(e) {
     e.preventDefault();
     
     // On récupère l'ID du projet à supprimer (avec dataset.id, qui permet de recuperer l'id du projet dans le html)
-    const workId = e.currentTarget.dataset.id;
+    const workId = e.currentTarget.dataset.id;  //dataset.id permet de recuperer l'id 
     
     try {
         // On appelle l'API pour supprimer le projet
-        const success = await deleteWork(workId);
+        const success = await deleteWork(workId);  // On appelle la fonction deleteWork avec l'id du projet à supprimer
         
         if (success) {
             // Si la suppression réussit, on recharge les galeries
-            loadWorksInModal(); // Recharge la galerie dans la modale
-            initGallery();     // Recharge la galerie principale avec la fonction initGallery 
+           loadWorksInModal(); // Recharge la galerie dans la modale
+            // initGallery();     // Recharge la galerie principale avec la fonction initGallery 
         }
     } catch (error) {
         console.error("Erreur lors de la suppression:", error); // Affiche l'erreur dans la console si la suppression echoue
@@ -128,7 +131,7 @@ async function handleDeleteWork(e) {
 async function handleAddWork(e) {
     e.preventDefault();
     
-    // On récupère les données du formulaire (formData permet de recuperer les donnees du formulaire (prendre le temps de rlier comment fonctionne formData plus precisément)
+    // On récupère les données du formulaire (formData permet de recuperer les donnees du formulaire (prendre le temps de relirecomment fonctionne plus précisément, voir le formData plus precisément)
     const formData = new FormData(e.target);
     
     try {
@@ -189,7 +192,7 @@ function checkFormValidity() {
     }
 }
 
-// Je gère l'ajout d'une photo
+// Gestion de  l'ajout d'une photo
 async function handlePhotoSubmit(event) {
     // J'empêche le comportement par défaut du formulaire
     event.preventDefault();

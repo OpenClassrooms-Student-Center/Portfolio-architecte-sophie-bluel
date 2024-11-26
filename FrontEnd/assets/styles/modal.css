@@ -34,7 +34,7 @@
     margin-bottom: 30px;
 }
 
-/* Je style le conteneur de la galerie */
+/*  style du conteneur de la galerie */
 .gallery-container {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -43,24 +43,24 @@
     margin-bottom: 67.3px;
 }
 
-/* Je style chaque projet dans la modale */
+/* différentes fenêtre dans la modale */
 .modal-work {
     position: relative;
 }
 
-/* Je style le conteneur de l'image */
+/*conteneur de l'image */
 .work-image-container {
     position: relative;
 }
 
-/* Je style l'image */
+/* image modale */
 .modal-work img {
     width: 100%;
     height: 100px;
     object-fit: cover;
 }
 
-/* Je style le bouton de suppression */
+/*  bouton de suppression */
 .delete-work {
     position: absolute;
     top: 5px;
@@ -72,7 +72,7 @@
     cursor: pointer;
 }
 
-/* Je style la légende */
+/*  légende */
 .modal-work figcaption {
     text-align: center;
     margin-top: 5px;

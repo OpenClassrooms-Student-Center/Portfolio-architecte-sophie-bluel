@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Sophie Bluel - Architecte d'intérieur</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="./assets/styles/style.css">
-    <link rel="stylesheet" href="./assets/styles/modal.css">
-    <link rel="stylesheet" href="./assets/styles/admin.css">
-    <meta name="description" content="">
-    <link rel="stylesheet" href="./assets/styles/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./assets/styles/style.css" />
+    <link rel="stylesheet" href="./assets/styles/modal.css" />
+    <link rel="stylesheet" href="./assets/styles/admin.css" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="./assets/styles/style.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
@@ -20,124 +26,159 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-</head>
-<body>
-<!------------------Modal(popup)--------------------->
-<!-- <a href="#modale">Ouvrir la boite modale</a>,-->
-<aside id="modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titlemodal" style="display: none;">
-    <div class="modale-wrapper">
+  </head>
+  <body>
+    <!------------------Modal(popup)--------------------->
+    
+    <aside
+      id="modal"
+      class="modal"
+      aria-hidden="true"
+      role="dialog"
+      aria-labelledby="titlemodal"   
+      style="display: none"
+    >  <!---changer titlemodal pur le vraie titre de la modale-->
+      <div class="modale-wrapper">
         <!-- Vue 1 : Galerie photo -->
         <div class="modal-view" id="gallery-view">
-            <h3 id="titlemodal">Galerie photo</h3>
-            <button class="close-modal" aria-label="Fermer"><i class="fa-solid fa-xmark"></i></button>
-            <div class="gallery-container">
-                <!-- La galerie sera ajoutée ici dynamiquement -->
-            </div>
-            <div class="modal-footer">
-                <hr>
-                <button class="add-photo-btn">Ajouter une photo</button>
-            </div>
+          <h3 id="titlemodal">Galerie photo</h3>
+          <button class="close-modal" aria-label="Fermer">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+          <div class="gallery-container">
+            <!-- La galerie sera ajoutée ici dynamiquement -->
+          </div>
+          <div class="modal-footer">
+            <hr />
+            <button class="add-photo-btn">Ajouter une photo</button>
+          </div>
         </div>
 
         <!-- Vue 2 : Ajout photo -->
-        <div class="modal-view" id="add-photo-view" style="display: none;">
-            <button class="back-button" aria-label="Retour"><i class="fa-solid fa-arrow-left"></i></button>
-            <button class="close-modal" aria-label="Fermer"><i class="fa-solid fa-xmark"></i></button>
-            <h3>Ajout photo</h3>
-            <form class="add-photo-form">
-                <div class="image-upload-container">
-                    <i class="fa-regular fa-image"></i>
-                    <label for="image-upload" class="custom-file-upload">+ Ajouter photo</label>
-                    <input type="file" id="image-upload" name="image" accept="image/*" required>
-                    <p class="file-info">jpg, png : 4mo max</p>
-                </div>
-                
-                <div class="form-group">
-                    <label for="title">Titre</label>
-                    <input type="text" id="title" name="title" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="category">Catégorie</label>
-                    <select id="category" name="category" required>
-                        <option value="">Sélectionner une catégorie</option>
-                        <!-- Les catégories seront ajoutées dynamiquement -->
-                    </select>
-                </div>
-                
-                <div class="form-validation">
-                    <hr>
-                    <button type="submit" class="validate-btn" disabled>Valider</button>
-                </div>
-            </form>
+        <div class="modal-view" id="add-photo-view" style="display: none"> <!--enlever le display none-->
+          <button class="back-button" aria-label="Retour"> <!--changer l'aria-label-->
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+          <button class="close-modal" aria-label="Fermer">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+          <h3>Ajout photo</h3>
+          <form class="add-photo-form">
+            <div class="image-upload-container">
+              <i class="fa-regular fa-image"></i>
+              <label for="image-upload" class="custom-file-upload"
+                >+ Ajouter photo</label
+              >
+              <input
+                type="file"
+                id="image-upload"
+                name="image"
+                accept="image/*"
+                required
+              />
+              <p class="file-info">jpg, png : 4mo max</p>
+            </div>
+
+            <div class="form-group">
+              <label for="title">Titre</label>
+              <input type="text" id="title" name="title" required />
+            </div>
+
+            <div class="form-group">
+              <label for="category">Catégorie</label>
+              <select id="category" name="category" required>
+                <option value="">Sélectionner une catégorie</option>
+                <!-- Les catégories seront ajoutées dynamiquement -->
+              </select>
+            </div>
+
+            <div class="form-validation">
+              <hr />
+              <button type="submit" class="validate-btn" disabled>
+                Valider
+              </button>
+            </div>
+          </form>
         </div>
-    </div>
-</aside> 
-<!------------Header------------------->
-<header>
-    <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
-    <nav>
+      </div>
+    </aside>
+    <!------------Header------------------->
+    <header>
+      <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+      <nav>
         <ul>
-            <li><a href="#portfolio">projets</a></li>
-            <li><a href="#contact">contact</a></li>
-            <li><a href=login.html>Login</a></li>
-            <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+          <li><a href="#portfolio">projets</a></li>
+          <li><a href="#contact">contact</a></li>
+          <li><a href="login.html">Login</a></li>
+          <li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
         </ul>
-    </nav>
-</header>
-<main>
-    <!------------Introduction------------------>
-    <section id="introduction">
+      </nav>
+    </header>
+    <main>
+      <!------------Introduction------------------>
+      <section id="introduction">
         <figure>
-            <img src="./assets/images/sophie-bluel.png" alt="">
+          <img src="./assets/images/sophie-bluel.png" alt="" />
         </figure>
         <article>
-            <h2>Designer d'espace</h2>
-            <p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
-            <p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
-            <p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
+          <h2>Designer d'espace</h2>
+          <p>
+            Je raconte votre histoire, je valorise vos idées. Je vous accompagne
+            de la conception à la livraison finale du chantier.
+          </p>
+          <p>
+            Chaque projet sera étudié en commun, de façon à mettre en valeur les
+            volumes, les matières et les couleurs dans le respect de l’esprit
+            des lieux et le choix adapté des matériaux. Le suivi du chantier
+            sera assuré dans le souci du détail, le respect du planning et du
+            budget.
+          </p>
+          <p>
+            En cas de besoin, une équipe pluridisciplinaire peut-être constituée
+            : architecte DPLG, décorateur(trice)
+          </p>
         </article>
-    </section>
-     <!-------------Portfolio------------------>
-    <section id="portfolio">
+      </section>
+      <!-------------Portfolio------------------>
+      <section id="portfolio">
         <div class="title-container">
-            <h2>Mes Projets</h2>
-            <button class="edit-btn" style="display: none;">
-                <i class="fas fa-edit"></i>
-                Modifier
-            </button>
+          <h2>Mes Projets</h2>
+          <button class="edit-btn" style="display: none">
+            <i class="fas fa-edit"></i>
+            Modifier
+          </button>
         </div>
-        <div class="gallery">
-        </div>
-    </section>
-     <!-------------Formulaire de contact------------------>
-    <section id="contact" class="formCommon">
+        <div class="gallery"></div>
+      </section>
+      <!-------------Formulaire de contact------------------>
+      <section id="contact" class="formCommon">
         <h2>Contact</h2>
         <p>Vous avez un projet ? Discutons-en !</p>
-        <form class="formLogin"  action="#" method="post">
-            <label for="name">Nom</label>
-            <input type="text" name="name" id="name">
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email">
-            <label for="message">Message</label>
-            <textarea name="message" id="message" cols="30" rows="10"></textarea>
-            <input type="submit" value="Envoyer" class="btn-submit">
+        <form class="formLogin" action="#" method="post">
+          <label for="name">Nom</label>
+          <input type="text" name="name" id="name" />
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" />
+          <label for="message">Message</label>
+          <textarea name="message" id="message" cols="30" rows="10"></textarea>
+          <input type="submit" value="Envoyer" class="btn-submit" />
         </form>
-    </section>
-</main>
-</div>
- <!-----------Footer-------------------->
-<footer>
-    <nav>
+      </section>
+    </main>
+
+    <!-----------Footer-------------------->
+    <footer>
+      <nav>
         <ul>
-            <li><a href ="">Mentions Légales</a></li>
+          <li><a href="#">Mentions Légales</a></li>
         </ul>
-    </nav>
-</footer>
-<!--------------Scripts Js----------------->
-   <script src="./scripts/api.js"></script>  <!--defini les fonctions des appels api, en fait (Commentaire en enlever plus tard, mais juste pour me rappeler), je n'ai pas besoin de import ou export pour utiliser mes fonctions entre les différents fichier, parce qu'ici les script sont placé dans le bon orde (c'est entre autre pour cela que la première fois que j'avais voulu faire plusieurs fichiers descript ça n'avait pas fonctionné apparememtn ils n'etaient pas dans le bon ordre) et donc comme le fichier qui contient les appels api est le dernier fichier appelé, j'ai pu utiliser directement mes fonctions. (il y a d'autres solutions donc a revoir plus précisément)-->
-   <script src="./scripts/scriptsGallery.js"></script> <!--utilise mes fonctions-->
-   <script src="./scripts/modal.js"></script>
-   <script src="./scripts/login.js"></script>
+      </nav>
+    </footer>
+    <!--------------Scripts Js----------------->
+    <script src="./scripts/api.js"></script>
+    <!--defini les fonctions des appels api, en fait (Commentaire en enlever plus tard, mais juste pour me rappeler), je n'ai pas besoin de import ou export pour utiliser mes fonctions entre les différents fichier, parce qu'ici les script sont placé dans le bon orde (c'est entre autre pour cela que la première fois que j'avais voulu faire plusieurs fichiers descript ça n'avait pas fonctionné apparememtn ils n'etaient pas dans le bon ordre) et donc comme le fichier qui contient les appels api est le dernier fichier appelé, j'ai pu utiliser directement mes fonctions. (il y a d'autres solutions donc a revoir plus précisément)-->
+    <script src="./scripts/scriptsGallery.js"></script>
+    <!--utilise mes fonctions-->
+    <script src="./scripts/modal.js"></script>
   </body>
- </html>
+</html>
