@@ -2,7 +2,8 @@
 import {
     insertAfterPortfolioTitle
 } from "./createCategoryFilterButtons.js";
-import jwtSign from "./node_modules/jsonwebtoken/sign.js";
+//import jwt from "./node_modules/jsonwebtoken";
+//const jwt = require('jsonwebtoken');
 console.log(new Date().toLocaleTimeString(), "connection page script begins");
 //await addConnectionListener();
 //await waitOnForm();
@@ -13,12 +14,11 @@ try {
         const storedLocal = storeVariableInLocalStorageAndReturnIt("test", "test");
         console.log(new Date().toLocaleTimeString(), "local stored: " + storedLocal);
         const submitData = prepareReqJSONdataPayload();
-        console.log(new Date().toLocaleTimeString(), "submit header: " + submitHeader);
         console.log(new Date().toLocaleTimeString(), "submit data: " + submitData);
         console.log(new Date().toLocaleTimeString(), "data test hard: " + submitData.testH);
         console.log(new Date().toLocaleTimeString(), "data test soft: " + submitData.testS);
         console.log(new Date().toLocaleTimeString(), "sent req fetched data response: " + sendReqAndReturnDataResponse());
-        //addConnectionListener();
+        addConnectionListener();
     });
 } catch(error) {
     console.error(new Date.toLocaleTimeString(), "Error getting connection.html DOM: %o", error);
@@ -53,13 +53,18 @@ async function waitOnForm() {
 function storeInputInVar(selector) {
     try {
         const el = document.querySelector(selector);
-        if(el.value !== null && el.value !== undefined && el.value !== "") {
-            return el.value;
-        } else if(el !== null) {
-            return el;
-        } else {
-            return "test store in var.";
-        }
+        el.addEventListener("input", () => {
+            if(el.value !== null && el.value !== undefined && el.value !== "") {
+                console.log("email el type: " + el.type);
+                return el.value;
+            } else if(el !== null) {
+                console.log("email el type: " + el.type);
+                return el;
+            } else {
+                console.log("email el type: " + el.type);
+                return "test store in var.";
+            }
+        });
     } catch (error) {
         console.error(new Date().toLocaleTimeString(), "Error querying form fields");
     }
@@ -87,14 +92,10 @@ function storeVariableInLocalStorageAndReturnIt(key, val) {
 function prepareReqJSONdataPayload() {
     try {
         const payload = {
-            "userId": 1,
-            "userName": "ef@m",
-            "testH": "test",
-            "testS": storeVariableInLocalStorageAndReturnIt(storeInputInVar("#email")),
-            exp: Math.floor(Date.now() / 1000) + (24 * 60 * 60)
+            "userId": 1
         }
-        const signedToken = jwtSign.sign(payload, { algorithm: "HS256" /*, expiresIn: "1h" */});
-        return signedToken;
+        //const signedToken = jwt.sign(payload, { algorithm: "HS256" /*, expiresIn: "24h" */});
+        return payload;
     } catch(error) {
         console.error(new Date().toLocaleTimeString(), "Error storing req JSON obj: %o", error);
     }
@@ -112,21 +113,28 @@ async function sendReqAndReturnDataResponse() {
     try {
         const token = prepareReqJSONdataPayload();
         const response = fetch(
-            "http://127.0.0.1:5678/api/endpoint", { 
+            "http://127.0.0.1:5678/api/users/login", { 
                 method: "POST",
-                mode: "no-cors",
+                //mode: "no-cors",
                 headers: { 
-                    alg: "HS256",
-                    aut: `Bearer ${token}`
+                    alg: "HS256"/*,
+                    auth: `Bearer ${token}`*/
                 },
-                body: JSON.stringify({ testH: "testH" })
+                body: JSON.stringify({ "email": "sophie.bluel@test.tld"/*, "password": ""*/})
             }
         );
         const data = await response.json();
+        return data;
     } catch(error) {
         console.error("Error sending login req: %o", error);
     }
 }
+
+/**
+ * SMART 3
+ * encrypt password to be done by server
+ */
+function bcryptPassword() {}
 
 /**
  * SMART 4
