@@ -5,7 +5,6 @@ import {
 //import jwt from "./node_modules/jsonwebtoken";
 //const jwt = require('jsonwebtoken');
 console.log(new Date().toLocaleTimeString(), "connection page script begins");
-//await addConnectionListener();
 //await waitOnForm();
 try {
     addEventListener("DOMContentLoaded", () => {
@@ -18,7 +17,7 @@ try {
         console.log(new Date().toLocaleTimeString(), "data test hard: " + submitData.testH);
         console.log(new Date().toLocaleTimeString(), "data test soft: " + submitData.testS);
         console.log(new Date().toLocaleTimeString(), "sent req fetched data response: " + sendReqAndReturnDataResponse());
-        addConnectionListener();
+        //addConnectionListener();
     });
 } catch(error) {
     console.error(new Date.toLocaleTimeString(), "Error getting connection.html DOM: %o", error);
@@ -48,25 +47,25 @@ async function waitOnForm() {
  * loginSubmit
  * This function checks the login form variable storage.
  * @param {string} selector : the HTML element's CSS selector
- * @returns a stored variable.
+ * @returns a string to store in a variable.
  */
 function storeInputInVar(selector) {
     try {
         const el = document.querySelector(selector);
         el.addEventListener("input", () => {
             if(el.value !== null && el.value !== undefined && el.value !== "") {
-                console.log("email el type: " + el.type);
+                console.log("email el type with value: " + el.type);
                 return el.value;
             } else if(el !== null) {
-                console.log("email el type: " + el.type);
+                console.log("email el type no value: " + el.type);
                 return el;
             } else {
-                console.log("email el type: " + el.type);
+                console.log("email el type null: " + el.type);
                 return "test store in var.";
             }
         });
     } catch (error) {
-        console.error(new Date().toLocaleTimeString(), "Error querying form fields");
+        console.error(new Date().toLocaleTimeString(), "Error querying form field: %o", error);
     }
 }
 
@@ -75,17 +74,21 @@ function storeInputInVar(selector) {
  * This function stores an input var in local storage.
  * @param {string} key input var
  * @param {string} val
- * @returns the stored data.
+ * @returns the stored value.
  */
 function storeVariableInLocalStorageAndReturnIt(key, val) {
-    localStorage.setItem(key, val);
-    return localStorage.getItem(key);
+    try{
+        localStorage.setItem(key, val);
+        return localStorage.getItem(key);
+    } catch(error) {
+        console.error(new Date().toLocaleTimeString(), "Error storing in locale storage: %o", error);
+    }
 }
 
 /**
  * SMART 2
  * loginSubmit
- * This objective checks a JSON object creation and temporary storage.
+ * This objective checks a JWT object creation and temporary storage.
  * This function prepares the JWT data payload.
  *  @returns {JSON} data
  */
@@ -97,7 +100,7 @@ function prepareReqJSONdataPayload() {
         //const signedToken = jwt.sign(payload, { algorithm: "HS256" /*, expiresIn: "24h" */});
         return payload;
     } catch(error) {
-        console.error(new Date().toLocaleTimeString(), "Error storing req JSON obj: %o", error);
+        console.error("Error storing req JSON obj: %o", error);
     }
 }
 
@@ -107,11 +110,12 @@ function prepareReqJSONdataPayload() {
  *     1) generate token locally in mode no CORS 
  *     2) then check backend for usage as is as possible
  * send req
- * POST HTTP 200
+ * This objective's expected result is POST's HTTP 200
  */
 async function sendReqAndReturnDataResponse() {
     try {
-        const token = prepareReqJSONdataPayload();
+        console.log("body: " + JSON.stringify({ email: "sophie.bluel@test.tld"}));
+        //const token = prepareReqJSONdataPayload();
         const response = fetch(
             "http://127.0.0.1:5678/api/users/login", { 
                 method: "POST",
@@ -120,10 +124,10 @@ async function sendReqAndReturnDataResponse() {
                     alg: "HS256"/*,
                     auth: `Bearer ${token}`*/
                 },
-                body: JSON.stringify({ "email": "sophie.bluel@test.tld"/*, "password": ""*/})
+                body: JSON.stringify({ email: "sophie.bluel@test.tld"/*, "password": ""*/})
             }
         );
-        const data = await response.json();
+        const data = await response;//.json();
         return data;
     } catch(error) {
         console.error("Error sending login req: %o", error);
@@ -132,7 +136,8 @@ async function sendReqAndReturnDataResponse() {
 
 /**
  * SMART 3
- * encrypt password to be done by server
+ * encrypt password to be done by server though guideline is not to expose it. 
+ * Exposure of mean to encrypt seems unavoidably open.
  */
 function bcryptPassword() {}
 
