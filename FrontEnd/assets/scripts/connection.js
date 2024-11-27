@@ -7,16 +7,20 @@ import {
 console.log(new Date().toLocaleTimeString(), "connection page script begins");
 //await waitOnForm();
 try {
-    addEventListener("DOMContentLoaded", () => {
+    addEventListener("DOMContentLoaded", async () => {
         const storedVar = storeInputInVar("#email");
         console.log(new Date().toLocaleTimeString(), "var store test email: " + storedVar);
         const storedLocal = storeVariableInLocalStorageAndReturnIt("test", "test");
         console.log(new Date().toLocaleTimeString(), "local stored: " + storedLocal);
         const submitData = prepareReqJSONdataPayload();
-        console.log(new Date().toLocaleTimeString(), "submit data: " + submitData);
-        console.log(new Date().toLocaleTimeString(), "data test hard: " + submitData.testH);
-        console.log(new Date().toLocaleTimeString(), "data test soft: " + submitData.testS);
-        console.log(new Date().toLocaleTimeString(), "sent req fetched data response: " + sendReqAndReturnDataResponse());
+        console.log(new Date().toLocaleTimeString(), "submit req: " + submitData);
+        console.log(new Date().toLocaleTimeString(), "req test userId: " + submitData.userId);
+        const repData = await sendReqAndReturnDataResponse();
+        console.log(new Date().toLocaleTimeString(), "sent req fetched data response: " + repData);
+        console.log("rep ok: " + repData.ok);
+        console.log("rep headers: " + repData.headers);
+        console.log("rep body: " + repData.body);
+        console.log("rep type: " + repData.type);
         //addConnectionListener();
     });
 } catch(error) {
@@ -29,7 +33,7 @@ try {
  */
 async function waitOnForm() {
     try {
-        addEventListener("DOMContentLoaded", () => {
+        document.addEventListener("DOMContentLoaded", () => {
             const form = document.querySelector("#connection");
             console.log(new Date().toLocaleTimeString(), "form: " + form);
             console.log("HTML element autofocus: " + form?.autofocus);
@@ -114,19 +118,24 @@ function prepareReqJSONdataPayload() {
  */
 async function sendReqAndReturnDataResponse() {
     try {
-        console.log("body: " + JSON.stringify({ email: "sophie.bluel@test.tld"}));
-        //const token = prepareReqJSONdataPayload();
-        const response = fetch(
-            "http://127.0.0.1:5678/api/users/login", { 
-                method: "POST",
-                //mode: "no-cors",
-                headers: { 
-                    alg: "HS256"/*,
-                    auth: `Bearer ${token}`*/
-                },
-                body: JSON.stringify({ email: "sophie.bluel@test.tld"/*, "password": ""*/})
-            }
-        );
+        let response = null;
+        const form = document.querySelector("#connectionForm");
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            //const token = prepareReqJSONdataPayload();
+            response = fetch(
+                "http://127.0.0.1:5678/api/users/login", { 
+                    "method": "POST",
+                    //mode: "no-cors",
+                    "headers": { 
+                        "alg": "HS256"/*,
+                        auth: `Bearer ${token}`*/
+                    },
+                    //"body": "JSON.stringify({ email: \"sophie.bluel@test.tld\" })"
+                    "body": { "email": "sophie.bluel@test.tld", "password": "test" } 
+                }
+            );
+        });
         const data = await response;//.json();
         return data;
     } catch(error) {
