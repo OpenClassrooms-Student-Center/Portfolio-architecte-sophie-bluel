@@ -2,6 +2,7 @@ const db = require('./../models');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const Users = db.users;
+import {fsLogger} from "../logger/logger.js";
 
 exports.signup = async (req, res) => {
 	if(!req.body.email){// || !req.body.password){
@@ -26,14 +27,17 @@ exports.signup = async (req, res) => {
 }
 
 exports.login = async (req, res) => {
+	console.log("user controller enter..."); //fsLogger("user controller enter...", "backend");
 	const user = await Users.findOne({where: {email: "sophie.bluel@test.tld"}});//req.body.email}});
 	if(user === null){
-		return res.status(404).json({message: 'user not found'})
+		console.log("user not found");
+		return res.status(404).json({message: 'user not found'});
 	}else {
 		/*const valid = await bcrypt.compare(req.body.password, user.password)
 		if(!valid){
 			return res.status(401).json({ error: new Error('Not Authorized') })
 		}*/
+		console.log("login OK");
 		return res.status(200).json({
 			userId: user.id,
 			token: jwt.sign(
@@ -42,6 +46,5 @@ exports.login = async (req, res) => {
 				{ expiresIn: '24h' }
 			)
 		})
-
 	}
 }

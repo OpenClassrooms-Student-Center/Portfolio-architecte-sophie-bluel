@@ -2,26 +2,15 @@
 import {
     insertAfterPortfolioTitle
 } from "./createCategoryFilterButtons.js";
-//import jwt from "./node_modules/jsonwebtoken";
-//const jwt = require('jsonwebtoken');
 console.log(new Date().toLocaleTimeString(), "connection page script begins");
-//await waitOnForm();
 try {
     addEventListener("DOMContentLoaded", async () => {
-        const storedVar = storeInputInVar("#email");
-        console.log(new Date().toLocaleTimeString(), "var store test email: " + storedVar);
-        const storedLocal = storeVariableInLocalStorageAndReturnIt("test", "test");
-        console.log(new Date().toLocaleTimeString(), "local stored: " + storedLocal);
-        const submitData = prepareReqJSONdataPayload();
-        console.log(new Date().toLocaleTimeString(), "submit req: " + submitData);
-        console.log(new Date().toLocaleTimeString(), "req test userId: " + submitData.userId);
         const repData = await sendReqAndReturnDataResponse();
         console.log(new Date().toLocaleTimeString(), "sent req fetched data response: " + repData);
         console.log("rep ok: " + repData.ok);
         console.log("rep headers: " + repData.headers);
         console.log("rep body: " + repData.body);
         console.log("rep type: " + repData.type);
-        //addConnectionListener();
     });
 } catch(error) {
     console.error(new Date.toLocaleTimeString(), "Error getting connection.html DOM: %o", error);
@@ -29,7 +18,7 @@ try {
 
 /**
  * SMART 0
- * This function checks step by step the form element usability.
+ * This function checks step by step the form usability.
  */
 async function waitOnForm() {
     try {
@@ -58,13 +47,13 @@ function storeInputInVar(selector) {
         const el = document.querySelector(selector);
         el.addEventListener("input", () => {
             if(el.value !== null && el.value !== undefined && el.value !== "") {
-                console.log("email el type with value: " + el.type);
+                console.log(`${selector} el type with value: ` + el.type);
                 return el.value;
             } else if(el !== null) {
-                console.log("email el type no value: " + el.type);
+                console.log(`${selector} el type no value: type ` + el.type + ", value: " + el.value);
                 return el;
             } else {
-                console.log("email el type null: " + el.type);
+                console.log(`${selector} el type null: ` + el.type);
                 return "test store in var.";
             }
         });
@@ -101,7 +90,6 @@ function prepareReqJSONdataPayload() {
         const payload = {
             "userId": 1
         }
-        //const signedToken = jwt.sign(payload, { algorithm: "HS256" /*, expiresIn: "24h" */});
         return payload;
     } catch(error) {
         console.error("Error storing req JSON obj: %o", error);
@@ -111,32 +99,36 @@ function prepareReqJSONdataPayload() {
 /**
  * SMART 3
  * jwt.io API ack. => 
- *     1) generate token locally in mode no CORS 
+ *     1) generate token locally in mode no-cors of method
+ *      a) const token = prepareReqJSONdataPayload();
+ *      b) headers: auth: `Bearer ${token}`
+ *      c) "body": "JSON.stringify({ email: \"sophie.bluel@test.tld\" })"
  *     2) then check backend for usage as is as possible
  * send req
  * This objective's expected result is POST's HTTP 200
+ * This function sends a minimal viable request to the backend.
+ * The intended effect is to store in the browser an edit mode display information.
  */
 async function sendReqAndReturnDataResponse() {
     try {
         let response = null;
         const form = document.querySelector("#connectionForm");
+        console.log("form to send query: " + form);
         form.addEventListener("submit", (event) => {
             event.preventDefault();
-            //const token = prepareReqJSONdataPayload();
             response = fetch(
                 "http://127.0.0.1:5678/api/users/login", { 
                     "method": "POST",
-                    //mode: "no-cors",
                     "headers": { 
-                        "alg": "HS256"/*,
-                        auth: `Bearer ${token}`*/
+                        "alg": "HS256"
                     },
-                    //"body": "JSON.stringify({ email: \"sophie.bluel@test.tld\" })"
                     "body": { "email": "sophie.bluel@test.tld", "password": "test" } 
                 }
             );
+            console.log("response fetch: " + response);
         });
-        const data = await response;//.json();
+        const data = await response;
+        console.log("data awaited: " + data);
         return data;
     } catch(error) {
         console.error("Error sending login req: %o", error);
