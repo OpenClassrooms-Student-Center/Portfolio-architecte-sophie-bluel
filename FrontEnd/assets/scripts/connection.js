@@ -3,18 +3,12 @@ import {
     insertAfterPortfolioTitle
 } from "./createCategoryFilterButtons.js";
 console.log(new Date().toLocaleTimeString(), "connection page script begins");
-try {
-    addEventListener("DOMContentLoaded", async () => {
-        const repData = await sendReqAndReturnDataResponse();
-        console.log(new Date().toLocaleTimeString(), "sent req fetched data response: " + repData);
-        console.log("rep ok: " + repData.ok);
-        console.log("rep headers: " + repData.headers);
-        console.log("rep body: " + repData.body);
-        console.log("rep type: " + repData.type);
-    });
-} catch(error) {
-    console.error(new Date.toLocaleTimeString(), "Error getting connection.html DOM: %o", error);
-};
+const loginURL = "http://127.0.0.1:5678/api/users/login";
+addEventListener("DOMContentLoaded", async () => {
+    addEventListener("submit", (event) => {
+        loginSubmit(event);
+    })
+});
 
 /**
  * SMART 0
@@ -98,42 +92,48 @@ function prepareReqJSONdataPayload() {
 
 /**
  * SMART 3
- * jwt.io API ack. => 
- *     1) generate token locally in mode no-cors of method
- *      a) const token = prepareReqJSONdataPayload();
- *      b) headers: auth: `Bearer ${token}`
- *      c) "body": "JSON.stringify({ email: \"sophie.bluel@test.tld\" })"
- *     2) then check backend for usage as is as possible
- * send req
- * This objective's expected result is POST's HTTP 200
- * This function sends a minimal viable request to the backend.
+ * This function loggs the user in and stores the token in localStorage.
  * The intended effect is to store in the browser an edit mode display information.
  */
-async function sendReqAndReturnDataResponse() {
-    try {
-        let response = null;
-        const form = document.querySelector("#connectionForm");
-        console.log("form to send query: " + form);
-        form.addEventListener("submit", (event) => {
-            event.preventDefault();
-            response = fetch(
-                "http://127.0.0.1:5678/api/users/login", { 
-                    "method": "POST",
-                    "headers": { 
-                        "alg": "HS256"
-                    },
-                    "body": { "email": "sophie.bluel@test.tld", "password": "test" } 
-                }
-            ).then( response => 
-                response.json()
-            ).then( data => {
-                console.log("data: " + data);
-                return data;
-            });
-        });
-    } catch(error) {
-        console.error("Error sending login req: %o", error);
+function loginSubmit(e){
+    e.preventDefault();
+    const email = document.querySelector("#email").value;
+    const password = document.querySelector("#password").value;
+    const loginData = { 
+        email,
+        password
+    };
+    console.log("email, pawd:", email, password, loginData);
+    const req = {
+        method: "POST",
+        headers: {
+            accept: "application/json",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(loginData)
     }
+    const erreur = document.querySelector("#erreur");
+    erreur.innerHTML = "";
+
+    fetch(loginURL, req)
+        .then((res) => {
+            if(res.status === 200) {
+                return res.json();
+            }
+            else if(res.status === 401) {
+                throw new Error("Mauvais mot de passe");
+            }
+            else {
+                throw new Error("Utilsateur inconnu");
+            }
+        })
+        .then((data) => {
+            localStorage.setItem("token", data.token);
+            window.location.href = "../index.html";
+        })
+        /*.catch((error) => {
+            erreur
+        }*/
 }
 
 /**
