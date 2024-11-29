@@ -124,12 +124,13 @@ async function sendReqAndReturnDataResponse() {
                     },
                     "body": { "email": "sophie.bluel@test.tld", "password": "test" } 
                 }
-            );
-            console.log("response fetch: " + response);
+            ).then( response => 
+                response.json()
+            ).then( data => {
+                console.log("data: " + data);
+                return data;
+            });
         });
-        const data = await response;
-        console.log("data awaited: " + data);
-        return data;
     } catch(error) {
         console.error("Error sending login req: %o", error);
     }

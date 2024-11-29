@@ -11,10 +11,14 @@
  * 
  * written with help of OC's AI Companion
  */
-export function fsLogger(logMsg, end) {
-    const fs = require('fs');
+const fs = require('fs');
 
-    fs.appendFile(`../../../Backend/logs/${end}/logs${Day().Date}.txt`, logMsg + '\n', (err) => {
+/**
+ * This function writes a log in a daystamped file.
+ * @param {*} logMsg : the message to write
+ */
+exports.log = (logMsg) => {
+    fs.appendFile(`./logs/logs${new Date().toISOString()}.txt`, logMsg + '\n', (err) => {
     if (err) {
         console.error('Error writing backend log :', err);
     } else {

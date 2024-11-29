@@ -2,7 +2,7 @@ const db = require('./../models');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const Users = db.users;
-import {fsLogger} from "../logger/logger.js";
+//const logger = require("../logger/logFile");
 
 exports.signup = async (req, res) => {
 	if(!req.body.email){// || !req.body.password){
@@ -27,7 +27,7 @@ exports.signup = async (req, res) => {
 }
 
 exports.login = async (req, res) => {
-	console.log("user controller enter..."); //fsLogger("user controller enter...", "backend");
+	console.log("user controller enter..."); //logger.log("user controller enter...", "backend");
 	const user = await Users.findOne({where: {email: "sophie.bluel@test.tld"}});//req.body.email}});
 	if(user === null){
 		console.log("user not found");
