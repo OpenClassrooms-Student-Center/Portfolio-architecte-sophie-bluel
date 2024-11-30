@@ -119,27 +119,27 @@ function loginSubmit(e) {
     let httpCode = 0;
 
     fetch(loginURL, req)
-        .then((res) => {
-            httpCode = res.status;
-            if(res.status === 200) {
+        .then(res => 
+            /*httpCode = res.status;
+            if(res.status === 200) {*/
                 res.json()
-            }
+            /*}
             else if(res.status === 401) {
                 displayAndThrowError("Mauvais mot de passe");
             }
             else {
                 displayAndThrowError("Utilisateur inconnu");
-            }
-        })
-        .then((data) => {
-            if(httpCode === 200) {
+            }*/
+        /*}*/)
+        .then(data => {
+            //if(httpCode === 200) {
                 storeVariableInLocalStorage("token", data.token);
                 window.location.href = "../index.html";
-            }
+            //}
         })
-        .catch((error) => {
-            erreur.innerHTML = "Votre connexion essuie une erreur: " + error;
-        });
+        .catch(error => //{
+            erreur.innerHTML = "Votre connexion essuie une erreur: " + error
+        /*}*/);
 }
 
 /**
