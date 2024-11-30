@@ -257,13 +257,13 @@ li:hover {
 	margin: 2em 0 1em 0;
 }
 
-#contact textarea, #name, #email, #pwd {
+#contact textarea, #name, #email, #password {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 	margin-bottom: 1%;
 }
 
-#contact #name, #email, #pwd {
+#contact #name, #email, #password {
 	height: 51px;
 }
 

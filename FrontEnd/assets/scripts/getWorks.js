@@ -13,7 +13,7 @@ export async function fetchAndStoreWorks() {
             return [];
         }
     }).catch(error => {
-        console.error("Error at works fetch from API: %o", error);
+        console.error("Error at works fetch from API: ", error);
         return [];
     });
 }
@@ -51,7 +51,7 @@ export async function fillGallery(works, galleryDiv, initialFetchedGallery) {
         initialFetchedGallery = Array.from(document.querySelectorAll(".gallery figure"));
         return initialFetchedGallery;
     } catch(error) {
-        console.error("Error at filling of the gallery: %o", error);
+        console.error("Error at filling of the gallery: ", error);
     }
 }
 

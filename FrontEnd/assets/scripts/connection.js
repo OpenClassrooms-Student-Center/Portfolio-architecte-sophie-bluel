@@ -5,28 +5,24 @@ import {
 console.log(new Date().toLocaleTimeString(), "connection page script begins");
 const loginURL = "http://127.0.0.1:5678/api/users/login";
 addEventListener("DOMContentLoaded", async () => {
-    addEventListener("submit", (event) => {
+    await addEventListener("submit", (event) => {
         loginSubmit(event);
     })
 });
 
 /**
  * SMART 0
- * This function checks step by step the form usability.
+ * This function checks the form usability.
  */
 async function waitOnForm() {
     try {
         document.addEventListener("DOMContentLoaded", () => {
             const form = document.querySelector("#connection");
             console.log(new Date().toLocaleTimeString(), "form: " + form);
-            console.log("HTML element autofocus: " + form?.autofocus);
-            console.log("HTML element innerHTML: " + form?.innerHTML);
-            console.log("HTML element dataset: " + form?.dataset);
-            console.log("HTML element anchorelement: " + form?.anchorElement);
-            
+            console.log("HTML element innerHTML: " + form?.innerHTML);            
         });
     } catch(error) {
-        console.error(new Date.toLocaleTimeString(), "Error getting connection.html DOM: %o", error);
+        console.error(new Date.toLocaleTimeString(), "Error getting connection.html DOM: ", error);
     }
 }
 /**
@@ -52,7 +48,7 @@ function storeInputInVar(selector) {
             }
         });
     } catch (error) {
-        console.error(new Date().toLocaleTimeString(), "Error querying form field: %o", error);
+        console.error(new Date().toLocaleTimeString(), "Error querying form field: ", error);
     }
 }
 
@@ -61,14 +57,14 @@ function storeInputInVar(selector) {
  * This function stores an input var in local storage.
  * @param {string} key input var
  * @param {string} val
- * @returns the stored value.
  */
-function storeVariableInLocalStorageAndReturnIt(key, val) {
+//* @returns the stored value.
+function storeVariableInLocalStorage(key, val) {
     try{
         localStorage.setItem(key, val);
-        return localStorage.getItem(key);
+        //return localStorage.getItem(key);
     } catch(error) {
-        console.error(new Date().toLocaleTimeString(), "Error storing in locale storage: %o", error);
+        console.error(new Date().toLocaleTimeString(), "Error storing in locale storage: ", error);
     }
 }
 
@@ -86,16 +82,22 @@ function prepareReqJSONdataPayload() {
         }
         return payload;
     } catch(error) {
-        console.error("Error storing req JSON obj: %o", error);
+        console.error("Error storing req JSON obj: ", error);
     }
+}
+
+function displayAndThrowError(error, errorElement) {
+    erreur.innerHTML = erreur;
+    throw new Error(erreur);
 }
 
 /**
  * SMART 3
- * This function loggs the user in and stores the token in localStorage.
- * The intended effect is to store in the browser an edit mode display information.
+ * This function logs the user in and stores the token in localStorage.
+ * It stores in the browser an edit mode display information.
+ * @param { Event } : login form SubmitEvent button click
  */
-function loginSubmit(e){
+function loginSubmit(e) {
     e.preventDefault();
     const email = document.querySelector("#email").value;
     const password = document.querySelector("#password").value;
@@ -103,7 +105,7 @@ function loginSubmit(e){
         email,
         password
     };
-    console.log("email, pawd:", email, password, loginData);
+    console.log("email, pawd saisis: ", email, password, loginData);
     const req = {
         method: "POST",
         headers: {
@@ -114,26 +116,30 @@ function loginSubmit(e){
     }
     const erreur = document.querySelector("#erreur");
     erreur.innerHTML = "";
+    let httpCode = 0;
 
     fetch(loginURL, req)
         .then((res) => {
+            httpCode = res.status;
             if(res.status === 200) {
-                return res.json();
+                res.json()
             }
             else if(res.status === 401) {
-                throw new Error("Mauvais mot de passe");
+                displayAndThrowError("Mauvais mot de passe");
             }
             else {
-                throw new Error("Utilsateur inconnu");
+                displayAndThrowError("Utilisateur inconnu");
             }
         })
         .then((data) => {
-            localStorage.setItem("token", data.token);
-            window.location.href = "../index.html";
+            if(httpCode === 200) {
+                storeVariableInLocalStorage("token", data.token);
+                window.location.href = "../index.html";
+            }
         })
-        /*.catch((error) => {
-            erreur
-        }*/
+        .catch((error) => {
+            erreur.innerHTML = "Votre connexion essuie une erreur: " + error;
+        });
 }
 
 /**
@@ -162,7 +168,7 @@ async function addConnectionListener() {
             window.location.href = "../index.html";
         });
     } catch(error) {
-        console.error("Error at connection listener adding: %o", error);
+        console.error("Error at connection listener adding: ", error);
     }
 }
 
@@ -180,7 +186,7 @@ export function addConnectedModeBanner() {
         header.appendChild(connectedModeBanner);
         header.appendChild(divVerticalFlex);
     } catch(error) {
-        console.error("Error at banner creation or adding to DOM: %o", error);
+        console.error("Error at banner creation or adding to DOM: ", error);
     }
 }
 

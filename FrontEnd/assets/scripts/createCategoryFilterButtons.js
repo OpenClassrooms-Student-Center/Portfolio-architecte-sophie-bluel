@@ -34,7 +34,7 @@ export async function createCategoryFilterButtons(categories, galleryDiv, initia
         filterDiv.appendChild(categoryButtons);
         insertAfterPortfolioTitle(filterDiv);
     } catch(error) {
-        console.error("Error at category filter buttons generation: %o", error);
+        console.error("Error at category filter buttons generation: ", error);
     }
 }
 

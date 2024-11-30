@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     await createCategoryFilterButtons(categories, galleryDiv, initialFetchedGallery);
     /****** Step 2.2 update landing page to connected mode ******/
     const isConnected = localStorage.getItem("token") === true;
-    console.log(new Date().toLocaleTimeString(), "is connected stored: " + isConnected);
+    console.log(new Date().toLocaleTimeString(), "Is token stored? " + isConnected);
     if(isConnected) {
         addConnectedModeBanner();
         toggleNavbarLogin();
