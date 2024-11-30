@@ -7,15 +7,15 @@ document.addEventListener('DOMContentLoaded', function () {
     event.preventDefault();                                     // Empêcher le comportement par défaut du formulaire
     console.log('Formulaire soumis'); 
 
-    const email = document.getElementById('email').value; // Récupérer la valeur de l'email (ici .value permet de récupérer la valeur de l'élément, celle-ci se trouve dans la propriété value de l'élément) 
-    const password = document.getElementById('password').value;// Récupérer la valeur du mot de passe, ici je récupère la valeur de l'élément avec l'id password
+    const email = document.getElementById('email').value; // Récupérer la valeur de l'email
+    const password = document.getElementById('password').value;// Récupérer la valeur du mot de passe
     await handlelogin(email, password);  // Appeler la fonction handlelogin avec les valeurs récupérées de l'email et du mot de passe
   });
 });
 
 // Fonction pour gérer la connexion
-async function handlelogin(email, password) {  // Définir la fonction handlelogin avec les paramètres email et password, cette fonction va donc permettre de gérer la connexion de l'utilisateur en utilisant les valeurs de l'email et du mot de passe (email et password sont mis en parmètre pour pouvoir les utiliser à l'intérieur de la fonction, par exemple pour les passer en argument de la fonction loginUser)
-  try {                                          // Gérer les erreurs 
+async function handlelogin(email, password) {  
+  try {                                           
     console.log('Tentative de connexion...');
     // Utiliser la fonction loginUser de api.js
     const data = await loginUser(email, password);  // Appeler la fonction loginUser avec les valeurs de l'email et du mot de passe et stocker le résultat dans la variable data.En passant en argument email et password a la fonction loginUser on peut les utiliser à l'intérieur de la fonction loginUser pour les envoyer dans le corps de la requête et les comparer avec ceux stockés dans la base de données qui sont associés à un utilisateur
@@ -25,7 +25,7 @@ async function handlelogin(email, password) {  // Définir la fonction handlelog
 
     window.location.href = 'index.html';             // Rediriger l'utilisateur vers la page index.html avec la méthode window.location.href qui permet de changer l'URL de la page actuelle et de charger une nouvelle page 
   } catch (error) {                                       // Gérer les erreurs 
-    console.error('Erreur lors de la connexion:', error);   // Afficher un message d'erreur dans la console 
+    console.error('Erreur lors de la connexion:', error);   
     const messageError = document.getElementById('messageError');  // Récupérer l'élément avec l'id messageError
     messageError.textContent = 'Email ou mot de passe incorrect';  // Afficher un message d'erreur dans la page 
   }
