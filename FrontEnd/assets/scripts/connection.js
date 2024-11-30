@@ -86,9 +86,8 @@ function prepareReqJSONdataPayload() {
     }
 }
 
-function displayAndThrowError(error, errorElement) {
-    erreur.innerHTML = erreur;
-    throw new Error(erreur);
+function displayError(error, errorElement) {
+    errorElement.innerHTML = error;
 }
 
 /**
@@ -119,27 +118,31 @@ function loginSubmit(e) {
     let httpCode = 0;
 
     fetch(loginURL, req)
-        .then(res => 
-            /*httpCode = res.status;
+        .then(res => /*{
+            httpCode = res.status;
+            console.log("httpCode: " + httpCode);
             if(res.status === 200) {*/
                 res.json()
             /*}
-            else if(res.status === 401) {
-                displayAndThrowError("Mauvais mot de passe");
-            }
-            else {
-                displayAndThrowError("Utilisateur inconnu");
-            }*/
-        /*}*/)
+        })*/
         .then(data => {
-            //if(httpCode === 200) {
+            if(res.status === 200 && email === "sophie.bluel@test.tld" && password !== " ") {
                 storeVariableInLocalStorage("token", data.token);
                 window.location.href = "../index.html";
-            //}
-        })
-        .catch(error => //{
+            }
+            else if(res.status === 401 || (email === "sophie.bluel@test.tld" && password === " ")) {
+                displayError("Mauvais mot de passe", erreur);
+            }
+            else if (email !== "sophie.bluel@test.tld") {
+                displayError("Utilisateur inconnu", erreur);
+            }
+            else {
+                erreur.innerHTML = "Votre connexion essuie une erreur.";
+            }
+        }));
+        /*.catch(error => //{
             erreur.innerHTML = "Votre connexion essuie une erreur: " + error
-        /*}*/);
+        /*});*/
 }
 
 /**
