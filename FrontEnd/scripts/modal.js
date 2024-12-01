@@ -1,4 +1,4 @@
-//*******************RééCRIRE cette fonctionnalité de zéro, revoir tout ce que j'ai fait à partir de checkif admin revoir la façon de gérer le mode édition, le mode admin et les modale, revoir la suppression des photos dans la première modale et pourquoi quand je supprime une photo je ne reste pas dans la modale, comme cela le faisias avnt que je poursuive sur la création de la seconde modlae, ******************** */
+
 let currentModal = null; // Variable globale pour stocker la modale ouverte, en fait elle permet de suivre l'etat de la modale et de savoir si elle est ouverte ou non, elle est definie sur null car elle n'a pas encore ete ouverte
 
 // OUVERTURE DE LA MODALE
@@ -6,15 +6,15 @@ function openModal(e) {
 
   e.preventDefault();
 
-  // Je récupère la modale et je l'affiche
+  //  récupèration la modale et affichage
   const modal = document.querySelector("#modal");
   modal.style.display = "flex";
 
-  // Je mets à jour les attributs ARIA
-  modal.removeAttribute("aria-hidden"); // retire l'attribut aria-hidden du bouton de fermeture de la modale pour rendre la modale accessible
-  modal.setAttribute("aria-modal", "true"); // met l'attribut aria-modal sur la modale pour rendre la modale accessible
+  //  met à jour les attributs ARIA
+  modal.removeAttribute("aria-hidden"); 
+  modal.setAttribute("aria-modal", "true");
 
-  // Je garde une référence à la modale ouverte
+  // garde une référence à la modale ouverte
   currentModal = modal;
 
   // ajoute les écouteurs d'événements
@@ -34,19 +34,20 @@ function closeModal(e) {
   if (!currentModal) return; 
 
   e.preventDefault();
-  e.stopPropagation(); 
-  // Je cache la modale
+  e.stopPropagation(); // Arrête la propagation immédiate de l'événement vers les éléments parent
+
+  // cache la modale
   currentModal.style.display = "none";
 
-  // Je mets à jour les attributs ARIA
+  // met à jour les attributs ARIA
   currentModal.setAttribute("aria-hidden", "true"); // Je met l'attribut aria-hidden sur la modale pour rendre la modale accessible
   currentModal.removeAttribute("aria-modal"); // Je retire l'attribut aria-modal de la modale pour rendre la modale accessible
 
-  // Je retire les écouteurs d'événements
+  // retire les écouteurs d'événements
   currentModal.removeEventListener("click", closeModal);
  
 
-  //Retire les écouteurs sur tous ls boutons de fermeture
+  //Retire les écouteurs sur tous les boutons de fermeture
      const closeButtons = document.querySelectorAll(".close-modal");
      for (const button of closeButtons) {
       button.removeEventListener("click", closeModal);
@@ -187,7 +188,7 @@ async function handleAddWork(e) {
     const newWork = await addWork(formData); // On appelle la fonction addWork avec les données du formulaire
 
     if (newWork) {
-      // Si l'ajout réussit, on recharge les galeries et on ferme la modale avec la fonction closeModal
+      // Si l'ajout réussit, recharge les galeries et ferme la modale avec la fonction closeModal
       loadWorksInModal();
       initGallery();
       closeModal(e);
@@ -198,46 +199,95 @@ async function handleAddWork(e) {
   }
 }
 
+// vérification si le formulaire est valide
+function checkFormValidity() {
+    // Récupération des éléments du formulaire
+    const form = document.querySelector('.add-photo-form');
+    if (!form) return;
+
+    const imageInput = form.querySelector('#image-upload');
+    const titleInput = form.querySelector('#title');
+    const categorySelect = form.querySelector('#category');
+    const submitButton = form.querySelector('.validate-btn');
+
+    // Vérification des valeurs
+    const hasImage = imageInput && imageInput.files && imageInput.files.length > 0;
+    const hasTitle = titleInput && titleInput.value.trim() !== '';
+    const hasCategory = categorySelect && categorySelect.value && categorySelect.value !== '';
+
+    // Log de l'état
+    console.log('État du formulaire:', {
+        image: hasImage,
+        title: hasTitle,
+        category: hasCategory
+    });
+
+    // Activation/désactivation du bouton
+    if (submitButton) {
+        if (hasImage && hasTitle && hasCategory) {
+            submitButton.disabled = false;
+            console.log('Bouton activé');
+        } else {
+            submitButton.disabled = true;
+            console.log('Bouton désactivé');
+        }
+    }
+}
+
+// Attache les événements du formulaire
+function attachFormEvents() {
+    const form = document.querySelector('.add-photo-form');
+    if (!form) return;
+
+    // Récupération des éléments
+    const imageInput = form.querySelector('#image-upload');
+    const titleInput = form.querySelector('#title');
+    const categorySelect = form.querySelector('#category');
+
+    // Nettoyage des anciens événements
+    const newForm = form.cloneNode(true);
+    form.parentNode.replaceChild(newForm, form);
+
+    // Rattachement des événements sur le nouveau formulaire
+    const newImageInput = newForm.querySelector('#image-upload');
+    const newTitleInput = newForm.querySelector('#title');
+    const newCategorySelect = newForm.querySelector('#category');
+
+    if (newImageInput) {
+        newImageInput.addEventListener('change', () => {
+            handleImagePreview(event);
+            checkFormValidity();
+        });
+    }
+
+    if (newTitleInput) {
+        newTitleInput.addEventListener('input', checkFormValidity);
+    }
+
+    if (newCategorySelect) {
+        newCategorySelect.addEventListener('change', checkFormValidity);
+    }
+
+    // Vérification initiale
+    checkFormValidity();
+}
+
 // Navigation entre les vues
 function showAddPhotoView() {
-  // Je cache la vue galerie et j'affiche la vue d'ajout photo
-  const galleryView = document.getElementById("gallery-view");
-  const addPhotoView = document.getElementById("add-photo-view");
+    const galleryView = document.getElementById("gallery-view");
+    const addPhotoView = document.getElementById("add-photo-view");
 
-  galleryView.style.display = "none"; // Je cache la vue galerie
-  addPhotoView.style.display = "block"; // Je affiche la vue d'ajout photo
-}
-
-function showGalleryView() {
-  // Je cache la vue d'ajout photo et j'affiche la vue galerie
-  const galleryView = document.getElementById("gallery-view");
-  const addPhotoView = document.getElementById("add-photo-view");
-
-  addPhotoView.style.display = "none";
-  galleryView.style.display = "block";
-}
-
-// Je vérifie si le formulaire est valide
-function checkFormValidity() {
-  // Je récupère tous les éléments du formulaire
-  const imageInput = document.getElementById("image-upload");
-  const titleInput = document.getElementById("title");
-  const categorySelect = document.getElementById("category");
-  const validateButton = document.querySelector(".validate-btn");
-
-  // Je vérifie si tous les champs sont remplis
-  const isImageSelected = imageInput.files.length > 0;
-  const isTitleFilled = titleInput.value.trim() !== "";
-  const isCategorySelected = categorySelect.value !== "";
-
-  // Si tout est rempli, j'active le bouton, sinon je le désactive
-  if (isImageSelected && isTitleFilled && isCategorySelected) {
-    validateButton.disabled = false;
-    validateButton.classList.add("active");
-  } else {
-    validateButton.disabled = true;
-    validateButton.classList.remove("active");
-  }
+    if (galleryView && addPhotoView) {
+        galleryView.style.display = "none";
+        addPhotoView.style.display = "block";
+        
+        // Réinitialisation et attachement des événements
+        const form = document.querySelector('.add-photo-form');
+        if (form) {
+            form.reset();
+            attachFormEvents();
+        }
+    }
 }
 
 // Gestion de  l'ajout d'une photo
@@ -370,26 +420,59 @@ style='max-width: 100%;
   `;
 };
 
-
 // J'initialise tous les événements de la modale
 function initializeModalEvents() {
   console.log('Initialisation des événements de la modale');
 
-  //Ajout de l'écouteur pour la previsualisation de l image uploader
-  const imageInput = document.getElementById("image-upload");
+  //récupère les éléments
+  const form = document.querySelector('.add-photo-form');
+  const imageInput = document.getElementById('image-upload');
   console.log('Input image trouvé :', !!imageInput);
+   const titleInput = document.getElementById("title");
+   const categorySelect = document.getElementById('category');
+  const addPhotoButton = document.querySelector('.add-photo-btn');
+  const backButton = document.querySelector('.back-button');
+  
+ 
+//Gestionnaire du formulaire d'ajout de photo
+if (imageInput && titleInput && categorySelect) {
+  console.log('✅ Éléments du formulaire trouvés');
+      
+
+  //prévisualisation et validation de l'image
+  imageInput.addEventListener('change', (e) => {
+    handleImagePreview(e);
+    checkFormValidity();
+  });
+
+//validation du titre
+titleInput.addEventListener("input", () => {
+  checkFormValidity();
+});
+
+//validation de la catégorie
+categorySelect.addEventListener("change", () => {
+  checkFormValidity();
+});
+} else {
+console.error('❌ Certains éléments du formulaire sont manquants');
+}
+
+        //navigation entre les vues de la modale
+        if (addPhotoButton) {
+          addPhotoButton.addEventListener("click", () => {
+            showAddPhotoView();
+        });
+
+        }
+
+        if (backButton) {
+          backButton.addEventListener("click", showGalleryView);
+        }     
   
 
-      if (imageInput) {
-        imageInput.addEventListener("change", handleImagePreview);
-        imageInput.addEventListener("change", checkFormValidity);
-        console.log('écouteur de prévisualisation ajouté');
-      }
-    //Gestion des boutons de fermeture pour les deux vues
-  const addPhotoButton = document.querySelector(".add-photo-btn");
-  const backButton = document.querySelector(".back-button");
-  
-  const closeButtons = document.querySelectorAll(".close-modal");
+  //gestion de la fermeture
+      const closeButtons = document.querySelectorAll(".close-modal");
   for (const button of closeButtons) {
     if (button) {
     button.addEventListener("click", (e) => {
@@ -400,32 +483,52 @@ function initializeModalEvents() {
   }
   }
 
-  //empêche la fermeture quand on clique dans la modale
+  //prévention de la fermeture accidentelle de la modale
   const modalWrappers = document.querySelectorAll(".modale-wrapper");
   for (const wrapper of modalWrappers) {
     wrapper.addEventListener("click", preventModalClose);
   }
 
-
-  // J'ajoute les écouteurs pour la navigation
-  addPhotoButton.addEventListener("click", showAddPhotoView);
-  backButton.addEventListener("click", showGalleryView);
-
-  // Je récupère le formulaire et ses champs
-  const form = document.querySelector(".add-photo-form");
-  const titleInput = document.getElementById("title");
-  const categorySelect = document.getElementById("category");
-
-  // J'ajoute les écouteurs pour la validation
-  
-  titleInput.addEventListener("input", checkFormValidity);
-  categorySelect.addEventListener("change", checkFormValidity);
-
-  // J'ajoute l'écouteur pour la soumission du formulaire
+  //soumission du formulaire
+  if (form) {
   form.addEventListener("submit", handlePhotoSubmit);
+  }
 
-  // Je charge les catégories
+  //  chargement des catégories
   loadCategories();
+}
+
+function resetAddPhotoForm() {
+  console.log('Rénitialisation du formaulaire');
+  
+  const form = document.querySelector('.add-photo-form');
+  const imagePreview = document.querySelector('.image-upload-container img');
+  const validateButton = Document.querySelector('.validate-btn');
+
+  if (form) {
+    form.reset();
+    console.log('🧹 Formulaire rénitialisé');
+  }
+
+  if (imagePreview) {
+    imagePreview.remove();
+    console.log('🧹 Image preview supprimée');
+  }
+
+  if (validateButton) {
+    validateButton.disabled = true;
+    validateButton.classList.remove('active');
+    console.log('🧹 Bouton de validation desactivé');
+  }
+}
+
+function showGalleryView() {
+  // Je cache la vue d'ajout photo et j'affiche la vue galerie
+  const galleryView = document.getElementById("gallery-view");
+  const addPhotoView = document.getElementById("add-photo-view");
+
+  addPhotoView.style.display = "none";
+  galleryView.style.display = "block";
 }
 
 // Quand la page est chargée et donc que le DOM est chargé, j'initialise tout
