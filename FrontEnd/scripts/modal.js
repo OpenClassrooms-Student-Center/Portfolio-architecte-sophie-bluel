@@ -4,9 +4,6 @@ let currentModal = null; // Variable globale pour stocker la modale ouverte, en 
 // OUVERTURE DE LA MODALE
 function openModal(e) {
 
-  //console.group('🎯 Ouverture de la modale');
-  //console.log('Event déclencheur :', e.type);
- // console.log('élément cliqué :', e.target);
   e.preventDefault();
 
   // Je récupère la modale et je l'affiche
@@ -25,7 +22,7 @@ function openModal(e) {
   modal.querySelector(".close-modal").addEventListener("click", closeModal);
   modal
     .querySelector(".modale-wrapper")
-    .addEventListener("click", stopPropagation);
+    .addEventListener("click", preventModalClose);
 
   // Je charge les projets dans la modale
   loadWorksInModal();
@@ -46,19 +43,25 @@ function closeModal(e) {
 
   // Je retire les écouteurs d'événements
   currentModal.removeEventListener("click", closeModal);
-  currentModal
-    .querySelector(".close-modal")
-    .removeEventListener("click", closeModal);   //
-  currentModal
-    .querySelector(".modale-wrapper")
-    .removeEventListener("click", stopPropagation);
+ 
+
+  //Retire les écouteurs sur tous ls boutons de fermeture
+     const closeButtons = document.querySelectorAll(".close-modal");
+     for (const button of closeButtons) {
+      button.removeEventListener("click", closeModal);
+     }
+
+const modalWrappers = currentModal.querySelectorAll(".modale-wrapper");
+      for (const wrapper of modalWrappers) {
+        wrapper.removeEventListener("click", preventModalClose);
+      }
 
   // Je réinitialise la référence
   currentModal = null;
 }
 
 // EMPÊCHER LA FERMETURE QUAND ON CLIQUE DANS LA MODALE
-function stopPropagation(e) {
+function preventModalClose(e) {
   // Je passe en paramètre l'événement e, qui est l'événement qui a été lancé, stop propagation me permet d'empêcher la propagation de l'événement vers les éléments parent et donc de ne pas fermer la modale quand on clique dans la modale 'maintenant il faut que je stoppe la propagation de l'événement'
   e.stopPropagation();
 }
@@ -191,18 +194,6 @@ async function updateInterfaceAfterDeletion() {
 //         }
 //     }
 // }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -379,6 +370,24 @@ function initializeModalEvents() {
   // Je récupère les boutons de navigation
   const addPhotoButton = document.querySelector(".add-photo-btn");
   const backButton = document.querySelector(".back-button");
+
+
+  //Gestion des boutons de fermeture pour les deux vues
+  const closeButtons = document.querySelectorAll(".close-modal");
+  for (const button of closeButtons) {
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      closeModal(e);
+    });
+  }
+
+  //empêche la fermeture quand on clique dans la modale
+  const modalWrappers = document.querySelectorAll(".modale-wrapper");
+  for (const wrapper of modalWrappers) {
+    wrapper.addEventListener("click", preventModalClose);
+  }
+
 
   // J'ajoute les écouteurs pour la navigation
   addPhotoButton.addEventListener("click", showAddPhotoView);
