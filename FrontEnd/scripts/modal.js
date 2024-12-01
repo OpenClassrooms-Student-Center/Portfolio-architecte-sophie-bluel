@@ -11,13 +11,13 @@ function openModal(e) {
   modal.style.display = "flex";
 
   // Je mets à jour les attributs ARIA
-  modal.removeAttribute("aria-hidden"); // Je retire l'attribut aria-hidden du bouton de fermeture de la modale pour rendre la modale accessible
-  modal.setAttribute("aria-modal", "true"); // Je met l'attribut aria-modal sur la modale pour rendre la modale accessible
+  modal.removeAttribute("aria-hidden"); // retire l'attribut aria-hidden du bouton de fermeture de la modale pour rendre la modale accessible
+  modal.setAttribute("aria-modal", "true"); // met l'attribut aria-modal sur la modale pour rendre la modale accessible
 
   // Je garde une référence à la modale ouverte
   currentModal = modal;
 
-  // J'ajoute les écouteurs d'événements
+  // ajoute les écouteurs d'événements
   modal.addEventListener("click", closeModal);
   modal.querySelector(".close-modal").addEventListener("click", closeModal);
   modal
@@ -26,6 +26,7 @@ function openModal(e) {
 
   // Je charge les projets dans la modale
   loadWorksInModal();
+  
 }
 
 // FERMETURE DE LA MODALE
@@ -173,29 +174,6 @@ async function updateInterfaceAfterDeletion() {
 }
 
 
-/****************Réécrire cette fonction pour ajouter les work********************************** */
-// async function handleAddWork(e) {
-//     //empêche le comportement par defaut et la propagation de l'événement vers les éléments parent
-//     e.preventDefault();
-//     e.stopPropagation();
-
-//     //récupérer l'ID du projet à supprimer
-//     const workId = e.currentTarget.dataset.id;
-
-//     try{
-//         //appel a l'API pour suppriler le work
-//         const success = await deleteWork(workId);  
-
-//         if (success) {
-//             await updateInterfaceAfterDeletion();
-//             console.log("Projet supprimé avec succès");
-//             e.stopPropagation();  
-//             return false; //empêche la propagation supplémentaire
-//         }
-//     }
-// }
-
-
 
 // AJOUT D'UN NOUVEAU PROJET (ici on appelle l'API et on recharge la galerie dans la modale en utilisant la fonction loadWorksInModal)
 async function handleAddWork(e) {
@@ -328,7 +306,7 @@ async function handlePhotoSubmit(event) {
 
       // Retour à la vue galerie
       showGalleryView();
-      console.log('👀 Retour à la vue galerie');
+      console.log(' Retour à la vue galerie');
       return;
     } else {
       const errorText = await response.text();
@@ -364,22 +342,62 @@ async function loadCategories() {
     console.error("Erreur lors du chargementes catégories:", error);
   }
 }
-/****************Vérifier là aussi si tout semble logique*************** */
+
+//preview image uploaded
+function handleImagePreview(event) {
+  console.log('🎯 Début handleImagePreview');
+  
+// récupère le fichier sélectionner
+const file = event.target.files[0];
+console.log('fichier sélectionner :', file?.name);
+
+//trouve le container où afficher l'image
+const container = document.querySelector('.image-upload-container');
+
+//vérfications que le fichier est une image
+if (!file.type.match('image.*')) {
+  alert('Veuillez choisir une image');
+  return;
+}
+//créer l'Url de l'image
+const imageUrl = URL.createObjectURL(file);
+//affiche l'image
+container.innerHTML = `<img src='${imageUrl}' alt=${file.name}
+style='max-width: 100%;
+ max-height: 100%;
+  object-fit: contain; 
+  object-fit: contain;'>
+  `;
+};
+
+
 // J'initialise tous les événements de la modale
 function initializeModalEvents() {
-  // Je récupère les boutons de navigation
+  console.log('Initialisation des événements de la modale');
+
+  //Ajout de l'écouteur pour la previsualisation de l image uploader
+  const imageInput = document.getElementById("image-upload");
+  console.log('Input image trouvé :', !!imageInput);
+  
+
+      if (imageInput) {
+        imageInput.addEventListener("change", handleImagePreview);
+        imageInput.addEventListener("change", checkFormValidity);
+        console.log('écouteur de prévisualisation ajouté');
+      }
+    //Gestion des boutons de fermeture pour les deux vues
   const addPhotoButton = document.querySelector(".add-photo-btn");
   const backButton = document.querySelector(".back-button");
-
-
-  //Gestion des boutons de fermeture pour les deux vues
+  
   const closeButtons = document.querySelectorAll(".close-modal");
   for (const button of closeButtons) {
+    if (button) {
     button.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();
       closeModal(e);
     });
+  }
   }
 
   //empêche la fermeture quand on clique dans la modale
@@ -395,12 +413,11 @@ function initializeModalEvents() {
 
   // Je récupère le formulaire et ses champs
   const form = document.querySelector(".add-photo-form");
-  const imageInput = document.getElementById("image-upload");
   const titleInput = document.getElementById("title");
   const categorySelect = document.getElementById("category");
 
   // J'ajoute les écouteurs pour la validation
-  imageInput.addEventListener("change", checkFormValidity);
+  
   titleInput.addEventListener("input", checkFormValidity);
   categorySelect.addEventListener("change", checkFormValidity);
 
