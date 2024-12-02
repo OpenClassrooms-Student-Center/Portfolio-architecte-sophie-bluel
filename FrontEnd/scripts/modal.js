@@ -2,7 +2,7 @@
 let currentModal = null; // Variable globale pour stocker la modale ouverte, en fait elle permet de suivre l'etat de la modale et de savoir si elle est ouverte ou non, elle est definie sur null car elle n'a pas encore ete ouverte
 
 // OUVERTURE DE LA MODALE
-function openModal(e) {
+window.openModal = function(e) {
 
   e.preventDefault();
 
@@ -68,9 +68,7 @@ function preventModalClose(e) {
   e.stopPropagation();
 }
 
-// CHARGEMENT DES PROJETS DANS LA MODALE,(galerie photos)
-
-//***********Voir si je ne peux pas faire cela d'ifferement (et utiliser la fonction dans scriptGallery qui me permet de récupéré les works et de les afficher, ainsi cela evitera de dupliquer le code)
+// CHARGEMENT DES PROJETS DANS LA MODALE,(galerie photo)
 async function loadWorksInModal() {
   console.log("Début chargement des projets dans la modale");
 
@@ -78,23 +76,23 @@ async function loadWorksInModal() {
   const modalGallery = document.querySelector(".gallery-container");
 
   try {
-    // Je récupère mes projets depuis l'API
+    // récupère mes projets depuis l'API
     const works = await getWorksFromAPI(); //  getWorksFromAPI est dans api.js)
     console.log("J'ai récupéré", works.length, "projets");  //la console m'affiche le nombre total de travaux récupérés 
 
-    // Je vide le conteneur avant d'ajouter les nouveaux projets
+    //  vide le conteneur avant d'ajouter les nouveaux projets
     modalGallery.innerHTML = "";
 
-    // Je parcours mes projets et je les ajoute à la modale
+    // parcours mes projets et je les ajoute à la modale
     for (let i = 0; i < works.length; i++) {
       const work = works[i];
 
-      // Je crée un élément figure pour chaque projet
+      //  crée un élément figure pour chaque projet
       const figure = document.createElement("figure");
       figure.className = "modal-work";
 
       
-      // J'ajoute l'image et le bouton de suppression
+      // ajoute l'image et le bouton de suppression
       figure.innerHTML = `
                 <div class="work-image-container">
                     <img src="${work.imageUrl}" alt="${work.title}">
@@ -112,14 +110,13 @@ async function loadWorksInModal() {
 
     console.log("J'ai fini de charger la galerie dans la modale");
   } catch (error) {
-    //je recupere l'erreur si il y en a une
     console.log("j'ai une erreur:", error);
-    //gestion de l'erreur coté client//***tester si cela fonctionne correctment, et donner un style a ce message plus stylé justemment **/
+    //gestion de l'erreur coté client//***tester si cela fonctionne correctment (si le message s'affiche bien s'il y a une erreur), et donner un style a ce message plus stylé justemment **/
     modalGallery.innerHTML = "Désolé, je n'arrive pas à charger les projets"; 
   }
 }
-//****// pb de fermeture de la modale quand je supprime une photo,(la photo se supprime mais je suis direct rediriger hors de la modale et ce n'est pas ce que nous voulons, le stpProoagation n'a tj pas fonctionné, il semble que ce soit le fais que le backend et le frontend soit dans le même repository et que j'utilise liverserver (en fait c'est logique ), et certains en les séparant ont régler ce pb mais il y a certainement une autre façon en gerant mieux peut être les événements)
 
+// SUPPRESSION D'UN PROJET
 async function handleDeleteWork(e) {
   console.group('🗑️ SUPPRESION WORK - Début')
   console.log('1.Type événement :', e.type);
@@ -131,10 +128,10 @@ console.log('4. Work ID :', e.currentTarget.dataset.id);
   console.log('🎯Début HandledeleteWork');
 
      e.preventDefault();  
-     e.stopPropagation();  // Arrête la propagation immédiate de l'événement vers les éléments parent 
+     e.stopPropagation();  
 
 //récupérer l'ID du projet à supprimer
-const workId = e.currentTarget.dataset.id;  // Je récupère l'attribut data-id de l'élément sur lequel l'événement a ete attache (cf doc MDN sur dataset)(currentTarget : élément sur lequel l'événement a ete attache)(e.currentTarget.dataset.id : attribut data-id de l'élément sur lequel l'événement a été attaché)
+const workId = e.currentTarget.dataset.id;  // Je récupère l'attribut data-id de l'élément sur lequel l'événement a ete attache (cf doc MDN sur dataset)(currentTarget : élément sur lequel l'événement a ete attache)
 
 try {
     //appel l'API pour supprimer le work
@@ -161,10 +158,9 @@ async function updateInterfaceAfterDeletion() {
     await loadWorksInModal();
 
     // mise à jour de la galerie dans la première vue de la modale
-    const works = await getWorksFromAPI();  // je recupere la nouvelle liste des travaux depuis l'API
-    if (Array.isArray(works)) {             //je verifie que works est un tableau
-        addWorksGallery(works);             //je met a jour la galerie
-        console.log("✅interface mise à jour");       //affiche un message de confirmation
+    const works = await getWorksFromAPI();  
+    if (Array.isArray(works)) {            
+        addWorksGallery(works);                 
 
     } else {
         throw new error("Format de données invalide");
@@ -176,7 +172,7 @@ async function updateInterfaceAfterDeletion() {
 
 
 
-// AJOUT D'UN NOUVEAU PROJET (ici on appelle l'API et on recharge la galerie dans la modale en utilisant la fonction loadWorksInModal)
+// AJOUT D'UN NOUVEAU PROJET 
 async function handleAddWork(e) {
   e.preventDefault();
 
@@ -199,95 +195,59 @@ async function handleAddWork(e) {
   }
 }
 
-// vérification si le formulaire est valide
-function checkFormValidity() {
-    // Récupération des éléments du formulaire
-    const form = document.querySelector('.add-photo-form');
-    if (!form) return;
-
-    const imageInput = form.querySelector('#image-upload');
-    const titleInput = form.querySelector('#title');
-    const categorySelect = form.querySelector('#category');
-    const submitButton = form.querySelector('.validate-btn');
-
-    // Vérification des valeurs
-    const hasImage = imageInput && imageInput.files && imageInput.files.length > 0;
-    const hasTitle = titleInput && titleInput.value.trim() !== '';
-    const hasCategory = categorySelect && categorySelect.value && categorySelect.value !== '';
-
-    // Log de l'état
-    console.log('État du formulaire:', {
-        image: hasImage,
-        title: hasTitle,
-        category: hasCategory
-    });
-
-    // Activation/désactivation du bouton
-    if (submitButton) {
-        if (hasImage && hasTitle && hasCategory) {
-            submitButton.disabled = false;
-            console.log('Bouton activé');
-        } else {
-            submitButton.disabled = true;
-            console.log('Bouton désactivé');
-        }
-    }
-}
-
-// Attache les événements du formulaire
-function attachFormEvents() {
-    const form = document.querySelector('.add-photo-form');
-    if (!form) return;
-
-    // Récupération des éléments
-    const imageInput = form.querySelector('#image-upload');
-    const titleInput = form.querySelector('#title');
-    const categorySelect = form.querySelector('#category');
-
-    // Nettoyage des anciens événements
-    const newForm = form.cloneNode(true);
-    form.parentNode.replaceChild(newForm, form);
-
-    // Rattachement des événements sur le nouveau formulaire
-    const newImageInput = newForm.querySelector('#image-upload');
-    const newTitleInput = newForm.querySelector('#title');
-    const newCategorySelect = newForm.querySelector('#category');
-
-    if (newImageInput) {
-        newImageInput.addEventListener('change', () => {
-            handleImagePreview(event);
-            checkFormValidity();
-        });
-    }
-
-    if (newTitleInput) {
-        newTitleInput.addEventListener('input', checkFormValidity);
-    }
-
-    if (newCategorySelect) {
-        newCategorySelect.addEventListener('change', checkFormValidity);
-    }
-
-    // Vérification initiale
-    checkFormValidity();
-}
-
 // Navigation entre les vues
 function showAddPhotoView() {
-    const galleryView = document.getElementById("gallery-view");
-    const addPhotoView = document.getElementById("add-photo-view");
+    // Cache la vue galerie et affiche la vue d'ajout photo
+  const galleryView = document.getElementById("gallery-view");
+  const addPhotoView = document.getElementById("add-photo-view");
 
-    if (galleryView && addPhotoView) {
-        galleryView.style.display = "none";
-        addPhotoView.style.display = "block";
-        
-        // Réinitialisation et attachement des événements
-        const form = document.querySelector('.add-photo-form');
-        if (form) {
-            form.reset();
-            attachFormEvents();
-        }
-    }
+  galleryView.style.display = "none"; // cache la vue galerie
+  addPhotoView.style.display = "block"; // affiche la vue d'ajout photo
+}
+
+function showGalleryView() {
+  // Je cache la vue d'ajout photo et j'affiche la vue galerie
+  const galleryView = document.getElementById("gallery-view");
+  const addPhotoView = document.getElementById("add-photo-view");
+
+  addPhotoView.style.display = "none";
+  galleryView.style.display = "block";
+}
+
+// vérification si le formulaire est valide
+function checkFormValidity() {
+  // Récupération des éléments
+  const imageInput = document.getElementById("image-upload");
+  const titleInput = document.getElementById("title");
+  const categorySelect = document.getElementById("category");
+  const validateButton = document.querySelector(".validate-btn");
+
+  // Vérification de l'existence des éléments
+  if (!imageInput || !titleInput || !categorySelect || !validateButton) {
+      console.error("❌ Elements du formulaire manquants");
+      return;
+  }
+
+  // Vérification des valeurs
+  const isImageSelected = imageInput.files && imageInput.files.length > 0;
+  const isTitleFilled = titleInput.value && titleInput.value.trim() !== "";
+  const isCategorySelected = categorySelect.value && categorySelect.value !== "";
+
+  console.log("📝 État du formulaire :");
+  console.log("- Image:", isImageSelected);
+  console.log("- Titre:", isTitleFilled);
+  console.log("- Catégorie:", isCategorySelected);
+
+    // Le bouton est activé UNIQUEMENT si les trois conditions sont remplies
+  if (isImageSelected && isTitleFilled && isCategorySelected) {
+      console.log("✅ Formulaire valide - Activation du bouton");
+      validateButton.disabled = false;
+      validateButton.classList.add("active");
+  } else {
+      console.log("❌ Formulaire incomplet - Désactivation du bouton");
+      validateButton.disabled = true;
+      validateButton.classList.remove("active");
+  }
 }
 
 // Gestion de  l'ajout d'une photo
@@ -408,17 +368,23 @@ const container = document.querySelector('.image-upload-container');
 if (!file.type.match('image.*')) {
   alert('Veuillez choisir une image');
   return;
-}
+} 
+
 //créer l'Url de l'image
 const imageUrl = URL.createObjectURL(file);
-//affiche l'image
-container.innerHTML = `<img src='${imageUrl}' alt=${file.name}
-style='max-width: 100%;
- max-height: 100%;
-  object-fit: contain; 
-  object-fit: contain;'>
-  `;
-};
+
+//cacher les éléments présent dans le conteneur avant de charger l'image
+const existingElements = container.querySelectorAll('.fa-regular, .custom-file-upload, .file-info');
+for (const element of existingElements) {
+  element.style.display = 'none';
+}
+//afficher l'image
+const imagePreview = document.createElement('img');
+imagePreview.className = 'image-preview';
+imagePreview.src = imageUrl;
+imagePreview.alt = file.name;
+container.appendChild(imagePreview);
+}
 
 // J'initialise tous les événements de la modale
 function initializeModalEvents() {
@@ -498,6 +464,7 @@ console.error('❌ Certains éléments du formulaire sont manquants');
   loadCategories();
 }
 
+
 function resetAddPhotoForm() {
   console.log('Rénitialisation du formaulaire');
   
@@ -522,14 +489,6 @@ function resetAddPhotoForm() {
   }
 }
 
-function showGalleryView() {
-  // Je cache la vue d'ajout photo et j'affiche la vue galerie
-  const galleryView = document.getElementById("gallery-view");
-  const addPhotoView = document.getElementById("add-photo-view");
-
-  addPhotoView.style.display = "none";
-  galleryView.style.display = "block";
-}
 
 // Quand la page est chargée et donc que le DOM est chargé, j'initialise tout
 document.addEventListener("DOMContentLoaded", function () {
@@ -538,3 +497,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
   initializeModalEvents();
 });
+
+

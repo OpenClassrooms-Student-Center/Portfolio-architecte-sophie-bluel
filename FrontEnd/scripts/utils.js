@@ -33,7 +33,7 @@ function toggleFiltersButtons(show) {
     }
 }
 //création de la barre noire en haut de la page qui montre que l'on est en mode édition
- // je crée une fonction createEditBar qui va créer la barre d'édition et l'ajouter dans le DOM (si l'utilisateur est connecté)
+ // jcrée une fonction createEditBar qui va créer la barre d'édition et l'ajouter dans le DOM (si l'utilisateur est connecté)
 function createEditBar() {
     
     const editBar = document.createElement("div");

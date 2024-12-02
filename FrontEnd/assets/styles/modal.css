@@ -35,6 +35,8 @@
 }
 
 /*  style du conteneur de la galerie */
+
+/********************Ajuster selon la maquette et ce que nous avons vu avec jean baptiste******************************/
 .gallery-container {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -59,6 +61,13 @@
     height: 100px;
     object-fit: cover;
 }
+
+.image-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 
 /*  bouton de suppression (container trash) */
 .delete-work {
@@ -155,6 +164,14 @@
     text-align: center;
 }
 
+.image-preview {
+    width: 129px;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+    margin: 0 auto;
+    
+}
 .back-button {
     position: absolute;
     left: 30px;
@@ -177,6 +194,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
     border-radius: 3px;
 }
 

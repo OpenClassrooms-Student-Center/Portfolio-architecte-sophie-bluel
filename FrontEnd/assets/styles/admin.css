@@ -35,7 +35,7 @@ body.admin-mode {
     font-size: 30px;
 }
 
-/* Style pour le lien modifier à côté du titre */
+/* Style pour le lien modifier à côté du titre h2 'Mes projets' */
 .portfolio-edit-link {
     color: black;
     text-decoration: none;

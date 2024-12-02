@@ -1,23 +1,23 @@
 // Fichier qui centralise le code pour les appels API
-const apiUrl = 'http://localhost:5678/api'; // URL de l'API
+const apiUrl = 'http://localhost:5678/api'; 
 
 // Fonction pour récupérer les travaux
-// Définir la fonction getWorksFromAPI qui va permettre de récupérer les travaux depuis l'API 
+ 
 async function getWorksFromAPI() {         
     console.log('Début récupération des travaux');
     try {
-        const response = await fetch(`${apiUrl}/works`); // Utiliser la fonction fetch pour envoyer une requête GET à l'URL de l'API pour récupérer les travaux
-        console.log('Réponse reçue:', response);  // J'affiche la réponse reçue dans la console
+        const response = await fetch(`${apiUrl}/works`); 
+        console.log('Réponse reçue:', response);  
 
-        if (!response.ok) {                           // Vérifier si la réponse est ok 
-            throw new Error(`Erreur HTTP: ${response.status}`); // Gére l'erreur en affichant un message d'erreur avec le code de statut de la réponse 
+        if (!response.ok) {                           
+            throw new Error(`Erreur HTTP: ${response.status}`); 
         }
 
-        const works = await response.json();  // Stocker les travaux récupérés dans la variable works en utilisant la méthode json() qui permet de lire le corps de la réponse en tant qu'objet JSON
+        const works = await response.json();  
         console.log('Travaux récupérés:', works);
-        return works;                               // Retourner les travaux récupérés
+        return works;                               
 
-    } catch (error) {                                 // Gérer les erreurs, (s'il y a une erreur catch l'attrape donc et nous renvoie un tableau vide)
+    } catch (error) {                                 
         console.error('Erreur lors de la récupération des travaux:', error);
         return []; // Je retourne un tableau vide en cas d'erreur
     }
@@ -96,7 +96,7 @@ async function deleteWork(workId) {
 }
 
 // Fonction pour ajouter un nouveau travail
-//pour cette fonction je vais utiliser formdata qui permet d'envoyer des données du formulaire en utilisant le protocole multipart/formdata(commme ela est préciser dans la doc de l'api), (pour formadata je vais utiliser un objet FormData qui permet de stocker les données du formulaire)(cf MDN)
+
 async function addWork(formData) {           
     console.log("Ajout d'un nouveau travail");
     const token = localStorage.getItem('token');  // On recupere le token de l'utilisateur connecté dans le localStorage, si l'utilisateur n'est pas connecté avec son token il ne peut pas ajouter de projet 
