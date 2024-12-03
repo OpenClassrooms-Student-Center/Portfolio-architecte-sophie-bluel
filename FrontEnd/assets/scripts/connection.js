@@ -96,7 +96,7 @@ function displayError(error, errorElement) {
  * It stores in the browser an edit mode display information.
  * @param { Event } : login form SubmitEvent button click
  */
-function loginSubmit(e) {
+async function loginSubmit(e) {
     e.preventDefault();
     const email = document.querySelector("#email").value;
     const password = document.querySelector("#password").value;
@@ -104,7 +104,6 @@ function loginSubmit(e) {
         email,
         password
     };
-    console.log("email, pawd saisis: ", email, password, loginData);
     const req = {
         method: "POST",
         headers: {
@@ -115,34 +114,23 @@ function loginSubmit(e) {
     }
     const erreur = document.querySelector("#erreur");
     erreur.innerHTML = "";
-    let httpCode = 0;
-
-    fetch(loginURL, req)
-        .then(res => /*{
-            httpCode = res.status;
-            console.log("httpCode: " + httpCode);
-            if(res.status === 200) {*/
-                res.json()
-            /*}
-        })*/
-        .then(data => {
-            if(res.status === 200 && email === "sophie.bluel@test.tld" && password !== " ") {
-                storeVariableInLocalStorage("token", data.token);
-                window.location.href = "../index.html";
-            }
-            else if(res.status === 401 || (email === "sophie.bluel@test.tld" && password === " ")) {
-                displayError("Mauvais mot de passe", erreur);
-            }
-            else if (email !== "sophie.bluel@test.tld") {
-                displayError("Utilisateur inconnu", erreur);
-            }
-            else {
-                erreur.innerHTML = "Votre connexion essuie une erreur.";
-            }
-        }));
-        /*.catch(error => //{
-            erreur.innerHTML = "Votre connexion essuie une erreur: " + error
-        /*});*/
+    try {
+        const res = await fetch(loginURL, req);
+        if(res.status === 401 || email !== "sophie.bluel@test.tld") {
+            displayError("Utilisat·rice·eur inconnu", erreur);
+        }
+        else if(res.status === 401 || (email === "sophie.bluel@test.tld" && password !== "OK")) {
+            displayError("Mauvais mot de passe", erreur);
+        }
+        else if(res.status === 200 && email === "sophie.bluel@test.tld" && password === "OK") {
+            const data = await res.json();
+            storeVariableInLocalStorage("token", data.token);
+            window.location.href = "../index.html";
+        }
+    } catch(error) {
+        erreur.innerHTML = "Votre connexion essuie une erreur.";
+        throw new Error("Fetch error: ", error);
+    }
 }
 
 /**
