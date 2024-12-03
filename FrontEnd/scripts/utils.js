@@ -1,3 +1,5 @@
+import { openModal } from './modal.js';
+
 //vérification du status d'administrateur
 function isAdmin() {
     const token = localStorage.getItem('token');
@@ -39,7 +41,7 @@ function createEditBar() {
     const editBar = document.createElement("div");
     editBar.className = "edit-bar";
     editBar.innerHTML = `
-          <a href="#" class="edit-link">
+        
               <i class="fa-regular fa-pen-to-square"></i>
               <span>Mode édition</span>
           </a>

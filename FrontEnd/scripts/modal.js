@@ -2,7 +2,7 @@
 let currentModal = null; // Variable globale pour stocker la modale ouverte, en fait elle permet de suivre l'etat de la modale et de savoir si elle est ouverte ou non, elle est definie sur null car elle n'a pas encore ete ouverte
 
 // OUVERTURE DE LA MODALE
-window.openModal = function(e) {
+export function openModal(e) {
 
   e.preventDefault();
 
@@ -58,13 +58,13 @@ const modalWrappers = currentModal.querySelectorAll(".modale-wrapper");
         wrapper.removeEventListener("click", preventModalClose);
       }
 
-  // Je réinitialise la référence
+  //réinitialise la référence
   currentModal = null;
 }
 
 // EMPÊCHER LA FERMETURE QUAND ON CLIQUE DANS LA MODALE
 function preventModalClose(e) {
-  // Je passe en paramètre l'événement e, qui est l'événement qui a été lancé, stop propagation me permet d'empêcher la propagation de l'événement vers les éléments parent et donc de ne pas fermer la modale quand on clique dans la modale 'maintenant il faut que je stoppe la propagation de l'événement'
+  // passe en paramètre l'événement e, qui est l'événement qui a été lancé, stop propagation me permet d'empêcher la propagation de l'événement vers les éléments parent et donc de ne pas fermer la modale quand on clique dans la modale 'maintenant il faut que je stoppe la propagation de l'événement'
   e.stopPropagation();
 }
 
@@ -102,7 +102,7 @@ async function loadWorksInModal() {
                 </div>   
             `; 
 
-      // J'ajoute l'élément figure à mon conteneur (.gallery-container)
+      // ajoute l'élément figure à mon conteneur (.gallery-container)
       modalGallery.appendChild(figure);
       const deleteButton = figure.querySelector(".delete-work");
       deleteButton.addEventListener("click", handleDeleteWork);
@@ -143,6 +143,7 @@ try {
         await updateInterfaceAfterDeletion();
         console.log('Projet supprimé avec succes');
         
+        e.stopImmediatePropagation(); //empêche la propagation supplémentaire(garanti que la modale ne se ferme pas, plus puissant que stopPropagation())
         return false; //empêche la propagation supplémentaire
     }
 } catch (error) {
@@ -176,11 +177,11 @@ async function updateInterfaceAfterDeletion() {
 async function handleAddWork(e) {
   e.preventDefault();
 
-  // On récupère les données du formulaire (formData permet de récuperer les données du formulaire où e.target est le formulaire qui a envoyé les données)
+  // récupère les données du formulaire (formData permet de récuperer les données du formulaire où e.target est le formulaire qui a envoyé les données)
   const formData = new FormData(e.target); // On utilise FormData pour pouvoir envoyer l'image crée un objet FormData qui permet de stocker les données du formulaire (où e.target est le formulaire qui a envoyé les données)
 
   try {
-    // On appelle l'API pour ajouter le projet
+    // appelle l'API pour ajouter le projet
     const newWork = await addWork(formData); // On appelle la fonction addWork avec les données du formulaire
 
     if (newWork) {
@@ -206,7 +207,7 @@ function showAddPhotoView() {
 }
 
 function showGalleryView() {
-  // Je cache la vue d'ajout photo et j'affiche la vue galerie
+  // cache la vue d'ajout photo et j'affiche la vue galerie
   const galleryView = document.getElementById("gallery-view");
   const addPhotoView = document.getElementById("add-photo-view");
 
@@ -470,7 +471,7 @@ function resetAddPhotoForm() {
   
   const form = document.querySelector('.add-photo-form');
   const imagePreview = document.querySelector('.image-upload-container img');
-  const validateButton = Document.querySelector('.validate-btn');
+  const validateButton = document.querySelector('.validate-btn');
 
   if (form) {
     form.reset();
@@ -481,6 +482,12 @@ function resetAddPhotoForm() {
     imagePreview.remove();
     console.log('🧹 Image preview supprimée');
   }
+
+//Réaffiche les éléments cachés
+const hiddenElements = document.querySelectorAll('.fa-regular, .custom-file-upload, .file-info');
+for (const element of hiddenElements) {
+  element.style.display = '';  //renitialise la valeur par défaut
+}
 
   if (validateButton) {
     validateButton.disabled = true;
