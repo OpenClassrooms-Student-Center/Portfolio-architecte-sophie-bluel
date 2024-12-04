@@ -170,7 +170,7 @@ export function addConnectedModeBanner() {
     try{
         const header = document.querySelector("header");
         const connectedModeBanner = document.createElement("div");
-        connectedModeBanner.id = "connection";
+        connectedModeBanner.id = "connected";
         connectedModeBanner.innerText = "Mode édition";
         const divVerticalFlex = document.getElementById("loggedOutModeHeader");
         header.innerHTML = "";
@@ -199,7 +199,7 @@ export function addWorksModificationLink() {
     editIcon.setAttribute("alt", "Éditez vos projets");
     editIcon.innerText = "edit";
     let editText = document.createElement("p");
-    editText.innerText = "Éditez vos projets";
+    editText.innerText = "modifier";
     let editDiv = document.createElement("div");
     editDiv.id = "editDiv";
     editDiv.appendChild(editIcon);
