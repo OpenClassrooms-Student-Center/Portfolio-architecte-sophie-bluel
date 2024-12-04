@@ -1,5 +1,7 @@
+import{ loginUser } from './api.js';  // Importer la fonction loginUser depuis api.js
+
 // Attendre que le DOM soit chargé pour exécuter le code suivant
-// GERER LA CONNEXION UTILISATEUR
+// 
 document.addEventListener('DOMContentLoaded', function () {
   console.log('DOM chargé, initialisation du formulaire de login');
   const loginForm = document.querySelector('.login form'); 
@@ -14,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
-// Fonction pour gérer la connexion
+// CONNEXION UTILISATEUR
 async function handlelogin(email, password) {  
   try {                                           
     console.log('Tentative de connexion...');
