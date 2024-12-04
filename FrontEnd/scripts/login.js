@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
 async function handlelogin(email, password) {  
   try {                                           
     console.log('Tentative de connexion...');
-    // Utiliser la fonction loginUser de api.js
+    
     const data = await loginUser(email, password);  // Appeler la fonction loginUser avec les valeurs de l'email et du mot de passe et stocker le résultat dans la variable data.En passant en argument email et password a la fonction loginUser on peut les utiliser à l'intérieur de la fonction loginUser pour les envoyer dans le corps de la requête et les comparer avec ceux stockés dans la base de données qui sont associés à un utilisateur
 
     localStorage.setItem('token', data.token);      

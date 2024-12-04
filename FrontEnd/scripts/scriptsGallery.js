@@ -17,7 +17,7 @@ function handleFilterClick(button, category, works) {
   }
 }
 
-function addWorksGallery(works) {
+export function addWorksGallery(works) {
   console.log('Ajout des travaux à la gallerie : ', works);
 
   const WorksContainer = document.querySelector('.gallery');
@@ -76,7 +76,7 @@ function createFilterButton(category, works) {
 
 //INITIALISATION DE LA GALLERIE
 
-async function initGallery() {
+export async function initGallery() {
   //console.log('Initialisation de la gallerie');
   const works = await getWorksFromAPI(); 
   const categories = extractCategories(works);

@@ -1,5 +1,7 @@
-import { getWorksFromAPI, addWorksGallery, deleteWork, addWork, apiUrl } from './api.js';
-import { initGallery } from './scriptsGallery.js';
+import { getWorksFromAPI, deleteWork, addWork, apiUrl } from './api.js';
+import { initGallery, addWorksGallery } from './scriptsGallery.js';
+
+
 let currentModal = null; // Variable globale pour stocker la modale ouverte, en fait elle permet de suivre l'etat de la modale et de savoir si elle est ouverte ou non, elle est definie sur null car elle n'a pas encore ete ouverte
 
 // OUVERTURE DE LA MODALE
@@ -35,7 +37,7 @@ function closeModal(e) {
   if (!currentModal) return; 
 
   e.preventDefault();
-  e.stopPropagation(); // Arrête la propagation immédiate de l'événement vers les éléments parent
+  e.stopPropagation();
 
   // cache la modale
   currentModal.style.display = 'none';
@@ -65,7 +67,6 @@ const modalWrappers = currentModal.querySelectorAll('.modale-wrapper');
 
 // EMPÊCHER LA FERMETURE QUAND ON CLIQUE DANS LA MODALE
 function preventModalClose(e) {
-  // passe en paramètre l'événement e, qui est l'événement qui a été lancé, stop propagation me permet d'empêcher la propagation de l'événement vers les éléments parents
   e.stopPropagation();
 }
 

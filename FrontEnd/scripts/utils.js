@@ -56,9 +56,10 @@ function setupPortfolioEditButton() {
   <i class='fa-regular fa-pen-to-square'></i>
   modifier
   `;
+  editButton.href ='#';
   editButton.addEventListener('click', (event) => {
     event.preventDefault(); 
-    openModal();
+    openModal(event);
   });
   portfolioTitle.appendChild(editButton);
 }
