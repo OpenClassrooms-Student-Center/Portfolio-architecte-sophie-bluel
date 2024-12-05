@@ -1,5 +1,6 @@
 /****** Step 2.2 user's authentication ******/
 import {
+    getPortfolioTitle,
     insertAfterPortfolioTitle
 } from "./createCategoryFilterButtons.js";
 console.log(new Date().toLocaleTimeString(), "connection page script begins");
@@ -193,18 +194,22 @@ export function hideCategoryFilterButtons() {
  * This function adds a works modification link below the portfolio title.
  */
 export function addWorksModificationLink() {
+    let editDiv = document.createElement("div");
+    editDiv.id = "editDiv";
+    insertAfterPortfolioTitle(editDiv);
     let editIcon = document.createElement("i");
     editIcon.classList.add("material-symbols-outlined");
     editIcon.setAttribute("aria-hidden", "true");
     editIcon.setAttribute("alt", "Éditez vos projets");
     editIcon.innerText = "edit";
-    let editText = document.createElement("p");
-    editText.innerText = "modifier";
-    let editDiv = document.createElement("div");
-    editDiv.id = "editDiv";
-    editDiv.appendChild(editIcon);
-    editDiv.appendChild(editText);
-    insertAfterPortfolioTitle(editDiv);
+    editIcon.id = "editIcon";
+    let editText = document.createTextNode("modifier");
+    let editSpan = document.createElement("span");
+    editSpan.id = "editSpan";
+    editSpan.appendChild(editIcon);
+    editSpan.appendChild(editText);
+    let portfolioTitle = getPortfolioTitle();
+    portfolioTitle.appendChild(editSpan);
 }
 
 /**

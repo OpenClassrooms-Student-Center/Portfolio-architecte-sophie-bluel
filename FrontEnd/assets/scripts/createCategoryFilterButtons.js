@@ -39,11 +39,19 @@ export async function createCategoryFilterButtons(categories, galleryDiv, initia
 }
 
 /**
+ * This function gets the portfolio section h2 title.
+ * @returns {HTMLHeadingElement} : the h2 title HTMl element
+ */
+export function getPortfolioTitle() {
+    let portfolio = document.getElementById("portfolio");
+    const title = portfolio.querySelector("h2");
+    return title;
+}
+
+/**
  * This function inserts a HTML element after "Mes Projets"
  * @param {Element} element : the category filter buttons or modification link after login
  */
 export function insertAfterPortfolioTitle(element) {
-    let portfolio = document.getElementById("portfolio");
-    const title = portfolio.querySelector("h2");
-    portfolio.insertBefore(element, title.nextSibling);
+    portfolio.insertBefore(element, getPortfolioTitle().nextSibling);
 }

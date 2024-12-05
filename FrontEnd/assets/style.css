@@ -203,12 +203,18 @@ li:hover {
 }
 
 #editDiv {
-	display: flex;
-	justify-content: center;
-	align-items: center;
 	padding: 5% 0;
-	color: var(--button-color);
-	gap: 0 1.5%;
+}
+
+#editSpan {
+	color: black;
+	font-family: var(--text-font-family);
+	font-size: 14px;
+	margin-left: 3%;
+}
+
+#editIcon {
+	font-size: 15.58px;
 }
 
 .gallery {
