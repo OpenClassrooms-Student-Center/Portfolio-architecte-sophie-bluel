@@ -3,22 +3,19 @@
  * This function fetches data and fills the localStorage for speed and less network use during next page reloads.
  * @returns : an array of fetched works in JSON format is returned.
  */
-export function fetchAndStoreWorks() {
-    fetch("http://localhost:5678/api/works")
-        .then(reponse => reponse.json())
-        .then(worksFromAPI => {
-            if (Array.isArray(worksFromAPI)) {
-                window.localStorage.setItem("works", JSON.stringify(worksFromAPI));
-                return worksFromAPI;
-            } else {
-                console.error("Works %o aren't an array.", worksFromAPI);
-                return [];
-            }
-        })
-        .catch(error => {
-            console.error("Error at works fetch from API: %o", error);
+export async function fetchAndStoreWorks() {
+    fetch("http://localhost:5678/api/works").then(works => works.json()).then(worksJSON => {
+        if (Array.isArray(worksJSON)) {
+            window.localStorage.setItem("works", JSON.stringify(worksJSON));
+            return worksJSON;
+        } else {
+            console.error("Works %o aren't an array.", worksJSON);
             return [];
-        });
+        }
+    }).catch(error => {
+        console.error("Error at works fetch from API: ", error);
+        return [];
+    });
 }
 
 /**
@@ -54,7 +51,7 @@ export async function fillGallery(works, galleryDiv, initialFetchedGallery) {
         initialFetchedGallery = Array.from(document.querySelectorAll(".gallery figure"));
         return initialFetchedGallery;
     } catch(error) {
-        console.error("Error at filling of the gallery: %o", error);
+        console.error("Error at filling of the gallery: ", error);
     }
 }
 

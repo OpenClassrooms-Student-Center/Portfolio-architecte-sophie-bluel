@@ -1,0 +1,28 @@
+/**
+ * Step2.2 login
+ * SMART 3
+ * This function follows the frontend req through the backend.
+ * This is the firt use of Companion, after weighing 
+ * code concision : ~=,
+ * learning curve and beginner's path: preferred, 
+ * package and project bandwidth usage: lighter, maintnenance cost: lower 
+ * and security risk lower
+ * versus first analyzed response of winston.
+ * 
+ * written with help of OC's AI Companion
+ */
+const fs = require('fs');
+
+/**
+ * This function writes a log in a daystamped file.
+ * @param {*} logMsg : the message to write
+ */
+exports.log = (logMsg) => {
+    fs.appendFile(`./logs/logs${new Date().toISOString()}.txt`, logMsg + '\n', (err) => {
+    if (err) {
+        console.error('Error writing backend log :', err);
+    } else {
+        console.log('1 info msg is written.');
+    }
+    });
+}

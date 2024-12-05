@@ -1,3 +1,4 @@
-.idea
 package-lock.json
 Backend/package-lock.json
+FrontEnd/assets/scripts/node_modules/*
+FrontEnd/assets/scripts/package*.json

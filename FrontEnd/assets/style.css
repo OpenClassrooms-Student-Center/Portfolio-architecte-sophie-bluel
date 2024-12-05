@@ -50,6 +50,7 @@ table {
 /** variables **/
 :root {
 	--button-color: #1D6154;
+	--button-color-hover: #0F2F28;
 	--h1-li-hover-color: #B1663C;
 	--a-color: #3D3D3D;
 	--button-font-size: 1.2em;
@@ -69,8 +70,8 @@ header {
 	flex-direction: column;
 }
 #connected {
-	height: 100px;
-	background-color: var(--button-color);
+	height: 60px;
+	background-color: black;
 	color: white;
 	display: flex;
 	justify-content: center;
@@ -189,12 +190,31 @@ li:hover {
 	color: white;
 }
 
+.selected:hover {
+	background-color: var(--button-color-hover);
+}
+
 .unselected {
 	color: var(--button-color);
 }
 
 .filter {
 	padding: 1% 4.25%;
+}
+
+#editDiv {
+	padding: 5% 0;
+}
+
+#editSpan {
+	color: black;
+	font-family: var(--text-font-family);
+	font-size: 14px;
+	margin-left: 3%;
+}
+
+#editIcon {
+	font-size: 15.58px;
 }
 
 .gallery {
@@ -209,26 +229,26 @@ li:hover {
 	width: 100%;
 
 }
-#contact, #connexion {
+#contact, #connection {
 	width: 33.75%;
 	margin: auto;
 	gap: 2% 0;
 }
 
-#connexion {
+#connection {
 	padding-top: 10%;
 }
-#contact, #connexion > * {
+#contact, #connection > * {
 	text-align: center;
 
 }
 #contact h2 {
 	margin-bottom: 20px;
 }
-#connexion h2 {
+#connection h2 {
 	margin-bottom: 15px;
 }
-#contact form, #connexion form{
+#contact form, #connection form{
 	text-align: left;
 	margin-top: 15px;
 	display: flex;
@@ -239,17 +259,17 @@ li:hover {
 	font-size: 16px;
 }
 
-#contact label, #connexion label {
+#contact label, #connection label {
 	margin: 2em 0 1em 0;
 }
 
-#contact textarea, #name, #email, #passe {
+#contact textarea, #name, #email, #password {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 	margin-bottom: 1%;
 }
 
-#contact #name, #email, #passe {
+#contact #name, #email, #password {
 	height: 51px;
 }
 
@@ -257,7 +277,7 @@ input[type="submit"]{
 	width: 180px;
 }
 
-#connexion a {
+#connection a {
 	text-align: center;
 	color: var(--a-color);
 	margin-bottom: 90%;

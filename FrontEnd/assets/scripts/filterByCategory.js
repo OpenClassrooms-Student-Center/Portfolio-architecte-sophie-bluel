@@ -20,7 +20,7 @@ export async function getCategories(works) {
         });
         return categories;
     } catch(error) {
-        console.error("Error looping works or filling categories variable: %o", error);
+        console.error("Error looping works or filling categories variable: ", error);
     }
 }
 
@@ -34,7 +34,7 @@ function hideGallery() {
             figure.style.display = "none";
         });
     } catch(error) {
-        console.error("Error hiding gallery figures: %o", error);
+        console.error("Error hiding gallery figures: ", error);
     }
 }
 
@@ -53,7 +53,7 @@ function displayFilteredFigures(filteredFigures, figuresArray) {
         });
         return figuresArray;
     } catch(error) {
-        console.error("Error at display setting: %o", error);
+        console.error("Error at display setting: ", error);
     }
 }
 
@@ -73,7 +73,7 @@ export function filterGallery(option, galleryDiv, initialGallery) {
         let figuresArray = Array.from(figures);
         let filteredFigures;
         if(val != "Tous"){
-            filteredFigures = figuresArray.filter(function(figure) {
+            filteredFigures = figuresArray.filter((figure) => {
                 return figure.className === val;
             });
         } else {
@@ -83,7 +83,7 @@ export function filterGallery(option, galleryDiv, initialGallery) {
         figuresArray = displayFilteredFigures(filteredFigures, figuresArray);
         replaceGallery(figuresArray, galleryDiv);
     } catch(error) {
-        console.error("Error filtering the gallery: %o", error);
+        console.error("Error filtering the gallery: ", error);
     }
 }
 

@@ -6,7 +6,7 @@ import { filterGallery } from "./filterByCategory.js";
  * @param {Element} galleryDiv see filterByCategory.js filterGallery the div containing the figures
  * @param {HTMLElement[]} initialGallery see filterByCategory.js filterGallery initial API figures fetch
  */
-export function createCategoryFilterButtons(categories, galleryDiv, initialGallery) {
+export async function createCategoryFilterButtons(categories, galleryDiv, initialGallery) {
     try{
         let filterDiv = document.createElement("div");
         filterDiv.id = "filter";
@@ -32,10 +32,26 @@ export function createCategoryFilterButtons(categories, galleryDiv, initialGalle
             categoryButtons.appendChild(categoryButton);
         });
         filterDiv.appendChild(categoryButtons);
-        let portfolio = document.getElementById("portfolio");
-        let title = portfolio.querySelector("h2");
-        portfolio.insertBefore(filterDiv, title.nextSibling);
+        insertAfterPortfolioTitle(filterDiv);
     } catch(error) {
-        console.error("Error at category filter buttons generation: %o", error);
+        console.error("Error at category filter buttons generation: ", error);
     }
+}
+
+/**
+ * This function gets the portfolio section h2 title.
+ * @returns {HTMLHeadingElement} : the h2 title HTMl element
+ */
+export function getPortfolioTitle() {
+    let portfolio = document.getElementById("portfolio");
+    const title = portfolio.querySelector("h2");
+    return title;
+}
+
+/**
+ * This function inserts a HTML element after "Mes Projets"
+ * @param {Element} element : the category filter buttons or modification link after login
+ */
+export function insertAfterPortfolioTitle(element) {
+    portfolio.insertBefore(element, getPortfolioTitle().nextSibling);
 }
