@@ -70,6 +70,7 @@ header {
 	flex-direction: column;
 }
 #connected {
+	width: 100vw;
 	height: 60px;
 	background-color: black;
 	color: white;
@@ -107,6 +108,11 @@ h2{
 	font-weight: 700;
 	font-size: 30px;
 	color: var(--button-color);
+}
+
+nav a {
+	text-decoration: none;
+	color: inherit;
 }
 nav ul {
 	display: flex;
@@ -171,6 +177,7 @@ li:hover {
 	width: 62%;
 	margin: 1.5em 0;
 	display: flex;
+	cursor: pointer;
 }
 
 .button {
@@ -210,11 +217,13 @@ li:hover {
 	color: black;
 	font-family: var(--text-font-family);
 	font-size: 14px;
-	margin-left: 3%;
+	margin-left: 2vw;
+	cursor: pointer;
 }
 
 #editIcon {
 	font-size: 15.58px;
+	margin-right: 0.75vw;
 }
 
 .gallery {

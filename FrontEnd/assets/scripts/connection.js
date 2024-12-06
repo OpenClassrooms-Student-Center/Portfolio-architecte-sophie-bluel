@@ -56,17 +56,32 @@ function storeInputInVar(selector) {
 /**
  * SMART 1
  * This function stores an input var in local storage.
+ * It's used to store the token at login.
  * @param {string} key input var
  * @param {string} val
+
  */
-//* @returns the stored value.
-function storeVariableInLocalStorage(key, val) {
+function storeInLocalStorage(key, val) {
     try{
         localStorage.setItem(key, val);
-        //return localStorage.getItem(key);
     } catch(error) {
-        console.error(new Date().toLocaleTimeString(), "Error storing in locale storage: ", error);
+        console.error(new Date().toLocaleTimeString(), "Error storing in local storage: ", error);
     }
+}
+
+/**
+ * SMART 1
+ * This function removes an item from local storage.
+ * It's used to remove the token at logout.
+ * @param {string} key item to remove key
+ */
+function removeFromLocalStorage(key) {
+    try {
+        localStorage.removeItem(key);
+    } catch(error) {
+        console.error(new Date().toLocaleTimeString(), "Error removing from local storage: ", error);
+    }
+
 }
 
 /**
@@ -123,9 +138,9 @@ async function loginSubmit(e) {
         else if(res.status === 401 || (email === "sophie.bluel@test.tld" && password !== "OK")) {
             displayError("Mauvais mot de passe", erreur);
         }
-        else if(res.status === 200 && email === "sophie.bluel@test.tld" && password === "OK") {
+        else if(res.status === 200) {// && email === "sophie.bluel@test.tld" && password === "OK") {
             const data = await res.json();
-            storeVariableInLocalStorage("token", data.token);
+            storeInLocalStorage("token", data.token);
             window.location.href = "../index.html";
         }
     } catch(error) {
@@ -199,9 +214,9 @@ export function addWorksModificationLink() {
     insertAfterPortfolioTitle(editDiv);
     let editIcon = document.createElement("i");
     editIcon.classList.add("material-symbols-outlined");
+    editIcon.innerText = "edit_square";
     editIcon.setAttribute("aria-hidden", "true");
     editIcon.setAttribute("alt", "Éditez vos projets");
-    editIcon.innerText = "edit";
     editIcon.id = "editIcon";
     let editText = document.createTextNode("modifier");
     let editSpan = document.createElement("span");
@@ -217,5 +232,18 @@ export function addWorksModificationLink() {
  */
 export function toggleNavbarLogin() {
     const login = document.getElementById("login");
+    console.log("login.innertText before: " + login.innerText);
     login.innerText === "login" ? login.innerText = "logout" : login.innerText = "login";
+    console.log("login.innerText after: " + login.innerText);
+    console.log("login.href: " + login.href);
+    if(login.innerText === "logout" && login.href.endsWith("/pages/connection.html")) {
+        console.log("logout link");
+        login.href.replace("/pages/connection.html", "/index.html");
+        if(localStorage.getItem("token") !== null) {
+            removeFromLocalStorage("token");
+        }
+    } else if(login.innerText === "login" && login.href.endsWith("/index.html")) {
+        console.log("login link");
+        login.href.replace("/index.html", "/pages.connection.html");
+    }
 }
