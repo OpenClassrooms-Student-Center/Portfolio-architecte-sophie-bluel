@@ -11,9 +11,9 @@ import {
 } from "./createCategoryFilterButtons.js";
 import {
     addConnectedModeBanner,
-    toggleNavbarLogin,
     hideCategoryFilterButtons,
-    addWorksModificationLink
+    addWorksModificationLink,
+    removeFromLocalStorage
 } from "./connection.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -48,10 +48,32 @@ document.addEventListener("DOMContentLoaded", async () => {
     const categories = await getCategories(worksPromise);
     await createCategoryFilterButtons(categories, galleryDiv, initialFetchedGallery);
     /****** Step 2.2 update landing page to connected mode ******/
+    const login = document.getElementById("login");
+    login.addEventListener("click", (event) => {
+        event.preventDefault();
+        if(login.innerText === "logout") {
+            if(localStorage.getItem("token")) {
+                removeFromLocalStorage("token");
+            }
+            login.innerText = "login";
+            if(login.href.endsWith("/index.html")) {
+                login.href = login.href.replace("/index.html", "/pages/connection.html");
+            }
+            window.location.href = "./index.html";
+        }
+        else if(login.innerText === "login") {
+            if(login.href.endsWith("/pages/connection..html")) {
+                login.href.replace("/pages/connection.html", "/index.html");
+            }
+            window.location.href = "./pages/connection.html";
+        }
+    })
     const isConnected = await localStorage.getItem("token");
     if(isConnected) {
         addConnectedModeBanner();
-        toggleNavbarLogin();
+        if(login.innerText === "login") {
+            login.innerText = "logout";
+        }
         hideCategoryFilterButtons();
         addWorksModificationLink();
     }

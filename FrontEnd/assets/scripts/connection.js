@@ -75,7 +75,7 @@ function storeInLocalStorage(key, val) {
  * It's used to remove the token at logout.
  * @param {string} key item to remove key
  */
-function removeFromLocalStorage(key) {
+export function removeFromLocalStorage(key) {
     try {
         localStorage.removeItem(key);
     } catch(error) {
@@ -225,25 +225,4 @@ export function addWorksModificationLink() {
     editSpan.appendChild(editText);
     let portfolioTitle = getPortfolioTitle();
     portfolioTitle.appendChild(editSpan);
-}
-
-/**
- * This function toggles login-logout.
- */
-export function toggleNavbarLogin() {
-    const login = document.getElementById("login");
-    console.log("login.innertText before: " + login.innerText);
-    login.innerText === "login" ? login.innerText = "logout" : login.innerText = "login";
-    console.log("login.innerText after: " + login.innerText);
-    console.log("login.href: " + login.href);
-    if(login.innerText === "logout" && login.href.endsWith("/pages/connection.html")) {
-        console.log("logout link");
-        login.href.replace("/pages/connection.html", "/index.html");
-        if(localStorage.getItem("token") !== null) {
-            removeFromLocalStorage("token");
-        }
-    } else if(login.innerText === "login" && login.href.endsWith("/index.html")) {
-        console.log("login link");
-        login.href.replace("/index.html", "/pages.connection.html");
-    }
 }
