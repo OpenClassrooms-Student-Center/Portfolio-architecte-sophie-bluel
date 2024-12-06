@@ -303,3 +303,40 @@ footer li {
 	font-weight: 300;
 	font-size: 14px;
 }
+
+#modale-backgrd {
+	width: 100vw;
+	height: 100vh;
+	background-color: #00000030;
+	position: fixed;
+	top: 0;
+	border: solid 5px black;
+}
+
+.wrapper {
+	width: 50%;
+	height: 50%;
+	background-color: white;
+	border-radius: 10px;
+}
+
+/*
+Step 3
+SMART modifier
+SMART2 modale
+edit mode bandeau fullscreen
+align center
+addeventlistener("modifier" => {
+	modal => modal.display: block
+})
+	fetch("URL works)
+	resize width height
+
+	icône
+	 suppr. position absolute
+	 addeventlistener
+	 bouton ajouter une photo
+	 afficher une autre div
+	 display: none
+	 display: block l'autre.
+*/
