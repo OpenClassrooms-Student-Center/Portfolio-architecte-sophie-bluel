@@ -186,3 +186,28 @@ footer nav ul {
 	margin: 2em
 }
 
+.buttonFiltre {
+	border: #1D6154 solid 1px;
+	border-radius: 60px;
+	background-color: white;
+	color: #1D6154;
+	font-weight: bold;
+	height: 37px;
+	font-size: 16px;
+	font-family: 'Syne';
+	padding-left: 17px;
+	padding-right: 17px;
+}
+
+#categoriesButton {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	gap: 10px;
+	margin-bottom: 50px;
+}
+
+.buttonFiltre:hover, .buttonFiltre:active {
+	background-color: #1D6154;
+	color: white;
+}
