@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
     <meta name="description" content="">
     <link rel="stylesheet" href="./assets/styles/style.css">
-    <link rel="stylesheet" href="./assets/styles/login.css">
+    <link rel="stylesheet"type ="text/css" href="./assets/styles/style.css">
 </head>
 <body>
     <div class="wrapper">
@@ -30,12 +30,11 @@
             <!-----------Form-------------------->
             <section class="login formLogin">
                 <h2>Log In</h2>
-                <!--le lien Modifier et son icône, est ajouter dynamiquement en mode édition-->
                 <form action="#" method="post">
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="email" autocomplete="email" value="sophie.bluel@test.tld" required>
+                    <input type="email" name="email" id="email" autocomplete="email" placeholder="Entrez votre email" required>
                     <label for="password">Mot de passe</label>
-                    <input type="password" name="password" id="password" autocomplete="current-password" required>
+                    <input type="password" name="password" id="password" autocomplete="current-password" placeholder="Entrez ici votre email" required>
                     <input type="submit" value="Se connecter" class="btn-submit">
                     <p id="messageError"></p>
                 </form>
@@ -53,7 +52,9 @@
     </footer>
       
     <!----------JS--------------------->
-    <script src="./scripts/api.js"></script>
-    <script src="./scripts/login.js"></script>
+    <script type="module" src="./scripts/api.js"></script>
+    <script type="module" src="./scripts/utils.js"></script>
+    <script type ="module" src="./scripts/login.js"></script>
+    
 </body>
 </html>

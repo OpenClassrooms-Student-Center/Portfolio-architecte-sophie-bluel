@@ -1,7 +1,7 @@
-import{ loginUser } from './api.js';  // Importer la fonction loginUser depuis api.js
+import{ loginUser } from './api.js';  
 
-// Attendre que le DOM soit chargé pour exécuter le code suivant
-// 
+// Attend que le DOM soit chargé pour exécuter le code
+ 
 document.addEventListener('DOMContentLoaded', function () {
   console.log('DOM chargé, initialisation du formulaire de login');
   const loginForm = document.querySelector('.login form'); 
@@ -13,15 +13,50 @@ document.addEventListener('DOMContentLoaded', function () {
     const email = document.getElementById('email').value; 
     const password = document.getElementById('password').value;
     await handlelogin(email, password);  
+      console.log('Email :',email);
+      console.log('Password :',password);
+      
+
+    //valider l'email
+    if (!validateEmail(email)){
+      console.log('Email invalide');
+      displayErrorMessage('Veuillez entrer une adresse email valide');
+      return; 
+    }
+
+    //valider le mot de passe
+    if (!password) {
+      console.log('Mot de passe invalide');
+      
+      displayErrorMessage('Veuillez entrer un mot de passe valide.');
+      return;
+    }
+
+    // Connexion de l'utilisateur
+    await handlelogin(email, password);
+
+    //Valider l'email et le mot de passe
+function validateEmail(email) {
+  const emailRegex =  /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+//Afficher un message d'erreur
+function displayErrorMessage(message) {}
+   const messageError = document.getElementById('messageError');
+   messageError.textContent = message;
+   messageError.computedStyleMap.color ='red';
   });
 });
+
 
 // CONNEXION UTILISATEUR
 async function handlelogin(email, password) {  
   try {                                           
     console.log('Tentative de connexion...');
     
-    const data = await loginUser(email, password);  // Appeler la fonction loginUser avec les valeurs de l'email et du mot de passe et stocker le résultat dans la variable data.En passant en argument email et password a la fonction loginUser on peut les utiliser à l'intérieur de la fonction loginUser pour les envoyer dans le corps de la requête et les comparer avec ceux stockés dans la base de données qui sont associés à un utilisateur
+    const data = await loginUser(email, password);  
+    console.log('Connexion réussie');
 
     localStorage.setItem('token', data.token);      
     console.log('Token stocké dans le localStorage'); 

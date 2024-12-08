@@ -33,7 +33,7 @@ const userRoutes = require("./routes/user.routes");
 const categoriesRoutes = require("./routes/categories.routes");
 
 
-//CORRECTION DU BUG : Suppression de .defaukt car le module n'utilise pas export default, (ce code ne fonctionnait pas correctement, il semble qu'il soit a l'origine de mon pb pour me connecté a l'api comportant les données du projet)
+//CORRECTION DU BUG : Suppression de .default car le module n'utilise pas export default, (ce code ne fonctionnait pas correctement, il semble qu'il soit a l'origine de mon pb pour me connecté a l'api comportant les données du projet)
 //Ancien code qui posait problème:
 //const worksRoutes = require("./routes/works.routes").default;
 //Nouveau code corrigé:

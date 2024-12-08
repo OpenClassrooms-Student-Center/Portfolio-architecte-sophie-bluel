@@ -1,9 +1,23 @@
 import { openModal } from './modal.js';
 
+//VERIFICATION DE LA VALIDITE DU TOKEN
+function isValidToken(token) {
+    if (!token) return false;
+    try {
+        const decodedToken = JSON.parse(atob(token.split('.')[1]));
+        const currentTime = Date.now() / 1000;
+        if (decodedToken.exp < currentTime) return false;
+        return true;
+    } catch {
+        localStorage.removeItem('token');
+        return false;
+    }
+}
+
 //VERIFICATION DE L EXISTENCE D UN TOKEN
 function isAdmin() {
-  const token = localStorage.getItem('token');
-  return !!token; // !! convertit le token en boolean (true si le token existe et false si non)
+    const token = localStorage.getItem('token');
+    return isValidToken(token);
 }
 
 //MISE A JOUR DE LOGIN/LOGOUT DANS LE NAV EN MODE ADMIN
@@ -32,13 +46,12 @@ function toggleFiltersButtons(show) {
     filterButtonsContainer.style.display = show ? 'flex' : 'none';
   }
 }
-//INDIQUE LE MODE EDITION A L UTILISATEUR
 
+//INDIQUE LE MODE EDITION A L UTILISATEUR
 function createEditBar() {
   const editBar = document.createElement('div');
   editBar.className = 'edit-bar';
   editBar.innerHTML = `
-        
               <i class='fa-regular fa-pen-to-square'></i>
               <span>Mode édition</span>
           </a>
@@ -46,7 +59,7 @@ function createEditBar() {
   document.body.insertBefore(editBar, document.body.firstChild);
 }
 
-//CREATION DU BOUTON DE MODIFICATION DU PORTFOLIO
+//CREATION DU BOUTON DE MODIFICATION (lien 'Modifier') DU PORTFOLIO
 function setupPortfolioEditButton() {
   const portfolioTitle = document.querySelector('#portfolio .title-container');
 
@@ -56,9 +69,9 @@ function setupPortfolioEditButton() {
   <i class='fa-regular fa-pen-to-square'></i>
   modifier
   `;
-  editButton.href ='#';
+  editButton.href = '#';
   editButton.addEventListener('click', (event) => {
-    event.preventDefault(); 
+    event.preventDefault();
     openModal(event);
   });
   portfolioTitle.appendChild(editButton);
@@ -95,8 +108,11 @@ function initializeAdminInterface() {
 function handleLogout(e) {
   e.preventDefault();
   console.log('Déconnexion ...');
+  // Nettoyage complet des données d'authentification
   localStorage.removeItem('token');
-  window.location.reload();
+  sessionStorage.clear(); // Nettoyage supplémentaire
+  // Redirection vers la page d'accueil
+  window.location.href = 'index.html';
 }
 
 //INITIALISATION DE L INTERFACE ADMIN

@@ -1,1 +1,28 @@
 .idea
+
+# Node modules
+**/node_modules/
+
+# Package files
+**/package-lock.json
+**/package.json
+
+# Config files
+**/eslint.config.mjs
+
+# Images uploads
+Backend/images/*
+!Backend/images/.gitkeep
+Backend_images_save/
+
+# Database
+Backend/database.sqlite
+
+# Environment variables
+**/.env
+
+# Maintenance files
+MAINTENANCE.md
+
+# Keep .gitignore
+!.gitignore

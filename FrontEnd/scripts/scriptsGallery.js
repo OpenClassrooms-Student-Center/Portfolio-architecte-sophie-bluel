@@ -16,7 +16,7 @@ function handleFilterClick(button, category, works) {
     addWorksGallery(filteredWorks);
   }
 }
-
+// AJOUT DES TRAVAUX A LA GALLERIE
 export function addWorksGallery(works) {
   console.log('Ajout des travaux à la gallerie : ', works);
 
@@ -56,7 +56,7 @@ function filterWorksByCategory(works, category) {
   if (category === 'Tous') {
     return works;
   }
-  return works.filter((work) => work.category.name === category); // filter va filtré les category par nom de category
+  return works.filter((work) => work.category.name === category); 
 }
 
 //CREE UN BOUTON DE FILTRE
@@ -91,7 +91,7 @@ export async function initGallery() {
   buttonsFiltersContainer.classList.add('btn-filter'); 
 
   
-  portefolioSection.insertBefore(buttonsFiltersContainer, galleryDiv); //j'insère un noeud avant le noeud de référence (portefolio) en tant qu'enfant du noeud parent spécifié (let insertNode = parentNode.insertBefore(newnode, referenceNode)
+  portefolioSection.insertBefore(buttonsFiltersContainer, galleryDiv); 
   console.log(
     'Container des boutons de filtre créé et inséré dans le DOM : ',
     buttonsFiltersContainer
@@ -107,12 +107,12 @@ export async function initGallery() {
     console.log(`Bouton ${category.name} crée et ajouté.`); 
   }
 
-  addWorksGallery(works); //j'appel la fonction qui ajoute les works a la gallery et lui passe en parmètre le tableau de works
+  addWorksGallery(works); 
 
   // VERIFICATION DE LA CONNEXION DE L'UTILISATEUR
   const token = localStorage.getItem('token'); 
   if (!token) {
-    // Si pas de token, on est en mode visiteur
+    console.log('Utilisateur non connecté');
     const editBar = document.querySelector('.edit-bar'); 
     if (editBar) {
       editBar.remove();
