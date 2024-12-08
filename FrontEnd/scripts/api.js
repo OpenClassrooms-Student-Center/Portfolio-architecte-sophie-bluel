@@ -91,7 +91,7 @@ export async function deleteWork(workId) {
 
 // AJOUTER UN WORK
 export async function addWork(formData) {
-  console.log('Ajout d\'un nouveau travail');
+  console.log("Ajout d'un nouveau travail");
   const token = localStorage.getItem('token');
 
   try {
@@ -111,7 +111,7 @@ export async function addWork(formData) {
     console.log('Nouveau travail ajouté:', newWork);
     return newWork;
   } catch (error) {
-    console.error('Erreur lors de l\'ajout:', error);
+    console.error("Erreur lors de l'ajout:", error);
     throw error;
   }
 }

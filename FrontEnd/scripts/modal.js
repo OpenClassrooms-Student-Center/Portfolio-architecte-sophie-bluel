@@ -1,7 +1,7 @@
 import { getWorksFromAPI, deleteWork, addWork, apiUrl } from './api.js';
 import { initGallery, addWorksGallery } from './scriptsGallery.js';
 
-let currentModal = null; // Variable globale pour stocker la modale ouverte, en fait elle permet de suivre l'etat de la modale et de savoir si elle est ouverte ou non, elle est definie sur null car elle n'a pas encore ete ouverte
+let currentModal = null; // Variable pour garder une référence à la modale ouverte
 
 // OUVERTURE DE LA MODALE
 export function openModal(e) {
@@ -75,15 +75,15 @@ async function loadWorksInModal() {
   try {
     // Récupère mes projets depuis l'API (appel fetch a l'api)
     const works = await getWorksFromAPI();
-    console.log("J'ai récupéré", works.length, 'projets');
+    console.log('J\'ai récupéré', works.length, 'projets');
 
     //  Vide le conteneur avant d'ajouter les nouveaux projets
     modalGallery.innerHTML = '';
 
     // Parcours mes projets et je les ajoute à la modale
     for (let i = 0; i < works.length; i++) {
-      const work = works[i];
-      //  crée un élément figure pour chaque projet
+      const work = works[i];  
+      //  crée un élément figure pour chaque projet, avec l'image et le bouton de suppression
       const figure = document.createElement('figure');
       figure.className = 'modal-work';
       // ajoute l'image et le bouton de suppression
@@ -389,7 +389,7 @@ function initializeModalEvents() {
   const addPhotoButton = document.querySelector('.add-photo-btn');
   const backButton = document.querySelector('.back-button');
 
-  //GESTION DE L'AJOOUT DE PHOTO
+  //GESTION DE L'AJOUT DE PHOTO
   if (imageInput && titleInput && categorySelect) {
     console.log('✅ Éléments du formulaire trouvés');
 

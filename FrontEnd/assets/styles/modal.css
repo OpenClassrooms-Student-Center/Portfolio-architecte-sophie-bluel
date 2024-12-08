@@ -36,15 +36,19 @@
 
 /*  style du conteneur de la galerie */
 
-/********************Ajuster selon la maquette et ce que nous avons vu avec jean baptiste******************************/
-.gallery-container {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
-    padding: 20px;
-    margin-bottom: 67.3px;
-}
 
+.gallery-container {
+ 
+display: flex;
+flex-wrap: wrap;
+justify-content: space-between;
+align-items: center;
+
+padding: 20px;
+margin-bottom: 67.3px;
+gap: 10px;
+
+}
 /* différentes fenêtres dans la modale */
 .modal-work {
     position: relative;
@@ -73,7 +77,7 @@
 .delete-work {
     position: absolute;
     top: 5px;
-    right: 40px;
+    right: 5px;
     background: black;
     color: white;
     border: none;
