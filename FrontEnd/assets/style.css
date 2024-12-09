@@ -95,6 +95,15 @@ nav li {
 	font-size: 1.2em;
 }
 
+nav a {
+	color: black;
+	text-decoration: none;
+}
+
+nav a:hover {
+	color: #B1663C;
+}
+
 li:hover {
 	color: #B1663C;
 }
@@ -210,4 +219,59 @@ footer nav ul {
 .buttonFiltre:hover, .buttonFiltre:active {
 	background-color: #1D6154;
 	color: white;
+}
+
+/*********login***********/
+
+.login {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 500px;
+}
+
+.login h2 {
+	margin-bottom: 35px;
+	color: #1D6154;
+	font-size: 30px;
+	font-style: normal;
+	font-family: 'Syne';
+}
+
+.login form {
+	display: flex;
+	flex-direction: column;
+	gap: 40px;
+	width: 30%;
+	align-items: center;
+}
+
+.groupeInput {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	gap: 8px;
+}
+
+.login input {
+	height: 50px;
+	border: none;
+	background-color: white;
+	box-shadow: 0px 5px 16px 5px rgba(0,0,0,0.12);
+}
+
+.connectionBtn {
+	width: 50%;
+	height: 36px;
+	color: white;
+	background-color: #1D6154;
+	border-radius: 60px;
+	border: none;
+	font-family: 'Syne';
+}
+
+.login a {
+	margin-top: 40px;
+	color: black;
 }
