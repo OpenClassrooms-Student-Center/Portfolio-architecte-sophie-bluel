@@ -53,6 +53,7 @@ table {
 	--button-color-hover: #0F2F28;
 	--h1-li-hover-color: #B1663C;
 	--a-color: #3D3D3D;
+	--line-color: #B3B3B3;
 	--button-font-size: 1.2em;
 	--button-font-family: 'Syne';
 	--text-font-family: 'Work Sans';
@@ -108,6 +109,12 @@ h2{
 	font-weight: 700;
 	font-size: 30px;
 	color: var(--button-color);
+}
+
+h3 {
+	font-family: var(--text-font-family);
+	font-size: 26px;
+	text-align: center;
 }
 
 nav a {
@@ -310,17 +317,42 @@ footer li {
 	background-color: #00000030;
 	position: fixed;
 	top: 0;
-	border: solid 5px black;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 
 .wrapper {
-	width: 50%;
-	height: 50%;
+	width: 45vw;
+	height: 75vh;
 	background-color: white;
 	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.close {
+	text-align: right;
+}
+
+.galleryModal {
+	width: 100%;
+	padding-left: 16%;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: 0;
+	grid-row-gap: 30px;
+	box-sizing: border-box;
+}
+
+#modal img {
+	width: 50%;
+	height: 100%;
+}
+
+hr {
+	color: var(--line-color);
 }
 
 /*

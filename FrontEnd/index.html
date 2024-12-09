@@ -8,6 +8,7 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400&icon_names=edit_square" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400&icon_names=close" rel="stylesheet">
 		<!--meta name="description" content=""-->
 		<link rel="stylesheet" href="./assets/style.css">
 		<script type="module" src="./assets/scripts/script.js"></script>
@@ -42,47 +43,47 @@
 				<h2>Mes Projets</h2>
 				<div class="gallery">
 					<figure>
-						<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
+						<img src="./assets/images/abajour-tahina.png" alt="Abajour Tahina">
 						<figcaption>Abajour Tahina</figcaption>
 					</figure>
 					<figure>
-						<img src="assets/images/appartement-paris-v.png" alt="Appartement Paris V">
+						<img src="./assets/images/appartement-paris-v.png" alt="Appartement Paris V">
 						<figcaption>Appartement Paris V</figcaption>
 					</figure>
 					<figure>
-						<img src="assets/images/restaurant-sushisen-londres.png" alt="Restaurant Sushisen - Londres">
+						<img src="./assets/images/restaurant-sushisen-londres.png" alt="Restaurant Sushisen - Londres">
 						<figcaption>Restaurant Sushisen - Londres</figcaption>
 					</figure>
 					<figure>
-						<img src="assets/images/la-balisiere.png" alt="Villa “La Balisiere” - Port Louis">
+						<img src="./assets/images/la-balisiere.png" alt="Villa “La Balisiere” - Port Louis">
 						<figcaption>Villa “La Balisiere” - Port Louis</figcaption>
 					</figure>
 					<figure>
-						<img src="assets/images/structures-thermopolis.png" alt="Structures Thermopolis">
+						<img src="./assets/images/structures-thermopolis.png" alt="Structures Thermopolis">
 						<figcaption>Structures Thermopolis</figcaption>
 					</figure>
 					<figure>
-						<img src="assets/images/appartement-paris-x.png" alt="Appartement Paris X">
+						<img src="./assets/images/appartement-paris-x.png" alt="Appartement Paris X">
 						<figcaption>Appartement Paris X</figcaption>
 					</figure>
 					<figure>
-						<img src="assets/images/le-coteau-cassis.png" alt="Pavillon “Le coteau” - Cassis">
+						<img src="./assets/images/le-coteau-cassis.png" alt="Pavillon “Le coteau” - Cassis">
 						<figcaption>Pavillon “Le coteau” - Cassis</figcaption>
 					</figure>
 					<figure>
-						<img src="assets/images/villa-ferneze.png" alt="Villa Ferneze - Isola d’Elba">
+						<img src="./assets/images/villa-ferneze.png" alt="Villa Ferneze - Isola d’Elba">
 						<figcaption>Villa Ferneze - Isola d’Elba</figcaption>
 					</figure>
 					<figure>
-						<img src="assets/images/appartement-paris-xviii.png" alt="Appartement Paris XVIII">
+						<img src="./assets/images/appartement-paris-xviii.png" alt="Appartement Paris XVIII">
 						<figcaption>Appartement Paris XVIII</figcaption>
 					</figure>
 					<figure>
-						<img src="assets/images/bar-lullaby-paris.png" alt="Bar “Lullaby” - Paris">
+						<img src="./assets/images/bar-lullaby-paris.png" alt="Bar “Lullaby” - Paris">
 						<figcaption>Bar “Lullaby” - Paris</figcaption>
 					</figure>
 					<figure>
-						<img src="assets/images/hotel-first-arte-new-delhi.png" alt="Hotel First Arte - New Delhi">
+						<img src="./assets/images/hotel-first-arte-new-delhi.png" alt="Hotel First Arte - New Delhi">
 						<figcaption>Hotel First Arte - New Delhi</figcaption>
 					</figure>
 				</div>
@@ -108,8 +109,14 @@
 				</ul>
 			</nav>
 		</footer>
-		<div id="modal-backgrd">
-			<div class="wrapper"></div>
-		</div>
+		<dialog id="modal-backgrd">
+			<div class="wrapper">
+				<i class="material-symbols-outlined close">close</i>
+				<h3>Galerie photo</h3>
+				<div id="modal" class="galleryModal"></div>
+				<hr size="1" width="420">
+				<button class="button selected">Ajouter une photo</button>
+			</div>
+		</dialog>
 	</body>
 </html>

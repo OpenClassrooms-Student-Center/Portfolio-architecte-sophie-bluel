@@ -15,6 +15,9 @@ import {
     addWorksModificationLink,
     removeFromLocalStorage
 } from "./connection.js";
+import {
+    displayPhotosGallery
+} from "./modal.js"
 
 document.addEventListener("DOMContentLoaded", async () => {
     let worksInLocalStorageVar = window.localStorage.getItem("works");
@@ -77,4 +80,5 @@ document.addEventListener("DOMContentLoaded", async () => {
         hideCategoryFilterButtons();
         addWorksModificationLink();
     }
+    displayPhotosGallery();
 });
