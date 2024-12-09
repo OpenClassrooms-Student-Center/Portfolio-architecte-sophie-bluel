@@ -304,13 +304,16 @@ footer li {
 	font-size: 14px;
 }
 
-#modale-backgrd {
+#modal-backgrd {
 	width: 100vw;
 	height: 100vh;
 	background-color: #00000030;
 	position: fixed;
 	top: 0;
 	border: solid 5px black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .wrapper {
@@ -323,7 +326,7 @@ footer li {
 /*
 Step 3
 SMART modifier
-SMART2 modale
+SMART2 modal
 edit mode bandeau fullscreen
 align center
 addeventlistener("modifier" => {
