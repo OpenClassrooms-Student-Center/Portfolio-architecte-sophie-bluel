@@ -275,3 +275,7 @@ footer nav ul {
 	margin-top: 40px;
 	color: black;
 }
+
+.msgError {
+	color: red;
+}
