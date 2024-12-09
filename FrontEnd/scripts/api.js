@@ -89,9 +89,9 @@ export async function deleteWork(workId) {
   }
 }
 
-// AJOUTER UN WORK
+// AJOUTER UN WORK FORMDATA
 export async function addWork(formData) {
-  console.log("Ajout d'un nouveau travail");
+  console.log('Ajout d\'un nouveau travail');
   const token = localStorage.getItem('token');
 
   try {
@@ -100,7 +100,7 @@ export async function addWork(formData) {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-      body: formData, // FormData data gère automatiquement l'encodage multipart/formdata (defini dans l 'api)(cf MDN), (on ne peut pas ici utilisé le content-type sur application/json car le Json ne permet pas d'envoyer des fichiers,images) On utilise FormData pour pouvoir envoyer l'image, où formdata est un objet qui permet de stocker les données du formulaire
+      body: formData, 
     });
 
     if (!response.ok) {
@@ -111,7 +111,10 @@ export async function addWork(formData) {
     console.log('Nouveau travail ajouté:', newWork);
     return newWork;
   } catch (error) {
-    console.error("Erreur lors de l'ajout:", error);
+    console.error('Erreur lors de l\'ajout:', error);
     throw error;
   }
 }
+
+
+

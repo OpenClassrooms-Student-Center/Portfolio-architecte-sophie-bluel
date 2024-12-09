@@ -64,7 +64,7 @@ body {
 	margin: 50px auto 0;
 	
 }
-/************************Modale*****************************/
+/************************Modale*******************/
 /* .modale {
 	position: fixed;
 	display: flex;
@@ -141,7 +141,7 @@ nav li img {
 	width: 22px;
 	height: auto;
 	font-weight: 700;
-	color: black;  /**mettre une police fontawesome**/
+	color: black; 
 }
 li:hover {
 	color: #B1663C;
@@ -234,8 +234,6 @@ nav a:hover {
 	font-family: 'Work Sans', 'Segoe UI', sans-serif;
 	font-size: 16px;
 	font-weight: 400;
-	
-
 }
 
 
@@ -305,7 +303,6 @@ input[type="submit"]{
 	border-radius: 60px;
 }
 
-
 .btn-submit:hover {
 background: #0e2f28;
 }
@@ -332,6 +329,22 @@ background: #0e2f28;
 	cursor: pointer;
 	margin: 20px;
 	padding: 20px;
+}
+
+/***********style placeholder***********/
+input::placeholder {
+	color: #cccccc;
+	opacity: 0.8;
+	font-family: 'Work Sans', sans-serif;
+	font-weight: 100;
+	font-size: 0.9em;
+}
+
+form > input:valid {
+	border: 1px solid green;
+}
+form > input:invalid {
+	border: 1px solid rgb(128, 19, 0);
 }
 
 /*********footer*********/

@@ -32,9 +32,9 @@
                 <h2>Log In</h2>
                 <form action="#" method="post">
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="email" autocomplete="email" placeholder="Entrez votre email" required>
+                    <input type="email" name="email" id="email" autocomplete="email" placeholder="Entrez votre email (requis)" required aria-label="champ requis">
                     <label for="password">Mot de passe</label>
-                    <input type="password" name="password" id="password" autocomplete="current-password" placeholder="Entrez ici votre email" required>
+                    <input type="password" name="password" id="password" autocomplete="current-password" placeholder="Entrez ici votre mot de passe (requis)" required minlength="6" aria-label="champ requis">
                     <input type="submit" value="Se connecter" class="btn-submit">
                     <p id="messageError"></p>
                 </form>

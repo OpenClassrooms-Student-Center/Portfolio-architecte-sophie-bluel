@@ -7,15 +7,10 @@ let currentModal = null; // Variable pour garder une référence à la modale ou
 export function openModal(e) {
   e.preventDefault();
 
-  //  récupèration la modale et affichage
   const modal = document.querySelector('#modal');
   modal.style.display = 'flex';
-
-  //  met à jour les attributs ARIA
   modal.removeAttribute('aria-hidden');
   modal.setAttribute('aria-modal', 'true');
-
-  // garde une référence à la modale ouverte
   currentModal = modal;
 
   // ajoute les écouteurs d'événements
@@ -25,7 +20,6 @@ export function openModal(e) {
     .querySelector('.modale-wrapper')
     .addEventListener('click', preventModalClose);
 
-  //Charge les projets dans la modale
   loadWorksInModal();
 }
 
@@ -36,17 +30,13 @@ function closeModal(e) {
   e.preventDefault();
   e.stopPropagation();
 
-  // cache la modale
   currentModal.style.display = 'none';
 
-  // met à jour les attributs ARIA
   currentModal.setAttribute('aria-hidden', 'true');
   currentModal.removeAttribute('aria-modal');
 
-  // retire les écouteurs d'événements
   currentModal.removeEventListener('click', closeModal);
 
-  //Retire les écouteurs sur tous les boutons de fermeture
   const closeButtons = document.querySelectorAll('.close-modal');
   for (const button of closeButtons) {
     button.removeEventListener('click', closeModal);
@@ -56,7 +46,6 @@ function closeModal(e) {
   for (const wrapper of modalWrappers) {
     wrapper.removeEventListener('click', preventModalClose);
   }
-
   //réinitialise la référence
   currentModal = null;
 }
@@ -67,26 +56,20 @@ function preventModalClose(e) {
 }
 // CHARGEMENT DES PROJETS DANS LA MODALE,(galerie photo)
 async function loadWorksInModal() {
-  console.log('Début chargement des projets dans la modale');
-
-  // Récupère le conteneur avec la bonne classe
   const modalGallery = document.querySelector('.gallery-container');
 
   try {
-    // Récupère mes projets depuis l'API (appel fetch a l'api)
     const works = await getWorksFromAPI();
     console.log('J\'ai récupéré', works.length, 'projets');
 
-    //  Vide le conteneur avant d'ajouter les nouveaux projets
     modalGallery.innerHTML = '';
 
-    // Parcours mes projets et je les ajoute à la modale
     for (let i = 0; i < works.length; i++) {
       const work = works[i];  
-      //  crée un élément figure pour chaque projet, avec l'image et le bouton de suppression
+
       const figure = document.createElement('figure');
       figure.className = 'modal-work';
-      // ajoute l'image et le bouton de suppression
+
       figure.innerHTML = `
                 <div class='work-image-container'>
                     <img src='${work.imageUrl}' alt='${work.title}'>
@@ -96,7 +79,7 @@ async function loadWorksInModal() {
                 </div>   
             `;
 
-      // Ajoute l'élément figure à mon conteneur (.gallery-container)
+
       modalGallery.appendChild(figure);
       const deleteButton = figure.querySelector('.delete-work');
       deleteButton.addEventListener('click', handleDeleteWork);
@@ -122,11 +105,9 @@ async function handleDeleteWork(e) {
   e.preventDefault();
   e.stopPropagation();
 
-  //Récupérer l'ID du projet à supprimer
   const workId = e.currentTarget.dataset.id;
 
   try {
-    //Appel l'API pour supprimer le work
     const success = await deleteWork(workId);
 
     if (success) {
@@ -178,8 +159,8 @@ async function handleAddWork(e) {
       closeModal(e);
     }
   } catch (error) {
-    console.error("Erreur lors de l'ajout:", error);
-    alert("Erreur lors de l'ajout du projet");
+    console.error('Erreur lors de l\'ajout:', error);
+    alert('Erreur lors de l\'ajout du projet');
   }
 }
 
@@ -238,17 +219,16 @@ function checkFormValidity() {
   }
 }
 
-// GESTION DE L'AJOUT DE PHOTO
-async function handlePhotoSubmit(event) {
+// GESTION Du FORMUALIRE D AJOUT D UN WORK
+async function handleFormSubmit(event) {
   event.preventDefault();
-  console.log('🎯 Début handlePhotoSubmit');
 
   try {
     const imageInput = document.getElementById('image-upload');
     const titleInput = document.getElementById('title');
     const categorySelect = document.getElementById('category');
 
-    // Vérification des champs
+   // Vérification des champs //************Ajouter un message error coté client pour chaque élémnt du formaulaire s'il est omis************************* */
     if (!imageInput.files[0] || !titleInput.value || !categorySelect.value) {
       console.error('❌ Formulaire incomplet');
       alert('Veuillez remplir tous les champs');
@@ -343,32 +323,31 @@ async function loadCategories() {
 
 // PRÉVISUALISATION DE L'IMAGE UPLOADÉE
 function handleImagePreview(event) {
-  console.log('🎯 Début handleImagePreview');
-
   // récupère le fichier sélectionner
   const file = event.target.files[0];
   console.log('fichier sélectionner :', file?.name);
 
-  //trouve le container où afficher l'image
   const container = document.querySelector('.image-upload-container');
 
-  //vérfications que le fichier est une image
   if (!file.type.match('image.*')) {
     alert('Veuillez choisir une image');
     return;
   }
-
-  //créer l'Url de l'image
   const imageUrl = URL.createObjectURL(file);
 
-  //cacher les éléments présent dans le conteneur avant de charger l'image
   const existingElements = container.querySelectorAll(
     '.fa-regular, .custom-file-upload, .file-info'
   );
   for (const element of existingElements) {
     element.style.display = 'none';
   }
-  //afficher l'image
+
+  const oldPreview = container.querySelector('.image-preview');
+  if(oldPreview) {
+    URL.revokedObjectURL(oldPreview.src);
+    oldPreview.appendChild(imagePreview);
+  }
+
   const imagePreview = document.createElement('img');
   imagePreview.className = 'image-preview';
   imagePreview.src = imageUrl;
@@ -378,18 +357,15 @@ function handleImagePreview(event) {
 
 //INITIALISATION DES EVENEMENTS DE LA MODALE
 function initializeModalEvents() {
-  console.log('Initialisation des événements de la modale');
 
-  //récupère les éléments
   const form = document.querySelector('.add-photo-form');
   const imageInput = document.getElementById('image-upload');
-  console.log('Input image trouvé :', !!imageInput);
   const titleInput = document.getElementById('title');
   const categorySelect = document.getElementById('category');
   const addPhotoButton = document.querySelector('.add-photo-btn');
   const backButton = document.querySelector('.back-button');
 
-  //GESTION DE L'AJOUT DE PHOTO
+
   if (imageInput && titleInput && categorySelect) {
     console.log('✅ Éléments du formulaire trouvés');
 
@@ -436,14 +412,14 @@ function initializeModalEvents() {
   }
 
   //prévention de la fermeture accidentelle de la modale
-  const modalWrappers = document.querySelectorAll('.modale-wrapper');
-  for (const wrapper of modalWrappers) {
-    wrapper.addEventListener('click', preventModalClose);
+  const modalWrapper = document.querySelector('.modale-wrapper');
+    if (modalWrapper) {
+    modalWrapper.addEventListener('click', preventModalClose);
   }
 
   //soumission du formulaire
   if (form) {
-    form.addEventListener('submit', handlePhotoSubmit);
+    form.addEventListener('submit', handleFormSubmit);
   }
 
   loadCategories();
@@ -451,12 +427,12 @@ function initializeModalEvents() {
 
 //réinitialisation du formulaire d'ajout de photo
 function resetAddPhotoForm() {
-  console.log('Rénitialisation du formaulaire');
+  console.log('Rénitialisation du formulaire');
 
   const form = document.querySelector('.add-photo-form');
   const imagePreview = document.querySelector('.image-upload-container img');
   const validateButton = document.querySelector('.validate-btn');
-
+/********************Revoir cette logique ne fonctionne pas correctement*********************** */
   if (form) {
     form.reset();
     console.log('🧹 Formulaire rénitialisé');
