@@ -1,10 +1,9 @@
-import { getWorksFromAPI, deleteWork, addWork, apiUrl } from './api.js';
-import { initGallery, addWorksGallery } from './scriptsGallery.js';
+
 
 let currentModal = null; // Variable pour garder une référence à la modale ouverte
 
 // OUVERTURE DE LA MODALE
-export function openModal(e) {
+function openModal(e) {
   e.preventDefault();
 
   const modal = document.querySelector('#modal');
@@ -116,8 +115,8 @@ async function handleDeleteWork(e) {
       await updateInterfaceAfterDeletion();
       console.log('Projet supprimé avec succes');
 
-      e.stopImmediatePropagation(); //empêche la propagation supplémentaire(garanti que la modale ne se ferme pas, plus puissant que stopPropagation())
-      return false; //empêche la propagation supplémentaire
+      e.stopImmediatePropagation(); 
+      return false; 
     }
   } catch (error) {
     console.error('Erreur lors de la suppression:', error);
@@ -146,8 +145,7 @@ async function updateInterfaceAfterDeletion() {
 async function handleAddWork(e) {
   e.preventDefault();
 
-  // récupère les données du formulaire (formData permet de récuperer les données du formulaire où e.target est le formulaire qui a envoyé les données)
-  const formData = new FormData(e.target); // On utilise FormData pour pouvoir envoyer l'image crée un objet FormData qui permet de stocker les données du formulaire (où e.target est le formulaire qui a envoyé les données)
+  const formData = new FormData(e.target);
 
   try {
     // appelle l'API pour ajouter le projet
@@ -425,6 +423,8 @@ function initializeModalEvents() {
   loadCategories();
 }
 
+
+/*************Revérifier si cela fonctionne encore correctement********************* */
 //réinitialisation du formulaire d'ajout de photo
 function resetAddPhotoForm() {
   console.log('Rénitialisation du formulaire');
@@ -448,7 +448,7 @@ function resetAddPhotoForm() {
     '.fa-regular, .custom-file-upload, .file-info'
   );
   for (const element of hiddenElements) {
-    element.style.display = ''; //renitialise la valeur par défaut
+    element.style.display = ''; //réinitialise la valeur par défaut
   }
 
   if (validateButton) {

@@ -35,8 +35,6 @@
 }
 
 /*  style du conteneur de la galerie */
-
-
 .gallery-container {
  
 display: flex;
@@ -217,6 +215,7 @@ gap: 10px;
     display: none;
 }
 
+/********** Style formulaire **********/
 .form-group {
     width: 420px;
     margin: 30px auto;
@@ -304,7 +303,7 @@ gap: 10px;
     cursor: pointer;
 }
 
-/* Media queries pour la responsivité */
+/* Media queries */
 @media (max-width: 700px) {
     .modale-wrapper {
         width: 95%;

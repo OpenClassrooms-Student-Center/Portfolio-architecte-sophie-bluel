@@ -51,7 +51,7 @@ table {
 	border-spacing: 0;
 }
 /** end reset css**/
-/****************Base**************************/
+/****************Base**********************/
 body {
 	max-width: 1140px;
 	margin: auto;
@@ -64,35 +64,9 @@ body {
 	margin: 50px auto 0;
 	
 }
-/************************Modale*******************/
-/* .modale {
-	position: fixed;
-	display: flex;
-	align-items: center;
-	justify-content: center; */
-	/*************A modifier en fonction de la maquette, mettre au centre de la page et adapter les dimensions *********************/
-	/* top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.3);
-}
-
-.modale-wrapper {
-	overflow: auto;
-	width: 630px;
-	max-width: calc(100vw - 20px);
-	max-height: calc(100vh - 20px);
-	height: 688px;
-	padding: 20px; */
-	/* margin: 405px; */
-	/* background: #fff;
-
-} */
 
 
-
-/**************************Header***************************/
+/*****************Header********************/
 header {
 	display: flex;
 	justify-content: space-between;
@@ -151,7 +125,7 @@ nav a:hover {
 	font-weight: 700;
 }
 
-/*******************Introduction***********************/
+/****************Introduction*****************/
 #introduction {
 	display: flex;
 	align-items: center;
@@ -176,13 +150,13 @@ nav a:hover {
 	margin-bottom: 0.5em;
 }
 
-/*********************portefolio**********************/
+/******************portefolio******************/
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
 }
 
-/***********************filter************************/
+/********************filter********************/
 .btn-filter {
 	display: flex;
 	justify-content: center;
@@ -307,21 +281,6 @@ input[type="submit"]{
 background: #0e2f28;
 }
 
-#messageError{
-	color: red;
-	text-align: center;
-	width: 100;
-	height: auto;
-	font-weight: 900;
-	font-size: 1.5em;
-	padding: 20px 0 20px;
-	margin-bottom: 20px;
-	display: none;
-	/* background: #0e2f28;
-	border: 2px solid red;
-	border-radius: 50px; */
-
-}
 
 #forgetMp {
 	color: black;
@@ -339,13 +298,35 @@ input::placeholder {
 	font-weight: 100;
 	font-size: 0.9em;
 }
+/***********style input valid/invalid***********/
 
-form > input:valid {
-	border: 1px solid green;
+/* Style par défaut pour les champs de formulaire */
+input[type="email"],
+input[type="password"] {
+border: none;
+padding: 5px;
+
 }
-form > input:invalid {
-	border: 1px solid rgb(128, 19, 0);
+
+/*Style pour les champs en cas d'erreur*/
+
+input[type="email"].error,
+input[type="password"].error {
+box-shadow:  0 0 5px 2px red;
+
 }
+
+/*Style pour message error*/
+
+#messageError {
+color: red;
+font-size: 1em;
+font-weight: bold;
+margin-top: 10px;
+text-align: center;
+}
+
+
 
 /*********footer*********/
 footer nav ul  {

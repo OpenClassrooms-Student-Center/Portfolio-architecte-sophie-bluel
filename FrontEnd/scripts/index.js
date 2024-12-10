@@ -1,13 +1,11 @@
-import { getWorksFromAPI } from './api.js';
-console.log('Initialisation de la galerie...');
 
 // GESTION DES FILTRES
 function handleFilterClick(button, category, works) {
-  // Retire la classe active de tous les boutons
+
   const allButtons = document.querySelectorAll('.btnFilter');
   allButtons.forEach((btn) => btn.classList.remove('active'));
-  // Ajoute la classe active au bouton cliqué
   button.classList.add('active');
+
   // Filtre les projets
   if (category === 'Tous') {
     addWorksGallery(works);
@@ -16,8 +14,9 @@ function handleFilterClick(button, category, works) {
     addWorksGallery(filteredWorks);
   }
 }
+
 // AJOUT DES TRAVAUX A LA GALLERIE
-export function addWorksGallery(works) {
+function addWorksGallery(works) {
   console.log('Ajout des travaux à la gallerie : ', works);
 
   const WorksContainer = document.querySelector('.gallery');
@@ -42,7 +41,7 @@ export function addWorksGallery(works) {
 
 // EXTRAIT LES CATEGORIES DES TRAVAUX
 function extractCategories(works) {
-  // Crée un tableau de catégories (sans doublons)(avec la méthode Set(), .map() et new)
+  
   const categories = [
     'Tous',
     ...new Set(works.map((work) => work.category.name)),
@@ -70,13 +69,12 @@ function createFilterButton(category, works) {
     console.log(`Bouton ${category.name} cliqué`);
     handleFilterClick(button, category.name, works);
   });
-  console.log('bouton créé : ', button);
   return button;
 }
 
 //INITIALISATION DE LA GALLERIE
 
-export async function initGallery() {
+async function initGallery() {
   //console.log('Initialisation de la gallerie');
   const works = await getWorksFromAPI(); 
   const categories = extractCategories(works);
@@ -92,36 +90,17 @@ export async function initGallery() {
 
   
   portefolioSection.insertBefore(buttonsFiltersContainer, galleryDiv); 
-  console.log(
-    'Container des boutons de filtre créé et inséré dans le DOM : ',
-    buttonsFiltersContainer
-  );
-
+ 
   for (let i = 0; i < categories.length; i++) {
     const category = { name: categories[i] }; 
-    console.log('Catégorie actuelle : ', category);
+   
 
     const btnCategory = createFilterButton(category, works); 
     buttonsFiltersContainer.appendChild(btnCategory); 
-
-    console.log(`Bouton ${category.name} crée et ajouté.`); 
+   
   }
-
   addWorksGallery(works); 
-
-  // VERIFICATION DE LA CONNEXION DE L'UTILISATEUR
-  const token = localStorage.getItem('token'); 
-  if (!token) {
-    console.log('Utilisateur non connecté');
-    const editBar = document.querySelector('.edit-bar'); 
-    if (editBar) {
-      editBar.remove();
-    }
-    const editButton = document.querySelector('.edit-button');
-    if (editButton) {
-      editButton.remove();
-    }
-  }
+  console.log('Gallerie initialisée');
 }
 initGallery(); 
-console.log('Script executé jusqu\'au bout');
+

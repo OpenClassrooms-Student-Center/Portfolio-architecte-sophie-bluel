@@ -1,12 +1,12 @@
 // FICHIER CENTRALISANT LES APPELS A L'API
-export const apiUrl = 'http://localhost:5678/api';
+ const apiUrl = 'http://localhost:5678/api';
 
 // RECUPERER LES TRAVAUX DEPUIS L'API
-export async function getWorksFromAPI() {
-  console.log('Début récupération des travaux');
+async function getWorksFromAPI() {
+
   try {
     const response = await fetch(`${apiUrl}/works`);
-    console.log('Réponse APi workrs reçue:', response);
+    console.log('Réponse APi works reçue:', response);
 
     if (!response.ok) {
       throw new Error(`Erreur HTTP: ${response.status}`);
@@ -22,7 +22,7 @@ export async function getWorksFromAPI() {
 }
 
 // RECUPERER LES CATEGORIES
-export async function getCategories() {
+async function getCategories() {
   console.log('Début récupération des catégories');
   try {
     const response = await fetch(`${apiUrl}/categories`);
@@ -41,8 +41,7 @@ export async function getCategories() {
 }
 
 // CONNEXION UTILISATEUR
-export async function loginUser(email, password) {
-  console.log('Tentative de connexion...');
+async function loginUser(email, password) {
   try {
     const response = await fetch(`${apiUrl}/users/login`, {
       method: 'POST',
@@ -66,7 +65,7 @@ export async function loginUser(email, password) {
 }
 
 // SUPPRIMER UN WORK
-export async function deleteWork(workId) {
+async function deleteWork(workId) {
   console.log('Suppression du travail:', workId);
   const token = localStorage.getItem('token');
 
@@ -90,7 +89,7 @@ export async function deleteWork(workId) {
 }
 
 // AJOUTER UN WORK FORMDATA
-export async function addWork(formData) {
+async function addWork(formData) {
   console.log('Ajout d\'un nouveau travail');
   const token = localStorage.getItem('token');
 

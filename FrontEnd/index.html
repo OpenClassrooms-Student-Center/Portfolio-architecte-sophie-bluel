@@ -66,6 +66,7 @@
           </button>
           <h3 class="titlemodal">Ajout photo</h3>
           <form class="add-photo-form">
+            
             <div class="image-upload-container">
               <i class="fa-regular fa-image"></i>
               <label for="image-upload" class="custom-file-upload"
@@ -78,17 +79,17 @@
                 accept="image/*"
                 required
               />
-              <p class="file-info">jpg, png : 4mo max</p>
+              <p class="file-info" aria-label="informations sur les type de fichiers téléchargeables et leur taille">jpg, png : 4mo max</p>
             </div>
 
             <div class="form-group">
               <label for="title">Titre</label>
-              <input type="text" id="title" name="title" required />
+              <input type="text" id="title" name="title" required aria-label="champ titre requis" />
             </div>
 
             <div class="form-group">
               <label for="category">Catégorie</label>
-              <select id="category" name="category" required>
+              <select id="category" name="category" required aria-label="champ categorie requis">
                 <option value="">Sélectionner une catégorie</option>
                 <!-- Les catégories seront ajoutées dynamiquement ici-->
               </select>
@@ -96,7 +97,7 @@
 
             <div class="form-validation">
               <hr />
-              <button type="submit" class="validate-btn" disabled>
+              <button type="submit" class="validate-btn" disabled aria-label="bouton de validation du formaulaire">
                 Valider
               </button>
             </div>
@@ -151,6 +152,7 @@
           </button>
         </div>
         <div class="gallery"></div>
+       
       </section>
       <!-------------Formulaire de contact------------------>
       <section id="contact" class="formCommon">
@@ -179,9 +181,9 @@
     <!--------------Scripts Js----------------->
 
     <!--défini les fonctions des appels api-->
-    <script type="module" src="./scripts/api.js"></script>
-    <script type="module" src="./scripts/utils.js"></script>
-    <script type="module" src="./scripts/scriptsGallery.js"></script>
-    <script type="module" src="./scripts/modal.js"></script>
+    <script src="./scripts/api.js"></script>
+    <script src="./scripts/utils.js"></script>
+    <script src="./scripts/index.js"></script>
+    <script src="./scripts/modal.js"></script>
   </body>
 </html>

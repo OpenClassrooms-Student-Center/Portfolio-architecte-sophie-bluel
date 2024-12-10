@@ -1,26 +1,32 @@
-import { openModal } from './modal.js';
 
 //VERIFICATION DE LA VALIDITE DU TOKEN
 function isValidToken(token) {
-    if (!token) return false;
+
+    if (!token) {
+      console.log('❌ Pas de token fourni');
+      return false;
+    }
+
     try {
         const decodedToken = JSON.parse(atob(token.split('.')[1]));
         const currentTime = Date.now() / 1000;
         if (decodedToken.exp < currentTime) return false;
         return true;
-    } catch {
+/************vérifier usi sécur de mettre error dans une catch pour une verif de token, voir comment fairpour les erreurs dans ce cas***************************** */
+    } catch (error) {
+        console.error('Erreur décodage token', error);
         localStorage.removeItem('token');
         return false;
     }
 }
 
-//VERIFICATION DE L EXISTENCE D UN TOKEN
+//VERIFICATION DE L EXISTENCE D'UN TOKEN
 function isAdmin() {
     const token = localStorage.getItem('token');
     return isValidToken(token);
 }
 
-//MISE A JOUR DE LOGIN/LOGOUT DANS LE NAV EN MODE ADMIN
+//MISE A JOUR DE LOGIN/LOGOUT DANS La NAV EN MODE ADMIN
 function updateLoginUI() {
   const loginLink = document.querySelector('nav ul li:nth-child(3) a');
 
@@ -58,6 +64,7 @@ function createEditBar() {
       `;
   document.body.insertBefore(editBar, document.body.firstChild);
 }
+ 
 
 //CREATION DU BOUTON DE MODIFICATION (lien 'Modifier') DU PORTFOLIO
 function setupPortfolioEditButton() {
@@ -79,43 +86,58 @@ function setupPortfolioEditButton() {
 
 //NETTOYER L INTERFACE EN MODE VISITEURS
 function cleanupAdminElements() {
+  const token = localStorage.getItem('token'); 
+   if (!token) {
+    console.log('Utilisateur non connecté !');
+    return;
+   }
+
   const editBar = document.querySelector('.edit-bar');
-  if (editBar) editBar.remove();
+  if (editBar) { 
+    editBar.remove();
+  }
+
+  const editButton = document.querySelector('#portfolio .title-container');
+  if (editButton) {
+    editButton.remove();
+  }
 
   document.body.classList.remove('admin-mode');
 }
 
 //INITIALISATION DE L INTERFACE EN MODE EDITION
 function initializeAdminInterface() {
-  console.log('Initialisation de l\'interface admin...');
-
-  cleanupAdminElements();
+  console.log('is Admin ?', isAdmin());
+  
   updateLoginUI();
 
   if (isAdmin()) {
-    console.log('Mode administrateur activé');
     document.body.classList.add('admin-mode');
     createEditBar();
     setupPortfolioEditButton();
     toggleFiltersButtons(false);
+    console.log('Mode administrateur activé');
   } else {
-    console.log('Mode visiteur activé');
     toggleFiltersButtons(true);
-  }
-}
 
-//GESTION DE LA DECONNEXION
-function handleLogout(e) {
-  e.preventDefault();
-  console.log('Déconnexion ...');
-  // Nettoyage complet des données d'authentification
-  localStorage.removeItem('token');
-  sessionStorage.clear(); // Nettoyage supplémentaire
-  // Redirection vers la page d'accueil
-  window.location.href = 'index.html';
+  }
 }
 
 //INITIALISATION DE L INTERFACE ADMIN
 document.addEventListener('DOMContentLoaded', () => {
   initializeAdminInterface();
 });
+
+//GESTION DE LA DECONNEXION
+function handleLogout(e) {
+  e.preventDefault();
+  console.log('Déconnexion ...');
+ 
+  localStorage.removeItem('token');
+  sessionStorage.clear(); 
+ 
+  window.location.href = 'index.html';
+}
+
+
+

@@ -1,60 +1,89 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Sophie Bluel - Architecte d'intérieur</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
-    <meta name="description" content="">
-    <link rel="stylesheet" href="./assets/styles/style.css">
-    <link rel="stylesheet"type ="text/css" href="./assets/styles/style.css">
-</head>
-<body>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="./assets/styles/style.css" />
+    <link rel="stylesheet" type="text/css" href="./assets/styles/style.css" />
+  </head>
+  <body>
     <div class="wrapper">
-        <!------------Header------------------->   
-        <header>
-            <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
-            <nav>
-                <ul>
-                    <li><a href="index.html#portfolio">projets</a></li>
-                    <li><a href="index.html#contact">contact</a></li>
-                    <li><a href="#">login</a></li>
-                    <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
-                </ul>
-            </nav>
-        </header>
-        <!-----------Main-------------------->
-        <main>
-            <!-----------Form-------------------->
-            <section class="login formLogin">
-                <h2>Log In</h2>
-                <form action="#" method="post">
-                    <label for="email">Email</label>
-                    <input type="email" name="email" id="email" autocomplete="email" placeholder="Entrez votre email (requis)" required aria-label="champ requis">
-                    <label for="password">Mot de passe</label>
-                    <input type="password" name="password" id="password" autocomplete="current-password" placeholder="Entrez ici votre mot de passe (requis)" required minlength="6" aria-label="champ requis">
-                    <input type="submit" value="Se connecter" class="btn-submit">
-                    <p id="messageError"></p>
-                </form>
-                <p id="forgetMp"><a href="#">Mot de passe oublié</a></p>
-            </section>
-        </main>
+      <!------------Header------------------->
+      <header>
+        <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+        <nav>
+          <ul>
+            <li><a href="index.html#portfolio">projets</a></li>
+            <li><a href="index.html#contact">contact</a></li>
+            <li><a href="#">login</a></li>
+            <li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
+          </ul>
+        </nav>
+      </header>
+      <!-----------Main-------------------->
+      <main>
+        <!-----------Form-------------------->
+        <section class="login formLogin">
+          <h2>Log In</h2>
+          <form action="#" method="post">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              autocomplete="email"
+              placeholder="Entrez votre email"
+              required
+              aria-label="Entrez votre email, champ requis"
+            />
+            <label for="password">Mot de passe</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              autocomplete="current-password"
+              placeholder="Entrez ici votre mot de passe"
+              required
+              minlength="6"
+              aria-label="Entrez votre mot de passe, champ requis"
+            />
+            <input
+              type="submit"
+              value="Se connecter"
+              class="btn-submit"
+              aria-label="bouton se connecter"
+            />
+            <p id="messageError"></p>
+          </form>
+          <p
+            id="forgetMp"
+            aria-label="Mot de passe oublié, lien vers réinitialisation du mot de passe"
+          >
+            <a href="#">Mot de passe oublié</a>
+          </p>
+        </section>
+      </main>
     </div>
     <!-----------Footer-------------------->
     <footer id="footerLogIn">
-        <nav>
-            <ul>
-                <li><a href="#">Mentions Légales</a></li>
-            </ul>
-        </nav>
+      <nav>
+        <ul>
+          <li><a href="#">Mentions Légales</a></li>
+        </ul>
+      </nav>
     </footer>
-      
+
     <!----------JS--------------------->
-    <script type="module" src="./scripts/api.js"></script>
-    <script type="module" src="./scripts/utils.js"></script>
-    <script type ="module" src="./scripts/login.js"></script>
-    
-</body>
+    <script src="./scripts/api.js"></script>
+    <script src="./scripts/utils.js"></script>
+    <script src="./scripts/login.js"></script>
+  </body>
 </html>
