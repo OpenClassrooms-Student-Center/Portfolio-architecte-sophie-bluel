@@ -80,7 +80,7 @@ async function deleteWork(workId) {
     if (!response.ok) {
       throw new Error('Erreur suppression');
     }
-    console.log('Travail supprimé avec succès');
+    console.log('Travail supprimé avec succès', workId);
     return true;
   } catch (error) {
     console.error('Erreur suppression:', error);
@@ -90,7 +90,6 @@ async function deleteWork(workId) {
 
 // AJOUTER UN WORK FORMDATA
 async function addWork(formData) {
-  console.log('Ajout d\'un nouveau travail');
   const token = localStorage.getItem('token');
 
   try {

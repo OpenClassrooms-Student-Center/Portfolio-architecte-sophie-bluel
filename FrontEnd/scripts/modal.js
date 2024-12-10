@@ -1,6 +1,6 @@
 
-
-let currentModal = null; // Variable pour garder une référence à la modale ouverte
+// Variable pour garder une référence à la modale ouverte
+let currentModal = null; 
 
 // OUVERTURE DE LA MODALE
 function openModal(e) {
@@ -12,8 +12,7 @@ function openModal(e) {
   modal.setAttribute('aria-modal', 'true');
   currentModal = modal;
 
-  // ajoute les écouteurs d'événements
-  //modal.addEventListener('click', closeModal);
+  modal.addEventListener('click', closeModal);
   modal.querySelector('.close-modal').addEventListener('click', closeModal);
   modal
     .querySelector('.modale-wrapper')
@@ -424,7 +423,7 @@ function initializeModalEvents() {
 }
 
 
-/*************Revérifier si cela fonctionne encore correctement********************* */
+
 //réinitialisation du formulaire d'ajout de photo
 function resetAddPhotoForm() {
   console.log('Rénitialisation du formulaire');
@@ -432,7 +431,7 @@ function resetAddPhotoForm() {
   const form = document.querySelector('.add-photo-form');
   const imagePreview = document.querySelector('.image-upload-container img');
   const validateButton = document.querySelector('.validate-btn');
-/********************Revoir cette logique ne fonctionne pas correctement*********************** */
+
   if (form) {
     form.reset();
     console.log('🧹 Formulaire rénitialisé');

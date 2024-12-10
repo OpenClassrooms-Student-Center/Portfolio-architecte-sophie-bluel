@@ -12,7 +12,7 @@ function isValidToken(token) {
         const currentTime = Date.now() / 1000;
         if (decodedToken.exp < currentTime) return false;
         return true;
-/************vérifier usi sécur de mettre error dans une catch pour une verif de token, voir comment fairpour les erreurs dans ce cas***************************** */
+/************vérifier si sécur de mettre error ainsi******************* */
     } catch (error) {
         console.error('Erreur décodage token', error);
         localStorage.removeItem('token');
@@ -108,7 +108,7 @@ function cleanupAdminElements() {
 //INITIALISATION DE L INTERFACE EN MODE EDITION
 function initializeAdminInterface() {
   console.log('is Admin ?', isAdmin());
-  
+
   updateLoginUI();
 
   if (isAdmin()) {
