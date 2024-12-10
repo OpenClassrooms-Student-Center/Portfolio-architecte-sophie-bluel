@@ -13,7 +13,7 @@ export function displayPhotosGallery() {
         {src:"./assets/images/le-coteau-cassis.png", alt:"Pavillon “Le coteau” - Cassis"},
 		{src:"./assets/images/bar-lullaby-paris.png", alt:"Bar “Lullaby” - Paris"},
 		{src:"./assets/images/hotel-first-arte-new-delhi.png", alt:"Hotel First Arte - New Delhi"}				
-        ];
+    ];
 
     galleryData.forEach(item => {
         const figure = document.createElement('figure');
@@ -23,11 +23,6 @@ export function displayPhotosGallery() {
         img.alt = item.alt;
 
         figure.appendChild(img);
-
-        /*const figcaption = document.createElement('figcaption');
-        figcaption.textContent = item.alt;
-
-        figure.appendChild(figcaption);*/
 
         modalContainer.appendChild(figure);
     });
