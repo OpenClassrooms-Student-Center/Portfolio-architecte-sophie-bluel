@@ -8,9 +8,9 @@ export function displayPhotosGallery() {
 		{src:"./assets/images/la-balisiere.png", alt:"Villa “La Balisiere” - Port Louis"},
 		{src:"./assets/images/structures-thermopolis.png", alt:"Structures Thermopolis"},
 		{src:"./assets/images/appartement-paris-x.png", alt:"Appartement Paris X"},
-		{src:"./assets/images/le-coteau-cassis.png", alt:"Pavillon “Le coteau” - Cassis"},
-		{src:"./assets/images/villa-ferneze.png", alt:"Villa Ferneze - Isola d’Elba"},
-		{src:"./assets/images/appartement-paris-xviii.png", alt:"Appartement Paris XVIII"},
+        {src:"./assets/images/villa-ferneze.png", alt:"Villa Ferneze - Isola d’Elba"},
+        {src:"./assets/images/appartement-paris-xviii.png", alt:"Appartement Paris XVIII"},
+        {src:"./assets/images/le-coteau-cassis.png", alt:"Pavillon “Le coteau” - Cassis"},
 		{src:"./assets/images/bar-lullaby-paris.png", alt:"Bar “Lullaby” - Paris"},
 		{src:"./assets/images/hotel-first-arte-new-delhi.png", alt:"Hotel First Arte - New Delhi"}				
         ];

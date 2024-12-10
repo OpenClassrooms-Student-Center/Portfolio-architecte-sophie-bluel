@@ -115,6 +115,8 @@ h3 {
 	font-family: var(--text-font-family);
 	font-size: 26px;
 	text-align: center;
+	margin-top: 15px;
+	margin-bottom: 50px;
 }
 
 nav a {
@@ -327,9 +329,11 @@ footer li {
 	height: 75vh;
 	background-color: white;
 	border-radius: 10px;
+	padding: 27.5px 27.5px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	box-sizing: border-box;
 }
 
 .close {
@@ -338,21 +342,29 @@ footer li {
 
 .galleryModal {
 	width: 100%;
-	padding-left: 16%;
+	height: 100%;
+	padding: 0 11%;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-	grid-column-gap: 0;
-	grid-row-gap: 30px;
+	grid-column-gap: 7.5px;
+	grid-row-gap: 25px;
 	box-sizing: border-box;
 }
 
 #modal img {
-	width: 50%;
+	width: 100%;
 	height: 100%;
 }
 
 hr {
 	color: var(--line-color);
+	margin-top: 65px;
+}
+
+.button-add-photo {
+	width: 237px;
+	height: 53px;
+	font-size: 1em;
 }
 
 /*
