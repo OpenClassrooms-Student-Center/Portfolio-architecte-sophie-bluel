@@ -16,13 +16,20 @@ export function displayPhotosGallery() {
     ];
 
     galleryData.forEach(item => {
-        const figure = document.createElement('figure');
+        const figure = document.createElement("figure");
 
-        const img = document.createElement('img');
+        const img = document.createElement("img");
         img.src = item.src;
         img.alt = item.alt;
 
         figure.appendChild(img);
+
+        /*const delIcon = document.createElement("span");
+        delIcon.classList.add("material-symbols-outlined");
+        delIcon.classList.add("deleteProj");
+        delIcon.innerText = "delete";
+        
+        modalContainer.appendChild(delIcon);*/
 
         modalContainer.appendChild(figure);
     });
