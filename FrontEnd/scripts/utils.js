@@ -1,29 +1,25 @@
-
 //VERIFICATION DE LA VALIDITE DU TOKEN
 function isValidToken(token) {
+  if (!token) {
+    return false;
+  }
 
-    if (!token) {
-      console.log('❌ Pas de token fourni');
-      return false;
-    }
-
-    try {
-        const decodedToken = JSON.parse(atob(token.split('.')[1]));
-        const currentTime = Date.now() / 1000;
-        if (decodedToken.exp < currentTime) return false;
-        return true;
-/************vérifier si sécur de mettre error ainsi******************* */
-    } catch (error) {
-        console.error('Erreur décodage token', error);
-        localStorage.removeItem('token');
-        return false;
-    }
+  try {
+    const decodedToken = JSON.parse(atob(token.split('.')[1]));
+    const currentTime = Date.now() / 1000;
+    if (decodedToken.exp < currentTime) return false;
+    return true;
+  } catch (error) {
+    console.error('Erreur décodage token', error);
+    localStorage.removeItem('token');
+    return false;
+  }
 }
 
-//VERIFICATION DE L EXISTENCE D'UN TOKEN
+//VERIFICATION DE L'EXISTENCE D'UN TOKEN
 function isAdmin() {
-    const token = localStorage.getItem('token');
-    return isValidToken(token);
+  const token = localStorage.getItem('token');
+  return isValidToken(token);
 }
 
 //MISE A JOUR DE LOGIN/LOGOUT DANS La NAV EN MODE ADMIN
@@ -31,7 +27,6 @@ function updateLoginUI() {
   const loginLink = document.querySelector('nav ul li:nth-child(3) a');
 
   if (!loginLink) {
-    console.error('Le lien de connexion n\'a pas été trouvé dans le DOM.');
     return;
   }
 
@@ -64,7 +59,6 @@ function createEditBar() {
       `;
   document.body.insertBefore(editBar, document.body.firstChild);
 }
- 
 
 //CREATION DU BOUTON DE MODIFICATION (lien 'Modifier') DU PORTFOLIO
 function setupPortfolioEditButton() {
@@ -86,14 +80,14 @@ function setupPortfolioEditButton() {
 
 //NETTOYER L INTERFACE EN MODE VISITEURS
 function cleanupAdminElements() {
-  const token = localStorage.getItem('token'); 
-   if (!token) {
+  const token = localStorage.getItem('token');
+  if (!token) {
     console.log('Utilisateur non connecté !');
     return;
-   }
+  }
 
   const editBar = document.querySelector('.edit-bar');
-  if (editBar) { 
+  if (editBar) {
     editBar.remove();
   }
 
@@ -119,7 +113,6 @@ function initializeAdminInterface() {
     console.log('Mode administrateur activé');
   } else {
     toggleFiltersButtons(true);
-
   }
 }
 
@@ -131,13 +124,11 @@ document.addEventListener('DOMContentLoaded', () => {
 //GESTION DE LA DECONNEXION
 function handleLogout(e) {
   e.preventDefault();
-  console.log('Déconnexion ...');
- 
   localStorage.removeItem('token');
-  sessionStorage.clear(); 
- 
+  sessionStorage.clear();
   window.location.href = 'index.html';
+
+  if (!isAdmin()) {
+    cleanupAdminElements();
+  }
 }
-
-
-

@@ -42,7 +42,7 @@
         <!-- Vue 1 : Galerie photo -->
         <div class="modal-view" id="gallery-view">
           <h3 class="titlemodal">Galerie photo</h3>
-          <button class="close-modal" aria-label="Fermer">
+          <button class="close-modal" aria-label="Fermer la modale">
             <i class="fa-solid fa-xmark"></i>
           </button>
           <div class="gallery-container">
@@ -57,11 +57,11 @@
         <!-- Vue 2 : Ajout photo, qui contient le formulaire -->
         <div class="modal-view" id="add-photo-view" style="display: none">
           <!--enlever le display none-->
-          <button class="back-button" aria-label="Retour">
+          <button class="back-button" aria-label="Retour à la vue gallerie photo de la modale">
             <!--changer l'aria-label-->
             <i class="fa-solid fa-arrow-left"></i>
           </button>
-          <button class="close-modal" aria-label="Fermer">
+          <button class="close-modal" aria-label="Fermer la modale">
             <i class="fa-solid fa-xmark"></i>
           </button>
           <h3 class="titlemodal">Ajout photo</h3>
@@ -89,7 +89,7 @@
 
             <div class="form-group">
               <label for="category">Catégorie</label>
-              <select id="category" name="category" required aria-label="champ categorie requis">
+              <select id="category" name="category" required aria-label="champ catégorie requis">
                 <option value="">Sélectionner une catégorie</option>
                 <!-- Les catégories seront ajoutées dynamiquement ici-->
               </select>
@@ -155,7 +155,7 @@
        
       </section>
       <!-------------Formulaire de contact------------------>
-      <section id="contact" class="formCommon">
+      <section id="contact">
         <h2>Contact</h2>
         <p>Vous avez un projet ? Discutons-en !</p>
         <form class="formLogin" action="#" method="post">

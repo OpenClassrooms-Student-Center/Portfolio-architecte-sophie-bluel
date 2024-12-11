@@ -1,9 +1,8 @@
 // FICHIER CENTRALISANT LES APPELS A L'API
- const apiUrl = 'http://localhost:5678/api';
+const apiUrl = 'http://localhost:5678/api';
 
 // RECUPERER LES TRAVAUX DEPUIS L'API
 async function getWorksFromAPI() {
-
   try {
     const response = await fetch(`${apiUrl}/works`);
     console.log('Réponse APi works reçue:', response);
@@ -23,7 +22,6 @@ async function getWorksFromAPI() {
 
 // RECUPERER LES CATEGORIES
 async function getCategories() {
-  console.log('Début récupération des catégories');
   try {
     const response = await fetch(`${apiUrl}/categories`);
 
@@ -98,7 +96,7 @@ async function addWork(formData) {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-      body: formData, 
+      body: formData,
     });
 
     if (!response.ok) {
@@ -109,10 +107,7 @@ async function addWork(formData) {
     console.log('Nouveau travail ajouté:', newWork);
     return newWork;
   } catch (error) {
-    console.error('Erreur lors de l\'ajout:', error);
+    console.error("Erreur lors de l'ajout:", error);
     throw error;
   }
 }
-
-
-

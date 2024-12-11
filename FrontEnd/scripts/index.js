@@ -17,14 +17,12 @@ function handleFilterClick(button, category, works) {
 
 // AJOUT DES TRAVAUX A LA GALLERIE
 function addWorksGallery(works) {
-  console.log('Ajout des travaux à la gallerie : ', works);
 
   const WorksContainer = document.querySelector('.gallery');
   WorksContainer.innerHTML = '';
 
   for (let i = 0; i < works.length; i++) {
     const work = works[i];
-    console.log('travail actuel : ', work);
 
     const workElement = document.createElement('figure');
     workElement.className = 'work';
@@ -32,11 +30,9 @@ function addWorksGallery(works) {
         <img src="${work.imageUrl}" alt="${work.title}"/>
         <figcaption>${work.title}</figcaption>
         `;
-    console.log('élément crée : ', workElement);
 
     WorksContainer.appendChild(workElement); 
   }
-  console.log('Tous les travaux ont été ajouté : ', WorksContainer);
 }
 
 // EXTRAIT LES CATEGORIES DES TRAVAUX
@@ -46,7 +42,6 @@ function extractCategories(works) {
     'Tous',
     ...new Set(works.map((work) => work.category.name)),
   ]; 
-  console.log('categories extraites fn : ', categories);
   return categories;
 }
 

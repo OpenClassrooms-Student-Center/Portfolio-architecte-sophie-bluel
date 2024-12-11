@@ -1,6 +1,5 @@
-
-// Variable pour garder une référence à la modale ouverte
-let currentModal = null; 
+// Variable garde une référence à la modale actuellement ouverte
+let currentModal = null;
 
 // OUVERTURE DE LA MODALE
 function openModal(e) {
@@ -12,12 +11,8 @@ function openModal(e) {
   modal.setAttribute('aria-modal', 'true');
   currentModal = modal;
 
-  modal.addEventListener('click', closeModal);
-  modal.querySelector('.close-modal').addEventListener('click', closeModal);
-  modal
-    .querySelector('.modale-wrapper')
-    .addEventListener('click', preventModalClose);
-
+  addModalEventListeners(modal)
+ 
   loadWorksInModal();
 }
 
@@ -29,41 +24,43 @@ function closeModal(e) {
   e.stopPropagation();
 
   currentModal.style.display = 'none';
-
   currentModal.setAttribute('aria-hidden', 'true');
   currentModal.removeAttribute('aria-modal');
-
-  currentModal.removeEventListener('click', closeModal);
-
-  const closeButtons = document.querySelectorAll('.close-modal');
-  for (const button of closeButtons) {
-    button.removeEventListener('click', closeModal);
-  }
-
-  const modalWrappers = currentModal.querySelectorAll('.modale-wrapper');
-  for (const wrapper of modalWrappers) {
-    wrapper.removeEventListener('click', preventModalClose);
-  }
+ 
+  removeModalEventListeners(currentModal);
   //réinitialise la référence
   currentModal = null;
+}
+
+function addModalEventListeners(modal) {
+  modal.addEventListener('click', closeModal);
+  modal.querySelector('.close-modal').addEventListener('click', closeModal);
+  modal.querySelector('.modale-wrapper').addEventListener('click', preventModalClose);
+}
+
+function removeModalEventListeners(modal) {
+  modal.removeEventListener('click', closeModal);
+  modal.querySelector('.close-modal').removeEventListener('click', closeModal);
+  modal.querySelector('.modale-wrapper').removeEventListener('click', preventModalClose);
 }
 
 // EMPÊCHER LA FERMETURE QUAND ON CLIQUE DANS LA MODALE
 function preventModalClose(e) {
   e.stopPropagation();
 }
+
+
 // CHARGEMENT DES PROJETS DANS LA MODALE,(galerie photo)
 async function loadWorksInModal() {
   const modalGallery = document.querySelector('.gallery-container');
 
   try {
     const works = await getWorksFromAPI();
-    console.log('J\'ai récupéré', works.length, 'projets');
 
     modalGallery.innerHTML = '';
 
     for (let i = 0; i < works.length; i++) {
-      const work = works[i];  
+      const work = works[i];
 
       const figure = document.createElement('figure');
       figure.className = 'modal-work';
@@ -76,7 +73,6 @@ async function loadWorksInModal() {
                     </button>
                 </div>   
             `;
-
 
       modalGallery.appendChild(figure);
       const deleteButton = figure.querySelector('.delete-work');
@@ -93,12 +89,6 @@ async function loadWorksInModal() {
 
 // SUPPRESSION D'UN PROJET
 async function handleDeleteWork(e) {
-  console.group('🗑️ SUPPRESION WORK - Début');
-  console.log('1.Type événement :', e.type);
-  console.log('2. élément cliqué :', e.target);
-  console.log('3. élément avec le listener :', e.currentTarget);
-  console.log('4. Work ID :', e.currentTarget.dataset.id);
-  console.log('🎯Début HandledeleteWork');
 
   e.preventDefault();
   e.stopPropagation();
@@ -110,12 +100,11 @@ async function handleDeleteWork(e) {
 
     if (success) {
       e.stopPropagation();
-      //Met a jour l'inteface de la modale sans la fermer
       await updateInterfaceAfterDeletion();
       console.log('Projet supprimé avec succes');
 
-      e.stopImmediatePropagation(); 
-      return false; 
+      e.stopImmediatePropagation();
+      return false;
     }
   } catch (error) {
     console.error('Erreur lors de la suppression:', error);
@@ -123,7 +112,7 @@ async function handleDeleteWork(e) {
   }
 }
 
-//fonction qui met à jour l interface de la modlale
+//MISE A JOUR INTERFACE  DE LA MODALE APRES LA SUPPRESSION
 async function updateInterfaceAfterDeletion() {
   try {
     await loadWorksInModal();
@@ -147,7 +136,6 @@ async function handleAddWork(e) {
   const formData = new FormData(e.target);
 
   try {
-    // appelle l'API pour ajouter le projet
     const newWork = await addWork(formData);
 
     if (newWork) {
@@ -163,7 +151,7 @@ async function handleAddWork(e) {
 
 // NAVIGATION ENTRE LES VUES DE LA MODALE
 function showAddPhotoView() {
-  // Cache la vue galerie et affiche la vue d'ajout photo
+  
   const galleryView = document.getElementById('gallery-view');
   const addPhotoView = document.getElementById('add-photo-view');
 
@@ -181,34 +169,27 @@ function showGalleryView() {
 
 // VERIFICATION DE LA VALIDITE DU FORMULAIRE
 function checkFormValidity() {
-  // Récupération des éléments
+
   const imageInput = document.getElementById('image-upload');
   const titleInput = document.getElementById('title');
   const categorySelect = document.getElementById('category');
   const validateButton = document.querySelector('.validate-btn');
 
-  // Vérification de l'existence des éléments
   if (!imageInput || !titleInput || !categorySelect || !validateButton) {
     console.error('❌ Elements du formulaire manquants');
     return;
   }
 
-  // Vérification des valeurs
   const isImageSelected = imageInput.files && imageInput.files.length > 0;
-  const isTitleFilled = titleInput.value && titleInput.value.trim() !== '';
-  const isCategorySelected =
-    categorySelect.value && categorySelect.value !== '';
-
-  console.log('📝 État du formulaire :');
-  console.log('- Image:', isImageSelected);
-  console.log('- Titre:', isTitleFilled);
-  console.log('- Catégorie:', isCategorySelected);
+  const isTitleFilled = titleInput.value && titleInput.value.trim() !== '' && titleInput.value.length > 3;
+  const isCategorySelected = categorySelect.value && categorySelect.value !== '';
 
   // Le bouton est activé UNIQUEMENT si les trois conditions sont remplies
   if (isImageSelected && isTitleFilled && isCategorySelected) {
     console.log('✅ Formulaire valide - Activation du bouton');
     validateButton.disabled = false;
     validateButton.classList.add('active');
+
   } else {
     console.log('❌ Formulaire incomplet - Désactivation du bouton');
     validateButton.disabled = true;
@@ -216,7 +197,7 @@ function checkFormValidity() {
   }
 }
 
-// GESTION Du FORMUALIRE D AJOUT D UN WORK
+// GESTION DU FORMULAIRE D'AJOUT D'UN WORK
 async function handleFormSubmit(event) {
   event.preventDefault();
 
@@ -225,7 +206,7 @@ async function handleFormSubmit(event) {
     const titleInput = document.getElementById('title');
     const categorySelect = document.getElementById('category');
 
-   // Vérification des champs //************Ajouter un message error coté client pour chaque élémnt du formaulaire s'il est omis************************* */
+    //Vérification des champs du formulaire
     if (!imageInput.files[0] || !titleInput.value || !categorySelect.value) {
       console.error('❌ Formulaire incomplet');
       alert('Veuillez remplir tous les champs');
@@ -237,39 +218,18 @@ async function handleFormSubmit(event) {
     formData.append('title', titleInput.value);
     formData.append('category', categorySelect.value);
 
-    console.log('📤 Envoi des données:', {
-      image: imageInput.files[0].name,
-      title: titleInput.value,
-      category: categorySelect.value,
-    });
-
     const token = localStorage.getItem('token');
     if (!token) {
       console.error('❌ Token manquant');
       throw new Error('Token d\'authentification manquant');
     }
 
-    const response = await fetch(`${apiUrl}/works`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      body: formData,
-    });
-
-    console.log('📡 Status:', response.status);
-
-    if (response.status === 201) {
-      const data = await response.json();
-      console.log('✅ Succès:', data);
+    const newWork = await addWork(formData);
+    if (newWork) {}
+      console.log('✅ Nouveau projet ajouté:', newWork);
 
       // Vider le formulaire
-      const form = document.querySelector('.add-photo-form');
-      if (form) {
-        form.reset();
-        console.log('🧹 Formulaire vidé');
-      }
-
+      resetAddPhotoForm();
       // Recharger les galeries
       try {
         await loadWorksInModal();
@@ -281,48 +241,42 @@ async function handleFormSubmit(event) {
 
       // Retour à la vue galerie
       showGalleryView();
-      console.log(' Retour à la vue galerie');
-      return;
-    } else {
-      const errorText = await response.text();
-      throw new Error(`Erreur ${response.status}: ${errorText}`);
-    }
+
   } catch (error) {
     console.error('❌ Erreur complète:', error);
     alert('Une erreur est survenue lors de l\'ajout du projet');
   }
 }
 
-// CHARGER LES CATEGORIES DANS LE MENU DEROULANT
+
+// RECUPERE LES CATEGORIES
 async function loadCategories() {
-  try {
-    // Récupère les catégories
-    const response = await fetch(`${apiUrl}/categories`);
-    const categories = await response.json();
+  const categorySelect = document.getElementById('category');
+  const categories = await getCategories();
+console.log('Catégories chargées:', categories);
 
-    // Récupère le menu déroulant
-    const categorySelect = document.getElementById('category');
+  if (categorySelect)  {
+    categorySelect.innerHTML = '';
 
-    // Pour chaque catégorie, crée une option dans le menu
-    for (let i = 0; i < categories.length; i++) {
-      const category = categories[i];
-
+    for (const category of categories) {
+      console.log( 'Ajout des options', category);
       const option = document.createElement('option');
       option.value = category.id;
-      option.textContent = category.name;
-
+      option.text = category.name;
       categorySelect.appendChild(option);
+      console.log(`Option ajoutée:', ${category.name}`);
     }
-  } catch (error) {
-    console.error('Erreur lors du chargementes catégories:', error);
+
+  } else {
+    console.error('❌ Certains éléments du formulaire sont manquants');
   }
 }
 
+
 // PRÉVISUALISATION DE L'IMAGE UPLOADÉE
 function handleImagePreview(event) {
-  // récupère le fichier sélectionner
+  
   const file = event.target.files[0];
-  console.log('fichier sélectionner :', file?.name);
 
   const container = document.querySelector('.image-upload-container');
 
@@ -340,7 +294,7 @@ function handleImagePreview(event) {
   }
 
   const oldPreview = container.querySelector('.image-preview');
-  if(oldPreview) {
+  if (oldPreview) {
     URL.revokedObjectURL(oldPreview.src);
     oldPreview.appendChild(imagePreview);
   }
@@ -354,7 +308,6 @@ function handleImagePreview(event) {
 
 //INITIALISATION DES EVENEMENTS DE LA MODALE
 function initializeModalEvents() {
-
   const form = document.querySelector('.add-photo-form');
   const imageInput = document.getElementById('image-upload');
   const titleInput = document.getElementById('title');
@@ -362,9 +315,7 @@ function initializeModalEvents() {
   const addPhotoButton = document.querySelector('.add-photo-btn');
   const backButton = document.querySelector('.back-button');
 
-
   if (imageInput && titleInput && categorySelect) {
-    console.log('✅ Éléments du formulaire trouvés');
 
     //prévisualisation et validation de l'image
     imageInput.addEventListener('change', (e) => {
@@ -387,9 +338,7 @@ function initializeModalEvents() {
 
   //navigation entre les vues de la modale
   if (addPhotoButton) {
-    addPhotoButton.addEventListener('click', () => {
-      showAddPhotoView();
-    });
+    addPhotoButton.addEventListener('click', showAddPhotoView);
   }
 
   if (backButton) {
@@ -407,26 +356,18 @@ function initializeModalEvents() {
       });
     }
   }
-
-  //prévention de la fermeture accidentelle de la modale
-  const modalWrapper = document.querySelector('.modale-wrapper');
-    if (modalWrapper) {
-    modalWrapper.addEventListener('click', preventModalClose);
-  }
-
-  //soumission du formulaire
-  if (form) {
-    form.addEventListener('submit', handleFormSubmit);
-  }
-
+ //gestion de la soumission du formulaire
+ if (form) {
+  form.addEventListener('submit', handleFormSubmit);
+}
+if(categorySelect) {
   loadCategories();
 }
 
+}
 
-
-//réinitialisation du formulaire d'ajout de photo
+//REINITIALISATION DU FORMULAIRE D'AJOUT DE PHOTO
 function resetAddPhotoForm() {
-  console.log('Rénitialisation du formulaire');
 
   const form = document.querySelector('.add-photo-form');
   const imagePreview = document.querySelector('.image-upload-container img');
@@ -434,7 +375,6 @@ function resetAddPhotoForm() {
 
   if (form) {
     form.reset();
-    console.log('🧹 Formulaire rénitialisé');
   }
 
   if (imagePreview) {
@@ -447,17 +387,17 @@ function resetAddPhotoForm() {
     '.fa-regular, .custom-file-upload, .file-info'
   );
   for (const element of hiddenElements) {
-    element.style.display = ''; //réinitialise la valeur par défaut
+    element.style.display = ''; 
   }
 
   if (validateButton) {
     validateButton.disabled = true;
     validateButton.classList.remove('active');
-    console.log('🧹 Bouton de validation desactivé');
+  
   }
 }
 
-//  initialisation de la modale et des événements après que le DOM soit chargé
+//  INITIALISATION DE LA MODALE
 document.addEventListener('DOMContentLoaded', function () {
   const modalBtn = document.querySelector('.edit-btn');
   if (modalBtn) modalBtn.addEventListener('click', openModal);
