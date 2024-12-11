@@ -1,3 +1,50 @@
+export function displayModalAddPhoto() {
+    const body = document.querySelector("body");
+
+    const dialog = document.createElement("dialog");
+    dialog.id = "modal-backgrd";
+
+    const wrapper = document.createElement("div");
+    wrapper.classList.add("wrapper");
+
+    const closeIcon = document.createElement("i");
+    closeIcon.classList.add("material-symbols-outlined");
+    closeIcon.classList.add("icon-close");
+    closeIcon.innerText = "close";
+    closeIcon.ariaHidden = "true";
+
+    const title = document.createElement("h3");
+    title.innerText = "Galerie photo";
+
+    const gallery = document.createElement("div");
+    gallery.id = "modal";
+    gallery.classList.add("gallery-modal");
+
+    const line = document.createElement("hr");
+    line.size = "1";
+    line.width = "420";
+
+    const add = document.createElement("button");
+    add.classList.add("button", "selected", "button-add-photo");
+    add.innerText = "Ajouter une photo";
+
+    wrapper.appendChild(closeIcon);
+    wrapper.appendChild(title);    
+    wrapper.appendChild(gallery);    
+    wrapper.appendChild(line);    
+    wrapper.appendChild(add);
+
+    dialog.appendChild(wrapper);
+
+    body.appendChild(dialog);
+}
+
+export function closeModal() {
+    const body = document.querySelector("body");
+    const dialog = document.getElementById("modal-backgrd");
+    body.removeChild(dialog);
+}
+
 export function displayPhotosGallery() {
     const modalContainer = document.getElementById("modal");
 

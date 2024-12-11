@@ -341,6 +341,7 @@ footer li {
 	text-align: right;
 	margin-top: 20px;
 	margin-right: 30px;
+	cursor: pointer;
 }
 
 .gallery-modal {
@@ -396,14 +397,9 @@ Step 3
 SMART modifier
 SMART2 modal
 edit mode bandeau fullscreen
-addeventlistener("modifier" => {
-	modal => modal.display: block
-})
 	fetch("URL works)
-	resize width height
 
 	icône
-	 suppr. position absolute
 	 addeventlistener
 	 bouton ajouter une photo
 	 afficher une autre div
