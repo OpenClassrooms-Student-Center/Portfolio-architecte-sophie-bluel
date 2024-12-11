@@ -24,12 +24,13 @@ export function displayPhotosGallery() {
 
         figure.appendChild(img);
 
-        /*const delIcon = document.createElement("span");
+        const delIcon = document.createElement("i");
         delIcon.classList.add("material-symbols-outlined");
-        delIcon.classList.add("deleteProj");
+        delIcon.classList.add("delete-proj");
         delIcon.innerText = "delete";
+        delIcon.ariaHidden = "true";
         
-        modalContainer.appendChild(delIcon);*/
+        figure.appendChild(delIcon);
 
         modalContainer.appendChild(figure);
     });

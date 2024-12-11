@@ -337,13 +337,13 @@ footer li {
 	box-sizing: border-box;
 }
 
-.close {
+.icon-close {
 	text-align: right;
 	margin-top: 20px;
 	margin-right: 30px;
 }
 
-.galleryModal {
+.gallery-modal {
 	width: 93%;
 	height: 95%;
 	padding: 0 11%;
@@ -371,21 +371,31 @@ hr {
 	margin: 28px 0 28px 156px;
 	font-size: 1em;
 }
-/*
-.deleteProj {
-	font-size: 17px;
-	width: 17px;
-	height: 17px;
+
+#modal figure {
+	position: relative;
+	display: inline-block;
+}
+
+.delete-proj {
+	font-size: 13px;
+	width: 14px;
+	height: 14px;
 	background-color: black;
 	color: white;
-}*/
+	position: absolute;
+	cursor: pointer;
+	top: 5px;
+	right: 5px;
+	padding: 1px;
+	border-radius: 2px;
+}
 
 /*
 Step 3
 SMART modifier
 SMART2 modal
 edit mode bandeau fullscreen
-align center
 addeventlistener("modifier" => {
 	modal => modal.display: block
 })
