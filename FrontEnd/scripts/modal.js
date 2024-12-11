@@ -253,7 +253,7 @@ async function handleFormSubmit(event) {
 async function loadCategories() {
   const categorySelect = document.getElementById('category');
   const categories = await getCategories();
-console.log('Catégories chargées:', categories);
+
 
   if (categorySelect)  {
     categorySelect.innerHTML = '';
@@ -264,7 +264,7 @@ console.log('Catégories chargées:', categories);
       option.value = category.id;
       option.text = category.name;
       categorySelect.appendChild(option);
-      console.log(`Option ajoutée:', ${category.name}`);
+     
     }
 
   } else {
@@ -289,6 +289,7 @@ function handleImagePreview(event) {
   const existingElements = container.querySelectorAll(
     '.fa-regular, .custom-file-upload, .file-info'
   );
+  
   for (const element of existingElements) {
     element.style.display = 'none';
   }

@@ -78,7 +78,6 @@ async function initGallery() {
   const portefolioSection = document.getElementById('portfolio'); 
   const h2Portefolio = document.querySelector('#portfolio h2');
   const galleryDiv = document.querySelector('.gallery');
-  console.log('Eléments récupérés : ', portefolioSection, h2Portefolio);
 
   const buttonsFiltersContainer = document.createElement('div');
   buttonsFiltersContainer.classList.add('btn-filter'); 
