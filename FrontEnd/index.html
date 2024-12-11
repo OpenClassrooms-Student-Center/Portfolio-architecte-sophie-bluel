@@ -17,8 +17,7 @@
     <link rel="stylesheet" href="./assets/styles/style.css" />
     <link rel="stylesheet" href="./assets/styles/modal.css" />
     <link rel="stylesheet" href="./assets/styles/admin.css" />
-    <meta name="description" content="" />
-    <link rel="stylesheet" href="./assets/styles/style.css" />
+    <meta name="description" content="Découvrez le portefolio de Sophie Bluel, architecte d'intérieur" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
@@ -32,11 +31,11 @@
 
     <aside
       id="modal"
-      class="modal"
+      class="modal hidden"
       aria-hidden="true"
       role="dialog"
       aria-labelledby="titlemodal"
-      style="display: none"
+
     >
       <div class="modale-wrapper">
         <!-- Vue 1 : Galerie photo -->
@@ -55,7 +54,7 @@
         </div>
 
         <!-- Vue 2 : Ajout photo, qui contient le formulaire -->
-        <div class="modal-view" id="add-photo-view" style="display: none">
+        <div class="modal-view hidden" id="add-photo-view">
           <!--enlever le display none-->
           <button class="back-button" aria-label="Retour à la vue gallerie photo de la modale">
             <!--changer l'aria-label-->
@@ -79,17 +78,17 @@
                 accept="image/*"
                 required
               />
-              <p class="file-info" aria-label="informations sur les type de fichiers téléchargeables et leur taille">jpg, png : 4mo max</p>
+              <p class="file-info" aria-label="Informations sur les types de fichiers téléchargeables et leur taille">jpg, png : 4mo max</p>
             </div>
 
             <div class="form-group">
               <label for="title">Titre</label>
-              <input type="text" id="title" name="title" required aria-label="champ titre requis" />
+              <input type="text" id="title" name="title" required aria-label="champ titre, champ requis" />
             </div>
 
             <div class="form-group">
               <label for="category">Catégorie</label>
-              <select id="category" name="category" required aria-label="champ catégorie requis">
+              <select id="category" name="category" required aria-label="champ catégorie, champ requis">
                 <option value="">Sélectionner une catégorie</option>
                 <!-- Les catégories seront ajoutées dynamiquement ici-->
               </select>

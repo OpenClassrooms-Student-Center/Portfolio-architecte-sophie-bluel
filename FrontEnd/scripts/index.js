@@ -70,7 +70,7 @@ function createFilterButton(category, works) {
 //INITIALISATION DE LA GALLERIE
 
 async function initGallery() {
-  //console.log('Initialisation de la gallerie');
+ 
   const works = await getWorksFromAPI(); 
   const categories = extractCategories(works);
   console.log('Catégories extraites : ', categories); 

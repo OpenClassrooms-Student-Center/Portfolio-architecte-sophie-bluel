@@ -5,14 +5,14 @@ let currentModal = null;
 function openModal(e) {
   e.preventDefault();
 
-  const modal = document.querySelector('#modal');
-  modal.style.display = 'flex';
+  const modal = document.getElementById('modal');
+
+ modal.classList.remove('hidden');
   modal.removeAttribute('aria-hidden');
   modal.setAttribute('aria-modal', 'true');
   currentModal = modal;
 
   addModalEventListeners(modal)
- 
   loadWorksInModal();
 }
 
@@ -23,7 +23,7 @@ function closeModal(e) {
   e.preventDefault();
   e.stopPropagation();
 
-  currentModal.style.display = 'none';
+  currentModal.classList.add('hidden');
   currentModal.setAttribute('aria-hidden', 'true');
   currentModal.removeAttribute('aria-modal');
  
@@ -152,19 +152,12 @@ async function handleAddWork(e) {
 // NAVIGATION ENTRE LES VUES DE LA MODALE
 function showAddPhotoView() {
   
-  const galleryView = document.getElementById('gallery-view');
-  const addPhotoView = document.getElementById('add-photo-view');
-
-  galleryView.style.display = 'none';
-  addPhotoView.style.display = 'block';
+  const galleryView = document.getElementById('gallery-view').classList.add('hidden');
+  const addPhotoView = document.getElementById('add-photo-view').classList.remove('hidden');
 }
-
 function showGalleryView() {
-  const galleryView = document.getElementById('gallery-view');
-  const addPhotoView = document.getElementById('add-photo-view');
-
-  addPhotoView.style.display = 'none';
-  galleryView.style.display = 'block';
+  const galleryView = document.getElementById('gallery-view').classList.remove('hidden');
+  const addPhotoView = document.getElementById('add-photo-view').classList.add('hidden');
 }
 
 // VERIFICATION DE LA VALIDITE DU FORMULAIRE

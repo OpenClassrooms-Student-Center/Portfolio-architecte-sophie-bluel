@@ -48,8 +48,6 @@ const messageError = document.getElementById('messageError');
         return;
       }
 
-
-      // Connexion de l'utilisateur
       try {
         await handlelogin(emailInput.value, passwordInput.value);
 
