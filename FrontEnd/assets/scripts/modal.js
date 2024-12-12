@@ -25,11 +25,11 @@ export function displayModalAddPhoto() {
 
     const gallery = document.createElement("div");
     gallery.id = "gallery";
-    gallery.classList.add("gallery-view");
+    gallery.classList.add("gallery-view", "gallery-add-view-size");
 
     const addView = document.createElement("div");
     addView.id = "addForm";
-    addView.classList.add("add-view");
+    addView.classList.add("add-view", "gallery-add-view-size");
 
     const line = document.createElement("hr");
     line.size = "1";
@@ -101,11 +101,12 @@ export function displayAddPhotoForm() {
     const modalContainer = document.getElementById("addForm");
 
     const form = document.createElement("form");
+    form.id = "modalForm";
 
     const file = document.createElement("input");
     file.type = "file";
-    file.id = "photo";
-    file.name = "photo";
+    file.id = "file-photo";
+    file.name = "file-photo";
     file.required = true;
     file.accept = ".jpg .jpeg .png";
     const labelTitle = document.createElement("label");

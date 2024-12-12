@@ -59,6 +59,7 @@ table {
 	--button-font-size: 1.2em;
 	--button-font-family: 'Syne';
 	--text-font-family: 'Work Sans';
+	--form-font-weight: 500;
 	--button-font-weight: 700;
 }
 /** end variables **/
@@ -290,13 +291,13 @@ li:hover {
 	margin: 2em 0 1em 0;
 }
 
-#contact textarea, #name, #email, #password {
+#contact textarea, #name, #email, #password, #title, #category {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 	margin-bottom: 1%;
 }
 
-#contact #name, #email, #password {
+#contact #name, #email, #password, #title, #category {
 	height: 51px;
 }
 
@@ -361,19 +362,22 @@ footer li {
 }
 
 .gallery-view {
-	width: 93%;
-	height: 95%;
-	padding: 0 11%;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 	grid-column-gap: 7.5px;
 	grid-row-gap: 30px;
 	box-sizing: border-box;
+	margin-bottom: 60px;
+}
+
+.gallery-add-view-size {
+	width: 93%;
+	height: 65%;
+	padding: 0 11%;
 }
 
 .add-view {
 	display: none;
-	flex-direction: column;
 }
 
 #gallery img {
@@ -383,7 +387,6 @@ footer li {
 
 hr {
 	color: var(--line-color);
-	margin-top: 65px;
 	margin-right: 104px;
 }
 
@@ -413,8 +416,32 @@ hr {
 	border-radius: 2px;
 }
 
-#photo {
+form input {
+	width: 420px;
+	margin-top: 10px;
+}
+
+form label {
+	margin-top: 20px;
+	font-size: 14px;
+	font-weight: var(--form-font-weight);
+	font-family: var(--text-font-family);
+}
+
+#file-photo {
 	background-color: var(--input-photo);
+	height: 169px;
+	margin-top: 0;
+}
+
+#modalForm {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 50px;
+}
+
+#category {
+	margin-bottom: 0;
 }
 
 /*
