@@ -51,6 +51,8 @@ table {
 :root {
 	--button-color: #1D6154;
 	--button-color-hover: #0F2F28;
+	--button-color-greyed: #A7A7A7;
+	--input-photo: #E8F1F6;
 	--h1-li-hover-color: #B1663C;
 	--a-color: #3D3D3D;
 	--line-color: #B3B3B3;
@@ -215,6 +217,12 @@ li:hover {
 	color: var(--button-color);
 }
 
+.greyed {
+	background-color: var(--button-color-greyed);
+	border: 1px solid var(--button-color-greyed);
+	color: white;
+}
+
 .filter {
 	padding: 1% 4.25%;
 }
@@ -344,7 +352,15 @@ footer li {
 	cursor: pointer;
 }
 
-.gallery-modal {
+.icon-back {
+	display: none;
+	text-align: left;
+	margin-top: 20px;
+	margin-left: 30px;
+	cursor: pointer;
+}
+
+.gallery-view {
 	width: 93%;
 	height: 95%;
 	padding: 0 11%;
@@ -355,7 +371,12 @@ footer li {
 	box-sizing: border-box;
 }
 
-#modal img {
+.add-view {
+	display: none;
+	flex-direction: column;
+}
+
+#gallery img {
 	width: 100%;
 	height: 100%;
 }
@@ -366,14 +387,14 @@ hr {
 	margin-right: 104px;
 }
 
-.button-add-photo {
+.button-modal {
 	width: 237px;
 	padding: 10px 0;
 	margin: 28px 0 28px 156px;
 	font-size: 1em;
 }
 
-#modal figure {
+#gallery figure {
 	position: relative;
 	display: inline-block;
 }
@@ -392,17 +413,14 @@ hr {
 	border-radius: 2px;
 }
 
+#photo {
+	background-color: var(--input-photo);
+}
+
 /*
 Step 3
 SMART modifier
 SMART2 modal
 edit mode bandeau fullscreen
 	fetch("URL works)
-
-	icône
-	 addeventlistener
-	 bouton ajouter une photo
-	 afficher une autre div
-	 display: none
-	 display: block l'autre.
 */

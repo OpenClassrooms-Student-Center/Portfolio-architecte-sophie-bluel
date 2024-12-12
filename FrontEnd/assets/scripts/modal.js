@@ -7,6 +7,12 @@ export function displayModalAddPhoto() {
     const wrapper = document.createElement("div");
     wrapper.classList.add("wrapper");
 
+    const backIcon = document.createElement("i");
+    backIcon.classList.add("material-symbols-outlined");
+    backIcon.classList.add("icon-back");
+    backIcon.innerText = "arrow_back";
+    backIcon.ariaHidden = "true";
+
     const closeIcon = document.createElement("i");
     closeIcon.classList.add("material-symbols-outlined");
     closeIcon.classList.add("icon-close");
@@ -14,23 +20,31 @@ export function displayModalAddPhoto() {
     closeIcon.ariaHidden = "true";
 
     const title = document.createElement("h3");
+    title.id = "modalTitle";
     title.innerText = "Galerie photo";
 
     const gallery = document.createElement("div");
-    gallery.id = "modal";
-    gallery.classList.add("gallery-modal");
+    gallery.id = "gallery";
+    gallery.classList.add("gallery-view");
+
+    const addView = document.createElement("div");
+    addView.id = "addForm";
+    addView.classList.add("add-view");
 
     const line = document.createElement("hr");
     line.size = "1";
     line.width = "420";
 
     const add = document.createElement("button");
-    add.classList.add("button", "selected", "button-add-photo");
+    add.classList.add("button", "selected", "button-modal");
     add.innerText = "Ajouter une photo";
+    add.id = "modalButton";
 
+    wrapper.appendChild(backIcon);
     wrapper.appendChild(closeIcon);
     wrapper.appendChild(title);    
-    wrapper.appendChild(gallery);    
+    wrapper.appendChild(gallery);
+    wrapper.appendChild(addView);
     wrapper.appendChild(line);    
     wrapper.appendChild(add);
 
@@ -46,7 +60,7 @@ export function closeModal() {
 }
 
 export function displayPhotosGallery() {
-    const modalContainer = document.getElementById("modal");
+    const modalContainer = document.getElementById("gallery");
 
     const galleryData = [
 		{src:"./assets/images/abajour-tahina.png", alt:"Abajour Tahina"},
@@ -81,4 +95,41 @@ export function displayPhotosGallery() {
 
         modalContainer.appendChild(figure);
     });
+}
+
+export function displayAddPhotoForm() {
+    const modalContainer = document.getElementById("addForm");
+
+    const form = document.createElement("form");
+
+    const file = document.createElement("input");
+    file.type = "file";
+    file.id = "photo";
+    file.name = "photo";
+    file.required = true;
+    file.accept = ".jpg .jpeg .png";
+    const labelTitle = document.createElement("label");
+    labelTitle.innerText = "Titre";
+    labelTitle.for = "title";
+    const title = document.createElement("input");
+    title.type = "text";
+    title.id = "title";
+    title.name = "title";
+    title.required = true;
+    const labelCategory = document.createElement("label");
+    labelCategory.for = "category";
+    labelCategory.innerText = "Catégorie";
+    const category = document.createElement("input");
+    category.type = "text";
+    category.id = "category";
+    category.name = "category";
+    category.required = true;
+
+    form.appendChild(file);
+    form.appendChild(labelTitle);
+    form.appendChild(title);
+    form.appendChild(labelCategory);
+    form.appendChild(category);
+
+    modalContainer.appendChild(form);
 }

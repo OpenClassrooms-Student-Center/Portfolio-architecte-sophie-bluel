@@ -18,7 +18,8 @@ import {
 import {
     displayModalAddPhoto,
     closeModal,
-    displayPhotosGallery
+    displayPhotosGallery,
+    displayAddPhotoForm
 } from "./modal.js"
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -87,7 +88,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             event.preventDefault();
             displayModalAddPhoto();
             const modalBackground = document.getElementById("modal-backgrd");
-            displayPhotosGallery();
             const fermer = document.querySelector(".icon-close");
             fermer.addEventListener("click", (event) => {
                 event.preventDefault();
@@ -98,6 +98,30 @@ document.addEventListener("DOMContentLoaded", async () => {
                 if(event.target === modalBackground) {
                     closeModal();
                 }
+            });
+            displayPhotosGallery();
+            const galleryView = document.querySelector(".gallery-view");
+            const addView = document.querySelector(".add-view");
+            const title = document.getElementById("modalTitle");
+            const button = document.getElementById("modalButton");
+            document.querySelector(".button-modal").addEventListener("click", () => {
+                galleryView.style.display = "none";
+                addView.style.display = "flex";
+                title.innerText = "Ajout photo";
+                button.innerText = "Valider";
+                button.type = "submit";
+                button.classList.remove("selected");
+                button.classList.add("greyed");
+                displayAddPhotoForm();
+            });
+            document.querySelector(".icon-back").addEventListener("click", () => {
+                galleryView.style.display = "block";
+                addView.style.display = "none";
+                title.innerText = "Galerie photo";
+                button.innerText = "Ajouter une photo";
+                button.classList.remove("greyed");
+                button.classList.add("selected");
+                displayPhotosGallery();
             })
         });
     }
