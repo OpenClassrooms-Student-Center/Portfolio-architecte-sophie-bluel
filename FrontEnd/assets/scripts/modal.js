@@ -7,6 +7,9 @@ export function displayModalAddPhoto() {
     const wrapper = document.createElement("div");
     wrapper.classList.add("wrapper");
 
+    const iconWrapper = document.createElement("div");
+    iconWrapper.id = "iconWrapper";
+
     const backIcon = document.createElement("i");
     backIcon.classList.add("material-symbols-outlined");
     backIcon.classList.add("icon-back");
@@ -40,8 +43,9 @@ export function displayModalAddPhoto() {
     add.innerText = "Ajouter une photo";
     add.id = "modalButton";
 
-    wrapper.appendChild(backIcon);
-    wrapper.appendChild(closeIcon);
+    iconWrapper.appendChild(backIcon);
+    iconWrapper.appendChild(closeIcon);
+    wrapper.appendChild(iconWrapper);
     wrapper.appendChild(title);    
     wrapper.appendChild(gallery);
     wrapper.appendChild(addView);

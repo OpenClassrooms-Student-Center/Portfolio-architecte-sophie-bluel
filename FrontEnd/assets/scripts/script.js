@@ -100,11 +100,17 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
             });
             displayPhotosGallery();
+            displayAddPhotoForm();
             const galleryView = document.querySelector(".gallery-view");
             const addView = document.querySelector(".add-view");
             const title = document.getElementById("modalTitle");
             const button = document.getElementById("modalButton");
+            const back = document.querySelector(".icon-back");
+            const iconWrappeer = document.getElementById("iconWrapper");
+            iconWrappeer.classList.add("iconWrapperTop");
             document.querySelector(".button-modal").addEventListener("click", () => {
+                iconWrappeer.classList.remove("iconWrapperTop");
+                back.style.display = "block";
                 galleryView.style.display = "none";
                 addView.style.display = "block";
                 title.innerText = "Ajout photo";
@@ -112,16 +118,16 @@ document.addEventListener("DOMContentLoaded", async () => {
                 button.type = "submit";
                 button.classList.remove("selected");
                 button.classList.add("greyed");
-                displayAddPhotoForm();
             });
             document.querySelector(".icon-back").addEventListener("click", () => {
-                galleryView.style.display = "block";
+                iconWrappeer.classList.add("iconWrapperTop");
+                back.style.display = "none";
+                galleryView.style.display = "grid";
                 addView.style.display = "none";
                 title.innerText = "Galerie photo";
                 button.innerText = "Ajouter une photo";
                 button.classList.remove("greyed");
                 button.classList.add("selected");
-                displayPhotosGallery();
             })
         });
     }

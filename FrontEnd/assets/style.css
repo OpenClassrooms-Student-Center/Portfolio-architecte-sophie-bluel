@@ -346,18 +346,26 @@ footer li {
 	box-sizing: border-box;
 }
 
+#iconWrapper {
+	position: relative;
+}
+
+.iconWrapperTop {
+	margin-top: 25px;
+}
+
 .icon-close {
-	text-align: right;
-	margin-top: 20px;
-	margin-right: 30px;
+	position: absolute;
+	right: 32.5px;
+	top: -17.5px;
 	cursor: pointer;
 }
 
 .icon-back {
 	display: none;
-	text-align: left;
-	margin-top: 20px;
-	margin-left: 30px;
+	position: absolute;
+	top: -17.5px;
+	left: -15px;
 	cursor: pointer;
 }
 
@@ -432,6 +440,11 @@ form label {
 	background-color: var(--input-photo);
 	height: 169px;
 	margin-top: 0;
+	margin-bottom: 10px;
+}
+
+#modalTitle {
+	margin-bottom: 37.5px;
 }
 
 #modalForm {
