@@ -7,12 +7,12 @@ function openModal(e) {
 
   const modal = document.getElementById('modal');
 
- modal.classList.remove('hidden');
+  modal.classList.remove('hidden');
   modal.removeAttribute('aria-hidden');
   modal.setAttribute('aria-modal', 'true');
   currentModal = modal;
 
-  addModalEventListeners(modal)
+  addModalEventListeners(modal);
   loadWorksInModal();
 }
 
@@ -102,7 +102,6 @@ async function handleDeleteWork(e) {
       e.stopPropagation();
       await updateInterfaceAfterDeletion();
       console.log('Projet supprimé avec succes');
-
       e.stopImmediatePropagation();
       return false;
     }

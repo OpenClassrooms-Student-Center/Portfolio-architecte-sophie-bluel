@@ -13,7 +13,7 @@ const messageError = document.getElementById('messageError');
     inputEmailPassword.reportValidity();
   };
 
-//Réinitialisation message error et style des champs
+//Réinitialisation message error 
   messageError.textContent = '';
   messageError.classList.remove('error');
   messageError.style.color = 'red';
@@ -59,7 +59,7 @@ const messageError = document.getElementById('messageError');
         console.log('Erreur lors de la connexion:', error);
       }
 
-   })
+   });
   });
 
 
@@ -67,13 +67,11 @@ const messageError = document.getElementById('messageError');
 // CONNEXION UTILISATEUR
 async function handlelogin(email, password) {  
   try {                       
-    console.log('données de connexion ...');
-                        
+                       
     const data = await loginUser(email, password);  
-    console.log('Réponse API :', data);
 
     localStorage.setItem('token', data.token);      
-    console.log('Token stocké dans le localStorage', localStorage.getItem('token')); 
+    console.log('Token stocké dans le localStorage'); 
 
     window.location.href = 'index.html';     
 

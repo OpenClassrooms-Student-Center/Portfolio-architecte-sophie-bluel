@@ -52,7 +52,6 @@ async function loginUser(email, password) {
     if (!response.ok) {
       throw new Error('Identifiants incorrects');
     }
-
     const data = await response.json();
     console.log('Connexion réussie');
     return data;
@@ -107,7 +106,7 @@ async function addWork(formData) {
     console.log('Nouveau travail ajouté:', newWork);
     return newWork;
   } catch (error) {
-    console.error("Erreur lors de l'ajout:", error);
+    console.error('Erreur lors de l\'ajout: ', error);
     throw error;
   }
 }
