@@ -13,6 +13,7 @@
         integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<script src="script.js"></script>
+	<script src="modal.js" defer></script>
 </head>
 <body>
 <header>
@@ -47,7 +48,7 @@
 	<section id="portfolio">
 		<div class="projectHeader">
 			<h2>Mes Projets</h2>
-			<button id ="editionBtn" class="btnModify"><i class="fa-regular fa-pen-to-square"></i>modifier</button>
+			<a href="#modal1" id ="editionBtn" class="btnModify js-modal"><i class="fa-regular fa-pen-to-square"></i>modifier</a>
 		</div>
 		<div id="categoriesButton">
 			<button onclick="getAllWork()" class="buttonFiltre">Tous</button>
@@ -56,6 +57,16 @@
 			
 		</div>
 	</section>
+	<aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titleModal" style="display: none;">
+		<div class="modal-wrapper js-modal-stop">
+			<button class="js-close-modal">Fermer</button>
+			<h1 id="titleModal">Galerie photo</h1>
+			<p>C'est un blabla qui fait blabnla</p>
+			<button>bouton</button>
+			<a href="#">chat chat</a>
+			<a href="#">chien chien</a>
+		</div>
+	</aside>
 	<section id="contact">
 		<h2>Contact</h2>
 		<p>Vous avez un projet ? Discutons-en !</p>

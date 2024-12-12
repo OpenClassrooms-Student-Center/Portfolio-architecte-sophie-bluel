@@ -56,7 +56,7 @@ async function onLoadApi(){
         editionBtn.style.display = "flex";
         log.addEventListener("click", (e)=>{
             e.preventDefault();
-            window.localStorage.clear();
+            window.localStorage.removeItem("token");
             location.reload()
         })
     }

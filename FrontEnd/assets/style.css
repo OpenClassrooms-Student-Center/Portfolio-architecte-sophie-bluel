@@ -319,3 +319,33 @@ footer nav ul {
 .msgError {
 	color: red;
 }
+
+/**********Modale************/
+* {
+	box-sizing: border-box;
+}
+
+*:focus {
+	box-shadow: 0 0 10px blue;
+}
+
+.modal{
+	position: fixed;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.8);
+}
+
+.modal-wrapper {
+	overflow: auto;
+	width: 600px;
+	max-width: calc(100vw - 20px);
+	max-height: calc(100vh - 20px);
+	padding: 20px;
+	background-color: #fff;
+}
