@@ -82,17 +82,23 @@ document.addEventListener("DOMContentLoaded", async () => {
         hideCategoryFilterButtons();
         addWorksModificationLink();
         const modifier = document.getElementById("editSpan");
-        /****** Step 3.1 show add photo modal ******/
+        /****** Step 3.1 show photo gallery modal ******/
         modifier.addEventListener("click", (event) => {
             event.preventDefault();
             displayModalAddPhoto();
-            const modal = document.getElementById("modal-backgrd");
-            displayPhotosGallery(); //modal.showModal(); 
+            const modalBackground = document.getElementById("modal-backgrd");
+            displayPhotosGallery();
             const fermer = document.querySelector(".icon-close");
             fermer.addEventListener("click", (event) => {
                 event.preventDefault();
-                closeModal(); //modal.close();
+                closeModal();
             });
+            modalBackground.addEventListener("click", (event) => {
+                event.preventDefault();
+                if(event.target === modalBackground) {
+                    closeModal();
+                }
+            })
         });
     }
 });
