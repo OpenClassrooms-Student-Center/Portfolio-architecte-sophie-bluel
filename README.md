@@ -20,9 +20,9 @@ Ce projet est développé dans le cadre du parcours de formation d'OpenClassRomm
 
 - HTML 5
 - CSS 3
-- JavaScript
+- JavaScript Vanilla
 
-## Apeels API
+## Appels API
 
 Le projet effectue des appels API pour les opérations suivantes :
 
@@ -36,7 +36,7 @@ Le projet effectue des appels API pour les opérations suivantes :
 
  - **Création de tokens** : Lors de la connexion via le formulaire de login, un Token JWT est généré et envoyé au client.
  - **Stockage des tokens** : Le Token est stoké dans le localStorage du navigateur pour maintenir la session de l'utilisateur.
- - **Vérification des tokens** : Les appels API nécessitant une authentification vérifient la vallidité du token avant d'uthoriser l'accès.
+ - **Vérification des tokens** : Les appels API nécessitant une authentification vérifient la validité du token avant d'authoriser l'accès.
 
 ## Installation
 
@@ -56,7 +56,8 @@ Utilisation :
 npm start
 
 2. Ouvrez le navigateur et accédez à l'URL suivante :
-htt://localhost:3000
+http://localhost:3000 ou liveserver  (http://localhost:5500)
+http://localhost:5678 pour accéder à la documentation de l'api
 
 3.Utilisez l'interface pour naviguer dans le portefolio, ajouter, modifier ou supprimer des projets. 
 
