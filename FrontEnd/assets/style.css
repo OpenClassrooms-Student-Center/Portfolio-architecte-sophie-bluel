@@ -55,9 +55,30 @@ body {
 }
 header {
 	display: flex;
+	flex-direction: column;
 	justify-content: space-between;
-	margin: 50px 0
+	/* margin: 50px 0; */
 }
+
+.edition{
+	flex-direction: row;
+	background-color: black;
+	color: white;
+	justify-content: center;
+	align-items: center;
+	gap: 21px;
+	height: 59px;
+	margin-top: 0px;
+	display: none;
+}
+
+.navigation {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin: 50px 0;
+}
+
 section {
 	margin: 50px 0
 }
@@ -130,9 +151,28 @@ li:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
+
+.projectHeader {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin-bottom: 1em;
+	gap: 20px;
+}
+
+.btnModify {
+	background-color: transparent;
+	border: none;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	display: none;
+}
+
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
+	/* margin-bottom: 1em; */
 }
 .gallery {
 	width: 100%;

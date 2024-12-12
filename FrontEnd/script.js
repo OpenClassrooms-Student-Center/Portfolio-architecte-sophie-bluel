@@ -45,6 +45,21 @@ async function onLoadApi(){
     for(let i =0; i< categories.length;i++){
         createCategories(categories[i])
     }
+
+    if(window.localStorage.getItem("token") != null){
+        const bannerEdition = document.getElementById("bannerEdition")
+        const log = document.getElementById("log")
+        const editionBtn = document.getElementById("editionBtn")
+
+        bannerEdition.style.display = "flex";
+        log.innerHTML = "logout";
+        editionBtn.style.display = "flex";
+        log.addEventListener("click", (e)=>{
+            e.preventDefault();
+            window.localStorage.clear();
+            location.reload()
+        })
+    }
 }
 
 let works = [];
