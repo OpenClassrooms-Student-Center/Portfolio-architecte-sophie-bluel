@@ -102,7 +102,7 @@ function prepareReqJSONdataPayload() {
     }
 }
 
-function displayError(error, errorElement) {
+export function displayError(error, errorElement) {
     errorElement.innerHTML = error;
 }
 

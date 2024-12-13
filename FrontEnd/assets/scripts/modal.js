@@ -107,12 +107,29 @@ export function displayAddPhotoForm() {
     const form = document.createElement("form");
     form.id = "modalForm";
 
+    const pErr = document.createElement("p");
+    pErr.id = "erreur";
+
     const file = document.createElement("input");
     file.type = "file";
     file.id = "file-photo";
     file.name = "file-photo";
     file.required = true;
     file.accept = ".jpg .jpeg .png";
+    const button = document.createElement("button");
+    button.id = "file-button";
+    const imageIcon = document.createElement("i");
+    imageIcon.classList.add("material-symbols-outlined");
+    imageIcon.innerText = "add_photo_alternate";
+    imageIcon.id = "icon-image";
+    const buttonFileAjout = document.createElement("button");
+    buttonFileAjout.id = "file-ajout-button";
+    buttonFileAjout.classList.add("button");
+    buttonFileAjout.innerText = "+ Ajouter photo";
+    const p = document.createElement("p");
+    p.innerText = "jpg, png : 4mo max.";
+    p.id = "file-text";
+  
     const labelTitle = document.createElement("label");
     labelTitle.innerText = "Titre";
     labelTitle.for = "title";
@@ -121,6 +138,7 @@ export function displayAddPhotoForm() {
     title.id = "title";
     title.name = "title";
     title.required = true;
+
     const labelCategory = document.createElement("label");
     labelCategory.for = "category";
     labelCategory.innerText = "Catégorie";
@@ -130,7 +148,12 @@ export function displayAddPhotoForm() {
     category.name = "category";
     category.required = true;
 
-    form.appendChild(file);
+    button.appendChild(file);
+    button.appendChild(imageIcon);
+    button.appendChild(buttonFileAjout);
+    button.appendChild(p);
+    form.appendChild(pErr);
+    form.appendChild(button);
     form.appendChild(labelTitle);
     form.appendChild(title);
     form.appendChild(labelCategory);

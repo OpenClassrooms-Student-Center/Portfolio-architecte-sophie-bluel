@@ -13,7 +13,8 @@ import {
     addConnectedModeBanner,
     hideCategoryFilterButtons,
     addWorksModificationLink,
-    removeFromLocalStorage
+    removeFromLocalStorage,
+    displayError
 } from "./connection.js";
 import {
     displayModalAddPhoto,
@@ -101,15 +102,17 @@ document.addEventListener("DOMContentLoaded", async () => {
             });
             displayPhotosGallery();
             displayAddPhotoForm();
+            const erreur = document.querySelector("#erreur");
+            erreur.innerText = "";
             const galleryView = document.querySelector(".gallery-view");
             const addView = document.querySelector(".add-view");
             const title = document.getElementById("modalTitle");
             const button = document.getElementById("modalButton");
             const back = document.querySelector(".icon-back");
-            const iconWrappeer = document.getElementById("iconWrapper");
-            iconWrappeer.classList.add("iconWrapperTop");
+            const iconWrapper = document.getElementById("iconWrapper");
+            iconWrapper.classList.add("iconWrapperTop");
             document.querySelector(".button-modal").addEventListener("click", () => {
-                iconWrappeer.classList.remove("iconWrapperTop");
+                iconWrapper.classList.remove("iconWrapperTop");
                 back.style.display = "block";
                 galleryView.style.display = "none";
                 addView.style.display = "block";
@@ -120,7 +123,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 button.classList.add("greyed");
             });
             document.querySelector(".icon-back").addEventListener("click", () => {
-                iconWrappeer.classList.add("iconWrapperTop");
+                iconWrapper.classList.add("iconWrapperTop");
                 back.style.display = "none";
                 galleryView.style.display = "grid";
                 addView.style.display = "none";
@@ -128,7 +131,16 @@ document.addEventListener("DOMContentLoaded", async () => {
                 button.innerText = "Ajouter une photo";
                 button.classList.remove("greyed");
                 button.classList.add("selected");
-            })
+            });
+            document.getElementById("file-photo").addEventListener("change", (event) => {
+                const file = event.target.files[0];
+                const maxSize = 4 * 1024 * 1024; // 4 Mo en octets
+
+                if(file && file.size > maxSize) {
+                    event.target.value = "";
+                    displayError("Le fichier dépasse la taille maximale de 4Mo. Recommencez s'il-vous-plaît.", erreur);
+                }
+            });
         });
     }
 });
