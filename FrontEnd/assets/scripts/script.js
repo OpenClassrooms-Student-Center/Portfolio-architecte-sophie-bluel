@@ -89,15 +89,21 @@ document.addEventListener("DOMContentLoaded", async () => {
             event.preventDefault();
             displayModalAddPhoto();
             const modalBackground = document.getElementById("modal-backgrd");
+            modalBackground.ariaModal = "true";
+            modalBackground.ariaHidden = "false";
             const fermer = document.querySelector(".icon-close");
             fermer.addEventListener("click", (event) => {
                 event.preventDefault();
                 closeModal();
+                modalBackground.ariaModal = "false";
+                modalBackground.ariaHidden = "true";
             });
             modalBackground.addEventListener("click", (event) => {
                 event.preventDefault();
                 if(event.target === modalBackground) {
                     closeModal();
+                    modalBackground.ariaModal = "false";
+                    modalBackground.ariaHidden = "true";
                 }
             });
             displayPhotosGallery();

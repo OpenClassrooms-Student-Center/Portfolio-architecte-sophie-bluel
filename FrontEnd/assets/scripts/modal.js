@@ -1,3 +1,24 @@
+import {
+    deleteWork
+} from "./deleteWorks.js";
+
+export const galleryData = [
+    {src:"./assets/images/abajour-tahina.png", alt:"Abajour Tahina", id:"1"},
+    {src:"./assets/images/appartement-paris-v.png", alt:"Appartement Paris V", id:"2"},
+    {src:"./assets/images/restaurant-sushisen-londres.png", alt:"Restaurant Sushisen - Londres", id:"3"},
+    {src:"./assets/images/la-balisiere.png", alt:"Villa “La Balisiere” - Port Louis", id:"4"},
+    {src:"./assets/images/structures-thermopolis.png", alt:"Structures Thermopolis", id:"5"},
+    {src:"./assets/images/appartement-paris-x.png", alt:"Appartement Paris X", id:"6"},
+    {src:"./assets/images/villa-ferneze.png", alt:"Villa Ferneze - Isola d’Elba", id:"8"},
+    {src:"./assets/images/appartement-paris-xviii.png", alt:"Appartement Paris XVIII", id:"9"},
+    {src:"./assets/images/le-coteau-cassis.png", alt:"Pavillon “Le coteau” - Cassis", id:"7"},
+    {src:"./assets/images/bar-lullaby-paris.png", alt:"Bar “Lullaby” - Paris", id:"10"},
+    {src:"./assets/images/hotel-first-arte-new-delhi.png", alt:"Hotel First Arte - New Delhi", id:"11"}				
+];
+
+/**
+ * This function displays the modal at modifier button click.
+ */
 export function displayModalAddPhoto() {
     const body = document.querySelector("body");
 
@@ -26,6 +47,9 @@ export function displayModalAddPhoto() {
     title.id = "modalTitle";
     title.innerText = "Galerie photo";
 
+    const pErr = document.createElement("p");
+    pErr.id = "erreur";
+
     const gallery = document.createElement("div");
     gallery.id = "gallery";
     gallery.classList.add("gallery-view", "gallery-add-view-size");
@@ -46,7 +70,8 @@ export function displayModalAddPhoto() {
     iconWrapper.appendChild(backIcon);
     iconWrapper.appendChild(closeIcon);
     wrapper.appendChild(iconWrapper);
-    wrapper.appendChild(title);    
+    wrapper.appendChild(title);
+    wrapper.appendChild(pErr);
     wrapper.appendChild(gallery);
     wrapper.appendChild(addView);
     wrapper.appendChild(line);    
@@ -57,28 +82,20 @@ export function displayModalAddPhoto() {
     body.appendChild(dialog);
 }
 
+/**
+ * This function closes(removes) the modal at cross or outside of the modal click.
+ */
 export function closeModal() {
     const body = document.querySelector("body");
     const dialog = document.getElementById("modal-backgrd");
     body.removeChild(dialog);
 }
 
+/**
+ * This function displays the gallery view of the modal.
+ */
 export function displayPhotosGallery() {
     const modalContainer = document.getElementById("gallery");
-
-    const galleryData = [
-		{src:"./assets/images/abajour-tahina.png", alt:"Abajour Tahina"},
-		{src:"./assets/images/appartement-paris-v.png", alt:"Appartement Paris V"},
-	    {src:"./assets/images/restaurant-sushisen-londres.png", alt:"Restaurant Sushisen - Londres"},
-		{src:"./assets/images/la-balisiere.png", alt:"Villa “La Balisiere” - Port Louis"},
-		{src:"./assets/images/structures-thermopolis.png", alt:"Structures Thermopolis"},
-		{src:"./assets/images/appartement-paris-x.png", alt:"Appartement Paris X"},
-        {src:"./assets/images/villa-ferneze.png", alt:"Villa Ferneze - Isola d’Elba"},
-        {src:"./assets/images/appartement-paris-xviii.png", alt:"Appartement Paris XVIII"},
-        {src:"./assets/images/le-coteau-cassis.png", alt:"Pavillon “Le coteau” - Cassis"},
-		{src:"./assets/images/bar-lullaby-paris.png", alt:"Bar “Lullaby” - Paris"},
-		{src:"./assets/images/hotel-first-arte-new-delhi.png", alt:"Hotel First Arte - New Delhi"}				
-    ];
 
     galleryData.forEach(item => {
         const figure = document.createElement("figure");
@@ -86,6 +103,7 @@ export function displayPhotosGallery() {
         const img = document.createElement("img");
         img.src = item.src;
         img.alt = item.alt;
+        img.id = item.id;
 
         figure.appendChild(img);
 
@@ -94,6 +112,11 @@ export function displayPhotosGallery() {
         delIcon.classList.add("delete-proj");
         delIcon.innerText = "delete";
         delIcon.ariaHidden = "true";
+        delIcon.id = item.id;
+        delIcon.addEventListener("click", (event) => {
+            event.preventDefault();
+            deleteWork(item.id);
+        });
         
         figure.appendChild(delIcon);
 
@@ -101,14 +124,17 @@ export function displayPhotosGallery() {
     });
 }
 
+/**
+ * This function displays the add photo form view of the modal.
+ */
 export function displayAddPhotoForm() {
     const modalContainer = document.getElementById("addForm");
 
     const form = document.createElement("form");
     form.id = "modalForm";
 
-    const pErr = document.createElement("p");
-    pErr.id = "erreur";
+    /*const pErr = document.createElement("p");
+    pErr.id = "erreur";*/
 
     const file = document.createElement("input");
     file.type = "file";
@@ -152,7 +178,7 @@ export function displayAddPhotoForm() {
     button.appendChild(imageIcon);
     button.appendChild(buttonFileAjout);
     button.appendChild(p);
-    form.appendChild(pErr);
+    /*form.appendChild(pErr);*/
     form.appendChild(button);
     form.appendChild(labelTitle);
     form.appendChild(title);
