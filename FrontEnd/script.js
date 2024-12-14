@@ -2,6 +2,15 @@
     const response = await fetch(url);
     return await response.json();
  }
+
+ async function createMainGallery (){
+    works = await getResponse("http://localhost:5678/api/works")
+    const mainGallery = document.getElementById("galleryImg");
+    mainGallery.innerHTML = ""
+    for(let i =0; i< works.length;i++){
+        createImage(works[i]);
+    }
+ }
  
 async function createImage(work){
     let imgSite = document.getElementById("galleryImg");
@@ -36,12 +45,9 @@ function getAllWork(){
     }
 }
 
-async function onLoadApi(){
-    works = await getResponse("http://localhost:5678/api/works")
+async function onLoadApi(){    
     categories = await getResponse("http://localhost:5678/api/categories")
-    for(let i =0; i< works.length;i++){
-        createImage(works[i]);
-    }
+    await createMainGallery(works);
     for(let i =0; i< categories.length;i++){
         createCategories(categories[i])
     }
@@ -50,8 +56,12 @@ async function onLoadApi(){
         const bannerEdition = document.getElementById("bannerEdition")
         const log = document.getElementById("log")
         const editionBtn = document.getElementById("editionBtn")
+        const catBtns = document.getElementById("categoriesButton")
+        const myProject = document.getElementById("myProject")
 
         bannerEdition.style.display = "flex";
+        catBtns.style.display = "none";
+        myProject.style.marginBottom = "70px";
         log.innerHTML = "logout";
         editionBtn.style.display = "flex";
         log.addEventListener("click", (e)=>{

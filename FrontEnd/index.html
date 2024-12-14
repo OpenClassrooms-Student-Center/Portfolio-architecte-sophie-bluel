@@ -46,7 +46,7 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<div class="projectHeader">
+		<div class="projectHeader" id="myProject">
 			<h2>Mes Projets</h2>
 			<a href="#modal1" id ="editionBtn" class="btnModify js-modal"><i class="fa-regular fa-pen-to-square"></i>modifier</a>
 		</div>
@@ -59,12 +59,39 @@
 	</section>
 	<aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titleModal" style="display: none;">
 		<div class="modal-wrapper js-modal-stop">
-			<button class="js-close-modal">Fermer</button>
-			<h1 id="titleModal">Galerie photo</h1>
-			<p>C'est un blabla qui fait blabnla</p>
-			<button>bouton</button>
-			<a href="#">chat chat</a>
-			<a href="#">chien chien</a>
+			<div class="headerModal">
+				<button style="display: none;" id="btnBack"><i class="fa-solid fa-arrow-left"></i></button>
+				<button class="js-close-modal"><i class="fa-solid fa-xmark"></i></button>
+			</div>
+			<div id="deleteWork">				
+				<h3 id="titleModal">Galerie photo</h3>
+				<div class="galleryModal" id="galleryModal">
+
+				</div>
+				<hr class="solid">
+				<button class="addWork" id="btnAddWork">Ajouter une photo</button>
+			</div>
+			<div class="showAddWork" id="addWork" style="display: none;">
+				<h3 id="titleModal">Ajout photo</h3>
+				<form class="formAddWork">
+					<div class="addPicture">
+						<i class="fa-regular fa-image"></i>
+						<button class="btnAddPicture">+ Ajouter photo</button>
+						<p>jpg, png : 4mo max</p>
+					</div>
+					<div class="formTitleAndCat">
+						<label for="title">Titre</label>
+						<input type="text" name="title" id="title">
+					</div>
+					<div class="formTitleAndCat">
+						<label for="categories">Catégorie</label>
+						<select id="categories" name="categories">
+						</select>
+					</div>
+					<hr class="solid">
+					<button class="btnValidateFormAddWork">Valider</button>
+				</form>
+			</div>
 		</div>
 	</aside>
 	<section id="contact">
