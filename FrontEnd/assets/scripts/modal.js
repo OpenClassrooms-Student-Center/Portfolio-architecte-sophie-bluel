@@ -3,17 +3,17 @@ import {
 } from "./deleteWorks.js";
 
 export const galleryData = [
-    {src:"./assets/images/abajour-tahina.png", alt:"Abajour Tahina", id:"1"},
-    {src:"./assets/images/appartement-paris-v.png", alt:"Appartement Paris V", id:"2"},
-    {src:"./assets/images/restaurant-sushisen-londres.png", alt:"Restaurant Sushisen - Londres", id:"3"},
-    {src:"./assets/images/la-balisiere.png", alt:"Villa “La Balisiere” - Port Louis", id:"4"},
-    {src:"./assets/images/structures-thermopolis.png", alt:"Structures Thermopolis", id:"5"},
-    {src:"./assets/images/appartement-paris-x.png", alt:"Appartement Paris X", id:"6"},
-    {src:"./assets/images/villa-ferneze.png", alt:"Villa Ferneze - Isola d’Elba", id:"8"},
-    {src:"./assets/images/appartement-paris-xviii.png", alt:"Appartement Paris XVIII", id:"9"},
-    {src:"./assets/images/le-coteau-cassis.png", alt:"Pavillon “Le coteau” - Cassis", id:"7"},
-    {src:"./assets/images/bar-lullaby-paris.png", alt:"Bar “Lullaby” - Paris", id:"10"},
-    {src:"./assets/images/hotel-first-arte-new-delhi.png", alt:"Hotel First Arte - New Delhi", id:"11"}				
+    {src:"./assets/images/abajour-tahina.png", alt:"Abajour Tahina", id:1},
+    {src:"./assets/images/appartement-paris-v.png", alt:"Appartement Paris V", id:2},
+    {src:"./assets/images/restaurant-sushisen-londres.png", alt:"Restaurant Sushisen - Londres", id:3},
+    {src:"./assets/images/la-balisiere.png", alt:"Villa “La Balisiere” - Port Louis", id:4},
+    {src:"./assets/images/structures-thermopolis.png", alt:"Structures Thermopolis", id:5},
+    {src:"./assets/images/appartement-paris-x.png", alt:"Appartement Paris X", id:6},
+    {src:"./assets/images/villa-ferneze.png", alt:"Villa Ferneze - Isola d’Elba", id:8},
+    {src:"./assets/images/appartement-paris-xviii.png", alt:"Appartement Paris XVIII", id:9},
+    {src:"./assets/images/le-coteau-cassis.png", alt:"Pavillon “Le coteau” - Cassis", id:7},
+    {src:"./assets/images/bar-lullaby-paris.png", alt:"Bar “Lullaby” - Paris", id:10},
+    {src:"./assets/images/hotel-first-arte-new-delhi.png", alt:"Hotel First Arte - New Delhi", id:11}				
 ];
 
 /**
@@ -133,9 +133,6 @@ export function displayAddPhotoForm() {
     const form = document.createElement("form");
     form.id = "modalForm";
 
-    /*const pErr = document.createElement("p");
-    pErr.id = "erreur";*/
-
     const file = document.createElement("input");
     file.type = "file";
     file.id = "file-photo";
@@ -178,7 +175,6 @@ export function displayAddPhotoForm() {
     button.appendChild(imageIcon);
     button.appendChild(buttonFileAjout);
     button.appendChild(p);
-    /*form.appendChild(pErr);*/
     form.appendChild(button);
     form.appendChild(labelTitle);
     form.appendChild(title);
