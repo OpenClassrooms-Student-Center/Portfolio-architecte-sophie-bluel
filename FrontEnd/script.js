@@ -58,8 +58,10 @@ async function onLoadApi(){
         const editionBtn = document.getElementById("editionBtn")
         const catBtns = document.getElementById("categoriesButton")
         const myProject = document.getElementById("myProject")
+        const navigation = document.getElementById("navigation")
 
         bannerEdition.style.display = "flex";
+        navigation.style.marginTop = "80px";
         catBtns.style.display = "none";
         myProject.style.marginBottom = "70px";
         log.innerHTML = "logout";

@@ -12,8 +12,6 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
         integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<script src="script.js"></script>
-	<script src="modal.js" defer></script>
 </head>
 <body>
 <header>
@@ -21,7 +19,7 @@
 		<i class="fa-regular fa-pen-to-square"></i>
 		<p>Mode édition</p>
 	</div>
-	<div class="navigation">
+	<div class="navigation" id="navigation">
 		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 		<nav>
 			<ul>
@@ -73,23 +71,30 @@
 			</div>
 			<div class="showAddWork" id="addWork" style="display: none;">
 				<h3 id="titleModal">Ajout photo</h3>
-				<form class="formAddWork">
+				<form class="formAddWork" method="post" id="formAddWork">
 					<div class="addPicture">
-						<i class="fa-regular fa-image"></i>
-						<button class="btnAddPicture">+ Ajouter photo</button>
-						<p>jpg, png : 4mo max</p>
+						<div id="divUploadPicture" class="divUploadPicture">
+							<i class="fa-regular fa-image"></i>
+							<label for="addPicture" class="btnAddPicture">+ Ajouter photo</label>
+							<input type="file" accept="image/jpeg, image/png" id="addPicture" name="addPicture" style="display: none;"></input>
+							<p>jpg, png : 4mo max</p>
+						</div>
+							<div class="previewImage">
+								<img id="previewImage" style="display: none;">
+							</div>
 					</div>
 					<div class="formTitleAndCat">
 						<label for="title">Titre</label>
-						<input type="text" name="title" id="title">
+						<input type="text" name="title" id="title" required>
 					</div>
 					<div class="formTitleAndCat">
 						<label for="categories">Catégorie</label>
-						<select id="categories" name="categories">
+						<select id="categories" name="categories" required>
 						</select>
 					</div>
+					<p id="msgForm"></p>
 					<hr class="solid">
-					<button class="btnValidateFormAddWork">Valider</button>
+					<button class="btnValidateFormAddWork" id="btnValidateFormAddWork">Valider</button>
 				</form>
 			</div>
 		</div>
@@ -116,5 +121,7 @@
 		</ul>
 	</nav>
 </footer>
+	<script src="script.js"></script>
+	<script src="modal.js"></script>
 </body>
 </html>
