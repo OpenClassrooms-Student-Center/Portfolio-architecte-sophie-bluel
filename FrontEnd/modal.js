@@ -13,6 +13,7 @@ const titleSelected = document.getElementById("title")
 const msgForm = document.getElementById("msgForm")
 const btnValidateFormAddWork = document.getElementById("btnValidateFormAddWork")
 
+//Permet d'ouvrir la modale et de créer la galerie à l'intérieur de la modale
 const openModal = async function (e) {
     e.preventDefault()
     modal = document.querySelector(document.getElementById("editionBtn").getAttribute("href"))
@@ -26,6 +27,7 @@ const openModal = async function (e) {
     createGallery()
 }
 
+//Permet de fermer la modale, soit en cliquant sur la croix, soit à l'extèrieur de la modale
 const closeModal = function (e) {
     if (modal === null) return
     e.preventDefault()
@@ -40,11 +42,13 @@ const closeModal = function (e) {
     modal = null;
 }
 
+//Permet d'éviter que la modale se ferme lors du click à l'intèrieur de celle-ci
 const stopPropagation = function (e) {
     e.stopPropagation()
 }
 
 
+//Permet de créer la galerie qui se situe à l'intèrieur de la modale
 const createGallery = async function (){
     const works = await getResponse("http://localhost:5678/api/works");
     galleryModal.innerHTML = ""
@@ -62,6 +66,7 @@ const createGallery = async function (){
         });  
 }
 
+//Permet d'effacer de manière dynamique une image dans la modale (en base de donnée et dans le DOM)
 async function deleteWork(workId){
     const token = window.localStorage.getItem("token")
     const deleteResponse = await fetch(`http://localhost:5678/api/works/${workId}`, {
@@ -76,6 +81,7 @@ async function deleteWork(workId){
     }
 }
 
+//Permet d'afficher la page "Ajouter une image"
 const showAddWork = async function(){    
     const headerModal = modal.querySelector(".headerModal")    
     pageDeleteWorks.style.display = "none";
@@ -88,6 +94,7 @@ const showAddWork = async function(){
     await createOptionsCategories()
 }
 
+//Permet la gestion du block "+ Ajouter une image"
 const loadPicture = function(e){
     const file = e.target.files[0];
     if (file) {
@@ -109,6 +116,7 @@ const loadPicture = function(e){
     }
 }
 
+//Permet d'afficher la première page de la modale
 const showDeleteWork = function() {
     const headerModal = modal.querySelector(".headerModal")
     pageDeleteWorks.style.display = "block";
@@ -119,6 +127,7 @@ const showDeleteWork = function() {
     btnBack.removeEventListener("click",showDeleteWork)
 }
 
+//Permet de remplir le menu déroulant "catégorie" dans la page "ajouter une image"
 const createOptionsCategories = async function(){
     const categories = await getResponse("http://localhost:5678/api/categories")
     selectCat.innerHTML = '<option value=""></option>'
@@ -128,6 +137,7 @@ const createOptionsCategories = async function(){
     });
 }
 
+//Permet de reset le formulaire 
 const resetForm = function(){
     btnAddPicture.value = ""
     titleSelected.value = ""
@@ -138,6 +148,7 @@ const resetForm = function(){
     managementBtnForm()
 }
 
+//Permet de gérer le bouton "Valider" du formulaire "Ajouter une image"
 const managementBtnForm = function (){
     if(titleSelected.value != "" && selectCat.value != "" && btnAddPicture.value != ""){
         btnValidateFormAddWork.disabled = false
@@ -146,22 +157,24 @@ const managementBtnForm = function (){
     }
 }
 
+//Pour tous les élément qui possède en classe "js-modal" on ajoute un évènement "click" qui permet d'ouvrir la modale
 document.querySelectorAll(".js-modal").forEach(a => {
     a.addEventListener("click", openModal)
 })
 
+//Permet d'écouter un évènement sur la page lors de la presse d'une touche, vérification de la touche, si elle est égale a "Echap" alors fermer la modale
 window.addEventListener("keydown", function (e) {
     if(e.key === "Escape" || e.key === "Esc"){
         closeModal(e)
     }
-    if (e.key === "Tab" && modal !== null) {
-        focusInModal(e)
-    }
 })
 
+//Permet de gérer le bouton "Valider" du formulaire s'il y a du texte tapé dans l'Input "title"
 titleSelected.addEventListener("input",function() {managementBtnForm()})
+//Permet de gérer le bouton "Valider" du formulaire s'il y a un item séléctionné dans le menu déroulant "category"
 selectCat.addEventListener("change",function() {managementBtnForm()})
 
+//Permet de créer l'image voulu en base de donnée et de l'afficher de manière dynamique dans les différentes galeries
 formAddWork.addEventListener("submit", async function(e){
     e.preventDefault()
     const body = new FormData();

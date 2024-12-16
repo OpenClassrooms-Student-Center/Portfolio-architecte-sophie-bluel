@@ -1,8 +1,10 @@
- async function getResponse (url){
+//fonction qui appelle l'API avec l'url en paramètre et renvoie le JSON
+async function getResponse (url){
     const response = await fetch(url);
     return await response.json();
  }
 
+//Fonction qui crée la galerie principale du site
  async function createMainGallery (){
     works = await getResponse("http://localhost:5678/api/works")
     const mainGallery = document.getElementById("galleryImg");
@@ -11,7 +13,8 @@
         createImage(works[i]);
     }
  }
- 
+
+ //fonction qui crée un élément image en HTML et l'insert dans le site 
 async function createImage(work){
     let imgSite = document.getElementById("galleryImg");
     const baliseImg =`<figure>
@@ -21,12 +24,14 @@ async function createImage(work){
     imgSite.innerHTML += baliseImg;
 }
 
+//Fonction qui crée un élément bouton efféctuant le tri et l'insert dans l'HTML
 async function createCategories(categorie){
     let buttonFiltre = document.getElementById("categoriesButton");
     const baliseButton =`<button id=${categorie.id} onClick ="getWorksByCat(${categorie.id})" class="buttonFiltre"> ${categorie.name}</button>`;
     buttonFiltre.innerHTML += baliseButton;
 }
 
+//Fonction qui créer la galerie triée selon la catégorie séléctionée 
 function getWorksByCat(idCat){
     let imgSite = document.getElementById("galleryImg");
     imgSite.innerHTML = ""
@@ -37,6 +42,7 @@ function getWorksByCat(idCat){
     }
 }
 
+//Fonction reliée au bouton de tri "Tous" qui permet de ne pas appliquer un tri
 function getAllWork(){
     let imgSite = document.getElementById("galleryImg");
     imgSite.innerHTML = ""
@@ -45,6 +51,7 @@ function getAllWork(){
     }
 }
 
+//Fonction lancée au chargement de la page afin de créer les boutons catégorie et la gallerie principale et vérifier si le mode édition est activé
 async function onLoadApi(){    
     categories = await getResponse("http://localhost:5678/api/categories")
     await createMainGallery(works);
@@ -76,6 +83,7 @@ async function onLoadApi(){
 
 let works = [];
 let categories = new Set();
+//Appel de la fonction "onLoadApi" lorsque la page se charge (window.onload effectue la fonction assoicé lors du chergement de la page)
 window.onload = onLoadApi;
 
 
