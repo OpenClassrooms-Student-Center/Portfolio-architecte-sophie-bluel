@@ -3,7 +3,7 @@ import {
     galleryData
 } from "./modal.js";
 
-const deleteURL = "http://127.0.0.1:5678/api/works/";
+export const worksURL = "http://127.0.0.1:5678/api/works/";
 
 /**
  * This function deletes a work from the back-end and gallery.

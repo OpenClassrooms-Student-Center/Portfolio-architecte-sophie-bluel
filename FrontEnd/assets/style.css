@@ -350,11 +350,11 @@ footer li {
 	padding-bottom: 5px;
 }
 
-#iconWrapper {
+#icon-wrapper {
 	position: relative;
 }
 
-.iconWrapperTop {
+.icon-wrapper-top {
 	margin-top: 25px;
 }
 
@@ -429,11 +429,11 @@ hr {
 }
 
 /****** add view modal ******/
-#modalTitle {
+#modal-title {
 	margin-bottom: 37.5px;
 }
 
-#modalForm {
+#modal-form {
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 50px;
@@ -508,4 +508,8 @@ form input {
 	background-color: var(--button-color-greyed);
 	border: 1px solid var(--button-color-greyed);
 	color: white;
+}
+
+#modal-button {
+	cursor: pointer;
 }

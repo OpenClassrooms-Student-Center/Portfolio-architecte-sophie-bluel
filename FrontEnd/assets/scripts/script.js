@@ -112,13 +112,13 @@ document.addEventListener("DOMContentLoaded", async () => {
             erreur.innerText = "";
             const galleryView = document.querySelector(".gallery-view");
             const addView = document.querySelector(".add-view");
-            const title = document.getElementById("modalTitle");
-            const button = document.getElementById("modalButton");
+            const title = document.getElementById("modal-title");
+            const button = document.getElementById("modal-button");
             const back = document.querySelector(".icon-back");
-            const iconWrapper = document.getElementById("iconWrapper");
-            iconWrapper.classList.add("iconWrapperTop");
+            const iconWrapper = document.getElementById("icon-wrapper");
+            iconWrapper.classList.add("icon-wrapper-top");
             document.querySelector(".button-modal").addEventListener("click", () => {
-                iconWrapper.classList.remove("iconWrapperTop");
+                iconWrapper.classList.remove("icon-wrapper-top");
                 back.style.display = "block";
                 galleryView.style.display = "none";
                 addView.style.display = "block";
@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 button.classList.add("greyed");
             });
             document.querySelector(".icon-back").addEventListener("click", () => {
-                iconWrapper.classList.add("iconWrapperTop");
+                iconWrapper.classList.add("icon-wrapper-top");
                 back.style.display = "none";
                 galleryView.style.display = "grid";
                 addView.style.display = "none";

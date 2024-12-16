@@ -29,7 +29,7 @@ export function displayModalAddPhoto() {
     wrapper.classList.add("wrapper");
 
     const iconWrapper = document.createElement("div");
-    iconWrapper.id = "iconWrapper";
+    iconWrapper.id = "icon-wrapper";
 
     const backIcon = document.createElement("i");
     backIcon.classList.add("material-symbols-outlined");
@@ -44,7 +44,7 @@ export function displayModalAddPhoto() {
     closeIcon.ariaHidden = "true";
 
     const title = document.createElement("h3");
-    title.id = "modalTitle";
+    title.id = "modal-title";
     title.innerText = "Galerie photo";
 
     const pErr = document.createElement("p");
@@ -55,7 +55,7 @@ export function displayModalAddPhoto() {
     gallery.classList.add("gallery-view", "gallery-add-view-size");
 
     const addView = document.createElement("div");
-    addView.id = "addForm";
+    addView.id = "add-form";
     addView.classList.add("add-view", "gallery-add-view-size");
 
     const line = document.createElement("hr");
@@ -65,7 +65,7 @@ export function displayModalAddPhoto() {
     const add = document.createElement("button");
     add.classList.add("button", "selected", "button-modal");
     add.innerText = "Ajouter une photo";
-    add.id = "modalButton";
+    add.id = "modal-button";
 
     iconWrapper.appendChild(backIcon);
     iconWrapper.appendChild(closeIcon);
@@ -128,10 +128,10 @@ export function displayPhotosGallery() {
  * This function displays the add photo form view of the modal.
  */
 export function displayAddPhotoForm() {
-    const modalContainer = document.getElementById("addForm");
+    const modalContainer = document.getElementById("add-form");
 
     const form = document.createElement("form");
-    form.id = "modalForm";
+    form.id = "modal-form";
 
     const file = document.createElement("input");
     file.type = "file";
