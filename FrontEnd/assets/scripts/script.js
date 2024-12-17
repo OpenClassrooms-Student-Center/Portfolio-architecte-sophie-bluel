@@ -13,15 +13,17 @@ import {
     addConnectedModeBanner,
     hideCategoryFilterButtons,
     addWorksModificationLink,
-    removeFromLocalStorage,
-    displayError
+    removeFromLocalStorage
 } from "./connection.js";
 import {
     displayModalAddPhoto,
     closeModal,
     displayPhotosGallery,
     displayAddPhotoForm
-} from "./modal.js"
+} from "./modal.js";
+import {
+    addSubmit
+} from "./addWork.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
     let worksInLocalStorageVar = window.localStorage.getItem("works");
@@ -138,14 +140,10 @@ document.addEventListener("DOMContentLoaded", async () => {
                 button.classList.remove("greyed");
                 button.classList.add("selected");
             });
-            document.getElementById("file-photo").addEventListener("change", (event) => {
-                const file = event.target.files[0];
-                const maxSize = 4 * 1024 * 1024; // 4 Mo en octets
-
-                if(file && file.size > maxSize) {
-                    event.target.value = "";
-                    displayError("Le fichier dépasse la taille maximale de 4Mo. Recommencez s'il-vous-plaît.", erreur);
-                }
+            /****** Step 3.3 add work ******/
+            document.getElementById("modal-button").addEventListener("submit", (event) => {
+                event.preventDefault();
+                addSubmit(event);
             });
         });
     }

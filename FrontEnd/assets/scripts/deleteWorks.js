@@ -2,6 +2,9 @@ import {
     closeModal,
     galleryData
 } from "./modal.js";
+import {
+    displayError
+} from "./connection.js";
 
 export const worksURL = "http://127.0.0.1:5678/api/works/";
 
@@ -20,7 +23,7 @@ export async function deleteWork(idWork) {
         if(confirm("Êtes-vous sûr de vouloir supprimer cet élément?")) { 
             const res = await fetch(deleteURL + idWork , req);
             if(res.status === 401) {
-                displayError("Utilisat·rice·eur pas authentifié", erreur);
+                displayError("Utilisat·rice·eur pas authentifié·e", erreur);
             }
             else if(res.status === 200 || res.status === 204) {
                 const el = document.getElementById(idWork);

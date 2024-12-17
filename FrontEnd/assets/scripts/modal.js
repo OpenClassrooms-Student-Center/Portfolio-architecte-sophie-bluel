@@ -1,6 +1,9 @@
 import {
     deleteWork
 } from "./deleteWorks.js";
+import {
+    displayError
+} from "./connection.js";
 
 export const galleryData = [
     {src:"./assets/images/abajour-tahina.png", alt:"Abajour Tahina", id:1},
@@ -113,6 +116,7 @@ export function displayPhotosGallery() {
         delIcon.innerText = "delete";
         delIcon.ariaHidden = "true";
         delIcon.id = item.id;
+        /****** Step 3.2 delete work ******/
         delIcon.addEventListener("click", (event) => {
             event.preventDefault();
             deleteWork(item.id);
@@ -139,6 +143,15 @@ export function displayAddPhotoForm() {
     file.name = "file-photo";
     file.required = true;
     file.accept = ".jpg .jpeg .png";
+    file.addEventListener("change", (event) => {
+        const file = event.target.files[0];
+        const maxSize = 4 * 1024 * 1024;
+
+        if(file && file.size > maxSize) {
+            event.target.value = "";
+            displayError("Le fichier dépasse la taille maximale de 4Mo. Recommencez s'il-vous-plaît.", erreur);
+        }
+    });
     const button = document.createElement("button");
     button.id = "file-button";
     const imageIcon = document.createElement("i");
