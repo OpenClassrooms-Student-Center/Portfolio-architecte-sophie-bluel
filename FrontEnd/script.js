@@ -27,7 +27,7 @@ async function createImage(work){
 //Fonction qui crée un élément bouton efféctuant le tri et l'insert dans l'HTML
 async function createCategories(categorie){
     let buttonFiltre = document.getElementById("categoriesButton");
-    const baliseButton =`<button id=${categorie.id} onClick ="getWorksByCat(${categorie.id})" class="buttonFiltre"> ${categorie.name}</button>`;
+    const baliseButton =`<button id=${categorie.id} class="buttonFiltre js-btncat"> ${categorie.name}</button>`;
     buttonFiltre.innerHTML += baliseButton;
 }
 
@@ -52,7 +52,7 @@ function getAllWork(){
 }
 
 //Fonction lancée au chargement de la page afin de créer les boutons catégorie et la gallerie principale et vérifier si le mode édition est activé
-async function onLoadApi(){    
+async function onLoadApi(){        
     categories = await getResponse("http://localhost:5678/api/categories")
     await createMainGallery(works);
     for(let i =0; i< categories.length;i++){
@@ -79,13 +79,20 @@ async function onLoadApi(){
             location.reload()
         })
     }
+
+    const btnAllCat = document.getElementById("btnAllCat");
+    btnAllCat.addEventListener("click",() => getAllWork())
+
+    document.querySelectorAll(".js-btncat").forEach(bouton => {
+        bouton.addEventListener("click", () => getWorksByCat(bouton.getAttribute('id')))
+    });
+
+
 }
 
 let works = [];
 let categories = new Set();
 //Appel de la fonction "onLoadApi" lorsque la page se charge (window.onload effectue la fonction assoicé lors du chergement de la page)
 window.onload = onLoadApi;
-
-
 
 
