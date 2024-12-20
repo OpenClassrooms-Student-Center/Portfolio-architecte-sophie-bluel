@@ -1,5 +1,4 @@
 import {
-    closeModal,
     galleryData
 } from "./modal.js";
 import {
@@ -38,7 +37,6 @@ export async function deleteWork(idWork) {
                     console.log(`L'élément d'id ${idWork} a été supprimé de la gallerie.`)
                 }
                 else { console.log(`Aucun élément d'd ${idWork} trouvé dans la gallerie.`); }
-                //closeModal();
             }
         }
     } catch(error) {

@@ -14,7 +14,7 @@ import {
  * At page reload it must be visible.
  * @param { Event } : login form SubmitEvent button click
  */
-export async function addSubmit(e) {
+export async function addSubmit() {
     console.log("enter add submit");
     const image = document.querySelector("#file-photo").value;
     const title = document.querySelector("#title").value;

@@ -458,7 +458,7 @@ form input {
 	height: 0;
 }
 
-#file-button {
+#file-add-button-wrapper {
 	background-color: var(--input-photo);
 	z-index: 0;
 	width: 420px;

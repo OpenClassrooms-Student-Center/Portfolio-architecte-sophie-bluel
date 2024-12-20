@@ -4,6 +4,9 @@ import {
 import {
     displayError
 } from "./connection.js";
+import {
+    addSubmit
+} from "./addWork.js";
 
 export const galleryData = [
     {src:"./assets/images/abajour-tahina.png", alt:"Abajour Tahina", id:1},
@@ -129,6 +132,34 @@ export function displayPhotosGallery() {
 }
 
 /**
+ * This function checks whether or not the browser has a Chrome / Chromium agent.
+ * @returns {Boolean} true if the used browser is having a Chrome or Chromium agent
+ */
+function isChromiumBrowser() {
+    const userAgent = navigator.userAgent;
+    return /Chrome|Chromium|Edg/.test(userAgent) && !/Firefox/.test(userAgent);
+}
+
+/**
+ * This function checks that the user picked file's size is less than 4 Mb.
+ * @param {File} file : a user picked file
+ * @param {Event} event : in case triggered by an <input type="file"> change event,
+ *  this event is reset for retry if the file's size exceeds 4Mb.
+ */
+function checkFileMaxSize(file, event) {
+    const maxSize = 4 * 1024 * 1024;
+    console.log("file.size: " + file.size);
+
+    if(file.size > maxSize) {
+        displayError("Le fichier dépasse la taille maximale de 4Mo. Recommencez s'il-vous-plaît.", erreur);
+        if(event) {
+            event.target.value = "";
+        }
+        else { file = null; }
+    }
+}
+
+/**
  * This function displays the add photo form view of the modal.
  */
 export function displayAddPhotoForm() {
@@ -136,39 +167,77 @@ export function displayAddPhotoForm() {
 
     const form = document.createElement("form");
     form.id = "modal-form";
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        console.log("step3.3 submit");
+        addSubmit();
+    });
 
-    const file = document.createElement("input");
-    file.type = "file";
-    file.id = "file-photo";
-    file.name = "file-photo";
-    file.required = true;
-    file.accept = ".jpg .jpeg .png";
-    file.addEventListener("change", (event) => {
-        const file = event.target.files[0];
-        const maxSize = 4 * 1024 * 1024;
-
-        if(file && file.size > maxSize) {
-            event.target.value = "";
-            displayError("Le fichier dépasse la taille maximale de 4Mo. Recommencez s'il-vous-plaît.", erreur);
+    const inputFile = document.createElement("input");
+    inputFile.type = "file";
+    inputFile.id = "file-photo";
+    inputFile.name = "file-photo";
+    inputFile.required = true;
+    inputFile.accept = ".jpg .jpeg .png";
+    console.log("before change file");
+    let file = null;
+    inputFile.addEventListener("click", async () => {
+        if (isChromiumBrowser() /*&& window.isSecureContext */&& 'showOpenFilePicker' in window) {
+            const [fileHandle] = await window.showOpenFilePicker({
+                multiple: false,
+                types: [
+                    {
+                        description: "Images",
+                        accept: {
+                            "image/*": [".jpg", ".jpeg", ".png"]
+                        }
+                    }
+                ]
+            });
+            file = await fileHandle.getFile();
+            console.log("Selected file:", file.name);
+            if(file){
+                checkFileMaxSize(file, null)
+            }
+            else { console.log("Aucun fichier sélectionné."); }
+        } else {
+            inputFile.addEventListener("change", (event) => {
+                console.log("change file event");
+                file = event.target.files[0];
+                if(file){
+                    checkFileMaxSize(file, event);
+                }
+                else { console.log("Aucun fichier sélectionné."); }
+            });
         }
     });
-    const button = document.createElement("button");
-    button.id = "file-button";
+
+    const fileAddButtonWrapper = document.createElement("div");
+    fileAddButtonWrapper.id = "file-add-button-wrapper";
+    
     const imageIcon = document.createElement("i");
     imageIcon.classList.add("material-symbols-outlined");
     imageIcon.innerText = "add_photo_alternate";
     imageIcon.id = "icon-image";
+
     const buttonFileAjout = document.createElement("button");
+    buttonFileAjout.type = "button";
     buttonFileAjout.id = "file-ajout-button";
     buttonFileAjout.classList.add("button");
     buttonFileAjout.innerText = "+ Ajouter photo";
+
+    fileAddButtonWrapper.addEventListener("click", () => {
+        console.log("wrapper user click");
+        inputFile.click();
+    });
+
     const p = document.createElement("p");
     p.innerText = "jpg, png : 4mo max.";
     p.id = "file-text";
   
     const labelTitle = document.createElement("label");
     labelTitle.innerText = "Titre";
-    labelTitle.for = "title";
+    labelTitle.htmlFor = "title";
     const title = document.createElement("input");
     title.type = "text";
     title.id = "title";
@@ -176,7 +245,7 @@ export function displayAddPhotoForm() {
     title.required = true;
 
     const labelCategory = document.createElement("label");
-    labelCategory.for = "category";
+    labelCategory.htmlFor = "category";
     labelCategory.innerText = "Catégorie";
     const category = document.createElement("input");
     category.type = "text";
@@ -184,11 +253,12 @@ export function displayAddPhotoForm() {
     category.name = "category";
     category.required = true;
 
-    button.appendChild(file);
-    button.appendChild(imageIcon);
-    button.appendChild(buttonFileAjout);
-    button.appendChild(p);
-    form.appendChild(button);
+    fileAddButtonWrapper.appendChild(imageIcon);
+    fileAddButtonWrapper.appendChild(buttonFileAjout);
+    fileAddButtonWrapper.appendChild(p);
+
+    form.appendChild(inputFile);
+    form.appendChild(fileAddButtonWrapper);
     form.appendChild(labelTitle);
     form.appendChild(title);
     form.appendChild(labelCategory);

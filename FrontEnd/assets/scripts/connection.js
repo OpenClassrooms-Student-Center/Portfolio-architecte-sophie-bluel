@@ -30,7 +30,7 @@ async function waitOnForm() {
  * SMART 1
  * loginSubmit
  * This function checks the login form variable storage.
- * @param {string} selector : the HTML element's CSS selector
+ * @param {String} selector : the HTML element's CSS selector
  * @returns a string to store in a variable.
  */
 function storeInputInVar(selector) {
@@ -57,8 +57,8 @@ function storeInputInVar(selector) {
  * SMART 1
  * This function stores an input var in local storage.
  * It's used to store the token at login.
- * @param {string} key input var
- * @param {string} val
+ * @param {String} key input var
+ * @param {String} val
 
  */
 function storeInLocalStorage(key, val) {
@@ -73,7 +73,7 @@ function storeInLocalStorage(key, val) {
  * SMART 1
  * This function removes an item from local storage.
  * It's used to remove the token at logout.
- * @param {string} key item to remove key
+ * @param {String} key item to remove key
  */
 export function removeFromLocalStorage(key) {
     try {
@@ -168,7 +168,7 @@ function bcryptPassword() {}
 async function addConnectionListener() {
     try{
         console.log(new Date().toLocaleTimeString(), "add event listener");
-        const connectionForm = document.querySelector("#connectionForm");
+        const connectionForm = document.querySelector("#connection-form");
         connectionForm.addEventListener("submit", (event) => {
             event.preventDefault();
             localStorage.setItem("connected", "true");

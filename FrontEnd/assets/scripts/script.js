@@ -21,9 +21,9 @@ import {
     displayPhotosGallery,
     displayAddPhotoForm
 } from "./modal.js";
-import {
+/*import {
     addSubmit
-} from "./addWork.js";
+} from "./addWork.js";*/
 
 document.addEventListener("DOMContentLoaded", async () => {
     let worksInLocalStorageVar = window.localStorage.getItem("works");
@@ -127,6 +127,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                 title.innerText = "Ajout photo";
                 button.innerText = "Valider";
                 button.type = "submit";
+                const form = document.getElementById("modal-form");
+                form.appendChild(button);
                 button.classList.remove("selected");
                 button.classList.add("greyed");
             });
@@ -141,10 +143,12 @@ document.addEventListener("DOMContentLoaded", async () => {
                 button.classList.add("selected");
             });
             /****** Step 3.3 add work ******/
-            document.getElementById("modal-button").addEventListener("submit", (event) => {
+            console.log("step3.3");
+            /*document.querySelector("#modal-form").addEventListener("submit", (event) => {
                 event.preventDefault();
-                addSubmit(event);
-            });
+                console.log("step3.3 submit");
+                addSubmit();
+            });*/
         });
     }
 });
