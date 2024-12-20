@@ -383,9 +383,9 @@ footer li {
 }
 
 .gallery-add-view-size {
-	width: 93%;
-	height: 65%;
-	padding: 0 11%;
+	width: 550px;
+	height: 400px;
+	padding: 0 65px;
 }
 
 .add-view {
