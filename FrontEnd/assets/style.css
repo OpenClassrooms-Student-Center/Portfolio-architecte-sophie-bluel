@@ -342,7 +342,7 @@ footer li {
 	height: 688px;
 	background-color: white;
 	border-radius: 10px;
-	padding: 27.5px 0 27.5px 40.5px;
+	padding: 0 0 27.5px 40.5px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -384,7 +384,7 @@ footer li {
 
 .gallery-add-view-size {
 	width: 550px;
-	height: 400px;
+	height: 500px;
 	padding: 0 65px;
 }
 
@@ -399,13 +399,15 @@ footer li {
 
 hr {
 	color: var(--line-color);
-	margin-right: 104px;
+	position: absolute;
+	bottom: 248px;
+	left: 492px;
 }
 
 .button-modal {
 	width: 237px;
 	padding: 10px 0;
-	margin: 28px 0 28px 156px;
+	margin: 88px 0 28px 90px;
 	font-size: 1em;
 }
 
@@ -469,6 +471,7 @@ form input {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	border-radius: 3px;
 }
 
 #icon-image {
