@@ -388,7 +388,12 @@ footer li {
 }
 
 .gallery-view-size {
-	height: 327px
+	height: 327px;
+	margin-bottom: 210px;
+}
+
+.gallery-view-size-back {
+	margin-bottom: 188px;
 }
 
 .add-view {
@@ -414,16 +419,10 @@ hr {
 .button-modal {
 	width: 237px;
 	padding: 10px 0;
-	margin: 88px 0 28px 0;
+	position: absolute;
+	bottom: 150px;
+	left: 585px;
 	font-size: 1em;
-}
-
-.button-modal-gallery {
-	margin-left: 155px;
-}
-
-.button-modal-form {
-	margin-left: 90px;
 }
 
 #gallery figure {

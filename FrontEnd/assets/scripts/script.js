@@ -116,38 +116,45 @@ if(isConnected) {
         erreur.innerText = "";
 
         const galleryView = document.querySelector(".gallery-view");
+        const gallery = document.querySelector("#gallery");
         const addView = document.querySelector(".add-view");
         const title = document.getElementById("modal-title");
         const button = document.getElementById("modal-button");
         const back = document.querySelector(".icon-back");
         const iconWrapper = document.getElementById("icon-wrapper");
         iconWrapper.classList.add("icon-wrapper-top");
+        const form = document.getElementById("modal-form");
+        const wrapper = document.querySelector(".wrapper");
 
         document.querySelector(".button-modal").addEventListener("click", () => {
             iconWrapper.classList.remove("icon-wrapper-top");
             back.style.display = "block";
             galleryView.style.display = "none";
+            gallery.classList.remove("gallery-view-size-back");
             addView.style.display = "block";
             title.innerText = "Ajout photo";
             button.classList.remove("button-modal-gallery");
             button.classList.add("button-modal-form");
             button.innerText = "Valider";
             button.type = "submit";
-            const form = document.getElementById("modal-form");
+            wrapper.removeChild(button);
             form.appendChild(button);
             button.classList.remove("selected");
             button.classList.add("greyed");
         });
 
         document.querySelector(".icon-back").addEventListener("click", () => {
-            iconWrapper.classList.add("icon-wrapper-top");
             back.style.display = "none";
             galleryView.style.display = "grid";
+            gallery.classList.add("gallery-view-size-back");
             addView.style.display = "none";
             title.innerText = "Galerie photo";
             button.classList.remove("button-modal-form");
             button.classList.add("button-modal-gallery");
             button.innerText = "Ajouter une photo";
+            button.type = "button";
+            form.removeChild(button);
+            wrapper.appendChild(button);
             button.classList.remove("greyed");
             button.classList.add("selected");
         });
