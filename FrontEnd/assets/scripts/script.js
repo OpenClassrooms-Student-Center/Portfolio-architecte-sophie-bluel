@@ -129,6 +129,8 @@ if(isConnected) {
             galleryView.style.display = "none";
             addView.style.display = "block";
             title.innerText = "Ajout photo";
+            button.classList.remove("button-modal-gallery");
+            button.classList.add("button-modal-form");
             button.innerText = "Valider";
             button.type = "submit";
             const form = document.getElementById("modal-form");
@@ -143,6 +145,8 @@ if(isConnected) {
             galleryView.style.display = "grid";
             addView.style.display = "none";
             title.innerText = "Galerie photo";
+            button.classList.remove("button-modal-form");
+            button.classList.add("button-modal-gallery");
             button.innerText = "Ajouter une photo";
             button.classList.remove("greyed");
             button.classList.add("selected");
