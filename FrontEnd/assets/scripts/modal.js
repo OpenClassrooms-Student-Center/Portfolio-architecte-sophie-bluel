@@ -58,18 +58,28 @@ export function displayModalAddPhoto() {
 
     const gallery = document.createElement("div");
     gallery.id = "gallery";
-    gallery.classList.add("gallery-view", "gallery-add-view-size");
+    gallery.classList.add(
+        "gallery-view", 
+        "gallery-view-size",
+        "gallery-add-view-size");
 
     const addView = document.createElement("div");
     addView.id = "add-form";
-    addView.classList.add("add-view", "gallery-add-view-size");
+    addView.classList.add(
+        "add-view", 
+        "add-view-size",
+        "gallery-add-view-size");
 
     const line = document.createElement("hr");
     line.size = "1";
     line.width = "420";
 
     const add = document.createElement("button");
-    add.classList.add("button", "selected", "button-modal");
+    add.classList.add(
+        "button", 
+        "selected", 
+        "button-modal", 
+        "button-modal-gallery");
     add.innerText = "Ajouter une photo";
     add.id = "modal-button";
 
