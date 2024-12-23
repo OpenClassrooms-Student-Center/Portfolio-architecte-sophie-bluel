@@ -34,6 +34,7 @@ export async function addSubmit() {
     }
     const erreur = document.querySelector("#erreur");
     erreur.innerHTML = "";
+    
     try {
         const res = await fetch(worksURL, req);
         console.log("add fetch done");

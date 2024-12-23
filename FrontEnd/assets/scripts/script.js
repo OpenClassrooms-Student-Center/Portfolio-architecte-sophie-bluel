@@ -21,9 +21,6 @@ import {
     displayPhotosGallery,
     displayAddPhotoForm
 } from "./modal.js";
-/*import {
-    addSubmit
-} from "./addWork.js";*/
 
 let worksInLocalStorageVar = window.localStorage.getItem("works");
 let worksPromise;
@@ -101,6 +98,7 @@ if(isConnected) {
             modalBackground.ariaModal = "false";
             modalBackground.ariaHidden = "true";
         });
+
         modalBackground.addEventListener("click", (event) => {
             event.preventDefault();
             if(event.target === modalBackground) {
@@ -121,25 +119,32 @@ if(isConnected) {
         const title = document.getElementById("modal-title");
         const button = document.getElementById("modal-button");
         const back = document.querySelector(".icon-back");
+
         const iconWrapper = document.getElementById("icon-wrapper");
         iconWrapper.classList.add("icon-wrapper-top");
+
         const form = document.getElementById("modal-form");
         const wrapper = document.querySelector(".wrapper");
 
         document.querySelector(".button-modal").addEventListener("click", () => {
             if(button.innerText === "Ajouter une photo") {
                 iconWrapper.classList.remove("icon-wrapper-top");
+
                 back.style.display = "block";
                 galleryView.style.display = "none";
                 gallery.classList.remove("gallery-view-size-back");
                 addView.style.display = "block";
+
                 title.innerText = "Ajout photo";
+
                 button.classList.remove("button-modal-gallery");
                 button.classList.add("button-modal-form");
                 button.innerText = "Valider";
                 button.type = "submit";
+
                 wrapper.removeChild(button);
                 form.appendChild(button);
+
                 button.classList.remove("selected");
                 button.classList.add("greyed");
             }
@@ -150,22 +155,19 @@ if(isConnected) {
             galleryView.style.display = "grid";
             gallery.classList.add("gallery-view-size-back");
             addView.style.display = "none";
+
             title.innerText = "Galerie photo";
+
             button.classList.remove("button-modal-form");
             button.classList.add("button-modal-gallery");
             button.innerText = "Ajouter une photo";
             button.type = "button";
+
             form.removeChild(button);
             wrapper.appendChild(button);
+
             button.classList.remove("greyed");
             button.classList.add("selected");
         });
-        /****** Step 3.3 add work ******/
-        console.log("step3.3");
-        /*document.querySelector("#modal-form").addEventListener("submit", (event) => {
-            event.preventDefault();
-            console.log("step3.3 submit");
-            addSubmit();
-        });*/
     });
 }

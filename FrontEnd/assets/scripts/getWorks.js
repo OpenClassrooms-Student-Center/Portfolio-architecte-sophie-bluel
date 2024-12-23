@@ -1,4 +1,5 @@
 /****** Step 1.1 get works from backend ******/
+export const categories = [];
 /**
  * This function fetches data and fills the localStorage for speed and less network use during next page reloads.
  * @returns : an array of fetched works in JSON format is returned.
@@ -34,14 +35,20 @@ export async function fillGallery(works, galleryDiv, initialFetchedGallery) {
             const titleFromAPI = work.title;
             imgFromAPI.src = work.imageUrl;
             imgFromAPI.alt = titleFromAPI;
+
             let figcaptionFromAPI = document.createElement("figcaption");
             figcaptionFromAPI.innerText = titleFromAPI;
+
             let figureFromAPI = document.createElement("figure");
+
             let categ = work.category.name;
+            categories.add(categ);
             categ = replaceSpaceByUnderscore(categ);
             figureFromAPI.classList.add(categ);
+
             figureFromAPI.appendChild(imgFromAPI);
             figureFromAPI.appendChild(figcaptionFromAPI);
+            
             figures.push(figureFromAPI);
         });
         galleryDiv.innerHTML = "";
@@ -51,7 +58,7 @@ export async function fillGallery(works, galleryDiv, initialFetchedGallery) {
         initialFetchedGallery = Array.from(document.querySelectorAll(".gallery figure"));
         return initialFetchedGallery;
     } catch(error) {
-        console.error("Error at filling of the gallery: ", error);
+        console.error("Error at filling the gallery: ", error);
     }
 }
 
