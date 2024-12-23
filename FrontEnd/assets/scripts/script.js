@@ -127,20 +127,22 @@ if(isConnected) {
         const wrapper = document.querySelector(".wrapper");
 
         document.querySelector(".button-modal").addEventListener("click", () => {
-            iconWrapper.classList.remove("icon-wrapper-top");
-            back.style.display = "block";
-            galleryView.style.display = "none";
-            gallery.classList.remove("gallery-view-size-back");
-            addView.style.display = "block";
-            title.innerText = "Ajout photo";
-            button.classList.remove("button-modal-gallery");
-            button.classList.add("button-modal-form");
-            button.innerText = "Valider";
-            button.type = "submit";
-            wrapper.removeChild(button);
-            form.appendChild(button);
-            button.classList.remove("selected");
-            button.classList.add("greyed");
+            if(button.innerText === "Ajouter une photo") {
+                iconWrapper.classList.remove("icon-wrapper-top");
+                back.style.display = "block";
+                galleryView.style.display = "none";
+                gallery.classList.remove("gallery-view-size-back");
+                addView.style.display = "block";
+                title.innerText = "Ajout photo";
+                button.classList.remove("button-modal-gallery");
+                button.classList.add("button-modal-form");
+                button.innerText = "Valider";
+                button.type = "submit";
+                wrapper.removeChild(button);
+                form.appendChild(button);
+                button.classList.remove("selected");
+                button.classList.add("greyed");
+            }
         });
 
         document.querySelector(".icon-back").addEventListener("click", () => {

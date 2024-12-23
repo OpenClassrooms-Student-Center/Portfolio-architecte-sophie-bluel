@@ -54,6 +54,9 @@ export async function addSubmit() {
                 alt: data.title,
                 id: data.userId
             });
+            image = null;
+            title = "";
+            category = "";
             closeModal();
             console.log("end add submit");
         }
