@@ -27,9 +27,11 @@ form.addEventListener("submit", async (event) => {
         }
         else{
             //Sinon afficher le message d'erreur
+            console.clear();
             let divError = document.getElementById("errorLogin");
             let errorMsg = '<p class="msgError">E-mail ou Mot de passe erroné</p>';
             divError.innerHTML = errorMsg;
+            
         }
     }catch (error){
         //Si une erreur autre, (type serveur) arrive alors afficher un autre message d'erreur 
