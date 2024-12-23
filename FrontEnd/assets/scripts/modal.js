@@ -179,6 +179,7 @@ export function displayAddPhotoForm() {
     form.addEventListener("submit", (event) => {
         event.preventDefault();
         console.log("step3.3 submit");
+        /****** Step 3.3 add work ******/
         addSubmit();
     });
 
