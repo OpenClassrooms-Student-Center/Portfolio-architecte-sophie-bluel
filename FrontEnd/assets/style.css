@@ -468,6 +468,11 @@ form input {
 	margin-top: 10px;
 }
 
+form select {
+	width: 420px;
+	margin-top: 10px;
+}
+
 #file-photo {
 	z-index: 1;
 	opacity: 0;

@@ -7,6 +7,9 @@ import {
 import {
     addSubmit
 } from "./addWork.js";
+import {
+    categories
+} from "./getWorks.js";
 
 export const galleryData = [
     {src:"./assets/images/abajour-tahina.png", alt:"Abajour Tahina", id:1},
@@ -257,11 +260,16 @@ export function displayAddPhotoForm() {
     const labelCategory = document.createElement("label");
     labelCategory.htmlFor = "category";
     labelCategory.innerText = "Catégorie";
-    const category = document.createElement("input");
-    category.type = "text";
+    const category = document.createElement("select");
     category.id = "category";
     category.name = "category";
     category.required = true;
+    categories.forEach(categorie => {
+        const option = document.createElement("option");
+        option.value = categorie;
+        option.textContent = categorie;
+        category.appendChild(option);
+    })
 
     fileAddButtonWrapper.appendChild(imageIcon);
     fileAddButtonWrapper.appendChild(buttonFileAjout);

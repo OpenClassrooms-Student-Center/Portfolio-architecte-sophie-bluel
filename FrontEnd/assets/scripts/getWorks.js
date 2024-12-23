@@ -1,5 +1,5 @@
 /****** Step 1.1 get works from backend ******/
-export const categories = [];
+export let categories = new Set();
 /**
  * This function fetches data and fills the localStorage for speed and less network use during next page reloads.
  * @returns : an array of fetched works in JSON format is returned.
