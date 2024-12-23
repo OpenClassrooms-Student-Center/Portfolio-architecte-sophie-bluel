@@ -12,7 +12,6 @@ addEventListener("DOMContentLoaded", async () => {
 });
 
 /**
- * SMART 0
  * This function checks the form usability.
  */
 async function waitOnForm() {
@@ -27,7 +26,6 @@ async function waitOnForm() {
     }
 }
 /**
- * SMART 1
  * loginSubmit
  * This function checks the login form variable storage.
  * @param {String} selector : the HTML element's CSS selector
@@ -54,7 +52,6 @@ function storeInputInVar(selector) {
 }
 
 /**
- * SMART 1
  * This function stores an input var in local storage.
  * It's used to store the token at login.
  * @param {String} key input var
@@ -70,7 +67,6 @@ function storeInLocalStorage(key, val) {
 }
 
 /**
- * SMART 1
  * This function removes an item from local storage.
  * It's used to remove the token at logout.
  * @param {String} key item to remove key
@@ -85,9 +81,6 @@ export function removeFromLocalStorage(key) {
 }
 
 /**
- * SMART 2
- * loginSubmit
- * This objective checks a JWT object creation and temporary storage.
  * This function prepares the JWT data payload.
  *  @returns {JSON} data
  */
@@ -107,7 +100,6 @@ export function displayError(error, errorElement) {
 }
 
 /**
- * SMART 3
  * This function logs the user in and stores the token in localStorage.
  * It stores in the browser an edit mode display information.
  * @param { Event } : login form SubmitEvent button click
@@ -150,17 +142,10 @@ async function loginSubmit(e) {
 }
 
 /**
- * SMART 3
- * encrypt password to be done by server though guideline is not to expose it. 
+ * Encrypt password to be done by server though guideline is not to expose it. 
  * Exposure of mean to encrypt seems unavoidably open.
  */
 function bcryptPassword() {}
-
-/**
- * SMART 4
- * fetch /API/user/login === user input
- * connected true stored in localStorage
- */
 
 /**
  * This function listens the click on the login page form connect button.
