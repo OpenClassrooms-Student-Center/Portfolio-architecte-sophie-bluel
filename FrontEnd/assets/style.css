@@ -409,11 +409,12 @@ footer li {
 	height: 102px;
 }
 
-hr {
+#hr-modal {
 	color: var(--line-color);
 	position: absolute;
 	bottom: 248px;
 	left: 492px;
+	width: 420px;
 }
 
 .button-modal {
