@@ -10,7 +10,9 @@ export const displayGallery = (projects) => {
     const figure = document.createElement("figure");
     const imageElement = document.createElement("img");
     imageElement.src = project.imageUrl;
+    imageElement.alt = project.title;
     const figCaption = document.createElement("figcaption");
+    figCaption.textContent = `visuel ${project.title}`;
     gallery.appendChild(figure);
     figure.appendChild(imageElement);
     figure.appendChild(figCaption);
