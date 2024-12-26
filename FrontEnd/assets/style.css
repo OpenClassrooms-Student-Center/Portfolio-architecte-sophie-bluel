@@ -125,6 +125,21 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
+/* Centrer le label */
+#portfolio label {
+	display: block; /* Permet au label de prendre toute la largeur */
+	text-align: center; /* Centrer le texte dans le label */
+	font-family: 'Syne', sans-serif; /* Police stylisée */
+	font-size: 1.2rem; /* Taille de police légèrement plus grande */
+	font-weight: 600; /* Poids de police légèrement plus léger pour une lecture agréable */
+	color: #1D6154; /* Couleur du texte (un vert foncé ici pour l'harmonie) */
+	background-color: #f7f7f7; /* Fond léger pour mieux faire ressortir le texte */
+	border-radius: 5px; /* Bordures arrondies pour un effet moderne */
+	padding: 10px 20px; /* Espace autour du texte pour le rendre plus aéré */
+	margin-bottom: 10px; /* Espacement entre le label et le select */
+	box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); /* Ombre subtile pour ajouter de la profondeur */
+  }
+
 .gallery {
 	width: 100%;
 	display: grid;

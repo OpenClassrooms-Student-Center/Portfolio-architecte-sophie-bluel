@@ -1,15 +1,12 @@
+import { displayGallery } from "./displayGallery.js"; // Assure-toi que le chemin d'accès est correct
+
 export const selectCategory = (projects) => {
   const portfolio = document.getElementById("portfolio");
-
-  // Créer et insérer le <h2>
-  const h2 = document.createElement("h2");
-  h2.textContent = "Filtrer par catégorie";
-  portfolio.appendChild(h2);
 
   // Créer le label
   const label = document.createElement("label");
   label.setAttribute("for", "categoryFilter"); // Associe le label au select
-  // label.textContent = "Catégories :"; // Texte du label
+  label.textContent = "Filtrer par Catégories"; // Texte du label
   portfolio.appendChild(label);
 
   // Créer la balise <select>
@@ -48,6 +45,19 @@ export const selectCategory = (projects) => {
 
   // Ajouter un EvenListener pour filtrer les projets
   categoryFilter.addEventListener("change", (e) => {
-    console.log(`Option sélectionnée : ${e.target.value}`);
+    // Log pour vérifier l'événement et la valeur sélectionnée
+    console.log("l'Événement est déclenché");
+    console.log("la catégorie sélectionnée est :", e.target.value);
+
+    // Appel de displayGallery avec les projets filtrés
+    displayGallery(
+      projects.filter(
+        (project) =>
+          e.target.value === "all" || project.category.name === e.target.value
+      )
+    );
+
+    // Log après l'appel de displayGallery pour confirmer que la fonction a bien été exécutée
+    console.log("Filtrage effectué et affichage de ou des catégories");
   });
 };
