@@ -474,7 +474,7 @@ form select {
 }
 
 #file-photo {
-	z-index: 1;
+	/*z-index: 1;*/
 	opacity: 0;
 	margin: 0;
 	height: 0;
@@ -495,7 +495,7 @@ form select {
 }
 
 #icon-image {
-	z-index: 0;
+	z-index: 1;
 	color: var(--file-button-bckgrd-color);
 	width: 76px;
 	height: 76px;
@@ -505,7 +505,7 @@ form select {
 }
 
 #file-ajout-button {
-	z-index: 0;
+	z-index: 1;
 	width: 173px;
 	background-color: var(--file-button-bckgrd-color);
 	color: var(--file-button-text-color);
@@ -518,9 +518,13 @@ form select {
 }
 
 #file-text {
-	z-index: 0;
+	z-index: 1;
 	color: var(--file-p-color);
 	margin-top: 4px;
+}
+
+#new-work {
+	z-index: 0;
 }
 
 #category {

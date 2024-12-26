@@ -183,16 +183,22 @@ function checkFileMaxSize(file, event) {
     }
 }
 
-function addToFileSystem(file) {
-    const dirImages = new FileSystemDirectoryEntry()
+/**
+ * This function displays a preview of the image to upload on the website.
+ * @param {File} file : le nouveau projet
+ * @param {HTMLDivElement} fileAddButtonWrapper : the container for image 
+ * file icon, 
+ * upload button and 
+ * information message about accepted format and size
+ */
+function displayMiniImage(file, fileAddButtonWrapper) {
+    const imageMini = document.createElement("img");
+    imageMini.src = URL.createObjectURL(file);
+    imageMini.alt = "nouveau projet à ajouter";
+    imageMini.id = "new-work";
+    /*imageMini.innerHTML = ""*/
+    fileAddButtonWrapper.appendChild(imageMini);
 }
-
-/*
-function addToGallery(file) {
-    galleryData.push(
-        {src: }
-    )
-}*/
 
 /**
  * This function displays the add photo form view of the modal.
@@ -233,9 +239,7 @@ export function displayAddPhotoForm() {
             console.log("Selected file:", file.name);
             if(file){
                 checkFileMaxSize(file, null);
-                const imageMini = document.createElement("img");
-                imageMini.src = 
-                imageMini.innerHTML = ""
+                displayMiniImage(file, fileAddButtonWrapper);
             }
             else { console.log("Aucun fichier sélectionné."); }
         } else {
