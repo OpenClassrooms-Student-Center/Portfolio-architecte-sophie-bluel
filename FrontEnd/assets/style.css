@@ -96,22 +96,22 @@ section {
 	margin: 50px 0
 }
 
-h1{
+h1 {
 	display: flex;
 	flex-direction: column;
 	font-family: 'Syne';
 	font-size: 22px;
 	font-weight: 800;
 	color: var(--h1-li-hover-color);
+
+	& > span {
+		font-family: var(--text-font-family);
+		font-size: 10px;
+		letter-spacing: 0.1em;
+	}
 }
 
-h1 > span {
-	font-family: var(--text-font-family);
-	font-size: 10px;
-	letter-spacing: 0.1em;
-}
-
-h2{
+h2 {
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;

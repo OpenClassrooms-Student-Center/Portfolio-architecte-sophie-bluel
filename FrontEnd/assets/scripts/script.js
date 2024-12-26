@@ -21,6 +21,9 @@ import {
     displayPhotosGallery,
     displayAddPhotoForm
 } from "./modal.js";
+import {
+    addSubmit
+} from "./addWork.js";
 
 let worksInLocalStorageVar = window.localStorage.getItem("works");
 let worksPromise;
@@ -126,7 +129,7 @@ if(isConnected) {
         const form = document.getElementById("modal-form");
         const wrapper = document.querySelector(".wrapper");
 
-        document.querySelector(".button-modal").addEventListener("click", () => {
+        button.addEventListener("click", (event) => {
             if(button.innerText === "Ajouter une photo") {
                 iconWrapper.classList.remove("icon-wrapper-top");
 
@@ -147,6 +150,11 @@ if(isConnected) {
 
                 button.classList.remove("selected");
                 button.classList.add("greyed");
+            }
+            else if(button.innerText === "Valider") {
+                console.log("step3.3 submit button click");
+                /****** Step 3.3 add work ******/
+                addSubmit(event);
             }
         });
 

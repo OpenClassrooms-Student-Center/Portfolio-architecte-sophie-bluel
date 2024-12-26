@@ -11,6 +11,17 @@ import {
     categories
 } from "./getWorks.js";
 
+/* refacto
+class button {
+    text
+    type
+}
+    class icon {
+    text
+
+    }
+*/
+
 export const galleryData = [
     {src:"./assets/images/abajour-tahina.png", alt:"Abajour Tahina", id:1},
     {src:"./assets/images/appartement-paris-v.png", alt:"Appartement Paris V", id:2},
@@ -145,6 +156,7 @@ export function displayPhotosGallery() {
 
 /**
  * This function checks whether or not the browser has a Chrome / Chromium agent.
+ * This is a workaround, on Chrome or Chromium only, to the error at input change listening.
  * @returns {Boolean} true if the used browser is having a Chrome or Chromium agent
  */
 function isChromiumBrowser() {
@@ -171,6 +183,17 @@ function checkFileMaxSize(file, event) {
     }
 }
 
+function addToFileSystem(file) {
+    const dirImages = new FileSystemDirectoryEntry()
+}
+
+/*
+function addToGallery(file) {
+    galleryData.push(
+        {src: }
+    )
+}*/
+
 /**
  * This function displays the add photo form view of the modal.
  */
@@ -180,10 +203,9 @@ export function displayAddPhotoForm() {
     const form = document.createElement("form");
     form.id = "modal-form";
     form.addEventListener("submit", (event) => {
-        event.preventDefault();
         console.log("step3.3 submit");
         /****** Step 3.3 add work ******/
-        addSubmit();
+        addSubmit(event);
     });
 
     const inputFile = document.createElement("input");
@@ -210,7 +232,10 @@ export function displayAddPhotoForm() {
             file = await fileHandle.getFile();
             console.log("Selected file:", file.name);
             if(file){
-                checkFileMaxSize(file, null)
+                checkFileMaxSize(file, null);
+                const imageMini = document.createElement("img");
+                imageMini.src = 
+                imageMini.innerHTML = ""
             }
             else { console.log("Aucun fichier sélectionné."); }
         } else {
