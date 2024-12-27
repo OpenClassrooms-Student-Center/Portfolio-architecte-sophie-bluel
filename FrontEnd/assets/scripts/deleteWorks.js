@@ -1,6 +1,6 @@
-import {
+/*import {
     galleryData
-} from "./modal.js";
+} from "./modal.js";*/
 import {
     displayError
 } from "./connection.js";

@@ -2,6 +2,7 @@ module.exports = (req, res, next) => {
 	try{
 		console.log("checkWork enter.");
 		const host = req.get('host');
+		console.log("1 host: " + host);
 		const title = req.body.title.trim() ?? undefined;
 		const categoryId = parseInt(req.body.category) ?? undefined;
 		//const userId = req.auth.userId ?? undefined;

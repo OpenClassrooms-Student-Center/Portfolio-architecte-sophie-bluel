@@ -30,7 +30,8 @@ export async function addSubmit(event) {
         const fetchOptions = {
             method: "POST",
             headers: {
-                accept: "multipart/form-data"
+                //accept: "multipart/form-data"
+                accept: "application/json"
             },
             body: formData
         };
