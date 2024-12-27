@@ -133,9 +133,15 @@ if(isConnected) {
             if(button.innerText === "Ajouter une photo") {
                 iconWrapper.classList.remove("icon-wrapper-top");
 
+               /* back.classList.add("display");
+                back.classList.remove("hide");*/
                 back.style.display = "block";
+                /*galleryView.classList.add("hide");
+                galleryView.classList.remove("display");*/
                 galleryView.style.display = "none";
                 gallery.classList.remove("gallery-view-size-back");
+                /*addView.classList.add("display");
+                addView.classList.remove("hide");*/
                 addView.style.display = "block";
 
                 title.innerText = "Ajout photo";
@@ -159,9 +165,13 @@ if(isConnected) {
         });
 
         document.querySelector(".icon-back").addEventListener("click", () => {
+            /*back.classList.add("hide");
+            back.classList.remove("display");*/
             back.style.display = "none";
             galleryView.style.display = "grid";
             gallery.classList.add("gallery-view-size-back");
+            /*addView.classList.add("hide");
+            addView.classList.add("display");*/
             addView.style.display = "none";
 
             title.innerText = "Galerie photo";

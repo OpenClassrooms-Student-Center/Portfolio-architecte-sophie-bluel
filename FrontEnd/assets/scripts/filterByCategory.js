@@ -31,7 +31,8 @@ function hideGallery() {
     try{
         let figures = document.querySelectorAll(".gallery figure");
         figures.forEach(figure => {
-            figure.style.display = "none";
+            figure.classList.add("hide");
+            figure.classList.remove("display");
         });
     } catch(error) {
         console.error("Error hiding gallery figures: ", error);
@@ -48,7 +49,8 @@ function displayFilteredFigures(filteredFigures, figuresArray) {
     try{
         figuresArray.forEach(figure => {
             if (filteredFigures.includes(figure)) {
-                figure.style.display = "block";
+                figure.classList.add("display");
+                figure.classList.remove("hide");
             }
         });
         return figuresArray;

@@ -17,7 +17,7 @@ import {
 export async function addSubmit(event) {
     console.log("enter add submit");
     event.preventDefault();
-    const image = document.querySelector("#file-photo").value;
+    const image = document.querySelector("#input-file-photo").value;
     const title = document.querySelector("#title").value;
     const category = document.querySelector("#category").value;
     const addData = {
@@ -25,37 +25,20 @@ export async function addSubmit(event) {
         title,
         category
     };
-    /*const req = {
-        method: "POST",
-        headers: {
-            accept: "application/json",
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(addData)
-    }*/
     const erreur = document.querySelector("#erreur");
     erreur.innerHTML = "";
     
     try {
-        /*const res = await fetch(worksURL, req);*/
-        /*const form = event.currentTarget;*/
-        /*const url = new URL(form.action);*/
         const url = new URL(worksURL);
-        /*const formData = new FormData(form);*/
-        /*const searchParams = new URLSearchParams(formData);*/
+        const formData = new FormData(form);
         const fetchOptions = {
-            /*method: form.method,*/
             method: "post",
-            
             headers: {
-                accept: "application/json",
-                "Content-Type": "application/json"
+                accept: "multipart/form-data",
+                "Content-Type": "multipart/form-data"
             },
-            body: JSON.stringify(addData)
+            body: formData
         };
-        /*if(form.method.toLowerCase() === "post"){
-            fetchOptions.body = form.enctype === "multipart/form-data" ? formData : searchParams;
-        } else { url.search = searchParams; }*/
 
         const res = await fetch(url, fetchOptions);
         console.log("add fetch done");

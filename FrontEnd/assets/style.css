@@ -67,6 +67,13 @@ table {
 	--text-font-size: 14px;
 }
 /** end variables **/
+.display {
+	display: block;
+}
+.hide {
+	display: none;
+}
+
 body {
 	max-width: 1140px;
 	margin:auto;
@@ -166,7 +173,6 @@ li:hover {
 	flex: 1
 }
 #introduction img {
-	display: block;
 	margin: auto;
 	width: 80%;
 }
@@ -228,7 +234,7 @@ li:hover {
 }
 
 #editDiv {
-	padding: 5% 0;
+	padding: 2.4% 0;
 }
 
 #editSpan {
@@ -428,7 +434,6 @@ footer li {
 
 #gallery figure {
 	position: relative;
-	display: inline-block;
 }
 
 .delete-proj {
@@ -473,8 +478,7 @@ form select {
 	margin-top: 10px;
 }
 
-#file-photo {
-	/*z-index: 1;*/
+#input-file-photo {
 	opacity: 0;
 	margin: 0;
 	height: 0;
@@ -482,7 +486,6 @@ form select {
 
 #file-add-button-wrapper {
 	background-color: var(--input-photo);
-	z-index: 0;
 	width: 420px;
 	height: 169px;
 	margin-bottom: 10px;
@@ -495,7 +498,6 @@ form select {
 }
 
 #icon-image {
-	z-index: 1;
 	color: var(--file-button-bckgrd-color);
 	width: 76px;
 	height: 76px;
@@ -505,7 +507,6 @@ form select {
 }
 
 #file-ajout-button {
-	z-index: 1;
 	width: 173px;
 	background-color: var(--file-button-bckgrd-color);
 	color: var(--file-button-text-color);
@@ -518,13 +519,12 @@ form select {
 }
 
 #file-text {
-	z-index: 1;
 	color: var(--file-p-color);
 	margin-top: 4px;
 }
 
-#new-work {
-	z-index: 0;
+#to-upload {
+	overflow: hidden;
 }
 
 #category {

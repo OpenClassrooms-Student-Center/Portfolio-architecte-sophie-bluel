@@ -22,6 +22,8 @@ class button {
     }
 */
 
+export let fileUpload;
+
 export const galleryData = [
     {src:"./assets/images/abajour-tahina.png", alt:"Abajour Tahina", id:1},
     {src:"./assets/images/appartement-paris-v.png", alt:"Appartement Paris V", id:2},
@@ -195,8 +197,12 @@ function displayMiniImage(file, fileAddButtonWrapper) {
     const imageMini = document.createElement("img");
     imageMini.src = URL.createObjectURL(file);
     imageMini.alt = "nouveau projet à ajouter";
-    imageMini.id = "new-work";
+    imageMini.id = "to-upload";
     /*imageMini.innerHTML = ""*/
+    const wrappedBeforeImageUpload = document.querySelectorAll(".wrapped");
+    wrappedBeforeImageUpload.forEach(item => {
+        item.classList.add("hide");
+    });
     fileAddButtonWrapper.appendChild(imageMini);
 }
 
@@ -208,74 +214,33 @@ export function displayAddPhotoForm() {
 
     const form = document.createElement("form");
     form.id = "modal-form";
-    form.addEventListener("submit", (event) => {
-        console.log("step3.3 submit");
-        /****** Step 3.3 add work ******/
-        addSubmit(event);
-    });
 
     const inputFile = document.createElement("input");
     inputFile.type = "file";
-    inputFile.id = "file-photo";
-    inputFile.name = "file-photo";
+    inputFile.id = "input-file-photo";
+    inputFile.name = "input-file-photo";
     inputFile.required = true;
     inputFile.accept = ".jpg .jpeg .png";
     console.log("before change file");
-    let file = null;
-    inputFile.addEventListener("click", async () => {
-        if (isChromiumBrowser() /*&& window.isSecureContext */&& 'showOpenFilePicker' in window) {
-            const [fileHandle] = await window.showOpenFilePicker({
-                multiple: false,
-                types: [
-                    {
-                        description: "Images",
-                        accept: {
-                            "image/*": [".jpg", ".jpeg", ".png"]
-                        }
-                    }
-                ]
-            });
-            file = await fileHandle.getFile();
-            console.log("Selected file:", file.name);
-            if(file){
-                checkFileMaxSize(file, null);
-                displayMiniImage(file, fileAddButtonWrapper);
-            }
-            else { console.log("Aucun fichier sélectionné."); }
-        } else {
-            inputFile.addEventListener("change", (event) => {
-                console.log("change file event");
-                file = event.target.files[0];
-                if(file){
-                    checkFileMaxSize(file, event);
-                }
-                else { console.log("Aucun fichier sélectionné."); }
-            });
-        }
-    });
 
     const fileAddButtonWrapper = document.createElement("div");
     fileAddButtonWrapper.id = "file-add-button-wrapper";
     
     const imageIcon = document.createElement("i");
-    imageIcon.classList.add("material-symbols-outlined");
+    imageIcon.classList.add("material-symbols-outlined", "wrapped");
     imageIcon.innerText = "add_photo_alternate";
     imageIcon.id = "icon-image";
 
     const buttonFileAjout = document.createElement("button");
     buttonFileAjout.type = "button";
     buttonFileAjout.id = "file-ajout-button";
-    buttonFileAjout.classList.add("button");
+    buttonFileAjout.classList.add("button", "wrapped");
     buttonFileAjout.innerText = "+ Ajouter photo";
-
-    fileAddButtonWrapper.addEventListener("click", () => {
-        console.log("wrapper user click");
-        inputFile.click();
-    });
 
     const p = document.createElement("p");
     p.innerText = "jpg, png : 4mo max.";
     p.id = "file-text";
+    p.classList.add("wrapped");
   
     const labelTitle = document.createElement("label");
     labelTitle.innerText = "Titre";
@@ -298,7 +263,53 @@ export function displayAddPhotoForm() {
         option.value = categorie;
         option.textContent = categorie;
         category.appendChild(option);
-    })
+    });
+
+    form.addEventListener("submit", (event) => {
+        console.log("step3.3 submit");
+        /****** Step 3.3 add work ******/
+        addSubmit(event);
+    });
+    
+    let file = null;
+    inputFile.addEventListener("click", async () => {
+        if (isChromiumBrowser() /*&& window.isSecureContext */&& 'showOpenFilePicker' in window) {
+            const [fileHandle] = await window.showOpenFilePicker({
+                multiple: false,
+                types: [
+                    {
+                        description: "Images",
+                        accept: {
+                            "image/*": [".jpg", ".jpeg", ".png"]
+                        }
+                    }
+                ]
+            });
+            file = await fileHandle.getFile();
+            console.log("Selected file:", file.name);
+            if(file){
+                checkFileMaxSize(file, null);
+                displayMiniImage(file, fileAddButtonWrapper);
+                fileUpload = file;
+            }
+            else { console.log("Aucun fichier sélectionné."); }
+        } else {
+            inputFile.addEventListener("change", (event) => {
+                console.log("change file event");
+                file = event.target.files[0];
+                if(file){
+                    checkFileMaxSize(file, event);
+                    displayMiniImage(file, fileAddButtonWrapper);
+                }
+                else { console.log("Aucun fichier sélectionné."); }
+            });
+        }
+    });
+
+    fileAddButtonWrapper.addEventListener("click", () => {
+        console.log("wrapper user click");
+        inputFile.click();
+    });
 
     fileAddButtonWrapper.appendChild(imageIcon);
     fileAddButtonWrapper.appendChild(buttonFileAjout);
