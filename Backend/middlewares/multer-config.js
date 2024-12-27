@@ -9,9 +9,11 @@ const MIME_TYPE = {
 
 const storage = multer.diskStorage({
 	destination: function (req, file, callback) {
+		console.log("multer enter dest.");
 		callback(null, './images')
 	},
 	filename:  (req, file, callback) => {
+		console.log("multer enter filename.");
 		const filename = file.originalname.split(' ').join('_')
 		const filenameArray = filename.split('.')
 		filenameArray.pop()

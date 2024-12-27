@@ -7,20 +7,22 @@ exports.findAll = async (req, res) =>  {
 }
 
 exports.create = async (req, res) => {
+	console.log("works.create enter.");
 	const host = req.get('host');
 	const title = req.body.title;
 	const categoryId = req.body.category;
-	const userId = req.auth.userId;
+	//const userId = req.auth.userId;
 	const imageUrl = `${req.protocol}://${host}/images/${req.file.filename}`;
 	try{
 		const work = await Works.create({
 			title,
 			imageUrl,
-			categoryId,
-			userId
+			categoryId/*,
+			userId*/
 		})
 		return res.status(201).json(work)
 	}catch (err) {
+		console.error("Something went wrong in works.create.");
 		return res.status(500).json({ error: new Error('Something went wrong') })
 	}
 }

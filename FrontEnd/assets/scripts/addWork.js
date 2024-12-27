@@ -18,7 +18,6 @@ import {
  * @param { Event } event : login form SubmitEvent button click
  */
 export async function addSubmit(event) {
-    console.log("enter add submit");
     event.preventDefault();
     const image = document.querySelector("#input-file-photo").value;
     const title = document.querySelector("#title").value;
@@ -26,12 +25,8 @@ export async function addSubmit(event) {
     const erreur = document.querySelector("#erreur");
     erreur.innerHTML = "";
     try {
-        console.log("enter try");
         const url = new URL(worksURL);
-        console.log("url: " + url);
-        console.log("formImported: " + formExported);
         const formData = new FormData(formExported);
-        console.log("8");
         const fetchOptions = {
             method: "POST",
             headers: {
@@ -39,7 +34,6 @@ export async function addSubmit(event) {
             },
             body: formData
         };
-        console.log("before fetch n°2");
         try{
             console.log("Before fetch.");
             console.log("URL: " + url);
@@ -48,7 +42,7 @@ export async function addSubmit(event) {
             const res = await fetch(url, fetchOptions);
             console.log("Request status: " + res.status);
             if(res.ok) { 
-                console.log("Created");
+                console.log("Created. Expected res.status is 201, status: " + res.status + ". Info: " + res.statusText);
                 const data = await res.json();
                 galleryData.addData ({
                     src: data.imageUrl,
@@ -59,27 +53,25 @@ export async function addSubmit(event) {
                 title = "";
                 category = "";
                 closeModal();
-                console.log("end add submit");
-            } else { console.error("Request error: " + res.statusText);}
+            }
+            else if(res.status === 401) {
+                displayError("Utilisat·rice·eur pas authentifié·e", erreur);
+            } else if(title !== "test") {
+                displayError("Titre incorrect", erreur);
+            } else if(category !== "Objets" || category !== "Appartements" || category !== "Hotels & restaurants") {
+                displayError("Catégorie inconnue", erreur);
+                console.log("category: " + category);
+                console.log("Request result status: " + res.status + ". Message: " + res.statusText);
+                console.log("FormData entries:");
+                for(let [key, value] of formData.entries()) {
+                    console.log(`${key} : ${value}`);
+                }
+            } else { console.error("Request -> result error. Status:  " + res.status + ". Message: " + res.statusText);}
         } catch(err) {
             console.error("Fetch err: " + err);
         }
         console.log("add fetch done");
         console.log("res.status: " + res.status);
-
-        if(res.status === 401) {
-            displayError("Utilisat·rice·eur pas authentifié·e", erreur);
-        }
-        if(title !== "test") {
-            displayError("Titre incorrect", erreur);
-        }
-        else if(category !== "Objets" || category !== "Appartements" || category !== "Hotels & restaurants") {
-            displayError("Catégorie inconnue", erreur);
-            console.log("category: " + category);
-        }
-        else if(res.status === 200 || res.status === 201) {
-           
-        }
     } catch(error) {
         erreur.innerHTML = "Votre ajout essuie une erreur. Demandez ou lisez les logs s'il vous plaît.";
     }
