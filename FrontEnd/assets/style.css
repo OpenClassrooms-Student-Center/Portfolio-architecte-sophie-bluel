@@ -148,9 +148,9 @@ li:hover {
   
   .filter-button {
 	padding: 10px 15px;
-	border: none;
-	border-radius: 5px;
-	background-color: #f0f0f0;
+	border: #1D6154 solid 1px;
+	border-radius: 60px;
+	background-color: white;
 	cursor: pointer;
 	font-size: 1rem;
 	transition: background-color 0.3s;
@@ -161,7 +161,7 @@ li:hover {
   }
   
   .filter-button.active {
-	background-color: #007bff;
+	background-color: #1D6154;
 	color: #fff;
   }
   
