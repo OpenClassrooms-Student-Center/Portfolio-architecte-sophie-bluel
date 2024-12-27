@@ -8,6 +8,9 @@ import {
 import {
     displayError
 } from "./connection.js";
+import {
+    formExported
+} from "./script.js";
 
 /**
  * This function adds a work. It sends it to the back-end.
@@ -20,27 +23,47 @@ export async function addSubmit(event) {
     const image = document.querySelector("#input-file-photo").value;
     const title = document.querySelector("#title").value;
     const category = document.querySelector("#category").value;
-    const addData = {
-        image,
-        title,
-        category
-    };
     const erreur = document.querySelector("#erreur");
     erreur.innerHTML = "";
-    
     try {
+        console.log("enter try");
         const url = new URL(worksURL);
-        const formData = new FormData(form);
+        console.log("url: " + url);
+        console.log("formImported: " + formExported);
+        const formData = new FormData(formExported);
+        console.log("8");
         const fetchOptions = {
-            method: "post",
+            method: "POST",
             headers: {
-                accept: "multipart/form-data",
-                "Content-Type": "multipart/form-data"
+                accept: "multipart/form-data"
             },
             body: formData
         };
-
-        const res = await fetch(url, fetchOptions);
+        console.log("before fetch n°2");
+        try{
+            console.log("Before fetch.");
+            console.log("URL: " + url);
+            console.log("FormData: " + formData);
+            console.log("Fetch options: " + fetchOptions);
+            const res = await fetch(url, fetchOptions);
+            console.log("Request status: " + res.status);
+            if(res.ok) { 
+                console.log("Created");
+                const data = await res.json();
+                galleryData.addData ({
+                    src: data.imageUrl,
+                    alt: data.title,
+                    id: data.userId
+                });
+                image = null;
+                title = "";
+                category = "";
+                closeModal();
+                console.log("end add submit");
+            } else { console.error("Request error: " + res.statusText);}
+        } catch(err) {
+            console.error("Fetch err: " + err);
+        }
         console.log("add fetch done");
         console.log("res.status: " + res.status);
 
@@ -55,21 +78,9 @@ export async function addSubmit(event) {
             console.log("category: " + category);
         }
         else if(res.status === 200 || res.status === 201) {
-            console.log("Created");
-            const data = await res.json();
-            galleryData.addData ({
-                src: data.imageUrl,
-                alt: data.title,
-                id: data.userId
-            });
-            image = null;
-            title = "";
-            category = "";
-            closeModal();
-            console.log("end add submit");
+           
         }
     } catch(error) {
-        erreur.innerHTML = "Votre ajout essuie une erreur.";
-        throw new Error("Fetch error: ", error);
+        erreur.innerHTML = "Votre ajout essuie une erreur. Demandez ou lisez les logs s'il vous plaît.";
     }
 }

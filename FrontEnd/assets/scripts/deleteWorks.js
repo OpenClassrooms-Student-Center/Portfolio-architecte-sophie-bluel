@@ -36,11 +36,10 @@ export async function deleteWork(idWork) {
                     galleryData.splice(elIndex, 1);
                     console.log(`L'élément d'id ${idWork} a été supprimé de la gallerie.`)
                 }
-                else { console.log(`Aucun élément d'd ${idWork} trouvé dans la gallerie.`); }
+                else { console.log(`Aucun élément d'id ${idWork} trouvé dans la gallerie.`); }
             }
         }
     } catch(error) {
-        erreur.innerHTML = "Votre suppression essuie une erreur.";
-        throw new Error("Fetch error: ", error);
+        erreur.innerHTML = "Votre suppression essuie une erreur. Demandez ou lisez les logs s'il vous plaît.";
     }
 }

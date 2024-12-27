@@ -27,6 +27,7 @@ import {
 
 let worksInLocalStorageVar = window.localStorage.getItem("works");
 let worksPromise;
+export let formExported;
 
 if (worksInLocalStorageVar) {
     try{
@@ -159,6 +160,9 @@ if(isConnected) {
             }
             else if(button.innerText === "Valider") {
                 console.log("step3.3 submit button click");
+                const formPassed = document.getElementById("modal-form");
+                formExported = formPassed;
+                console.log("script form: " + formPassed);
                 /****** Step 3.3 add work ******/
                 addSubmit(event);
             }

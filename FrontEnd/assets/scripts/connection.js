@@ -136,8 +136,7 @@ async function loginSubmit(e) {
             window.location.href = "../index.html";
         }
     } catch(error) {
-        erreur.innerHTML = "Votre connexion essuie une erreur.";
-        throw new Error("Fetch error: ", error);
+        erreur.innerHTML = "Votre connexion essuie une erreur. Demandez ou lisez les logs s'il vous plaît.";
     }
 }
 
