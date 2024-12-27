@@ -21,13 +21,29 @@ export const fetchArtGalleryData = async () => {
     }
 
     // Si la réponse est correcte, on tente de récupérer les données au format JSON
-    const data = await response.json();
+    const dataWorks = await response.json();
 
     // Affichage des données dans la console pour vérifier qu'on a bien récupéré la réponse
-    console.log(data);
+    console.log(dataWorks);
 
-    // Retourne les données récupérées pour qu'elles puissent être utilisées ailleurs dans le code
-    return data;
+    // Extraire les catégories uniques des projets
+    const categories = new Set();
+    dataWorks.forEach((project) => {
+      categories.add(project.category.name);
+    });
+
+    // Convertir le Set en tableau pour pouvoir le passer en paramètre à
+    //  displayFilter. Dans notre cas, je veux récupérer la liste des
+    //  projets, mais aussi extraire les catégories uniques des projets.
+    return {
+      //data est un tableau d'objets qui contient déjà toutes les informations
+      // des projets. C'est un objet itérable, donc je n'ai pas besoin de
+      // le transformer en tableau avec le spread operator.
+      projects: dataWorks,
+      //Le spread operator ici va me permettre d'extraire chaque élément
+      //  du Set et de les mettre dans un tableau.
+      categories: [...categories],
+    };
   } catch (error) {
     // Si une erreur survient à n'importe quelle étape (connexion, réponse invalide, etc.),
     // l'erreur est capturée et affichée dans la console

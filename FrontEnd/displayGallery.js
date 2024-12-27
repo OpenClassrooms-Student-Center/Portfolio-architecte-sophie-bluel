@@ -1,22 +1,29 @@
 export const displayGallery = (projects) => {
-  // Sélectionner la section où tu veux ajouter la galerie
-  const portfolioSection = document.getElementById("portfolio");
-  const gallery = document.createElement("div");
-  gallery.classList.add("gallery");
+  // Sélectionner ou créer le conteneur de la galerie
+  let gallery = document.querySelector(".gallery");
+
+  // Si la galerie n'existe pas encore, on la crée
+  if (!gallery) {
+    gallery = document.createElement("div");
+    gallery.classList.add("gallery");
+    document.getElementById("portfolio").appendChild(gallery);
+  }
+
+  // Vider la galerie avant d'ajouter les nouveaux éléments
+  gallery.innerHTML = "";
 
   // Ajouter des éléments à la galerie
-  for (let i = 0; i < projects.length; i++) {
-    const project = projects[i];
+  projects.forEach((project) => {
     const figure = document.createElement("figure");
     const imageElement = document.createElement("img");
     imageElement.src = project.imageUrl;
     imageElement.alt = project.title;
+
     const figCaption = document.createElement("figcaption");
-    figCaption.textContent = `visuel ${project.title}`;
-    gallery.appendChild(figure);
+    figCaption.textContent = project.title;
+
     figure.appendChild(imageElement);
     figure.appendChild(figCaption);
-  }
-  // Ajouter la galerie à la section
-  portfolioSection.appendChild(gallery);
+    gallery.appendChild(figure);
+  });
 };
