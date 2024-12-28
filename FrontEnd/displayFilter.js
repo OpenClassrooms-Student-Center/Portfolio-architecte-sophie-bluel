@@ -21,6 +21,6 @@ export const displayFilter = (categories) => {
     filterContainer.appendChild(button);
   });
 
-  // Ajouter le conteneur au portfolio
+  // Ajouter le conteneur au portfolio au dessus des autres
   portfolio.prepend(filterContainer);
 };
