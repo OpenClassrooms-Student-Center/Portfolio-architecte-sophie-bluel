@@ -187,7 +187,7 @@ function displayMiniImage(file, fileAddButtonWrapper) {
     imageMini.src = URL.createObjectURL(file);
     imageMini.alt = "nouveau projet à ajouter";
     imageMini.id = "to-upload";
-    /*imageMini.innerHTML = ""*/
+    /*imageMini.innerHTML = ``*/
     const wrappedBeforeImageUpload = document.querySelectorAll(".wrapped");
     wrappedBeforeImageUpload.forEach(item => {
         item.classList.add("hide");

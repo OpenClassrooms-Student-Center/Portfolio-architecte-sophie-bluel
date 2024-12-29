@@ -1,3 +1,7 @@
+import {
+    storeInLocalStorage
+} from "./connection.js"
+
 /****** connection ******/
 /**
  * This function checks the form usability.
@@ -79,11 +83,45 @@ async function addConnectionListener() {
 }
 
 /****** local category cache ******/
-async function getCategories() {
-    const categoriesUrl = "127.0.0.1:5678/api/category";
-    const res = await fetch(categoriesUrl);
-    if(res) {
-        const data = await res.json();
-        console.log(res);
+/**
+ * This function changes a hard coded test category name in its id calling the API for up-to-date data.
+ * @returns the id of category name to the main flow.
+ */
+export async function getCategories() {
+    const categoriesUrl = "http://127.0.0.1:5678/api/categories";
+    const req = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
     }
+    try {
+        console.log("0 enter fetch category");
+        console.log("1 categoriesUrl: " + categoriesUrl);
+        console.log("2 req: " + req);
+        const res = await fetch(categoriesUrl, req);
+        if(res.ok) {
+            const data = await res.json();
+            console.log("3 res :"+ res +" data: " + data);
+            const objTrouv = data.find(obj => obj.name === "Objets");
+            if(objTrouv) { 
+                storeInLocalStorage(objTrouv.id, objTrouv.name);
+                return objTrouv.id;
+            }
+        }
+    } catch(err) {
+        console.error("Categories fetch error: " + err);
+    }
+}
+
+/****** FormData replacer ******/
+export function formDataValueReplacer(formData, key, newValue) {
+    for(let [cle, valeur] of formData.entries()) {
+        if(cle === key) {
+            formData.remove(cle);
+            formData.append(cle, newValue);
+        }
+        console.log("replace key: " + cle + " value: " + valeur + "by value: " + newValue);
+    }
+    return formData;
 }

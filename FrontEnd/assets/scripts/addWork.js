@@ -11,6 +11,10 @@ import {
 import {
     formExported
 } from "./script.js";
+import {
+    getCategories,
+    formDataValueReplacer
+} from "./helper.js";
 
 /**
  * This function adds a work. It sends it to the back-end.
@@ -26,14 +30,17 @@ export async function addSubmit(event) {
     erreur.innerHTML = "";
     try {
         const url = new URL(worksURL);
-        const formData = new FormData(formExported);
+        const formData = new FormData(form);
+        console.log("addSubmit 1");
+        const formDataId = formDataValueReplacer(formData, "category", getCategories());
+        
         const fetchOptions = {
             method: "POST",
             headers: {
-                //accept: "multipart/form-data"
-                accept: "application/json"
+                accept: "multipart/form-data",
+                "Content-Type": "application/json"
             },
-            body: formData
+            body: formDataId
         };
         try{
             console.log("Before fetch.");

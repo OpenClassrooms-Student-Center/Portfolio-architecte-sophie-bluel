@@ -18,7 +18,7 @@ addEventListener("DOMContentLoaded", async () => {
  * @param {String} val
 
  */
-function storeInLocalStorage(key, val) {
+export function storeInLocalStorage(key, val) {
     try{
         localStorage.setItem(key, val);
     } catch(error) {
