@@ -125,6 +125,47 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
+/* Centrer le label */
+#portfolio label {
+	display: block; 
+	text-align: center; 
+	font-family: 'Syne', sans-serif;
+	font-size: 1.2rem;
+	font-weight: 600; 
+	color: #1D6154; 
+	background-color: #f7f7f7; 
+	border-radius: 5px; 
+	padding: 10px 20px; 
+	margin-bottom: 10px;
+	box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  .filter-container {
+	display: flex;
+	justify-content: center;
+	gap: 10px; /* Espacement entre les boutons */
+	margin-bottom: 20px;
+  }
+  
+  .filter-button {
+	padding: 10px 15px;
+	border: #1D6154 solid 1px;
+	border-radius: 60px;
+	background-color: white;
+	cursor: pointer;
+	font-size: 1rem;
+	transition: background-color 0.3s;
+  }
+  
+  .filter-button:hover {
+	background-color: #d0d0d0;
+  }
+  
+  .filter-button.active {
+	background-color: #1D6154;
+	color: #fff;
+  }
+  
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -168,6 +209,22 @@ margin: auto;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
+/* select catégories */
+#categoryFilter {
+	display: block; /* Permet à l'élément de prendre toute la largeur disponible */
+	margin: 20px auto; /* Centrer horizontalement avec une marge automatique */
+	padding: 10px;
+	font-size: 1rem;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	background-color: #fff;
+  }
+  
+  #categoryFilter:focus {
+	outline: none; /* Retirer le contour par défaut lors de la mise au point */
+	border-color: #007bff; /* Couleur de bordure lors de la mise au point */
+  }
+/* ----------------- */
 
 input[type="submit"]{
 	font-family: 'Syne';
