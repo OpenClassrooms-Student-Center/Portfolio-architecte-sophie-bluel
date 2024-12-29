@@ -115,6 +115,13 @@ export async function getCategories() {
 }
 
 /****** FormData replacer ******/
+/**
+ * This function finds a key and replaces the value. It musn't be greedy.
+ * @param {FormData} formData 
+ * @param {String} key 
+ * @param {*} newValue 
+ * @returns the muted formData.
+ */
 export function formDataValueReplacer(formData, key, newValue) {
     for(let [cle, valeur] of formData.entries()) {
         if(cle === key) {

@@ -9,9 +9,6 @@ import {
     displayError
 } from "./connection.js";
 import {
-    formExported
-} from "./script.js";
-import {
     getCategories,
     formDataValueReplacer
 } from "./helper.js";
@@ -27,13 +24,17 @@ export async function addSubmit(event) {
     const title = document.querySelector("#title").value;
     const category = document.querySelector("#category").value;
     const erreur = document.querySelector("#erreur");
+    const form = document.querySelector("#modal-form");
     erreur.innerHTML = "";
     try {
         const url = new URL(worksURL);
         const formData = new FormData(form);
-        console.log("addSubmit 1");
+        //title no => category is to replace.
         const formDataId = formDataValueReplacer(formData, "category", getCategories());
-        
+        console.log("formDataId: " + formDataId);
+        for(let [key, value] of formDataId.entries()) {
+            console.log(`${key}: ${value}`);
+        }
         const fetchOptions = {
             method: "POST",
             headers: {
