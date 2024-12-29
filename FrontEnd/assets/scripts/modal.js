@@ -163,7 +163,6 @@ function isChromiumBrowser() {
  */
 function checkFileMaxSize(file, event) {
     const maxSize = 4 * 1024 * 1024;
-    console.log("file.size: " + file.size);
 
     if(file.size > maxSize) {
         displayError("Le fichier dépasse la taille maximale de 4Mo. Recommencez s'il-vous-plaît.", erreur);
@@ -210,7 +209,6 @@ export function displayAddPhotoForm() {
     inputFile.name = "input-file-photo";
     inputFile.required = true;
     inputFile.accept = ".jpg .jpeg .png";
-    console.log("before change file");
 
     const fileAddButtonWrapper = document.createElement("div");
     fileAddButtonWrapper.id = "file-add-button-wrapper";
@@ -255,7 +253,6 @@ export function displayAddPhotoForm() {
     });
 
     form.addEventListener("submit", (event) => {
-        console.log("step3.3 submit");
         /****** Step 3.3 add work ******/
         addSubmit(event);
     });
@@ -275,7 +272,6 @@ export function displayAddPhotoForm() {
                 ]
             });
             file = await fileHandle.getFile();
-            console.log("Selected file:", file.name);
             if(file){
                 checkFileMaxSize(file, null);
                 displayMiniImage(file, fileAddButtonWrapper);

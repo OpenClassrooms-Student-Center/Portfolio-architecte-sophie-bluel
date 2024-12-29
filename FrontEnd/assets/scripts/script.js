@@ -159,7 +159,6 @@ if(isConnected) {
                 button.classList.add("greyed");
             }
             else if(button.innerText === "Valider") {
-                console.log("step3.3 submit button click");
                 /****** Step 3.3 add work ******/
                 addSubmit(event);
             }

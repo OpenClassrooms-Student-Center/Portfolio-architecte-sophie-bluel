@@ -40,6 +40,6 @@ export async function deleteWork(idWork) {
             }
         }
     } catch(error) {
-        erreur.innerHTML = "Votre suppression essuie une erreur. Demandez ou lisez les logs s'il vous plaît.";
+        erreur.innerHTML = "3 Votre suppression essuie une erreur. Demandez ou lisez les logs s'il vous plaît.";
     }
 }

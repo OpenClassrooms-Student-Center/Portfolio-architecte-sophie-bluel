@@ -81,7 +81,7 @@ async function loginSubmit(e) {
             window.location.href = "../index.html";
         }
     } catch(error) {
-        erreur.innerHTML = "Votre connexion essuie une erreur. Demandez ou lisez les logs s'il vous plaît.";
+        erreur.innerHTML = "2 Votre connexion essuie une erreur. Demandez ou lisez les logs s'il vous plaît.";
     }
 }
 

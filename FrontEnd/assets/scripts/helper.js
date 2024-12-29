@@ -87,22 +87,15 @@ async function addConnectionListener() {
  * This function changes a hard coded test category name in its id calling the API for up-to-date data.
  * @returns the id of category name to the main flow.
  */
-export async function getCategories() {
+export async function getCategoryId() {
     const categoriesUrl = "http://127.0.0.1:5678/api/categories";
     const req = {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json"
-        }
+        method: "GET"
     }
     try {
-        console.log("0 enter fetch category");
-        console.log("1 categoriesUrl: " + categoriesUrl);
-        console.log("2 req: " + req);
         const res = await fetch(categoriesUrl, req);
         if(res.ok) {
             const data = await res.json();
-            console.log("3 res :"+ res +" data: " + data);
             const objTrouv = data.find(obj => obj.name === "Objets");
             if(objTrouv) { 
                 storeInLocalStorage(objTrouv.id, objTrouv.name);
@@ -110,7 +103,7 @@ export async function getCategories() {
             }
         }
     } catch(err) {
-        console.error("Categories fetch error: " + err);
+        console.error("getCategoryId fetch error: " + err);
     }
 }
 
@@ -123,12 +116,17 @@ export async function getCategories() {
  * @returns the muted formData.
  */
 export function formDataValueReplacer(formData, key, newValue) {
+    console.log("replace key: " + key);//category
+    console.log("replace newValue: " + newValue);//Promise? no it must be an id
+
     for(let [cle, valeur] of formData.entries()) {
         if(cle === key) {
-            formData.remove(cle);
-            formData.append(cle, newValue);
+            console.log("enter remove->append");
+            console.log("old value: " + valeur)
+            console.log("appended new value: " + newValue)
+            formData.set(cle, newValue)
+            console.log("formData after replace: " + formData)
         }
-        console.log("replace key: " + cle + " value: " + valeur + "by value: " + newValue);
     }
     return formData;
 }
