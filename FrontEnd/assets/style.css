@@ -23,6 +23,23 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
+/* Liens sans soulignement et avec une couleur constante */
+a {
+    text-decoration: none; /* Supprime le soulignement */
+    color: inherit; /* Utilise la couleur du parent (héritée) */
+}
+
+/* Optionnel : personnalisez les couleurs pour chaque état si nécessaire */
+a:link,
+a:visited {
+    color: #333333; /* Couleur du lien normal et déjà visité */
+}
+
+a:hover,
+a:active {
+    color: #555555; /* Couleur au survol ou lorsqu'il est actif */
+}
+
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
@@ -91,12 +108,20 @@ nav ul {
 
 }
 nav li {
+	display: flex;
+    align-items: center; /* Centre verticalement */
+    justify-content: center; /* Centre horizontalement (si nécessaire) */
 	padding: 0 10px;
-	font-size: 1.2em;
+    font-size: 1.2em;
+
 }
 
 li:hover {
 	color: #B1663C;
+}
+.instagram {
+	width: 22px;
+	height: 22px;
 }
 #introduction {
 	display: flex;
@@ -242,4 +267,82 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em
 }
+.wrapper-login {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+}
 
+
+/* Conteneur principal */
+.login-container {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+    background-color: none;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+/* Titre */
+.login-title {
+    font-size: 2rem;
+    color: #1D6154;
+    margin-bottom: 1.5rem;
+}
+
+/* Formulaire */
+.login-form .form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+/* Champs de saisie */
+.login-form input[type="email"],
+.login-form input[type="password"] {
+    width: 379px;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0px 4px 14px 0px #00000017; /* Ombre portée */
+    box-sizing: border-box;
+    
+}
+
+/* Bouton */
+.login-button {
+    width: 179px;
+	height: 36px;
+	line-height: 1;
+    padding: 0.75rem;
+    background-color: #1D6154;
+    color: #ffffff;
+    font-size: 1rem;
+    border: none;
+    border-radius: 60px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-button:hover {
+    background-color: #267d6d;
+    
+}
+
+/* Lien "Mot de passe oublié" */
+.forgot-password {
+    display: block;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #3D3D3D;
+    line-height: 1; /* Réduit l'espacement vertical */
+    text-decoration: underline;
+    transition: color 0.3s;
+}
+
+.forgot-password:hover {
+    color: #515151;
+}
