@@ -346,3 +346,24 @@ footer nav ul {
 .forgot-password:hover {
     color: #515151;
 }
+#error-message-form {
+	margin: auto;
+	color: #fff; 
+	background-color: #267d6d; 
+	font-size: 18px; 
+	font-weight: bold; 
+	padding: 15px; 
+	margin-top: 10px; 
+	border-radius: 5px; 
+	text-align: center;
+	width: 290px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+	display: none;
+	opacity: 0;
+  }
+  
+  /* Lors de l'affichage, on fait apparaître l'erreur avec une opacité de 1 */
+  #error-message-form.show {
+	display: block;
+	opacity: 1;
+  }

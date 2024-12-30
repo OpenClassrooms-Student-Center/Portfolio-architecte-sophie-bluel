@@ -47,6 +47,7 @@ export const fetchArtGalleryData = async () => {
   } catch (error) {
     // Si une erreur survient à n'importe quelle étape (connexion, réponse invalide, etc.),
     // l'erreur est capturée et affichée dans la console
-    console.error("Erreur:", error);
+    const errorMessage = document.querySelector("#error-message");
+    errorMessage.textContent = `Une erreur est survenue: ${error.message}`;
   }
 };
