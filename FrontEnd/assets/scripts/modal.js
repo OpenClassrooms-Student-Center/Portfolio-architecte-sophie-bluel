@@ -208,7 +208,7 @@ export function displayAddPhotoForm() {
     inputFile.id = "input-file-photo";
     inputFile.name = "input-file-photo";
     inputFile.required = true;
-    inputFile.accept = ".jpg .jpeg .png";
+    inputFile.accept = ".jpg .jpeg .png .webp";
 
     const fileAddButtonWrapper = document.createElement("div");
     fileAddButtonWrapper.id = "file-add-button-wrapper";
@@ -225,7 +225,7 @@ export function displayAddPhotoForm() {
     buttonFileAjout.innerText = "+ Ajouter photo";
 
     const p = document.createElement("p");
-    p.innerText = "jpg, png : 4mo max.";
+    p.innerText = "jpg, png, webp : 4mo max.";
     p.id = "file-text";
     p.classList.add("wrapped");
   
@@ -266,7 +266,7 @@ export function displayAddPhotoForm() {
                     {
                         description: "Images",
                         accept: {
-                            "image/*": [".jpg", ".jpeg", ".png"]
+                            "image/*": [".jpg", ".jpeg", ".png", ".webp"]
                         }
                     }
                 ]
