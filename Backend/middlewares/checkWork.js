@@ -10,11 +10,12 @@ module.exports = (req, res, next) => {
 		console.log("3 categoryId: " + categoryId);
 		//const userId = req.auth.userId ?? undefined;
 		console.log(`req protocol:        ${req.protocol}`);
-		console.log(`host/images/reqfilefilename:        //${host}/images/${req.file.filename}`);
-		console.log("")
+		console.log("host: " + host);//
+		console.log("req.file.filename: " + req.file.filename)
+		console.log(`host/images/req.file.filename:        //${host}/images/${req.file.filename}`)
 		const imageUrl = `${req.protocol}://${host}/images/${req.file.filename}` ?? undefined;
 		console.log("4 imageUrl: " + imageUrl)
-	console.log(title,categoryId/*,userId*/,imageUrl)
+		console.log(title,categoryId/*,userId*/,imageUrl)
 		if(title !== undefined &&
 			title.length > 0 &&
 			categoryId !== undefined &&
@@ -23,7 +24,7 @@ module.exports = (req, res, next) => {
 			userId > 0 &&*/
 			imageUrl !== undefined){//
 			req.work = {title, categoryId, userId, imageUrl}
-			console.log("5 req.work: " + req.work);
+			console.log("5 req.work: " + req.work)
 			next()
 		}else{
 			return res.status(400).json({error: new Error("Bad Request")})

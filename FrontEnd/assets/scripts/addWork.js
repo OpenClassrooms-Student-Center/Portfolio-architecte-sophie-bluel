@@ -53,6 +53,16 @@ addWork.js:117 input-file-photo : [object File]
 addWork.js:117 title : test
 addWork.js:117 category : 1
 addWork.js:123 add fetch done
+
+Executing (default): SELECT `id`, `name` FROM `categories` AS `categories`;
+auth's req.headers.authorization: undefined
+checkWork enter.
+1 host: 127.0.0.1:5678
+2 title: test
+3 req.body.category: 1
+3 categoryId: 1
+req protocol:        http
+Something wrong occured in checkWork.
  */
 export async function addSubmit(event) {
     event.preventDefault();
