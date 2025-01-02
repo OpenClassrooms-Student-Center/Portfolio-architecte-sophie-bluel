@@ -10,7 +10,7 @@ const API_URI = "http://localhost:5678/api/works";
 export const fetchArtGalleryData = async () => {
   // Utilisation de try-catch pour gérer les erreurs
   try {
-    // Envoi de la requête HTTP GET à l'API
+    // Envoi de la requête HTTP GET à l'API. premier argument est l'url
     const response = await fetch(API_URI);
 
     // Vérification de la réponse HTTP
