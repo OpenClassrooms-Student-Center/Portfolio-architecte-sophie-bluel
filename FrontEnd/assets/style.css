@@ -25,7 +25,7 @@ time, mark, audio, video {
 }
 
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, /******figure,*/
+article, aside, details, figcaption,
 footer, header, hgroup, menu, nav, section {
     display: block;
 }
@@ -73,9 +73,9 @@ table {
     --text-font-size: 14px;
 }
 /** end variables **/
-/******.display-style {
-        display: block;
-}*/
+.display-style {
+    display: block;
+}
 
 .hide {
     display: none;
@@ -149,6 +149,11 @@ body {
 
                     &:hover {
                         color: var(--h1-li-hover-color);
+                    }
+
+                    img {
+                        width: 22px;
+                        height: 22px;
                     }
                 }
             }
@@ -258,11 +263,12 @@ body {
     }
 
     .gallery {
-        width: 100%;
+        width: 83%;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         grid-column-gap: 20px;
         grid-row-gap: 20px;
+        margin-left: 6vw;
 
         img {
             width: 100%;
@@ -460,7 +466,7 @@ body {
             display: flex;
             justify-content: flex-end;
             margin: 2em;
-            margin-right: -17.5%;
+            margin-right: -2%;
         }
 
         li {

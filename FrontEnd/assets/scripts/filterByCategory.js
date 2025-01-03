@@ -32,7 +32,7 @@ function hideGallery() {
         let figures = document.querySelectorAll(".gallery figure");
         figures.forEach(figure => {
             figure.classList.add("hide");
-            figure.classList.remove("display");
+            figure.classList.remove("display-style");
         });
     } catch(error) {
         console.error("Error hiding gallery figures: ", error);
@@ -49,7 +49,7 @@ function displayFilteredFigures(filteredFigures, figuresArray) {
     try{
         figuresArray.forEach(figure => {
             if (filteredFigures.includes(figure)) {
-                figure.classList.add("display");
+                figure.classList.add("display-style");
                 figure.classList.remove("hide");
             }
         });
@@ -76,7 +76,7 @@ export function filterGallery(option, galleryDiv, initialGallery) {
         let filteredFigures;
         if(val != "Tous"){
             filteredFigures = figuresArray.filter((figure) => {
-                return figure.className === val;
+                return figure.className.includes(val);
             });
         } else {
             filteredFigures = initialGallery;
