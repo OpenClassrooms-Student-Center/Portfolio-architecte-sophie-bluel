@@ -5,17 +5,18 @@ const errorMessageForm = document.getElementById("error-message-form");
 const confirmButton = document.getElementById("login-button-id");
 
 // Fonction de gestion de la soumission du formulaire avec une fonction fléchée
-const handleLoginSubmit = async (e) => {
+export const handleLoginSubmit = async (e) => {
   e.preventDefault(); // Empêche l'envoi du formulaire
 
   const inputEmail = document.getElementById("email");
   const inputPassword = document.getElementById("password");
 
+  // Récupère et nettoie les valeurs des champs une seule fois
+  const email = inputEmail.value.trim();
+  const password = inputPassword.value.trim();
+
   // Vérifie si l'un des champs est vide
-  if (
-    inputEmail.value.trim().length < 1 ||
-    inputPassword.value.trim().length < 1
-  ) {
+  if (email.length === 0 || password.length === 0) {
     console.log("Veuillez remplir tous les champs");
 
     // Créer un paragraphe pour le message d'erreur
@@ -39,17 +40,11 @@ const handleLoginSubmit = async (e) => {
     return; // Arrête l'exécution si les champs sont incomplets
   }
 
-  // Si les champs sont remplis, continuer le traitement ici
-  const email = inputEmail.value.trim(); // Supprime les espaces autour de l'email
-  const password = inputPassword.value.trim(); // Supprime les espaces autour du mot de passe
   console.log(email, password);
   console.log("Formulaire valide");
 
   // Préparation des données à envoyer
-  const loginData = {
-    email: email,
-    password: password,
-  };
+  const loginData = { email, password };
   console.log("Données préparées pour l'envoi :", loginData);
 
   try {
@@ -68,9 +63,10 @@ const handleLoginSubmit = async (e) => {
       // Stockage du token dans sessionStorage
       logIn(token);
 
-      // Redirection vers la page index.html
       // Vérifier que le token est bien enregistré
       console.log("Jeton enregistré :", sessionStorage.getItem("token"));
+
+      // Redirection vers la page index.html
       window.location.href = "./index.html";
     } else {
       console.log("Connexion échouée");
@@ -93,12 +89,11 @@ const handleLoginSubmit = async (e) => {
         if (wrongDataElement) {
           wrongDataElement.remove();
         }
-      }, 3000); // Le message disparaît après 5 secondes
+      }, 3000);
     }
   } catch (error) {
     console.error("Une erreur s'est produite lors de la connexion :", error);
 
-    // Créer une div 'wrongData' pour afficher un message d'erreur en cas d'exception
     // Créer une div 'wrongData' pour afficher un message d'erreur en cas d'exception
     let wrongData = document.createElement("div");
     wrongData.textContent =
@@ -111,13 +106,13 @@ const handleLoginSubmit = async (e) => {
     const form = document.querySelector(".login-form");
     form.appendChild(wrongData);
 
-    // Assurez-vous que la suppression du message se fait bien après 5 secondes
+    // Supprimer le message après 5 secondes
     setTimeout(() => {
       const wrongDataElement = document.getElementById("wrongData");
       if (wrongDataElement) {
-        wrongDataElement.remove(); // Cela fonctionnera maintenant car l'élément a un id unique
+        wrongDataElement.remove();
       }
-    }, 3000); // Le message disparaît après 5 secondes
+    }, 1000);
   }
 };
 
