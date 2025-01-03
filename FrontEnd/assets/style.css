@@ -98,7 +98,7 @@ body {
             margin-right: -1.5%;
         }
 
-        #connected {
+        #connected-banner {
             width: 100vw;
             height: 60px;
             background-color: black;
@@ -275,7 +275,7 @@ body {
         }
     }
     /****** end section porttfolio ******/
-    /****** section contact ******/
+    /****** section contact connection ******/
     #contact, #connection {
         width: 33.75%;
         margin: auto;
@@ -311,7 +311,7 @@ body {
         text-align: center;
     }
 
-    #contact {
+    #contact, #connection {
         h2 {
             margin-bottom: 20px;
         }

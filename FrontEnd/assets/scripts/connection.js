@@ -92,7 +92,7 @@ export function addConnectedModeBanner() {
     try{
         const header = document.querySelector("header");
         const connectedModeBanner = document.createElement("div");
-        connectedModeBanner.id = "connected";
+        connectedModeBanner.id = "connected-banner";
         connectedModeBanner.innerText = "Mode édition";
         const divVerticalFlex = document.getElementById("logged-out-mode-header");
         header.innerHTML = "";
