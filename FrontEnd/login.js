@@ -1,3 +1,5 @@
+import { logIn, logOut, isConnected } from "./sessionManagement.js";
+
 const API_URI = "http://localhost:5678/api/users/login";
 const errorMessageForm = document.getElementById("error-message-form");
 const confirmButton = document.getElementById("login-button-id");
@@ -64,7 +66,8 @@ const handleLoginSubmit = async (e) => {
       console.log(data);
       const token = data.token;
       // Stockage du token dans sessionStorage
-      sessionStorage.setItem("token", token);
+      logIn(token);
+
       // Redirection vers la page index.html
       // Vérifier que le token est bien enregistré
       console.log("Jeton enregistré :", sessionStorage.getItem("token"));
@@ -96,21 +99,25 @@ const handleLoginSubmit = async (e) => {
     console.error("Une erreur s'est produite lors de la connexion :", error);
 
     // Créer une div 'wrongData' pour afficher un message d'erreur en cas d'exception
+    // Créer une div 'wrongData' pour afficher un message d'erreur en cas d'exception
     let wrongData = document.createElement("div");
     wrongData.textContent =
       "Une erreur est survenue, veuillez réessayer plus tard.";
 
-    // Ajouter la div sous le formulaire
+    // Ajoutez un id unique pour pouvoir le cibler plus tard
+    wrongData.id = "wrongData";
+
+    // Ajouter immédiatement la div sous le formulaire
     const form = document.querySelector(".login-form");
     form.appendChild(wrongData);
 
-    // Supprimer le message d'erreur après 5 secondes
+    // Assurez-vous que la suppression du message se fait bien après 5 secondes
     setTimeout(() => {
       const wrongDataElement = document.getElementById("wrongData");
       if (wrongDataElement) {
-        wrongDataElement.remove();
+        wrongDataElement.remove(); // Cela fonctionnera maintenant car l'élément a un id unique
       }
-    }, 5000); // Le message disparaît après 5 secondes
+    }, 3000); // Le message disparaît après 5 secondes
   }
 };
 

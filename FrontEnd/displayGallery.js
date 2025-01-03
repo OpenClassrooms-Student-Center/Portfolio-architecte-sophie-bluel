@@ -1,14 +1,11 @@
 export const displayGallery = (projects) => {
-  // Sélectionner ou créer le conteneur de la galerie
   let gallery = document.querySelector(".gallery");
 
-  // Si la galerie n'existe pas encore, on la crée
   if (!gallery) {
     gallery = document.createElement("div");
     gallery.classList.add("gallery");
     document.getElementById("portfolio").appendChild(gallery);
   }
-
   // Vider la galerie avant d'ajouter les nouveaux éléments
   gallery.innerHTML = "";
 
