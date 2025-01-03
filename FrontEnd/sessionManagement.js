@@ -1,20 +1,17 @@
+// Fonction pour connecter l'utilisateur et stocker le token
 export const logIn = (token) => {
   sessionStorage.setItem("token", token);
+  console.log("Utilisateur connecté avec token :", token);
 };
 
+// Fonction pour déconnecter l'utilisateur et supprimer le token
 export const logOut = () => {
-  sessionStorage.setItem("token", null);
+  sessionStorage.removeItem("token");
+  console.log("Utilisateur déconnecté.");
 };
 
+// Fonction pour vérifier si l'utilisateur est connecté
 export const isConnected = () => {
-  const isConnected = false;
-  isConnected = sessionStorage.getItem("token");
-
-  return isConnected;
+  const token = sessionStorage.getItem("token");
+  return token ? true : false;
 };
-
-// export function isConnected() {
-//     // Correction de la variable 'isConnected' pour qu'elle fonctionne correctement
-//     const token = localStorage.getItem("token");
-//     return token !== null && token !== "null";
-//   }

@@ -1,7 +1,6 @@
 import { logIn, logOut, isConnected } from "./sessionManagement.js";
 
 const API_URI = "http://localhost:5678/api/users/login";
-const errorMessageForm = document.getElementById("error-message-form");
 const confirmButton = document.getElementById("login-button-id");
 
 // Fonction de gestion de la soumission du formulaire
@@ -22,7 +21,8 @@ export const handleLoginSubmit = async (e) => {
     // Créer un paragraphe pour le message d'erreur
     let errorMessage = document.createElement("p");
     errorMessage.textContent = "Veuillez remplir tous les champs"; // Le message d'erreur
-
+    // Appliquer le style en direct
+    errorMessage.style.fontWeight = "bold"; // Mettre le texte en gras
     // Ajouter le message d'erreur sous le formulaire
     const form = document.querySelector(".login-form");
     form.appendChild(errorMessage); // Ajouter l'erreur au formulaire
@@ -34,7 +34,6 @@ export const handleLoginSubmit = async (e) => {
 
     return; // Arrête l'exécution si les champs sont incomplets
   }
-
   console.log(email, password);
   console.log("Formulaire valide");
 
@@ -70,12 +69,11 @@ export const handleLoginSubmit = async (e) => {
       let wrongData = document.createElement("p");
       wrongData.textContent =
         "Erreur de connexion : Veuillez vérifier vos identifiants.";
-
+      wrongData.style.fontWeight = "bold"; // Mettre le texte en gras
       // Ajouter le message d'erreur sous le formulaire
       const form = document.querySelector(".login-form");
       form.appendChild(wrongData);
 
-      // Supprimer le message d'erreur après 3 secondes
       setTimeout(() => {
         wrongData.remove();
       }, 3000);
