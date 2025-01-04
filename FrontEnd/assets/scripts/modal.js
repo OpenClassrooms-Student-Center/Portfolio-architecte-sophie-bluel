@@ -237,6 +237,7 @@ export function displayAddPhotoForm() {
     title.id = "title";
     title.name = "title";
     title.required = true;
+    title.classList.add("add-form-input-width");
 
     const labelCategory = document.createElement("label");
     labelCategory.htmlFor = "category";
@@ -245,6 +246,7 @@ export function displayAddPhotoForm() {
     category.id = "category";
     category.name = "category";
     category.required = true;
+    category.classList.add("add-form-input-width");
     categories.forEach(categorie => {
         const option = document.createElement("option");
         option.value = categorie;

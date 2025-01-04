@@ -58,7 +58,7 @@ table {
     --button-color: #1D6154;
     --button-color-hover: #0F2F28;
     --button-color-greyed: #A7A7A7;
-    --input-photo: #E8F1F6;
+    /*--input-photo: #E8F1F6;*/
     --h1-li-hover-color: #B1663C;
     --a-color: #3D3D3D;
     --line-color: #B3B3B3;
@@ -99,7 +99,6 @@ body {
         }
 
         #connected-banner {
-            width: 100vw;
             height: 60px;
             background-color: black;
             color: white;
@@ -275,8 +274,8 @@ body {
         }
     }
     /****** end section porttfolio ******/
-    /****** section contact connection ******/
-    #contact, #connection {
+    /****** section contact connection modal form ******/
+    #contact, #connection, .wrapper #add-form {
         width: 33.75%;
         margin: auto;
         gap: 2% 0;
@@ -285,12 +284,17 @@ body {
             margin: 2em 0 1em 0;
         }
 
-        form {
+        form, #modal-form {
             text-align: left;
             margin-top: 15px;
             display: flex;
             flex-direction: column;
         }
+    }
+
+    .wrapper #add-form {
+        width: 200px;
+        margin: 0 20px;
     }
 
     #connection {
@@ -311,7 +315,7 @@ body {
         text-align: center;
     }
 
-    #contact, #connection {
+    #contact, #connection, #modal-form {
         h2 {
             margin-bottom: 20px;
         }
@@ -330,14 +334,22 @@ body {
         #name, #email, #password, #title, #category {
             height: 51px;
         }
-    }
 
-    input[type="submit"]{
-        width: 180px;
-    }
+        .add-form-input-width {
+            width: 420px;
+        }
 
-    #erreur {
-        color: red;
+        #input-file-photo {
+            height: 0
+        }
+
+        input[type="submit"]{
+            width: 180px;
+        }
+
+        #erreur {
+            color: red;
+        }
     }
         
     /****** gallery and add view modal ******/
