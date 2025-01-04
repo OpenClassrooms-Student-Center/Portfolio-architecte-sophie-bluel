@@ -487,7 +487,7 @@ body {
     }
 
     .gallery-view-size {
-        height: 327px;
+        height: 224px;
         margin-bottom: 210px;
     }
 
@@ -511,14 +511,16 @@ body {
     #hr-modal {
         color: var(--line-color);
         position: relative;
-        bottom: 7.5%;
+        bottom: -4.5%; /*gallery setting */
+        left: -3%;
     }
 
     .button-modal {
         width: 237px;
         padding: 10px 0;
         position: relative;
-        bottom: 8%;
+        bottom: -4.5%;
+        left: -3%; /* gallery setting */
         font-size: 1em;
     }
 
