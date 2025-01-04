@@ -112,7 +112,7 @@ export function hideCategoryFilterButtons() {
         button.classList.add("hide");
     });
     buttons = document.querySelector(".buttons");
-    buttons.classList.add("hide");
+    buttons.classList.add("hide", "pointer");
 }
 
 /**

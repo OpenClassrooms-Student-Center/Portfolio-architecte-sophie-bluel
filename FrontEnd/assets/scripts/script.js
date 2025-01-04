@@ -86,6 +86,7 @@ if(isConnected) {
     hideCategoryFilterButtons();
     addWorksModificationLink();
     const modifier = document.getElementById("editSpan");
+    modifier.classList.add("pointer");
     /****** Step 3.1 show photo gallery modal ******/
     modifier.addEventListener("click", (event) => {
         event.preventDefault();

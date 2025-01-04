@@ -43,14 +43,21 @@ export function displayModalAddPhoto() {
     iconWrapper.id = "icon-wrapper";
 
     const backIcon = document.createElement("i");
-    backIcon.classList.add("material-symbols-outlined");
+    backIcon.classList.add(
+        "icon-back",
+        "material-symbols-outlined",
+        "pointer"
+    );
     backIcon.classList.add("icon-back");
     backIcon.innerText = "arrow_back";
     backIcon.ariaHidden = "true";
 
     const closeIcon = document.createElement("i");
-    closeIcon.classList.add("material-symbols-outlined");
-    closeIcon.classList.add("icon-close");
+    closeIcon.classList.add(
+        "icon-close", 
+        "material-symbols-outlined",
+        "pointer"
+    );
     closeIcon.innerText = "close";
     closeIcon.ariaHidden = "true";
 
@@ -84,7 +91,8 @@ export function displayModalAddPhoto() {
         "button", 
         "selected", 
         "button-modal", 
-        "button-modal-gallery");
+        "button-modal-gallery",
+        "pointer");/*refacto issue:  limit of 4 classes to weigh*/
     add.innerText = "Ajouter une photo";
     add.id = "modal-button";
 
@@ -129,7 +137,10 @@ export function displayPhotosGallery() {
         figure.appendChild(img);
 
         const delIcon = document.createElement("i");
-        delIcon.classList.add("material-symbols-outlined");
+        delIcon.classList.add(
+            "delete-proj",
+            "material-symbols-outlined",
+            "pointer");
         delIcon.classList.add("delete-proj");
         delIcon.innerText = "delete";
         delIcon.ariaHidden = "true";
@@ -213,7 +224,7 @@ export function displayAddPhotoForm() {
 
     const fileAddButtonWrapper = document.createElement("div");
     fileAddButtonWrapper.id = "file-add-button-wrapper";
-    fileAddButtonWrapper.classList.add("width420px");
+    fileAddButtonWrapper.classList.add("width420px", "pointer");
     
     const imageIcon = document.createElement("i");
     imageIcon.classList.add("material-symbols-outlined", "wrapped");
@@ -223,7 +234,7 @@ export function displayAddPhotoForm() {
     const buttonFileAjout = document.createElement("button");
     buttonFileAjout.type = "button";
     buttonFileAjout.id = "file-ajout-button";
-    buttonFileAjout.classList.add("button", "wrapped");
+    buttonFileAjout.classList.add("button", "wrapped", "pointer");
     buttonFileAjout.innerText = "+ Ajouter photo";
 
     const p = document.createElement("p");
