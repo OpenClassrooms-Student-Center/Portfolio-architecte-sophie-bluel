@@ -1,0 +1,26 @@
+body {
+    #introduction {
+        display: flex;
+        align-items: center;
+        gap: 5.2vw;
+        margin: 6vw 6vw 0 6vw;
+                
+        figure {
+            img {
+                width: 35vw;
+            }
+        }
+
+        article {
+            width: 30vw;
+        }
+
+        h2 {
+            margin-bottom: 0.7em;
+        }
+
+        p {
+            margin-bottom: 0.5em;
+        }
+    }
+}

@@ -1,0 +1,125 @@
+body {
+    h3 {
+        font-family: var(--text-font-family);
+        font-size: 26px;
+        text-align: center;
+        margin-top: 15px;
+        margin-right: 40px;
+        margin-bottom: 37.5px; /*50px;*/
+    }
+    
+    #modal-backgrd {
+        width: 100vw;
+        height: 100vh;
+        background-color: #00000030;
+        position: fixed;
+        top: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .wrapper {
+        width: 630px;
+        height: 688px;
+        background-color: white;
+        border-radius: 10px;
+        padding: 0 0 27.5px 40.5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        box-sizing: border-box;
+        padding-bottom: 5px;
+        position: absolute;
+    }
+
+    #icon-wrapper {
+        position: relative;
+    }
+
+    .icon-wrapper-top {
+        margin-top: 25px;
+    }
+
+    .icon-close {
+        position: absolute;
+        right: 32.5px;
+        top: -17.5px;
+    }
+
+    .icon-back {
+        display: none;
+        position: absolute;
+        top: -17.5px;
+        left: -15px;
+    }
+
+    .gallery-view {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        grid-column-gap: 7.5px;
+        grid-row-gap: 30px;
+        box-sizing: border-box;
+        margin-bottom: 60px;
+    }
+
+    .gallery-add-view-size {
+        width: 550px;
+        padding: 0 65px;
+    }
+
+    .gallery-view-size {
+        height: 224px;
+        margin-bottom: 210px;
+    }
+
+    .gallery-view-size-back {
+        margin-bottom: 188px;
+    }
+
+    .add-view {
+        display: none;
+    }
+
+    .add-view-size {
+        height: 515px;
+    }
+
+    #gallery img {
+        width: 77px;
+        height: 102px;
+    }
+
+    #hr-modal {
+        color: var(--line-color);
+        position: relative;
+        bottom: -4.5%; /*gallery setting */
+        left: -3%;
+    }
+
+    .button-modal {
+        width: 237px;
+        padding: 10px 0;
+        position: relative;
+        bottom: -4.5%;
+        left: -3%; /* gallery setting */
+        font-size: 1em;
+    }
+
+    #gallery figure {
+        position: relative;
+    }
+
+    .delete-proj {
+        font-size: 13px;
+        width: 14px;
+        height: 14px;
+        background-color: black;
+        color: white;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        padding: 1px;
+        border-radius: 2px;
+    }
+}
