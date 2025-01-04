@@ -58,7 +58,7 @@ table {
     --button-color: #1D6154;
     --button-color-hover: #0F2F28;
     --button-color-greyed: #A7A7A7;
-    /*--input-photo: #E8F1F6;*/
+    --input-photo: #E8F1F6;
     --h1-li-hover-color: #B1663C;
     --a-color: #3D3D3D;
     --line-color: #B3B3B3;
@@ -79,6 +79,10 @@ table {
 
 .hide {
     display: none;
+}
+
+.width420px {
+    width: 420px;
 }
 
 body {
@@ -280,8 +284,24 @@ body {
         margin: auto;
         gap: 2% 0;
 
+        #file-add-button-wrapper {
+            background-color: var(--input-photo);
+            height: 169px;
+            margin-bottom: 10px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 3px;
+        }
+
         label {
             margin: 2em 0 1em 0;
+            /*margin-top: 20px;*/
+            font-size: var(--text-font-size);
+            font-weight: var(--form-font-weight);
+            font-family: var(--text-font-family);
         }
 
         form, #modal-form {
@@ -289,6 +309,24 @@ body {
             margin-top: 15px;
             display: flex;
             flex-direction: column;
+
+            input {
+                width: 420px;
+                margin-top: 10px;
+            }
+
+            select {
+                width: 420px;
+                margin-top: 10px;
+            }
+
+            #input-file-photo {
+                height: 0
+            }
+    
+            input[type="submit"]{
+                width: 180px;
+            }
         }
     }
 
@@ -335,17 +373,7 @@ body {
             height: 51px;
         }
 
-        .add-form-input-width {
-            width: 420px;
-        }
-
-        #input-file-photo {
-            height: 0
-        }
-
-        input[type="submit"]{
-            width: 180px;
-        }
+       
 
         #erreur {
             color: red;
@@ -359,7 +387,7 @@ body {
         text-align: center;
         margin-top: 15px;
         margin-right: 40px;
-        margin-bottom: 50px;
+        margin-bottom: 37.5px; /*50px;*/
     }
     
     #modal-backgrd {
@@ -450,7 +478,6 @@ body {
         position: absolute;
         bottom: 248px;
         left: 492px;
-        width: 420px;
     }
 
     .button-modal {

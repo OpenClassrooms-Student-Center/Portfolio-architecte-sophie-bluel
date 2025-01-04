@@ -77,6 +77,7 @@ export function displayModalAddPhoto() {
 
     const line = document.createElement("hr");
     line.id = "hr-modal";
+    line.classList.add("width420px");
 
     const add = document.createElement("button");
     add.classList.add(
@@ -212,6 +213,7 @@ export function displayAddPhotoForm() {
 
     const fileAddButtonWrapper = document.createElement("div");
     fileAddButtonWrapper.id = "file-add-button-wrapper";
+    fileAddButtonWrapper.classList.add("width420px");
     
     const imageIcon = document.createElement("i");
     imageIcon.classList.add("material-symbols-outlined", "wrapped");
