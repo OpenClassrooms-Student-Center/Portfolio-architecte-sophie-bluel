@@ -5,7 +5,7 @@ body {
         text-align: center;
         margin-top: 15px;
         margin-right: 40px;
-        margin-bottom: 37.5px; /*50px;*/
+        margin-bottom: 50px;
     }
     
     #modal-backgrd {
@@ -24,7 +24,7 @@ body {
         height: 688px;
         background-color: white;
         border-radius: 10px;
-        padding: 0 0 27.5px 40.5px;
+        padding: 30px 0 27.5px 40.5px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -74,7 +74,7 @@ body {
     }
 
     .gallery-view-size-back {
-        margin-bottom: 188px;
+        margin-bottom: 198px;
     }
 
     .add-view {
@@ -93,7 +93,6 @@ body {
     #hr-modal {
         color: var(--line-color);
         position: relative;
-        bottom: -4.5%; /*gallery setting */
         left: -3%;
     }
 
@@ -101,7 +100,6 @@ body {
         width: 237px;
         padding: 10px 0;
         position: relative;
-        bottom: -4.5%;
         left: -3%; /* gallery setting */
         font-size: 1em;
     }
