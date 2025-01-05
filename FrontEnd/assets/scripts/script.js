@@ -88,8 +88,7 @@ if(isConnected) {
     const modifier = document.getElementById("editSpan");
     modifier.classList.add("pointer");
     /****** Step 3.1 show photo gallery modal ******/
-    modifier.addEventListener("click", (event) => {
-        event.preventDefault();
+    modifier.addEventListener("click", () => {
         displayModalAddPhoto();
 
         const modalBackground = document.getElementById("modal-backgrd");
@@ -97,15 +96,13 @@ if(isConnected) {
         modalBackground.ariaHidden = "false";
 
         const fermer = document.querySelector(".icon-close");
-        fermer.addEventListener("click", (event) => {
-            event.preventDefault();
+        fermer.addEventListener("click", () => {
             closeModal();
             modalBackground.ariaModal = "false";
             modalBackground.ariaHidden = "true";
         });
 
         modalBackground.addEventListener("click", (event) => {
-            event.preventDefault();
             if(event.target === modalBackground) {
                 closeModal();
                 modalBackground.ariaModal = "false";
@@ -136,6 +133,7 @@ if(isConnected) {
 
         button.addEventListener("click", (event) => {
             if(button.innerText === "Ajouter une photo") {
+                iconClose.classList.remove("icon-close-gallery");
                 iconClose.classList.add("icon-close-form");
 
                 iconWrapper.classList.remove("icon-wrapper-top");
@@ -153,7 +151,6 @@ if(isConnected) {
 
                 title.innerText = "Ajout photo";
 
-                button.classList.remove("button-modal-gallery");
                 button.classList.add("button-modal-form");
                 button.innerText = "Valider";
                 button.type = "submit";
@@ -173,9 +170,9 @@ if(isConnected) {
         });
 
         document.querySelector(".icon-back").addEventListener("click", () => {
-            if(button.innerText === "Valider") {
-                iconClose.classList.remove("icon-close-form");
-            }
+            iconClose.classList.remove("icon-close-form");
+            iconClose.classList.add("icon-close-gallery");
+
             back.classList.add("hide");
             back.classList.remove("display-style");
             back.style.display = "none";
@@ -188,7 +185,6 @@ if(isConnected) {
             title.innerText = "Galerie photo";
 
             button.classList.remove("button-modal-form");
-            button.classList.add("button-modal-gallery");
             button.innerText = "Ajouter une photo";
             button.type = "button";
 

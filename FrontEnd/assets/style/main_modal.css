@@ -29,7 +29,6 @@ body {
         flex-direction: column;
         justify-content: center;
         box-sizing: border-box;
-        padding-bottom: 5px;
         position: absolute;
     }
 
@@ -44,17 +43,21 @@ body {
     .icon-close {
         position: absolute;
         right: 32.5px;
-        top: -17px;
+        top: -14px;
     }
 
     .icon-close-form {
-        top: -25px;
+        top: -16px;
+    }
+
+    .icon-close-gallery {
+        top: -8px;
     }
 
     .icon-back {
         display: none;
         position: absolute;
-        top: -25px;
+        top: -16px;
         left: -15px;
     }
 
@@ -104,8 +107,12 @@ body {
         width: 237px;
         padding: 10px 0;
         position: relative;
-        left: -3%; /* gallery setting */
+        left: -3%;
         font-size: 1em;
+    }
+
+    .button-modal-form {
+        left: 43%;
     }
 
     #gallery figure {
