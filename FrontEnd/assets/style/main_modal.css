@@ -103,6 +103,10 @@ body {
         left: -3%;
     }
 
+    .hr-modal-form {
+        top: 35px;
+    }
+
     .button-modal {
         width: 237px;
         padding: 10px 0;
@@ -113,6 +117,7 @@ body {
 
     .button-modal-form {
         left: 43%;
+        top: 35px;
     }
 
     #gallery figure {

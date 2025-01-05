@@ -151,6 +151,8 @@ if(isConnected) {
 
                 title.innerText = "Ajout photo";
 
+                line.classList.add("hr-modal-form");
+
                 button.classList.add("button-modal-form");
                 button.innerText = "Valider";
                 button.type = "submit";
@@ -183,6 +185,8 @@ if(isConnected) {
             addView.style.display = "none";
 
             title.innerText = "Galerie photo";
+
+            line.classList.remove("hr-modal-form");
 
             button.classList.remove("button-modal-form");
             button.innerText = "Ajouter une photo";
