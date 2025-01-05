@@ -1,5 +1,5 @@
 /****** Step 1.2 create category filter buttons ******/
-import { filterGallery } from "./filterByCategory.js";
+import { filterGallery } from "./filter_by_category.js";
 /**
  * This function creates the HTML category filtering buttons elements
  * @param {Set} categories see filterByCategory.js getCategories all unique category of work

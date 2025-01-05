@@ -1,7 +1,7 @@
 /****** Step 1.2 create the category filter ******/
 import {
     replaceSpaceByUnderscore
-} from "./getWorks.js";
+} from "./get_works.js";
 /**
  * This function stores in a variable all the categories of works.
  * @param {Promise<any>} works : see getWorks.js fillGallery. Works have a category information.

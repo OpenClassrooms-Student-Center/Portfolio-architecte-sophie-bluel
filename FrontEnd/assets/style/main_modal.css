@@ -44,13 +44,17 @@ body {
     .icon-close {
         position: absolute;
         right: 32.5px;
-        top: -17.5px;
+        top: -17px;
+    }
+
+    .icon-close-form {
+        top: -25px;
     }
 
     .icon-back {
         display: none;
         position: absolute;
-        top: -17.5px;
+        top: -25px;
         left: -15px;
     }
 

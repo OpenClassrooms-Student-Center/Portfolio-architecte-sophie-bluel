@@ -2,13 +2,13 @@
 import {
     fetchAndStoreWorks,
     fillGallery
-} from "./getWorks.js";
+} from "./get_works.js";
 import {
     getCategories
-} from "./filterByCategory.js";
+} from "./filter_by_category.js";
 import {
     createCategoryFilterButtons
-} from "./createCategoryFilterButtons.js";
+} from "./create_category_filter_buttons.js";
 import {
     addConnectedModeBanner,
     hideCategoryFilterButtons,
@@ -23,7 +23,7 @@ import {
 } from "./modal.js";
 import {
     addSubmit
-} from "./addWork.js";
+} from "./add_work.js";
 
 let worksInLocalStorageVar = window.localStorage.getItem("works");
 let worksPromise;
@@ -115,6 +115,8 @@ if(isConnected) {
         displayPhotosGallery();
         displayAddPhotoForm();
 
+        const iconClose = document.querySelector(".icon-close");
+
         const erreur = document.querySelector("#erreur");
         erreur.innerText = "";
 
@@ -123,6 +125,7 @@ if(isConnected) {
         const addView = document.querySelector(".add-view");
         const title = document.getElementById("modal-title");
         const button = document.getElementById("modal-button");
+        const line = document.getElementById("hr-modal");
         const back = document.querySelector(".icon-back");
 
         const iconWrapper = document.getElementById("icon-wrapper");
@@ -133,6 +136,8 @@ if(isConnected) {
 
         button.addEventListener("click", (event) => {
             if(button.innerText === "Ajouter une photo") {
+                iconClose.classList.add("icon-close-form");
+
                 iconWrapper.classList.remove("icon-wrapper-top");
 
                 back.classList.add("display-style");
@@ -154,6 +159,8 @@ if(isConnected) {
                 button.type = "submit";
 
                 wrapper.removeChild(button);
+                wrapper.removeChild(line);
+                form.appendChild(line);
                 form.appendChild(button);
 
                 button.classList.remove("selected");
@@ -166,6 +173,9 @@ if(isConnected) {
         });
 
         document.querySelector(".icon-back").addEventListener("click", () => {
+            if(button.innerText === "Valider") {
+                iconClose.classList.remove("icon-close-form");
+            }
             back.classList.add("hide");
             back.classList.remove("display-style");
             back.style.display = "none";
@@ -183,6 +193,8 @@ if(isConnected) {
             button.type = "button";
 
             form.removeChild(button);
+            form.removeChild(line);
+            wrapper.appendChild(line);
             wrapper.appendChild(button);
 
             button.classList.remove("greyed");

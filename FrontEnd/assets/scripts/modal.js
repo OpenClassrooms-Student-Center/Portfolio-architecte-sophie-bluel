@@ -1,15 +1,15 @@
 import {
     deleteWork
-} from "./deleteWorks.js";
+} from "./delete_works.js";
 import {
     displayError
 } from "./connection.js";
 import {
     addSubmit
-} from "./addWork.js";
+} from "./add_work.js";
 import {
     categories
-} from "./getWorks.js";
+} from "./get_works.js";
 
 export let fileUpload;
 

@@ -2,7 +2,7 @@
 import {
     getPortfolioTitle,
     insertAfterPortfolioTitle
-} from "./createCategoryFilterButtons.js";
+} from "./create_category_filter_buttons.js";
 console.log(new Date().toLocaleTimeString(), "connection page script begins");
 const loginURL = "http://127.0.0.1:5678/api/users/login";
 addEventListener("DOMContentLoaded", async () => {

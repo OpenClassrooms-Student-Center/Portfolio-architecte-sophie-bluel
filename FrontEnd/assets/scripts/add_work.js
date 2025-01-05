@@ -1,6 +1,6 @@
 import {
     worksURL
-} from "./deleteWorks.js";
+} from "./delete_works.js";
 import {
     closeModal,
     galleryData
