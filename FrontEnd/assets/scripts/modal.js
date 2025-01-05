@@ -83,8 +83,7 @@ export function displayModalAddPhoto() {
         "gallery-add-view-size");
 
     const line = document.createElement("hr");
-    line.id = "hr-modal";
-    line.classList.add("width420px");
+    line.classList.add("hr-modal","width420px");
 
     const add = document.createElement("button");
     add.classList.add(

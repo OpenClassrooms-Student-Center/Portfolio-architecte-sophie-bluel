@@ -122,7 +122,7 @@ if(isConnected) {
         const addView = document.querySelector(".add-view");
         const title = document.getElementById("modal-title");
         const button = document.getElementById("modal-button");
-        const line = document.getElementById("hr-modal");
+        const line = document.querySelector(".hr-modal");
         const back = document.querySelector(".icon-back");
 
         const iconWrapper = document.getElementById("icon-wrapper");
