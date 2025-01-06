@@ -347,4 +347,29 @@ footer nav ul {
     color: #515151;
 }
 
+  /* Dans ton fichier CSS */
+  #welcome-message {
+	display: none; /* Par défaut, caché */
+	position: absolute;
+	top: 14%; /* Position verticale au centre */
+	left: 50%; /* Position horizontale au centre */
+	transform: translate(-50%, -50%); /* Déplacer le message pour le centrer parfaitement */
+	width: 80px; /* Largeur définie, ajustez selon vos besoins */
+	height: 22px; /* Hauteur définie, ajustez selon vos besoins */
+	background-color: #1D6154; /* Couleur de fond verte */
+	color: white; /* Texte blanc */
+	font-size: 0.8rem; /* Taille de police */
+	padding: 10px; /* Espacement autour du texte */
+	border-radius: 5px; /* Coins arrondis */
+	text-align: center; /* Centrer le texte */
+	font-weight: bold; /* Mettre le texte en gras */
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre portée */
+	transition: opacity 0.3s ease-in-out; /* Transition pour l'animation */
+  }
+  
+  #welcome-message.show {
+	display: block; /* Rendre l'élément visible */
+	opacity: 1; /* Lorsque visible, on applique l'opacité */
+  }
+  
   
