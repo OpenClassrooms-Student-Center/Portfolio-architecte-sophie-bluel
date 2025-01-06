@@ -76,7 +76,7 @@ body {
             }
 
             select {
-                border: none;/* Opera One 115.0.5322.119
+                border: 0.5px solid white;/* Opera One 115.0.5322.119
                 Chromium 130.0.6723.170 Windows 10 64 bits*/
                 background-color: white;/* Firefox 133.0.3 */
                 width: 420px;
