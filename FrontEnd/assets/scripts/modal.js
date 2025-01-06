@@ -216,10 +216,10 @@ export function displayAddPhotoForm() {
 
     const inputFile = document.createElement("input");
     inputFile.type = "file";
-    inputFile.id = "input-file-photo";
-    inputFile.name = "input-file-photo";
+    inputFile.id = "image";
+    inputFile.name = "image";
     inputFile.required = true;
-    inputFile.accept = ".jpg .jpeg .png .webp";
+    inputFile.accept = "jpg, jpeg, png, webp";
 
     const fileAddButtonWrapper = document.createElement("div");
     fileAddButtonWrapper.id = "file-add-button-wrapper";

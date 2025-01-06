@@ -18,55 +18,57 @@ import {
  * At page reload it must be visible.
  * @param { Event } event : login form SubmitEvent button click
  * 
- * 16:09:37 connection page script begins
-16:15:04 connection page script begins
-modal.js:295 wrapper user click
-addWork.js:63 end submit var
-addWork.js:66 url: http://127.0.0.1:5678/api/works/
-addWork.js:68 formData before replace: [object FormData]
+ * 
+15:30:53 connection page script begins
+modal.js:309 wrapper user click
+add_work.js:75 end submit var
+add_work.js:78 url: http://127.0.0.1:5678/api/works/
+add_work.js:80 formData before replace: [object FormData]
 helper.js:119 replace key: category
 helper.js:120 replace newValue: 1
 helper.js:124 enter remove->append
 helper.js:125 old value: Objets
 helper.js:126 appended new value: 1
 helper.js:128 formData after replace: [object FormData]
-addWork.js:76 formDataId: [object FormData]
-addWork.js:78 input-file-photo: [object File]
-addWork.js:78 title: test
-addWork.js:78 category: 1
-addWork.js:88 Before fetch.
-addWork.js:89 URL: http://127.0.0.1:5678/api/works/
-addWork.js:90 FormData: [object FormData]
-addWork.js:91 Fetch options: [object Object]
-addWork.js:92 
+add_work.js:88 formDataId: [object FormData]
+add_work.js:90 image: [object File]
+add_work.js:90 title: test
+add_work.js:90 category: 1
+add_work.js:100 Before fetch.
+add_work.js:101 URL: http://127.0.0.1:5678/api/works/
+add_work.js:102 FormData: [object FormData]
+add_work.js:103 Fetch options: [object Object]
+add_work.js:104 
         
         
        POST http://127.0.0.1:5678/api/works/ 500 (Internal Server Error)
-addSubmit @ addWork.js:92
+addSubmit @ add_work.js:104
 await in addSubmit
-(anonymous) @ script.js:163
-addWork.js:93 Request status: 500
-addWork.js:113 category: Objets
-addWork.js:114 Request result status: 500. Message: Internal Server Error
-addWork.js:115 FormData entries:
-addWork.js:117 input-file-photo : [object File]
-addWork.js:117 title : test
-addWork.js:117 category : 1
-addWork.js:123 add fetch done
-
+(anonymous) @ script.js:170
+add_work.js:105 Request status: 500
+add_work.js:125 category: Objets
+add_work.js:126 Request result status: 500. Message: Internal Server Error
+add_work.js:127 FormData entries:
+add_work.js:129 image : [object File]
+add_work.js:129 title : test
+add_work.js:129 category : 1
+add_work.js:135 add fetch done
+******************************* back **************************************
+Executing (default): SELECT `id`, `name` FROM `categories` AS `categories`;
+auth's req.headers.authorization: undefined
+multer enter dest.
+multer enter filename.
+checkWork enter.
+Something wrong occured in checkWork.
 Executing (default): SELECT `id`, `name` FROM `categories` AS `categories`;
 auth's req.headers.authorization: undefined
 checkWork enter.
-1 host: 127.0.0.1:5678
-2 title: test
-3 req.body.category: 1
-3 categoryId: 1
-req protocol:        http
 Something wrong occured in checkWork.
  */
+/******* POST: the image file must be a string($binary) ******/
 export async function addSubmit(event) {
     event.preventDefault();
-    const image = document.querySelector("#input-file-photo").value;
+    const image = document.querySelector("#image").value;
     const title = document.querySelector("#title").value;
     const category = document.querySelector("#category").value;
     const erreur = document.querySelector("#erreur");
