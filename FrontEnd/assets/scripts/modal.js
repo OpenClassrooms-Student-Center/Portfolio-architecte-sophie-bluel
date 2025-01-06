@@ -208,6 +208,7 @@ function displayMiniImage(file, fileAddButtonWrapper) {
 /**
  * This function displays the add photo form view of the modal.
  */
+/****** Once picked, deactivation to disallow multiple picking is to do. ******/
 export function displayAddPhotoForm() {
     const modalContainer = document.getElementById("add-form");
 
@@ -219,7 +220,7 @@ export function displayAddPhotoForm() {
     inputFile.id = "image";
     inputFile.name = "image";
     inputFile.required = true;
-    inputFile.accept = "jpg, jpeg, png, webp";
+    inputFile.accept = "image/jpeg, image/png";
 
     const fileAddButtonWrapper = document.createElement("div");
     fileAddButtonWrapper.id = "file-add-button-wrapper";
@@ -237,7 +238,7 @@ export function displayAddPhotoForm() {
     buttonFileAjout.innerText = "+ Ajouter photo";
 
     const p = document.createElement("p");
-    p.innerText = "jpg, png, webp : 4mo max.";
+    p.innerText = ".jpg, .png : 4mo max.";
     p.id = "file-text";
     p.classList.add("wrapped");
   
