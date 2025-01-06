@@ -59,6 +59,7 @@ body {
             font-size: var(--text-font-size);
             font-weight: var(--form-font-weight);
             font-family: var(--text-font-family);
+            text-align: left;/*index.html*/
         }
 
         form, #modal-form {
@@ -75,6 +76,9 @@ body {
             }
 
             select {
+                border: none;/* Opera One 115.0.5322.119
+                Chromium 130.0.6723.170 Windows 10 64 bits*/
+                background-color: white;/* Firefox 133.0.3 */
                 width: 420px;
                 margin-top: 10px;
             }
