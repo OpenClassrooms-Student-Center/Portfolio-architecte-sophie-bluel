@@ -142,6 +142,10 @@ body {
             height: 51px;
         }
 
+        #password {
+            margin-bottom: 3vh;
+        }
+
         #erreur {
             color: red;
         }
