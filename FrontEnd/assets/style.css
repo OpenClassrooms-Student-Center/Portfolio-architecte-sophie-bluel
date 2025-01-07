@@ -415,15 +415,34 @@ footer nav ul {
   /* Le contenu de la modale (boîte de dialogue) */
   .modal-wrapper {
     position: relative;
+    overflow: auto;
     background-color: white;
-    padding: 20px;
+    padding: 50px; /* Ajuster le padding si nécessaire */
     border-radius: 10px;
-    max-width: 600px; /* Largeur maximale de la modale */
-    width: 80%; /* Largeur de la modale, adaptable */
-	height: 500px;
-    margin: 0 auto;
+    width: 630px; /* Largeur fixe */
+    height: 688px; /* Hauteur fixe */
+    margin: 0 auto; /* Centrer horizontalement */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre pour donner de la profondeur */
-  }
+}
+
+.modal-gallery {
+    display: grid; /* Active le mode grille */
+    grid-template-columns: repeat(5, 1fr); /* Définit 5 colonnes égales */
+    gap: 15px; /* Espacement entre les images */
+    justify-items: center; /* Centre les images horizontalement dans chaque cellule */
+}
+
+.modal-gallery img {
+    width: 75%; /* Adapte la taille des images pour la nouvelle taille de la modale */
+    height: auto; /* Conserve le ratio des images */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Ombre pour un effet de profondeur */
+}
+
+.modal-gallery figcaption {
+    display: none; /* Cache les légendes */
+}
+
+
   
   /* Style du bouton de fermeture */
   .close-btn {
@@ -436,3 +455,6 @@ footer nav ul {
     cursor: pointer;
     z-index: 1000; /* Assure que le bouton est au-dessus de la modale */
   }
+  
+  
+  
