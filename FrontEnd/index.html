@@ -9,6 +9,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
 		rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
@@ -43,9 +44,24 @@
 					décorateur(trice)</p>
 			</article>
 		</section>
-		<section id="portfolio">
-			<h2>Mes Projets</h2>
+		<section id="portfolio" class="portfolioFlex">
+			<!-- Le titre de la section de projets -->
+			<h2 class="modal-title">Mes Projets
+				<a href="#modal1" class="modal-link">
+					<i class="fa-regular fa-pen-to-square"></i></i> Modifier
+				</a>
+			</h2>
 
+			<!-- La modale -->
+			<aside id="modal1" class="modal">
+				<div class="modal-wrapper">
+					<h2 class="modal-title">Galerie photo</h2>
+					<p>Zombie ipsum reversus ab viral inferno, nam rick grimes malum cerebro...</p>
+					<button class="close-btn">
+						<i class="fas fa-times"></i>
+					</button>
+				</div>
+			</aside>
 		</section>
 		<section id="contact">
 			<h2>Contact</h2>
@@ -70,6 +86,8 @@
 		</nav>
 	</footer>
 	<script type="module" src="./main.js"></script>
+	<script type="module" src="./modal.js"></script>
+
 </body>
 
 </html>

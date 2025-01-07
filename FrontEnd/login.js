@@ -16,7 +16,7 @@ export const handleLoginSubmit = async (e) => {
 
   // Vérifie si l'un des champs est vide
   if (email.length === 0 || password.length === 0) {
-    console.log("Veuillez remplir tous les champs");
+    // console.log("Veuillez remplir tous les champs");
 
     // Créer un paragraphe pour le message d'erreur
     let errorMessage = document.createElement("p");
@@ -50,7 +50,7 @@ export const handleLoginSubmit = async (e) => {
       body: JSON.stringify(loginData),
     });
     if (response.ok) {
-      console.log("Connexion réussie");
+      // console.log("Connexion réussie");
       const data = await response.json();
       console.log(data);
       const token = data.token;
@@ -63,7 +63,7 @@ export const handleLoginSubmit = async (e) => {
       // Redirection vers la page index.html
       window.location.href = "./index.html";
     } else {
-      console.log("Connexion échouée");
+      // console.log("Connexion échouée");
 
       // Créer un message d'erreur pour les identifiants incorrects
       let wrongData = document.createElement("p");
