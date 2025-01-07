@@ -116,17 +116,18 @@ export async function getCategoryId() {
  * @returns the muted formData.
  */
 export function formDataValueReplacer(formData, key, newValue) {
-    console.log("replace key: " + key);//category
-    console.log("replace newValue: " + newValue);//Promise? no it must be an id
+    const formDataReplaced = formData;
+    console.log("replace key: " + key);
+    console.log("replace newValue: " + newValue);
 
-    for(let [cle, valeur] of formData.entries()) {
+    for(let [cle, valeur] of formDataReplaced.entries()) {
         if(cle === key) {
             console.log("enter remove->append");
             console.log("old value: " + valeur)
             console.log("appended new value: " + newValue)
-            formData.set(cle, newValue)
+            formDataReplaced.set(cle, newValue)
             console.log("formData after replace: " + formData)
         }
     }
-    return formData;
+    return formDataReplaced;
 }

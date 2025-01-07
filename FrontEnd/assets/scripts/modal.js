@@ -267,6 +267,8 @@ export function displayAddPhotoForm() {
         category.appendChild(option);
     });
 
+    const reader = new FileReader();
+
     form.addEventListener("submit", (event) => {
         /****** Step 3.3 add work ******/
         addSubmit(event);
@@ -274,37 +276,25 @@ export function displayAddPhotoForm() {
     
     let file = null;
     inputFile.addEventListener("click", async () => {
-        if (isChromiumBrowser() /*&& window.isSecureContext */&& 'showOpenFilePicker' in window) {
-            const [fileHandle] = await window.showOpenFilePicker({
-                multiple: false,
-                types: [
-                    {
-                        description: "Images",
-                        accept: {
-                            "image/*": [".jpg", ".jpeg", ".png", ".webp"]
-                        }
-                    }
-                ]
-            });
-            file = await fileHandle.getFile();
+        inputFile.addEventListener("change", (event) => {
+            console.log("change file event");
+            file = event.target.files[0];
             if(file){
-                checkFileMaxSize(file, null);
+                checkFileMaxSize(file, event);
                 displayMiniImage(file, fileAddButtonWrapper);
-                fileUpload = file;
+                reader.readAsDataURL(file);
+                console.log("reader: " + reader);
             }
             else { console.log("Aucun fichier sélectionné."); }
-        } else {
-            inputFile.addEventListener("change", (event) => {
-                console.log("change file event");
-                file = event.target.files[0];
-                if(file){
-                    checkFileMaxSize(file, event);
-                    displayMiniImage(file, fileAddButtonWrapper);
-                }
-                else { console.log("Aucun fichier sélectionné."); }
-            });
-        }
+        });
     });
+
+    reader.onload = (event) => {
+        console.log("reader.onload enter");
+        const fileContent = event.target.result;
+        fileUpload = fileContent;
+        console.log("fileUpload: " + fileUpload);
+    }
 
     fileAddButtonWrapper.addEventListener("click", () => {
         console.log("wrapper user click");

@@ -3,7 +3,8 @@ import {
 } from "./delete_works.js";
 import {
     closeModal,
-    galleryData
+    galleryData,
+    fileUpload
 } from "./modal.js";
 import {
     displayError
@@ -17,55 +18,7 @@ import {
  * This function adds a work. It sends it to the back-end.
  * At page reload it must be visible.
  * @param { Event } event : login form SubmitEvent button click
- * 
- * 
-15:30:53 connection page script begins
-modal.js:309 wrapper user click
-add_work.js:75 end submit var
-add_work.js:78 url: http://127.0.0.1:5678/api/works/
-add_work.js:80 formData before replace: [object FormData]
-helper.js:119 replace key: category
-helper.js:120 replace newValue: 1
-helper.js:124 enter remove->append
-helper.js:125 old value: Objets
-helper.js:126 appended new value: 1
-helper.js:128 formData after replace: [object FormData]
-add_work.js:88 formDataId: [object FormData]
-add_work.js:90 image: [object File]
-add_work.js:90 title: test
-add_work.js:90 category: 1
-add_work.js:100 Before fetch.
-add_work.js:101 URL: http://127.0.0.1:5678/api/works/
-add_work.js:102 FormData: [object FormData]
-add_work.js:103 Fetch options: [object Object]
-add_work.js:104 
-        
-        
-       POST http://127.0.0.1:5678/api/works/ 500 (Internal Server Error)
-addSubmit @ add_work.js:104
-await in addSubmit
-(anonymous) @ script.js:170
-add_work.js:105 Request status: 500
-add_work.js:125 category: Objets
-add_work.js:126 Request result status: 500. Message: Internal Server Error
-add_work.js:127 FormData entries:
-add_work.js:129 image : [object File]
-add_work.js:129 title : test
-add_work.js:129 category : 1
-add_work.js:135 add fetch done
-******************************* back **************************************
-Executing (default): SELECT `id`, `name` FROM `categories` AS `categories`;
-auth's req.headers.authorization: undefined
-multer enter dest.
-multer enter filename.
-checkWork enter.
-Something wrong occured in checkWork.
-Executing (default): SELECT `id`, `name` FROM `categories` AS `categories`;
-auth's req.headers.authorization: undefined
-checkWork enter.
-Something wrong occured in checkWork.
  */
-/******* POST: the image file must be a string($binary) ******/
 export async function addSubmit(event) {
     event.preventDefault();
     const image = document.querySelector("#image").value;
@@ -91,17 +44,24 @@ export async function addSubmit(event) {
         for(let [key, value] of formDataId.entries()) {
             console.log(`${key}: ${value}`);
         }
+        const formDataBinary = formDataValueReplacer(formDataId, "image", fileUpload);
+        console.log("formDataBinary: " + formDataBinary);
+        for(let [key, value] of formDataBinary.entries()) {
+            console.log(`${key}: ${value}`);
+        }
+        const boundary = "----WebKitFormBoundary" + Math.random().toString(36).substring(2);
         const fetchOptions = {
             method: "POST",
-            /*headers: {
-                accept: "multipart/form-data"
-            },*/
-            body: formDataId
+            headers: {
+                accept: "application/json",
+                "Content-Type": "multipart/form-data; boundary=" + boundary
+            },
+            body: formDataBinary
         };
         try{
             console.log("Before fetch.");
             console.log("URL: " + url);
-            console.log("FormData: " + formData);
+            console.log("FormDataBinary: " + formDataBinary);
             console.log("Fetch options: " + fetchOptions);
             const res = await fetch(url, fetchOptions);
             console.log("Request status: " + res.status);
@@ -126,8 +86,8 @@ export async function addSubmit(event) {
                 displayError("Catégorie inconnue", erreur);
                 console.log("category: " + category);
                 console.log("Request result status: " + res.status + ". Message: " + res.statusText);
-                console.log("FormData entries:");
-                for(let [key, value] of formData.entries()) {
+                console.log("FormDataBinary entries:");
+                for(let [key, value] of formDataBinary.entries()) {
                     console.log(`${key} : ${value}`);
                 }
             } else { console.error("Request -> result error. Status:  " + res.status + ". Message: " + res.statusText);}
