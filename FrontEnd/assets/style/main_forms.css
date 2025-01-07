@@ -145,9 +145,9 @@ body {
         #password {
             margin-bottom: 3vh;
         }
+    }
 
-        #erreur {
-            color: red;
-        }
+    #erreur {
+        color: red;
     }
 }
