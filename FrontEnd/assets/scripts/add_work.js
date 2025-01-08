@@ -42,7 +42,6 @@ export async function addSubmit(event) {
     console.log("end submit var")
     try {
         const url = new URL(worksURL);
-        console.log("url: " + url);
         const formData = new FormData(form);
         console.log("formData before replace: " + formData);
         form.addEventListener("formdata", (e) => {
@@ -53,12 +52,7 @@ export async function addSubmit(event) {
         })
         const formDataId = formDataValueReplacer(formData, "category", await getCategoryId());
         const formDataBinary = formDataValueReplacer(formDataId, "image", fileUpload);
-        console.log("formDataBinary: " + formDataBinary);
-        for(let [key, value] of formDataBinary.entries()) {
-            console.log(`${key}: ${value}`);
-        }
         const boundary = "----WebKitFormBoundary--" + Math.random().toString(36).substring(2);
-        console.log("boundary: " + boundary);
         const fetchOptions = {
             method: "POST",
             headers: {
@@ -68,12 +62,17 @@ export async function addSubmit(event) {
             body: formDataBinary
         };
         try{
-            console.log("Before fetch.");
-            console.log("URL: " + url);
-            console.log("FormDataBinary: " + formDataBinary);
+            console.log("Before fetch enter try...");
+            console.log("url: " + url);
+            console.log("boundary: " + boundary);
+            console.log("formDataBinary.entries except image base64 binary string: " + formDataBinary);
+            for(let [key, value] of formDataBinary.entries()) {
+                if(key !== "image") {
+                    console.log(`${key}: ${value}`);
+                }
+            }
             console.log("Fetch options: " + fetchOptions);
             const res = await fetch(url, fetchOptions);
-            console.log("Request status: " + res.status);
             if(res.ok) { 
                 console.log("Created. Expected res.status is 201, status: " + res.status + ". Info: " + res.statusText);
                 const data = await res.json();
@@ -94,7 +93,11 @@ export async function addSubmit(event) {
             } else if(category !== "Objets" || category !== "Appartements" || category !== "Hotels & restaurants") {
                 displayError("Catégorie inconnue", erreur);
                 console.log("category: " + category);
-                console.log("Request result status: " + res.status + ". Message: " + res.statusText);
+                console.log("Request res.status: " + res.status + ". res.statusText: " + res.statusText);
+                console.log("res.body.toString():    " + res.body.toString());                
+                console.log("JSON.stringify(res):    " + JSON.stringify(res));              
+                console.log("JSON.stringify(res.body):    " + JSON.stringify(res.body));                          
+
                 console.log("FormDataBinary entries:");
                 for(let [key, value] of formDataBinary.entries()) {
                     console.log(`${key} : ${value}`);
@@ -104,7 +107,6 @@ export async function addSubmit(event) {
             console.error("Fetch err: " + err);
         }
         console.log("add fetch done");
-        console.log("res.status: " + res.status);
     } catch(error) {
         erreur.innerHTML = "1 Votre ajout essuie une erreur. Demandez ou lisez les logs s'il vous plaît.";
     }

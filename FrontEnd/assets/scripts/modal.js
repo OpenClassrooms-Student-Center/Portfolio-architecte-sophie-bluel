@@ -265,7 +265,6 @@ export function displayAddPhotoForm() {
         console.log("reader.onload enter");
         const fileContent = event.target.result;
         fileUpload = fileContent;
-        console.log("fileUpload: " + fileUpload);
     }
 
     fileAddButtonWrapper.addEventListener("click", () => {
