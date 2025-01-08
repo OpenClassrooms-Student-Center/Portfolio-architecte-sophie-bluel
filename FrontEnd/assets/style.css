@@ -171,38 +171,165 @@ li:hover {
 	margin-bottom: 20px;
   }
   
-  .filter-button {
-	padding: 10px 15px;
-	border: #1D6154 solid 1px;
-	border-radius: 60px;
-	background-color: white;
-	cursor: pointer;
-	font-size: 1rem;
-	transition: background-color 0.3s;
+  	.filter-button {
+		padding: 10px 15px;
+		border: #1D6154 solid 1px;
+		border-radius: 60px;
+		background-color: white;
+		cursor: pointer;
+		font-size: 1rem;
+		transition: background-color 0.3s;
   }
   
-  .filter-button:hover {
+  	.filter-button:hover {
 	background-color: #d0d0d0;
   }
   
-  .filter-button.active {
+  	.filter-button.active {
 	background-color: #1D6154;
 	color: #fff;
   }
+  /* modale */
+
+	.portfolioFlex {
+    	display: flex;
+    	flex-direction: column;
+    	gap: 1rem;
+	}
+		.modal-title {
+    		margin-right: 10px; 
+		}
+		.modal-link {
+			font-size: 14px; 
+			color: inherit; /* Assure-toi que la couleur du texte soit la même que celle par défaut */
+  		}
+  
+  			.modal-link i {
+				font-size: 1rem; /* Taille de l'icône */
+				margin-right: 0.1rem; /* Espace entre l'icône et le texte */
+  			}
+/* Style général pour la modale */
+/* la modale s'étend sur tout l'écran */
+		.modal {
+    		display: none; /* Masque la modale par défaut */
+    		position: fixed; /* Positionne la modale en haut à gauche de la fenêtre */
+    		top: 0;
+    		left: 0;
+    		width: 100%;
+    		height: 100%;
+    		justify-content: center; /* Centre le contenu à l'intérieur de la modale */
+    		align-items: center; /* Centre le contenu à l'intérieur de la modale */
+    		background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+    		z-index: 100; /* Place la modale au-dessus de tout autre contenu */
+    		opacity: 0; /* La modale est invisible au départ */
+    		transition: opacity 0.3s ease; /* Ajoute une transition pour la visibilité */
+    		transform: translate(0, 0); /* Le transform reste pour garder la modale centrée */
+  		}
+  
+  		/* Affiche la modale quand elle a la classe "active" */
+  		.modal.active {
+    		display: flex; /* Affiche la modale */
+    		opacity: 1; /* Rends la modale visible */
+  		}
+  
+  			/* Le contenu de la modale (boîte de dialogue) */
+  			.modal-wrapper {
+    			position: relative;
+				display: flex;
+				justify-content: center; /* Centre horizontalement */
+				align-items: center; /* Centre verticalement */
+				flex-direction: column; /* Si besoin d'empiler les éléments */
+				height: 100%; /* Facultatif : si vous voulez centrer verticalement */
+    			overflow: auto;
+    			background-color: white;
+    			padding: 50px; /* Ajuster le padding si nécessaire */
+    			border-radius: 10px;
+    			width: 630px; /* Largeur fixe */
+    			height: 688px; /* Hauteur fixe */
+    			margin: 0 auto; /* Centrer horizontalement */
+    			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre pour donner de la profondeur */
+			}
+
+				.modal-gallery {
+    				display: grid; /* Active le mode grille */
+    				grid-template-columns: repeat(5, 1fr); /* Définit 5 colonnes égales */
+    				gap: 15px; /* Espacement entre les images */
+    				justify-items: center; /* Centre les images horizontalement dans chaque cellule */
+					height: 35rem;
+					border-bottom: 1px solid black;
+				}
+				.modal-gallery figure {
+					position: relative; /* Positionne le bouton par rapport à cet élément */
+				}
+
+					.modal-gallery img {
+    					width: 75%; /* Adapte la taille des images pour la nouvelle taille de la modale */
+    					height: auto; /* Conserve le ratio des images */
+    					box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Ombre pour un effet de profondeur */
+					}
+
+					.modal-gallery figcaption {
+    					display: none; /* Cache les légendes */
+					}
+  
+  				/* Style du bouton de fermeture */
+  				.close-btn {
+    				background: transparent;
+    				border: none;
+    				font-size: 24px;
+    				position: absolute;
+    				top: 10px;
+    				right: 10px;
+    				cursor: pointer;
+    				z-index: 1000; /* Assure que le bouton est au-dessus de la modale */
+  				}
+				.photo-add-btn {
+					background-color: #1D6154;
+					width:237px ;
+					color: white;
+					border: none;
+					padding: 10px 20px;
+					border-radius: 5px;
+					font-size: 14px;
+					cursor: pointer;
+					border-radius: 50px;
+					margin-top: 40px;
+				}
+				/* delete btn */
+				.delete-btn {
+					background-color: black;
+					color: white;
+					border: none;
+					border-radius: 50%;
+					padding: 5px; /* Réduit l'espace autour du bouton */
+					cursor: pointer;
+					display: inline-flex;
+					justify-content: center;
+					align-items: center;
+					width: 25px; /* Réduit la taille du bouton */
+					height: 25px; /* Réduit la taille du bouton */
+					position: absolute;
+					top: 5%; /* Décalage depuis le haut */
+					right: 30%; /* Décalage depuis la droite */
+				}
+				
+				.delete-btn i {
+					font-size: 12px; /* Réduit la taille de l'icône */
+				}
+  /* end modal */
   
 
-.gallery {
-	width: 100%;
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	grid-column-gap: 20px;
-	grid-row-gap: 20px;
-}
+	.gallery {
+		width: 100%;
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		grid-column-gap: 20px;
+		grid-row-gap: 20px;
+	}
 
-.gallery img {
-	width: 100%;
-
-}
+	.gallery img {
+			width: 100%;
+		}
 #contact {
 	width: 50%;
 margin: auto;
@@ -274,7 +401,7 @@ footer nav ul {
 }
 
 
-/* Conteneur principal */
+/* page login */
 .login-container {
 	display: flex;
 	flex-direction: column;
@@ -286,175 +413,91 @@ footer nav ul {
     max-width: 400px;
     text-align: center;
 }
-/* Titre */
-.login-title {
-    font-size: 2rem;
-    color: #1D6154;
-    margin-bottom: 1.5rem;
-}
+	.login-title {
+    	font-size: 2rem;
+    	color: #1D6154;
+    	margin-bottom: 1.5rem;
+	}
 
-/* Formulaire */
-.login-form .form-group {
+	/* Formulaire */
+	.login-form .form-group {
     margin-bottom: 1.5rem;
     text-align: left;
-}
+	}
 
-/* Champs de saisie */
-.login-form input[type="email"],
-.login-form input[type="password"] {
-    width: 379px;
-    padding: 0.75rem;
-    font-size: 1rem;
-    border: none;
-    border-radius: 4px;
-    box-shadow: 0px 4px 14px 0px #00000017; /* Ombre portée */
-    box-sizing: border-box;
+		/* Champs de saisie */
+		.login-form input[type="email"],
+		.login-form input[type="password"] {
+    		width: 379px;
+    		padding: 0.75rem;
+    		font-size: 1rem;
+    		border: none;
+    		border-radius: 4px;
+    		box-shadow: 0px 4px 14px 0px #00000017; /* Ombre portée */
+    		box-sizing: border-box;
     
-}
+		}
 
-/* Bouton */
-.login-button {
-    width: 179px;
-	height: 36px;
-	line-height: 1;
-    padding: 0.75rem;
-    background-color: #1D6154;
-    color: #ffffff;
-    font-size: 1rem;
-    border: none;
-    border-radius: 60px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
+		/* Bouton de soumission */
+		.login-button {
+    		width: 179px;
+			height: 36px;
+			line-height: 1;
+    		padding: 0.75rem;
+    		background-color: #1D6154;
+    		color: #ffffff;
+    		font-size: 1rem;
+    		border: none;
+    		border-radius: 60px;
+    		cursor: pointer;
+    		transition: background-color 0.3s;
+		}
 
-.login-button:hover {
-    background-color: #267d6d;
-    
-}
+		.login-button:hover {
+    		background-color: #267d6d;
+		}
 
-/* Lien "Mot de passe oublié" */
-.forgot-password {
-    display: block;
-    margin-top: 1rem;
-    font-size: 0.9rem;
-    color: #3D3D3D;
-    line-height: 1; /* Réduit l'espacement vertical */
-    text-decoration: underline;
-    transition: color 0.3s;
-}
+		/* Lien "Mot de passe oublié" */
+		.forgot-password {
+    		display: block;
+    		margin-top: 1rem;
+    		font-size: 0.9rem;
+    		color: #3D3D3D;
+    		line-height: 1; /* Réduit l'espacement vertical */
+    		text-decoration: underline;
+    		transition: color 0.3s;
+		}
 
-.forgot-password:hover {
-    color: #515151;
-}
+		.forgot-password:hover {
+    		color: #515151;
+		}
 
-  /* Dans ton fichier CSS */
-  #welcome-message {
-	display: none; /* Par défaut, caché */
-	position: absolute;
-	top: 14%; /* Position verticale au centre */
-	left: 50%; /* Position horizontale au centre */
-	transform: translate(-50%, -50%); /* Déplacer le message pour le centrer parfaitement */
-	width: 80px; /* Largeur définie, ajustez selon vos besoins */
-	height: 22px; /* Hauteur définie, ajustez selon vos besoins */
-	background-color: #1D6154; /* Couleur de fond verte */
-	color: white; /* Texte blanc */
-	font-size: 0.8rem; /* Taille de police */
-	padding: 10px; /* Espacement autour du texte */
-	border-radius: 5px; /* Coins arrondis */
-	text-align: center; /* Centrer le texte */
-	font-weight: bold; /* Mettre le texte en gras */
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre portée */
-	transition: opacity 0.3s ease-in-out; /* Transition pour l'animation */
-  }
+  		/* Dans ton fichier CSS */
+  		#welcome-message {
+			display: none; /* Par défaut, caché */
+			position: absolute;
+			top: 14%; /* Position verticale au centre */
+			left: 50%; /* Position horizontale au centre */
+			transform: translate(-50%, -50%); /* Déplacer le message pour le centrer parfaitement */
+			width: 80px; /* Largeur définie, ajustez selon vos besoins */
+			height: 22px; /* Hauteur définie, ajustez selon vos besoins */
+			background-color: #1D6154; /* Couleur de fond verte */
+			color: white; /* Texte blanc */
+			font-size: 0.8rem; /* Taille de police */
+			padding: 10px; /* Espacement autour du texte */
+			border-radius: 5px; /* Coins arrondis */
+			text-align: center; /* Centrer le texte */
+			font-weight: bold; /* Mettre le texte en gras */
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre portée */
+			transition: opacity 0.3s ease-in-out; /* Transition pour l'animation */
+  		}
   
-  #welcome-message.show {
-	display: block; /* Rendre l'élément visible */
-	opacity: 1; /* Lorsque visible, on applique l'opacité */
-  }
-  .portfolioFlex {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-  .modal-title {
-    margin-right: 10px; 
-}
-.modal-link {
-	font-size: 14px; 
-	color: inherit; /* Assure-toi que la couleur du texte soit la même que celle par défaut */
-  }
+  		#welcome-message.show {
+			display: block; /* Rendre l'élément visible */
+			opacity: 1; /* Lorsque visible, on applique l'opacité */
+  		}
   
-  .modal-link i {
-	font-size: 1rem; /* Taille de l'icône */
-	margin-right: 0.1rem; /* Espace entre l'icône et le texte */
-  }
-/* Style général pour la modale */
-/* la modale s'étend sur tout l'écran */
-.modal {
-    display: none; /* Masque la modale par défaut */
-    position: fixed; /* Positionne la modale en haut à gauche de la fenêtre */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    justify-content: center; /* Centre le contenu à l'intérieur de la modale */
-    align-items: center; /* Centre le contenu à l'intérieur de la modale */
-    background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
-    z-index: 100; /* Place la modale au-dessus de tout autre contenu */
-    opacity: 0; /* La modale est invisible au départ */
-    transition: opacity 0.3s ease; /* Ajoute une transition pour la visibilité */
-    transform: translate(0, 0); /* Le transform reste pour garder la modale centrée */
-  }
-  
-  /* Affiche la modale quand elle a la classe "active" */
-  .modal.active {
-    display: flex; /* Affiche la modale */
-    opacity: 1; /* Rends la modale visible */
-  }
-  
-  /* Le contenu de la modale (boîte de dialogue) */
-  .modal-wrapper {
-    position: relative;
-    overflow: auto;
-    background-color: white;
-    padding: 50px; /* Ajuster le padding si nécessaire */
-    border-radius: 10px;
-    width: 630px; /* Largeur fixe */
-    height: 688px; /* Hauteur fixe */
-    margin: 0 auto; /* Centrer horizontalement */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre pour donner de la profondeur */
-}
-
-.modal-gallery {
-    display: grid; /* Active le mode grille */
-    grid-template-columns: repeat(5, 1fr); /* Définit 5 colonnes égales */
-    gap: 15px; /* Espacement entre les images */
-    justify-items: center; /* Centre les images horizontalement dans chaque cellule */
-}
-
-.modal-gallery img {
-    width: 75%; /* Adapte la taille des images pour la nouvelle taille de la modale */
-    height: auto; /* Conserve le ratio des images */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Ombre pour un effet de profondeur */
-}
-
-.modal-gallery figcaption {
-    display: none; /* Cache les légendes */
-}
-
-
-  
-  /* Style du bouton de fermeture */
-  .close-btn {
-    background: transparent;
-    border: none;
-    font-size: 24px;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    z-index: 1000; /* Assure que le bouton est au-dessus de la modale */
-  }
-  
+	
+		
   
   

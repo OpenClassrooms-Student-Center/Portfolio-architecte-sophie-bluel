@@ -38,8 +38,22 @@ export const displayGallery = (projects) => {
       const modalCaption = document.createElement("figcaption");
       modalCaption.textContent = project.title;
 
+      // Ajouter un bouton corbeille
+      const deleteBtn = document.createElement("button");
+      deleteBtn.classList.add("delete-btn");
+      deleteBtn.innerHTML = `<i class="fa-regular fa-trash-can"></i>`; // Icône de corbeille (Font Awesome)
+
+      // Gestion de l'événement de suppression
+      deleteBtn.addEventListener("click", () => {
+        // modalFigure.remove(); // Supprime l'élément de la modale
+        // Vous pouvez également ajouter une logique pour supprimer cet élément de vos données
+        console.log(`Projet "${project.title}" supprimé.`);
+      });
+
+      // Ajouter les éléments au conteneur
       modalFigure.appendChild(modalImage);
       modalFigure.appendChild(modalCaption);
+      modalFigure.appendChild(deleteBtn);
       modalGallery.appendChild(modalFigure);
     });
   }

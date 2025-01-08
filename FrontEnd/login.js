@@ -42,6 +42,7 @@ export const handleLoginSubmit = async (e) => {
   console.log("Données préparées pour l'envoi :", loginData);
 
   try {
+    // ---------------------------------argument 2: objet d'options
     const response = await fetch(API_URI, {
       method: "POST",
       headers: {
@@ -79,7 +80,7 @@ export const handleLoginSubmit = async (e) => {
       }, 3000);
     }
   } catch (error) {
-    console.error("Une erreur s'est produite lors de la connexion :", error);
+    // console.error("Une erreur s'est produite lors de la connexion :", error);
 
     // Créer un message d'erreur générique pour une exception
     let wrongData = document.createElement("p");

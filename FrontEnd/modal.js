@@ -1,9 +1,16 @@
+import { isConnected } from "./sessionManagement.js"; // Assurez-vous que cette fonction est bien définie et accessible
+
 const modal = document.getElementById("modal1");
 const closeModal = document.querySelector(".close-btn");
 const modalLink = document.querySelector(".modal-link");
 
 // Fonction pour initialiser la modale
 export const initializeModal = () => {
+  if (!isConnected()) {
+    console.log("Utilisateur non connecté : la modale n'est pas initialisée.");
+    return; // Si l'utilisateur n'est pas connecté, on quitte la fonction sans rien faire
+  }
+
   // Fonction pour ouvrir la modale
   const openModal = () => {
     modal.classList.add("active");
@@ -21,6 +28,7 @@ export const initializeModal = () => {
   });
 
   closeModal.addEventListener("click", closeModalHandler);
+
   // Fermeture de la modale en cliquant à l'extérieur
   window.addEventListener("click", (e) => {
     if (e.target === modal) {
@@ -29,5 +37,5 @@ export const initializeModal = () => {
   });
 };
 
-// Appeler la fonction pour initialiser la modale
+// Conditionner l'appel de `initializeModal` selon l'état de connexion
 initializeModal();
