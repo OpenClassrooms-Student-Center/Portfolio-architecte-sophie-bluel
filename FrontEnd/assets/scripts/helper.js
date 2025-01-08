@@ -2,6 +2,81 @@ import {
     storeInLocalStorage
 } from "./connection.js"
 
+
+/****** local category cache ******/
+/**
+ * This function changes a hard coded test category name in its id calling the API for up-to-date data.
+ * @returns the id of category name to the main flow.
+ */
+export async function getCategoryId() {
+    const categoriesUrl = "http://127.0.0.1:5678/api/categories";
+    const req = {
+        method: "GET"
+    }
+    try {
+        const res = await fetch(categoriesUrl, req);
+        if(res.ok) {
+            const data = await res.json();
+            const objTrouv = data.find(obj => obj.name === "Objets");
+            if(objTrouv) { 
+                storeInLocalStorage(objTrouv.id, objTrouv.name);
+                return objTrouv.id;
+            }
+        }
+    } catch(err) {
+        console.error("getCategoryId fetch error: " + err);
+    }
+}
+
+/****** FormData replacer ******/
+/**
+ * This function finds a key and replaces the value. It musn't be greedy.
+ * @param {FormData} formData 
+ * @param {String} key 
+ * @param {*} newValue 
+ * @returns the muted formData.
+ */
+export function formDataValueReplacer(formData, key, newValue) {
+    const formDataReplaced = formData;
+    for(let [cle, valeur] of formDataReplaced.entries()) {
+        if(cle === key) {
+            formDataReplaced.set(cle, newValue);
+        }
+    }
+    return formDataReplaced;
+}
+
+/****** file check ******/
+/**
+ * This function checks that the user picked file's size is less than 4 Mb.
+ * @param {File} file : a user picked file
+ * @param {Event} event : in case triggered by an <input type="file"> change event,
+ *  this event is reset for retry if the file's size exceeds 4Mb.
+ */
+export function checkFileMaxSize(file, event) {
+    const maxSize = 4 * 1024 * 1024;
+
+    if(file.size > maxSize) {
+        displayError("Le fichier dépasse la taille maximale de 4Mo. Recommencez s'il-vous-plaît.", erreur);
+        if(event) {
+            event.target.value = "";
+        }
+        else { file = null; }
+    }
+}
+
+/****** browser check ******/
+/**
+ * This function checks whether or not the browser has a Chrome / Chromium agent.
+ * This is a workaround, on Chrome or Chromium only, to the error at input change listening.
+ * An issue to check remains that Edge uses Chromium, as well as Brave or Opera for example.
+ * @returns {Boolean} true if the used browser is having a Chrome or Chromium agent
+ */
+function isChromiumBrowser() {
+    const userAgent = navigator.userAgent;
+    return /Chrome|Chromium|Edg/.test(userAgent) && !/Firefox/.test(userAgent);
+}
+
 /****** connection ******/
 /**
  * This function checks the form usability.
@@ -80,54 +155,4 @@ async function addConnectionListener() {
     } catch(error) {
         console.error("Error at connection listener adding: ", error);
     }
-}
-
-/****** local category cache ******/
-/**
- * This function changes a hard coded test category name in its id calling the API for up-to-date data.
- * @returns the id of category name to the main flow.
- */
-export async function getCategoryId() {
-    const categoriesUrl = "http://127.0.0.1:5678/api/categories";
-    const req = {
-        method: "GET"
-    }
-    try {
-        const res = await fetch(categoriesUrl, req);
-        if(res.ok) {
-            const data = await res.json();
-            const objTrouv = data.find(obj => obj.name === "Objets");
-            if(objTrouv) { 
-                storeInLocalStorage(objTrouv.id, objTrouv.name);
-                return objTrouv.id;
-            }
-        }
-    } catch(err) {
-        console.error("getCategoryId fetch error: " + err);
-    }
-}
-
-/****** FormData replacer ******/
-/**
- * This function finds a key and replaces the value. It musn't be greedy.
- * @param {FormData} formData 
- * @param {String} key 
- * @param {*} newValue 
- * @returns the muted formData.
- */
-export function formDataValueReplacer(formData, key, newValue) {
-    const formDataReplaced = formData;
-    console.log("replace key: " + key);
-    console.log("replace newValue: " + newValue);
-
-    for(let [cle, valeur] of formDataReplaced.entries()) {
-        if(cle === key) {
-            console.log("enter remove->append");
-            console.log("old value: " + valeur)
-            console.log("appended new value: " + newValue)
-            formDataReplaced.set(cle, newValue)
-            console.log("formData after replace: " + formData)
-        }
-    }
-    return formDataReplaced;
 }

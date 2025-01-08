@@ -19,6 +19,18 @@ import {
  * At page reload it must be visible.
  * @param { Event } event : login form SubmitEvent button click
  */
+/*******
+ * checkWork debug is ongoing:
+ * auth's req.headers.authorization: undefined
+0 checkWork enter.
+0.1 req: [object Object] 12:48:27
+1 req.hostname:portHardCoded:    127.0.0.1:5678 12:48:27
+2 req.body.title:    undefined
+3 req.body.category:    undefined
+4 req protocol:    http
+5 req.file:    undefined
+12:48:27 Something wrong occured in checkWork.
+ ******/
 export async function addSubmit(event) {
     event.preventDefault();
     const image = document.querySelector("#image").value;
@@ -40,16 +52,13 @@ export async function addSubmit(event) {
             }
         })
         const formDataId = formDataValueReplacer(formData, "category", await getCategoryId());
-        console.log("formDataId: " + formDataId);
-        for(let [key, value] of formDataId.entries()) {
-            console.log(`${key}: ${value}`);
-        }
         const formDataBinary = formDataValueReplacer(formDataId, "image", fileUpload);
         console.log("formDataBinary: " + formDataBinary);
         for(let [key, value] of formDataBinary.entries()) {
             console.log(`${key}: ${value}`);
         }
-        const boundary = "----WebKitFormBoundary" + Math.random().toString(36).substring(2);
+        const boundary = "----WebKitFormBoundary--" + Math.random().toString(36).substring(2);
+        console.log("boundary: " + boundary);
         const fetchOptions = {
             method: "POST",
             headers: {

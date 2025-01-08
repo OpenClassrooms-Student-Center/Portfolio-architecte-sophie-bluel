@@ -2,14 +2,14 @@ import {
     deleteWork
 } from "./delete_works.js";
 import {
-    displayError
-} from "./connection.js";
-import {
     addSubmit
 } from "./add_work.js";
 import {
     categories
 } from "./get_works.js";
+import {
+    checkFileMaxSize
+} from "./helper.js";
 
 export let fileUpload;
 
@@ -157,34 +157,6 @@ export function displayPhotosGallery() {
 }
 
 /**
- * This function checks whether or not the browser has a Chrome / Chromium agent.
- * This is a workaround, on Chrome or Chromium only, to the error at input change listening.
- * @returns {Boolean} true if the used browser is having a Chrome or Chromium agent
- */
-function isChromiumBrowser() {
-    const userAgent = navigator.userAgent;
-    return /Chrome|Chromium|Edg/.test(userAgent) && !/Firefox/.test(userAgent);
-}
-
-/**
- * This function checks that the user picked file's size is less than 4 Mb.
- * @param {File} file : a user picked file
- * @param {Event} event : in case triggered by an <input type="file"> change event,
- *  this event is reset for retry if the file's size exceeds 4Mb.
- */
-function checkFileMaxSize(file, event) {
-    const maxSize = 4 * 1024 * 1024;
-
-    if(file.size > maxSize) {
-        displayError("Le fichier dépasse la taille maximale de 4Mo. Recommencez s'il-vous-plaît.", erreur);
-        if(event) {
-            event.target.value = "";
-        }
-        else { file = null; }
-    }
-}
-
-/**
  * This function displays a preview of the image to upload on the website.
  * @param {File} file : le nouveau projet
  * @param {HTMLDivElement} fileAddButtonWrapper : the container for image 
@@ -208,7 +180,7 @@ function displayMiniImage(file, fileAddButtonWrapper) {
 /**
  * This function displays the add photo form view of the modal.
  */
-/****** Once picked, deactivation to disallow multiple picking is to do. ******/
+/****** Once picked, deactivation to disallow multiple picking is to do and check. ******/
 export function displayAddPhotoForm() {
     const modalContainer = document.getElementById("add-form");
 
