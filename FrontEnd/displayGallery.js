@@ -1,3 +1,5 @@
+import { deleteProject } from "./deleteProject.js"; // Assure-toi que le chemin est correct
+
 export const displayGallery = (projects) => {
   let gallery = document.querySelector(".gallery");
   if (!gallery) {
@@ -38,9 +40,17 @@ export const displayGallery = (projects) => {
       deleteBtn.innerHTML = `<i class="fa-regular fa-trash-can"></i>`; // Icône de corbeille (Font Awesome)
 
       // Gestion de l'événement de suppression
-      deleteBtn.addEventListener("click", () => {
-        // test avec un log
-        console.log(`Projet "${project.title}" supprimé.`);
+      deleteBtn.addEventListener("click", async () => {
+        // Appel de la fonction de suppression avec l'ID et le titre du projet
+        const isDeleted = await deleteProject(project.id, project.title);
+
+        if (isDeleted) {
+          // Si la suppression est réussie, on peut retirer l'élément du DOM
+          modalFigure.remove();
+          console.log(`Le projet "${project.title}" a été supprimé.`);
+        } else {
+          console.log("Erreur lors de la suppression du projet.");
+        }
       });
 
       // Ajouter les éléments au conteneur
