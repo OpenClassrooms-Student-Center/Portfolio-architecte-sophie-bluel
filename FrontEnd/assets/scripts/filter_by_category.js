@@ -1,28 +1,7 @@
 /****** Step 1.2 create the category filter ******/
 import {
     replaceSpaceByUnderscore
-} from "./get_works.js";
-/**
- * This function stores in a variable all the categories of works.
- * @param {Promise<any>} works : see getWorks.js fillGallery. Works have a category information.
- * @returns: categories is a set of unique categories.
- */
-export async function getCategories(works) {
-    try{
-        let categories = new Set();
-        categories.add("Tous");
-        const result = await works;
-        result.forEach(work => {
-            const categ = work.category.name;
-            if(categories.size === 0 || !categories.has(categ)) {
-                categories.add(categ);
-            }
-        });
-        return categories;
-    } catch(error) {
-        console.error("Error looping works or filling categories variable: ", error);
-    }
-}
+} from "./helpers/string_replacer.js";
 
 /**
  * This function hides the gallery.

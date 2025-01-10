@@ -6,10 +6,10 @@ import {
 } from "./add_work.js";
 import {
     categories
-} from "./get_works.js";
+} from "./script.js";
 import {
     checkFileMaxSize
-} from "./helper.js";
+} from "./helpers/file_checker.js";
 
 export let fileUpload;
 
@@ -169,7 +169,6 @@ function displayMiniImage(file, fileAddButtonWrapper) {
     imageMini.src = URL.createObjectURL(file);
     imageMini.alt = "nouveau projet à ajouter";
     imageMini.id = "to-upload";
-    /*imageMini.innerHTML = ``*/
     const wrappedBeforeImageUpload = document.querySelectorAll(".wrapped");
     wrappedBeforeImageUpload.forEach(item => {
         item.classList.add("hide");

@@ -1,11 +1,6 @@
-/*import {
-    galleryData
-} from "./modal.js";*/
 import {
     displayError
 } from "./connection.js";
-
-export const worksURL = "http://127.0.0.1:5678/api/works/";
 
 /**
  * This function deletes a work from the back-end and gallery.

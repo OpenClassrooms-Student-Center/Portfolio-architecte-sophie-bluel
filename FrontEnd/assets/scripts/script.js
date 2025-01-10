@@ -4,8 +4,8 @@ import {
     fillGallery
 } from "./get_works.js";
 import {
-    getCategories
-} from "./filter_by_category.js";
+    getCategoriesNames
+} from "./helpers/categories_getName.js";
 import {
     createCategoryFilterButtons
 } from "./create_category_filter_buttons.js";
@@ -25,6 +25,7 @@ import {
     addSubmit
 } from "./add_work.js";
 
+export const worksURL = "http://127.0.0.1:5678/api/works/";
 let worksInLocalStorageVar = window.localStorage.getItem("works");
 let worksPromise;
 export let formExported;
@@ -47,6 +48,7 @@ if (worksInLocalStorageVar) {
 } else {
     worksPromise = fetchAndStoreWorks();
 }
+
 let galleryDiv = document.querySelector(".gallery");
 let initialFetchedGallery;
 async function initGallery() {
@@ -54,7 +56,8 @@ async function initGallery() {
 }
 await initGallery();
 /****** Step 1.2 create category filter ******/
-const categories = await getCategories(worksPromise);
+export let categories = new Set();
+categories = await getCategoriesNames(worksPromise);
 await createCategoryFilterButtons(categories, galleryDiv, initialFetchedGallery);
 /****** Step 2.2 update landing page to connected mode ******/
 const login = document.getElementById("login");
@@ -76,7 +79,8 @@ login.addEventListener("click", (event) => {
         }
         window.location.href = "./pages/connection.html";
     }
-})
+});
+
 const isConnected = await localStorage.getItem("token");
 if(isConnected) {
     addConnectedModeBanner();

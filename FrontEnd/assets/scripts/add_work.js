@@ -1,6 +1,6 @@
 import {
     worksURL
-} from "./delete_works.js";
+} from "./script.js";
 import {
     closeModal,
     galleryData,
@@ -10,9 +10,11 @@ import {
     displayError
 } from "./connection.js";
 import {
-    getCategoryId,
+    getCategoryId
+} from "./helpers/category_getId.js";
+import {
     formDataValueReplacer
-} from "./helper.js";
+} from "./helpers/FormData_value_replacer.js";
 
 /**
  * This function adds a work. It sends it to the back-end.

@@ -1,5 +1,8 @@
 /****** Step 1.2 create category filter buttons ******/
-import { filterGallery } from "./filter_by_category.js";
+import { 
+    filterGallery 
+} from "./filter_by_category.js";
+
 /**
  * This function creates the HTML category filtering buttons elements
  * @param {Set} categories see filterByCategory.js getCategories all unique category of work
@@ -10,8 +13,10 @@ export async function createCategoryFilterButtons(categories, galleryDiv, initia
     try{
         let filterDiv = document.createElement("div");
         filterDiv.id = "filter";
+
         let categoryButtons = document.createElement("div");
         categoryButtons.classList.add("buttons");
+
         categories.forEach(category => {
             let categoryButton = document.createElement("button");
             categoryButton.innerText = category;
@@ -20,12 +25,15 @@ export async function createCategoryFilterButtons(categories, galleryDiv, initia
             categoryButton.innerText === "Tous" ? 
                 categoryButton.classList.add("selected") : 
                 categoryButton.classList.add("unselected");
+
             categoryButton.addEventListener("click", event => {
                 const selectedOption = event.target.getAttribute("data");
                 filterGallery(selectedOption, galleryDiv, initialGallery);
+
                 let prevSelected = document.querySelector(".selected");
                 prevSelected.classList.remove("selected");
                 prevSelected.classList.add("unselected");
+                
                 categoryButton.classList.remove("unselected");
                 categoryButton.classList.add("selected");
             });

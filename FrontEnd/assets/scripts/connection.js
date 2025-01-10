@@ -3,8 +3,11 @@ import {
     getPortfolioTitle,
     insertAfterPortfolioTitle
 } from "./create_category_filter_buttons.js";
+
 console.log(new Date().toLocaleTimeString(), "connection page script begins");
+
 const loginURL = "http://127.0.0.1:5678/api/users/login";
+
 addEventListener("DOMContentLoaded", async () => {
     await addEventListener("submit", (event) => {
         loginSubmit(event);
@@ -14,6 +17,7 @@ addEventListener("DOMContentLoaded", async () => {
 /**
  * This function stores an input var in local storage.
  * It's used to store the token at login.
+ * It's meant to try to debug easier this specific error
  * @param {String} key input var
  * @param {String} val
 
@@ -90,11 +94,13 @@ async function loginSubmit(e) {
  */
 export function addConnectedModeBanner() {
     try{
-        const header = document.querySelector("header");
         const connectedModeBanner = document.createElement("div");
         connectedModeBanner.id = "connected-banner";
         connectedModeBanner.innerText = "Mode édition";
+
         const divVerticalFlex = document.getElementById("logged-out-mode-header");
+
+        const header = document.querySelector("header");
         header.innerHTML = "";
         header.appendChild(connectedModeBanner);
         header.appendChild(divVerticalFlex);
@@ -122,17 +128,21 @@ export function addWorksModificationLink() {
     let editDiv = document.createElement("div");
     editDiv.id = "editDiv";
     insertAfterPortfolioTitle(editDiv);
+
     let editIcon = document.createElement("i");
     editIcon.classList.add("material-symbols-outlined");
     editIcon.innerText = "edit_square";
     editIcon.setAttribute("aria-hidden", "true");
     editIcon.setAttribute("alt", "Éditez vos projets");
     editIcon.id = "editIcon";
+
     let editText = document.createTextNode("modifier");
+
     let editSpan = document.createElement("span");
     editSpan.id = "editSpan";
     editSpan.appendChild(editIcon);
     editSpan.appendChild(editText);
+
     let portfolioTitle = getPortfolioTitle();
     portfolioTitle.appendChild(editSpan);
 }
