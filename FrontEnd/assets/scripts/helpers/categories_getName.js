@@ -1,6 +1,7 @@
 import {
     categories
 } from "../script.js";
+
 /**
  * This function stores in a variable all the categories of works.
  * It is called in script.js line 59.

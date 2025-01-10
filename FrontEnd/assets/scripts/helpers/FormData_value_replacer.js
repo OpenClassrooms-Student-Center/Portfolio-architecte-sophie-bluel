@@ -1,5 +1,5 @@
 /**
- * This function finds a key and replaces the value. It musn't be greedy.
+ * This function finds a key and replaces the value.
  * It is called in add_work.js addSubmit() lines 89 and 90.
  * @param {FormData} formData 
  * @param {String} key 
@@ -11,6 +11,7 @@ export function formDataValueReplacer(formData, key, newValue) {
     for(let [cle, valeur] of formDataReplaced.entries()) {
         if(cle === key) {
             formDataReplaced.set(cle, newValue);
+            break;
         }
     }
     return formDataReplaced;

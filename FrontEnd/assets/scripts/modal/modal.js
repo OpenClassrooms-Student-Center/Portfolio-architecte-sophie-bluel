@@ -111,7 +111,10 @@ export function displayModalAddPhoto() {
 }
 
 /**
- * This function closes(removes) the modal at cross or outside of the modal click.
+ * This function closes(removes) the modal 
+ * at cross 
+ * or 
+ * click outside of the modal.
  */
 export function closeModal() {
     const body = document.querySelector("body");
