@@ -1,12 +1,10 @@
 export const displayGallery = (projects) => {
   let gallery = document.querySelector(".gallery");
-
   if (!gallery) {
     gallery = document.createElement("div");
     gallery.classList.add("gallery");
-    document.getElementById("portfolio").appendChild(gallery);
+    document.getElementById("portfolio").append(gallery);
   }
-
   // Vider la galerie avant d'ajouter les nouveaux éléments
   gallery.innerHTML = "";
 
@@ -16,13 +14,10 @@ export const displayGallery = (projects) => {
     const imageElement = document.createElement("img");
     imageElement.src = project.imageUrl;
     imageElement.alt = project.title;
-
     const figCaption = document.createElement("figcaption");
     figCaption.textContent = project.title;
-
-    figure.appendChild(imageElement);
-    figure.appendChild(figCaption);
-    gallery.appendChild(figure);
+    figure.append(imageElement, figCaption);
+    gallery.append(figure);
   });
 
   // Vider la galerie dans la modale avant d'ajouter les images
@@ -34,7 +29,6 @@ export const displayGallery = (projects) => {
       const modalImage = document.createElement("img");
       modalImage.src = project.imageUrl;
       modalImage.alt = project.title;
-
       const modalCaption = document.createElement("figcaption");
       modalCaption.textContent = project.title;
 
@@ -45,16 +39,13 @@ export const displayGallery = (projects) => {
 
       // Gestion de l'événement de suppression
       deleteBtn.addEventListener("click", () => {
-        // modalFigure.remove(); // Supprime l'élément de la modale
-        // Vous pouvez également ajouter une logique pour supprimer cet élément de vos données
+        // test avec un log
         console.log(`Projet "${project.title}" supprimé.`);
       });
 
       // Ajouter les éléments au conteneur
-      modalFigure.appendChild(modalImage);
-      modalFigure.appendChild(modalCaption);
-      modalFigure.appendChild(deleteBtn);
-      modalGallery.appendChild(modalFigure);
+      modalFigure.append(modalImage, modalCaption, deleteBtn);
+      modalGallery.append(modalFigure);
     });
   }
 };

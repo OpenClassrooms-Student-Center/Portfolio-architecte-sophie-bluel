@@ -1,4 +1,4 @@
-import { isConnected } from "./sessionManagement.js"; // Assurez-vous que cette fonction est bien définie et accessible
+import { isConnected } from "./sessionManagement.js";
 
 const modal = document.getElementById("modal1");
 const closeModal = document.querySelector(".close-btn");

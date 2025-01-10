@@ -7,7 +7,7 @@ export const setupPage = () => {
   setupAuthButton(authLink, welcomeMessageElement);
 
   if (welcomeMessageElement && isConnected()) {
-    welcomeMessageElement.textContent = "Bienvenue, admin !";
+    welcomeMessageElement.textContent = "Mode édition";
     welcomeMessageElement.style.display = "block";
   }
 };
