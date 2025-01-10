@@ -1,6 +1,10 @@
-import { displayGallery } from "./displayGallery.js";
 export const selectCategory = (projects) => {
   const filterContainer = document.querySelector(".filter-container");
+
+  // Vérifier si filterContainer existe avant d'ajouter l'écouteur
+  if (!filterContainer) {
+    return; // Si filterContainer n'existe pas, on ne fait rien et on quitte la fonction
+  }
 
   // Ajouter un écouteur sur le conteneur pour détecter les clics
   filterContainer.addEventListener("click", (e) => {
