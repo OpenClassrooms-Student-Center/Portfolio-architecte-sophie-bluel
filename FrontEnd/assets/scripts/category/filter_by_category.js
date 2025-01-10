@@ -1,7 +1,7 @@
 /****** Step 1.2 create the category filter ******/
 import {
     replaceSpaceByUnderscore
-} from "./helpers/string_replacer.js";
+} from "../helpers/string_replacer.js";
 
 /**
  * This function hides the gallery.

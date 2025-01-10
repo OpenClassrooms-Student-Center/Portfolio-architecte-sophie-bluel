@@ -1,6 +1,6 @@
 import {
     displayError
-} from "./connection.js";
+} from "../connection.js";
 
 /**
  * This function deletes a work from the back-end and gallery.

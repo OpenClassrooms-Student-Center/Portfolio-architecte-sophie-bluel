@@ -6,10 +6,10 @@ import {
 } from "./add_work.js";
 import {
     categories
-} from "./script.js";
+} from "../script.js";
 import {
     checkFileMaxSize
-} from "./helpers/file_checker.js";
+} from "../helpers/file_checker.js";
 
 export let fileUpload;
 

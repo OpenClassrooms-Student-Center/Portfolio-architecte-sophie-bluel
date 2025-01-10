@@ -2,13 +2,13 @@
 import {
     fetchAndStoreWorks,
     fillGallery
-} from "./get_works.js";
+} from "./modal/get_works.js";
 import {
     getCategoriesNames
 } from "./helpers/categories_getName.js";
 import {
     createCategoryFilterButtons
-} from "./create_category_filter_buttons.js";
+} from "./category/create_category_filter_buttons.js";
 import {
     addConnectedModeBanner,
     hideCategoryFilterButtons,
@@ -20,10 +20,10 @@ import {
     closeModal,
     displayPhotosGallery,
     displayAddPhotoForm
-} from "./modal.js";
+} from "./modal/modal.js";
 import {
     addSubmit
-} from "./add_work.js";
+} from "./modal/add_work.js";
 
 export const worksURL = "http://127.0.0.1:5678/api/works/";
 let worksInLocalStorageVar = window.localStorage.getItem("works");

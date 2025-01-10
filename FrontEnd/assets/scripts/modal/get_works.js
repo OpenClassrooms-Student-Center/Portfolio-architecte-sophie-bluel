@@ -1,9 +1,9 @@
 import {
     worksURL
-} from "./script.js";
+} from "../script.js";
 import {
     replaceSpaceByUnderscore
-} from "./helpers/string_replacer.js";
+} from "../helpers/string_replacer.js";
 
 /****** Step 1.1 get works from backend ******/
 /**

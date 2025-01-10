@@ -2,7 +2,7 @@
 import {
     getPortfolioTitle,
     insertAfterPortfolioTitle
-} from "./create_category_filter_buttons.js";
+} from "./category/create_category_filter_buttons.js";
 
 console.log(new Date().toLocaleTimeString(), "connection page script begins");
 
