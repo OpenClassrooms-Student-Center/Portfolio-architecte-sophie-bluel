@@ -1,3 +1,4 @@
+import { displayGallery } from "./displayGallery.js";
 export const selectCategory = (projects) => {
   const filterContainer = document.querySelector(".filter-container");
 

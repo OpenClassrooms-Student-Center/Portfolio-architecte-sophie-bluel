@@ -5,7 +5,7 @@ import { initializeModal } from "./modal.js";
 // Fonction principale pour initialiser la page d'accueil
 const initPage = async () => {
   if (window.location.pathname === "/index.html") {
-    setupPage(); // Configure la page
+    setupPage(); // Configure la page, message util et bouton de connexion
     await initGalleryContent(); // Charge et affiche la galerie
     initializeModal();
   } else {

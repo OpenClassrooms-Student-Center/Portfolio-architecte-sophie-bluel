@@ -150,20 +150,6 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
-/* Centrer le label */
-#portfolio label {
-	display: block; 
-	text-align: center; 
-	font-family: 'Syne', sans-serif;
-	font-size: 1.2rem;
-	font-weight: 600; 
-	color: #1D6154; 
-	background-color: #f7f7f7; 
-	border-radius: 5px; 
-	padding: 10px 20px; 
-	margin-bottom: 10px;
-	box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
-  }
   .filter-container {
 	display: flex;
 	justify-content: center;
@@ -253,19 +239,18 @@ li:hover {
 				.modal-gallery {
     				display: grid; /* Active le mode grille */
     				grid-template-columns: repeat(5, 1fr); /* Définit 5 colonnes égales */
-    				gap: 15px; /* Espacement entre les images */
+    				gap: 15px;
     				justify-items: center; /* Centre les images horizontalement dans chaque cellule */
 					height: 35rem;
 					border-bottom: 1px solid black;
 				}
 				.modal-gallery figure {
-					position: relative; /* Positionne le bouton par rapport à cet élément */
+					position: relative;
 				}
 
 					.modal-gallery img {
     					width: 75%; /* Adapte la taille des images pour la nouvelle taille de la modale */
     					height: auto; /* Conserve le ratio des images */
-    					box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Ombre pour un effet de profondeur */
 					}
 
 					.modal-gallery figcaption {
@@ -321,7 +306,16 @@ li:hover {
 					font-size: 12px; /* Réduit la taille de l'icône */
 				}
   /* end modal */
+  /* ajout des projets dans la modale */
   
+  .form-container {
+    width: 630px; 
+    margin: 0 auto;
+	
+}
+
+
+  /* end ajout des projets dans la modale */
 
 	.gallery {
 		width: 100%;
