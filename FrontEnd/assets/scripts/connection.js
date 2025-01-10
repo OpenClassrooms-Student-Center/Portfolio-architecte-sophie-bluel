@@ -19,7 +19,7 @@ addEventListener("DOMContentLoaded", async () => {
  * It's used to store the token at login.
  * It's meant to try to debug easier this specific error
  * @param {String} key input var
- * @param {String} val
+ * @param {String} val the token for example
 
  */
 export function storeInLocalStorage(key, val) {
@@ -33,7 +33,8 @@ export function storeInLocalStorage(key, val) {
 /**
  * This function removes an item from local storage.
  * It's used to remove the token at logout.
- * @param {String} key item to remove key
+ * See meaning above.
+ * @param {String} key item to remove's key
  */
 export function removeFromLocalStorage(key) {
     try {
@@ -44,6 +45,11 @@ export function removeFromLocalStorage(key) {
 
 }
 
+/**
+ * This function displays a user error message.
+ * @param {*} error : the message to display
+ * @param {*} errorElement : the HTML element used to display
+ */
 export function displayError(error, errorElement) {
     errorElement.innerHTML = error;
 }
@@ -51,7 +57,7 @@ export function displayError(error, errorElement) {
 /**
  * This function logs the user in and stores the token in localStorage.
  * It stores in the browser an edit mode display information.
- * @param { Event } : login form SubmitEvent button click
+ * @param { Event } e : login form SubmitEvent button click
  */
 async function loginSubmit(e) {
     e.preventDefault();
