@@ -27,37 +27,37 @@ import {
 
 export const worksURL = "http://127.0.0.1:5678/api/works/";
 let worksInLocalStorageVar = window.localStorage.getItem("works");
-let worksPromise;
+let works;
 export let formExported;
 
 if (worksInLocalStorageVar) {
     try{
         let worksParsed = JSON.parse(worksInLocalStorageVar);
         if (Array.isArray(worksParsed)) {
-            worksPromise = Promise.resolve(worksParsed);
+            works = worksParsed;
         } else {
             console.warn("Works %o locally stored isn't an array: local storage is deleted and loaded again.", worksParsed);
             window.localStorage.removeItem("works");
-            worksPromise = fetchAndStoreWorks();
+            works = fetchAndStoreWorks();
         }
     } catch (erreur) {
         console.error("Error %o at locally stored works parsing: local storage is deleted and loaded again", erreur);
         window.localStorage.removeItem("works");
-        worksPromise = fetchAndStoreWorks();
+        works = fetchAndStoreWorks();
     }
 } else {
-    worksPromise = fetchAndStoreWorks();
+    works = fetchAndStoreWorks();
 }
 
 let galleryDiv = document.querySelector(".gallery");
 let initialFetchedGallery;
 async function initGallery() {
-    initialFetchedGallery = await fillGallery(worksPromise, galleryDiv, initialFetchedGallery);
+    initialFetchedGallery = await fillGallery(works, galleryDiv, initialFetchedGallery);
 }
 await initGallery();
 /****** Step 1.2 create category filter ******/
 export let categories = new Set();
-categories = await getCategoriesNames(worksPromise);
+categories = await getCategoriesNames(works);
 await createCategoryFilterButtons(categories, galleryDiv, initialFetchedGallery);
 /****** Step 2.2 update landing page to connected mode ******/
 const login = document.getElementById("login");
@@ -113,7 +113,7 @@ if(isConnected) {
                 modalBackground.ariaHidden = "true";
             }
         });
-        displayPhotosGallery();
+        displayPhotosGallery(works);
         displayAddPhotoForm();
 
         const iconClose = document.querySelector(".icon-close");

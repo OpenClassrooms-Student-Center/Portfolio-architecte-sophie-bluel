@@ -28,14 +28,13 @@ export async function fetchAndStoreWorks() {
 /**
  * This function creates HTML elements in <div class="gallery"> based on works from the API.
  * It is called in script.js line 55.
- * @param {Promise<any>} worksPromise : works in JSON format is expected from the API at promise resolution
+ * @param {Array} works : works in JSON format is expected from the API at promise resolution
  * @param {Element} galleryDiv : the <div class="gallery"> including figures
  * @param {HTMLElement[]} initialFetchedGallery : a copy of the gallery initially fetched from the API
  * @returns : the array of figures initially fetched from the API
 */
-export async function fillGallery(worksPromise, galleryDiv, initialFetchedGallery) {
+export async function fillGallery(works, galleryDiv, initialFetchedGallery) {
     try{
-        const works = await worksPromise;
         const figures = [];
 
         works.forEach(work => {

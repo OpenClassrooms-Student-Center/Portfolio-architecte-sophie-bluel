@@ -3,7 +3,6 @@ import {
 } from "../script.js";
 import {
     closeModal,
-    galleryData,
     fileUpload
 } from "./modal.js";
 import {
@@ -112,11 +111,7 @@ export async function addSubmit(event) {
             if(res.ok) { 
                 console.log("Created. Expected res.status is 201, status: " + res.status + ". Info: " + res.statusText);
                 const data = await res.json();
-                galleryData.addData ({
-                    src: data.imageUrl,
-                    alt: data.title,
-                    id: data.userId
-                });
+               
                 image = null;
                 title = "";
                 category = "";
