@@ -1,7 +1,4 @@
 import {
-    deleteWork
-} from "./delete_works.js";
-import {
     addSubmit
 } from "./add_work.js";
 import {
@@ -106,44 +103,6 @@ export function closeModal() {
     const body = document.querySelector("body");
     const dialog = document.getElementById("modal-backgrd");
     body.removeChild(dialog);
-}
-
-/**
- * This function displays the gallery view of the modal.
- * @param {Array} works : JSON array of works from backend
- */
-export function displayPhotosGallery(works) {
-    const modalContainer = document.getElementById("gallery");
-
-    works.forEach(item => {
-        const figure = document.createElement("figure");
-
-        const img = document.createElement("img");
-        img.src = item.imageUrl;
-        img.alt = item.title;
-        img.id = item.id;
-
-        figure.appendChild(img);
-
-        const delIcon = document.createElement("i");
-        delIcon.classList.add(
-            "delete-proj",
-            "material-symbols-outlined",
-            "pointer");
-        delIcon.classList.add("delete-proj");
-        delIcon.innerText = "delete";
-        delIcon.ariaHidden = "true";
-        delIcon.id = item.id;
-        /****** Step 3.2 delete work ******/
-        delIcon.addEventListener("click", (event) => {
-            event.preventDefault();
-            deleteWork(item.id);
-        });
-        
-        figure.appendChild(delIcon);
-
-        modalContainer.appendChild(figure);
-    });
 }
 
 /**

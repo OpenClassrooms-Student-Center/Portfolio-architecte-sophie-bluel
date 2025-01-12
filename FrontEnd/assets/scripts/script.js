@@ -16,9 +16,11 @@ import {
     removeFromLocalStorage
 } from "./connection.js";
 import {
+    displayGallery
+} from "./landing_page/portfolio.js"
+import {
     displayModalAddPhoto,
     closeModal,
-    displayPhotosGallery,
     displayAddPhotoForm
 } from "./modal/modal.js";
 import {
@@ -113,7 +115,7 @@ if(isConnected) {
                 modalBackground.ariaHidden = "true";
             }
         });
-        displayPhotosGallery(works);
+        displayGallery("modal", works);
         displayAddPhotoForm();
 
         const iconClose = document.querySelector(".icon-close");
