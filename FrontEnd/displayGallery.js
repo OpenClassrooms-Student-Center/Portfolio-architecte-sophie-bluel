@@ -39,7 +39,7 @@ export const displayGallery = (projects) => {
   addPhotoButton.addEventListener("click", () => {
     if (modalGallery) {
       modalGallery.innerHTML = ""; // Vider la galerie actuelle uniquement lors du clic
-
+      addPhotoButton.style.display = "none";
       // Modifier le titre en "Ajout photo"
       const modalTitle = modalTitleContainer.querySelector(".modal-title");
       modalTitle.textContent = "Ajout photo"; // Changer le titre
@@ -102,7 +102,9 @@ export const displayGallery = (projects) => {
 
       // Création du bouton pour soumettre
       const submitButton = document.createElement("button");
-      submitButton.classList.add("form-submit-btn");
+      submitButton.classList.add("photo-add-btn");
+      submitButton.style.display = "block"; // Faire du bouton un élément block
+      submitButton.style.margin = "7rem auto 0"; // Appliquer une marge automatique pour centrer horizontalement
       submitButton.textContent = "Ajouter le projet";
 
       // Ajouter un événement au bouton pour envoyer les données
