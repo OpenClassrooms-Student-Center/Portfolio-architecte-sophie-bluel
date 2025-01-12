@@ -1,51 +1,72 @@
 import {
     deleteWork
 } from "../modal/delete_works.js";
+import {
+    replaceSpaceByUnderscore
+} from "../helpers/string_replacer.js";
 
 /**
  * This function displays the gallery view of the 
  *     landing page or
  *     modal.
+ * This function creates HTML elements in <div class="gallery"> based on works from the API.
+ * It is called in script.js line 55.
  * @param {String} element : "landing" or "modal"
  * @param {Array} works : JSON array of works from backend
  */
-export function displayGallery(element, works) {   
-    works.forEach(item => {
-        const figure = document.createElement("figure");
+export function displayGallery(element, works) {
+    try {  
+        let gallery; 
+        let figcaption;
 
-        const img = document.createElement("img");
-        img.src = item.imageUrl;
-        img.alt = item.title;
-        img.id = item.id;
+        works.forEach(work => {
+            const figure = document.createElement("figure");
 
-        const delIcon = document.createElement("i");
-        delIcon.classList.add(
-            "delete-proj",
-            "material-symbols-outlined",
-            "pointer");
-        delIcon.classList.add("delete-proj");
-        delIcon.innerText = "delete";
-        delIcon.ariaHidden = "true";
-        delIcon.id = item.id;
+            let img = document.createElement("img");
+            img.src = work.imageUrl;
+            img.alt = work.title;
+            img.id = work.id;
 
-        let container;
-        if(element === "landing"){
-            container = document.querySelector(".gallery");
-        }
-        else if(element === "modal") {
-            container = document.getElementById("gallery");
+            if(element === "landing"){
+                gallery = document.querySelector(".gallery");
+                
+                figcaption = document.createElement("figcaption");
+                figcaption.innerText = work.title;
 
-            /****** Step 3.2 delete work ******/
-            delIcon.addEventListener("click", (event) => {
-                event.preventDefault();
-                deleteWork(item.id);
-            });
-            
-            figure.appendChild(delIcon);
+                let categ = work.category.name;
+                categ = replaceSpaceByUnderscore(categ);
+                figure.classList.add(categ);
+            }
+            else if(element === "modal") {
+                gallery = document.getElementById("gallery");
+
+                /****** Step 3.2 delete work ******/
+                const delIcon = document.createElement("i");
+                delIcon.classList.add(
+                    "delete-proj",
+                    "material-symbols-outlined",
+                    "pointer");
+                delIcon.classList.add("delete-proj");
+                delIcon.innerText = "delete";
+                delIcon.ariaHidden = "true";
+                delIcon.id = work.id;
+
+                delIcon.addEventListener("click", (event) => {
+                    event.preventDefault();
+                    deleteWork(work.id);
+                });
+                
+                figure.appendChild(delIcon);
+            }
+            figure.appendChild(img);
+
+            if(element === "landing") {
+                figure.appendChild(figcaption);
             }
 
-        figure.appendChild(img);
-
-        container.appendChild(figure);
-    });
+            gallery.appendChild(figure);
+        });
+    } catch(error) {
+        console.error("Error at filling the gallery: ", error);
+    }
 }

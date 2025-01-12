@@ -13,7 +13,7 @@ export let fileUpload;
 /**
  * This function displays the modal at modifier button click.
  */
-export function displayModalAddPhoto() {
+export function displayModal() {
     const body = document.querySelector("body");
 
     const dialog = document.createElement("dialog");
@@ -129,7 +129,7 @@ function displayMiniImage(file, fileAddButtonWrapper) {
  * This function displays the add photo form view of the modal.
  */
 /****** Once picked, deactivation to disallow multiple picking is to do and check. ******/
-export function displayAddPhotoForm() {
+export function displayAddWorkForm() {
     const modalContainer = document.getElementById("add-form");
 
     const form = document.createElement("form");

@@ -71,5 +71,9 @@ body {
         img {
             width: 100%;
         }
+
+        figcaption {
+            margin-top: 5px;
+        }
     }
 }

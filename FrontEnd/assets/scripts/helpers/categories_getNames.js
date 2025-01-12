@@ -4,8 +4,8 @@ import {
 
 /**
  * This function stores in a variable all the categories of works.
- * It is called in script.js line 59.
- * @param {Array} works : see getWorks.js fillGallery. Works have a category information.
+ * It is called in script.js line 58.
+ * @param {Array} works : see portfolio.js displayGallery. Works have a category information.
  * @returns: categories is a set of unique categories.
  */
 export async function getCategoriesNames(works) {

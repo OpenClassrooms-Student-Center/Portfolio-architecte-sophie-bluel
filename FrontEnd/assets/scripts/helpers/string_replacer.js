@@ -2,7 +2,7 @@
  * This function replaces spaces by underscores ("_").
  * It is called in 
  *     filter_by_category.js filterGallery() line 51,
- *     getWorks.js fillGallery line 53.
+ *     portfolio.js displayGallery line 37.
  * @param {string} name : the class name including one or more spaces (" ")
  * @returns the string substitution with "_" instead of " "
  */

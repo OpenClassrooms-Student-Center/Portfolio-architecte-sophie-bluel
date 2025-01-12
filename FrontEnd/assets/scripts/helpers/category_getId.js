@@ -4,7 +4,7 @@ import {
 
 /**
  * This function changes a hard coded test category name in its id calling the API for up-to-date data.
- * It is called in add_work.js addSubmit() line 89.
+ * It is called in add_work.js addSubmit() line 88.
  * @returns the id of category name to the main flow.
  */
 export async function getCategoryId() {

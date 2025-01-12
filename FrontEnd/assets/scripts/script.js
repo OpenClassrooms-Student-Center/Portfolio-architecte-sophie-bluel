@@ -1,11 +1,10 @@
 /****** Step 1.1 fetch works from backend ******/
 import {
-    fetchAndStoreWorks,
-    fillGallery
+    fetchAndStoreWorks
 } from "./modal/get_works.js";
 import {
     getCategoriesNames
-} from "./helpers/categories_getName.js";
+} from "./helpers/categories_getNames.js";
 import {
     createCategoryFilterButtons
 } from "./category/create_category_filter_buttons.js";
@@ -19,9 +18,9 @@ import {
     displayGallery
 } from "./landing_page/portfolio.js"
 import {
-    displayModalAddPhoto,
+    displayModal,
     closeModal,
-    displayAddPhotoForm
+    displayAddWorkForm
 } from "./modal/modal.js";
 import {
     addSubmit
@@ -52,15 +51,12 @@ if (worksInLocalStorageVar) {
 }
 
 let galleryDiv = document.querySelector(".gallery");
-let initialFetchedGallery;
-async function initGallery() {
-    initialFetchedGallery = await fillGallery(works, galleryDiv, initialFetchedGallery);
-}
-await initGallery();
+
+displayGallery("landing", works);
 /****** Step 1.2 create category filter ******/
 export let categories = new Set();
 categories = await getCategoriesNames(works);
-await createCategoryFilterButtons(categories, galleryDiv, initialFetchedGallery);
+await createCategoryFilterButtons(categories, galleryDiv);
 /****** Step 2.2 update landing page to connected mode ******/
 const login = document.getElementById("login");
 login.addEventListener("click", (event) => {
@@ -95,7 +91,7 @@ if(isConnected) {
     modifier.classList.add("pointer");
     /****** Step 3.1 show photo gallery modal ******/
     modifier.addEventListener("click", () => {
-        displayModalAddPhoto();
+        displayModal();
 
         const modalBackground = document.getElementById("modal-backgrd");
         modalBackground.ariaModal = "true";
@@ -116,7 +112,7 @@ if(isConnected) {
             }
         });
         displayGallery("modal", works);
-        displayAddPhotoForm();
+        displayAddWorkForm();
 
         const iconClose = document.querySelector(".icon-close");
 

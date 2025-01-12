@@ -1,6 +1,6 @@
 /**
  * This function checks that the user picked file's size is less than 4 Mb.
- * It is called in modal.js displayAddPhotoForm() line 254.
+ * It is called in modal.js displayAddWorkForm() line 203.
  * @param {File} file : a user picked file
  * @param {Event} event : in case triggered by an <input type="file"> change event,
  *  this event is reset for retry if the file's size exceeds 4Mb.
