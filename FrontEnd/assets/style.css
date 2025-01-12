@@ -306,13 +306,55 @@ li:hover {
 					font-size: 12px; /* Réduit la taille de l'icône */
 				}
   /* end modal */
+
   /* ajout des projets dans la modale */
   
-  .form-container {
-    width: 630px; 
-    margin: 0 auto;
-	
-}
+  					.form-container {
+						display: flex;
+						flex-direction: column;
+						margin: auto;
+						gap: 10px;
+    					width: 630px; 
+    					margin: 0 auto;
+					}
+						.form-container label {
+							width: 100px;          /* Permet au label de s'étendre sur toute la largeur */
+							      /* Ajoute un petit espace sous chaque label */
+					  }
+					
+					  .chooseFile {
+						margin: auto;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						background-color: #E8F1F6;
+						width: 420px;
+						height: 169px;
+						border: none;
+						padding: 10px 20px;
+						border-radius: 5px;
+						font-size: 14px;
+						cursor: pointer;
+						margin-top: 40px;
+					  }
+						.form-title-category-input{
+							margin: auto;
+							width: 73%;
+							height: 51px;
+							border: none;
+							box-shadow: 0px 4px 14px 0px #00000017;
+
+						}
+						.custom-file-button{
+							width: 173px;
+							height: 36px;
+							color: #306685;
+
+							background: #CBD6DC;
+							border-radius: 50px;
+						}
+
+
 
 
   /* end ajout des projets dans la modale */
