@@ -1,9 +1,12 @@
 import {
     deleteWork
-} from "../modal/delete_works.js";
+} from "../modal/delete_work.js";
 import {
     replaceSpaceByUnderscore
 } from "../helpers/string_replacer.js";
+import {
+    worksURL
+} from "../script.js";
 
 /**
  * This function displays the gallery view of the 
@@ -53,7 +56,7 @@ export function displayGallery(element, works) {
 
                 delIcon.addEventListener("click", (event) => {
                     event.preventDefault();
-                    deleteWork(work.id);
+                    deleteWork(worksURL, work.id);
                 });
                 
                 figure.appendChild(delIcon);
