@@ -2,6 +2,11 @@
    v2.0 | 20110126
    License: none (public domain)
 */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -148,311 +153,386 @@ li:hover {
 }
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
+	/* margin-bottom: 1em; */
 }
-  .filter-container {
+/* ----- le message de bienvenu ----- */
+#welcome-message {
+	position: relative;
+	display: none;
+	line-height: 1.5;
+	width: 100%;
+	height: auto;
+	background-color: black;
+	color: white;
+	font-size: 1.14rem; 
+	padding: 0.71rem; 
+	border-radius: 0.35rem; 
+	text-align: center;
+	box-shadow: 0 0.28rem 0.57rem rgba(0, 0, 0, 0.1);
+  }
+  #welcome-message::before {
+	content: "\f044"; 
+	font-family: "Font Awesome 6 Free"; 
+	font-weight: 900;
+	display: inline-block;
+	margin-right: 0.57rem;
+	vertical-align: middle;
+  }
+  #welcome-message.show {
+	display: block;
+	opacity: 1;
+  }
+/* les boutons filtres avec leur conteneur */
+.filter-container {
 	display: flex;
 	justify-content: center;
-	gap: 10px; /* Espacement entre les boutons */
-	margin-bottom: 20px;
-  }
-  
-  	.filter-button {
-		padding: 10px 15px;
+	gap: 0.62rem;
+	margin-bottom: 1.25rem;
+}
+
+	.filter-button {
+		padding: 0.62rem 0.93rem;
 		border: #1D6154 solid 1px;
-		border-radius: 60px;
+		border-radius: 3.75rem;
 		background-color: white;
 		cursor: pointer;
 		font-size: 1rem;
 		transition: background-color 0.3s;
-  }
-  
-  	.filter-button:hover {
-	background-color: #d0d0d0;
-  }
-  
-  	.filter-button.active {
-	background-color: #1D6154;
-	color: #fff;
-  }
-  /* modale */
-
-	.portfolioFlex {
-    	display: flex;
-    	flex-direction: column;
-    	gap: 1rem;
 	}
+	/* le bouton change de style au survol */
+	.filter-button:hover {
+		background-color: #d0d0d0;
+	}
+	/* le bouton cliqué change de style */
+	.filter-button.active {
+		background-color: #1D6154;
+		color: #fff;
+	}
+
+/* container du portfolio avec la galerie */
+.portfolioFlex {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+/* les éléments qui constituent la modale */
+	/* le lien modifier et l'icône qui mène à la modale et son contenu */
 		.modal-title {
-    		margin-right: 10px; 
+			margin-right: 0.62rem; 
 		}
+
 		.modal-link {
-			font-size: 14px; 
-			color: inherit; /* Assure-toi que la couleur du texte soit la même que celle par défaut */
+			font-size: 0.87rem; 
   		}
-  
+
   			.modal-link i {
-				font-size: 1rem; /* Taille de l'icône */
-				margin-right: 0.1rem; /* Espace entre l'icône et le texte */
+				font-size: 1rem;
+				margin-right: 0.1rem;
   			}
+
 /* Style général pour la modale */
-/* la modale s'étend sur tout l'écran */
-		.modal {
-    		display: none; /* Masque la modale par défaut */
-    		position: fixed; /* Positionne la modale en haut à gauche de la fenêtre */
-    		top: 0;
-    		left: 0;
-    		width: 100%;
-    		height: 100%;
-    		justify-content: center; /* Centre le contenu à l'intérieur de la modale */
-    		align-items: center; /* Centre le contenu à l'intérieur de la modale */
-    		background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
-    		z-index: 100; /* Place la modale au-dessus de tout autre contenu */
-    		opacity: 0; /* La modale est invisible au départ */
-    		transition: opacity 0.3s ease; /* Ajoute une transition pour la visibilité */
-    		transform: translate(0, 0); /* Le transform reste pour garder la modale centrée */
-  		}
-  
-  		/* Affiche la modale quand elle a la classe "active" */
-  		.modal.active {
-    		display: flex; /* Affiche la modale */
-    		opacity: 1; /* Rends la modale visible */
-  		}
-  
-  			/* Le contenu de la modale (boîte de dialogue) */
-  			.modal-wrapper {
-    			position: relative;
-				display: flex;
-				justify-content: center; /* Centre horizontalement */
-				align-items: center; /* Centre verticalement */
-				flex-direction: column; /* Si besoin d'empiler les éléments */
-				height: 100%; /* Facultatif : si vous voulez centrer verticalement */
-    			overflow: auto;
-    			background-color: white;
-    			padding: 50px; /* Ajuster le padding si nécessaire */
-    			border-radius: 10px;
-    			width: 630px; /* Largeur fixe */
-    			height: 688px; /* Hauteur fixe */
-    			margin: 0 auto; /* Centrer horizontalement */
-    			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre pour donner de la profondeur */
+	.modal {
+		display: none; 
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		justify-content: center;
+		align-items: center;
+		background-color: rgba(0, 0, 0, 0.5);
+		z-index: 100;
+		opacity: 0;
+	}
+
+	/* Affiche la modale quand elle a la classe "active" */
+	.modal.active {
+		display: flex;
+		opacity: 1;
+	}
+
+		/* Le contenu de la modale (boîte de dialogue) */
+		.modal-wrapper {
+			position: relative;
+			display: flex;
+			justify-content: center; 
+			align-items: center; 
+			flex-direction: column;
+			height: 100%;
+			overflow: auto;
+			background-color: white;
+			padding: 3.12rem; 
+			border-radius: 0.62rem; 
+			width: 40rem;
+			height: 39rem;
+			margin: 0 auto;
+			box-shadow: 0 0.25rem 0.37rem rgba(0, 0, 0, 0.1);
+		}
+
+			.modal-gallery {
+				display: grid;
+				grid-template-columns: repeat(5, 1fr);
+				justify-items: center;
+				height: 31rem;
+				width: 100%;
+				/* margin-top: 2rem; */
 			}
 
-				.modal-gallery {
-    				display: grid; /* Active le mode grille */
-    				grid-template-columns: repeat(5, 1fr); /* Définit 5 colonnes égales */
-    				gap: 15px;
-    				justify-items: center; /* Centre les images horizontalement dans chaque cellule */
-					height: 35rem;
-					border-bottom: 1px solid black;
-				}
-				.modal-gallery figure {
-					position: relative;
+			.modal-gallery figure {
+				position: relative;
+			}
+
+				.modal-gallery img {
+					width: 75%; 
+					height: auto;
 				}
 
-					.modal-gallery img {
-    					width: 75%; /* Adapte la taille des images pour la nouvelle taille de la modale */
-    					height: auto; /* Conserve le ratio des images */
-					}
-
-					.modal-gallery figcaption {
-    					display: none; /* Cache les légendes */
-					}
-  
-  				/* Style du bouton de fermeture */
-  				.close-btn {
-    				background: transparent;
-    				border: none;
-    				font-size: 24px;
-    				position: absolute;
-    				top: 10px;
-    				right: 10px;
-    				cursor: pointer;
-    				z-index: 1000; /* Assure que le bouton est au-dessus de la modale */
-  				}
-				.photo-add-btn {
-					background-color: #1D6154;
-					width:237px ;
-					color: white;
-					border: none;
-					padding: 10px 20px;
-					border-radius: 5px;
-					font-size: 14px;
-					cursor: pointer;
-					border-radius: 50px;
-					margin-top: 40px;
+				.modal-gallery figcaption {
+					display: none; /* Cache les légendes */
 				}
-				/* La classe "hidden" permet de masquer un élément */
-				.hidden {
+			/* style du bouton de retour à l'édidion */
+			.homepage-edit-btn {
 				display: none;
-  				}
-				/* delete btn */
-				.delete-btn {
-					background-color: black;
-					color: white;
-					border: none;
-					border-radius: 50%;
-					padding: 5px; /* Réduit l'espace autour du bouton */
-					cursor: pointer;
-					display: inline-flex;
-					justify-content: center;
-					align-items: center;
-					width: 25px; /* Réduit la taille du bouton */
-					height: 25px; /* Réduit la taille du bouton */
-					position: absolute;
-					top: 5%; /* Décalage depuis le haut */
-					right: 30%; /* Décalage depuis la droite */
-				}
-				
-				.delete-btn i {
-					font-size: 12px; /* Réduit la taille de l'icône */
-				}
-  /* end modal */
+				opacity: 0;
+				background: transparent;
+				border: none;
+				font-size: 1.5rem;
+				position: absolute;
+				top: 0.62rem;
+				left: 0.62rem;
+				cursor: pointer;
+				z-index: 1000;
+			}
+			.homepage-edit-btn.appear {
+				display: block;
+				opacity: 1;
+			}
+  			/* Style du bouton de fermeture */
+  			.close-btn {
+				background: transparent;
+				border: none;
+				font-size: 1.5rem; 
+				position: absolute;
+				top: 0.62rem; 
+				right: 0.62rem;
+				cursor: pointer;
+				z-index: 1000;
+  			}
 
-  /* ajout des projets dans la modale */
-  
-  					.form-container {
-						display: flex;
-						flex-direction: column;
-						margin: auto;
-						gap: 10px;
-    					width: 630px; 
-    					margin: 0 auto;
-					}
-						.form-container label {
-							width: 100px;          /* Permet au label de s'étendre sur toute la largeur */
-							      /* Ajoute un petit espace sous chaque label */
-					  }
-					
-					  .chooseFile {
-						margin: auto;
-						display: flex;
-						justify-content: center;
-						align-items: center;
-						background-color: #E8F1F6;
-						width: 420px;
-						height: 169px;
-						border: none;
-						padding: 10px 20px;
-						border-radius: 5px;
-						font-size: 14px;
-						cursor: pointer;
-						margin-top: 40px;
-					  }
-						.form-title-category-input{
-							margin: auto;
-							width: 73%;
-							height: 51px;
-							border: none;
-							box-shadow: 0px 4px 14px 0px #00000017;
+			.photo-add-btn {
+				background-color: #1D6154;
+				width: 14.81rem;
+				color: white;
+				border: none;
+				padding: 0.62rem 1.25rem;
+				border-radius: 0.31rem;
+				font-size: 0.87rem;
+				cursor: pointer;
+				border-radius: 3.12rem;
+				margin-top: 2.5rem;
+			}
+			.photo-add-project {
+				position: absolute;
+				bottom: -19%;
+				left: 24%;
+				margin: 0 auto;
+				background: #A7A7A7;
+				width: 14.81rem;
+				color: white;
+				border: none;
+				padding: 0.62rem 1.25rem;
+				border-radius: 0.31rem;
+				font-size: 0.87rem;
+				cursor: pointer;
+				border-radius: 3.12rem;
+			}
+			
 
-						}
-						.custom-file-button{
-							width: 173px;
-							height: 36px;
-							color: #306685;
+			/* La classe "hidden" permet de masquer un élément */
+			.hidden {
+				display: none;
+  			}
 
-							background: #CBD6DC;
-							border-radius: 50px;
-						}
+			/* delete btn */
+			.delete-btn {
+				background-color: black;
+				color: white;
+				border: none;
+				border-radius: 50%;
+				padding: 0.31rem;
+				cursor: pointer;
+				display: inline-flex;
+				justify-content: center;
+				align-items: center;
+				width: 1.56rem; 
+				height: 1.56rem; 
+				position: absolute;
+				top: 5%; 
+				right: 30%;
+			}
+			
+			.delete-btn i {
+				font-size: 0.75rem;
+			}
 
+/* end modal */
 
+/* ajout des projets dans la modale */
+	.form-container {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		margin: auto;
+		gap: 0.62rem;
+		width: 33rem;
+		height: 25rem ;
+		margin: 0 auto;
+	}
+	
+		.chooseFile {
+			margin: auto;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background-color: #E8F1F6;
+			width: 26.25rem; 
+			height: 11rem;
+			border: none;
+			padding: 0.62rem 1.25rem;
+			border-radius: 0.31rem;
+			font-size: 0.87rem;
+			cursor: pointer;
+		}
+		.form-title-container, .form-category-container {
+			margin: 0 auto;
+			width: 90%;
+			display: flex;
+			flex-direction: column;
+			margin-top: 1rem;
+		} 
+		.form-title-category-input {
+			margin: auto;
+			margin-top: 0.5rem;
+			width: 100%;
+			height: 51px;
+			border: none;
+			box-shadow: 0px 0.25rem 0.87rem 0px #00000017;
+		}
 
+		.custom-file-button {
+			width: 10.81rem;
+			height: 2.25rem;
+			border: none;
+			color: #306685;
+			background: #CBD6DC;
+			border-radius: 3.12rem;
+		}
 
-  /* end ajout des projets dans la modale */
+/* end ajout des projets dans la modale */
 
 	.gallery {
 		width: 100%;
 		display: grid;
 		grid-template-columns: 1fr 1fr 1fr;
-		grid-column-gap: 20px;
-		grid-row-gap: 20px;
+		grid-column-gap: 1.25rem; /* 20px */
+    	grid-row-gap: 1.25rem; /* 20px */
 	}
 
 	.gallery img {
-			width: 100%;
-		}
+		width: 100%;
+	}
+
 #contact {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
+
 #contact > * {
 	text-align: center;
+}
 
+#contact h2 {
+	margin-bottom: 1.25rem;
 }
-#contact h2{
-	margin-bottom: 20px;
-}
+
 #contact form {
 	text-align: left;
-	margin-top:30px;
-	display: flex;
-	flex-direction: column;
+    margin-top: 1.87rem; /* 30px */
+    display: flex;
+    flex-direction: column;
 }
 
 #contact input {
-	height: 50px;
-	font-size: 1.2em;
-	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	height: 3.12rem;
+    font-size: 1.2em;
+    border: none;
+    box-shadow: 0px 0.25rem 0.87rem rgba(0, 0, 0, 0.09);
 }
+
 #contact label {
 	margin: 2em 0 1em 0;
 }
+
 #contact textarea {
 	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+    box-shadow: 0px 0.25rem 0.87rem rgba(0, 0, 0, 0.09);
 }
+
 /* select catégories */
 #categoryFilter {
-	display: block; /* Permet à l'élément de prendre toute la largeur disponible */
-	margin: 20px auto; /* Centrer horizontalement avec une marge automatique */
-	padding: 10px;
-	font-size: 1rem;
-	border: 1px solid #ccc;
-	border-radius: 5px;
-	background-color: #fff;
-  }
-  
-  #categoryFilter:focus {
-	outline: none; /* Retirer le contour par défaut lors de la mise au point */
-	border-color: #007bff; /* Couleur de bordure lors de la mise au point */
-  }
+	display: block; 
+    margin: 1.25rem auto;
+    padding: 0.62rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.31rem;
+    background-color: #fff;
+}
+
+#categoryFilter:focus {
+	outline: none;
+	border-color: #007bff;
+}
+
 /* ----------------- */
 
-input[type="submit"]{
+input[type="submit"] {
 	font-family: 'Syne';
-	font-weight: 700;
-	color: white;
-	background-color: #1D6154;
-	margin : 2em auto ;
-	width: 180px;
-	text-align: center;
-	border-radius: 60px ;
+    font-weight: 700;
+    color: white;
+    background-color: #1D6154;
+    margin: 2em auto;
+    width: 11.25rem; 
+    text-align: center;
+    border-radius: 3.75rem;
 }
 
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
-	margin: 2em
+	margin: 2em;
 }
+
 .wrapper-login {
     min-height: 100vh;
     display: flex;
     justify-content: center;
 }
 
-
 /* page login */
 .login-container {
 	display: flex;
-	flex-direction: column;
-	gap: 1rem;
+    flex-direction: column;
+    gap: 1rem;
     background-color: none;
     padding: 2rem;
-    border-radius: 8px;
+    border-radius: 0.5rem; 
     width: 100%;
-    max-width: 400px;
+    max-width: 25rem;
     text-align: center;
 }
+
 	.login-title {
     	font-size: 2rem;
     	color: #1D6154;
@@ -461,34 +541,32 @@ footer nav ul {
 
 	/* Formulaire */
 	.login-form .form-group {
-    margin-bottom: 1.5rem;
-    text-align: left;
+		margin-bottom: 1.5rem;
+		text-align: left;
 	}
 
 		/* Champs de saisie */
 		.login-form input[type="email"],
 		.login-form input[type="password"] {
-    		width: 379px;
+    		width: 23.68rem;
     		padding: 0.75rem;
     		font-size: 1rem;
     		border: none;
-    		border-radius: 4px;
-    		box-shadow: 0px 4px 14px 0px #00000017; /* Ombre portée */
-    		box-sizing: border-box;
-    
+    		border-radius: 0.25rem;
+    		box-shadow: 0px 0.25rem 0.87rem 0px #00000017;
 		}
 
 		/* Bouton de soumission */
 		.login-button {
-    		width: 179px;
-			height: 36px;
+    		width: 12.79rem;
+			height: 2.57rem;
 			line-height: 1;
     		padding: 0.75rem;
     		background-color: #1D6154;
     		color: #ffffff;
     		font-size: 1rem;
     		border: none;
-    		border-radius: 60px;
+    		border-radius: 4.29rem;
     		cursor: pointer;
     		transition: background-color 0.3s;
 		}
@@ -503,49 +581,6 @@ footer nav ul {
     		margin-top: 1rem;
     		font-size: 0.9rem;
     		color: #3D3D3D;
-    		line-height: 1; /* Réduit l'espacement vertical */
+    		line-height: 1;
     		text-decoration: underline;
-    		transition: color 0.3s;
 		}
-
-		.forgot-password:hover {
-    		color: #515151;
-		}
-
-  		/* Dans ton fichier CSS */
-  		#welcome-message {
-			position: relative;
-			display: none; 
-			line-height: 1.5;
-			width: 100%;
-			height: auto; 
-			background-color: black; 
-			color: white; 
-			font-size: 16px; 
-			padding: 10px;
-			border-radius: 5px; /* Coins arrondis */
-			text-align: center;
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre portée */
-			transition: opacity 0.3s ease-in-out;
-			
-		  }
-		  
-		  #welcome-message::before {
-			content: "\f044"; 
-			font-family: "Font Awesome 6 Free"; 
-			font-weight: 900;
-			display: inline-block; /* Pour bien aligner l'icône avec le texte */
-			margin-right: 8px;
-			vertical-align: middle;
-		  }
-		  
-  
-  		#welcome-message.show {
-			display: block; /* Rendre l'élément visible */
-			opacity: 1; /* Lorsque visible, on applique l'opacité */
-  		}
-		
-	
-		
-  
-  
