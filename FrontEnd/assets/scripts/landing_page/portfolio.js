@@ -28,7 +28,8 @@ export function displayGallery(element, works) {
             let img = document.createElement("img");
             img.src = work.imageUrl;
             img.alt = work.title;
-            img.id = work.id;
+
+            figure.id = element + "#" + work.id;
 
             if(element === "landing"){
                 gallery = document.querySelector(".gallery");
@@ -56,7 +57,7 @@ export function displayGallery(element, works) {
 
                 delIcon.addEventListener("click", (event) => {
                     event.preventDefault();
-                    deleteWork(worksURL, work.id);
+                    deleteWork(worksURL, work.id, work.title);
                 });
                 
                 figure.appendChild(delIcon);
@@ -71,5 +72,24 @@ export function displayGallery(element, works) {
         });
     } catch(error) {
         console.error("Error at filling the gallery: ", error);
+    }
+}
+
+/**
+ * This function removes landing page gallery's DOM work figure with the specified id.
+ * @param {integer} idWork 
+ */
+export function deleteWorkFigureFromLandingPageDOM(idWork) {
+    try {
+        const el = document.getElementById("landing" + "#" + idWork); // figure sur page d'accueil
+        if(el) {
+            el.remove();
+            console.log(`Landing page figure id n°${idWork} was deleted from DOM.`);
+        }
+        else { 
+            console.error(`No landing page figure having id landing#${idWork} was found in the DOM.`);
+        }
+    } catch(error) {
+        console.error(`Error deleting landing page figure id n° ${idWork}:  ${error}`);
     }
 }

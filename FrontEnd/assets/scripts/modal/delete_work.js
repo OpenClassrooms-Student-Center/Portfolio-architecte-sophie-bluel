@@ -1,40 +1,57 @@
 import {
-    displayError
+    displayError,
+    removeFromLocalStorage
 } from "../connection.js";
+import {
+    deleteWorkFigureFromLandingPageDOM
+} from "../landing_page/portfolio.js";
 
 /**
- * This function deletes a work from the back-end and gallery.
+ * This function deletes a work from the back-end, DOM and localStorage.
  * @param {String} deleteURL : the backend DELETE URL begins with the script.js worksURL constant.
  * @param {Number} idWork : the id of the work to delete
+ * @param {String} titleWork : the name of the work to delete in case of error message user display
  */
-export async function deleteWork(deleteURL, idWork) {
-    console.log("deleteWork enter");
+export async function deleteWork(deleteURL, idWork, titleWork) {
     const req = {
         method: "DELETE"
     }
     try {
-        if(confirm("Êtes-vous sûr de vouloir supprimer cet élément?")) { 
-            console.log("before fetch");
+        //if(confirm("Êtes-vous sûr de vouloir supprimer ce projet?")) { 
             const res = await fetch(deleteURL + idWork , req);
-            console.log("after fetch");
             if(res.status === 401) {
                 displayError("Utilisat·rice·eur pas authentifié·e", erreur);
             }
             else if(res.status === 200 || res.status === 204) {
-                console.log("DELETE ok");
-                const el = document.getElementById(idWork);
-                if(el) {
-                    console.log("DOM removal");
-                    el.remove();
-                    console.log(`L'élément d'id ${idWork} a été supprimé du DOM.`)
-                }
-                else { console.log(`Aucun élément d'id ${idWork} trouvé dans le DOM.`); }
+                deleteWorkFigureFromModalDOM(idWork);
+                deleteWorkFigureFromLandingPageDOM(idWork);
+                removeFromLocalStorage("works");
             }
             else {
-                console.error("delete error res status: " + res.status + ", statusText: " + res.statusText);
+                console.error("DELETE error res status: " + res.status + ", statusText: " + res.statusText);
             }
+        //}
+    } catch(error) {
+        erreur.innerHTML = `Erreur à la suppression du projet "${titleWork}: demandez ou lisez les logs s'il vous plaît.`;
+    }
+}
+
+/**
+ * This function removes modal gallery's DOM work figure with specified id.
+ * @param {integer} idWork 
+ */
+function deleteWorkFigureFromModalDOM(idWork) {
+    try {
+        const el = document.getElementById("modal" + "#" + idWork); // figure dans modale
+        if(el) {
+            console.log("after query el modal");
+            el.remove();
+            console.log(`Modal figure id n°${idWork} was deleted from DOM.`);
+        }
+        else { 
+            console.error(`No modal figure having id modal#${idWork} was found in the DOM.`); 
         }
     } catch(error) {
-        erreur.innerHTML = "3 Votre suppression essuie une erreur. Demandez ou lisez les logs s'il vous plaît.";
+        console.error(`Error deleting modal figure id n°${idWork}: ${error}`);
     }
 }
