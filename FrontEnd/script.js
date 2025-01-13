@@ -17,7 +17,7 @@ async function fetchImages() {
     const response = await fetch(url, { method: "GET" });
     const data = await response.json();
     renderGallery(data);
-}
+};
 function renderGallery(data) {
   const gallery = document.getElementById("gallery");
   gallery.innerHTML = "hey"; // Clear previous data-------------
@@ -33,13 +33,13 @@ function renderGallery(data) {
     figure.appendChild(figcaption);
     gallery.appendChild(figure);
   });
-}
+};
 async function fetchCategories() {
     const url = `${BASE_URL}${categories}`;
     const response = await fetch(url, { method: "GET" });
     const data = await response.json();
     renderCategoryButtons(data);
-}
+};
 function renderCategoryButtons(data) {
   const buttons = document.getElementById("buttons");
   const allBtn = document.createElement("button");
@@ -52,7 +52,7 @@ function renderCategoryButtons(data) {
     btn.addEventListener("click", () => filterImages(item.id));
     buttons.appendChild(btn);
   });
-}
+};
 async function filterImages(filterid) {
     const url = `${BASE_URL}${works}`;
     const response = await fetch(url, { method: "GET" });
@@ -63,11 +63,11 @@ async function filterImages(filterid) {
       const filteredData = data.filter((item) => item.category.id === filterid);
       renderGallery(filteredData);
     }
-}
+};
 function renderloginbtn(){
     const loginbtn = document.getElementById("login");
     loginbtn.addEventListener("click", () => renderloginpage());
-}
+};
 function renderloginpage(){
     const loginpage = document.getElementById("main");
     loginpage.innerHTML = '';
@@ -96,7 +96,7 @@ function renderloginpage(){
     loginform.appendChild(loginbtn);
     loginform.appendChild(loginlink);
     loginpage.appendChild(loginform);
-}
+};
 function forgotenn(){
     const loginpage = document.getElementById("main");
     loginpage.innerHTML = '';
@@ -112,7 +112,7 @@ function forgotenn(){
     loginform.appendChild(logininput);
     loginform.appendChild(loginbtn);
     loginpage.appendChild(loginform);
-}
+};
 function verifyLogin() {
     const loginform = document.getElementById("loginform");
     const loginInput = document.getElementById("logininput").value;
@@ -122,13 +122,13 @@ function verifyLogin() {
     alert("Veuillez remplir tous les champs.");
     return;
   }
-}  
+};
 async function verifylogin(){
 
     const url = `${BASE_URL}${login}`;
     const response = await fetch(url, { method: "POST" });
     const data = await response.json();   
-}
+};
 
 
 
