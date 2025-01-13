@@ -1,5 +1,5 @@
 //const BASE_URL = "http://localhost:5678/api/";
-const BASE_URL = "http://carnelian-western-sock.glitch.me/api/";
+const BASE_URL = "https://carnelian-western-sock.glitch.me/api/";
 fetch('https://carnelian-western-sock.glitch.me/api/data')
 .then(response => response.json())
 .then(data => {
