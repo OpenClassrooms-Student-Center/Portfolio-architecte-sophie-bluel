@@ -1,5 +1,13 @@
 //const BASE_URL = "http://localhost:5678/api/";
 const BASE_URL = "http://localhohttps://carnelian-western-sock.glitch.me/api/datast:5678/api/";
+fetch('https://carnelian-western-sock.glitch.me/api/data')
+.then(response => response.json())
+.then(data => {
+  document.getElementById('dynamic-content').innerText = data.message;
+});
+
+
+
 const works = "works";
 const categories = "categories";
 const login = "users/login";
