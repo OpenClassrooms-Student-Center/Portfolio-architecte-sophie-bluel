@@ -1,10 +1,8 @@
-//const BASE_URL = "http://localhost:5678/api/";
-const BASE_URL = "https://carnelian-western-sock.glitch.me/api/";
-fetch('https://carnelian-western-sock.glitch.me/api/data')
-.then(response => response.json())
-.then(data => {
-  document.getElementById('dynamic-content').innerText = data.message;
-});
+const BASE_URL = "http://localhost:5678/api/";
+//const BASE_URL = "https://carnelian-western-sock.glitch.me/api/";
+//fetch('https://carnelian-western-sock.glitch.me/api/data')
+//.then(response => response.json())
+//.then(data => {document.getElementById('dynamic-content').innerText = data.message;});
 
 
 
