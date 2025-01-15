@@ -11,6 +11,7 @@ export const fetchArtGalleryData = async () => {
   // Utilisation de try-catch pour gérer les erreurs
   try {
     // Envoi de la requête HTTP GET à l'API. premier argument est l'url
+    //  de l'API, le deuxième argument est un objet de configuration
     const response = await fetch(API_URI);
 
     // Vérification de la réponse HTTP

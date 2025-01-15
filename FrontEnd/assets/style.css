@@ -392,7 +392,8 @@ li:hover {
 	
 		.chooseFile {
 			margin: auto;
-			display: flex;
+			display: flex; 
+			flex-direction: column;
 			justify-content: center;
 			align-items: center;
 			background-color: #E8F1F6;
@@ -403,15 +404,30 @@ li:hover {
 			border-radius: 0.31rem;
 			font-size: 0.87rem;
 			cursor: pointer;
+			/* margin-top: 2.5rem; */
 		}
+		.chooseFile p{
+			margin-top: 0.5rem;
+		}
+		.image-preview{
+			position: absolute;
+			max-width: 180px;
+  			max-height: 180px; 
+		}
+
 		.form-title-container, .form-category-container {
 			margin: 0 auto;
 			width: 90%;
 			display: flex;
 			flex-direction: column;
 			margin-top: 1rem;
-		} 
-		.form-title-category-input {
+		}
+		.form-category-container select {
+			box-shadow: 0px 0.25rem 0.87rem 0px #00000017;
+			height: 51px;
+			border: none;
+		  }
+		.form-title-input {
 			margin: auto;
 			margin-top: 0.5rem;
 			width: 100%;
