@@ -78,7 +78,9 @@ export const displayGallery = (projects) => {
       customButton.addEventListener("click", () => {
         imageInput.click();
       });
-
+      homepageEditButton.addEventListener("click", () => {
+        window.location.replace("./index.html");
+      });
       imageInput.addEventListener("change", () => {
         if (imageInput.files.length > 0) {
           console.log("Fichier sélectionné :", imageInput.files[0].name);
