@@ -1,3 +1,4 @@
+const API_URI = "http://localhost:5678/api/works";
 export const deleteProject = async (projectId, projectTitle) => {
   const token = sessionStorage.getItem("token");
   const confirmation = confirm(
@@ -6,16 +7,13 @@ export const deleteProject = async (projectId, projectTitle) => {
 
   if (confirmation) {
     try {
-      const response = await fetch(
-        `http://localhost:5678/api/works/${projectId}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
-          },
-        }
-      );
+      const response = await fetch(`${API_URI}/${projectId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      });
       return response.ok;
     } catch (error) {
       console.error("Erreur lors de la tentative de suppression :", error); // Log ici uniquement
