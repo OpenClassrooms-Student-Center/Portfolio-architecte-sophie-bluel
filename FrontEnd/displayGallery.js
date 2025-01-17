@@ -2,7 +2,6 @@ import { deleteProject } from "./deleteProject.js";
 import { addProject } from "./addProject.js";
 
 export const displayGallery = (projects) => {
-  // Déclaration des constantes en haut
   let gallery = document.querySelector(".gallery");
   const modalGallery = document.querySelector(".modal-gallery");
   const addPhotoButton = document.querySelector(".photo-add-btn");
@@ -11,7 +10,9 @@ export const displayGallery = (projects) => {
 
   // Extraire toutes les catégories uniques
   const categories = [
-    ...new Set(projects.map((project) => project.category.name)),
+    ...new Map(
+      projects.map((project) => [project.category.id, project.category])
+    ).values(),
   ];
 
   // Si la galerie n'existe pas, on la crée
@@ -35,32 +36,6 @@ export const displayGallery = (projects) => {
     figure.append(imageElement, figCaption);
     gallery.append(figure);
   });
-
-  // Créer les options pour le select
-  const categorySelect = document.querySelector("#form-category-input");
-
-  // Si le select existe, on ajoute les options
-  if (categorySelect) {
-    // On vide le select avant d'ajouter les nouvelles options
-    categorySelect.innerHTML = "";
-
-    // Créer une option vide pour "Toutes les catégories" mais non sélectionnée
-    const allOption = document.createElement("option");
-    allOption.value = ""; // Valeur vide
-    allOption.textContent = "Toutes les catégories"; // Texte de l'option
-    categorySelect.appendChild(allOption);
-
-    // Ajouter les catégories uniques
-    categories.forEach((category) => {
-      const option = document.createElement("option");
-      option.value = category; // Utilisation du nom de la catégorie
-      option.textContent = category; // Texte de l'option affiché
-      categorySelect.appendChild(option);
-    });
-
-    // Ne rien sélectionner par défaut, le select reste vide
-    categorySelect.value = "";
-  }
 
   if (modalTitleContainer) {
     const modalTitle = document.createElement("h2");
@@ -86,7 +61,7 @@ export const displayGallery = (projects) => {
       const formContainer = document.createElement("div");
       formContainer.classList.add("form-container");
 
-      // Choix de fichier pour l'image
+      // Création de la zone de sélection et de prévisualisation d'images
       const chooseFileDiv = document.createElement("div");
       chooseFileDiv.classList.add("chooseFile");
 
@@ -108,12 +83,11 @@ export const displayGallery = (projects) => {
         if (imageInput.files.length > 0) {
           console.log("Fichier sélectionné :", imageInput.files[0].name);
 
-          // Affichage de l'image sélectionnée dans la div 'chooseFileDiv'
+          // Prévisualisation de l'image sélectionnée dans la div 'chooseFileDiv'
           const fileReader = new FileReader();
-          fileReader.onload = function (e) {
+          fileReader.onload = (e) => {
             const imgPreview = document.createElement("img");
-            imgPreview.src = e.target.result; // Image sélectionnée en prévisualisation
-            // Ajout d'une classe à l'image
+            imgPreview.src = e.target.result;
             imgPreview.classList.add("image-preview");
             chooseFileDiv.appendChild(imgPreview);
           };
@@ -124,7 +98,14 @@ export const displayGallery = (projects) => {
 
       chooseFileDiv.append(customButton, imageInput);
 
-      // Paragraphe sous le bouton
+      // Ajouter une image "picture.png" provenant du dossier "assets/icons"
+      const pictureImage = document.createElement("img");
+      pictureImage.src = "./assets/icons/picture.png";
+      pictureImage.alt = "Image de prévisualisation";
+      pictureImage.classList.add("icone-preview");
+      chooseFileDiv.appendChild(pictureImage);
+
+      // Paragraphe sous le bouton JPG, PNG : 4 Mo max
       const fileInfoParagraph = document.createElement("p");
       fileInfoParagraph.textContent = "JPG, PNG : 4 Mo max";
       chooseFileDiv.append(fileInfoParagraph);
@@ -152,30 +133,22 @@ export const displayGallery = (projects) => {
       const categorySelect = document.createElement("select");
       categorySelect.setAttribute("id", "form-category-input");
 
-      // Ajouter la catégorie "Toutes les catégories" mais sans la sélectionner
-      const allOption = document.createElement("option");
-      allOption.value = "";
-      allOption.textContent = "Choisissez une catégorie";
-      categorySelect.appendChild(allOption);
+      // Option vide par défaut
+      const defaultOption = document.createElement("option");
+      defaultOption.value = "";
+      defaultOption.textContent = "Choisir une catégorie";
+      categorySelect.appendChild(defaultOption);
 
       categories.forEach((category) => {
         const option = document.createElement("option");
-        option.value = category;
-        option.textContent = category;
+        option.value = category.id; // Utilisez l'id comme valeur
+        option.textContent = category.name; // Affichez le nom
         categorySelect.appendChild(option);
-      });
-
-      // Ajouter l'écouteur d'événement après avoir créé les options
-      categorySelect.addEventListener("change", (e) => {
-        // Récupérer la valeur de la catégorie sélectionnée
-        const selectedCategory = e.target.value;
-
-        // Afficher la catégorie sélectionnée dans la console
-        console.log("Catégorie sélectionnée :", selectedCategory);
       });
 
       categoryContainer.append(categoryLabel, categorySelect);
 
+      // Bouton de soumission de l'ajout des projets
       const submitButton = document.createElement("button");
       submitButton.classList.add("photo-add-project");
       submitButton.textContent = "Valider";
@@ -186,8 +159,18 @@ export const displayGallery = (projects) => {
         const category = categorySelect.value;
         const image = imageInput.files[0];
 
-        // Appel à la fonction pour ajouter le projet
-        const newProject = await addProject(title, category, image);
+        // Vérification de la validité de la catégorie
+        const categoryId = categorySelect.value;
+
+        // Vérifiez que la catégorie est valide
+        if (!categoryId) {
+          console.error("Invalid category value");
+          alert("Please select a valid category.");
+          return;
+        }
+
+        // Appel de la fonction addProject avec l'id de la catégorie
+        const newProject = await addProject(title, categoryId, image);
 
         if (newProject) {
           const newFigure = document.createElement("figure");
@@ -215,8 +198,9 @@ export const displayGallery = (projects) => {
     }
   });
 
+  // --------------------------------------------------------------------------------
+  // Affichage des projets dans la galerie modale et suppression des projets
   if (modalGallery) {
-    // Affichage des projets dans la galerie modale
     projects.forEach((project) => {
       const modalFigure = document.createElement("figure");
       const modalImage = document.createElement("img");

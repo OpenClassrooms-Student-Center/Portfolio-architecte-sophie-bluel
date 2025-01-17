@@ -398,7 +398,7 @@ li:hover {
 			align-items: center;
 			background-color: #E8F1F6;
 			width: 26.25rem; 
-			height: 11rem;
+			height: 14rem;
 			border: none;
 			padding: 0.62rem 1.25rem;
 			border-radius: 0.31rem;
@@ -409,6 +409,15 @@ li:hover {
 		.chooseFile p{
 			margin-top: 0.5rem;
 		}
+		.icone-preview {
+			position: absolute;
+			border-radius: 5px;
+			top: 7%;
+			left: 45%;
+			max-width: 45px;
+  			max-height: 45px;
+		  }
+		  
 		.image-preview{
 			position: absolute;
 			max-width: 180px;

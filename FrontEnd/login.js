@@ -1,4 +1,4 @@
-import { logIn, logOut, isConnected } from "./sessionManagement.js";
+import { logIn } from "./sessionManagement.js";
 
 const API_URI = "http://localhost:5678/api/users/login";
 const confirmButton = document.getElementById("login-button-id");
