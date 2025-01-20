@@ -158,16 +158,27 @@ export const displayGallery = (projects) => {
       submitButton.addEventListener("click", async (e) => {
         e.preventDefault();
         const title = titleInput.value;
-        const category = categorySelect.value;
-        const image = imageInput.files[0];
-
         // Vérification de la validité de la catégorie
         const categoryId = categorySelect.value;
-
+        const image = imageInput.files[0];
+        if (!title) {
+          console.error("Invalid title value");
+          alert(
+            "Veuillez renseigner l'ensemble des champs et renseigner bien le titre et la catégorie."
+          );
+          return;
+        }
         // Vérifiez que la catégorie est valide
         if (!categoryId) {
           console.error("Invalid category value");
-          alert("Please select a valid category.");
+          alert("Veuillez selectionner les trois champs.");
+          return;
+        }
+        if (!image) {
+          console.error("Pas d'image selectionnée");
+          alert(
+            "Veuillez sélectionner une image avant de valider le formulaire."
+          );
           return;
         }
 
