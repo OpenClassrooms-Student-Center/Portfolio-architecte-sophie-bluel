@@ -143,19 +143,19 @@ export const displayGallery = (projects) => {
 
       categories.forEach((category) => {
         const option = document.createElement("option");
-        option.value = category.id; // Utilisez l'id comme valeur
-        option.textContent = category.name; // Affichez le nom
+        option.value = category.id;
+        option.textContent = category.name;
         categorySelect.appendChild(option);
       });
       // Ajouter la ligne sous le sélecteur de catégorie
       const lineDiv = document.createElement("div");
       lineDiv.style.position = "absolute";
-      lineDiv.style.bottom = "-1.5rem"; // Place la ligne sous l'élément avec un espace de 1rem
+      lineDiv.style.bottom = "-1.5rem";
       lineDiv.style.left = "1.8rem";
       lineDiv.style.width = "90%";
       lineDiv.style.borderBottom = "1px solid black";
 
-      // Ajouter les éléments dans le conteneur categoryContainer avec append
+      // Ajouter les éléments dans le conteneur categoryContainer
       categoryContainer.append(categoryLabel, categorySelect, lineDiv);
 
       // Bouton de soumission de l'ajout des projets
@@ -204,6 +204,8 @@ export const displayGallery = (projects) => {
 
           newFigure.append(newImage, newCaption);
           gallery.append(newFigure);
+          // Redirection après ajout
+          window.location.replace("./index.html");
         } else {
           console.log("Erreur lors de l'ajout du projet.");
         }
