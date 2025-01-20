@@ -147,8 +147,16 @@ export const displayGallery = (projects) => {
         option.textContent = category.name; // Affichez le nom
         categorySelect.appendChild(option);
       });
+      // Ajouter la ligne sous le sélecteur de catégorie
+      const lineDiv = document.createElement("div");
+      lineDiv.style.position = "absolute";
+      lineDiv.style.bottom = "-1.5rem"; // Place la ligne sous l'élément avec un espace de 1rem
+      lineDiv.style.left = "1.8rem";
+      lineDiv.style.width = "90%";
+      lineDiv.style.borderBottom = "1px solid black";
 
-      categoryContainer.append(categoryLabel, categorySelect);
+      // Ajouter les éléments dans le conteneur categoryContainer avec append
+      categoryContainer.append(categoryLabel, categorySelect, lineDiv);
 
       // Bouton de soumission de l'ajout des projets
       const submitButton = document.createElement("button");

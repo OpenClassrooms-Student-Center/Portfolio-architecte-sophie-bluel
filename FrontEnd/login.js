@@ -45,6 +45,7 @@ export const handleLoginSubmit = async (e) => {
     // ---------------------------------argument 2: objet d'options
     const response = await fetch(API_URI, {
       method: "POST",
+      // le corps de la requête sera en json
       headers: {
         "Content-Type": "application/json",
       },

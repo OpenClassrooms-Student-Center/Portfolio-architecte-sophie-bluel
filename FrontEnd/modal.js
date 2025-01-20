@@ -24,7 +24,7 @@ export const initializeModal = () => {
   // Événements
   modalLink.addEventListener("click", (e) => {
     // Cela empêche un comportement de navigation qui pourrait perturber l'ouverture de la modale.
-    e.preventDefault(); // Empêche l'action par défaut du lien
+    e.preventDefault();
     openModal();
   });
 
