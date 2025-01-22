@@ -3,9 +3,9 @@
    License: none (public domain)
 */
 
-html, body, div, span, applet, object, iframe,
+html, body, div, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
+ abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
 b, u, i, center,
@@ -62,7 +62,7 @@ section {
 	margin: 50px 0
 }
 
-h1{
+h1 > a{
 	display: flex;
 	flex-direction: column;
 	font-family: 'Syne';
@@ -71,11 +71,11 @@ h1{
 	color: #B1663C
 }
 
-h1 > span {
+span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
-;
+	text-transform: uppercase;
 }
 
 h2{
@@ -94,25 +94,38 @@ nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
 }
-
+#navbar img{
+	height: 22px;
+}
 li:hover {
 	color: #B1663C;
+}
+.activenav {
+	font-weight: 900;
+}
+a {
+	text-decoration: none;
+	color: black;
+}
+a:hover {
+	color: #B1663C;
+	text-decoration: underline;
 }
 #introduction {
 	display: flex;
 	align-items: center;
 }
 #introduction figure {
-	flex: 1
+	flex: 1.1
 }
 #introduction img {
 	display: block;
-	margin: auto;
-	width: 80%;
+	/*margin: auto;*/
+	width: 90%;
 }
 
 #introduction article {
-	flex: 1
+	flex: 0.9
 }
 #introduction h2 {
 	margin-bottom: 1em;
@@ -121,10 +134,7 @@ li:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
-#portfolio h2 {
-	text-align: center;
-	margin-bottom: 1em;
-}
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -137,39 +147,53 @@ li:hover {
 	width: 100%;
 
 }
-#contact {
+#formstyle {
 	width: 50%;
 margin: auto;
 }
-#contact > * {
+#formstyle > * {
 	text-align: center;
 
 }
-#contact h2{
+#formstyle h2{
 	margin-bottom: 20px;
 }
-#contact form {
+#formstyle form {
 	text-align: left;
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
 }
 
-#contact input {
+#formstyle input {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#contact label {
+#formstyle label {
 	margin: 2em 0 1em 0;
 }
-#contact textarea {
+#formstyle textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
+#formstyle a {
+	text-align: center;
+	cursor: pointer;
+	width: auto;
+	align-self: center;
+}
+#errormsg{
+	color: red;
+	text-align: center;
+	padding-top: 30px;
+}
+.errormsghide{
+	display: none;
+}
 
-input[type="submit"]{
+input[type="submit"], #add{
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
@@ -178,11 +202,121 @@ input[type="submit"]{
 	width: 180px;
 	text-align: center;
 	border-radius: 60px ;
+	cursor: pointer;
 }
-
+input[type="submit"]:hover, #add:hover{
+	background-color: #0E2F28;
+}
+#buttons{
+	display: flex;
+	justify-content: center;
+	margin-top: 1em;
+}
+button{
+	font-family: 'Syne';
+	font-weight: 700;
+	color: #1D6154;
+	margin : 2em 5px ;
+	text-align: center;
+	border-radius: 60px ;
+	cursor: pointer;
+	border: solid 1px #1D6154;
+	background-color: transparent;
+	padding: 10px 20px;
+}
+button:hover{
+	background-color: #1D6154;
+	color: white;
+}
+.active{
+	background-color: #1D6154;
+	color: white;
+}
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em
 }
+#Editormode{
+	background-color: black;
+	color: white;
+	padding: 10px;
+	margin: auto;
+	z-index: 100;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+}
 
+#modify{
+	display: flex;
+	align-items: flex-end;
+	gap: 10px;
+	color: black;
+	grid-column-start: 3;
+	cursor: pointer;
+}
+#modify:hover svg, #modify:hover p{
+	color: #B1663C;
+	fill:#B1663C;
+
+}
+#projets {
+	align-items: center;
+	justify-items: start;
+	gap: 20px;
+	display: grid;
+	grid-template-columns: 2fr 1fr 2fr;
+}
+#projets h2 {
+	text-align: center;
+	width: auto;
+	align-self: center;
+	grid-column-start: 2;
+}
+#popup {
+	border-radius: 10px;
+	width: 35%;
+	height: 70%;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	z-index: 100;
+	text-align: center;
+	padding: 1em;
+	display: flex;
+	flex-direction: column;
+	align-content: space-between;
+	flex: 1 1 auto;
+}
+#popup svg {
+	cursor: pointer;
+}
+#popup svg:hover {
+	fill: #B1663C;
+}
+
+#blackout {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 1000%;
+	height: 1000%;
+	background-color: #0000005d;
+	z-index: 50;
+}
+h3 {
+	font-size: 2em;
+}
+#close {
+	justify-self: flex-end;
+	text-align: right;
+
+}
