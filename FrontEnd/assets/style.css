@@ -1,8 +1,3 @@
-/* http://meyerweb.com/eric/tools/css/reset/
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
 html, body, div, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
  abbr, acronym, address, big, cite, code,
@@ -61,7 +56,6 @@ header {
 section {
 	margin: 50px 0
 }
-
 h1 > a{
 	display: flex;
 	flex-direction: column;
@@ -70,14 +64,12 @@ h1 > a{
 	font-weight: 800;
 	color: #B1663C
 }
-
 span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
 	text-transform: uppercase;
 }
-
 h2{
 	font-family: 'Syne';
 	font-weight: 700;
@@ -88,7 +80,6 @@ nav ul {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
-
 }
 nav li {
 	padding: 0 10px;
@@ -120,21 +111,17 @@ a:hover {
 }
 #introduction img {
 	display: block;
-	/*margin: auto;*/
 	width: 90%;
 }
-
 #introduction article {
 	flex: 0.9
 }
 #introduction h2 {
 	margin-bottom: 1em;
 }
-
 #introduction p {
 	margin-bottom: 0.5em;
 }
-
 .gallery {
 	width: 100%;
 	display: grid;
@@ -142,12 +129,10 @@ a:hover {
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
 }
-
 .gallery img {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
-
 }
 #formstyle {
 	width: 50%;
@@ -251,7 +236,6 @@ footer nav ul {
 	align-items: center;
 	gap: 10px;
 }
-
 #modify{
 	display: flex;
 	align-items: flex-end;
@@ -263,7 +247,6 @@ footer nav ul {
 #modify:hover svg, #modify:hover p{
 	color: #B1663C;
 	fill:#B1663C;
-
 }
 #projets {
 	align-items: center;
@@ -291,12 +274,10 @@ footer nav ul {
 .blackoutoff{
 	display: none;
 }
-
-
 #popup {
 	border-radius: 10px;
 	width: 50%;
-	height: 70%;
+	height: 72%;
 	position: fixed;
 	top: 50%;
 	left: 50%;
@@ -306,7 +287,7 @@ footer nav ul {
 	text-align: center;
 	padding: 10px;
 	display: grid;
-	grid-template-rows: 100px 1fr 12px 70px;
+	grid-template-rows: 100px 1fr 22px 70px;
 	grid-template-columns: 115px 1fr 115px;
 }
 #popup svg {
@@ -322,7 +303,6 @@ footer nav ul {
 #back {
 	grid-area: 1 / 1 / 5 / 2;
 	justify-self: flex-start;
-
 }
 #popup h3 {
 	grid-area: 1 / 2 / 2 / 3;
@@ -340,10 +320,13 @@ footer nav ul {
 	grid-area: 3 / 2 / 3 / 3;
 	background-color: #B3B3B3;
 	margin-bottom: 10px;
+	margin-top: 10px;
 }
 #add {
 	grid-area: 4 / 2 / 5 / 3;
 	align-self: center;
+	width: auto;
+	padding: 10px 30px;
 }
 #popupimg {
 	height: 100px;
@@ -356,7 +339,7 @@ footer nav ul {
 }
 #trashcan{
 	background-color: black;
-	border: 5px solid black;
+	border: 5px solid;
 	border-radius: 5px;
 	width: 12px;
 	height: 12px;
@@ -378,19 +361,29 @@ footer nav ul {
 	flex-direction: column;
 	gap: 20px;
 	text-align: left;
-
 }
 #background{
 	background-color: #E8F1F6;
 	border-radius: 5px;
 	display: flex;
 	flex-direction: column;
-	padding: 30px;
-	gap: 10px;
+	gap: 30px;
 	align-items: center;
+	justify-content: space-evenly;
+	padding: 20px;
+}
+#background svg:hover{
+	fill: #B9C5CC;
+	cursor: auto;
+}
+#uploadimg{
+	height: 170px !important;
+	object-fit: contain !important;
 }
 #uploadbtn{
-	display: none;
+	opacity: 0;
+	position: absolute;
+	left: 10000px;
 }
 #labeluploadbtn{
 	background-color: #CBD6DC;
@@ -411,12 +404,7 @@ footer nav ul {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 	background-color: white;
 	padding-left: 10px;
-
 }
-/*#uploadform label {
-	margin: 2em 0 1em 0;
-
-}*/
 #valider{
 	background-color: #A7A7A7;
 	grid-area: 4 / 2 / 5 / 3;
@@ -427,9 +415,12 @@ footer nav ul {
 	border: none;
 	padding: 10px 20px;
 }
-
 #valider:hover{
 	background-color: #1D6154;
+}
+#successmsg{
+	position: relative;
+	top: 35%;
 }
 
 
