@@ -30,6 +30,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	background-color: #FFFEF8;
 }
 ol, ul {
 	list-style: none;
@@ -56,7 +57,11 @@ body {
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 50px 0;
+	background-color: #FFFEF8;
+}
+main {
+	
 }
 section {
 	margin: 50px 0
@@ -95,6 +100,11 @@ nav li {
 	font-size: 1.2em;
 }
 
+nav a {
+	text-decoration: none;
+	color: inherit;
+}
+
 li:hover {
 	color: #B1663C;
 }
@@ -125,6 +135,47 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
+.filtres {
+	max-width: 585px;
+	display: flex;
+	flex-direction: row;
+	margin:auto;
+	justify-content: space-between;
+	margin-top: 3em;
+	margin-bottom: 3em;
+}
+
+.filtres button {
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 16px;
+	color: #1D6154;
+	background-color: white;
+	display: flex;
+    flex-direction: row;
+    width: fit-content;
+    height: 37px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 2px solid #1D6154;
+    border-radius: 25px;
+    justify-content: center;
+    align-items: center;
+    column-gap: 8px;
+    cursor: pointer;
+    box-sizing: border-box;
+
+}
+.filtres .clicked {
+	color: white;
+	background-color: #1D6154;
+}
+
+.filtres button:hover {
+	color: white;
+	background-color: #1D6154;
+}
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -180,9 +231,61 @@ input[type="submit"]{
 	border-radius: 60px ;
 }
 
+footer {
+	height: 60px;
+	background-color: #FFFFFF;
+}
+
 footer nav ul {
+	height: 60px;
 	display: flex;
 	justify-content: flex-end;
-	margin: 2em
+	align-items: center;
+	margin: 2em;
+	
+}
+
+/*Page de connexion*/
+
+#login-container {
+	width: 100%;
+	margin:auto;
+	padding: 150px 0 350px 0;
+	display:flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#login-container form {
+	display:flex;
+	flex-direction: column;
+}
+
+#login-container h2 {
+	padding-bottom: 30px;
+}
+
+#login-container input[type="email"], input[type="password"] {
+	width: 379px;
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+#login-container input[type="submit"]{
+	height: 36px;
+	width: 180px;
+	box-shadow: none;
+	border: none;
+	cursor: pointer;
+}
+
+#login-container label {
+	margin: 2em 0 1em 0;
+}
+
+#login-container a {
+	color: inherit;
 }
 
