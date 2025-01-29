@@ -1,0 +1,141 @@
+
+#introduction {
+	display: flex;
+	align-items: center;
+}
+#introduction figure {
+	flex: 1
+}
+#introduction img {
+	display: block;
+	margin: auto;
+	width: 80%;
+}
+
+#introduction article {
+	flex: 1
+}
+#introduction h2 {
+	margin-bottom: 1em;
+}
+
+#introduction p {
+	margin-bottom: 0.5em;
+}
+#projets {
+	display: flex;
+	padding: 90px 0 30px 0;
+	max-width: 800px;
+	height: fit-content;
+	margin: auto;
+	justify-content: center;
+	position: relative;
+}
+#projets h2 {
+	margin-bottom: 1em;
+	text-align: center;
+}
+
+#projets .button {
+	all: unset;
+	cursor: pointer;
+	padding-top: 10px;
+	display: flex;
+	position: absolute;
+	right: 190px;
+}
+#projets .button span{
+	font-size: 16px;
+}
+#projets .button p {
+	font-size: 14px;
+	margin-left: 8px;
+}
+#projets .button:hover {
+	color:#B1663C;
+}
+.filtres-off{
+	display: none;
+}
+.filtres {
+	max-width: 585px;
+	display: flex;
+	flex-direction: row;
+	margin:auto;
+	justify-content: space-between;
+}
+
+.filtres button {
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 16px;
+	color: #1D6154;
+	background-color: white;
+	display: flex;
+    flex-direction: row;
+    width: fit-content;
+    height: 37px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 2px solid #1D6154;
+    border-radius: 25px;
+    justify-content: center;
+    align-items: center;
+    column-gap: 8px;
+    cursor: pointer;
+    box-sizing: border-box;
+
+}
+.filtres .clicked {
+	color: white;
+	background-color: #1D6154;
+}
+
+.filtres button:hover {
+	color: white;
+	background-color: #1D6154;
+}
+
+.gallery {
+	margin-top: 50px;
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-column-gap: 20px;
+	grid-row-gap: 20px;
+}
+
+.gallery img {
+	width: 100%;
+
+}
+#contact {
+	width: 50%;
+margin: auto;
+}
+#contact > * {
+	text-align: center;
+
+}
+#contact h2{
+	margin-bottom: 20px;
+}
+#contact form {
+	text-align: left;
+	margin-top:30px;
+	display: flex;
+	flex-direction: column;
+}
+#contact input {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+#contact label {
+	margin: 2em 0 1em 0;
+}
+#contact textarea {
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}

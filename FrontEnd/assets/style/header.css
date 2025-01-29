@@ -1,0 +1,54 @@
+header {
+	display: flex;
+	flex-direction: column;
+	
+}
+#header-content {
+	display: flex;
+	justify-content: space-between;
+	margin: 50px 0;
+	background-color: #FFFEF8;
+}
+#banniere .banniere-off {
+	display: none;
+}
+.banniere-edit {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	background-color: black;
+	color: #FFFFFF;
+}
+.banniere-edit p {
+	font-family: 'Work Sans';
+	font-size: 16px;
+	margin:0;
+	padding: 20px 10px;
+}
+.banniere-edit span {
+	font-size: 16px;
+	margin: 0;
+	padding: 20px 0;
+}
+nav ul {
+	display: flex;
+	align-items: center;
+	list-style-type: none;
+}
+.hidden {
+	display: none;
+}
+nav li {
+	padding: 0 10px;
+	font-size: 1.2em;
+}
+
+nav a {
+	cursor: pointer;
+	text-decoration: none;
+	color: inherit;
+}
+
+li:hover {
+	color: #B1663C;
+}

@@ -1,3 +1,20 @@
+export async function getProjets() {
+
+    const reponse = await fetch('http://localhost:5678/api/works');
+    const works = await reponse.json();
+    const worksJSON = JSON.stringify(works);
+
+    window.localStorage.setItem("works", worksJSON); 
+}
+export async function getCategories() {
+
+    const categoriesJSON = await fetch('http://localhost:5678/api/categories');
+    const categories = await categoriesJSON.json();
+
+    window.localStorage.setItem("categories", categoriesJSON);
+    return categories;
+}   
+
 export function genererProjets(works) {
 
     for(let i=0; i < works.length; i++) {
@@ -23,19 +40,17 @@ export function genererProjets(works) {
     }
 }
 
-export async function creerFiltres(){
+async function creerFiltres(){
 
     let categoriesJSON = window.localStorage.getItem("categories");
     let categories
 
     if(categoriesJSON === null){
 
-        categoriesJSON = await fetch('http://localhost:5678/api/categories');
-        categories = await categoriesJSON.json();
-        window.localStorage.setItem("categories", categoriesJSON);
+        categories = await getCategories();
 
     }else {
-         categories = JSON.parse(categoriesJSON);
+        categories = JSON.parse(categoriesJSON);
     }
 
     const boutonTous = document.createElement("button");
@@ -57,16 +72,20 @@ export async function creerFiltres(){
     
 }
 
-export async function actionFiltres() {
+async function actionFiltres() {
 
     const boutonsFiltres = document.querySelectorAll(".filtres button");
     
     boutonsFiltres.forEach((button) => {
 
-        button.addEventListener("click", (event) =>{
+        button.addEventListener("click", async (event) =>{
 
             let id = event.target.id;
             const worksJSON = window.localStorage.getItem("works");
+
+            if(worksJSON === null){
+                worksJSON = JSON.stringify(await getProjets());
+            }
             boutonsFiltres.forEach(button => button.classList.remove("clicked"));
             event.target.classList.toggle("clicked");
 
@@ -78,10 +97,7 @@ export async function actionFiltres() {
             }else{
                 id = parseInt(id);
                 const works= JSON.parse(worksJSON);
-                console.log(works);
-                console.log(id);
                 const worksFiltres = works.filter(p => p.categoryId === id);
-                console.log(worksFiltres);
                 document.querySelector(".gallery").innerHTML = "";
                 genererProjets(worksFiltres);
                 
@@ -89,4 +105,8 @@ export async function actionFiltres() {
 
         })
     })
+}
+export async function filtres(){
+    creerFiltres();
+    actionFiltres();
 }
