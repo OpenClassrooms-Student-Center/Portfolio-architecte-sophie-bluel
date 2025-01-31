@@ -8,16 +8,18 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
-	<link rel="stylesheet" href="./assets/style.css">
+	<link rel="stylesheet" href="./assets/css/index.css">
+	<script type="module" src="index.js" defer></script>
+	
 </head>
 <body>
 <header>
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
-			<li>projets</li>
+			<li><a class="actif" href="/Portfolio-architecte-sophie-bluel/FrontEnd/index.html">projets</a></li>
 			<li>contact</li>
-			<li>login</li>
+			<li><a href="/Portfolio-architecte-sophie-bluel/FrontEnd/login.html">login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -36,8 +38,18 @@
 	</section>
 	<section id="portfolio">
 		<h2>Mes Projets</h2>
+
+		<menu>
+			<nav class="menu">
+				<button class="all">Tous</button>
+				<button class="objects">Objets</button>
+				<button class="appartements">Appartements</button>
+				<button class="bar">Hotels & Restaurants</button>
+			</nav>
+		</menu>
+
 		<div class="gallery">
-			<figure>
+			<!-- <figure>
 				<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
 				<figcaption>Abajour Tahina</figcaption>
 			</figure>
@@ -80,7 +92,7 @@
 			<figure>
 				<img src="assets/images/hotel-first-arte-new-delhi.png" alt="Hotel First Arte - New Delhi">
 				<figcaption>Hotel First Arte - New Delhi</figcaption>
-			</figure>
+			</figure> -->
 		</div>
 	</section>
 	<section id="contact">
