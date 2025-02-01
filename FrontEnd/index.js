@@ -17,9 +17,11 @@ function genererArticles(data) {
     }
 }
 
+// console.log(data)
 genererArticles(data);
 
-// console.log(data)
+
+/***** filtres *****/
 
 const filterByAll = document.querySelector(".all")
 filterByAll.addEventListener("click", function () {
