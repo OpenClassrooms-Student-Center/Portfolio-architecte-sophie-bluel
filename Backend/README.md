@@ -6,17 +6,10 @@ Ce dossier contient le code backend du projet
 
 Ouvrez un terminal à cet emplacement
 
-Pour installer les dépendances du projet, executez la commande 
+Pour installer les dépendances du projet et lancer le serveur, exécutez la commande 
 ```bash 
-npm install
+docker compose up -d
 ```
-
-Une fois les dépendances installées lancez le projet avec la commande 
-```bash 
-npm start
-```
-
-**Laisser tourner ce terminal pour travailler**
 
 ## Compte de test pour Sophie Bluel
 
