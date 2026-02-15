@@ -3,19 +3,87 @@
    License: none (public domain)
 */
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -23,46 +91,68 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
 	display: block;
 }
+
 body {
 	line-height: 1;
 }
-ol, ul {
+
+ol,
+ul {
 	list-style: none;
 }
-blockquote, q {
+
+blockquote,
+q {
 	quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
 	content: '';
 	content: none;
 }
+
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
 /** end reset css**/
 body {
 	max-width: 1140px;
-	margin:auto;
-	font-family: 'Work Sans' ;
+	margin: 75px auto 0 auto;
+	font-family: 'Work Sans';
 	font-size: 14px;
 }
+
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 50px 0;
 }
+
 section {
 	margin: 50px 0
 }
 
-h1{
+h1 {
 	display: flex;
 	flex-direction: column;
 	font-family: 'Syne';
@@ -71,40 +161,46 @@ h1{
 	color: #B1663C
 }
 
-h1 > span {
+h1>span {
 	font-family: 'Work Sans';
-	font-size:10px;
+	font-size: 10px;
 	letter-spacing: 0.1em;
-;
+	;
 }
 
-h2{
+h2 {
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
 	color: #1D6154
 }
+
 nav ul {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
 
 }
+
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
+	cursor: pointer;
 }
 
 li:hover {
 	color: #B1663C;
 }
+
 #introduction {
 	display: flex;
 	align-items: center;
 }
+
 #introduction figure {
 	flex: 1
 }
+
 #introduction img {
 	display: block;
 	margin: auto;
@@ -114,6 +210,7 @@ li:hover {
 #introduction article {
 	flex: 1
 }
+
 #introduction h2 {
 	margin-bottom: 1em;
 }
@@ -121,10 +218,91 @@ li:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
+
+/***** EDIT PAGE *****/
+
+.edit {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background-color: black;
+	color: white;
+	height: 45px;
+	font-family: 'Work Sans';
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+}
+
+.edit p {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.container-editMode {
+	display: flex;
+	justify-content: center;
+	gap: 30px;
+	margin-top: 120px;
+}
+
+.editMode {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 20px;
+	cursor: pointer;
+}
+
+.change-btn {
+	background: none;
+	border: none;
+	display: flex;
+	gap: 10px;
+	font-family: 'Work Sans';
+	font-size: 14px;
+	cursor: pointer;
+}
+
+
+
+/********* STYLE BOUTONS FILTRES ********/
+.filters {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	margin-bottom: 50px;
+	margin-top: 20px;
+}
+
+.filter-button {
+	color: #1D6154;
+	border: 2px solid #1D6154;
+	border-radius: 60px;
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 16px;
+	padding: 9px 15px;
+	cursor: pointer;
+	background-color: white;
+}
+
+.filter-button:hover {
+	background-color: #1D6154;
+	color: white;
+}
+
+
+/********** FIN STYLE BOUTONS FILTRES *********/
+
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
 }
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -137,20 +315,24 @@ li:hover {
 	width: 100%;
 
 }
+
 #contact {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
-#contact > * {
+
+#contact>* {
 	text-align: center;
 
 }
-#contact h2{
+
+#contact h2 {
 	margin-bottom: 20px;
 }
+
 #contact form {
 	text-align: left;
-	margin-top:30px;
+	margin-top: 30px;
 	display: flex;
 	flex-direction: column;
 }
@@ -161,28 +343,316 @@ margin: auto;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
+
 #contact label {
 	margin: 2em 0 1em 0;
 }
+
 #contact textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-input[type="submit"]{
+input[type="submit"] {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
 	background-color: #1D6154;
-	margin : 2em auto ;
+	margin: 2em auto;
 	width: 180px;
 	text-align: center;
-	border-radius: 60px ;
+	border-radius: 60px;
 }
+
+/***** LOGIN PAGE ******/
+
+.forgot-password {
+	color: black;
+	text-decoration: underline;
+	font-size: 14px;
+	margin-top: 5px;
+	display: inline-block;
+	text-align: center;
+}
+
+nav a {
+	text-decoration: none;
+	color: black;
+}
+
+nav a:hover {
+	color: #B1663C;
+}
+
+.error-message {
+	color: red;
+	font-weight: bold;
+	margin-top: 10px;
+	text-align: center;
+}
+
+/***** MODALE ******/
+
+.modal {
+	display: none;
+	position: fixed;
+	align-items: center;
+	justify-content: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+
+.modal.active {
+	display: flex;
+}
+
+.overlay {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.3);
+}
+
+.modal-wrapper {
+	position: relative;
+	overflow: auto;
+	background-color: #FFF;
+	width: 500px;
+	max-width: 90%;
+	border-radius: 10px;
+	padding: 30px 80px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+
+.modal h3 {
+	font-family: 'Work Sans';
+	font-size: 28px;
+	color: black;
+	margin-top: 40px;
+	margin-bottom: 50px;
+	font-weight: 400;
+	text-align: center;
+}
+
+/*modale 1*/
+.modal-gallery {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 30px;
+
+}
+
+/*modale 1*/
+.gallery-item {
+	position: relative;
+	width: calc((100% - 40px) / 5);
+	margin: 0;
+}
+
+/*modale 1*/
+.gallery-item img {
+	width: 100%;
+	height: 120px;
+	object-fit: cover;
+}
+
+/*modale 1*/
+.delete-icon {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	background-color: black;
+	color: white;
+	width: 19px;
+	height: 19px;
+	border: none;
+	border-radius: 2px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	font-size: 11px;
+}
+
+/*modale 2*/
+.back-modal {
+	position: absolute;
+	top: 25px;
+	left: 30px;
+	background: none;
+	border: none;
+	display: flex;
+	font-size: 24px;
+	cursor: pointer;
+}
+
+/*modale 1 et 2*/
+.close-modal {
+	position: absolute;
+	top: 25px;
+	right: 30px;
+	background: none;
+	border: none;
+	display: flex;
+	font-size: 24px;
+	cursor: pointer;
+
+}
+
+/*modale 1*/
+.modal-btn-add-photo {
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 14px;
+	color: white;
+	background-color: #1D6154;
+	text-align: center;
+	border-radius: 60px;
+	border: none;
+	padding: 10px 45px 10px 45px;
+	cursor: pointer;
+}
+
+/*modale 1 et 2*/
+.modal-line {
+	border-top: 1px solid #B3B3B3;
+	width: 100%;
+	margin-top: 40px;
+	margin-bottom: 35px;
+}
+
+/*modale 2*/
+.form-upload-container {
+	background-color: #E8F1F6;
+	width: 100%;
+	height: 190px;
+	border-radius: 3px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 10px;
+	position: relative;
+	overflow: hidden;
+
+}
+
+.form-upload-element {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+
+/*modale 2*/
+.form-add-photo {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+/*modale 2*/
+.form-fields {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+/*modale 2*/
+.icon-image {
+	font-size: 60px;
+	color: #B9C5CC;
+	margin-bottom: 10px;
+}
+
+/*modale 2*/
+.form-upload-btn {
+	background-color: #CBD6DC;
+	color: #306685;
+	padding: 10px 33px;
+	border-radius: 50px;
+	font-weight: 500;
+	cursor: pointer;
+	margin-bottom: 8px;
+	font-family: 'Work Sans';
+}
+
+/*modale 2*/
+.form-upload-container p {
+	color: #444444;
+	font-size: 10px;
+}
+
+/*modale 2*/
+.form-fields input {
+	width: 100%;
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+/*modale 2*/
+#form-category {
+	width: 100%;
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+/*modale 2*/
+.form-fields label {
+	margin: 2em 0 1em 0;
+}
+
+/*modale 2*/
+.modal-btn-validate {
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 14px;
+	color: white;
+	text-align: center;
+	border-radius: 60px;
+	border: none;
+	padding: 10px 65px;
+	width: 50%;
+}
+
+.modal-btn-validate:disabled {
+	background-color: #A7A7A7;
+	cursor: not-allowed;
+}
+
+/*modale 2*/
+.modal-btn-validate:not(:disabled) {
+	background-color: #1D6154;
+	cursor: pointer;
+}
+
+/*modale 2*/
+.img-preview {
+	max-width: 100%;
+	height: 190px;
+	object-fit: contain;
+	position: absolute;
+}
+
 
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
-	margin: 2em
+	margin: 2em;
 }
-
