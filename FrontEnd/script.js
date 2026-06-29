@@ -8,7 +8,7 @@ async function worksRecuperation() {
     const reponse = await fetch("http://localhost:5678/api/works");
     const gallerieApi = await reponse.json();
 
-    const galleryHtml = document.getElementById(".gallery");
+    const galleryHtml = document.getElementById("gallery");
 
     for (let i = 0; i < gallerieApi.length; i++) {
       const workImg = document.createElement("img");
