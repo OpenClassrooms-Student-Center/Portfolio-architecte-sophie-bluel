@@ -9,6 +9,8 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<script type="module" src="./assets/js/main.js" defer></script>
 </head>
 <body>
 <header>
@@ -17,7 +19,7 @@
 		<ul>
 			<li>projets</li>
 			<li>contact</li>
-			<li>login</li>
+			<li><a href="login.html">login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -105,5 +107,40 @@
 		</ul>
 	</nav>
 </footer>
+<aside id="modal" class="modal" style="display: none;">
+        <div class="modal-wrapper">
+            <button class="modal-close"><i class="fa-solid fa-xmark"></i></button>
+            
+            <div id="modal-gallery-view">
+                <h3>Galerie photo</h3>
+                <div class="modal-gallery"></div>
+                <hr class="modal-separator">
+                <button id="btn-add-photo" class="modal-btn-primary">Ajouter une photo</button>
+            </div>
+
+            <div id="modal-add-view" style="display: none;">
+                <button class="modal-back"><i class="fa-solid fa-arrow-left"></i></button>
+                <h3>Ajout photo</h3>
+                <form id="form-add-photo">
+                    <div class="upload-container">
+                        <i class="fa-regular fa-image upload-icon"></i>
+                        <label for="image-upload" class="btn-upload">+ Ajouter photo</label>
+                        <input type="file" id="image-upload" accept="image/png, image/jpeg" required hidden>
+                        <p class="upload-info">jpg, png : 4Mo max</p>
+                        <img id="image-preview" src="" alt="Anteprima" style="display: none;">
+                    </div>
+
+                    <label for="photo-title">Titre</label>
+                    <input type="text" id="photo-title" required>
+
+                    <label for="photo-category">Catégorie</label>
+                    <select id="photo-category" required></select>
+
+                    <hr class="modal-separator">
+                    <input type="submit" id="btn-submit-photo" value="Valider" disabled>
+                </form>
+            </div>
+        </div>
+    </aside>
 </body>
 </html>
