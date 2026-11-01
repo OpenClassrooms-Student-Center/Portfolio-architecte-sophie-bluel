@@ -75,12 +75,37 @@ export function initModal(editBtn, works, categories, onDeleteCallback, onAddCal
         }
     }
 
+    if (!modal.dataset.listenerAttached) {
+        modal.dataset.listenerAttached = "true";
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal || e.target.closest(".modal-close")) {
+                closeModal();
+            }
+            else if (e.target.closest("#btn-add-photo")) {
+                if (modalGalleryView && modalAddView) {
+                    modalGalleryView.style.display = "none";
+                    modalAddView.style.display = "block";
+                }
+            }
+            else if (e.target.closest(".modal-back")) {
+                if (modalGalleryView && modalAddView) {
+                    modalAddView.style.display = "none";
+                    modalGalleryView.style.display = "block";
+                }
+            }
+        });
+    }
+
     // Gestione del submit senza clonazione per non perdere il file selezionato
     if (formAddPhoto && !formAddPhoto.dataset.listenerAttached) {
         formAddPhoto.dataset.listenerAttached = "true";
 
         formAddPhoto.addEventListener("submit", async (e) => {
             e.preventDefault();
+            if (!inputUpload.files[0] || inputTitle.value.trim() === "" || selectCategory.value === "") {
+                alert("Veuillez remplir tous les champs et sélectionner une image.");
+                return;
+            }
             const token = localStorage.getItem("token");
             const formData = new FormData();
             formData.append("image", inputUpload.files[0]);
