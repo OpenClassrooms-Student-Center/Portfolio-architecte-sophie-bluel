@@ -46,12 +46,13 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-/** end reset css**/
+/* end reset css*/
 body {
 	max-width: 1140px;
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
+    background-color: #FFFEF8;
 }
 header {
 	display: flex;
@@ -95,9 +96,14 @@ nav li {
 	font-size: 1.2em;
 }
 
+nav a {
+	text-decoration: none; color: inherit;
+}
+
 li:hover {
 	color: #B1663C;
 }
+
 #introduction {
 	display: flex;
 	align-items: center;
@@ -125,6 +131,34 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
+
+/* Stili per i filtri */
+.filter-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 50px;
+}
+
+.filter-btn {
+    font-family: 'Syne';
+    font-weight: 700;
+    font-size: 16px;
+    color: #1D6154;
+    background-color: white;
+    border: 1px solid #1D6154;
+    border-radius: 60px;
+    padding: 9px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    color: white;
+    background-color: #1D6154;
+}
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -137,17 +171,311 @@ li:hover {
 	width: 100%;
 
 }
+
+#login {
+    width: 379px;
+    margin: 150px auto;
+    text-align: center;
+}
+
+#login h2 {
+    margin-bottom: 30px;
+}
+
+#login form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+#login label {
+    margin: 20px 0 7px 0;
+}
+
+#login input[type="email"],
+#login input[type="password"] {
+    height: 51px;
+    font-size: 1.2em;
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+    padding-left: 10px;
+}
+
+#login input[type="submit"] {
+    font-family: 'Syne';
+    font-weight: 700;
+    color: white;
+    background-color: #1D6154;
+    margin: 30px auto 0 auto;
+    width: 180px;
+    height: 36px;
+    text-align: center;
+    border-radius: 60px;
+    border: none;
+    cursor: pointer;
+}
+
+#login a {
+    display: block;
+    text-align: center;
+    color: #3D3D3D;
+    margin-top: 30px;
+    font-size: 14px;
+}
+
+/* --- Barra Admin in alto (Mode édition) --- */
+.admin-bar {
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 18px 0;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100vw;
+	position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;     /* Rompe i margini del contenitore principale per andare da bordo a bordo */
+    margin-right: -50vw;
+    margin-bottom: 50px;
+}
+
+/* --- Contenitore del Titolo "Mes Projets" + Pulsante "modifier" --- */
+.edit-title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.edit-title-container h2 {
+    margin-bottom: 0; /* Rimuove il margine inferiore predefinito del titolo */
+}
+
+.edit-btn {
+    color: black;
+    text-decoration: none;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+	padding-bottom: 30px;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Finestra bianca della modale */
+.modal-wrapper {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    width: 630px;
+    max-width: 90%;
+    padding: 60px 105px;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Pulsante di chiusura (X) e freccia indietro */
+.modal-close,
+.modal-back {
+    position: absolute;
+    top: 30px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #000000;
+}
+
+.modal-close {
+    right: 30px;
+}
+
+.modal-back {
+    left: 30px;
+}
+
+/* Titoli all'interno della modale */
+.modal h3 {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 26px;
+    font-weight: 400;
+    text-align: center;
+    color: #000000;
+    margin-bottom: 45px;
+}
+
+/* Griglia della galleria nella modale */
+.modal-gallery {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    row-gap: 25px;
+    max-height: 400px;
+    overflow-y: auto;
+    margin-bottom: 45px;
+}
+
+/* Contenitore della singola miniatura nella modale */
+.modal-gallery figure {
+    position: relative;
+    margin: 0;
+}
+
+.modal-gallery img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+}
+
+/* Icona del cestino per eliminare la foto */
+.modal-gallery .delete-icon {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background-color: #000000;
+    color: #FFFFFF;
+    width: 17px;
+    height: 17px;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 9px;
+    cursor: pointer;
+}
+
+/* Linea separatrice */
+.modal-separator {
+    width: 100%;
+    border: none;
+    border-top: 1px solid #B3B3B3;
+    margin-bottom: 38px;
+}
+
+/* Pulsante principale "Ajouter une photo" e "Valider" */
+.modal-btn-primary,
+#btn-submit-photo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: white;
+    background-color: #1D6154;
+    border: none;
+    border-radius: 60px;
+    width: 237px;
+    height: 36px;
+    margin: 0 auto;
+    display: block;
+    cursor: pointer;
+    text-align: center;
+}
+
+#btn-submit-photo:disabled {
+    background-color: #A7A7A7;
+    cursor: not-allowed;
+}
+
+/* Form di caricamento immagini (Vista 2) */
+#form-add-photo {
+    display: flex;
+    flex-direction: column;
+}
+
+.upload-container {
+    background-color: #E8F1F6;
+    border-radius: 3px;
+    height: 169px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.upload-icon {
+    font-size: 58px;
+    color: #B9C5CC;
+    margin-bottom: 10px;
+}
+
+.btn-upload {
+    background-color: #CBD6DC;
+    color: #306685;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 10px 33px;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-bottom: 7px;
+}
+
+.upload-info {
+    font-size: 10px;
+    color: #444444;
+}
+
+#image-preview {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    position: absolute;
+}
+
+#form-add-photo label {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 14px;
+    color: #3D3D3D;
+    margin-bottom: 10px;
+}
+
+#form-add-photo input[type="text"],
+#form-add-photo select {
+    height: 51px;
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+    margin-bottom: 30px;
+    padding: 0 15px;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 14px;
+    background-color: #FFFFFF;
+}
+
 #contact {
 	width: 50%;
 margin: auto;
 }
+
 #contact > * {
 	text-align: center;
-
 }
+
 #contact h2{
 	margin-bottom: 20px;
 }
+
 #contact form {
 	text-align: left;
 	margin-top:30px;
@@ -161,9 +489,11 @@ margin: auto;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
+
 #contact label {
 	margin: 2em 0 1em 0;
 }
+
 #contact textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
@@ -185,4 +515,3 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em
 }
-
