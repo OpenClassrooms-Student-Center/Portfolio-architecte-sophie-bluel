@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Sophie Bluel - Connexion</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script type="module" src="./assets/js/login.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+        <nav>
+            <ul>
+                <li><a href="./index.html#portfolio">projets</a></li>
+                <li><a href="./index.html#contact">contact</a></li>
+                <li><a href="./login.html" class="active">login</a></li>
+                <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="login">
+            <h2>Log In</h2>
+            <form id="login-form">
+                <label for="email">E-mail</label>
+                <input type="email" name="email" id="email" required>
+                
+                <label for="password">Mot de passe</label>
+                <input type="password" name="password" id="password" required>
+                
+                <p id="error-message" class="error-msg" style="display: none;">Erreur dans l'identifiant ou le mot de passe</p>
+
+                <input type="submit" value="Se connecter">
+            </form>
+            <a href="#" class="forgot-password">Mot de passe oublié</a>
+        </section>
+    </main>
+
+    <footer>
+        <nav>
+            <ul>
+                <li>Mentions Légales</li>
+            </ul>
+        </nav>
+    </footer>
+
+    <script type="module" src="./assets/js/login.js" defer></script>
+</body>
+</html>
